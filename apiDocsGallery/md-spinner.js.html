@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-md-spinner   md-spinner.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-md-spinner&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a>
+                
+                 &gt; md-spinner.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+                        <div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Shows an input box with a set of up/down buttons to change its value.</span>
+<span class="cm">* @module gallery-md-spinner</span>
+<span class="cm">* @class Spinner</span>
+<span class="cm">* @constructor</span>
+<span class="cm">* @extends Widget</span>
+<span class="cm">* @uses MakeNode</span>
+<span class="cm">*/</span>
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Lang</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span>
+	<span class="nx">CBX</span> <span class="o">=</span> <span class="s1">&#39;contentBox&#39;</span><span class="p">,</span>
+	<span class="nx">VALUE</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+	<span class="nx">CHANGE</span> <span class="o">=</span> <span class="s1">&#39;Change&#39;</span><span class="p">,</span>
+	<span class="nx">INPUT</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+	<span class="nx">INPUT_ERROR</span> <span class="o">=</span> <span class="s1">&#39;inputError&#39;</span><span class="p">,</span>
+	<span class="nx">UP</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span>
+	<span class="nx">DOWN</span> <span class="o">=</span> <span class="s1">&#39;down&#39;</span><span class="p">,</span>
+	<span class="nx">UI</span> <span class="o">=</span> <span class="s1">&#39;ui&#39;</span><span class="p">,</span>
+	<span class="nx">PARSER</span> <span class="o">=</span> <span class="s1">&#39;parser&#39;</span><span class="p">,</span>
+	<span class="nx">FORMATTER</span> <span class="o">=</span> <span class="s1">&#39;formatter&#39;</span><span class="p">,</span>
+	<span class="nx">MIN</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span>
+	<span class="nx">MAX</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+	<span class="nx">WRAPAROUND</span> <span class="o">=</span> <span class="s1">&#39;wraparound&#39;</span><span class="p">,</span>
+	<span class="nx">WRAPPED</span> <span class="o">=</span> <span class="s1">&#39;wrapped&#39;</span><span class="p">;</span>
+	
+<span class="nx">Y</span><span class="p">.</span><span class="nx">Spinner</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+	<span class="s1">&#39;spinner&#39;</span><span class="p">,</span>
+	<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+	<span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">MakeNode</span><span class="p">],</span>
+	<span class="p">{</span>
+	
+		<span class="cm">/**</span>
+<span class="cm">		 * Renders the HTML elements of this component.  </span>
+<span class="cm">		 * Uses the TEMPLATE static variable to produce the markup.</span>
+<span class="cm">		 * Calls _locateNodes to get the references to the elements created.</span>
+<span class="cm">		 * @method renderUI</span>
+<span class="cm">		 */</span>
+		<span class="nx">renderUI</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">();</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Bounding box mouse down handler. Will determine if the mouse down</span>
+<span class="cm">		 * is on one of the spinner buttons, and increment/decrement the value</span>
+<span class="cm">		 * accordingly.</span>
+<span class="cm">		 * </span>
+<span class="cm">		 * The method also sets up a timer, to support the user holding the mouse</span>
+<span class="cm">		 * down on the spinner buttons. The timer is cleared when a mouse up event</span>
+<span class="cm">		 * is detected.</span>
+<span class="cm">		 * @method _onMouseDown</span>
+<span class="cm">		 * @param ev {EventFacade} Event facade produced by the event handler</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_onMouseDown</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span>
+				<span class="nx">dir</span><span class="p">,</span>
+				<span class="nx">handled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+				<span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">),</span>
+				<span class="nx">minorStep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;minorStep&quot;</span><span class="p">);</span>
+
+			<span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">hasClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">.</span><span class="nx">up</span><span class="p">))</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span> <span class="o">+</span> <span class="nx">minorStep</span><span class="p">);</span>
+				<span class="nx">dir</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="nx">handled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">hasClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">.</span><span class="nx">down</span><span class="p">))</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span> <span class="o">-</span> <span class="nx">minorStep</span><span class="p">);</span>
+				<span class="nx">dir</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+				<span class="nx">handled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+			<span class="p">}</span>
+
+			<span class="k">if</span> <span class="p">(</span><span class="nx">handled</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_setMouseDownTimers</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">minorStep</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Override the default content box value, since we don&#39;t want the srcNode</span>
+<span class="cm">		 * to be the content box for spinner.</span>
+<span class="cm">		 * @property _defaultCB</span>
+<span class="cm">		 * @type HTMLElement</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_defaultCB</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Document mouse up handler. Clears the timers supporting</span>
+<span class="cm">		 * the &quot;mouse held down&quot; behavior.</span>
+<span class="cm">		 * @method _onDocMouseUp</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_onDocMouseUp</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_clearMouseDownTimers</span><span class="p">();</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Bounding box Arrow up/down, Page up/down key listener.</span>
+<span class="cm">		 *</span>
+<span class="cm">		 * Increments/Decrement the spinner value, based on the key pressed.</span>
+<span class="cm">		 * @method _onDirectionKey</span>
+<span class="cm">		 * @param ev {EventFacade} as provided by the key listener</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_onDirectionKey</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+
+			<span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+			<span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">),</span>
+				<span class="nx">minorStep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;minorStep&quot;</span><span class="p">),</span>
+				<span class="nx">majorStep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;majorStep&quot;</span><span class="p">);</span>
+
+			<span class="k">switch</span> <span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">charCode</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">case</span> <span class="mi">38</span><span class="o">:</span>
+					<span class="nx">value</span> <span class="o">+=</span> <span class="nx">minorStep</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="k">case</span> <span class="mi">40</span><span class="o">:</span>
+					<span class="nx">value</span> <span class="o">-=</span> <span class="nx">minorStep</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="k">case</span> <span class="mi">33</span><span class="o">:</span>
+					<span class="nx">value</span> <span class="o">+=</span> <span class="nx">majorStep</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="k">case</span> <span class="mi">34</span><span class="o">:</span>
+					<span class="nx">value</span> <span class="o">-=</span> <span class="nx">majorStep</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Simple change handler, to make sure user does not input an invalid value.</span>
+<span class="cm">		 * If an error is detected, focus will return to the input box and the input box highlighted briefly.</span>
+<span class="cm">		 * @method _onInputChange</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_onInputChange</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">inputEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_inputNode</span><span class="p">,</span>
+				<span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">PARSER</span><span class="p">)(</span><span class="nx">inputEl</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">));</span>
+				
+			<span class="c1">// It validates it to prevent the wraparound method from wrapping it around and masking the input error.</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_validateValue</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>  
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="c1">// this._uiSetValue(this.get(VALUE));</span>
+				<span class="nx">inputEl</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+				<span class="nx">inputEl</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">INPUT_ERROR</span><span class="p">]);</span>
+				<span class="nx">Y</span><span class="p">.</span><span class="nx">later</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+					<span class="nx">inputEl</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">INPUT_ERROR</span><span class="p">]);</span>
+				<span class="p">});</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Default parser for the user input.  It assumes only integers are expected</span>
+<span class="cm">		 * @method parser</span>
+<span class="cm">		 * @param value {string} value read from the input box</span>
+<span class="cm">		 * @return {integer} parsed value</span>
+<span class="cm">		 */</span>
+		<span class="nx">parser</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Formats the internal value to be shown to the user</span>
+<span class="cm">		 * @method formatter</span>
+<span class="cm">		 * @param value {integer} value to be shown</span>
+<span class="cm">		 * @return {string} formatted value actually displayed</span>
+<span class="cm">		 */</span>
+		<span class="nx">formatter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Initiates mouse down timers, to increment slider, while mouse button</span>
+<span class="cm">		 * is held down</span>
+<span class="cm">		 * @method _setMouseDownTimers</span>
+<span class="cm">		 * @param dir {1 | -1} Direction, up or down, to change at each tick</span>
+<span class="cm">		 * @param step {number} Amount to change on each tick</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_setMouseDownTimers</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_mouseDownTimer</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">later</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_mousePressTimer</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">later</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="nx">dir</span> <span class="o">*</span> <span class="nx">step</span><span class="p">));</span>
+				<span class="p">},</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+			<span class="p">});</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * If attribute &lt;a href=&quot;#config_wraparound&quot;&gt;&lt;code&gt;wraparound&lt;/code&gt;&lt;/a&gt; is true this method is set as a before listener </span>
+<span class="cm">		 * for the &lt;a href=&quot;#event_valueChange&quot;&gt;&lt;code&gt;valueChange&lt;/code&gt;&lt;/a&gt; event.</span>
+<span class="cm">		 * When one end of the range is reached, it will make it jump to the other end. </span>
+<span class="cm">		 * Changes the newVal property of the event facade, which will be the new value for the attribute.</span>
+<span class="cm">		 * If stepping by more than one, it will advance the value</span>
+<span class="cm">		 * by the remaining amount of the step.</span>
+<span class="cm">		 * Fires the &lt;a href=&quot;#event_wrapped&quot;&gt;&lt;code&gt;wrapped&lt;/code&gt;&lt;/a&gt; event when the value is wrapped around.</span>
+<span class="cm">		 * @method _wrap</span>
+<span class="cm">		 * @param ev {EventFacade}</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Fires when one end of the range is reached and the value is folded to the other end.</span>
+<span class="cm">		 * @event wrapped</span>
+<span class="cm">		 * @param prevVal {number} value that triggered the wrapping</span>
+<span class="cm">		 * @param newVal {number} new value after wrapping</span>
+<span class="cm">		 */</span>
+		<span class="nx">_wrap</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">max</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">MAX</span><span class="p">),</span>
+				<span class="nx">min</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">MIN</span><span class="p">),</span>
+				<span class="nx">value</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">value</span> <span class="o">-=</span> <span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">WRAPPED</span><span class="p">,{</span><span class="nx">prevVal</span><span class="o">:</span><span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">newVal</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">min</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">value</span> <span class="o">+=</span> <span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">WRAPPED</span><span class="p">,{</span><span class="nx">prevVal</span><span class="o">:</span><span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">newVal</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
+			<span class="p">}</span>
+			<span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Clears timers used to support the &quot;mouse held down&quot; behavior</span>
+<span class="cm">		 * @method _clearMouseDownTimers</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_clearMouseDownTimers</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mouseDownTimer</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_mouseDownTimer</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_mouseDownTimer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mousePressTimer</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_mousePressTimer</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_mousePressTimer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * Updates the value of the input box to reflect </span>
+<span class="cm">		 * the value passed in through the &lt;code&gt;value&lt;/code&gt; configuration attribute</span>
+<span class="cm">		 * @method _uiSetValue</span>
+<span class="cm">		 * @param value {integer} new value to be set</span>
+<span class="cm">		 * @param src {string} source of the new value.  If the source is &#39;ui&#39; the change will be ignored.</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetValue</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">src</span> <span class="o">===</span> <span class="nx">UI</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_inputNode</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">FORMATTER</span><span class="p">)(</span><span class="nx">value</span><span class="p">));</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Attaches the &lt;a href=&quot;#method__wrap&quot;&gt;&lt;code&gt;_wrap&lt;/code&gt;&lt;/a&gt; method as a before-event listener </span>
+<span class="cm">		 * when &lt;a href=&quot;#config_wraparound&quot;&gt;&lt;code&gt;wraparound&lt;/code&gt;&lt;/a&gt; is set.</span>
+<span class="cm">		 * @method _uiSetWraparound</span>
+<span class="cm">		 * @param value {Boolean} value of wraparound attribute</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetWraparound</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_wrapListener</span> <span class="o">=</span>  <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">VALUE</span> <span class="o">+</span> <span class="nx">CHANGE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_wrap</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_wrapListener</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_wrapListener</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+
+		<span class="cm">/**</span>
+<span class="cm">		 * value attribute default validator. Verifies that</span>
+<span class="cm">		 * the value being set lies between the min/max value</span>
+<span class="cm">		 * @method _validateValue</span>
+<span class="cm">		 * @param val {number} value to be validated</span>
+<span class="cm">		 * @return {Boolean} true if within bounds</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_validateValue</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nx">val</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">MIN</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">val</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">MAX</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	<span class="p">{</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * MakeNode template for this component</span>
+<span class="cm">		 * @property _TEMPLATE</span>
+<span class="cm">		 * @type String</span>
+<span class="cm">		 * @static</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">_TEMPLATE</span><span class="o">:</span> <span class="p">[</span>
+			<span class="s1">&#39;&lt;input type=&quot;text&quot; title=&quot;{s input}&quot; class=&quot;{c input}&quot;&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;button type=&quot;button&quot; title=&quot;{s up}&quot; class=&quot;{c up}&quot;&gt;&lt;/button&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;button type=&quot;button&quot; title=&quot;{s down}&quot; class=&quot;{c down}&quot;&gt;&lt;/button&gt;&#39;</span>
+		<span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">),</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * List of CSS class name suffixes to be generated and used in the template</span>
+<span class="cm">		 * @property _CLASS_NAMES</span>
+<span class="cm">		 * @type [String]</span>
+<span class="cm">		 * @static</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="nx">INPUT</span><span class="p">,</span> <span class="nx">UP</span><span class="p">,</span> <span class="nx">DOWN</span><span class="p">,</span> <span class="nx">INPUT_ERROR</span><span class="p">],</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Descriptor of DOM events to be listened to and the methods to handle them</span>
+<span class="cm">		 * @property _EVENTS</span>
+<span class="cm">		 * @type Object</span>
+<span class="cm">		 * @static</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">_EVENTS</span><span class="o">:</span> <span class="p">{</span>
+			<span class="s1">&#39;.&#39;</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">key</span><span class="o">:</span><span class="p">{</span>
+					<span class="nx">fn</span><span class="o">:</span><span class="s1">&#39;_onDirectionKey&#39;</span><span class="p">,</span>
+					<span class="nx">args</span><span class="o">:</span><span class="p">((</span><span class="o">!</span><span class="nx">Y</span><span class="p">.</span><span class="nx">UA</span><span class="p">.</span><span class="nx">opera</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;down:&quot;</span> <span class="o">:</span> <span class="s2">&quot;press:&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;38, 40, 33, 34&quot;</span>
+				<span class="p">},</span>
+				<span class="nx">mousedown</span><span class="o">:</span> <span class="s1">&#39;_onMouseDown&#39;</span>
+			<span class="p">},</span>
+			<span class="s1">&#39;..&#39;</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">mouseup</span><span class="o">:</span> <span class="s1">&#39;_onDocMouseUp&#39;</span>
+			<span class="p">},</span>
+			<span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">change</span><span class="o">:</span><span class="s1">&#39;_onInputChange&#39;</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * The minimum value for the spinner.</span>
+<span class="cm">			 * @attribute min</span>
+<span class="cm">			 * @type number</span>
+<span class="cm">			 * @default 0</span>
+<span class="cm">			 */</span>
+			<span class="nx">min</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="mi">0</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * The maximum value for the spinner.</span>
+<span class="cm">			 * @attribute min</span>
+<span class="cm">			 * @type number</span>
+<span class="cm">			 * @default 100</span>
+<span class="cm">			 */</span>
+			<span class="nx">max</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="mi">100</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * The current value of the spinner.</span>
+<span class="cm">			 * @attribute value</span>
+<span class="cm">			 * @type number</span>
+<span class="cm">			 * @default 0</span>
+<span class="cm">			 */</span>
+			<span class="nx">value</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="s1">&#39;_validateValue&#39;</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * Amount to increment/decrement the spinner when the buttons or arrow up/down keys are pressed.</span>
+<span class="cm">			 * @attribute minorStep</span>
+<span class="cm">			 * @type number</span>
+<span class="cm">			 * @default 1</span>
+<span class="cm">			 */</span>
+			<span class="nx">minorStep</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="mi">1</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * Amount to increment/decrement the spinner when the page up/down keys are pressed.</span>
+<span class="cm">			 * @attribute majorStep</span>
+<span class="cm">			 * @type number</span>
+<span class="cm">			 * @default 10</span>
+<span class="cm">			 */</span>
+			<span class="nx">majorStep</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="mi">10</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * override default (&quot;null&quot;), required for focus()</span>
+<span class="cm">			 * @attribute tabIndex</span>
+<span class="cm">			 * @type integer</span>
+<span class="cm">			 * @default 0</span>
+<span class="cm">			 */</span>
+			<span class="nx">tabIndex</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="mi">0</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * The strings for the spinner UI (used in the tooltip texts)</span>
+<span class="cm">			 * @attribute strings</span>
+<span class="cm">			 * @type hash</span>
+<span class="cm">			 */</span>
+			<span class="nx">strings</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">input</span><span class="o">:</span> <span class="s2">&quot;Press the arrow up/down keys for minor increments, page up/down for major increments.&quot;</span><span class="p">,</span>
+					<span class="nx">up</span><span class="o">:</span> <span class="s2">&quot;Increment&quot;</span><span class="p">,</span>
+					<span class="nx">down</span><span class="o">:</span> <span class="s2">&quot;Decrement&quot;</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Function to format the value to be shown to the user</span>
+<span class="cm">			 * @attribute formatter</span>
+<span class="cm">			 * @type function</span>
+<span class="cm">			 * @default this.formatter</span>
+<span class="cm">			 */</span>
+			<span class="nx">formatter</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">valueFn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formatter</span><span class="p">;</span>
+				<span class="p">},</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Function to format the value entered by the user</span>
+<span class="cm">			 * @attribute parser</span>
+<span class="cm">			 * @type function</span>
+<span class="cm">			 * @default this.parser</span>
+<span class="cm">			 */</span>
+			<span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">valueFn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">parser</span><span class="p">;</span>
+				<span class="p">},</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Whether the values should wrap around to the other end when one end of the range is reached</span>
+<span class="cm">			 * @attribute wraparound</span>
+<span class="cm">			 * @type Boolean</span>
+<span class="cm">			 * @default false</span>
+<span class="cm">			 */</span>
+			<span class="nx">wraparound</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Adds the &lt;code&gt;value&lt;/code&gt; attribute to the list of attributes whose change needs to be reflected in the UI</span>
+<span class="cm">		 * @property _ATTRS_2_UI</span>
+<span class="cm">		 * @type Object</span>
+<span class="cm">		 * @static</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">BIND</span><span class="o">:</span> <span class="p">[</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">WRAPAROUND</span><span class="p">],</span>
+			<span class="nx">SYNC</span><span class="o">:</span> <span class="p">[</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">WRAPAROUND</span><span class="p">]</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Tells Widget to read the value from the input box if any existing markup is found</span>
+<span class="cm">		 * @property HTML_PASER</span>
+<span class="cm">		 * @type Object</span>
+<span class="cm">		 * @static</span>
+<span class="cm">		 */</span>
+		<span class="nx">HTML_PARSER</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">value</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">srcNode</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">srcNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">),</span><span class="mi">10</span><span class="p">);</span> 
+				<span class="k">return</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">?</span> <span class="nx">val</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class=""><a href="module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a></li>
+                                <li class=""><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
+                                <li class=""><a href="module_gallery-md-makenode.html" title="gallery-md-makenode">gallery-md-makenode</a></li>
+                                <li class="selected"><a href="module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a></li>
+                                <li class=""><a href="module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Spinner.html" title="Spinner">Spinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="md-spinner.js.html" title="md-spinner.js">md-spinner.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method__onDocMouseUp", "access": "private", "host": "Spinner", "type": "method", "name": "_onDocMouseUp"}, {"url": "Spinner.html#method__onInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_onInputChange"}, {"url": "Spinner.html#method__onMouseDown", "access": "private", "host": "Spinner", "type": "method", "name": "_onMouseDown"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
+</script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-md-timespinner   md-timespinner.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-md-timespinner&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a>
+                
+                 &gt; md-timespinner.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+                        <div class="highlight"><pre><span class="cm">/*js lint white: true, nomen: true, maxerr: 50, indent: 4 */</span>
+<span class="cm">/*gl obal Y*/</span>
+<span class="cm">/**</span>
+<span class="cm">* Shows and accepts a time via a set of spinners.  </span>
+<span class="cm">* It can run showing the current time.</span>
+<span class="cm">* @module gallery-md-timespinner</span>
+<span class="cm">*/</span>
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Spinner</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Spinner</span><span class="p">,</span>
+	<span class="nx">Lang</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span>
+	<span class="nx">CBX</span> <span class="o">=</span> <span class="s1">&#39;contentBox&#39;</span><span class="p">,</span>
+	<span class="nx">BBX</span> <span class="o">=</span> <span class="s1">&#39;boundingBox&#39;</span><span class="p">,</span>
+	<span class="nx">CHANGE</span> <span class="o">=</span> <span class="s1">&#39;Change&#39;</span><span class="p">,</span>
+	<span class="nx">VALUE</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+	<span class="nx">UI</span> <span class="o">=</span> <span class="s1">&#39;ui&#39;</span><span class="p">,</span>
+	<span class="nx">SHOW_AMPM</span> <span class="o">=</span> <span class="s1">&#39;showAmPm&#39;</span><span class="p">,</span>
+	<span class="nx">MIN</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span>
+	<span class="nx">MAX</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+	<span class="nx">INTERVAL</span> <span class="o">=</span> <span class="s1">&#39;interval&#39;</span><span class="p">,</span>
+	<span class="nx">SHOW_SECONDS</span> <span class="o">=</span> <span class="s1">&#39;showSeconds&#39;</span><span class="p">,</span>
+	<span class="nx">RUNNING</span> <span class="o">=</span> <span class="s1">&#39;running&#39;</span><span class="p">,</span>
+	<span class="nx">AFTER</span> <span class="o">=</span> <span class="s1">&#39;after&#39;</span><span class="p">,</span>
+	<span class="nx">WRAPPED</span> <span class="o">=</span> <span class="s1">&#39;wrapped&#39;</span><span class="p">,</span>
+	<span class="nx">HOURS</span> <span class="o">=</span> <span class="s1">&#39;hours&#39;</span><span class="p">,</span>
+	<span class="nx">MINUTES</span> <span class="o">=</span> <span class="s1">&#39;minutes&#39;</span><span class="p">,</span>
+	<span class="nx">SECONDS</span> <span class="o">=</span> <span class="s1">&#39;seconds&#39;</span><span class="p">,</span>
+	<span class="nx">AMPM</span> <span class="o">=</span> <span class="s1">&#39;ampm&#39;</span><span class="p">;</span>
+<span class="cm">/**</span>
+<span class="cm"> * The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.</span>
+<span class="cm"> * @class TimeSpinner</span>
+<span class="cm"> * @extends Widget</span>
+<span class="cm"> * @uses Y.Spinner, Y.MakeNode</span>
+<span class="cm"> * @constructor </span>
+<span class="cm"> * @param cfg {object} (optional) configuration attributes</span>
+<span class="cm"> */</span>	
+<span class="nx">Y</span><span class="p">.</span><span class="nx">TimeSpinner</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+	<span class="s1">&#39;timeSpinner&#39;</span><span class="p">,</span>
+	<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+	<span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">MakeNode</span><span class="p">],</span>
+	<span class="p">{</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Reference to the Spinner showing the hours.</span>
+<span class="cm">		 * @property _hourSp</span>
+<span class="cm">		 * @type Y.Spinner</span>
+<span class="cm">		 * @default null</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_hourSp</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Reference to the Spinner showing the minutes.</span>
+<span class="cm">		 * @property _minSp</span>
+<span class="cm">		 * @type Y.Spinner</span>
+<span class="cm">		 * @default null</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_minSp</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Reference to the Spinner showing the seconds.</span>
+<span class="cm">		 * @property _secSp</span>
+<span class="cm">		 * @type Y.Spinner</span>
+<span class="cm">		 * @default null</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_secSp</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Reference to the Spinner showingam/pm.</span>
+<span class="cm">		 * @property _ampmSp</span>
+<span class="cm">		 * @type Y.Spinner</span>
+<span class="cm">		 * @default null</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_ampmSp</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Reference to the timer created by Y.later that updates the time.</span>
+<span class="cm">		 * @property _timer</span>
+<span class="cm">		 * @type timer object</span>
+<span class="cm">		 * @default null</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_timer</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Difference in milliseconds in between the current time and that displayed.  </span>
+<span class="cm">		 * Used when the timer is running to display times other than the current time.</span>
+<span class="cm">		 * @property _offset</span>
+<span class="cm">		 * @type Number</span>
+<span class="cm">		 * @default 0</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_offset</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+		
+		<span class="cm">/** Used to store the moment when the timer was stopped</span>
+<span class="cm">		 * @property _frozenTime</span>
+<span class="cm">		 * @type Number (milliseconds)</span>
+<span class="cm">		 * @default 0</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_frozenTime</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Renders the hours and minutes spinners. </span>
+<span class="cm">		 * The other two, being optional, are rendered when set.</span>
+<span class="cm">		 * @method renderUI</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">renderUI</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;renderUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">cbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">);</span>
+				
+			<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
+				<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+				<span class="nx">max</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">SHOW_AMPM</span><span class="p">)</span><span class="o">?</span><span class="mi">11</span><span class="o">:</span><span class="mi">23</span><span class="p">,</span>
+				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+			<span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="nx">cbx</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">HOURS</span><span class="p">]);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
+				<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+				<span class="nx">max</span><span class="o">:</span> <span class="mi">59</span><span class="p">,</span>
+				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+			<span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="nx">cbx</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">MINUTES</span><span class="p">]);</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Sets the listeners for events from the hours and minutes spinners.</span>
+<span class="cm">		 * @method bindUI</span>
+<span class="cm">		 * @protected</span>
+<span class="cm">		 */</span>
+		<span class="nx">bindUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bindUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_eventHandles</span> <span class="o">=</span> <span class="p">[</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">VALUE</span> <span class="o">+</span> <span class="nx">CHANGE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterValueChange</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">VALUE</span> <span class="o">+</span> <span class="nx">CHANGE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterValueChange</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">WRAPPED</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterWrapped</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+			<span class="p">];</span>
+		<span class="p">},</span>
+		
+		<span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_timer</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_timer</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+			<span class="p">}</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">([].</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_eventHandles</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_secondsEventHandles</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmEventHandle</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eh</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">eh</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">eh</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">TimeSpinner</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">destroy</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Creates or destroys the seconds spinner and attaches/detaches the event listeners.</span>
+<span class="cm">		 * @method _uiSetSeconds</span>
+<span class="cm">		 * @param value {Boolean} whether to show the seconds spinner or not</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetShowSeconds</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetShowSeconds, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
+					<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+					<span class="nx">max</span><span class="o">:</span> <span class="mi">59</span><span class="p">,</span>
+					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+				<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> <span class="nx">AFTER</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">).</span><span class="nx">getSeconds</span><span class="p">());</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">SECONDS</span><span class="p">]);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_secondsEventHandles</span> <span class="o">=</span> <span class="p">[</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">VALUE</span> <span class="o">+</span> <span class="nx">CHANGE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterValueChange</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">WRAPPED</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterWrapped</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+				<span class="p">];</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secondsEventHandles</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eh</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">eh</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+					<span class="p">});</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Creates or destroys the am/pm spinner and attaches/detaches the event listeners.</span>
+<span class="cm">		 * @method _uiSetAmpm</span>
+<span class="cm">		 * @param value {Boolean} whether to show the am/pm spinner or not</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetShowAmPm</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetShowAmPm, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
+					<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+					<span class="nx">max</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+					<span class="nx">formatter</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">return</span> <span class="nx">value</span><span class="o">?</span><span class="s1">&#39;PM&#39;</span><span class="o">:</span><span class="s1">&#39;AM&#39;</span><span class="p">;</span>
+					<span class="p">},</span>
+					<span class="nx">parser</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">switch</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">())</span> <span class="p">{</span>
+							<span class="k">case</span> <span class="s1">&#39;AM&#39;</span><span class="o">:</span>
+								<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+							<span class="k">case</span> <span class="s1">&#39;PM&#39;</span><span class="o">:</span>
+								<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+							<span class="k">default</span><span class="o">:</span>
+								<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+						<span class="p">}</span>
+					<span class="p">},</span>
+					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+				<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
+				<span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="o">?</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">)</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">)).</span><span class="nx">insert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> <span class="nx">AFTER</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">SHOW_AMPM</span><span class="p">]);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_ampmEventHandle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">VALUE</span> <span class="o">+</span> <span class="nx">CHANGE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterValueChange</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">MAX</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">MIN</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_uiSetValue</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">));</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">MAX</span><span class="p">,</span> <span class="mi">23</span><span class="p">);</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_ampmEventHandle</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Shows the current value in the set of spinners</span>
+<span class="cm">		 * @method _uiSetValue</span>
+<span class="cm">		 * @param value {Date} value to be shown</span>
+<span class="cm">		 * @param src {String} source of the change in value.  </span>
+<span class="cm">		 *        If src===UI, the value comes from the spinners, it needs not be refreshed</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetValue</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetValue, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39; src &#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">src</span> <span class="o">===</span> <span class="nx">UI</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="kd">var</span> <span class="nx">hours</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="p">(</span><span class="nx">hours</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">||</span> <span class="mi">12</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">hours</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">hours</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">());</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">());</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Sets the interval for refreshing the display</span>
+<span class="cm">		 * @method _uiSetInterval</span>
+<span class="cm">		 * @param value {number} milliseconds in between refreshes</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetInterval</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetInterval, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_timer</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_timer</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_timer</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">later</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_updateTime</span><span class="p">,</span> <span class="p">[],</span> <span class="kc">true</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Sets the timer running.</span>
+<span class="cm">		 * @method _uiSetRunning</span>
+<span class="cm">		 * @param value {Boolean} run or not</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_uiSetRunning</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetRunning, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_uiSetInterval</span><span class="p">(</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">INTERVAL</span><span class="p">));</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_frozenTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Listener for a change in any of the spinners, sets the value.</span>
+<span class="cm">		 * @method _afterValueChange</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_afterValueChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_afterValueChange&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+			<span class="nx">d</span><span class="p">.</span><span class="nx">setHours</span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="o">?</span> <span class="mi">12</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span><span class="o">:</span><span class="mi">0</span><span class="p">))</span> <span class="o">%</span> <span class="mi">24</span><span class="p">);</span>
+			<span class="nx">d</span><span class="p">.</span><span class="nx">setMinutes</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">));</span>
+			<span class="nx">d</span><span class="p">.</span><span class="nx">setSeconds</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="o">?</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span><span class="o">:</span><span class="mi">0</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="p">{</span><span class="nx">src</span><span class="o">:</span> <span class="nx">UI</span><span class="p">});</span> 
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Listener for the wrapped event of the spinners to propagate </span>
+<span class="cm">		 * the changes from seconds to minutes and minutes to hours.</span>
+<span class="cm">		 * @method</span>
+<span class="cm">		 * @param ev {EventFacade} to find out which one wrapped and which way</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_afterWrapped</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_afterWrapped&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span> <span class="o">&gt;</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">prevVal</span><span class="o">?-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">target</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span> <span class="o">+</span> <span class="nx">dir</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">target</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span> <span class="o">+</span> <span class="nx">dir</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Callback for the interval timer to update the time shown</span>
+<span class="cm">		 * @method _updateTime</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_updateTime</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_updateTime&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_uiSetValue</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_getTime</span><span class="p">());</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Getter for the time value.  It returns the current time minus the offset </span>
+<span class="cm">		 * or the time when it was stopped.</span>
+<span class="cm">		 * @method _getTime</span>
+<span class="cm">		 * @return {Date} Time shown</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_getTime</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_getTime&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">RUNNING</span><span class="p">))</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">_offset</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_frozenTime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">_offset</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Setter for the time value.  </span>
+<span class="cm">		 * It calculates and saves the offset in between the current time and that set.</span>
+<span class="cm">		 * @method _setTime</span>
+<span class="cm">		 * @param value {Date} time to be shown</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_setTime</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_setTime, value &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_offset</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+			<span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+		<span class="p">},</span>
+		
+		<span class="cm">/**</span>
+<span class="cm">		 * Helper method to set the timer running.</span>
+<span class="cm">		 * Same as &lt;code&gt;this.set(&#39;running&#39;, true);&lt;/code&gt;</span>
+<span class="cm">		 * @method start</span>
+<span class="cm">		 */</span>
+		<span class="nx">start</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">RUNNING</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Helper method to stop the timer.</span>
+<span class="cm">		 * Same as &lt;code&gt;this.set(&#39;running&#39;, false);&lt;/code&gt;</span>
+<span class="cm">		 * @method stop</span>
+<span class="cm">		 */</span>
+		<span class="nx">stop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">RUNNING</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	<span class="p">{</span>
+		<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="nx">HOURS</span><span class="p">,</span> <span class="nx">MINUTES</span><span class="p">,</span> <span class="nx">SECONDS</span><span class="p">,</span> <span class="nx">AMPM</span><span class="p">],</span>
+		<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Whether to show the am/pm indicator or show a 24 hours timer.</span>
+<span class="cm">			 * @attribute showAmPm</span>
+<span class="cm">			 * @type Boolean</span>
+<span class="cm">			 * @default false</span>
+<span class="cm">			 */</span>
+			<span class="nx">showAmPm</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Whether to show the seconds indicator</span>
+<span class="cm">			 * @attribute showSeconds</span>
+<span class="cm">			 * @type Boolean</span>
+<span class="cm">			 * @default true</span>
+<span class="cm">			 */</span>
+			<span class="nx">showSeconds</span><span class="o">:</span><span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Value of the timer</span>
+<span class="cm">			 * @attribute value</span>
+<span class="cm">			 * @type Date</span>
+<span class="cm">			 * @default time at initialization or current time if running</span>
+<span class="cm">			 */</span>
+			<span class="nx">value</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">valueFn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+				<span class="p">},</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">Date</span><span class="p">;</span>
+				<span class="p">},</span>
+				<span class="nx">getter</span><span class="o">:</span><span class="s1">&#39;_getTime&#39;</span><span class="p">,</span>
+				<span class="nx">setter</span><span class="o">:</span><span class="s1">&#39;_setTime&#39;</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * How often to refresh the time displayed</span>
+<span class="cm">			 * @attribute interval</span>
+<span class="cm">			 * @type Number (milliseconds)</span>
+<span class="cm">			 * @default 500</span>
+<span class="cm">			 */</span>
+			<span class="nx">interval</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * Whether the timer is running.</span>
+<span class="cm">			 * @attribute running</span>
+<span class="cm">			 * @type Boolean</span>
+<span class="cm">			 * @default true</span>
+<span class="cm">			 */</span>
+			<span class="nx">running</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">BIND</span><span class="o">:</span> <span class="p">[</span><span class="nx">INTERVAL</span><span class="p">,</span> <span class="nx">RUNNING</span><span class="p">,</span> <span class="nx">SHOW_AMPM</span><span class="p">,</span> <span class="nx">SHOW_SECONDS</span><span class="p">,</span> <span class="nx">VALUE</span><span class="p">],</span>
+			<span class="nx">SYNC</span><span class="o">:</span> <span class="p">[</span><span class="nx">INTERVAL</span><span class="p">,</span> <span class="nx">RUNNING</span><span class="p">,</span> <span class="nx">SHOW_AMPM</span><span class="p">,</span> <span class="nx">SHOW_SECONDS</span><span class="p">,</span> <span class="nx">VALUE</span><span class="p">]</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class=""><a href="module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a></li>
+                                <li class=""><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
+                                <li class=""><a href="module_gallery-md-makenode.html" title="gallery-md-makenode">gallery-md-makenode</a></li>
+                                <li class=""><a href="module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a></li>
+                                <li class="selected"><a href="module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="TimeSpinner.html" title="TimeSpinner">TimeSpinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="md-timespinner.js.html" title="md-timespinner.js">md-timespinner.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "TimeSpinner.html#method_", "access": "private", "host": "TimeSpinner", "type": "method", "name": ""}, {"url": "TimeSpinner.html#method__afterValueChange", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_afterValueChange"}, {"url": "TimeSpinner.html#property__ampmSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_ampmSp"}, {"url": "TimeSpinner.html#method_bindUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "bindUI"}, {"url": "TimeSpinner.html#property__frozenTime", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_frozenTime"}, {"url": "TimeSpinner.html#method__getTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_getTime"}, {"url": "TimeSpinner.html#property__hourSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_hourSp"}, {"url": "TimeSpinner.html#config_interval", "access": "", "host": "TimeSpinner", "type": "config", "name": "interval"}, {"url": "TimeSpinner.html#event_intervalChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "intervalChange"}, {"url": "TimeSpinner.html#property__minSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_minSp"}, {"url": "TimeSpinner.html#property__offset", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_offset"}, {"url": "TimeSpinner.html#method_renderUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "renderUI"}, {"url": "TimeSpinner.html#config_running", "access": "", "host": "TimeSpinner", "type": "config", "name": "running"}, {"url": "TimeSpinner.html#event_runningChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "runningChange"}, {"url": "TimeSpinner.html#property__secSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_secSp"}, {"url": "TimeSpinner.html#method__setTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_setTime"}, {"url": "TimeSpinner.html#config_showAmPm", "access": "", "host": "TimeSpinner", "type": "config", "name": "showAmPm"}, {"url": "TimeSpinner.html#event_showAmPmChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showAmPmChange"}, {"url": "TimeSpinner.html#config_showSeconds", "access": "", "host": "TimeSpinner", "type": "config", "name": "showSeconds"}, {"url": "TimeSpinner.html#event_showSecondsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showSecondsChange"}, {"url": "TimeSpinner.html#method_start", "access": "", "host": "TimeSpinner", "type": "method", "name": "start"}, {"url": "TimeSpinner.html#method_stop", "access": "", "host": "TimeSpinner", "type": "method", "name": "stop"}, {"url": "TimeSpinner.html#property__timer", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_timer"}, {"url": "TimeSpinner.html#method__uiSetAmpm", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetAmpm"}, {"url": "TimeSpinner.html#method__uiSetInterval", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetInterval"}, {"url": "TimeSpinner.html#method__uiSetRunning", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetRunning"}, {"url": "TimeSpinner.html#method__uiSetSeconds", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetSeconds"}, {"url": "TimeSpinner.html#method__uiSetValue", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetValue"}, {"url": "TimeSpinner.html#method__updateTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_updateTime"}, {"url": "TimeSpinner.html#config_value", "access": "", "host": "TimeSpinner", "type": "config", "name": "value"}, {"url": "TimeSpinner.html#event_valueChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "valueChange"}];
+</script>
+</body>
+</html>

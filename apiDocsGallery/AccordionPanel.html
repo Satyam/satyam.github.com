@@ -1,0 +1,1116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-md-accordion  AccordionPanel   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-md-accordion&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a>
+                 &gt; AccordionPanel 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">AccordionPanel</b>
+                        <span class="extends">
+                           - extends <a href="Widget.html" title="Widget">Widget</a>
+                        </span>
+
+                            <span class="extends" rel="yui:extends">
+                          - uses 
+                            
+                                <span rel="extend" resource="WidgetChild, WidgetStdMod, MakeNode.html">
+                                <a href="WidgetChild, WidgetStdMod, MakeNode.html" property="yui:name" title="WidgetChild, WidgetStdMod, MakeNode">WidgetChild, WidgetStdMod, MakeNode</a>
+                                </span>
+                            
+                            
+                        </span>
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        The AccordionPanel class represents one of the panels within an accordion
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">AccordionPanel</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                cfg
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">cfg</span>
+                                                    &lt;<span property="yui:type">object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  (optional) configuration attributes</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="protected" rel="yui:property" resource="#property__ATTRS_2_UI">
+                                    <h4><a name="property__ATTRS_2_UI" property="yui:name">_ATTRS_2_UI</a>
+                                        - <code>protected static <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__CLASS_NAMES">
+                                    <h4><a name="property__CLASS_NAMES" property="yui:name">_CLASS_NAMES</a>
+                                        - <code>protected static <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Defines the class names used by MakeNode, later stored in this._classNames.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__EVENTS">
+                                    <h4><a name="property__EVENTS" property="yui:name">_EVENTS</a>
+                                        - <code>protected static <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Defines the UI events to be attached through MakeNode,
+specifically, click on the headers
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__HEADER_TEMPLATE">
+                                    <h4><a name="property__HEADER_TEMPLATE" property="yui:name">_HEADER_TEMPLATE</a>
+                                        - <code>protected static <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Defines the template used by MakeNode to build the container for the header
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__TEMPLATE">
+                                    <h4><a name="property__TEMPLATE" property="yui:name">_TEMPLATE</a>
+                                        - <code>protected static <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Defines the template used by MakeNode to build the container for the body
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property_CONTENT_TEMPLATE">
+                                    <h4><a name="property_CONTENT_TEMPLATE" property="yui:name">CONTENT_TEMPLATE</a>
+                                        - <code>protected <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            With the accordion panel container filled with with WidgetStdMod divs
+it seems like too much to have a separate contentBox
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:method" resource="#method__afterExpanded">
+                                    <h4>
+                                        <a name="method__afterExpanded">_afterExpanded</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterExpanded</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Listener for the after Expanded change event, toggles the panel
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onHeaderClick">
+                                    <h4>
+                                        <a name="method__onHeaderClick">_onHeaderClick</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onHeaderClick</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Responds to clicks in the header of this panel to toggle it
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  uses target to make sure it is the 
+header of this accordion and not that of a nested one</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__syncUIStdMod">
+                                    <h4>
+                                        <a name="method__syncUIStdMod">_syncUIStdMod</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_syncUIStdMod</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override of WidgetStdMod method to prevent it from re-rendering the 
+three sections again and again and wiping out the resize handles
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetCloseable">
+                                    <h4>
+                                        <a name="method__uiSetCloseable">_uiSetCloseable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetCloseable</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the close icon visible or not depending on the attribute <code>closeable</code>
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  new value for the closeeable attribute</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetContent">
+                                    <h4>
+                                        <a name="method__uiSetContent">_uiSetContent</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetContent</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the content on this panel
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">String | Node</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  content to be shown</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetLabel">
+                                    <h4>
+                                        <a name="method__uiSetLabel">_uiSetLabel</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetLabel</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the label on the header of this panel
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  text to be shown</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetResizeable">
+                                    <h4>
+                                        <a name="method__uiSetResizeable">_uiSetResizeable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetResizeable</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Plugs/unplugs the resize-plugin (if available) in response to the resizeable attribute
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  new value for the resizeable attribute</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_close">
+                                    <h4>
+                                        <a name="method_close">close</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">close</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Convenience method to close this panel.
+Called when the close icon, if present, is clicked.
+It fires the <code>panelClose</code> event to signal 
+the container for it to remove the panel
+from the accordion.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_collapse">
+                                    <h4>
+                                        <a name="method_collapse">collapse</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">collapse</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Collapses this panel
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_expand">
+                                    <h4>
+                                        <a name="method_expand">expand</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">expand</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Expands this panel
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method_renderUI">
+                                    <h4>
+                                        <a name="method_renderUI">renderUI</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">renderUI</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Adds the resizer to the body of the three section StdMod
+and creates a container for the actual content within
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_toggle">
+                                    <h4>
+                                        <a name="method_toggle">toggle</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">toggle</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Toggles this panel from expanded to collapsed
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_closeableChange">
+                                    <h4>
+                                        <a name="event_closeableChange">closeableChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">closeableChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'closeable' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_contentChange">
+                                    <h4>
+                                        <a name="event_contentChange">contentChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">contentChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'content' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_expandedChange">
+                                    <h4>
+                                        <a name="event_expandedChange">expandedChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">expandedChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'expanded' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_labelChange">
+                                    <h4>
+                                        <a name="event_labelChange">labelChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">labelChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'label' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_panelClose">
+                                    <h4>
+                                        <a name="event_panelClose">panelClose</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">panelClose</strong>
+
+                                            (
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fired by the panel to signal the accordion to remove this panel.
+Closure of the panel can be prevented by listening and halting this event.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_resizeableChange">
+                                    <h4>
+                                        <a name="event_resizeableChange">resizeableChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">resizeableChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'resizeable' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_closeable">
+                                    <h4><a name="config_closeable">closeable</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Allows panels to be closed via an icon in the header.
+It shows or hides the close icon.  
+Panels can be closedvia programming at any time, regardless of this attribute.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: true
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_content">
+                                    <h4><a name="config_content">content</a>
+                                        <code>- <span property="yui:type">String or Node instance</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Content to be shown in the body of this accordion panel
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_expanded">
+                                    <h4><a name="config_expanded">expanded</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            State of this panel
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: false (collapsed)
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_label">
+                                    <h4><a name="config_label">label</a>
+                                        <code>- <span property="yui:type">String</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Text to be shown in the header of this accordion panel
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_resizeable">
+                                    <h4><a name="config_resizeable">resizeable</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Allows panels to be resized.
+Requires the optional resize-plugin module to be loaded.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: true
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class="selected"><a href="module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a></li>
+                                <li class=""><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
+                                <li class=""><a href="module_gallery-md-makenode.html" title="gallery-md-makenode">gallery-md-makenode</a></li>
+                                <li class=""><a href="module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a></li>
+                                <li class=""><a href="module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Accordion.html" title="Accordion">Accordion</a></li>
+                                <li class="selected"><a href="AccordionPanel.html" title="AccordionPanel">AccordionPanel</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="md-accordion.js.html" title="md-accordion.js">md-accordion.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="protected"><a href="#property__ATTRS_2_UI" title="_ATTRS_2_UI">_ATTRS_2_UI</a></li>
+                                <li class="protected"><a href="#property__CLASS_NAMES" title="_CLASS_NAMES">_CLASS_NAMES</a></li>
+                                <li class="protected"><a href="#property__EVENTS" title="_EVENTS">_EVENTS</a></li>
+                                <li class="protected"><a href="#property__HEADER_TEMPLATE" title="_HEADER_TEMPLATE">_HEADER_TEMPLATE</a></li>
+                                <li class="protected"><a href="#property__TEMPLATE" title="_TEMPLATE">_TEMPLATE</a></li>
+                                <li class="protected"><a href="#property_CONTENT_TEMPLATE" title="CONTENT_TEMPLATE">CONTENT_TEMPLATE</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#method__afterExpanded" title="_afterExpanded">_afterExpanded</a></li>
+                                <li class="private"><a href="#method__onHeaderClick" title="_onHeaderClick">_onHeaderClick</a></li>
+                                <li class="protected"><a href="#method__syncUIStdMod" title="_syncUIStdMod">_syncUIStdMod</a></li>
+                                <li class="private"><a href="#method__uiSetCloseable" title="_uiSetCloseable">_uiSetCloseable</a></li>
+                                <li class="private"><a href="#method__uiSetContent" title="_uiSetContent">_uiSetContent</a></li>
+                                <li class="private"><a href="#method__uiSetLabel" title="_uiSetLabel">_uiSetLabel</a></li>
+                                <li class="private"><a href="#method__uiSetResizeable" title="_uiSetResizeable">_uiSetResizeable</a></li>
+                                <li class=""><a href="#method_close" title="close">close</a></li>
+                                <li class=""><a href="#method_collapse" title="collapse">collapse</a></li>
+                                <li class=""><a href="#method_expand" title="expand">expand</a></li>
+                                <li class="protected"><a href="#method_renderUI" title="renderUI">renderUI</a></li>
+                                <li class=""><a href="#method_toggle" title="toggle">toggle</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_closeableChange" title="closeableChange">closeableChange</a></li>
+                                <li class=""><a href="#event_contentChange" title="contentChange">contentChange</a></li>
+                                <li class=""><a href="#event_expandedChange" title="expandedChange">expandedChange</a></li>
+                                <li class=""><a href="#event_labelChange" title="labelChange">labelChange</a></li>
+                                <li class=""><a href="#event_panelClose" title="panelClose">panelClose</a></li>
+                                <li class=""><a href="#event_resizeableChange" title="resizeableChange">resizeableChange</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_closeable" title="closeable">closeable</a></li>
+                                <li class=""><a href="#config_content" title="content">content</a></li>
+                                <li class=""><a href="#config_expanded" title="expanded">expanded</a></li>
+                                <li class=""><a href="#config_label" title="label">label</a></li>
+                                <li class=""><a href="#config_resizeable" title="resizeable">resizeable</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "AccordionPanel.html#method__afterExpanded", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_afterExpanded"}, {"url": "AccordionPanel.html#property__ATTRS_2_UI", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "AccordionPanel.html#property__CLASS_NAMES", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_CLASS_NAMES"}, {"url": "AccordionPanel.html#method_close", "access": "", "host": "AccordionPanel", "type": "method", "name": "close"}, {"url": "AccordionPanel.html#config_closeable", "access": "", "host": "AccordionPanel", "type": "config", "name": "closeable"}, {"url": "AccordionPanel.html#event_closeableChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "closeableChange"}, {"url": "AccordionPanel.html#method_collapse", "access": "", "host": "AccordionPanel", "type": "method", "name": "collapse"}, {"url": "AccordionPanel.html#config_content", "access": "", "host": "AccordionPanel", "type": "config", "name": "content"}, {"url": "AccordionPanel.html#event_contentChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "contentChange"}, {"url": "AccordionPanel.html#property_CONTENT_TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "CONTENT_TEMPLATE"}, {"url": "AccordionPanel.html#property__EVENTS", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_EVENTS"}, {"url": "AccordionPanel.html#method_expand", "access": "", "host": "AccordionPanel", "type": "method", "name": "expand"}, {"url": "AccordionPanel.html#config_expanded", "access": "", "host": "AccordionPanel", "type": "config", "name": "expanded"}, {"url": "AccordionPanel.html#event_expandedChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "expandedChange"}, {"url": "AccordionPanel.html#property__HEADER_TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_HEADER_TEMPLATE"}, {"url": "AccordionPanel.html#config_label", "access": "", "host": "AccordionPanel", "type": "config", "name": "label"}, {"url": "AccordionPanel.html#event_labelChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "labelChange"}, {"url": "AccordionPanel.html#method__onHeaderClick", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_onHeaderClick"}, {"url": "AccordionPanel.html#event_panelClose", "access": "", "host": "AccordionPanel", "type": "event", "name": "panelClose"}, {"url": "AccordionPanel.html#method_renderUI", "access": "protected", "host": "AccordionPanel", "type": "method", "name": "renderUI"}, {"url": "AccordionPanel.html#config_resizeable", "access": "", "host": "AccordionPanel", "type": "config", "name": "resizeable"}, {"url": "AccordionPanel.html#event_resizeableChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "resizeableChange"}, {"url": "AccordionPanel.html#method__syncUIStdMod", "access": "protected", "host": "AccordionPanel", "type": "method", "name": "_syncUIStdMod"}, {"url": "AccordionPanel.html#property__TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_TEMPLATE"}, {"url": "AccordionPanel.html#method_toggle", "access": "", "host": "AccordionPanel", "type": "method", "name": "toggle"}, {"url": "AccordionPanel.html#method__uiSetCloseable", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetCloseable"}, {"url": "AccordionPanel.html#method__uiSetContent", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetContent"}, {"url": "AccordionPanel.html#method__uiSetLabel", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetLabel"}, {"url": "AccordionPanel.html#method__uiSetResizeable", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetResizeable"}];
+</script>
+</body>
+</html>

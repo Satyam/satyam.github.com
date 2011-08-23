@@ -1,0 +1,1556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-md-spinner  Spinner   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-md-spinner&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a>
+                 &gt; Spinner 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Spinner</b>
+                        <span class="extends">
+                           - extends <a href="Widget.html" title="Widget">Widget</a>
+                        </span>
+
+                            <span class="extends" rel="yui:extends">
+                          - uses 
+                            
+                                <span rel="extend" resource="MakeNode.html">
+                                <a href="MakeNode.html" property="yui:name" title="MakeNode">MakeNode</a>
+                                </span>
+                            
+                            
+                        </span>
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Shows an input box with a set of up/down buttons to change its value.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Spinner</strong>
+                                <code>
+                                    (
+                                    )
+                                </code>
+                                <div class="description">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="protected" rel="yui:property" resource="#property__ATTRS_2_UI">
+                                    <h4><a name="property__ATTRS_2_UI" property="yui:name">_ATTRS_2_UI</a>
+                                        - <code>protected static <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Adds the <code>value</code> attribute to the list of attributes whose change needs to be reflected in the UI
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__CLASS_NAMES">
+                                    <h4><a name="property__CLASS_NAMES" property="yui:name">_CLASS_NAMES</a>
+                                        - <code>protected static <span property="yui:type">[String]</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            List of CSS class name suffixes to be generated and used in the template
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__defaultCB">
+                                    <h4><a name="property__defaultCB" property="yui:name">_defaultCB</a>
+                                        - <code>private <span property="yui:type">HTMLElement</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Override the default content box value, since we don't want the srcNode
+to be the content box for spinner.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__EVENTS">
+                                    <h4><a name="property__EVENTS" property="yui:name">_EVENTS</a>
+                                        - <code>protected static <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Descriptor of DOM events to be listened to and the methods to handle them
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__TEMPLATE">
+                                    <h4><a name="property__TEMPLATE" property="yui:name">_TEMPLATE</a>
+                                        - <code>protected static <span property="yui:type">String</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            MakeNode template for this component
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_HTML_PASER">
+                                    <h4><a name="property_HTML_PASER" property="yui:name">HTML_PASER</a>
+                                        - <code>static <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Tells Widget to read the value from the input box if any existing markup is found
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div rel="yui:inheritance">
+                        <div class="section field inheritance" rel="yui:superclass"  resource="MakeNode.html">
+                            <h4>Properties inherited from <a href="MakeNode.html" property="yui:name" title="MakeNode">MakeNode</a>:</h4>
+                            <div class="content" rel="yui:properties">
+                                <code>
+                                    
+                                        <span rel="yui:property" resource="MakeNode.html#property__classNames">
+                                        <a class="protected" href="MakeNode.html#property__classNames" property="yui:name" title="_classNames">_classNames</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="MakeNode.html#property__templateHandlers">
+                                        <a class="private" href="MakeNode.html#property__templateHandlers" property="yui:name" title="_templateHandlers">_templateHandlers</a>
+                                        </span>
+                                    
+                                </code>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:method" resource="#method__clearMouseDownTimers">
+                                    <h4>
+                                        <a name="method__clearMouseDownTimers">_clearMouseDownTimers</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_clearMouseDownTimers</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Clears timers used to support the "mouse held down" behavior
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onDirectionKey">
+                                    <h4>
+                                        <a name="method__onDirectionKey">_onDirectionKey</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onDirectionKey</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Bounding box Arrow up/down, Page up/down key listener.
+Increments/Decrement the spinner value, based on the key pressed.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  as provided by the key listener</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onDocMouseUp">
+                                    <h4>
+                                        <a name="method__onDocMouseUp">_onDocMouseUp</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onDocMouseUp</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Document mouse up handler. Clears the timers supporting
+the "mouse held down" behavior.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onInputChange">
+                                    <h4>
+                                        <a name="method__onInputChange">_onInputChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onInputChange</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Simple change handler, to make sure user does not input an invalid value.
+If an error is detected, focus will return to the input box and the input box highlighted briefly.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onMouseDown">
+                                    <h4>
+                                        <a name="method__onMouseDown">_onMouseDown</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onMouseDown</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Bounding box mouse down handler. Will determine if the mouse down
+is on one of the spinner buttons, and increment/decrement the value
+accordingly.
+The method also sets up a timer, to support the user holding the mouse
+down on the spinner buttons. The timer is cleared when a mouse up event
+is detected.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Event facade produced by the event handler</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__setMouseDownTimers">
+                                    <h4>
+                                        <a name="method__setMouseDownTimers">_setMouseDownTimers</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_setMouseDownTimers</strong>
+                                           (
+                                                
+                                                        
+                                                         dir
+                                                    
+                                                
+                                                        , 
+                                                         step
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Initiates mouse down timers, to increment slider, while mouse button
+is held down
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">dir</span>
+                                                        &lt;<span property="yui:type">1 | -1</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Direction, up or down, to change at each tick</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">step</span>
+                                                        &lt;<span property="yui:type">number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Amount to change on each tick</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetValue">
+                                    <h4>
+                                        <a name="method__uiSetValue">_uiSetValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetValue</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                                        , 
+                                                         src
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Updates the value of the input box to reflect 
+the value passed in through the <code>value</code> configuration attribute
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  new value to be set</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">src</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  source of the new value.  If the source is 'ui' the change will be ignored.</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__uiSetWraparound">
+                                    <h4>
+                                        <a name="method__uiSetWraparound">_uiSetWraparound</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetWraparound</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Attaches the <a href="#method__wrap"><code>_wrap</code></a> method as a before-event listener 
+when <a href="#config_wraparound"><code>wraparound</code></a> is set.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value of wraparound attribute</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__validateValue">
+                                    <h4>
+                                        <a name="method__validateValue">_validateValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        Boolean
+                                            <strong property="yui:name">_validateValue</strong>
+                                           (
+                                                
+                                                        
+                                                         val
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            value attribute default validator. Verifies that
+the value being set lies between the min/max value
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">val</span>
+                                                        &lt;<span property="yui:type">number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value to be validated</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                            Boolean
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">true if within bounds</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__wrap">
+                                    <h4>
+                                        <a name="method__wrap">_wrap</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_wrap</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            If attribute <a href="#config_wraparound"><code>wraparound</code></a> is true this method is set as a before listener 
+for the <a href="#event_valueChange"><code>valueChange</code></a> event.
+When one end of the range is reached, it will make it jump to the other end. 
+Changes the newVal property of the event facade, which will be the new value for the attribute.
+If stepping by more than one, it will advance the value
+by the remaining amount of the step.
+Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value is wrapped around.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_formatter">
+                                    <h4>
+                                        <a name="method_formatter">formatter</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        string
+                                            <strong property="yui:name">formatter</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Formats the internal value to be shown to the user
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value to be shown</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                            string
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">formatted value actually displayed</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_parser">
+                                    <h4>
+                                        <a name="method_parser">parser</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        integer
+                                            <strong property="yui:name">parser</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Default parser for the user input.  It assumes only integers are expected
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value read from the input box</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                            integer
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">parsed value</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_renderUI">
+                                    <h4>
+                                        <a name="method_renderUI">renderUI</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">renderUI</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders the HTML elements of this component.  
+Uses the TEMPLATE static variable to produce the markup.
+Calls _locateNodes to get the references to the elements created.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div rel="yui:inheritance">                    
+                            <div class="section field inheritance" rel="yui:superclass"  resource="MakeNode.html">
+                                <h4>Methods inherited from <a href="MakeNode.html" property="yui:name" title="MakeNode">MakeNode</a>:</h4>
+                                <div class="content" rel="yui:methods">
+                                    <code>
+                                            <span rel="yui:method" resource="MakeNode.html#method__attachEvents">                                        
+                                            <a class="private" href="MakeNode.html#method__attachEvents" property="yui:name" title="_attachEvents">_attachEvents</a><span class="private">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__concatUIAttrs">                                        
+                                            <a class="private" href="MakeNode.html#method__concatUIAttrs" property="yui:name" title="_concatUIAttrs">_concatUIAttrs</a><span class="private">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__detachEvents">                                        
+                                            <a class="private" href="MakeNode.html#method__detachEvents" property="yui:name" title="_detachEvents">_detachEvents</a><span class="private">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__locateNodes">                                        
+                                            <a class="protected" href="MakeNode.html#method__locateNodes" property="yui:name" title="_locateNodes">_locateNodes</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__makeClassNames">                                        
+                                            <a class="private" href="MakeNode.html#method__makeClassNames" property="yui:name" title="_makeClassNames">_makeClassNames</a><span class="private">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__makeNode">                                        
+                                            <a class="protected" href="MakeNode.html#method__makeNode" property="yui:name" title="_makeNode">_makeNode</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__parseMakeNodeArgs">                                        
+                                            <a class="private" href="MakeNode.html#method__parseMakeNodeArgs" property="yui:name" title="_parseMakeNodeArgs">_parseMakeNodeArgs</a><span class="private">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="MakeNode.html#method__substitute">                                        
+                                            <a class="protected" href="MakeNode.html#method__substitute" property="yui:name" title="_substitute">_substitute</a>
+                                            </span>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_formatterChange">
+                                    <h4>
+                                        <a name="event_formatterChange">formatterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">formatterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'formatter' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_majorStepChange">
+                                    <h4>
+                                        <a name="event_majorStepChange">majorStepChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">majorStepChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'majorStep' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_minChange">
+                                    <h4>
+                                        <a name="event_minChange">minChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">minChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'min' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_minorStepChange">
+                                    <h4>
+                                        <a name="event_minorStepChange">minorStepChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">minorStepChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'minorStep' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_parserChange">
+                                    <h4>
+                                        <a name="event_parserChange">parserChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">parserChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'parser' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_stringsChange">
+                                    <h4>
+                                        <a name="event_stringsChange">stringsChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">stringsChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'strings' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_tabIndexChange">
+                                    <h4>
+                                        <a name="event_tabIndexChange">tabIndexChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">tabIndexChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'tabIndex' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_valueChange">
+                                    <h4>
+                                        <a name="event_valueChange">valueChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">valueChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'value' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_wraparoundChange">
+                                    <h4>
+                                        <a name="event_wraparoundChange">wraparoundChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">wraparoundChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'wraparound' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_wrapped">
+                                    <h4>
+                                        <a name="event_wrapped">wrapped</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">wrapped</strong>
+
+                                            (
+                                                
+                                                        
+                                                         prevVal
+                                                    
+                                                
+                                                        , 
+                                                         newVal
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when one end of the range is reached and the value is folded to the other end.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">prevVal</span>
+                                                                &lt;<span property="yui:type">number</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  value that triggered the wrapping</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">newVal</span>
+                                                                &lt;<span property="yui:type">number</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  new value after wrapping</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_formatter">
+                                    <h4><a name="config_formatter">formatter</a>
+                                        <code>- <span property="yui:type">function</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to format the value to be shown to the user
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: this.formatter
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_majorStep">
+                                    <h4><a name="config_majorStep">majorStep</a>
+                                        <code>- <span property="yui:type">number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Amount to increment/decrement the spinner when the page up/down keys are pressed.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: 10
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_min">
+                                    <h4><a name="config_min">min</a>
+                                        <code>- <span property="yui:type">number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The minimum value for the spinner.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: 0
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_minorStep">
+                                    <h4><a name="config_minorStep">minorStep</a>
+                                        <code>- <span property="yui:type">number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Amount to increment/decrement the spinner when the buttons or arrow up/down keys are pressed.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: 1
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_parser">
+                                    <h4><a name="config_parser">parser</a>
+                                        <code>- <span property="yui:type">function</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to format the value entered by the user
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: this.parser
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_strings">
+                                    <h4><a name="config_strings">strings</a>
+                                        <code>- <span property="yui:type">hash</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The strings for the spinner UI (used in the tooltip texts)
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_tabIndex">
+                                    <h4><a name="config_tabIndex">tabIndex</a>
+                                        <code>- <span property="yui:type">integer</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            override default ("null"), required for focus()
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: 0
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_value">
+                                    <h4><a name="config_value">value</a>
+                                        <code>- <span property="yui:type">number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The current value of the spinner.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: 0
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_wraparound">
+                                    <h4><a name="config_wraparound">wraparound</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Whether the values should wrap around to the other end when one end of the range is reached
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: false
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class=""><a href="module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a></li>
+                                <li class=""><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
+                                <li class=""><a href="module_gallery-md-makenode.html" title="gallery-md-makenode">gallery-md-makenode</a></li>
+                                <li class="selected"><a href="module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a></li>
+                                <li class=""><a href="module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="Spinner.html" title="Spinner">Spinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="md-spinner.js.html" title="md-spinner.js">md-spinner.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="protected"><a href="#property__ATTRS_2_UI" title="_ATTRS_2_UI">_ATTRS_2_UI</a></li>
+                                <li class="protected"><a href="#property__CLASS_NAMES" title="_CLASS_NAMES">_CLASS_NAMES</a></li>
+                                <li class="private"><a href="#property__defaultCB" title="_defaultCB">_defaultCB</a></li>
+                                <li class="protected"><a href="#property__EVENTS" title="_EVENTS">_EVENTS</a></li>
+                                <li class="protected"><a href="#property__TEMPLATE" title="_TEMPLATE">_TEMPLATE</a></li>
+                                <li class=""><a href="#property_HTML_PASER" title="HTML_PASER">HTML_PASER</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#method__clearMouseDownTimers" title="_clearMouseDownTimers">_clearMouseDownTimers</a></li>
+                                <li class="private"><a href="#method__onDirectionKey" title="_onDirectionKey">_onDirectionKey</a></li>
+                                <li class="private"><a href="#method__onDocMouseUp" title="_onDocMouseUp">_onDocMouseUp</a></li>
+                                <li class="private"><a href="#method__onInputChange" title="_onInputChange">_onInputChange</a></li>
+                                <li class="private"><a href="#method__onMouseDown" title="_onMouseDown">_onMouseDown</a></li>
+                                <li class="private"><a href="#method__setMouseDownTimers" title="_setMouseDownTimers">_setMouseDownTimers</a></li>
+                                <li class="private"><a href="#method__uiSetValue" title="_uiSetValue">_uiSetValue</a></li>
+                                <li class="private"><a href="#method__uiSetWraparound" title="_uiSetWraparound">_uiSetWraparound</a></li>
+                                <li class="private"><a href="#method__validateValue" title="_validateValue">_validateValue</a></li>
+                                <li class="private"><a href="#method__wrap" title="_wrap">_wrap</a></li>
+                                <li class=""><a href="#method_formatter" title="formatter">formatter</a></li>
+                                <li class=""><a href="#method_parser" title="parser">parser</a></li>
+                                <li class=""><a href="#method_renderUI" title="renderUI">renderUI</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_formatterChange" title="formatterChange">formatterChange</a></li>
+                                <li class=""><a href="#event_majorStepChange" title="majorStepChange">majorStepChange</a></li>
+                                <li class=""><a href="#event_minChange" title="minChange">minChange</a></li>
+                                <li class=""><a href="#event_minorStepChange" title="minorStepChange">minorStepChange</a></li>
+                                <li class=""><a href="#event_parserChange" title="parserChange">parserChange</a></li>
+                                <li class=""><a href="#event_stringsChange" title="stringsChange">stringsChange</a></li>
+                                <li class=""><a href="#event_tabIndexChange" title="tabIndexChange">tabIndexChange</a></li>
+                                <li class=""><a href="#event_valueChange" title="valueChange">valueChange</a></li>
+                                <li class=""><a href="#event_wraparoundChange" title="wraparoundChange">wraparoundChange</a></li>
+                                <li class=""><a href="#event_wrapped" title="wrapped">wrapped</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_formatter" title="formatter">formatter</a></li>
+                                <li class=""><a href="#config_majorStep" title="majorStep">majorStep</a></li>
+                                <li class=""><a href="#config_min" title="min">min</a></li>
+                                <li class=""><a href="#config_minorStep" title="minorStep">minorStep</a></li>
+                                <li class=""><a href="#config_parser" title="parser">parser</a></li>
+                                <li class=""><a href="#config_strings" title="strings">strings</a></li>
+                                <li class=""><a href="#config_tabIndex" title="tabIndex">tabIndex</a></li>
+                                <li class=""><a href="#config_value" title="value">value</a></li>
+                                <li class=""><a href="#config_wraparound" title="wraparound">wraparound</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method__onDocMouseUp", "access": "private", "host": "Spinner", "type": "method", "name": "_onDocMouseUp"}, {"url": "Spinner.html#method__onInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_onInputChange"}, {"url": "Spinner.html#method__onMouseDown", "access": "private", "host": "Spinner", "type": "method", "name": "_onMouseDown"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
+</script>
+</body>
+</html>
