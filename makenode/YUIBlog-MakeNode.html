@@ -1,0 +1,528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>The "MakeNode" Widget Extension</TITLE>
+
+</HEAD>
+<BODY>
+<P>In my previous article, <A HREF="http://www.yuiblog.com/blog/2011/04/01/a-recipe-for-a-yui-3-application">A
+Recipe for a YUI 3 Application</A>, I showed a way to use
+<CODE>Y.substitute</CODE> as a very basic template
+processor. The idea took life from there, with suggestions from the
+folks in the #yui IRC channel, and I made it a Widget extension that
+is available on my site, called <A HREF="http://satyam.com.ar/yui/3.0.0/makenode/makenode.js">MakeNode</A>.
+MakeNode is not a generic template processor and it is not meant as
+one. On the other hand, it is tightly integrated with the YUI <A HREF="http://developer.yahoo.com/yui/3/widget/">Widget</A>
+foundation class, including className and event helpers and
+internationalization. In this article, I will take the <A HREF="http://developer.yahoo.com/yui/3/examples/widget/widget-extend.html">Spinner</A>
+example and modify it to follow the guidelines from my previous
+article and to use MakeNode. <A HREF="http://yuilibrary.com/gallery/show/makenode">MakeNode</A>
+is available as a gallery component as well as the modified <A HREF="http://yuilibrary.com/gallery/show/md-spinner">Spinner</A>
+component and the <A HREF="http://satyam.com.ar/yui/3.0.0/SpinnerTest.html">example</A>
+that will be used in this article. 
+</P>
+<H2>Extending your component</H2>
+<P>To load MakeNode you need to include the module in your
+<CODE>YUI().use()</CODE> statement using the name
+<CODE>'gallery-makenode'</CODE>or, if defining a
+module via <CODE>YUI.add()</CODE>, list it in the
+<CODE>requires</CODE> array. Then, to extend your
+widget, you list it in the third argument to <CODE>Y.Base.create()</CODE>,
+like this:</P>
+<PRE>Y.Spinner = Y.Base.create(
+     'Spinner',
+     Y.Widget,
+     [Y.MakeNode],
+     {
+        // instance members …
+     },
+     {
+         // static members
+     }
+); </PRE><P>
+You can add MakeNode along any number of suitable extensions for
+Widget, such as WidgetParent, WidgetChild, WidgetStdMode, etc.
+MakeNode adds two protected methods to be used by the developer,
+<CODE>_makeNode</CODE> and <CODE>_locateNodes,</CODE>
+and it will read from several static properties, if found.</P>
+<P>All members of this extension are either protected or private
+since they are meant to be used by the component developer and not by
+the implementer using those components, who should not be bothered
+with them. Remember to check the Show Protected option when viewing
+the <A HREF="http://satyam.github.com/apiDocsGallery/MakeNode.html">API
+docs</A>. 
+</P>
+<H2>Defining the Template</H2>
+<P>The first thing you will normally do is to define the template for
+your component. For the Spinner, our template will be:</P>
+<PRE>_TEMPLATE: [
+    '&lt;input type=&quot;text&quot; title=&quot;{s input}&quot; class=&quot;{c input}&quot;&gt;',
+    '&lt;button type=&quot;button&quot; title=&quot;{s up}&quot; class=&quot;{c up}&quot;&gt;&lt;/button&gt;',
+    '&lt;button type=&quot;button&quot; title=&quot;{s down}&quot; class=&quot;{c down}&quot;&gt;&lt;/button&gt;'
+].join('\n'),</PRE><P>
+The default template will usually be named <CODE>_TEMPLATE</CODE>
+and declared along the other static properties of the class, such as
+<CODE>ATTRS</CODE>. MakeNode will use this template
+if none other is explicitly provided. The template is made of plain
+HTML plus a series of placeholders enclosed in curly brackets, each
+made of a single character (the processing code) and followed by one
+or more arguments. The placeholders and what they produce are:</P>
+<UL>
+	<LI><P><CODE>{@ attributeName}</CODE> configuration
+	attribute value 
+	</P>
+	<LI><P><CODE>{p propertyName}</CODE> instance
+	property value 
+	</P>
+	<LI><P><CODE>{m methodName arg1 arg2 ….}</CODE>
+	return value of the given method. The processing code is followed by
+	the method name and any number of arguments separated by whitespace.
+		</P>
+	<LI><P><CODE>{c classNameKey}</CODE> CSS className
+	generated from the <CODE>_CLASS_NAMES</CODE> static
+	property (see <A HREF="#_CLASS_NAMES">later</A>)</P>
+	<LI><P><CODE>{s key}</CODE> string from the <CODE>strings</CODE>
+	attribute, using <CODE>key</CODE> as the
+	sub-attribute.</P>
+	<LI><P><CODE>{? </CODE><CODE><I>condition</I></CODE><CODE>
+	</CODE><CODE><I>valueIfTrue valueIfFalse</I></CODE><CODE>}</CODE>
+	much like the <CODE>?: </CODE>operator of
+	JavaScript, produces <CODE>valueIfTrue</CODE> if
+	condition is truish, <CODE>valueIfFalse</CODE>
+	otherwise.</P>
+	<LI><P><CODE>{1 </CODE><CODE><I>condition
+	valueIfOne valueIfMore</I></CODE><CODE>}</CODE> used
+	to produce singular/plural words based on the value of condition. 
+	</P>
+	<LI><P><CODE>{}</CODE> any other value will be
+	handled just like <CODE>Y.substitute</CODE> does. 
+	</P>
+</UL>
+<P>For example, <CODE>{@ value}</CODE> will translate
+to <CODE>this.get('value')</CODE> while <CODE>{p
+value}</CODE> translates to <CODE>this['value']</CODE>.
+</P>
+<P>When placeholders have arguments, like <CODE>{m}</CODE>,
+<CODE>{?}</CODE> and <CODE>{1}</CODE>,
+strings must be enclosed in double quotation marks. Numbers, Booleans
+and <CODE>null</CODE> (all unquoted) will be parsed
+to their proper data types. Placeholders can be nested. The <CODE>{?}</CODE>
+and <CODE>{1}</CODE> placeholders will usually
+contain a nested placeholder for the condition and quite possible for
+their values, for example:</P>
+<PRE>{p qty} {1 {p qty} &quot;unit&quot; &quot;units&quot;} </PRE><P>
+If the property <CODE>qty</CODE> is 1, it will
+produce <CODE>&quot;1 unit&quot;</CODE>, for 2 or
+more it will return <CODE>&quot;2 units&quot;</CODE>
+and so on. A more elaborate version dealing with zero would be:</P>
+<PRE>{? {p qty} &quot;{p qty} {1 {p qty} &quot;unit&quot; &quot;units&quot;}&quot; &quot;none&quot;} </PRE><P>
+Note that the result of processing the inner placeholders, if a
+string, must be enclosed in its own set of quotes.</P>
+<P>To include a double quote inside a quoted string, use <CODE>\\&quot;</CODE>,
+the double backslash being required because JavaScript will interpret
+a single one and discards it before it gets to MakeNode. Only double
+quotes are allowed, MakeNode does not use <CODE>eval()</CODE>
+so the parser is limited but safe. Anything but numbers, <CODE>null</CODE>,
+Booleans and double quoted strings will be ignored.</P>
+<P>The <CODE>{?}</CODE> placeholder is also handy to
+use with checkboxes and radio buttons. It can be used to produce the
+string <CODE>&quot;checked&quot;</CODE> depending on
+the truth value of the processing instruction code that follows.
+Thus, <CODE>&lt;input type=&quot;checkbox&quot; {? {m
+getLength} &quot;checked&quot; &quot;&quot;}/&gt;</CODE> will produce
+a marked checkbox if the <CODE>getLength</CODE>
+method returns anything but zero.</P>
+<P>For the <CODE>{c}</CODE> placeholder, we need to
+have a <CODE>_CLASS_NAMES</CODE> property defined.</P>
+<P>Further placeholders can be added to MakeNode by adding them into
+the <CODE>_templateHandlers</CODE> hash.</P>
+<H2><A NAME="_CLASS_NAMES"></A>The _CLASS_NAMES
+property</H2>
+<P>Along with the <CODE>ATTRS</CODE> and <CODE>_TEMPLATE</CODE>
+static properties, we can define a <CODE>_CLASS_NAMES</CODE>
+static property which points to an array of strings. Each of those
+strings will be used to generate a className. Thus <CODE>_CLASS_NAMES:
+['input']</CODE> will produce the className <CODE>&quot;yui3-spinner-input&quot;</CODE>.
+Those classNames are stored in an instance property <CODE>this._classNames</CODE>.
+The <CODE>{c input}</CODE> placeholder in the
+template above will be replaced by <CODE>&quot;yui3-spinner-input&quot;</CODE>.
+I call the strings listed in <CODE>_CLASS_NAMES</CODE>,
+such as <CODE>'input'</CODE>, the 'className <I>keys</I>'
+since they can be used as a key to refer to the actual className or
+the elements containing those classNames, as we'll seen later.</P>
+<P>You can use the <CODE>_CLASS_NAMES</CODE> property
+to generate any number of classNames, whether you use them in the
+template or not. You can still reach those extra classNames from
+within <CODE>this._classNames</CODE>. The className
+is generated using the <CODE>yui3</CODE> prefix
+followed by the value of the <CODE>NAME</CODE> static
+property turned lowercase, and then the string given in <CODE>_CLASS_NAMES</CODE>
+(this last one will not be turned lowercase), all separated by
+hyphens. The <CODE>_classNames</CODE> hash will also
+contain the classNames for the <CODE>boundingBox</CODE>
+and the <CODE>contentBox</CODE>, the first under the
+<CODE>&quot;.&quot;</CODE> key and the second under
+the <CODE>&quot;content&quot;</CODE> key. Widget
+assigns to the <CODE>boundingBox</CODE> the
+classNames derived from the values of the <CODE>NAME</CODE>
+property of each of the classes in the inheritance chain, starting
+with <CODE>yui3-widget</CODE>. MakeNode stores into
+<CODE>this._classNames</CODE> only the top-most
+className for the <CODE>boundingBox</CODE>. 
+</P>
+<P>If the WidgetStdMod module is loaded, MakeNode will also generate
+entries for its <CODE>HEADER</CODE>, <CODE>BODY</CODE>
+and <CODE>FOOTER</CODE> sections with those same
+keys, which are also the constants defined in that same module.</P>
+<P>If a component is several levels away from Widget, like
+<CODE>SuperSpecialSpinner</CODE> inheriting from
+<CODE>SuperSpinner</CODE> which inherits from <CODE>Spinner</CODE>
+which inherits from <CODE>Widget,</CODE> and if any
+or all of them have <CODE>_CLASS_NAMES</CODE>
+properties defined, MakeNode will produce classNames for all of them
+and store them in <CODE>this._classNames</CODE>. You
+don't need to include at each level the names already declared in the
+previous levels. In fact, it is better that you don't since the
+classNames produced at each level will use the value of the <CODE>NAME</CODE>
+property of that level. Thus, in <CODE>SuperSpecialSpinner</CODE>,
+<CODE>{c input}</CODE> will still result in
+<CODE>&quot;yui3-spinner-input&quot;</CODE> and not
+<CODE>&quot;yui3-superspecialspinner-input&quot;</CODE>
+and so it will keep your CSS file still valid.</P>
+<H2>The {s} placeholder</H2>
+<P>Widget has a <CODE>strings</CODE> configuration
+attribute defined, though it is not initialized with any value. This
+attribute is meant to hold strings that are visible to (or, via
+screen readers, read to) the user. It is important that you never
+include visible strings directly in the template. This is not a
+requirement of MakeNode — it has never been a good idea at all. All
+strings that are to be viewed by or read to the user should always be
+placed in the <CODE>strings</CODE> attribute. The
+<CODE>strings</CODE> attribute contains a hash where
+each individual text is located by its key. The Spinner component has
+the following strings, which you can see used in the template above.</P>
+<PRE>strings: {
+    value: {
+        input: &quot;Press the arrow up/down keys for minor increments, page up/down for major increments.&quot;,
+        up: &quot;Increment&quot;,
+        down: &quot;Decrement&quot;
+    }
+},</PRE><P>
+The best part of doing this is that your component can be localized
+to other languages very easily by developers using your component.
+When creating an instance of Spinner, you might do:</P>
+<PRE>var mySpinner = new Spinner({strings: Y.Intl.get('spinner')});</PRE><P>
+Setting the configuration attribute <CODE>strings</CODE>
+in this way replaces the default <CODE>strings</CODE>
+values with those from the language resource file using the language
+previously defined. The <CODE>{s}</CODE> placeholder
+accesses the strings stored in the <CODE>strings</CODE>
+attribute, either the default ones or the translated ones, if set.
+The <CODE>{s xxxx}</CODE> placeholder is, in fact,
+nothing more than a shortcut to the <CODE>{@
+strings.xxxx}</CODE> placeholder. However, the first can only access
+strings at the top level while, for example, <CODE>{@
+strings.xxxx.yyyy.zzzz}</CODE> would allow you to access a string
+deeper down.</P>
+<H2>Using _makeNode in renderUI</H2>
+<P>We use the template to create the markup for our component. To do
+so, we can call MakeNode's <CODE>_makeNode</CODE>
+method, like this:</P>
+<PRE>renderUI : function() {
+    this.get('contentBox').append(this._makeNode());
+},</PRE><P>
+This will fill in the <CODE>contentBox</CODE> of our
+widget with the markup from processing the template. The <CODE>_makeNode</CODE>
+method returns an instance of <CODE>Y.Node</CODE>
+which can be appended or inserted anywhere or just held for later
+use. It does not return a string, it produces a <CODE>Node</CODE>
+instance. If you do need the string and not the node, you can use
+method <CODE>_substitute</CODE> which also requires
+the template to be specified, it makes no assumptions about any
+defaults.</P>
+<P>The <CODE>_makeNode</CODE> method takes two
+optional arguments: a reference to a template and an object to fill
+in placeholders, as <CODE>Y.substitute</CODE> does.
+In our simple Spinner example there is a single template for the
+whole widget but other widgets might require bits and pieces made out
+of several templates. In that case, you would usually call <CODE>_makeNode</CODE>
+with no arguments for the main part and call it once again with
+different templates to fill in the extra parts. The <A HREF="http://satyam.com.ar/yui/3.0.0/SpinnerTest.html">example</A>
+contains this <CODE>renderUI</CODE> method:</P>
+<PRE>renderUI: function () {
+    var fieldset = this._makeNode();
+    this.each(function (item) {
+        fieldset.appendChild(this._makeNode(MultipleTemplates.RADIO_TEMPLATE, item));
+    }, this);
+    this.get('contentBox').append(fieldset);
+}</PRE><P>
+The first call to <CODE>_makeNode</CODE> returns a
+<CODE>Node</CODE> instance stored in the variable
+<CODE>fieldset</CODE>. The sample component is also
+extended with <CODE>Y.ArrayList</CODE> so the
+<CODE>RADIO_TEMPLATE</CODE> will be filled with
+values taken from the items stored in the array list and the
+resulting Nodes appended to the <CODE>fieldset</CODE>
+before it is finally appended to the <CODE>contentBox</CODE>.
+The special placeholders such as <CODE>{@} </CODE>or
+<CODE>{p}</CODE> will still refer to attributes or
+properties in the main object. The nested items will be processed
+just as <CODE>Y.substitute </CODE>would.</P>
+<H2>The _locateNodes method</H2>
+<P>MakeNode further provides a <CODE>_locateNodes</CODE>
+method which will try to locate all the elements with the classNames
+declared in <CODE>_CLASS_NAMES</CODE>. To locate
+specific elements you can pass any number of className keys,
+otherwise, <CODE>_locateNodes</CODE> tries them all.
+For each element found of each className, <CODE>_locateNodes</CODE>
+will produce a private instance property using the underscore prefix
+followed by the key name and the <CODE>&quot;Node&quot;</CODE>
+suffix. Thus, in our Spinner example, <CODE>_locateNodes</CODE>
+will generate the properties <CODE>_inputNode</CODE>,
+<CODE>_upNode</CODE> and <CODE>_downNode</CODE>.
+If several elements have the same className, <CODE>_locateNodes</CODE>
+will return a reference to the first of them. If an element is not
+found, no variable will be created.</P>
+<P>In the Spinner component we use <CODE>_locateNodes</CODE>
+after creating the markup:</P>
+<PRE>renderUI : function() {
+    this.get(CBX).append(this._makeNode());
+    this._locateNodes();
+},</PRE><H2>
+The _EVENTS static property</H2>
+<P>One further property can be defined along the lines of <CODE>_TEMPLATE</CODE>
+and <CODE>_CLASS_NAMES</CODE> and that is <CODE>_EVENTS</CODE>.
+<CODE>_EVENTS</CODE> will contain a hash made up of
+class name keys, each containing a hash of event types and methods to
+handle them. It is better explained with an example:</P>
+<PRE>_EVENTS: {
+    input: {
+        change:'_onInputChange'
+    },
+    '.': {
+        key:{
+            fn:'_onDirectionKey',
+            args:((!Y.UA.opera) ? &quot;down:&quot; : &quot;press:&quot;) + &quot;38, 40, 33, 34&quot;
+        },
+        mousedown: '_onMouseDown'
+    },
+    '..': {
+        mouseup: '_onDocMouseUp'
+
+    }
+},</PRE><P>
+<CODE>_EVENTS</CODE> is an object (a hash) with any
+number of entries. The names of the properties, that is, the keys of
+the hash, identify the nodes whose events we will listen to. They are
+the same className keys defined in <CODE>_CLASS_NAMES</CODE>.
+There are several extra special keys:</P>
+<UL STYLE="margin-left: 0.64cm">
+	<LI><P><CODE>&quot;.&quot;</CODE> will refer to the
+	bounding box itself.</P>
+	<LI><P><CODE>&quot;..&quot;</CODE> refers to the
+	document containing this widget.</P>
+	<LI><P><CODE>&quot;THIS&quot;</CODE> refers to the
+	widget itself</P>
+	<LI><P><CODE>&quot;Y&quot;</CODE> refers to the Y
+	instance.</P>
+</UL>
+<P>Think of the first two as doing a <CODE>chdir</CODE>
+command when located at the <CODE>boundingBox</CODE>
+level. If the Widget has been extended with WidgetStdMod as well, the
+keys <CODE>HEADER</CODE>, <CODE>BODY</CODE>
+and <CODE>FOOTER</CODE> will refer to those sections
+since they will be available in the <CODE>_classNames</CODE>
+hash. JavaScript does not need the keys to be quoted if they are
+valid identifiers so, except for the dots, the others don't need to
+be quoted.</P>
+<P>The <CODE>_EVENTS</CODE> property is processed
+after the <CODE>renderUI</CODE>, <CODE>bindUI</CODE>
+and <CODE>syncUI</CODE> methods have been called so
+the widget is expected to be already inserted within the document
+body, otherwise the <CODE>&quot;..&quot;</CODE> will
+fail. 
+</P>
+<P>Each of the entries in <CODE>_EVENTS</CODE> is a
+further object that uses the type of event as its key and the name of
+an instance method to handle it. <CODE>_EVENTS</CODE>,
+being a static variable, has no access to <CODE>this</CODE>
+so it cannot take actual function references, only the name of the
+event listener method. Some event types need extra arguments, such as
+the <CODE>key</CODE> event. In that case, instead of
+providing the name of the event handler you can provide an object
+with properties <CODE>fn</CODE> and <CODE>args</CODE>
+to hold the function name and the extra arguments, when required. 
+</P>
+<P>MakeNode will use <CODE>Node.delegate</CODE> to
+listen to the events of the elements within the <CODE>boundingBox</CODE>,
+while it will use <CODE>Y.after</CODE> to listen to
+events from the <CODE>boundingBox</CODE> and the
+document body. It will use <CODE>this.after</CODE> to
+listen to events under the <CODE>THIS</CODE> key and
+also <CODE>Y.after</CODE> for listeners listed under
+the <CODE>Y</CODE> key. All events are listened to
+using <I>after</I> event listeners since they are meant to make the
+widget respond to events, not to filter the behavior of the object
+that fires them so in no case these events can be prevented or
+stopped. (Note: listening to the <CODE>key</CODE>
+event on any nested element works only with version 3.4.0pr1 and
+above, since delegation of the <CODE>key</CODE> event
+was not available before. All the other features work with previous
+versions as well).</P>
+<P>The <CODE>_EVENTS</CODE> declarations are
+cumulative when components inherit from one another. Each class in
+the inheritance chain will have its own <CODE>_EVENTS</CODE>
+declaration processed separately.</P>
+<H2>The _ATTRS_2_UI static property</H2>
+<P>Events go both ways, from the UI to the component and from the
+component to the UI. The first are handled by the <CODE>_EVENTS</CODE>
+property. Then there are the events fired by attribute value changes
+that need to be reflected in the user interface. As I mentioned in
+the previous article, when there are any secondary effects from
+changing a configuration attribute, they should be handled by <I>change</I>
+event listeners, not by the optional <CODE>setter</CODE>
+method of the attribute, which should only deal with normalizing the
+value being set. The UI should reflect the state of the configuration
+attributes, first in <CODE>syncUI</CODE>, when being
+initialized and then on every attribute change event. For the latter,
+we need to attach an event listener, which we would normally do in
+<CODE>bindUI</CODE>. Widget already provides a
+mechanism to make that simple, which I described in the comments to
+the previous article.</P>
+<P>Widget uses the instance property <CODE>_UI_ATTRS</CODE>
+that contains an object with two further properties, <CODE>SYNC</CODE>
+and <CODE>BIND</CODE>. Each of these is an array
+listing the names of the configuration attributes to be initially
+synched and then listened to in order to keep the UI reflecting
+current values. Widget expects each of those entries to have a method
+associated with it, named after the attribute name prefixed by <CODE>_uiSet</CODE>
+with the first character of the attribute name converted to uppercase
+to have the method name in proper camel case. Thus, if <CODE>&quot;value&quot;</CODE>
+was listed in any of the <CODE>_UI_ATTRS</CODE>
+arrays (in either <CODE>SYNC</CODE> or <CODE>BIND</CODE>),
+Widget would expect to find a <CODE>_uiSetValue</CODE>
+method. This method will receive two arguments, the <CODE>value</CODE>
+being set and the <CODE>src</CODE> of the change.
+This is the code for our Spinner <CODE>_uiSetValue</CODE>
+method:</P>
+<PRE>_uiSetValue : function(value, src) {
+    if (src === UI) {
+        return;
+    }
+    this._inputNode.set(VALUE, this.get(FORMATTER)(value));
+},</PRE><P>
+All the uppercase identifiers you see in this piece of code
+correspond to string constants declared elsewhere, to allow the YUI
+compressor to do its job better. The method, basically, sets the
+<CODE>value</CODE> HTML attribute in the <CODE>&lt;input&gt;</CODE>
+box to the new value set, after being formatted. The reference to the
+textbox was provided by <CODE>_locateNodes</CODE>.
+The <CODE>src</CODE> argument is initially checked to
+see if set to the string value <CODE>'ui'</CODE>. If
+this is so, no action will be taken. This is to avoid endless loops.
+If the user enters something in the input box, its value would go
+into the <CODE>value</CODE> configuration attribute
+which then would fire a <CODE>valueChange</CODE>
+event, which would get <CODE>_uiSetValue</CODE>
+called which, if unchecked, would then go and change the value of the
+input box, which would trigger the whole process again. Thus, in
+<CODE>_uiSetValue</CODE>, if we know the change comes
+from the UI, we do nothing and so break the loop. However, this
+requires another piece of code elsewhere. In the listener for the DOM
+event, when we set the configuration attribute, we use the third
+optional argument to set, like this:</P>
+<PRE>_afterValueChange : function(ev) {
+    this.set(VALUE, ev.newVal, {src: UI});
+}</PRE><P>
+It is up to us to ensure that changes coming from the UI are flagged
+thus and then check that same flag to avoid loops. Do use the
+identifier <CODE>src</CODE> when setting the value of
+the attribute, not <CODE>source</CODE> which will not
+be recognized.</P>
+<P>With all this said, I haven't yet talked about the static property
+<CODE>_ATTRS_2_UI</CODE> mentioned in the heading of
+this section. As the comments in my previous article shows (through
+the blunders I made in them), making sure that all attributes
+affecting the UI are properly listed is somewhat messy. You should
+never initialize <CODE>_UI_ATTRS</CODE> from scratch
+since Widget already lists a whole lot of attributes and those would
+be lost. You have to concatenate new attribute names over the
+existing ones, which is somewhat hard to remember how to do it right.
+To make it simple, MakeNode will read from the static property
+<CODE>_ATTRS_2_UI</CODE> and do that concatenation
+for you. It will concatenate all such lists from each and every class
+in the inheritance chain so at each level each class can handle its
+own attributes. In Spinner, we have:</P>
+<PRE>_ATTRS_2_UI: {
+    BIND: VALUE,
+    SYNC: VALUE
+},</PRE><P>
+MakeNode will accept both an array of names or a single attribute
+name, as in this case. 
+</P>
+<P>The question naturally arises, why two lists, one for binding the
+other for syncing? <CODE>SYNC</CODE> is used the
+first time around, after the <CODE>renderUI</CODE>
+and <CODE>bindUI</CODE> methods, if they exist, are
+called and before <CODE>syncUI</CODE> while those
+listed in <CODE>BIND</CODE> will be bound to the
+corresponding attributes for later changes. Quite often the <CODE>SYNC</CODE>
+array has fewer entries than the <CODE>BIND</CODE>
+list and this is because the template for the component might already
+have the very same default value as the configuration attribute and
+there is no need to do an initial syncing. So, if the default value
+for the <CODE>value</CODE> configuration attribute is
+an empty string and the <CODE>&lt;input&gt;</CODE>
+element in the template has no <CODE>value</CODE>
+attribute, then there is no need to sync them on initialization.</P>
+<P>Attributes listed in <CODE>BIND</CODE> will have
+their <CODE>_uiSet</CODE><CODE><I>Xxxx</I></CODE>
+methods called in any order, as attributes can be set in any order.
+Attributes listed in <CODE>SYNC</CODE> will be called
+once in the order in which they are listed and, if one is dependent
+on another (which they shouldn't) the order might be important.</P>
+<P>MakeNode will check for duplicate entries in any of these arrays.
+If any appear, it means that a class our component inherits from
+already handles this attribute and any new declaration would most
+likely overstep the <CODE>_uiSet</CODE><CODE><I>Xxxx</I></CODE>
+handler for it. Incidentally, MakeNode also checks for duplicate
+entries in <CODE>_CLASS_NAMES</CODE>, which can also
+cause conflict in some, though not all, circumstances. MakeNode will
+write a message to the log for any such error.</P>
+<H2>The _PUBLISH property</H2>
+<P>Finally, the <CODE>_PUBLISH</CODE> static property
+will list those events that have to be published. It contains a hash
+using the name of the event as its keys and an object literal of
+configuration attributes as its values. It will publish all the
+events listed in any such property in all the inheritance chain. The
+same event name can be published in a class and in any class
+inheriting from it which will make  the configuration attributes of
+later ones override the ones in the older ones, for example, you
+might want to make an existing event broadcast globally. Just as with
+the <CODE>_EVENTS</CODE>, since <CODE>_PUBLISH</CODE>
+is a static property without access to <CODE>this</CODE>,
+when specifying functions, it is the name of the method, as a string,
+that needs to be given.</P>
+<H2>Conclusion</H2>
+<P>MakeNode provides a very simple template processor, with simple
+functionality that is highly integrated with the Widget foundation
+class. It also provides helper methods to create classNames to be
+used in the template and to use those names to locate and refer to
+the nodes created. It also provides the means to hook into the events
+generated both by the UI and the component itself and associate each
+with a method. It does all these things, while taking care to respect
+the inheritance chain straight up to Widget and any level of classes
+you may define.</P>
+<P>It does not provide for absolutely all possibilities, but covers a
+good range of them. Nevertheless, it does not preclude you from
+adding extra functionality. You might rarely have to write a <CODE>bindUI</CODE>
+or <CODE>syncUI</CODE> method if you use the glue
+provided by MakeNode, but you may do so, since MakeNode does not use
+them.</P>
+<P>As a bonus to those who had the patience to read this far, I have
+also modified Anthony Pipkin's Button set of gallery components and
+made an Accordion and TimeSpinner components, all available in the
+<A HREF="http://yuilibrary.com/gallery/tag/satyam">gallery</A>.</P>
+</BODY>
+</HTML>

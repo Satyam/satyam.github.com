@@ -187,6 +187,27 @@ arguments for the listener, such as a key descriptor for <code>key</code> events
 
                                     <hr />
                                     </div>
+                                    <div class="protected" rel="yui:property" resource="#property__PUBLISH">
+                                    <h4><a name="property__PUBLISH" property="yui:name">_PUBLISH</a>
+                                        - <code>protected static <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            <b>**</b> This is a documentation entry only.
+This property is not defined in this file, it should be defined by the developer. <b>**</b><br/><br/>
+Contains a hash of events to be published.  
+Each element has the name of the event as its key
+and the configuration object as its value.  
+If the event has already been published, the configuration of the event will be modified by the
+configuration set in the new definition.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
                                     <div class="protected" rel="yui:property" resource="#property__TEMPLATE">
                                     <h4><a name="property__TEMPLATE" property="yui:name">_TEMPLATE</a>
                                         - <code>protected static <span property="yui:type">String</span></code>
@@ -545,6 +566,37 @@ It skips over anything else.
                                     </div>
                                     <hr />
                                     </div>
+                                    <div class="private" rel="yui:method" resource="#method__publishEvents">
+                                    <h4>
+                                        <a name="method__publishEvents">_publishEvents</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_publishEvents</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Publishes the events listed in the _PUBLISH static property of each of the classes in the inheritance chain.
+If an event has been publishes, the properties set in the descendants will override those in the original publisher.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
                                     <div class="protected" rel="yui:method" resource="#method__substitute">
                                     <h4>
                                         <a name="method__substitute">_substitute</a></h4>
@@ -659,6 +711,7 @@ If missing, it will use the first static <a href="#property__TEMPLATE"><code>_TE
                                 <li class="protected"><a href="#property__CLASS_NAMES" title="_CLASS_NAMES">_CLASS_NAMES</a></li>
                                 <li class="protected"><a href="#property__classNames" title="_classNames">_classNames</a></li>
                                 <li class="protected"><a href="#property__EVENTS" title="_EVENTS">_EVENTS</a></li>
+                                <li class="protected"><a href="#property__PUBLISH" title="_PUBLISH">_PUBLISH</a></li>
                                 <li class="protected"><a href="#property__TEMPLATE" title="_TEMPLATE">_TEMPLATE</a></li>
                                 <li class="private"><a href="#property__templateHandlers" title="_templateHandlers">_templateHandlers</a></li>
                         </ul>
@@ -674,6 +727,7 @@ If missing, it will use the first static <a href="#property__TEMPLATE"><code>_TE
                                 <li class="private"><a href="#method__makeClassNames" title="_makeClassNames">_makeClassNames</a></li>
                                 <li class="protected"><a href="#method__makeNode" title="_makeNode">_makeNode</a></li>
                                 <li class="private"><a href="#method__parseMakeNodeArgs" title="_parseMakeNodeArgs">_parseMakeNodeArgs</a></li>
+                                <li class="private"><a href="#method__publishEvents" title="_publishEvents">_publishEvents</a></li>
                                 <li class="protected"><a href="#method__substitute" title="_substitute">_substitute</a></li>
                         </ul>
                     </div>
@@ -690,7 +744,7 @@ If missing, it will use the first static <a href="#property__TEMPLATE"><code>_TE
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
+    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
 </script>
 </body>
 </html>
