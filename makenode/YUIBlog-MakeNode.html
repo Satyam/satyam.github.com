@@ -11,7 +11,7 @@ Recipe for a YUI 3 Application</A>, I showed a way to use
 <CODE>Y.substitute</CODE> as a very basic template
 processor. The idea took life from there, with suggestions from the
 folks in the #yui IRC channel, and I made it a Widget extension that
-is available on my site, called <A HREF="http://satyam.com.ar/yui/3.0.0/makenode/makenode.js">MakeNode</A>.
+is available on the YUI Gallery, called <A HREF="http://yuilibrary.com/gallery/show/makenode">MakeNode</A>.
 MakeNode is not a generic template processor and it is not meant as
 one. On the other hand, it is tightly integrated with the YUI <A HREF="http://developer.yahoo.com/yui/3/widget/">Widget</A>
 foundation class, including className and event helpers and
@@ -19,7 +19,7 @@ internationalization. In this article, I will take the <A HREF="http://developer
 example and modify it to follow the guidelines from my previous
 article and to use MakeNode. <A HREF="http://yuilibrary.com/gallery/show/makenode">MakeNode</A>
 is available as a gallery component as well as the modified <A HREF="http://yuilibrary.com/gallery/show/md-spinner">Spinner</A>
-component and the <A HREF="http://satyam.com.ar/yui/3.0.0/SpinnerTest.html">example</A>
+component and the <A HREF="http://satyam.github.com/makenode/sample.html">example</A>
 that will be used in this article. 
 </P>
 <H2>Extending your component</H2>
@@ -248,7 +248,7 @@ In our simple Spinner example there is a single template for the
 whole widget but other widgets might require bits and pieces made out
 of several templates. In that case, you would usually call <CODE>_makeNode</CODE>
 with no arguments for the main part and call it once again with
-different templates to fill in the extra parts. The <A HREF="http://satyam.com.ar/yui/3.0.0/SpinnerTest.html">example</A>
+different templates to fill in the extra parts. The <A HREF="http://satyam.github.com/makenode/sample.html">example</A>
 contains this <CODE>renderUI</CODE> method:</P>
 <PRE>renderUI: function () {
     var fieldset = this._makeNode();
