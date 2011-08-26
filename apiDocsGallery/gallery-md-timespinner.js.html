@@ -2,7 +2,7 @@
 <html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>API: gallery-md-timespinner   md-timespinner.js  (YUI Library)</title>
+	<title>API: gallery-md-timespinner   gallery-md-timespinner.js  (YUI Library)</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/api.css" />
@@ -20,7 +20,7 @@
         <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
             &gt; <a href="./module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a>
                 
-                 &gt; md-timespinner.js (source view) 
+                 &gt; gallery-md-timespinner.js (source view) 
         <form onsubmit="return false">
             <div id="propertysearch">
                 Search: <input autocomplete="off" id="searchinput" />
@@ -159,13 +159,15 @@
 			<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
 				<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
 				<span class="nx">max</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">SHOW_AMPM</span><span class="p">)</span><span class="o">?</span><span class="mi">11</span><span class="o">:</span><span class="mi">23</span><span class="p">,</span>
-				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="s1">&#39;strings.input&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings.hours&#39;</span><span class="p">)</span>
 			<span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="nx">cbx</span><span class="p">);</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">HOURS</span><span class="p">]);</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
 				<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
 				<span class="nx">max</span><span class="o">:</span> <span class="mi">59</span><span class="p">,</span>
-				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+				<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="s1">&#39;strings.input&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings.minutes&#39;</span><span class="p">)</span>
 			<span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="nx">cbx</span><span class="p">);</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">MINUTES</span><span class="p">]);</span>
 		<span class="p">},</span>
@@ -208,7 +210,8 @@
 				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spinner</span><span class="p">({</span>
 					<span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
 					<span class="nx">max</span><span class="o">:</span> <span class="mi">59</span><span class="p">,</span>
-					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="s1">&#39;strings.input&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings.seconds&#39;</span><span class="p">)</span>
 				<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> <span class="nx">AFTER</span><span class="p">);</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">).</span><span class="nx">getSeconds</span><span class="p">());</span>
@@ -252,7 +255,8 @@
 								<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 						<span class="p">}</span>
 					<span class="p">},</span>
-					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span>
+					<span class="nx">wraparound</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="s1">&#39;strings.input&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings.ampm&#39;</span><span class="p">)</span>
 				<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
 				<span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="o">?</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">)</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">_minSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">)).</span><span class="nx">insert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> <span class="nx">AFTER</span><span class="p">);</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">SHOW_AMPM</span><span class="p">]);</span>
@@ -278,6 +282,7 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_uiSetValue</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_setting</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_uiSetValue, value: &#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39; src &#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
 			<span class="k">if</span> <span class="p">(</span><span class="nx">src</span> <span class="o">===</span> <span class="nx">UI</span><span class="p">)</span> <span class="p">{</span>
 				<span class="k">return</span><span class="p">;</span>
@@ -293,6 +298,7 @@
 			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">)</span> <span class="p">{</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">_secSp</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">());</span>
 			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_setting</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 		<span class="p">},</span>
 		
 		<span class="cm">/**</span>
@@ -328,6 +334,9 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_afterValueChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_setting</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span><span class="p">;</span>
+			<span class="p">}</span>
 			<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;_afterValueChange&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;TimeSpinner&#39;</span><span class="p">);</span>
 			<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
 			<span class="nx">d</span><span class="p">.</span><span class="nx">setHours</span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">_hourSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="o">?</span> <span class="mi">12</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">_ampmSp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">)</span><span class="o">:</span><span class="mi">0</span><span class="p">))</span> <span class="o">%</span> <span class="mi">24</span><span class="p">);</span>
@@ -470,6 +479,19 @@
 			<span class="nx">running</span><span class="o">:</span> <span class="p">{</span>
 				<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * Set of localizable strings to be used as tooltips on the spinners.</span>
+<span class="cm">			 * @attribute strings</span>
+<span class="cm">			 */</span>
+			<span class="nx">strings</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">hours</span><span class="o">:</span><span class="s1">&#39;hours&#39;</span><span class="p">,</span>
+					<span class="nx">minutes</span><span class="o">:</span><span class="s1">&#39;minutes&#39;</span><span class="p">,</span>
+					<span class="nx">seconds</span><span class="o">:</span> <span class="s1">&#39;seconds&#39;</span><span class="p">,</span>
+					<span class="nx">ampm</span><span class="o">:</span> <span class="s1">&#39;am/pm&#39;</span>
+				<span class="p">}</span>
 			<span class="p">}</span>
 		<span class="p">},</span>
 		<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
@@ -508,7 +530,7 @@
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class="selected"><a href="md-timespinner.js.html" title="md-timespinner.js">md-timespinner.js</a></li>
+                                <li class="selected"><a href="gallery-md-timespinner.js.html" title="gallery-md-timespinner.js">gallery-md-timespinner.js</a></li>
                         </ul>
                     </div>
 
@@ -526,7 +548,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "TimeSpinner.html#method_", "access": "private", "host": "TimeSpinner", "type": "method", "name": ""}, {"url": "TimeSpinner.html#method__afterValueChange", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_afterValueChange"}, {"url": "TimeSpinner.html#property__ampmSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_ampmSp"}, {"url": "TimeSpinner.html#method_bindUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "bindUI"}, {"url": "TimeSpinner.html#property__frozenTime", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_frozenTime"}, {"url": "TimeSpinner.html#method__getTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_getTime"}, {"url": "TimeSpinner.html#property__hourSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_hourSp"}, {"url": "TimeSpinner.html#config_interval", "access": "", "host": "TimeSpinner", "type": "config", "name": "interval"}, {"url": "TimeSpinner.html#event_intervalChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "intervalChange"}, {"url": "TimeSpinner.html#property__minSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_minSp"}, {"url": "TimeSpinner.html#property__offset", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_offset"}, {"url": "TimeSpinner.html#method_renderUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "renderUI"}, {"url": "TimeSpinner.html#config_running", "access": "", "host": "TimeSpinner", "type": "config", "name": "running"}, {"url": "TimeSpinner.html#event_runningChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "runningChange"}, {"url": "TimeSpinner.html#property__secSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_secSp"}, {"url": "TimeSpinner.html#method__setTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_setTime"}, {"url": "TimeSpinner.html#config_showAmPm", "access": "", "host": "TimeSpinner", "type": "config", "name": "showAmPm"}, {"url": "TimeSpinner.html#event_showAmPmChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showAmPmChange"}, {"url": "TimeSpinner.html#config_showSeconds", "access": "", "host": "TimeSpinner", "type": "config", "name": "showSeconds"}, {"url": "TimeSpinner.html#event_showSecondsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showSecondsChange"}, {"url": "TimeSpinner.html#method_start", "access": "", "host": "TimeSpinner", "type": "method", "name": "start"}, {"url": "TimeSpinner.html#method_stop", "access": "", "host": "TimeSpinner", "type": "method", "name": "stop"}, {"url": "TimeSpinner.html#property__timer", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_timer"}, {"url": "TimeSpinner.html#method__uiSetAmpm", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetAmpm"}, {"url": "TimeSpinner.html#method__uiSetInterval", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetInterval"}, {"url": "TimeSpinner.html#method__uiSetRunning", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetRunning"}, {"url": "TimeSpinner.html#method__uiSetSeconds", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetSeconds"}, {"url": "TimeSpinner.html#method__uiSetValue", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetValue"}, {"url": "TimeSpinner.html#method__updateTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_updateTime"}, {"url": "TimeSpinner.html#config_value", "access": "", "host": "TimeSpinner", "type": "config", "name": "value"}, {"url": "TimeSpinner.html#event_valueChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "valueChange"}];
+    var ALL_YUI_PROPS = [{"url": "TimeSpinner.html#method_", "access": "private", "host": "TimeSpinner", "type": "method", "name": ""}, {"url": "TimeSpinner.html#method__afterValueChange", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_afterValueChange"}, {"url": "TimeSpinner.html#property__ampmSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_ampmSp"}, {"url": "TimeSpinner.html#method_bindUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "bindUI"}, {"url": "TimeSpinner.html#property__frozenTime", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_frozenTime"}, {"url": "TimeSpinner.html#method__getTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_getTime"}, {"url": "TimeSpinner.html#property__hourSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_hourSp"}, {"url": "TimeSpinner.html#config_interval", "access": "", "host": "TimeSpinner", "type": "config", "name": "interval"}, {"url": "TimeSpinner.html#event_intervalChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "intervalChange"}, {"url": "TimeSpinner.html#property__minSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_minSp"}, {"url": "TimeSpinner.html#property__offset", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_offset"}, {"url": "TimeSpinner.html#method_renderUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "renderUI"}, {"url": "TimeSpinner.html#config_running", "access": "", "host": "TimeSpinner", "type": "config", "name": "running"}, {"url": "TimeSpinner.html#event_runningChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "runningChange"}, {"url": "TimeSpinner.html#property__secSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_secSp"}, {"url": "TimeSpinner.html#method__setTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_setTime"}, {"url": "TimeSpinner.html#config_showAmPm", "access": "", "host": "TimeSpinner", "type": "config", "name": "showAmPm"}, {"url": "TimeSpinner.html#event_showAmPmChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showAmPmChange"}, {"url": "TimeSpinner.html#config_showSeconds", "access": "", "host": "TimeSpinner", "type": "config", "name": "showSeconds"}, {"url": "TimeSpinner.html#event_showSecondsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showSecondsChange"}, {"url": "TimeSpinner.html#method_start", "access": "", "host": "TimeSpinner", "type": "method", "name": "start"}, {"url": "TimeSpinner.html#method_stop", "access": "", "host": "TimeSpinner", "type": "method", "name": "stop"}, {"url": "TimeSpinner.html#config_strings", "access": "", "host": "TimeSpinner", "type": "config", "name": "strings"}, {"url": "TimeSpinner.html#event_stringsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "stringsChange"}, {"url": "TimeSpinner.html#property__timer", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_timer"}, {"url": "TimeSpinner.html#method__uiSetAmpm", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetAmpm"}, {"url": "TimeSpinner.html#method__uiSetInterval", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetInterval"}, {"url": "TimeSpinner.html#method__uiSetRunning", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetRunning"}, {"url": "TimeSpinner.html#method__uiSetSeconds", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetSeconds"}, {"url": "TimeSpinner.html#method__uiSetValue", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetValue"}, {"url": "TimeSpinner.html#method__updateTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_updateTime"}, {"url": "TimeSpinner.html#config_value", "access": "", "host": "TimeSpinner", "type": "config", "name": "value"}, {"url": "TimeSpinner.html#event_valueChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "valueChange"}];
 </script>
 </body>
 </html>

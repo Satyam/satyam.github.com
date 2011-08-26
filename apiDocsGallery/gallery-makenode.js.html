@@ -2,7 +2,7 @@
 <html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>API: gallery-makenode   makenode.js  (YUI Library)</title>
+	<title>API: gallery-makenode   gallery-makenode.js  (YUI Library)</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/api.css" />
@@ -20,7 +20,7 @@
         <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
             &gt; <a href="./module_gallery-makenode.html" title="gallery-makenode">gallery-makenode</a>
                 
-                 &gt; makenode.js (source view) 
+                 &gt; gallery-makenode.js (source view) 
         <form onsubmit="return false">
             <div id="propertysearch">
                 Search: <input autocomplete="off" id="searchinput" />
@@ -319,44 +319,57 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_attachEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="cm">/*jslint confusion: true */</span>
 			<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
 				<span class="nx">selector</span><span class="p">,</span>
 				<span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
-				<span class="nx">eh</span> <span class="o">=</span> <span class="p">[];</span>
+				<span class="nx">eh</span> <span class="o">=</span> <span class="p">[],</span>
+				<span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span>
+				<span class="nx">toInitialCap</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">name</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">name</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+				<span class="p">},</span>
+				<span class="nx">equivalents</span> <span class="o">=</span> <span class="p">{</span>
+					<span class="nx">boundingBox</span><span class="o">:</span><span class="nx">bbx</span><span class="p">,</span> 
+					<span class="nb">document</span><span class="o">:</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;ownerDocument&#39;</span><span class="p">),</span> 
+					<span class="nx">THIS</span><span class="o">:</span><span class="nx">self</span><span class="p">,</span>
+					<span class="nx">Y</span><span class="o">:</span><span class="nx">Y</span>
+				<span class="p">};</span>
 				
 			<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_getClasses</span><span class="p">(),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">_EVENTS</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handlers</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">selector</span> <span class="o">=</span> <span class="p">{</span>
-						<span class="nx">DOT</span><span class="o">:</span><span class="nx">bbx</span><span class="p">,</span> 
-						<span class="s1">&#39;..&#39;</span><span class="o">:</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;ownerDocument&#39;</span><span class="p">),</span> 
-						<span class="nx">THIS</span><span class="o">:</span><span class="nx">self</span><span class="p">,</span>
-						<span class="nx">Y</span><span class="o">:</span><span class="nx">Y</span>
-					<span class="p">}[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="nx">DOT</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">handlers</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handler</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">selector</span> <span class="o">=</span> <span class="nx">equivalents</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="nx">DOT</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nb">Array</span><span class="p">(</span><span class="nx">handlers</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
 						<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
-							<span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span><span class="nx">fn</span><span class="o">:</span><span class="nx">handler</span><span class="p">};</span>
-						<span class="p">}</span> 
-						<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;fn&#39;</span><span class="p">))</span> <span class="p">{</span>
+							<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
+							<span class="nx">fn</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="s1">&#39;_after&#39;</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">type</span><span class="p">)];</span>
+							<span class="nx">args</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+						<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
+							<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+							<span class="nx">fn</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">];</span>
+							<span class="nx">args</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">;</span>
+						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Wrong event handler for class: &#39;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span> <span class="o">+</span> <span class="s1">&#39; key: &#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+						<span class="p">}</span>
+						<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
 							<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
 								<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="o">===</span><span class="s1">&#39;key&#39;</span><span class="p">)</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">],</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
+									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
 								<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">],</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">));</span>
+									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
 								<span class="p">}</span>
 							<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 								<span class="k">if</span> <span class="p">(</span><span class="nx">selector</span> <span class="o">===</span> <span class="nx">self</span> <span class="o">||</span> <span class="nx">selector</span> <span class="o">===</span> <span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">],</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">));</span>
+									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
 								<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 									<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="o">===</span><span class="s1">&#39;key&#39;</span><span class="p">)</span> <span class="p">{</span>
-										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">],</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
+										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
 									<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">self</span><span class="p">[</span><span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">],</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">));</span>
+										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
 									<span class="p">}</span>
 								<span class="p">}</span>
 							<span class="p">}</span>
+						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Wrong event type: &#39;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
 						<span class="p">}</span>
-							
 					<span class="p">});</span>
 				<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
 			<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
@@ -374,7 +387,11 @@
 				<span class="nx">l</span> <span class="o">=</span> <span class="nx">cs</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
 				<span class="nx">i</span><span class="p">,</span>
 				<span class="nx">publisher</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-					<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">options</span><span class="p">);</span>
+					<span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{};</span>
+					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">options</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">opt</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">opts</span><span class="p">[</span><span class="nx">opt</span><span class="p">]</span> <span class="o">=</span><span class="nx">opt</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;Fn&#39;</span><span class="o">?</span><span class="k">this</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">:</span><span class="nx">value</span><span class="p">;</span>
+					<span class="p">},</span><span class="k">this</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">opts</span><span class="p">);</span>
 				<span class="p">};</span>
 			<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">l</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span> <span class="p">(</span><span class="nx">cs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">_PUBLISH</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">publisher</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
@@ -395,7 +412,7 @@
 	<span class="p">};</span>
 	<span class="cm">/**</span>
 <span class="cm">	 * &lt;b&gt;**&lt;/b&gt; This is a documentation entry only. </span>
-<span class="cm">	 * This property is not defined in this file, it should be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
+<span class="cm">	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
 <span class="cm">	 * Holds the default template to be used by &lt;a href=&quot;#method__makeNode&quot;&gt;&lt;code&gt;_makeNode&lt;/code&gt;&lt;/a&gt; when none is explicitly provided.&lt;br/&gt;</span>
 <span class="cm">	 * The string should contain HTML code with placeholders made of a set of curly braces</span>
 <span class="cm">	 * enclosing an initial processing code and arguments.  </span>
@@ -432,7 +449,7 @@
 <span class="cm">	 */</span>
 	<span class="cm">/**</span>
 <span class="cm">	 * &lt;b&gt;**&lt;/b&gt; This is a documentation entry only.</span>
-<span class="cm">	 * This property is not defined in this file, it should be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
+<span class="cm">	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
 <span class="cm">	 * Holds an array of strings, each the suffix used to define a CSS className using the </span>
 <span class="cm">	 * _cssPrefix of each class.  The names listed here are used as the keys into</span>
 <span class="cm">	 * &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;/code&gt;&lt;/a&gt;, </span>
@@ -448,7 +465,7 @@
 
 	<span class="cm">/**</span>
 <span class="cm">	 * &lt;b&gt;**&lt;/b&gt; This is a documentation entry only.</span>
-<span class="cm">	 * This property is not defined in this file, it should be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
+<span class="cm">	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
 <span class="cm">	 * Lists the attributes whose value should be reflected in the UI.  </span>
 <span class="cm">	 * It contains an object with two properties, &lt;code&gt;BIND&lt;/code&gt; and &lt;code&gt;SYNC&lt;/code&gt;, each </span>
 <span class="cm">	 * containing the name of an attribute or an array of names of attributes.</span>
@@ -467,19 +484,41 @@
 	 
 	<span class="cm">/**</span>
 <span class="cm">	 * &lt;b&gt;**&lt;/b&gt; This is a documentation entry only.</span>
-<span class="cm">	 * This property is not defined in this file, it should be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
+<span class="cm">	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
 <span class="cm">	 * Contains a hash of elements to attach event listeners to.  </span>
 <span class="cm">	 * Each element is identified by the suffix of its generated className,</span>
 <span class="cm">	 * as declared in the &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;/code&gt;&lt;/a&gt; property.  &lt;br/&gt;</span>
-<span class="cm">	 * There are three further element identifiers,</span>
-<span class="cm">	 * a &lt;code&gt;&quot;.&quot;&lt;/code&gt; identifies the boundingBox of the Widget, &lt;code&gt;&quot;content&quot;&lt;/code&gt; its contextBox, and a &lt;code&gt;&quot;..&quot;&lt;/code&gt; identifies the document</span>
-<span class="cm">	 * where the component is in.</span>
-<span class="cm">	 * If the Y.WidgetStdMod extension is used the &lt;code&gt;&quot;HEADER&quot;&lt;/code&gt;, &lt;code&gt;&quot;BODY&quot;&lt;/code&gt; and &lt;code&gt;&quot;FOOTER&quot;&lt;/code&gt; identifiers will also be available.&lt;br/&gt;</span>
-<span class="cm">	 * Each entry is made of a further hash using the type of event to listen to (&lt;code&gt;&quot;key&quot;&lt;/code&gt;, &lt;code&gt;&quot;mousedown&quot;&lt;/code&gt;, etc)</span>
-<span class="cm">	 * as the key to each handler.&lt;br/&gt;</span>
-<span class="cm">	 * For each type of event, you can list either a string with the name of an instance method that will handle the event</span>
-<span class="cm">	 * or an object with properties &lt;code&gt;fn&lt;/code&gt; with a string with the name of the instance method and an &lt;code&gt;args&lt;/code&gt; property with extra</span>
-<span class="cm">	 * arguments for the listener, such as a key descriptor for &lt;code&gt;key&lt;/code&gt; events</span>
+<span class="cm">	 * There are seveal virtual element identifiers,&lt;ul&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;&quot;boundingBox&quot;&lt;/code&gt; identifies the boundingBox of the Widget&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;&quot;content&quot;&lt;/code&gt; its contextBox&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;&quot;document&quot;&lt;/code&gt; identifies the document where the component is in&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;&quot;THIS&quot;&lt;/code&gt; identifies this instance&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;&quot;Y&quot;&lt;/code&gt; identifies the YUI instance of the sandbox&lt;/li&gt;</span>
+<span class="cm">	 * &lt;/ul&gt;</span>
+<span class="cm">	 * If the Y.WidgetStdMod extension is used the &lt;code&gt;&quot;HEADER&quot;&lt;/code&gt;, &lt;code&gt;&quot;BODY&quot;&lt;/code&gt; </span>
+<span class="cm">	 * and &lt;code&gt;&quot;FOOTER&quot;&lt;/code&gt; identifiers will also be available.&lt;br/&gt;</span>
+<span class="cm">	 * Each entry contains a type of event to be listened to or an array of events.</span>
+<span class="cm">	 * Each event can be described by its type (i.e.: &lt;code&gt;&quot;key&quot;&lt;/code&gt;, &lt;code&gt;&quot;mousedown&quot;&lt;/code&gt;, etc).</span>
+<span class="cm">	 * MakeNode will associate this event with a method named &lt;code&gt;&quot;_after&quot;&lt;/code&gt; followed by the element identifier with the first character capitalized </span>
+<span class="cm">	 * and the type of event with the first character capitalized (i.e.: &lt;code&gt;_afterBoundingBoxClick&lt;/code&gt;, &lt;code&gt;_afterInputBlur&lt;/code&gt;, &lt;code&gt;_afterTHISValueChange&lt;/code&gt;, etc.)</span>
+<span class="cm">	 * Alternatively, the event listener can be described by an object literal containing properties &lt;ul&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;type&lt;/code&gt; (mandatory) the type of event being listened to&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;fn&lt;/code&gt; the name of the method to handle the event.  </span>
+<span class="cm">	 * Since _EVENTS is static, it has no access to &lt;code&gt;this&lt;/code&gt; so the name of the method must be specified&lt;/li&gt;</span>
+<span class="cm">	 * &lt;li&gt;&lt;code&gt;args&lt;/code&gt; extra arguments to be passed to the listener, useful, </span>
+<span class="cm">	 * for example as a key descriptor for &lt;code&gt;key&lt;/code&gt; events.</span>
+<span class="cm">	 * &lt;pre&gt;_EVENTS: {</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp; boundingBox: [</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; {</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; type: &#39;key&#39;,</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; fn:&#39;_onDirectionKey&#39;,   // calls this._onDirectionKey</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; args:((!Y.UA.opera) ? &quot;down:&quot; : &quot;press:&quot;) + &quot;38, 40, 33, 34&quot;</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; },</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; &#39;mousedown&#39; &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; // calls this._afterBoundingBoxMousedown</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp; ],</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp; document: &#39;mouseup&#39;, &amp;nbsp; &amp;nbsp; // calls this._afterDocumentMouseup</span>
+<span class="cm"> &amp;nbsp; &amp;nbsp; input: &#39;change&#39; &amp;nbsp; &amp;nbsp;  &amp;nbsp; &amp;nbsp; // calls this._afterInputChange</span>
+<span class="cm">},&lt;/pre&gt;</span>
 <span class="cm">	 * @property _EVENTS</span>
 <span class="cm">	 * @type Object</span>
 <span class="cm">	 * @static</span>
@@ -488,12 +527,13 @@
 	 
 	<span class="cm">/**</span>
 <span class="cm">	 * &lt;b&gt;**&lt;/b&gt; This is a documentation entry only.</span>
-<span class="cm">	 * This property is not defined in this file, it should be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
+<span class="cm">	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</span>
 <span class="cm">	 * Contains a hash of events to be published.  </span>
 <span class="cm">	 * Each element has the name of the event as its key</span>
 <span class="cm">	 * and the configuration object as its value.  </span>
 <span class="cm">	 * If the event has already been published, the configuration of the event will be modified by the</span>
 <span class="cm">	 * configuration set in the new definition.</span>
+<span class="cm">	 * When setting functions use the name of the function, not a function reference.</span>
 <span class="cm">	 * @property _PUBLISH</span>
 <span class="cm">	 * @type Object</span>
 <span class="cm">	 * @static</span>
@@ -532,7 +572,7 @@
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class="selected"><a href="makenode.js.html" title="makenode.js">makenode.js</a></li>
+                                <li class="selected"><a href="gallery-makenode.js.html" title="gallery-makenode.js">gallery-makenode.js</a></li>
                         </ul>
                     </div>
 

@@ -2,7 +2,7 @@
 <html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>API: gallery-md-button   button.js  (YUI Library)</title>
+	<title>API: gallery-md-button   gallery-md-button.js  (YUI Library)</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/api.css" />
@@ -20,7 +20,7 @@
         <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
             &gt; <a href="./module_gallery-md-button.html" title="gallery-md-button">gallery-md-button</a>
                 
-                 &gt; button.js (source view) 
+                 &gt; gallery-md-button.js (source view) 
         <form onsubmit="return false">
             <div id="propertysearch">
                 Search: <input autocomplete="off" id="searchinput" />
@@ -117,22 +117,7 @@
 <span class="cm">		 */</span>
 		<span class="nx">_prevIconClassName</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 
-		<span class="cm">/**</span>
-<span class="cm">		 * publishes events</span>
-<span class="cm">		 * @method initializer</span>
-<span class="cm">		 */</span>
-
-		<span class="nx">initializer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 		
-			<span class="cm">/**</span>
-<span class="cm">			 * Fired when the button is clicked and no href provided</span>
-<span class="cm">			 * @event press</span>
-<span class="cm">			 */</span>
-
-			<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">EVENT_PRESS</span><span class="p">,</span> <span class="p">{</span>
-				<span class="nx">defaultFn</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defPressFn</span>
-			<span class="p">});</span>
-		<span class="p">},</span>
 		<span class="nx">renderUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">(</span><span class="nx">LABEL</span><span class="p">,</span> <span class="nx">ICON</span><span class="p">);</span>
@@ -143,19 +128,19 @@
 <span class="cm">		 * Removes the pressed class.  </span>
 <span class="cm">		 * MouseUp is listened to at the document body level since the cursor might have moved</span>
 <span class="cm">		 * away from the pressed button when released.</span>
-<span class="cm">		 * @method _onMouseUp</span>
+<span class="cm">		 * @method _afterDocumentMouseup</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onMouseUp</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nx">_afterDocumentMouseup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">.</span><span class="nx">pressed</span><span class="p">);</span>
 		<span class="p">},</span>
 
 		<span class="cm">/**</span>
 <span class="cm">		 * Adds the pressed class to bounding box</span>
-<span class="cm">		 * @method _onMouseDown</span>
+<span class="cm">		 * @method _afterBoundingBoxMousedown</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onMouseDown</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nx">_afterBoundingBoxMousedown</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">DISABLED</span><span class="p">))</span> <span class="p">{</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">.</span><span class="nx">pressed</span><span class="p">);</span>
 			<span class="p">}</span>
@@ -243,11 +228,11 @@
 
 		<span class="cm">/**</span>
 <span class="cm">		 * Default click event handler</span>
-<span class="cm">		 * @method _onClick</span>
+<span class="cm">		 * @method _afterBoundingBoxClick</span>
 <span class="cm">		 * @param ev {Event Facade}</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">_afterBoundingBoxClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
 			<span class="kd">var</span> <span class="nx">href</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HREF</span><span class="p">);</span>
 
 			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">DISABLED</span><span class="p">))</span> <span class="p">{</span>
@@ -373,14 +358,14 @@
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>
 		<span class="nx">_EVENTS</span><span class="o">:</span> <span class="p">{</span>
-			<span class="s1">&#39;.&#39;</span><span class="o">:</span> <span class="p">{</span>
-				<span class="nx">click</span><span class="o">:</span> <span class="s1">&#39;_onClick&#39;</span><span class="p">,</span>
-				<span class="nx">mousedown</span><span class="o">:</span> <span class="s1">&#39;_onMouseDown&#39;</span>
-			<span class="p">},</span>
-			<span class="s1">&#39;..&#39;</span><span class="o">:</span> <span class="p">{</span>
-				<span class="nx">mouseup</span><span class="o">:</span> <span class="s1">&#39;_onMouseUp&#39;</span>
-			<span class="p">}</span>
+			<span class="nx">boundingBox</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="s1">&#39;mousedown&#39;</span><span class="p">],</span>
+			<span class="nb">document</span><span class="o">:</span> <span class="s1">&#39;mouseup&#39;</span>
 		<span class="p">},</span> 
+		<span class="nx">_PUBLISH</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">press</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">defaultFn</span><span class="o">:</span> <span class="s2">&quot;_defPressFn&quot;</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
 		<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
 			<span class="cm">/**</span>
 <span class="cm">			 * Label to be shown on the button</span>
@@ -631,7 +616,7 @@
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class="selected"><a href="button.js.html" title="button.js">button.js</a></li>
+                                <li class="selected"><a href="gallery-md-button.js.html" title="gallery-md-button.js">gallery-md-button.js</a></li>
                         </ul>
                     </div>
 
@@ -649,7 +634,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "Button.html#property_BOUNDING_TEMPLATE", "access": "private", "host": "Button", "type": "property", "name": "BOUNDING_TEMPLATE"}, {"url": "Button.html#config_callback", "access": "", "host": "Button", "type": "config", "name": "callback"}, {"url": "Button.html#event_callbackChange", "access": "", "host": "Button", "type": "event", "name": "callbackChange"}, {"url": "Button.html#method__callbackFromType", "access": "private", "host": "Button", "type": "method", "name": "_callbackFromType"}, {"url": "Button.html#property_CONTENT_TEMPLATE", "access": "private", "host": "Button", "type": "property", "name": "CONTENT_TEMPLATE"}, {"url": "Button.html#config_default", "access": "", "host": "Button", "type": "config", "name": "default"}, {"url": "Button.html#event_defaultChange", "access": "", "host": "Button", "type": "event", "name": "defaultChange"}, {"url": "Button.html#method__defPressFn", "access": "private", "host": "Button", "type": "method", "name": "_defPressFn"}, {"url": "ButtonToggle.html#method__defPressFn", "access": "private", "host": "ButtonToggle", "type": "method", "name": "_defPressFn"}, {"url": "ButtonToggle.html#config_deselectedCallback", "access": "", "host": "ButtonToggle", "type": "config", "name": "deselectedCallback"}, {"url": "ButtonToggle.html#event_deselectedCallbackChange", "access": "", "host": "ButtonToggle", "type": "event", "name": "deselectedCallbackChange"}, {"url": "Button.html#config_href", "access": "", "host": "Button", "type": "config", "name": "href"}, {"url": "Button.html#event_hrefChange", "access": "", "host": "Button", "type": "event", "name": "hrefChange"}, {"url": "Button.html#property_HTML_PARSER", "access": "", "host": "Button", "type": "property", "name": "HTML_PARSER"}, {"url": "Button.html#config_icon", "access": "", "host": "Button", "type": "config", "name": "icon"}, {"url": "Button.html#event_iconChange", "access": "", "host": "Button", "type": "event", "name": "iconChange"}, {"url": "Button.html#config_iconPosition", "access": "", "host": "Button", "type": "config", "name": "iconPosition"}, {"url": "Button.html#event_iconPositionChange", "access": "", "host": "Button", "type": "event", "name": "iconPositionChange"}, {"url": "Button.html#method_initializer", "access": "", "host": "Button", "type": "method", "name": "initializer"}, {"url": "Button.html#config_label", "access": "", "host": "Button", "type": "config", "name": "label"}, {"url": "Button.html#event_labelChange", "access": "", "host": "Button", "type": "event", "name": "labelChange"}, {"url": "Button.html#method__onClick", "access": "private", "host": "Button", "type": "method", "name": "_onClick"}, {"url": "Button.html#method__onMouseDown", "access": "private", "host": "Button", "type": "method", "name": "_onMouseDown"}, {"url": "Button.html#method__onMouseUp", "access": "private", "host": "Button", "type": "method", "name": "_onMouseUp"}, {"url": "Button.html#event_press", "access": "", "host": "Button", "type": "event", "name": "press"}, {"url": "Button.html#property__prevIconClassName", "access": "private", "host": "Button", "type": "property", "name": "_prevIconClassName"}, {"url": "Button.html#property__TEMPLATE", "access": "protected", "host": "Button", "type": "property", "name": "_TEMPLATE"}, {"url": "Button.html#config_title", "access": "", "host": "Button", "type": "config", "name": "title"}, {"url": "Button.html#event_titleChange", "access": "", "host": "Button", "type": "event", "name": "titleChange"}, {"url": "Button.html#config_type", "access": "", "host": "Button", "type": "config", "name": "type"}, {"url": "Button.html#event_typeChange", "access": "", "host": "Button", "type": "event", "name": "typeChange"}, {"url": "Button.html#method__uiSetDefault", "access": "private", "host": "Button", "type": "method", "name": "_uiSetDefault"}, {"url": "Button.html#method__uiSetHref", "access": "private", "host": "Button", "type": "method", "name": "_uiSetHref"}, {"url": "Button.html#method__uiSetIcon", "access": "private", "host": "Button", "type": "method", "name": "_uiSetIcon"}, {"url": "Button.html#method__uiSetIconPosition", "access": "private", "host": "Button", "type": "method", "name": "_uiSetIconPosition"}, {"url": "Button.html#method__uiSetLabel", "access": "private", "host": "Button", "type": "method", "name": "_uiSetLabel"}, {"url": "Button.html#method__uiSetTitle", "access": "private", "host": "Button", "type": "method", "name": "_uiSetTitle"}, {"url": "Button.html#property_Y.Button._CLASS_NAMES", "access": "protected", "host": "Button", "type": "property", "name": "Y.Button._CLASS_NAMES"}, {"url": "Button.html#property_Y.Button._EVENTS", "access": "protected", "host": "Button", "type": "property", "name": "Y.Button._EVENTS"}, {"url": "Button.html#property_Y.Button.LEFT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.LEFT"}, {"url": "Button.html#property_Y.Button.PUSH", "access": "", "host": "Button", "type": "property", "name": "Y.Button.PUSH"}, {"url": "Button.html#property_Y.Button.RESET", "access": "", "host": "Button", "type": "property", "name": "Y.Button.RESET"}, {"url": "Button.html#property_Y.Button.RIGHT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.RIGHT"}, {"url": "Button.html#property_Y.Button.SUBMIT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.SUBMIT"}, {"url": "ButtonToggle.html#property_Y.ButtonToggle._CLASS_NAMES", "access": "protected", "host": "ButtonToggle", "type": "property", "name": "Y.ButtonToggle._CLASS_NAMES"}];
+    var ALL_YUI_PROPS = [{"url": "Button.html#method__afterBoundingBoxClick", "access": "private", "host": "Button", "type": "method", "name": "_afterBoundingBoxClick"}, {"url": "Button.html#method__afterBoundingBoxMousedown", "access": "private", "host": "Button", "type": "method", "name": "_afterBoundingBoxMousedown"}, {"url": "Button.html#method__afterDocumentMouseup", "access": "private", "host": "Button", "type": "method", "name": "_afterDocumentMouseup"}, {"url": "Button.html#property_BOUNDING_TEMPLATE", "access": "private", "host": "Button", "type": "property", "name": "BOUNDING_TEMPLATE"}, {"url": "Button.html#config_callback", "access": "", "host": "Button", "type": "config", "name": "callback"}, {"url": "Button.html#event_callbackChange", "access": "", "host": "Button", "type": "event", "name": "callbackChange"}, {"url": "Button.html#method__callbackFromType", "access": "private", "host": "Button", "type": "method", "name": "_callbackFromType"}, {"url": "Button.html#property_CONTENT_TEMPLATE", "access": "private", "host": "Button", "type": "property", "name": "CONTENT_TEMPLATE"}, {"url": "Button.html#config_default", "access": "", "host": "Button", "type": "config", "name": "default"}, {"url": "Button.html#event_defaultChange", "access": "", "host": "Button", "type": "event", "name": "defaultChange"}, {"url": "Button.html#method__defPressFn", "access": "private", "host": "Button", "type": "method", "name": "_defPressFn"}, {"url": "ButtonToggle.html#method__defPressFn", "access": "private", "host": "ButtonToggle", "type": "method", "name": "_defPressFn"}, {"url": "ButtonToggle.html#config_deselectedCallback", "access": "", "host": "ButtonToggle", "type": "config", "name": "deselectedCallback"}, {"url": "ButtonToggle.html#event_deselectedCallbackChange", "access": "", "host": "ButtonToggle", "type": "event", "name": "deselectedCallbackChange"}, {"url": "Button.html#config_href", "access": "", "host": "Button", "type": "config", "name": "href"}, {"url": "Button.html#event_hrefChange", "access": "", "host": "Button", "type": "event", "name": "hrefChange"}, {"url": "Button.html#property_HTML_PARSER", "access": "", "host": "Button", "type": "property", "name": "HTML_PARSER"}, {"url": "Button.html#config_icon", "access": "", "host": "Button", "type": "config", "name": "icon"}, {"url": "Button.html#event_iconChange", "access": "", "host": "Button", "type": "event", "name": "iconChange"}, {"url": "Button.html#config_iconPosition", "access": "", "host": "Button", "type": "config", "name": "iconPosition"}, {"url": "Button.html#event_iconPositionChange", "access": "", "host": "Button", "type": "event", "name": "iconPositionChange"}, {"url": "Button.html#config_label", "access": "", "host": "Button", "type": "config", "name": "label"}, {"url": "Button.html#event_labelChange", "access": "", "host": "Button", "type": "event", "name": "labelChange"}, {"url": "Button.html#property__prevIconClassName", "access": "private", "host": "Button", "type": "property", "name": "_prevIconClassName"}, {"url": "Button.html#property__TEMPLATE", "access": "protected", "host": "Button", "type": "property", "name": "_TEMPLATE"}, {"url": "Button.html#config_title", "access": "", "host": "Button", "type": "config", "name": "title"}, {"url": "Button.html#event_titleChange", "access": "", "host": "Button", "type": "event", "name": "titleChange"}, {"url": "Button.html#config_type", "access": "", "host": "Button", "type": "config", "name": "type"}, {"url": "Button.html#event_typeChange", "access": "", "host": "Button", "type": "event", "name": "typeChange"}, {"url": "Button.html#method__uiSetDefault", "access": "private", "host": "Button", "type": "method", "name": "_uiSetDefault"}, {"url": "Button.html#method__uiSetHref", "access": "private", "host": "Button", "type": "method", "name": "_uiSetHref"}, {"url": "Button.html#method__uiSetIcon", "access": "private", "host": "Button", "type": "method", "name": "_uiSetIcon"}, {"url": "Button.html#method__uiSetIconPosition", "access": "private", "host": "Button", "type": "method", "name": "_uiSetIconPosition"}, {"url": "Button.html#method__uiSetLabel", "access": "private", "host": "Button", "type": "method", "name": "_uiSetLabel"}, {"url": "Button.html#method__uiSetTitle", "access": "private", "host": "Button", "type": "method", "name": "_uiSetTitle"}, {"url": "Button.html#property_Y.Button._CLASS_NAMES", "access": "protected", "host": "Button", "type": "property", "name": "Y.Button._CLASS_NAMES"}, {"url": "Button.html#property_Y.Button._EVENTS", "access": "protected", "host": "Button", "type": "property", "name": "Y.Button._EVENTS"}, {"url": "Button.html#property_Y.Button.LEFT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.LEFT"}, {"url": "Button.html#property_Y.Button.PUSH", "access": "", "host": "Button", "type": "property", "name": "Y.Button.PUSH"}, {"url": "Button.html#property_Y.Button.RESET", "access": "", "host": "Button", "type": "property", "name": "Y.Button.RESET"}, {"url": "Button.html#property_Y.Button.RIGHT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.RIGHT"}, {"url": "Button.html#property_Y.Button.SUBMIT", "access": "", "host": "Button", "type": "property", "name": "Y.Button.SUBMIT"}, {"url": "ButtonToggle.html#property_Y.ButtonToggle._CLASS_NAMES", "access": "protected", "host": "ButtonToggle", "type": "property", "name": "Y.ButtonToggle._CLASS_NAMES"}];
 </script>
 </body>
 </html>

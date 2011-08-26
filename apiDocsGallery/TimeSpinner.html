@@ -969,6 +969,50 @@ Same as <code>this.set('running', false);</code>
                                     </div>
                                     <hr />
                                     </div>
+                                    <div class="" rel="yui:event" resource="#event_stringsChange">
+                                    <h4>
+                                        <a name="event_stringsChange">stringsChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">stringsChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'strings' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
                                     <div class="" rel="yui:event" resource="#event_valueChange">
                                     <h4>
                                         <a name="event_valueChange">valueChange</a></h4>
@@ -1091,6 +1135,20 @@ Same as <code>this.set('running', false);</code>
 
                                     <hr />
                                     </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_strings">
+                                    <h4><a name="config_strings">strings</a>
+                                        <code>- <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Set of localizable strings to be used as tooltips on the spinners.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
                                     <div class="" rel="yui:attribute" resource="#config_value">
                                     <h4><a name="config_value">value</a>
                                         <code>- <span property="yui:type">Date</span></code>
@@ -1141,7 +1199,7 @@ Same as <code>this.set('running', false);</code>
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class=""><a href="md-timespinner.js.html" title="md-timespinner.js">md-timespinner.js</a></li>
+                                <li class=""><a href="gallery-md-timespinner.js.html" title="gallery-md-timespinner.js">gallery-md-timespinner.js</a></li>
                         </ul>
                     </div>
 
@@ -1185,6 +1243,7 @@ Same as <code>this.set('running', false);</code>
                                 <li class=""><a href="#event_runningChange" title="runningChange">runningChange</a></li>
                                 <li class=""><a href="#event_showAmPmChange" title="showAmPmChange">showAmPmChange</a></li>
                                 <li class=""><a href="#event_showSecondsChange" title="showSecondsChange">showSecondsChange</a></li>
+                                <li class=""><a href="#event_stringsChange" title="stringsChange">stringsChange</a></li>
                                 <li class=""><a href="#event_valueChange" title="valueChange">valueChange</a></li>
                         </ul>
                     </div>
@@ -1196,6 +1255,7 @@ Same as <code>this.set('running', false);</code>
                                 <li class=""><a href="#config_running" title="running">running</a></li>
                                 <li class=""><a href="#config_showAmPm" title="showAmPm">showAmPm</a></li>
                                 <li class=""><a href="#config_showSeconds" title="showSeconds">showSeconds</a></li>
+                                <li class=""><a href="#config_strings" title="strings">strings</a></li>
                                 <li class=""><a href="#config_value" title="value">value</a></li>
                         </ul>
                     </div>
@@ -1210,7 +1270,7 @@ Same as <code>this.set('running', false);</code>
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "TimeSpinner.html#method_", "access": "private", "host": "TimeSpinner", "type": "method", "name": ""}, {"url": "TimeSpinner.html#method__afterValueChange", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_afterValueChange"}, {"url": "TimeSpinner.html#property__ampmSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_ampmSp"}, {"url": "TimeSpinner.html#method_bindUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "bindUI"}, {"url": "TimeSpinner.html#property__frozenTime", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_frozenTime"}, {"url": "TimeSpinner.html#method__getTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_getTime"}, {"url": "TimeSpinner.html#property__hourSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_hourSp"}, {"url": "TimeSpinner.html#config_interval", "access": "", "host": "TimeSpinner", "type": "config", "name": "interval"}, {"url": "TimeSpinner.html#event_intervalChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "intervalChange"}, {"url": "TimeSpinner.html#property__minSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_minSp"}, {"url": "TimeSpinner.html#property__offset", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_offset"}, {"url": "TimeSpinner.html#method_renderUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "renderUI"}, {"url": "TimeSpinner.html#config_running", "access": "", "host": "TimeSpinner", "type": "config", "name": "running"}, {"url": "TimeSpinner.html#event_runningChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "runningChange"}, {"url": "TimeSpinner.html#property__secSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_secSp"}, {"url": "TimeSpinner.html#method__setTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_setTime"}, {"url": "TimeSpinner.html#config_showAmPm", "access": "", "host": "TimeSpinner", "type": "config", "name": "showAmPm"}, {"url": "TimeSpinner.html#event_showAmPmChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showAmPmChange"}, {"url": "TimeSpinner.html#config_showSeconds", "access": "", "host": "TimeSpinner", "type": "config", "name": "showSeconds"}, {"url": "TimeSpinner.html#event_showSecondsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showSecondsChange"}, {"url": "TimeSpinner.html#method_start", "access": "", "host": "TimeSpinner", "type": "method", "name": "start"}, {"url": "TimeSpinner.html#method_stop", "access": "", "host": "TimeSpinner", "type": "method", "name": "stop"}, {"url": "TimeSpinner.html#property__timer", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_timer"}, {"url": "TimeSpinner.html#method__uiSetAmpm", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetAmpm"}, {"url": "TimeSpinner.html#method__uiSetInterval", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetInterval"}, {"url": "TimeSpinner.html#method__uiSetRunning", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetRunning"}, {"url": "TimeSpinner.html#method__uiSetSeconds", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetSeconds"}, {"url": "TimeSpinner.html#method__uiSetValue", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetValue"}, {"url": "TimeSpinner.html#method__updateTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_updateTime"}, {"url": "TimeSpinner.html#config_value", "access": "", "host": "TimeSpinner", "type": "config", "name": "value"}, {"url": "TimeSpinner.html#event_valueChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "valueChange"}];
+    var ALL_YUI_PROPS = [{"url": "TimeSpinner.html#method_", "access": "private", "host": "TimeSpinner", "type": "method", "name": ""}, {"url": "TimeSpinner.html#method__afterValueChange", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_afterValueChange"}, {"url": "TimeSpinner.html#property__ampmSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_ampmSp"}, {"url": "TimeSpinner.html#method_bindUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "bindUI"}, {"url": "TimeSpinner.html#property__frozenTime", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_frozenTime"}, {"url": "TimeSpinner.html#method__getTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_getTime"}, {"url": "TimeSpinner.html#property__hourSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_hourSp"}, {"url": "TimeSpinner.html#config_interval", "access": "", "host": "TimeSpinner", "type": "config", "name": "interval"}, {"url": "TimeSpinner.html#event_intervalChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "intervalChange"}, {"url": "TimeSpinner.html#property__minSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_minSp"}, {"url": "TimeSpinner.html#property__offset", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_offset"}, {"url": "TimeSpinner.html#method_renderUI", "access": "protected", "host": "TimeSpinner", "type": "method", "name": "renderUI"}, {"url": "TimeSpinner.html#config_running", "access": "", "host": "TimeSpinner", "type": "config", "name": "running"}, {"url": "TimeSpinner.html#event_runningChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "runningChange"}, {"url": "TimeSpinner.html#property__secSp", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_secSp"}, {"url": "TimeSpinner.html#method__setTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_setTime"}, {"url": "TimeSpinner.html#config_showAmPm", "access": "", "host": "TimeSpinner", "type": "config", "name": "showAmPm"}, {"url": "TimeSpinner.html#event_showAmPmChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showAmPmChange"}, {"url": "TimeSpinner.html#config_showSeconds", "access": "", "host": "TimeSpinner", "type": "config", "name": "showSeconds"}, {"url": "TimeSpinner.html#event_showSecondsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "showSecondsChange"}, {"url": "TimeSpinner.html#method_start", "access": "", "host": "TimeSpinner", "type": "method", "name": "start"}, {"url": "TimeSpinner.html#method_stop", "access": "", "host": "TimeSpinner", "type": "method", "name": "stop"}, {"url": "TimeSpinner.html#config_strings", "access": "", "host": "TimeSpinner", "type": "config", "name": "strings"}, {"url": "TimeSpinner.html#event_stringsChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "stringsChange"}, {"url": "TimeSpinner.html#property__timer", "access": "private", "host": "TimeSpinner", "type": "property", "name": "_timer"}, {"url": "TimeSpinner.html#method__uiSetAmpm", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetAmpm"}, {"url": "TimeSpinner.html#method__uiSetInterval", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetInterval"}, {"url": "TimeSpinner.html#method__uiSetRunning", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetRunning"}, {"url": "TimeSpinner.html#method__uiSetSeconds", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetSeconds"}, {"url": "TimeSpinner.html#method__uiSetValue", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_uiSetValue"}, {"url": "TimeSpinner.html#method__updateTime", "access": "private", "host": "TimeSpinner", "type": "method", "name": "_updateTime"}, {"url": "TimeSpinner.html#config_value", "access": "", "host": "TimeSpinner", "type": "config", "name": "value"}, {"url": "TimeSpinner.html#event_valueChange", "access": "", "host": "TimeSpinner", "type": "event", "name": "valueChange"}];
 </script>
 </body>
 </html>

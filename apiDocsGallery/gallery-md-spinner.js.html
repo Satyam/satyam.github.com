@@ -2,7 +2,7 @@
 <html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>API: gallery-md-spinner   md-spinner.js  (YUI Library)</title>
+	<title>API: gallery-md-spinner   gallery-md-spinner.js  (YUI Library)</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/api.css" />
@@ -20,7 +20,7 @@
         <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
             &gt; <a href="./module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a>
                 
-                 &gt; md-spinner.js (source view) 
+                 &gt; gallery-md-spinner.js (source view) 
         <form onsubmit="return false">
             <div id="propertysearch">
                 Search: <input autocomplete="off" id="searchinput" />
@@ -98,11 +98,11 @@
 <span class="cm">		 * The method also sets up a timer, to support the user holding the mouse</span>
 <span class="cm">		 * down on the spinner buttons. The timer is cleared when a mouse up event</span>
 <span class="cm">		 * is detected.</span>
-<span class="cm">		 * @method _onMouseDown</span>
+<span class="cm">		 * @method _afterBoundingBoxMousedown</span>
 <span class="cm">		 * @param ev {EventFacade} Event facade produced by the event handler</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onMouseDown</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">_afterBoundingBoxMousedown</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
 			<span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span>
 				<span class="nx">dir</span><span class="p">,</span>
 				<span class="nx">handled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
@@ -138,10 +138,10 @@
 		<span class="cm">/**</span>
 <span class="cm">		 * Document mouse up handler. Clears the timers supporting</span>
 <span class="cm">		 * the &quot;mouse held down&quot; behavior.</span>
-<span class="cm">		 * @method _onDocMouseUp</span>
+<span class="cm">		 * @method _afterDocumentMouseup</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onDocMouseUp</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">_afterDocumentMouseup</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_clearMouseDownTimers</span><span class="p">();</span>
 		<span class="p">},</span>
 
@@ -181,10 +181,10 @@
 		<span class="cm">/**</span>
 <span class="cm">		 * Simple change handler, to make sure user does not input an invalid value.</span>
 <span class="cm">		 * If an error is detected, focus will return to the input box and the input box highlighted briefly.</span>
-<span class="cm">		 * @method _onInputChange</span>
+<span class="cm">		 * @method _afterInputChange</span>
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
-		<span class="nx">_onInputChange</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">_afterInputChange</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 			<span class="kd">var</span> <span class="nx">inputEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_inputNode</span><span class="p">,</span>
 				<span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">PARSER</span><span class="p">)(</span><span class="nx">inputEl</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">));</span>
 				
@@ -353,19 +353,16 @@
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>
 		<span class="nx">_EVENTS</span><span class="o">:</span> <span class="p">{</span>
-			<span class="s1">&#39;.&#39;</span><span class="o">:</span> <span class="p">{</span>
-				<span class="nx">key</span><span class="o">:</span><span class="p">{</span>
+			<span class="nx">boundingBox</span><span class="o">:</span> <span class="p">[</span>
+				<span class="p">{</span>
+					<span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span>
 					<span class="nx">fn</span><span class="o">:</span><span class="s1">&#39;_onDirectionKey&#39;</span><span class="p">,</span>
 					<span class="nx">args</span><span class="o">:</span><span class="p">((</span><span class="o">!</span><span class="nx">Y</span><span class="p">.</span><span class="nx">UA</span><span class="p">.</span><span class="nx">opera</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;down:&quot;</span> <span class="o">:</span> <span class="s2">&quot;press:&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;38, 40, 33, 34&quot;</span>
 				<span class="p">},</span>
-				<span class="nx">mousedown</span><span class="o">:</span> <span class="s1">&#39;_onMouseDown&#39;</span>
-			<span class="p">},</span>
-			<span class="s1">&#39;..&#39;</span><span class="o">:</span> <span class="p">{</span>
-				<span class="nx">mouseup</span><span class="o">:</span> <span class="s1">&#39;_onDocMouseUp&#39;</span>
-			<span class="p">},</span>
-			<span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
-				<span class="nx">change</span><span class="o">:</span><span class="s1">&#39;_onInputChange&#39;</span>
-			<span class="p">}</span>
+				<span class="s1">&#39;mousedown&#39;</span>
+			<span class="p">],</span>
+			<span class="nb">document</span><span class="o">:</span> <span class="s1">&#39;mouseup&#39;</span><span class="p">,</span>
+			<span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;change&#39;</span>
 		<span class="p">},</span>
 		<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
 			<span class="cm">/**</span>
@@ -531,7 +528,7 @@
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class="selected"><a href="md-spinner.js.html" title="md-spinner.js">md-spinner.js</a></li>
+                                <li class="selected"><a href="gallery-md-spinner.js.html" title="gallery-md-spinner.js">gallery-md-spinner.js</a></li>
                         </ul>
                     </div>
 
@@ -549,7 +546,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method__onDocMouseUp", "access": "private", "host": "Spinner", "type": "method", "name": "_onDocMouseUp"}, {"url": "Spinner.html#method__onInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_onInputChange"}, {"url": "Spinner.html#method__onMouseDown", "access": "private", "host": "Spinner", "type": "method", "name": "_onMouseDown"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
+    var ALL_YUI_PROPS = [{"url": "Spinner.html#method__afterBoundingBoxMousedown", "access": "private", "host": "Spinner", "type": "method", "name": "_afterBoundingBoxMousedown"}, {"url": "Spinner.html#method__afterDocumentMouseup", "access": "private", "host": "Spinner", "type": "method", "name": "_afterDocumentMouseup"}, {"url": "Spinner.html#method__afterInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_afterInputChange"}, {"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
 </script>
 </body>
 </html>

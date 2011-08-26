@@ -211,6 +211,117 @@ to be the content box for spinner.
                         <div class="section method details">
                             <h3 id="methods">Methods</h3>
                             <div class="content">
+                                    <div class="private" rel="yui:method" resource="#method__afterBoundingBoxMousedown">
+                                    <h4>
+                                        <a name="method__afterBoundingBoxMousedown">_afterBoundingBoxMousedown</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterBoundingBoxMousedown</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Bounding box mouse down handler. Will determine if the mouse down
+is on one of the spinner buttons, and increment/decrement the value
+accordingly.
+The method also sets up a timer, to support the user holding the mouse
+down on the spinner buttons. The timer is cleared when a mouse up event
+is detected.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Event facade produced by the event handler</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__afterDocumentMouseup">
+                                    <h4>
+                                        <a name="method__afterDocumentMouseup">_afterDocumentMouseup</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterDocumentMouseup</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Document mouse up handler. Clears the timers supporting
+the "mouse held down" behavior.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__afterInputChange">
+                                    <h4>
+                                        <a name="method__afterInputChange">_afterInputChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterInputChange</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Simple change handler, to make sure user does not input an invalid value.
+If an error is detected, focus will return to the input box and the input box highlighted briefly.
+                                        </div>
+
+                                        <div class="description">
+
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
                                     <div class="private" rel="yui:method" resource="#method__clearMouseDownTimers">
                                     <h4>
                                         <a name="method__clearMouseDownTimers">_clearMouseDownTimers</a></h4>
@@ -274,117 +385,6 @@ Increments/Decrement the spinner value, based on the key pressed.
                                                         &lt;<span property="yui:type">EventFacade</span>&gt;
                                                         </code>
                                                         <span property="yui:description">  as provided by the key listener</span>
-                                                        </dd>
-                                                </dl>
-
-
-
-             
-
-                                        </div>
-
-                                    </div>
-                                    <hr />
-                                    </div>
-                                    <div class="private" rel="yui:method" resource="#method__onDocMouseUp">
-                                    <h4>
-                                        <a name="method__onDocMouseUp">_onDocMouseUp</a></h4>
-                                    <div class="detail" >
-                                        <code>
-                                         private 
-                                        
-                                        
-                                        void
-                                            <strong property="yui:name">_onDocMouseUp</strong>
-                                           (
-                                            )
-                                        </code>
-                                        
-                                        <div class="description" property="yui:description">
-                                            Document mouse up handler. Clears the timers supporting
-the "mouse held down" behavior.
-                                        </div>
-
-                                        <div class="description">
-
-
-
-
-             
-
-                                        </div>
-
-                                    </div>
-                                    <hr />
-                                    </div>
-                                    <div class="private" rel="yui:method" resource="#method__onInputChange">
-                                    <h4>
-                                        <a name="method__onInputChange">_onInputChange</a></h4>
-                                    <div class="detail" >
-                                        <code>
-                                         private 
-                                        
-                                        
-                                        void
-                                            <strong property="yui:name">_onInputChange</strong>
-                                           (
-                                            )
-                                        </code>
-                                        
-                                        <div class="description" property="yui:description">
-                                            Simple change handler, to make sure user does not input an invalid value.
-If an error is detected, focus will return to the input box and the input box highlighted briefly.
-                                        </div>
-
-                                        <div class="description">
-
-
-
-
-             
-
-                                        </div>
-
-                                    </div>
-                                    <hr />
-                                    </div>
-                                    <div class="private" rel="yui:method" resource="#method__onMouseDown">
-                                    <h4>
-                                        <a name="method__onMouseDown">_onMouseDown</a></h4>
-                                    <div class="detail" >
-                                        <code>
-                                         private 
-                                        
-                                        
-                                        void
-                                            <strong property="yui:name">_onMouseDown</strong>
-                                           (
-                                                
-                                                        
-                                                         ev
-                                                    
-                                                
-                                            )
-                                        </code>
-                                        
-                                        <div class="description" property="yui:description">
-                                            Bounding box mouse down handler. Will determine if the mouse down
-is on one of the spinner buttons, and increment/decrement the value
-accordingly.
-The method also sets up a timer, to support the user holding the mouse
-down on the spinner buttons. The timer is cleared when a mouse up event
-is detected.
-                                        </div>
-
-                                        <div class="description">
-
-                                                <dl rel="yui:parameters">
-                                                    <dt>Parameters:</dt>
-                                                        <dd rel="yui:parameter">
-                                                        <code><span property="yui:name">ev</span>
-                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
-                                                        </code>
-                                                        <span property="yui:description">  Event facade produced by the event handler</span>
                                                         </dd>
                                                 </dl>
 
@@ -1477,7 +1477,7 @@ Calls _locateNodes to get the references to the elements created.
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class=""><a href="md-spinner.js.html" title="md-spinner.js">md-spinner.js</a></li>
+                                <li class=""><a href="gallery-md-spinner.js.html" title="gallery-md-spinner.js">gallery-md-spinner.js</a></li>
                         </ul>
                     </div>
 
@@ -1496,11 +1496,11 @@ Calls _locateNodes to get the references to the elements created.
                     <div id="methodsList" class="module">
                         <h4>Methods</h4>
                         <ul class="content">        
+                                <li class="private"><a href="#method__afterBoundingBoxMousedown" title="_afterBoundingBoxMousedown">_afterBoundingBoxMousedown</a></li>
+                                <li class="private"><a href="#method__afterDocumentMouseup" title="_afterDocumentMouseup">_afterDocumentMouseup</a></li>
+                                <li class="private"><a href="#method__afterInputChange" title="_afterInputChange">_afterInputChange</a></li>
                                 <li class="private"><a href="#method__clearMouseDownTimers" title="_clearMouseDownTimers">_clearMouseDownTimers</a></li>
                                 <li class="private"><a href="#method__onDirectionKey" title="_onDirectionKey">_onDirectionKey</a></li>
-                                <li class="private"><a href="#method__onDocMouseUp" title="_onDocMouseUp">_onDocMouseUp</a></li>
-                                <li class="private"><a href="#method__onInputChange" title="_onInputChange">_onInputChange</a></li>
-                                <li class="private"><a href="#method__onMouseDown" title="_onMouseDown">_onMouseDown</a></li>
                                 <li class="private"><a href="#method__setMouseDownTimers" title="_setMouseDownTimers">_setMouseDownTimers</a></li>
                                 <li class="private"><a href="#method__uiSetValue" title="_uiSetValue">_uiSetValue</a></li>
                                 <li class="private"><a href="#method__uiSetWraparound" title="_uiSetWraparound">_uiSetWraparound</a></li>
@@ -1553,7 +1553,7 @@ Calls _locateNodes to get the references to the elements created.
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method__onDocMouseUp", "access": "private", "host": "Spinner", "type": "method", "name": "_onDocMouseUp"}, {"url": "Spinner.html#method__onInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_onInputChange"}, {"url": "Spinner.html#method__onMouseDown", "access": "private", "host": "Spinner", "type": "method", "name": "_onMouseDown"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
+    var ALL_YUI_PROPS = [{"url": "Spinner.html#method__afterBoundingBoxMousedown", "access": "private", "host": "Spinner", "type": "method", "name": "_afterBoundingBoxMousedown"}, {"url": "Spinner.html#method__afterDocumentMouseup", "access": "private", "host": "Spinner", "type": "method", "name": "_afterDocumentMouseup"}, {"url": "Spinner.html#method__afterInputChange", "access": "private", "host": "Spinner", "type": "method", "name": "_afterInputChange"}, {"url": "Spinner.html#property__ATTRS_2_UI", "access": "protected", "host": "Spinner", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Spinner.html#property__CLASS_NAMES", "access": "protected", "host": "Spinner", "type": "property", "name": "_CLASS_NAMES"}, {"url": "Spinner.html#method__clearMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_clearMouseDownTimers"}, {"url": "Spinner.html#property__defaultCB", "access": "private", "host": "Spinner", "type": "property", "name": "_defaultCB"}, {"url": "Spinner.html#property__EVENTS", "access": "protected", "host": "Spinner", "type": "property", "name": "_EVENTS"}, {"url": "Spinner.html#method_formatter", "access": "", "host": "Spinner", "type": "method", "name": "formatter"}, {"url": "Spinner.html#config_formatter", "access": "", "host": "Spinner", "type": "config", "name": "formatter"}, {"url": "Spinner.html#event_formatterChange", "access": "", "host": "Spinner", "type": "event", "name": "formatterChange"}, {"url": "Spinner.html#property_HTML_PASER", "access": "", "host": "Spinner", "type": "property", "name": "HTML_PASER"}, {"url": "Spinner.html#config_majorStep", "access": "", "host": "Spinner", "type": "config", "name": "majorStep"}, {"url": "Spinner.html#event_majorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "majorStepChange"}, {"url": "Spinner.html#config_min", "access": "", "host": "Spinner", "type": "config", "name": "min"}, {"url": "Spinner.html#event_minChange", "access": "", "host": "Spinner", "type": "event", "name": "minChange"}, {"url": "Spinner.html#config_minorStep", "access": "", "host": "Spinner", "type": "config", "name": "minorStep"}, {"url": "Spinner.html#event_minorStepChange", "access": "", "host": "Spinner", "type": "event", "name": "minorStepChange"}, {"url": "Spinner.html#method__onDirectionKey", "access": "private", "host": "Spinner", "type": "method", "name": "_onDirectionKey"}, {"url": "Spinner.html#method_parser", "access": "", "host": "Spinner", "type": "method", "name": "parser"}, {"url": "Spinner.html#config_parser", "access": "", "host": "Spinner", "type": "config", "name": "parser"}, {"url": "Spinner.html#event_parserChange", "access": "", "host": "Spinner", "type": "event", "name": "parserChange"}, {"url": "Spinner.html#method_renderUI", "access": "", "host": "Spinner", "type": "method", "name": "renderUI"}, {"url": "Spinner.html#method__setMouseDownTimers", "access": "private", "host": "Spinner", "type": "method", "name": "_setMouseDownTimers"}, {"url": "Spinner.html#config_strings", "access": "", "host": "Spinner", "type": "config", "name": "strings"}, {"url": "Spinner.html#event_stringsChange", "access": "", "host": "Spinner", "type": "event", "name": "stringsChange"}, {"url": "Spinner.html#config_tabIndex", "access": "", "host": "Spinner", "type": "config", "name": "tabIndex"}, {"url": "Spinner.html#event_tabIndexChange", "access": "", "host": "Spinner", "type": "event", "name": "tabIndexChange"}, {"url": "Spinner.html#property__TEMPLATE", "access": "protected", "host": "Spinner", "type": "property", "name": "_TEMPLATE"}, {"url": "Spinner.html#method__uiSetValue", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetValue"}, {"url": "Spinner.html#method__uiSetWraparound", "access": "private", "host": "Spinner", "type": "method", "name": "_uiSetWraparound"}, {"url": "Spinner.html#method__validateValue", "access": "private", "host": "Spinner", "type": "method", "name": "_validateValue"}, {"url": "Spinner.html#config_value", "access": "", "host": "Spinner", "type": "config", "name": "value"}, {"url": "Spinner.html#event_valueChange", "access": "", "host": "Spinner", "type": "event", "name": "valueChange"}, {"url": "Spinner.html#method__wrap", "access": "private", "host": "Spinner", "type": "method", "name": "_wrap"}, {"url": "Spinner.html#config_wraparound", "access": "", "host": "Spinner", "type": "config", "name": "wraparound"}, {"url": "Spinner.html#event_wraparoundChange", "access": "", "host": "Spinner", "type": "event", "name": "wraparoundChange"}, {"url": "Spinner.html#event_wrapped", "access": "", "host": "Spinner", "type": "event", "name": "wrapped"}];
 </script>
 </body>
 </html>
