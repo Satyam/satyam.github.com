@@ -2,10 +2,9 @@
 <HTML>
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<TITLE>The "MakeNode" Widget Extension</TITLE>
-
+	<TITLE>The &quot;MakeNode&quot; Widget Extension</TITLE>
 </HEAD>
-<BODY>
+<BODY LANG="en-US" DIR="LTR">
 <P>In my previous article, <A HREF="http://www.yuiblog.com/blog/2011/04/01/a-recipe-for-a-yui-3-application">A
 Recipe for a YUI 3 Application</A>, I showed a way to use
 <CODE>Y.substitute</CODE> as a very basic template
@@ -297,75 +296,77 @@ and <CODE>_CLASS_NAMES</CODE> and that is <CODE>_EVENTS</CODE>.
 class name keys, each containing a hash of event types and methods to
 handle them. It is better explained with an example:</P>
 <PRE>_EVENTS: {
-    input: {
-        change:'_onInputChange'
-    },
-    '.': {
-        key:{
-            fn:'_onDirectionKey',
+    input: 'change',                    // calls this._afterInputChange
+    boundingBox: [
+        {
+            type: 'key',
+            fn:'_onDirectionKey',       // calls this._onDirectionKey
             args:((!Y.UA.opera) ? &quot;down:&quot; : &quot;press:&quot;) + &quot;38, 40, 33, 34&quot;
         },
-        mousedown: '_onMouseDown'
-    },
-    '..': {
-        mouseup: '_onDocMouseUp'
-
-    }
+        'mousedown'                     // calls this._afterBoundingBoxMousedown
+    ],
+    document: 'mouseup',                // calls this._afterDocumentMouseup,
+    Y: 'broadcastingObject:someEvent'   // calls this[&quot;_afterYBroadcastingObject:someEvent&quot;]
 },</PRE><P>
 <CODE>_EVENTS</CODE> is an object (a hash) with any
 number of entries. The names of the properties, that is, the keys of
 the hash, identify the nodes whose events we will listen to. They are
 the same className keys defined in <CODE>_CLASS_NAMES</CODE>.
 There are several extra special keys:</P>
-<UL STYLE="margin-left: 0.64cm">
-	<LI><P><CODE>&quot;.&quot;</CODE> will refer to the
-	bounding box itself.</P>
-	<LI><P><CODE>&quot;..&quot;</CODE> refers to the
-	document containing this widget.</P>
+<UL>
+	<LI><P><CODE>&quot;boundingBox&quot;</CODE> will
+	refer to the bounding box itself.</P>
+	<LI><P><CODE>&quot;document&quot;</CODE> refers to
+	the document containing this widget.</P>
 	<LI><P><CODE>&quot;THIS&quot;</CODE> refers to the
 	widget itself</P>
-	<LI><P><CODE>&quot;Y&quot;</CODE> refers to the Y
+	<LI><P><CODE>&quot;Y&quot;</CODE> refers to the <code>Y</code>
 	instance.</P>
 </UL>
-<P>Think of the first two as doing a <CODE>chdir</CODE>
-command when located at the <CODE>boundingBox</CODE>
-level. If the Widget has been extended with WidgetStdMod as well, the
+<P>If the Widget has been extended with WidgetStdMod as well, the
 keys <CODE>HEADER</CODE>, <CODE>BODY</CODE>
 and <CODE>FOOTER</CODE> will refer to those sections
 since they will be available in the <CODE>_classNames</CODE>
 hash. JavaScript does not need the keys to be quoted if they are
-valid identifiers so, except for the dots, the others don't need to
-be quoted.</P>
+valid identifiers so none of the above need to be quoted.</P>
 <P>The <CODE>_EVENTS</CODE> property is processed
 after the <CODE>renderUI</CODE>, <CODE>bindUI</CODE>
 and <CODE>syncUI</CODE> methods have been called so
 the widget is expected to be already inserted within the document
-body, otherwise the <CODE>&quot;..&quot;</CODE> will
+body, otherwise the <CODE>&quot;document&quot;</CODE> identifier will
 fail. 
 </P>
-<P>Each of the entries in <CODE>_EVENTS</CODE> is a
-further object that uses the type of event as its key and the name of
-an instance method to handle it. <CODE>_EVENTS</CODE>,
-being a static variable, has no access to <CODE>this</CODE>
-so it cannot take actual function references, only the name of the
-event listener method. Some event types need extra arguments, such as
-the <CODE>key</CODE> event. In that case, instead of
-providing the name of the event handler you can provide an object
-with properties <CODE>fn</CODE> and <CODE>args</CODE>
-to hold the function name and the extra arguments, when required. 
+<P>For each of those elements there is an event identifier or an
+array of event identifiers.  An event can be identified by the type
+of event to listen to or an object with further details.  By default,
+MakeNode will use as a listener a method named using the <CODE>&quot;_after&quot;</CODE>
+prefix followed by the element identifier with its first character
+capitalized followed by the event type with its first character
+capitalized.   The code block above shows the methods called for each
+event.  
 </P>
+<P>An event identifier can also be an object with properties <CODE>type</CODE>,
+<CODE>fn</CODE> and <CODE>args</CODE>.
+ The <CODE>type</CODE> is mandatory and indicates the
+type of event being listened to.  The <CODE>fn</CODE>
+property gives the name of the method that will listen to the event
+thus avoiding the automatic naming.  Since <CODE>_EVENTS</CODE>
+is a static property, it has no access to <CODE>this</CODE>
+so it cannot take an actual reference to a method, only its name. 
+The <CODE>args</CODE> argument can be used to pass
+further arguments to the caller such as with the <CODE>key</CODE>
+event which requires a keys specification.</P>
 <P>MakeNode will use <CODE>Node.delegate</CODE> to
 listen to the events of the elements within the <CODE>boundingBox</CODE>,
-while it will use <CODE>Y.after</CODE> to listen to
-events from the <CODE>boundingBox</CODE> and the
+while it will use <CODE>Node.after</CODE> to listen
+to events from the <CODE>boundingBox</CODE> and the
 document body. It will use <CODE>this.after</CODE> to
 listen to events under the <CODE>THIS</CODE> key and
-also <CODE>Y.after</CODE> for listeners listed under
-the <CODE>Y</CODE> key. All events are listened to
-using <I>after</I> event listeners since they are meant to make the
-widget respond to events, not to filter the behavior of the object
-that fires them so in no case these events can be prevented or
-stopped. (Note: listening to the <CODE>key</CODE>
+<CODE>Y.after</CODE> for listeners listed under the <CODE>Y</CODE>
+key. All events are listened to using <I>after</I> event listeners
+since they are meant to make the widget respond to events, not to
+filter the behavior of the object that fires them so in no case these
+events can be prevented or stopped. (Note: listening to the <CODE>key</CODE>
 event on any nested element works only with version 3.4.0pr1 and
 above, since delegation of the <CODE>key</CODE> event
 was not available before. All the other features work with previous
@@ -497,7 +498,7 @@ using the name of the event as its keys and an object literal of
 configuration attributes as its values. It will publish all the
 events listed in any such property in all the inheritance chain. The
 same event name can be published in a class and in any class
-inheriting from it which will make  the configuration attributes of
+inheriting from it which will make the configuration attributes of
 later ones override the ones in the older ones, for example, you
 might want to make an existing event broadcast globally. Just as with
 the <CODE>_EVENTS</CODE>, since <CODE>_PUBLISH</CODE>
