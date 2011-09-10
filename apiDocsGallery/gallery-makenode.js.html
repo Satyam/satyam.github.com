@@ -174,7 +174,7 @@
 <span class="cm">		 * Contains a hash of CSS classNames generated from the entries in &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;/code&gt;&lt;/a&gt;</span>
 <span class="cm">		 * indexed by those same values.</span>
 <span class="cm">		 * It will also have the following entries added automatically: &lt;ul&gt;</span>
-<span class="cm">		 * &lt;li&gt;&lt;code&gt;.&lt;/code&gt; The className for the boundingBox&lt;/li&gt;</span>
+<span class="cm">		 * &lt;li&gt;&lt;code&gt;boundingBox&lt;/code&gt; The className for the boundingBox&lt;/li&gt;</span>
 <span class="cm">		 * &lt;li&gt;&lt;code&gt;content&lt;/code&gt; The className for the contentBox&lt;/li&gt;</span>
 <span class="cm">		 * &lt;li&gt;&lt;code&gt;HEADER&lt;/code&gt; The className for the header section of a StdMod if Y.WidgetStdMod has been loaded&lt;/li&gt;</span>
 <span class="cm">		 * &lt;li&gt;&lt;code&gt;BODY&lt;/code&gt; The className for the body section of a StdMod if Y.WidgetStdMod has been loaded&lt;/li&gt;</span>
@@ -343,7 +343,7 @@
 <span class="cm">		 * Looks for static properties called &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;/code&gt;&lt;/a&gt; in each of the classes of the inheritance chain</span>
 <span class="cm">		 * and generates CSS classNames based on the &lt;code&gt;_cssPrefix&lt;/code&gt; of each class and each of the suffixes listed in each them.</span>
 <span class="cm">		 * The classNames generated will be stored in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;/code&gt;&lt;/a&gt; indexed by the suffix.</span>
-<span class="cm">		 * It will also store the classNames of the boundingBox ( . )and the contentBox ( content ).  </span>
+<span class="cm">		 * It will also store the classNames of the boundingBox ( boundingBox )and the contentBox ( content ).  </span>
 <span class="cm">		 * If the WidgetStdMod is used, it will also add the classNames for the three sections ( HEADER, BODY, FOOTER )</span>
 <span class="cm">		 * @method _makeClassNames</span>
 <span class="cm">		 * @private</span>
