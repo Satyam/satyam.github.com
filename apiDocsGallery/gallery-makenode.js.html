@@ -61,14 +61,13 @@
 	<span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 		<span class="c1">// See: http://yuilibrary.com/projects/yui3/ticket/2531032</span>
 		<span class="kd">var</span> <span class="nx">L</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span> <span class="nx">DUMP</span> <span class="o">=</span> <span class="s1">&#39;dump&#39;</span><span class="p">,</span> <span class="nx">SPACE</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nx">LBRACE</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="nx">RBRACE</span> <span class="o">=</span> <span class="s1">&#39;}&#39;</span><span class="p">,</span>
-		<span class="nx">savedRegExp</span> <span class="o">=</span>  <span class="sr">/(~-(\d+)-~)/g</span><span class="p">;</span>
+		<span class="nx">savedRegExp</span> <span class="o">=</span>  <span class="sr">/(~-(\d+)-~)/g</span><span class="p">,</span> <span class="nx">lBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{LBRACE\}/g</span><span class="p">,</span> <span class="nx">rBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{RBRACE\}/g</span><span class="p">;</span>
 		
 		<span class="nx">Y</span><span class="p">.</span><span class="nx">substitute</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">o</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">recurse</span><span class="p">)</span> <span class="p">{</span>
 			<span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">meta</span><span class="p">,</span> <span class="nx">saved</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">token</span><span class="p">,</span> <span class="nx">dump</span><span class="p">,</span>
 				<span class="nx">lidx</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
 
-				<span class="nx">o</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">merge</span><span class="p">({</span><span class="nx">LBRACE</span><span class="o">:</span><span class="nx">LBRACE</span><span class="p">,</span><span class="nx">RBRACE</span><span class="o">:</span><span class="nx">RBRACE</span><span class="p">},</span><span class="nx">o</span><span class="p">);</span>
-				<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+			<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
 				<span class="nx">i</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">LBRACE</span><span class="p">,</span> <span class="nx">lidx</span><span class="p">);</span>
 				<span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 					<span class="k">break</span><span class="p">;</span>
@@ -121,7 +120,7 @@
 							<span class="p">}</span>
 						<span class="p">}</span>
 					<span class="p">}</span>
-					<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">L</span><span class="p">.</span><span class="nx">isUndefined</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span> <span class="p">{</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">L</span><span class="p">.</span><span class="nx">isUndefined</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span> <span class="p">{</span>
 					<span class="c1">// This {block} has no replace string. Save it for later.</span>
 					<span class="nx">v</span> <span class="o">=</span> <span class="s1">&#39;~-&#39;</span> <span class="o">+</span> <span class="nx">saved</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="s1">&#39;-~&#39;</span><span class="p">;</span>
 					<span class="nx">saved</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
@@ -136,13 +135,15 @@
 				<span class="p">}</span>
 
 			<span class="p">}</span>
+			<span class="c1">// restore saved {block}s and replace escaped braces</span>
 
-			<span class="c1">// restore saved {block}s</span>
-			<span class="nx">s</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">savedRegExp</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span> <span class="p">{</span>
-				<span class="k">return</span> <span class="nx">LBRACE</span> <span class="o">+</span> <span class="nx">saved</span><span class="p">[</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">p2</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span> <span class="o">+</span> <span class="nx">RBRACE</span><span class="p">;</span>
-			<span class="p">});</span>
-
-			<span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
+			<span class="k">return</span> <span class="nx">s</span>
+				<span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">savedRegExp</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">LBRACE</span> <span class="o">+</span> <span class="nx">saved</span><span class="p">[</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">p2</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span> <span class="o">+</span> <span class="nx">RBRACE</span><span class="p">;</span>
+				<span class="p">})</span>
+				<span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">lBraceRegExp</span><span class="p">,</span> <span class="nx">LBRACE</span><span class="p">)</span>
+				<span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">rBraceRegExp</span><span class="p">,</span> <span class="nx">RBRACE</span><span class="p">)</span>
+			<span class="p">;</span>
 
 		<span class="p">};</span>
 	<span class="p">})();</span>	
@@ -209,8 +210,8 @@
 			<span class="s1">&#39;c&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
 				<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">arg</span><span class="p">];</span>
 			<span class="p">},</span>
-			<span class="s1">&#39;s&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
-				<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings&#39;</span><span class="p">)[</span><span class="nx">arg</span><span class="p">];</span>
+			<span class="s1">&#39;s&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">,</span> <span class="nx">extras</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_substitute</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;strings&#39;</span><span class="p">)[</span><span class="nx">arg</span><span class="p">],</span> <span class="nx">extras</span><span class="p">);</span>
 			<span class="p">},</span>
 			<span class="s1">&#39;?&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">args</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_parseMakeNodeArgs</span><span class="p">(</span><span class="nx">args</span><span class="p">);</span>
@@ -305,7 +306,7 @@
 				<span class="k">if</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
 					<span class="nx">fn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_templateHandlers</span><span class="p">[</span><span class="nx">key</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()];</span>
 					<span class="k">if</span> <span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-						<span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arg</span><span class="p">);</span>
+						<span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arg</span><span class="p">,</span> <span class="nx">extras</span><span class="p">);</span>
 					<span class="p">}</span>
 				<span class="p">}</span>
 				<span class="k">return</span> <span class="nx">suggested</span><span class="p">;</span>
@@ -365,7 +366,7 @@
 				<span class="p">}</span>
 			<span class="p">});</span>
 			
-			<span class="nx">cns</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="p">(</span><span class="nx">cns</span><span class="p">.</span><span class="nx">boundingBox</span> <span class="o">=</span> <span class="nx">YCM</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">NAME</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()))</span> <span class="o">+</span> <span class="s1">&#39;-content&#39;</span><span class="p">;</span>
+			<span class="nx">cns</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="p">(</span><span class="nx">cns</span><span class="p">[</span><span class="nx">BBX</span><span class="p">]</span> <span class="o">=</span> <span class="nx">YCM</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">NAME</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()))</span> <span class="o">+</span> <span class="s1">&#39;-content&#39;</span><span class="p">;</span>
 			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getStdModNode</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">cns</span><span class="p">.</span><span class="nx">HEADER</span> <span class="o">=</span> <span class="s1">&#39;yui3-widget-hd&#39;</span><span class="p">;</span>
 				<span class="nx">cns</span><span class="p">.</span><span class="nx">BODY</span> <span class="o">=</span> <span class="s1">&#39;yui3-widget-bd&#39;</span><span class="p">;</span>
