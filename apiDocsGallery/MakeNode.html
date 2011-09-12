@@ -159,6 +159,22 @@ It will also have the following entries added automatically: <ul>
 
                                     <hr />
                                     </div>
+                                    <div class="private" rel="yui:property" resource="#property__eventHandles">
+                                    <h4><a name="property__eventHandles" property="yui:name">_eventHandles</a>
+                                        - <code>private <span property="yui:type">Array</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            An array of event handles returned when attaching listeners to events,
+meant to detach them all when destroying the instance.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
                                     <div class="protected" rel="yui:property" resource="#property__EVENTS">
                                     <h4><a name="property__EVENTS" property="yui:name">_EVENTS</a>
                                         - <code>protected static <span property="yui:type">Object</span></code>
@@ -733,6 +749,7 @@ If an event has been publishes, the properties set in the descendants will overr
                                 <li class="protected"><a href="#property__ATTRS_2_UI" title="_ATTRS_2_UI">_ATTRS_2_UI</a></li>
                                 <li class="protected"><a href="#property__CLASS_NAMES" title="_CLASS_NAMES">_CLASS_NAMES</a></li>
                                 <li class="protected"><a href="#property__classNames" title="_classNames">_classNames</a></li>
+                                <li class="private"><a href="#property__eventHandles" title="_eventHandles">_eventHandles</a></li>
                                 <li class="protected"><a href="#property__EVENTS" title="_EVENTS">_EVENTS</a></li>
                                 <li class="protected"><a href="#property__PUBLISH" title="_PUBLISH">_PUBLISH</a></li>
                                 <li class="protected"><a href="#property__TEMPLATE" title="_TEMPLATE">_TEMPLATE</a></li>
@@ -767,7 +784,7 @@ If an event has been publishes, the properties set in the descendants will overr
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
+    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
 </script>
 </body>
 </html>
