@@ -164,12 +164,13 @@
 <span class="cm">		 * @constructor</span>
 <span class="cm">		 */</span>
 		<span class="nx">MakeNode</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_eventHandles</span> <span class="o">=</span> <span class="p">[];</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_makeClassNames</span><span class="p">();</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_concatUIAttrs</span><span class="p">();</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_publishEvents</span><span class="p">();</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_attachEvents</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_detachEvents</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">_eventHandles</span> <span class="o">=</span> <span class="p">[];</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">_makeClassNames</span><span class="p">();</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">_concatUIAttrs</span><span class="p">();</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">_publishEvents</span><span class="p">();</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_attachEvents</span><span class="p">,</span> <span class="nx">self</span><span class="p">);</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_detachEvents</span><span class="p">,</span> <span class="nx">self</span><span class="p">);</span>
 		<span class="p">};</span>
 	<span class="nx">MakeNode</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
 		<span class="cm">/** </span>
@@ -283,6 +284,32 @@
 			<span class="k">return</span> <span class="nx">args</span><span class="p">;</span>
 		<span class="p">},</span>
 		<span class="cm">/**</span>
+<span class="cm">		 * Enumerates all the values and keys of a given static properties for all classes in the hierarchy, </span>
+<span class="cm">		 * starting with the oldest ancestor (Base).</span>
+<span class="cm">		 * @method _forAllXinClasses</span>
+<span class="cm">		 * @param x {String} name of the static property to be enumerated</span>
+<span class="cm">		 * @param fn {function} function to be called for each value.  </span>
+<span class="cm">		 * The function will receive a reference to the class where it occurs, the value of the property </span>
+<span class="cm">		 * and the key or index.</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		
+		<span class="nx">_forAllXinClasses</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+				<span class="nx">cs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getClasses</span><span class="p">(),</span>
+				<span class="nx">l</span> <span class="o">=</span> <span class="nx">cs</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+				<span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span>
+				<span class="nx">caller</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">k</span><span class="p">);</span>
+				<span class="p">};</span>
+			<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">l</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">c</span> <span class="o">=</span> <span class="nx">cs</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">[</span><span class="nx">x</span><span class="p">])</span> <span class="p">{</span>
+					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">c</span><span class="p">[</span><span class="nx">x</span><span class="p">],</span> <span class="nx">caller</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="cm">/**</span>
 <span class="cm">		 * Processes the template given and returns a &lt;code&gt;Y.Node&lt;/code&gt; instance.</span>
 <span class="cm">		 * @method _makeNode</span>
 <span class="cm">		 * @param template {String} (optional) Template to process.  </span>
@@ -363,16 +390,13 @@
 			<span class="kd">var</span> <span class="nx">YCM</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">ClassNameManager</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">,</span>
 				<span class="nx">defined</span> <span class="o">=</span> <span class="p">{},</span>
 				<span class="nx">cns</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span> <span class="o">=</span> <span class="p">{};</span>
-			<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_getClasses</span><span class="p">(),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-				<span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">_CLASS_NAMES</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">_CLASS_NAMES</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-						<span class="k">if</span> <span class="p">(</span><span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
-							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">substitute</span><span class="p">(</span><span class="s1">&#39;ClassName&#39;</span> <span class="o">+</span> <span class="nx">DUPLICATE</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="nx">name</span><span class="p">,</span> <span class="nx">recentDef</span><span class="o">:</span> <span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span> <span class="nx">prevDef</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">}),</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
-						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-							<span class="nx">cns</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">YCM</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">name</span><span class="p">);</span>
-							<span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">;</span>
-						<span class="p">}</span>
-					<span class="p">});</span>
+				
+			<span class="k">this</span><span class="p">.</span><span class="nx">_forAllXinClasses</span><span class="p">(</span><span class="s1">&#39;_CLASS_NAMES&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
+					<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">substitute</span><span class="p">(</span><span class="s1">&#39;ClassName&#39;</span> <span class="o">+</span> <span class="nx">DUPLICATE</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="nx">name</span><span class="p">,</span> <span class="nx">recentDef</span><span class="o">:</span> <span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span> <span class="nx">prevDef</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">}),</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="nx">cns</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">YCM</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">name</span><span class="p">);</span>
+					<span class="nx">defined</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span><span class="p">;</span>
 				<span class="p">}</span>
 			<span class="p">});</span>
 			
@@ -418,9 +442,9 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_attachEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
-				<span class="nx">selector</span><span class="p">,</span>
-				<span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+			<span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+				<span class="nx">bbx</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
+				<span class="nx">selector</span><span class="p">,</span>				
 				<span class="nx">eh</span> <span class="o">=</span> <span class="p">[],</span>
 				<span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span>
 				<span class="nx">toInitialCap</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
@@ -432,52 +456,52 @@
 					<span class="nx">THIS</span><span class="o">:</span><span class="nx">self</span><span class="p">,</span>
 					<span class="nx">Y</span><span class="o">:</span><span class="nx">Y</span>
 				<span class="p">};</span>
-				
-			<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_getClasses</span><span class="p">(),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">_EVENTS</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handlers</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">selector</span> <span class="o">=</span> <span class="nx">equivalents</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="nx">DOT</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nb">Array</span><span class="p">(</span><span class="nx">handlers</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
-						<span class="nx">fn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-						<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
-							<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
-							<span class="nx">args</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-						<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
-							<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
-							<span class="nx">fn</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
-							<span class="nx">args</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">;</span>
+			<span class="nx">self</span><span class="p">.</span><span class="nx">_forAllXinClasses</span><span class="p">(</span><span class="s1">&#39;_EVENTS&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">handlers</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">selector</span> <span class="o">=</span> <span class="nx">equivalents</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="nx">DOT</span> <span class="o">+</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nb">Array</span><span class="p">(</span><span class="nx">handlers</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">fn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
+						<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
+						<span class="nx">args</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
+						<span class="nx">type</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+						<span class="nx">fn</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
+						<span class="nx">args</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">.</span><span class="nx">args</span><span class="p">;</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+						<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Bad event handler for class: &#39;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span> <span class="o">+</span> <span class="s1">&#39; key: &#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+					<span class="p">}</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">fn</span> <span class="o">=</span> <span class="nx">fn</span> <span class="o">||</span> <span class="s1">&#39;_after&#39;</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+						<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="p">[</span><span class="nx">fn</span><span class="p">])</span> <span class="p">{</span>
+							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Listener method not found: &#39;</span> <span class="o">+</span> <span class="nx">fn</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
 						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Bad event handler for class: &#39;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span> <span class="o">+</span> <span class="s1">&#39; key: &#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+							<span class="nx">fn</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">fn</span><span class="p">];</span>
 						<span class="p">}</span>
-						<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-							<span class="nx">fn</span> <span class="o">=</span> <span class="nx">fn</span> <span class="o">||</span> <span class="s1">&#39;_after&#39;</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="nx">toInitialCap</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
-							<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="p">[</span><span class="nx">fn</span><span class="p">])</span> <span class="p">{</span>
-								<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Listener method not found: &#39;</span> <span class="o">+</span> <span class="nx">fn</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+						<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
+							<span class="c1">// All the classNames are processed here:</span>
+							<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="o">===</span><span class="s1">&#39;key&#39;</span><span class="p">)</span> <span class="p">{</span>
+								<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
 							<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-								<span class="nx">fn</span> <span class="o">=</span> <span class="nx">self</span><span class="p">[</span><span class="nx">fn</span><span class="p">];</span>
+								<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
 							<span class="p">}</span>
-							<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
+						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+							<span class="k">if</span> <span class="p">(</span><span class="nx">selector</span> <span class="o">===</span> <span class="nx">self</span> <span class="o">||</span> <span class="nx">selector</span> <span class="o">===</span> <span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+								<span class="c1">// the Y and THIS selectors here</span>
+								<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
+							<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+								<span class="c1">// The document and boundingBox here</span>
 								<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="o">===</span><span class="s1">&#39;key&#39;</span><span class="p">)</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
+									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
 								<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
-								<span class="p">}</span>
-							<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-								<span class="k">if</span> <span class="p">(</span><span class="nx">selector</span> <span class="o">===</span> <span class="nx">self</span> <span class="o">||</span> <span class="nx">selector</span> <span class="o">===</span> <span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
-									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
-								<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-									<span class="k">if</span> <span class="p">(</span><span class="nx">type</span><span class="o">===</span><span class="s1">&#39;key&#39;</span><span class="p">)</span> <span class="p">{</span>
-										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span>
-									<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-										<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
-									<span class="p">}</span>
+									<span class="nx">eh</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
 								<span class="p">}</span>
 							<span class="p">}</span>
-						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-							<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;No type found in: &#39;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span> <span class="o">+</span> <span class="s1">&#39;, key: &#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
 						<span class="p">}</span>
-					<span class="p">});</span>
-				<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
-			<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+						<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;No type found in: &#39;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">NAME</span> <span class="o">+</span> <span class="s1">&#39;, key: &#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;MakeNode&#39;</span><span class="p">);</span>
+					<span class="p">}</span>
+				<span class="p">});</span>
+			<span class="p">});</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_eventHandles</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_eventHandles</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">eh</span><span class="p">);</span>
 		<span class="p">},</span>
 		
@@ -488,19 +512,13 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_publishEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="kd">var</span> <span class="nx">cs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getClasses</span><span class="p">(),</span>
-				<span class="nx">l</span> <span class="o">=</span> <span class="nx">cs</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
-				<span class="nx">i</span><span class="p">,</span>
-				<span class="nx">publisher</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-					<span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{};</span>
-					<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">options</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">opt</span><span class="p">)</span> <span class="p">{</span>
-						<span class="nx">opts</span><span class="p">[</span><span class="nx">opt</span><span class="p">]</span> <span class="o">=</span><span class="nx">opt</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;Fn&#39;</span><span class="o">?</span><span class="k">this</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">:</span><span class="nx">value</span><span class="p">;</span>
-					<span class="p">},</span><span class="k">this</span><span class="p">);</span>
-					<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">opts</span><span class="p">);</span>
-				<span class="p">};</span>
-			<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">l</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span> <span class="p">(</span><span class="nx">cs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">_PUBLISH</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">publisher</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_forAllXinClasses</span><span class="p">(</span><span class="s1">&#39;_PUBLISH&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{};</span>
+				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">options</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">opt</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">opts</span><span class="p">[</span><span class="nx">opt</span><span class="p">]</span> <span class="o">=</span><span class="nx">opt</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;Fn&#39;</span><span class="o">?</span><span class="k">this</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">:</span><span class="nx">value</span><span class="p">;</span>
+				<span class="p">},</span><span class="k">this</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">opts</span><span class="p">);</span>
+			<span class="p">});</span>
 		<span class="p">},</span>
 		<span class="cm">/**</span>
 <span class="cm">		 * Detaches all the events created by &lt;a href=&quot;method__attachEvents&quot;&gt;&lt;code&gt;_attachEvents&lt;/code&gt;&lt;/a&gt;</span>
@@ -695,7 +713,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
+    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__forAllXinClasses", "access": "private", "host": "MakeNode", "type": "method", "name": "_forAllXinClasses"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
 </script>
 </body>
 </html>
