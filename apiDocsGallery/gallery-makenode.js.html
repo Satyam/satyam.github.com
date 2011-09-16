@@ -354,27 +354,32 @@
 <span class="cm">		 * or those specifically requested in its arguments and stores references to them</span>
 <span class="cm">		 * in properties named after each className key, prefixed with an underscore</span>
 <span class="cm">		 * and followed by &lt;code&gt;&quot;Node&quot;&lt;/code&gt;.</span>
+<span class="cm">		 * If the className key contains a hyphen followed by a lowercase letter, the hyphen will be dropped and the letter capitalized.</span>
+<span class="cm">		 * Any other characters invalid for identifiers will be turned into underscores, </span>
+<span class="cm">		 * thus for the &lt;code&gt;no-label-1&lt;/code&gt; className key a &lt;code&gt;_noLabel_1Node&lt;/code&gt; property will be created.</span>
 <span class="cm">		 * @method _locateNodes</span>
-<span class="cm">		 * @param arg1,.... {String} (optional) If given, list of className heys of the nodes to be located.</span>
+<span class="cm">		 * @param arg1,.... {String} (optional) If given, list of className keys of the nodes to be located.</span>
 <span class="cm">		 *        If missing, all the classNames stored in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;/code&gt;&lt;/a&gt; will be located.</span>
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>
 		<span class="nx">_locateNodes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> <span class="nx">el</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span> 
+				<span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+				<span class="nx">makeName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">self</span><span class="p">[</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\-([a-z])/g</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span> <span class="p">{</span>
+							<span class="k">return</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+						<span class="p">}).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\W/g</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nx">NODE</span><span class="p">]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
+					<span class="p">}</span>
+				<span class="p">};</span>
 			<span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">el</span> <span class="o">=</span> <span class="nx">bbx</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="nx">DOT</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
-					<span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-						<span class="k">this</span><span class="p">[</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span>  <span class="nx">name</span> <span class="o">+</span> <span class="nx">NODE</span><span class="p">]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
-					<span class="p">}</span>
-				<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">makeName</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="nx">DOT</span> <span class="o">+</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">name</span><span class="p">]),</span><span class="nx">name</span><span class="p">);</span>
+				<span class="p">});</span>
 			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">el</span> <span class="o">=</span> <span class="nx">bbx</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="nx">DOT</span> <span class="o">+</span> <span class="nx">selector</span><span class="p">);</span>
-					<span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-						<span class="k">this</span><span class="p">[</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span>  <span class="nx">name</span> <span class="o">+</span> <span class="nx">NODE</span><span class="p">]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
-					<span class="p">}</span>
-				<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">makeName</span><span class="p">(</span><span class="nx">bbx</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="nx">DOT</span> <span class="o">+</span> <span class="nx">selector</span><span class="p">),</span> <span class="nx">name</span><span class="p">);</span>
+				<span class="p">});</span>
 			<span class="p">}</span>
 		<span class="p">},</span>
 		<span class="cm">/**</span>
@@ -458,6 +463,7 @@
 				<span class="p">};</span>
 			<span class="nx">self</span><span class="p">.</span><span class="nx">_forAllXinClasses</span><span class="p">(</span><span class="s1">&#39;_EVENTS&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">handlers</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">selector</span> <span class="o">=</span> <span class="nx">equivalents</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="nx">DOT</span> <span class="o">+</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">&#39;THIS&#39;</span><span class="p">)</span> <span class="p">{</span><span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;This&#39;</span><span class="p">;}</span>
 				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nb">Array</span><span class="p">(</span><span class="nx">handlers</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
 					<span class="nx">fn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 					<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">handler</span><span class="p">))</span> <span class="p">{</span>
@@ -623,7 +629,7 @@
 <span class="cm">	 * Each entry contains a type of event to be listened to or an array of events.</span>
 <span class="cm">	 * Each event can be described by its type (i.e.: &lt;code&gt;&quot;key&quot;&lt;/code&gt;, &lt;code&gt;&quot;mousedown&quot;&lt;/code&gt;, etc).</span>
 <span class="cm">	 * MakeNode will associate this event with a method named &lt;code&gt;&quot;_after&quot;&lt;/code&gt; followed by the element identifier with the first character capitalized </span>
-<span class="cm">	 * and the type of event with the first character capitalized (i.e.: &lt;code&gt;_afterBoundingBoxClick&lt;/code&gt;, &lt;code&gt;_afterInputBlur&lt;/code&gt;, &lt;code&gt;_afterTHISValueChange&lt;/code&gt;, etc.)</span>
+<span class="cm">	 * and the type of event with the first character capitalized (i.e.: &lt;code&gt;_afterBoundingBoxClick&lt;/code&gt;, &lt;code&gt;_afterInputBlur&lt;/code&gt;, &lt;code&gt;_afterThisValueChange&lt;/code&gt;, etc.)</span>
 <span class="cm">	 * Alternatively, the event listener can be described by an object literal containing properties &lt;ul&gt;</span>
 <span class="cm">	 * &lt;li&gt;&lt;code&gt;type&lt;/code&gt; (mandatory) the type of event being listened to&lt;/li&gt;</span>
 <span class="cm">	 * &lt;li&gt;&lt;code&gt;fn&lt;/code&gt; the name of the method to handle the event.  </span>
