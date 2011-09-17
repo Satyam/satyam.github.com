@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>JSON Schema and DataTypes</title>
+		<style>
+			td , th , table {
+				border: thin solid silver;
+			}
+			td , th {
+				padding: 5px;
+			}
+		</style>
+
+
+    </head>
+    <body class="yui3-skin-sam yui-skin-sam">
+
+		
+		<div id="test"></div>
+
+		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
+
+		<script>
+			YUI({
+				// debug:true,
+				// useBrowserConsole:true,
+				// filter: 'debug',
+			}).use(
+				'datatype','yui-base','oop','node',
+				function(Y) {
+					"use strict";
+					
+					/*
+						This is a sample definition of a series of DataTypes.
+						Normally, this would be composed from bits and pieces loaded according to locale and other environment circumstances.
+						Each of the entries has as its key the concatenation of the JSON-Schema type and format properties for a field.
+						The entry for the first one, for example, has my local preferences for date and time for UI.
+						Usually, this would have come from an external file with locales, in this case ES-es,
+						which would have overwritten the default EN-us.
+						Likewise, the 'server' entries would be loaded/overwritten according to my server environment,
+						that is, how my server expects to receive the values and how it would send them.
+						
+						Utilities should be aware that certain type/format combinations might have no entries
+						so the value would have to be passed through unchanged.
+						
+						All formatters and parsers get the value and a reference to the entry itself so they can reach out to 
+						pick extra information.  For example, in the first entry, the formatter doesn't have the mask,
+						it comes from the fmtMask property in that same entry.  Thus, when overwriting the entry for another locale
+						there is no need to overwrite the formatter method, only the mask.  
+					*/
+					Y.DataTypes = {
+						'string_date-time': {
+							UI: {
+								fmtMask: '%d/%b/%Y %T',
+								formatter: function (value, entry) {
+									return Y.DataType.Date.format(value, {format:entry.fmtMask});
+								},
+								parser: function(value, entry) {
+									return Date.parse(value);
+								}
+							},
+							server: {
+								// YYYY-MM-DDThh:mm:ssZ
+								fmtMask:'%FT%T%Z',
+								formatter: function (value, entry) {
+									return Y.DataType.Date.format(value, {format: entry.fmtMask});
+								},
+								// this one would fail in so many ways that it's worthless, but for an example, it will do.
+								parser: function (value, entry) {
+									var tmz = value.substr(-1),  // I am doing nothing with the timezone, though I should :P
+										a = value.substr(0,value.length -1);
+									a = a.split('T');
+									a[0] = a[0].split('-');
+									a[1] = a[1].split(':');
+									return new Date(a[0][0],a[0][1] -1 ,a[0][2],a[1][0],a[1][1],a[1][2]);
+								}
+							}
+						},
+						'integer': {
+							UI: {
+								formatter: function (value, entry) {
+									return value.toString();
+								},
+								parser: function (value, entry) {
+									return parseInt(value, 10);
+								}
+							},
+							server: {
+								formatter: function (value, entry) {
+									return value.toString();
+								},
+								parser: function (value, entry) {
+									return parseInt(value, 10);
+								}
+							}
+						},
+						'number': {
+							UI: {
+								formatter: function (value, entry) {
+									return value.toString();
+								},
+								parser: function (value, entry) {
+									return parseFloat(value);
+								}
+							},
+							server: {
+								formatter: function (value, entry) {
+									return value.toString();
+								},
+								parser: function (value, entry) {
+									return parseFloat(value);
+								}
+							}
+						},
+						// actually, this entry is pointless, the default behavior should be, 
+						// when there is no type specification, do nothing.
+						'string': {
+							UI: {
+								formatter: function (value, entry) {
+									return value;
+								},
+								parser: function (value, entry) {
+									return value;
+								}
+							},
+							server: {
+								formatter: function (value, entry) {
+									return value;
+								},
+								parser: function (value, entry) {
+									return value;
+								}
+							}
+						},
+							
+						'number_currency': {
+							UI: {
+								formatter: function (value, entry) {
+									return Y.DataType.Number.format(value, {
+										suffix:'€',
+										decimalPlaces:2,
+										decimalSeparator: ',',
+										thousandsSeparator:'.'
+									});
+								},
+								parser: function (value, entry) {
+									return parseFloat(value.replace(/[€.]/g,'').replace(',','.'));
+								}
+							},
+							server: {
+								formatter: function (value, entry) {
+									return value.toString();
+								},
+								parser: function (value, entry) {
+									return parseFloat(value);
+								}
+							}
+						}
+					};	
+
+					/* This is the schema I am going to use which describes the data below.
+					*/
+					var transactionSchema = {
+						"name":"Transaction",
+						"properties": {
+							"id": {
+								"type":"number",
+								"description":"Transaction ID",
+								"required":true
+							},
+							"descr": {
+								"type":"string",
+								"description":"Description"
+							},
+							"date": {
+								"type":"string",
+								"format":"date-time",
+								"description":"transaction date",
+								"title":"Date"
+							},
+							"amount":{
+								"type":"number",
+								"format":"currency",
+								"description":"Amount",
+								"title":"Amount"
+							}
+						}
+					};
+					
+					// And this is the data, supposedly just read from the server and JSON-parsed.
+					// The date, for example, remains as a string since it has not been processed according to the schema.
+					var recordSet = [
+						{id:12345,descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:123123.45},
+						{id:67890,descr:"last transaction",date:"1972-12-07T02:55:03R",amount:678678.90}
+					];
+					
+					/*
+						This function reads the data received from the server (above),
+						processes it according to the given schema
+						and returns an array with the values in their native JavaScript types.
+						In this case, the only one actually changed in any way is the date,
+						however, should the id or amount came as strings, they would have been converted
+						to actual numbers
+					*/
+					var readFromServer = function(recordSet, schema) {
+						var output = [], outRecord, type;
+						Y.each(recordSet, function (inRecord) {
+							outRecord = {};
+							Y.each(schema.properties, function (fieldDef, fieldName) {
+								type = fieldDef.type;
+								if (fieldDef.format) {
+									type += '_' + fieldDef.format;
+								}
+								
+								outRecord[fieldName] = Y.DataTypes[type].server.parser(inRecord[fieldName], Y.DataTypes[type].server);
+							});
+							output.push(outRecord);
+						});
+						return output;
+					};
+					
+					/*
+						Creates the HTML for a table.
+						It reads the header cells from the schema taking either the title or description properties and
+						if none is present, the field name itself.
+						Then it goes and reads the records and formats them according to their type/format.
+					*/
+					
+					var makeTable = function (recordSet, schema) {
+						var table = [], tr = [], type, value;
+						Y.each(schema.properties, function (fieldDef, fieldName) {
+							tr.push('<th>' + (fieldDef.title || fieldDef.description || fieldName) + '<\/th>');
+						});
+						table.push('<tr>' + tr.join('\n') + '<\/tr>');
+						Y.each(recordSet, function (record) {
+							tr = [];
+							Y.each(schema.properties, function (fieldDef, fieldName) {
+								type = fieldDef.type;
+								if (fieldDef.format) {
+									type += '_' + fieldDef.format;
+								}
+								value = record[fieldName];
+								value = Y.DataTypes[type].UI.formatter(value,Y.DataTypes[type].UI);
+								tr.push('<td>' + value + '<\/td>');
+							});
+							table.push('<tr>' + tr.join('\n') + '<\/tr>');
+						});
+						return '<table>' + table.join('\n') + '<\/table>';
+					};
+					
+					/* 
+						Finally, this inserts into a <div> the result of processing via makeTable what was read
+						and processed via readFromServer, both using the same schema
+					*/
+					Y.one('#test').setContent(
+						makeTable(
+							readFromServer(recordSet, transactionSchema),
+							transactionSchema
+						)
+					);
+				
+				}
+			);
+								
+
+		</script>
+        
+    </body>
+</html>
