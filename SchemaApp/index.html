@@ -10,6 +10,10 @@
 			td , th {
 				padding: 5px;
 			}
+			.yui3-formfieldplugin-label {
+				float: left;
+				margin: 2px 5px;
+			}
 		</style>
 
 
@@ -18,6 +22,8 @@
 
 		
 		<div id="test"></div>
+		<hr/>
+		<form id="form"></form>
 
 		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
 
@@ -26,8 +32,9 @@
 				// debug:true,
 				// useBrowserConsole:true,
 				// filter: 'debug',
+				gallery: 'gallery-2011.09.14-20-40'
 			}).use(
-				'datatype','yui-base','oop','node',
+				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange','plugin','widget','widget-child',
 				function(Y) {
 					"use strict";
 					
@@ -35,7 +42,8 @@
 						PARSER = 'parser',
 						FORMATTER = 'formatter',
 						UI = 'UI',
-						SERVER = 'server';
+						SERVER = 'server',
+						SEPARATOR = '|';
 					
 					/*
 						I improved on the original DataTypes by providing methods to help manipulate the data.
@@ -107,7 +115,7 @@
 							if (value) {
 								item = DTs._types;
 								if (format) {
-									type = type + '|' + format;
+									type = type + SEPARATOR + format;
 								}
 								next = item[type];
 								if (!next) {
@@ -125,6 +133,7 @@
 								}
 								item = next;
 								item = value;
+								DTs._cache = {};
 								return;
 							} 
 							if (Lang.isObject(entry)) {
@@ -152,6 +161,7 @@
 								});
 								return;
 							}
+							Y.log('If it ever reaches this far, it is an error','error','datatypes');
 						},
 
 						_cache: {},
@@ -257,7 +267,7 @@
 								return null;
 							},
 							t = DTs._types[type],
-							f = format?DTs._types[type + '|' + format]:{};
+							f = format?DTs._types[type + SEPARATOR + format]:{};
 						return Y.merge(
 							{
 								formatter: noop,
@@ -359,6 +369,129 @@
 					var internal = readFromServer(recordSet, transactionSchema);
 					// console.log(internal);
 					Y.one('#test').setContent(makeTable(internal, transactionSchema));
+					
+					var CBX = 'contentBox',
+						BBX = 'boundingBox',
+						VALUE = 'value',
+						TITLE = 'title',
+						LABEL = 'label',
+						INPUT = 'input',
+						ERR_MSG = 'errorMsg',
+						VALIDATOR = 'validator',
+						SCHEMA = 'schema';
+						
+					/*
+						This is the base for a cell editor, basically, it uses a plain <input> box.
+						See methods _uiSetValue, _afterInputValueChange and _afterInputBlur
+						They all use the schema configuration attribute to pick the formatter, parser and validator
+						from Y.DataTypes.
+					*/
+						
+					var	BaseCellEditor = Y.Base.create(
+						'base-cell-editor',
+						Y.Widget,
+						[Y.WidgetChild, Y.MakeNode],
+						{
+							renderUI: function () {
+								this.get(CBX).append(this._makeNode());
+								this._locateNodes();
+							},
+							bindUI: function () {
+								// interim solution because as of 3.4.0, valueChange cannot be listened to by delegation
+								this._eventHandles.push(this._inputNode.after('valueChange', this._afterInputValueChange, this));
+							},
+							_uiSetValue: function (value, src) {
+								if (src === UI) {
+									return;
+								}
+								this._inputNode.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, FORMATTER, value));
+							},
+							_uiSetLabel: function (value) {
+								this._inputNode.set(TITLE, value);
+							},
+							_uiSetErrorMsg: function (value) {
+								this._inputNode.set(TITLE, value || this.get(LABEL));
+							},
+							_afterInputValueChange: function (ev) {
+								this.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, PARSER, ev.target.get(VALUE)), {src: UI});
+							},
+							_afterInputBlur: function (value)  {
+								this.set(ERR_MSG, DTs.invoke(this.get(SCHEMA), UI, VALIDATOR, value));
+							}								
+						},
+						{
+							ATTRS: {
+								value: {
+								},
+								label: {
+								},
+								errorMsg: {
+								},
+								schema: {
+								}
+							},
+							_TEMPLATE: '<input class="{c input}" title="{@ label}" />',
+							_CLASS_NAMES:[INPUT],
+							_ATTRS_2_UI: {
+								SYNC: [VALUE],
+								BIND: [LABEL, ERR_MSG, VALUE]
+							},
+							_EVENTS: {
+								// Unfortunately, valueChange is a synthetic event and cannot be hooked via _EVENTS
+								// input: 'valueChange'
+								input: 'blur'
+							}
+						}
+					);
+					
+					/*
+						This is the plugin that adds a label in between the bounding box and the content box
+						and captures the _uiSetLabel method of the host to display it on the label.
+						
+						A similar plugin should be available to turn the base cell editor into a popup
+						that could be overlayed anywhere.
+					*/
+					
+					var FormFieldPlugin = Y.Base.create(
+						'FormFieldPlugin',
+						Y.Plugin.Base,
+						[],
+						{
+							initializer: function () {
+								this.afterHostEvent('render',this._afterHostRender);
+								this.beforeHostMethod('_uiSetLabel', this._uiSetLabel);
+								
+							},
+							_uiSetLabel: function(value) {
+								this._labelNode.setContent(value);
+								return new Y.Do.Prevent();
+							},
+							_afterHostRender: function () {
+								var host = this.get('host'),
+									bbx = host.get(BBX);
+								this._labelNode = Y.Node.create('<label class="yui3-formfieldplugin-label"><\/label>');
+								bbx.insert(this._labelNode,0);
+								this._labelNode.setContent(host.get(LABEL));
+							}
+							
+						},
+						{
+							NS:'FieldPlugin'							
+						}
+					);
+					
+					/*
+						Here I create the cell editor plugged to have the label as a regular form field.
+						The value is taken from the record parsed using the schema and the field
+						holds a reference to the corresponding field in the schema.
+					*/
+					var inputField = new BaseCellEditor({
+						label:'Date Field',
+						value: internal[0].date,
+						schema: transactionSchema.properties.date,
+						plugins : [FormFieldPlugin]
+						
+					}).render('#form');
 				
 				}
 			);
