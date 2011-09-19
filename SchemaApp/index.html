@@ -31,6 +31,12 @@
 				function(Y) {
 					"use strict";
 					
+					var Lang = Y.Lang,
+						PARSER = 'parser',
+						FORMATTER = 'formatter',
+						UI = 'UI',
+						SERVER = 'server';
+					
 					/*
 						I improved on the original DataTypes by providing methods to help manipulate the data.
 						Now, the data is stored under a private variable _types and the methods help you reach it.
@@ -86,40 +92,95 @@
 							}
 						},
 						use: function (schemaEntry, side) {
+							/* In order for Y.cached to work, the method needs to receive string arguments
+							   or objects whose toString() method produces unique strings so that cached
+							   can used them as keys.  Since schemaEntry has no toString() method,
+							   the fallback is Object.toString() which produces [object: object] or
+							   something like that, the very same key for all entries so it would always
+							   return the same value.  That's why I had to expand it.
+							*/
 							return this._use(schemaEntry.type, schemaEntry.format, side);
+						},
+						
+						add: function (type, format, side, entry, value) {
+							var self = this, item, next;
+							if (value) {
+								item = DTs._types;
+								if (format) {
+									type = type + '|' + format;
+								}
+								next = item[type];
+								if (!next) {
+									next = item[type] = {};
+								}
+								item = next;
+								next = item[side];
+								if (!next) {
+									next = item[side] = {};
+								}
+								item = next;
+								next = item[entry];
+								if (!next) {
+									next = item[entry] = {};
+								}
+								item = next;
+								item = value;
+								return;
+							} 
+							if (Lang.isObject(entry)) {
+								Y.each(entry, function (values, entry) {
+									self.add(type, format, side, entry, values);
+								});
+								return;
+							}
+							if (Lang.isObject(side)) {
+								Y.each(side, function (values, side) {
+									self.add(type, format, side, values);
+								});
+								return;
+							}
+									
+							if (Lang.isObject(format)) {
+								Y.each(format, function (values, format) {
+									self.add(type, format, values);
+								});
+								return;
+							}
+							if (Lang.isObject(type)) {
+								Y.each(type, function (values, type) {
+									self.add(type, values);
+								});
+								return;
+							}
 						},
 
 						_cache: {},
 								
 						_types: {
-							'string': {
-								_formats: {
-									'date-time': {
-										UI: {
-											formatMask: '%d/%b/%Y %T',
-											formatter: function (value) {
-												return Y.DataType.Date.format(value, {format:this.formatMask});
-											},
-											parser: function (value) {
-												return Date.parse(value);
-											}
-										},
-										server: {
-											// YYYY-MM-DDThh:mm:ssZ
-											formatMask:'%FT%T%Z',
-											formatter: function (value) {
-												return Y.DataType.Date.format(value, {format: this.formatMask});
-											},
-											// this one would fail in so many ways that it's worthless, but for an example, it will do.
-											parser: function (value) {
-												var tmz = value.substr(-1),  // I am doing nothing with the timezone, though I should :P
-													a = value.substr(0,value.length -1);
-												a = a.split('T');
-												a[0] = a[0].split('-');
-												a[1] = a[1].split(':');
-												return new Date(a[0][0],a[0][1] -1 ,a[0][2],a[1][0],a[1][1],a[1][2]);
-											}
-										}
+							'string|date-time': {
+								UI: {
+									formatMask: '%d/%b/%Y %T',
+									formatter: function (value) {
+										return Y.DataType.Date.format(value, {format:this.formatMask});
+									},
+									parser: function (value) {
+										return Date.parse(value);
+									}
+								},
+								server: {
+									// YYYY-MM-DDThh:mm:ssZ
+									formatMask:'%FT%T%Z',
+									formatter: function (value) {
+										return Y.DataType.Date.format(value, {format: this.formatMask});
+									},
+									// this one would fail in so many ways that it's worthless, but for an example, it will do.
+									parser: function (value) {
+										var tmz = value.substr(-1),  // I am doing nothing with the timezone, though I should :P
+											a = value.substr(0,value.length -1);
+										a = a.split('T');
+										a[0] = a[0].split('-');
+										a[1] = a[1].split(':');
+										return new Date(a[0][0],a[0][1] -1 ,a[0][2],a[1][0],a[1][1],a[1][2]);
 									}
 								}
 							},
@@ -157,30 +218,28 @@
 									parser: function (value) {
 										return parseFloat(value);
 									}
+								}
+							},
+							'number|currency': {
+								UI: {
+									formatter: function (value) {
+										return Y.DataType.Number.format(value, {
+											suffix:'€',
+											decimalPlaces:2,
+											decimalSeparator: ',',
+											thousandsSeparator:'.'
+										});
+									},
+									parser: function (value) {
+										return parseFloat(value.replace(/[€.]/g,'').replace(',','.'));
+									}
 								},
-								_formats: {
-									'currency': {
-										UI: {
-											formatter: function (value) {
-												return Y.DataType.Number.format(value, {
-													suffix:'€',
-													decimalPlaces:2,
-													decimalSeparator: ',',
-													thousandsSeparator:'.'
-												});
-											},
-											parser: function (value) {
-												return parseFloat(value.replace(/[€.]/g,'').replace(',','.'));
-											}
-										},
-										server: {
-											formatter: function (value) {
-												return value.toString();
-											},
-											parser: function (value) {
-												return parseFloat(value);
-											}
-										}
+								server: {
+									formatter: function (value) {
+										return value.toString();
+									},
+									parser: function (value) {
+										return parseFloat(value);
 									}
 								}
 							}
@@ -197,15 +256,16 @@
 							retNull = function () {
 								return null;
 							},
-							t = DTs._types[type];
+							t = DTs._types[type],
+							f = format?DTs._types[type + '|' + format]:{};
 						return Y.merge(
 							{
 								formatter: noop,
 								parser: noop
 							},
-							(side === 'UI'? {validator: retNull}:{}),
+							(side === UI? {validator: retNull}:{}),
 							(t?t[side]:{}),
-							(t._formats[format]?t._formats[format][side]:{})
+							(f[side] || {})
 						);
 					}, DTs._cache);
 					Y.DataTypes = DTs;
@@ -260,7 +320,7 @@
 						Y.each(recordSet, function (inRecord) {
 							outRecord = {};
 							Y.each(schema.properties, function (fieldDef, fieldName) {
-								outRecord[fieldName] = Y.DataTypes.invoke(fieldDef,'server','parser',inRecord[fieldName]);
+								outRecord[fieldName] = Y.DataTypes.invoke(fieldDef,SERVER,PARSER,inRecord[fieldName]);
 							});
 							output.push(outRecord);
 						});
@@ -284,7 +344,7 @@
 							tr = [];
 							Y.each(schema.properties, function (fieldDef, fieldName) {
 								value = record[fieldName];
-								value = Y.DataTypes.invoke(fieldDef, 'UI','formatter',value);
+								value = Y.DataTypes.invoke(fieldDef, UI, FORMATTER, value);
 								tr.push('<td>' + value + '<\/td>');
 							});
 							table.push('<tr>' + tr.join('\n') + '<\/tr>');
