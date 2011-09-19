@@ -13,14 +13,14 @@
 			.yui3-formfieldplugin-label {
 				float: left;
 				margin: 2px 5px;
-				width: 100px;
+				width: 150px;
 			}
 			.yui3-base-cell-editor {
 				clear:both;
 				margin: 4px 0;
 			}
 			#fullform {
-				width:300px;
+				width:350px;
 			}
 			.yui3-widget-hd {
 				color:white;
@@ -39,14 +39,87 @@
 
     </head>
     <body class="yui3-skin-sam yui-skin-sam">
-
+		<h1>JSON-Schema and Y.DataTypes</h1>
+		<p>All the below is generated from a JSON-Schema:</p>
+		<pre>
+var transactionSchema = {
+	"name":"Transaction",
+	"properties": {
+		"id": {
+			"type":"number",
+			"description":"Transaction ID",
+			"required":true
+		},
+		"descr": {
+			"type":"string",
+			"description":"Description"
+		},
+		"date": {
+			"type":"string",
+			"format":"date-time",
+			"description":"transaction date",
+			"title":"Date"
+		},
+		"amount":{
+			"type":"number",
+			"format":"currency",
+			"description":"Amount",
+			"title":"Amount"
+		}
+	}
+};
 		
+		</pre>
+		<p>a couple of records: </p>
+		<pre>
+var recordSet = [
+	{id:12345,descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:123123.45},
+	{id:67890,descr:"last transaction",date:"1972-12-07T02:55:03R",amount:678678.90}
+];
+</pre>
+<p>and a base component I propose called Y.DataTypes, containing entries such as formatters, parsers, editors, validators and so on 
+for each field according to its type/format as per the JSON-Schema. </p>
+<p>Each sample below is shown with the code that produced it.  The objects and methods mentioned in that sample code are contained within this same file.
+There are no external references except to known YUI and Gallery modules.</p>
+
+		<hr/>
+		<h3>Simple reading from a record into native JavaScript types and then showing it in a simple tabular format</h3>
+		<pre>
+var internal = readFromServer(recordSet, transactionSchema);
+Y.one('#test').setContent(makeTable(internal, transactionSchema));
+</pre>
 		<div id="test"></div>
 		<hr/>
-		<form id="form"></form>
+		<h3>Showing it in a simple field editor</h3>
+		<pre>
+var inputField = new BaseCellEditor({
+	label:'Date Field',
+	value: internal[0].date,
+	schema: transactionSchema.properties.date,
+	plugins : [FormFieldPlugin]
+	
+}).render('#field');
+		</pre>
+		<form id="field"></form>
 		<hr/>
+		<h3>Now a full form</h3>
+		<p>Actually, all fields are using the same editor because I did only the base one, however, each value is formatted
+		according to its type.  All labels are read from the JSON-Schema.</p>
+		<pre>
+var fullForm = new Form({
+	schema:transactionSchema,
+	values:internal[0]
+}).render('#fullform');
+		</pre>
 		<div id="fullform"></div>
 		<hr/>
+		<h3>A YUI3 Datatable using a plugin to read the JSON-Schema</h3>
+		<pre>
+var table = new Y.DataTable.Base({
+	recordset: internal,
+	plugins: [{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}}]
+}).render("#datatable");
+		</pre>
 		<div id="datatable"></div>
 		
 
@@ -510,7 +583,7 @@
 							},
 							_setLabel: function (schema) {
 								this._labelNode.setAttrs({
-									innerHTML:schema.title,
+									innerHTML:schema.title || schema.description,
 									title:schema.description
 								});
 							},
@@ -542,7 +615,7 @@
 						schema: transactionSchema.properties.date,
 						plugins : [FormFieldPlugin]
 						
-					}).render('#form');
+					}).render('#field');
 					
 					var HEADER = Y.WidgetStdMod.HEADER,
 						BODY = Y.WidgetStdMod.BODY,
