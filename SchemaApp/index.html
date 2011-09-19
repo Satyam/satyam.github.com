@@ -13,6 +13,26 @@
 			.yui3-formfieldplugin-label {
 				float: left;
 				margin: 2px 5px;
+				width: 100px;
+			}
+			.yui3-base-cell-editor {
+				clear:both;
+				margin: 4px 0;
+			}
+			#fullform {
+				width:300px;
+			}
+			.yui3-widget-hd {
+				color:white;
+				background-color: blue;
+				font-weight: bold;
+				padding: 5px;
+			}
+			.yui3-widget-bd {
+				border: thin solid silver;
+			}
+			.yui3-formfieldplugin-label {
+				font-weight: bold;
 			}
 		</style>
 
@@ -24,19 +44,26 @@
 		<div id="test"></div>
 		<hr/>
 		<form id="form"></form>
+		<hr/>
+		<div id="fullform"></div>
 
 		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
 
 		<script>
 			YUI({
-				// debug:true,
-				// useBrowserConsole:true,
-				// filter: 'debug',
+				/*
+				debug:true,
+				useBrowserConsole:true,
+				filter: 'debug',
+				combine: false,
+				*/
+				
 				gallery: 'gallery-2011.09.14-20-40'
 			}).use(
-				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange','plugin','widget','widget-child',
+				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange','plugin','widget','widget-child','widget-parent','widget-stdmod',
 				function(Y) {
 					"use strict";
+					/*jslint vars: true */
 					
 					var Lang = Y.Lang,
 						PARSER = 'parser',
@@ -109,6 +136,12 @@
 							*/
 							return this._use(schemaEntry.type, schemaEntry.format, side);
 						},
+						_flush: function  () {
+							var c = DTs._cache;
+							Y.each(c, function (value, key) {
+								delete c[key];
+							});
+						},
 						
 						add: function (type, format, side, entry, value) {
 							var self = this, item, next;
@@ -117,7 +150,8 @@
 								if (format) {
 									type = type + SEPARATOR + format;
 								}
-								next = item[type];
+								
+								next = type?item[type]:DTs._defaults;
 								if (!next) {
 									next = item[type] = {};
 								}
@@ -126,14 +160,8 @@
 								if (!next) {
 									next = item[side] = {};
 								}
-								item = next;
-								next = item[entry];
-								if (!next) {
-									next = item[entry] = {};
-								}
-								item = next;
-								item = value;
-								DTs._cache = {};
+								next[entry] = value;
+								this._flush();
 								return;
 							} 
 							if (Lang.isObject(entry)) {
@@ -165,7 +193,28 @@
 						},
 
 						_cache: {},
+						_defaults: {
+							UI: {
+								formatter: function (value) {
+									return value;
+								},
+								parser: function (value) {
+									return value;
+								},
+								validator: function() {
+									return null;
+								}
+							},
+							server: {
+								formatter: function (value) {
+									return value;
+								},
+								parser: function (value) {
+									return value;
+								}
+							}
 								
+						},
 						_types: {
 							'string|date-time': {
 								UI: {
@@ -215,7 +264,7 @@
 							'number': {
 								UI: {
 									formatter: function (value) {
-										return value.toString();
+										return value + '';
 									},
 									parser: function (value) {
 										return parseFloat(value);
@@ -223,7 +272,7 @@
 								},
 								server: {
 									formatter: function (value) {
-										return value.toString();
+										return value + '';
 									},
 									parser: function (value) {
 										return parseFloat(value);
@@ -260,20 +309,10 @@
 					// gives an error if defined within DTs because DTs itself is not defined
 					// at that point.
 					DTs._use = Y.cached(function (type, format, side) {
-						var noop = function (value) {
-								return value;
-							},
-							retNull = function () {
-								return null;
-							},
-							t = DTs._types[type],
+						var t = DTs._types[type],
 							f = format?DTs._types[type + SEPARATOR + format]:{};
 						return Y.merge(
-							{
-								formatter: noop,
-								parser: noop
-							},
-							(side === UI? {validator: retNull}:{}),
+							DTs._defaults[side],
 							(t?t[side]:{}),
 							(f[side] || {})
 						);
@@ -406,8 +445,8 @@
 								}
 								this._inputNode.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, FORMATTER, value));
 							},
-							_uiSetLabel: function (value) {
-								this._inputNode.set(TITLE, value);
+							_uiSetSchema: function (value) {
+								this._inputNode.set(TITLE, value.description || value.title);
 							},
 							_uiSetErrorMsg: function (value) {
 								this._inputNode.set(TITLE, value || this.get(LABEL));
@@ -423,21 +462,20 @@
 							ATTRS: {
 								value: {
 								},
-								label: {
-								},
 								errorMsg: {
 								},
 								schema: {
 								}
 							},
-							_TEMPLATE: '<input class="{c input}" title="{@ label}" />',
+							_TEMPLATE: '<input class="{c input}" />',
 							_CLASS_NAMES:[INPUT],
 							_ATTRS_2_UI: {
-								SYNC: [VALUE],
-								BIND: [LABEL, ERR_MSG, VALUE]
+								SYNC: [SCHEMA, VALUE],
+								BIND: [SCHEMA, ERR_MSG, VALUE]
 							},
 							_EVENTS: {
 								// Unfortunately, valueChange is a synthetic event and cannot be hooked via _EVENTS
+								// so I had to bind it in bindUI
 								// input: 'valueChange'
 								input: 'blur'
 							}
@@ -459,19 +497,26 @@
 						{
 							initializer: function () {
 								this.afterHostEvent('render',this._afterHostRender);
-								this.beforeHostMethod('_uiSetLabel', this._uiSetLabel);
+								this.afterHostEvent('schemaChange', this._afterHostSchemaChange);
 								
 							},
-							_uiSetLabel: function(value) {
-								this._labelNode.setContent(value);
+							_afterHostSchemaChange: function(ev) {
+								this._setLabel(ev.newVal);
 								return new Y.Do.Prevent();
 							},
+							_setLabel: function (schema) {
+								this._labelNode.setAttrs({
+									innerHTML:schema.title,
+									title:schema.description
+								});
+							},
+							
 							_afterHostRender: function () {
 								var host = this.get('host'),
 									bbx = host.get(BBX);
 								this._labelNode = Y.Node.create('<label class="yui3-formfieldplugin-label"><\/label>');
 								bbx.insert(this._labelNode,0);
-								this._labelNode.setContent(host.get(LABEL));
+								this._setLabel(host.get(SCHEMA));
 							}
 							
 						},
@@ -484,6 +529,8 @@
 						Here I create the cell editor plugged to have the label as a regular form field.
 						The value is taken from the record parsed using the schema and the field
 						holds a reference to the corresponding field in the schema.
+						
+						Normally, it would be created by a form component, see below.
 					*/
 					var inputField = new BaseCellEditor({
 						label:'Date Field',
@@ -492,6 +539,102 @@
 						plugins : [FormFieldPlugin]
 						
 					}).render('#form');
+					
+					var HEADER = Y.WidgetStdMod.HEADER,
+						BODY = Y.WidgetStdMod.BODY,
+						VALUES = 'values',
+						EDITOR = 'editor';
+						
+					
+					/*
+						So, this is the real thing, finally.  
+						This form takes 
+							a) a full schema 
+							b) a set of values
+						and it builds a form from those.
+						It will take the header of the form from the description or the name of the schema.
+						Each of the fields is taken from the schema, their labels from the title or description.
+						The editor to use is taken from the Y.DataTypes based on the type/format in the schema.
+						Each cell editor field is plugged in with the FormFieldPlugin and passes the schema info
+						for that particular field.  The field itself will take the label from the title or description for that field,
+						and the formatter, parser and validator.
+						Each field will take its value from the record passed, using the formatter from the schema.
+						
+						The form uses a three section WidgetStdMod and is also a WidgetParent, with the form fields its children.
+					*/
+					var Form = Y.Base.create(
+						'form',
+						Y.Widget,
+						[Y.WidgetStdMod, Y.WidgetParent, Y.MakeNode],
+						{
+							CONTENT_TEMPLATE: '<form><\/form>',
+							renderUI: function () {
+								this.setStdModContent(BODY,'');
+								this._childrenContainer = this.getStdModNode(BODY);
+							},
+								
+							_uiSetSchema: function (value) {
+
+								var Editor, editor;
+								
+								this.setStdModContent(HEADER, value.description || value.name);
+								Y.each(value.properties , function (schema) {
+									Editor = DTs.get(schema, UI, EDITOR);
+									editor = new Editor({
+										schema:schema,
+										plugins: [FormFieldPlugin]
+									});
+									this.add(editor);
+								
+								},this);
+								this._stdModParsed = {bodyContent:true};
+							},
+							_uiSetValues: function (value) {
+								var i = 0;
+								Y.each(this.get(SCHEMA).properties, function (schema, key) {
+									this.item(i).set(VALUE, value[key]);
+									i+=1;
+								}, this);
+							}
+						},
+						{
+							_ATTRS_2_UI: {
+								SYNC: [SCHEMA, VALUES],
+								BIND: [SCHEMA, VALUES]
+							},							
+							ATTRS:  {
+								schema: {
+								},
+								values: {
+								}
+							}
+						}
+					);
+					
+					/*
+						This is the trick on how a form library adds itself to the Y.DataTypes.
+						In this case, I am adding the same BaseCellEditor as default editor for all types/formats (the first null, null).
+						Since I have only a single editor type, I add it as the default and since no type has any other, it will fall back to this one.
+						In a real case, a library would add the proper type for each individual schema type/format, though the default
+						will always remain as a fallback.
+					*/
+					
+					DTs.add(null, null, UI, EDITOR, BaseCellEditor);
+					
+					
+					/*
+						In the end, all comes down to this, you create a form instance and give it a schema and a record with data
+						and that's it.
+						Not all functionality is implemented at this point, the most obvious one: the form has no buttons
+						or actions set for submiting it.  Eventually, I will add it.
+						
+						The basic point to show is how it reads the schema and using the information set in Y.DataTypes, 
+						it handles it according to which forms library is loaded
+					*/
+					var fullForm = new Form({
+						schema:transactionSchema,
+						values:internal[0]
+					}).render('#fullform');
 				
 				}
 			);
