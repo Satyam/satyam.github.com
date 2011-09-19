@@ -46,6 +46,9 @@
 		<form id="form"></form>
 		<hr/>
 		<div id="fullform"></div>
+		<hr/>
+		<div id="datatable"></div>
+		
 
 		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
 
@@ -60,7 +63,8 @@
 				
 				gallery: 'gallery-2011.09.14-20-40'
 			}).use(
-				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange','plugin','widget','widget-child','widget-parent','widget-stdmod',
+				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange',
+				'plugin','widget','widget-child','widget-parent','widget-stdmod','datatable',
 				function(Y) {
 					"use strict";
 					/*jslint vars: true */
@@ -636,6 +640,55 @@
 						values:internal[0]
 					}).render('#fullform');
 				
+					/*
+						This is a plugin that reads and schema and sets the column definitions of a DataTable
+						with information taken from the JSON-Schema and Y.DataTypes
+					*/
+				
+					var DataTableSchemaPlugin = Y.Base.create(
+						'datatable-sckema-plugin',
+						Y.Plugin.Base,
+						[],
+						{
+							initializer: function (config) {
+								var host = config.host,
+									colDefs = [],
+									schema = config[SCHEMA];
+								
+								host.set('caption', schema.description || schema.name);
+								
+								Y.each(schema.properties, function (fieldDefs, name) {
+									colDefs.push({
+										key: name,
+										label: fieldDefs.title || fieldDefs.description,
+										formatter: function (o) {
+											return DTs.invoke(fieldDefs, UI, FORMATTER, o.value);
+										}
+									});
+								});
+								host.set('columnset',colDefs);
+							}
+						},
+						{
+							NS:'DataTableSchemaPlugin',
+							ATTRS: {
+								schema: {
+								}
+							}
+						}
+					);
+					
+					
+					/*
+						And this is how easy it is to have a DataTable set up from a JSON Schema
+						using the plugin above
+					*/
+					
+					var table = new Y.DataTable.Base({
+						recordset: internal,
+						plugins: [{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}}]
+					}).render("#datatable");
+					
 				}
 			);
 								
