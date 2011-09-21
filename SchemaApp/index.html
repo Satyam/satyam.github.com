@@ -742,18 +742,12 @@ var table = new Y.DataTable.Base({
 								
 							_uiSetSchema: function (value) {
 
-								var Editor, editor;
-								
 								this.setStdModContent(HEADER, value.description || value.name);
 								Y.each(value.properties , function (schema) {
-									Editor = DTs.get(schema, UI, EDITOR);
-									editor = new Editor({
-										schema:schema,
+									this.add(DTs.invoke(schema, UI, EDITOR, {
 										plugins: [FormFieldPlugin]
-									});
-									this.add(editor);
-								
-								},this);
+									}));
+								}, this);
 								this._stdModParsed = {bodyContent:true};
 							},
 							_uiSetValues: function (value) {
@@ -780,13 +774,18 @@ var table = new Y.DataTable.Base({
 					
 					/*
 						This is the trick on how a form library adds itself to the Y.DataTypes.
-						In this case, I am adding the same BaseCellEditor as default editor for all types/formats (the first null, null).
+						In this case, I am adding a function that returns an instance of BaseCellEditor as default editor for all types/formats (the first null, null).
 						Since I have only a single editor type, I add it as the default and since no type has any other, it will fall back to this one.
 						In a real case, a library would add the proper type for each individual schema type/format, though the default
 						will always remain as a fallback.
+						
+						** Important ** it is not DataTypes that should know about possible editors,
+						it is the library that should register its editors with Y.DataTypes when loaded.
 					*/
 					
-					DTs.add(null, null, UI, EDITOR, BaseCellEditor);
+					DTs.add(null, null, UI, EDITOR, function (config, schema) {
+						return new BaseCellEditor( Y.merge({schema: schema}, config));
+					});
 					
 					
 					/*
@@ -856,15 +855,12 @@ var table = new Y.DataTable.Base({
 									schema = config[SCHEMA],
 									column,
 									editor,
-									Editor,
 									bbx = host.get(BBX);
 								
 								Y.each(schema.properties, function (fieldDefs, name) {
 									column = host.get('columnset').keyHash[name];
-									Editor = DTs.get(fieldDefs, UI, EDITOR);
 									column.addAttr('editor', {});
-									editor = new Editor({
-										schema: fieldDefs,
+									editor = DTs.invoke(fieldDefs, UI, EDITOR, {
 										plugins:[FloatingFieldPlugin]
 									}).render(bbx);
 									column.set('editor', editor);
