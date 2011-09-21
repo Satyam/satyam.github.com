@@ -10,7 +10,7 @@
 			td , th {
 				padding: 5px;
 			}
-			.yui3-formfieldplugin-label {
+			.yui3-form-field-plugin-label {
 				float: left;
 				margin: 2px 5px;
 				width: 150px;
@@ -31,8 +31,30 @@
 			.yui3-widget-bd {
 				border: thin solid silver;
 			}
-			.yui3-formfieldplugin-label {
+			.yui3-form-field-plugin-label {
 				font-weight: bold;
+			}
+			.yui3-floating-field-plugin-button {
+				float:left;
+				border: thin solid silver;
+				margin: 2px 5px;
+				padding: 2px;
+				cursor: default;
+			}
+			.yui3-floating-field-plugin-ok {
+				background-color:blue;
+			}
+			.yui3-floating-field-plugin-popup {
+				border: thin solid silver;
+				position: absolute;
+				background-color: white;
+				text-align:center;
+			}
+			.yui3-floating-field-plugin-popup .yui3-base-cell-editor-input {
+				width:95%;
+			}
+			.yui3-base-cell-editor-hidden {
+				display: none;
 			}
 		</style>
 
@@ -114,10 +136,16 @@ var fullForm = new Form({
 		<div id="fullform"></div>
 		<hr/>
 		<h3>A YUI3 Datatable using a plugin to read the JSON-Schema</h3>
+		<p>The table has also attached a cell editing plugin, you can click on any cell to edit it.  
+		The cell editor is just a proof of concept, it will probably fail on the date field because the input parser is not really good,
+		but it should do fine with the string and numeric fields.</p>
 		<pre>
 var table = new Y.DataTable.Base({
 	recordset: internal,
-	plugins: [{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}}]
+	plugins: [
+		{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
+		{fn: DataTableCellEditor, cfg:{schema:transactionSchema}}
+	]
 }).render("#datatable");
 		</pre>
 		<div id="datatable"></div>
@@ -568,7 +596,7 @@ var table = new Y.DataTable.Base({
 					*/
 					
 					var FormFieldPlugin = Y.Base.create(
-						'FormFieldPlugin',
+						'form-field-plugin',
 						Y.Plugin.Base,
 						[],
 						{
@@ -591,13 +619,74 @@ var table = new Y.DataTable.Base({
 							_afterHostRender: function () {
 								var host = this.get('host'),
 									bbx = host.get(BBX);
-								this._labelNode = Y.Node.create('<label class="yui3-formfieldplugin-label"><\/label>');
+								this._labelNode = Y.Node.create('<label class="yui3-form-field-plugin-label"><\/label>');
 								bbx.insert(this._labelNode,0);
 								this._setLabel(host.get(SCHEMA));
 							}
 							
 						},
 						{
+							NS:'FieldPlugin'							
+						}
+					);
+					
+					var FloatingFieldPlugin = Y.Base.create(
+						'floating-field-plugin',
+						Y.Plugin.Base,
+						[],
+						{
+							initializer: function (config) {
+								var host = config.host,
+									YCM = Y.ClassNameManager.getClassName;
+								this.afterHostEvent('render',this._afterHostRender);
+								this._classNames = {};
+								Y.each(this._classNameKeys, function (key) {
+									this._classNames[key] = YCM(this.name, key);
+								},this);
+								host.addAttr('node', {
+									setter: function (value) {
+										return Y.Node.one(value);
+									}
+								});
+								host.set('visible', false);
+								this.afterHostEvent('nodeChange', this._afterNodeChange, this);
+							},
+							_classNameKeys: ['buttons', 'button', 'ok','cancel','popup'],
+							_afterHostRender: function () {
+								var host = this.get('host'),
+									bbx = host.get(BBX);
+									
+								bbx.addClass(this._classNames['popup']);
+								this._buttonsNode = Y.Node.create(Lang.sub(this._template,this._classNames));
+								bbx.append(this._buttonsNode);
+								this._buttonsNode.delegate('click', this._afterButtonClick, '.' + this._classNames['button'], this);
+							},
+							_afterButtonClick: function (ev) {
+								var host = this.get('host');
+								if (ev.target.hasClass(this._classNames['ok'])) {
+									host.fire('cellEditorSave', {value: host.get(VALUE)});
+								}
+								host.set('visible', false);
+							},
+							_afterNodeChange: function (ev) {
+								var host = this.get('host'),
+									bbx = host.get(BBX),
+									node = ev.newVal,
+									region = node.get('region');
+									
+								bbx.setXY([region.left, region.top]);
+								bbx.set('offsetWidth', region.width);
+								
+							},
+							_template: [
+								'<div class="{buttons}">',
+								'<div class="{button} {ok}">Ok<\/div>',
+								'<div class="{button} {cancel}">Cancel<\/div>',
+								'<\/div>'
+							].join('')
+						},
+						{
+							// they have the same NS since the two cannot coexist so loading one implicitly unloads the other.
 							NS:'FieldPlugin'							
 						}
 					);
@@ -617,6 +706,7 @@ var table = new Y.DataTable.Base({
 						
 					}).render('#field');
 					
+					inputField.set('node','#test td');
 					var HEADER = Y.WidgetStdMod.HEADER,
 						BODY = Y.WidgetStdMod.BODY,
 						VALUES = 'values',
@@ -751,15 +841,104 @@ var table = new Y.DataTable.Base({
 						}
 					);
 					
+					/*
+						This plugin allows for cell editing, it uses the editor configured in Y.DataTypes which,
+						in these tests is a very simple input box for all fields.
+					*/
+					
+					var DataTableCellEditor = Y.Base.create(
+						'datatable-cell-editor',
+						Y.Plugin.Base,
+						[],
+						{
+							initializer: function (config) {
+								var host = config.host,
+									schema = config[SCHEMA],
+									column,
+									editor,
+									Editor,
+									bbx = host.get(BBX);
+								
+								Y.each(schema.properties, function (fieldDefs, name) {
+									column = host.get('columnset').keyHash[name];
+									Editor = DTs.get(fieldDefs, UI, EDITOR);
+									column.addAttr('editor', {});
+									editor = new Editor({
+										schema: fieldDefs,
+										plugins:[FloatingFieldPlugin]
+									}).render(bbx);
+									column.set('editor', editor);
+									editor.after('cellEditorSave', this._saveCellEditor, this);
+								}, this);
+								bbx.delegate('click', this._afterCellClick, '.yui3-datatable-liner', this);
+							},
+							_afterCellClick: function (ev) {
+								var dt = this.get('host'),
+									liner = ev.target,
+									td = liner.get('parentNode'),
+									tr = td.get('parentNode'),
+									tbody = tr.get('parentNode'),
+									colIndex = td.get('cellIndex'),
+									rowIndex = tr.get('sectionRowIndex');
+								if (tbody.hasClass('yui3-datatable-data')) {
+									var record = dt.get('recordset').item(rowIndex),
+										colset = dt.get('columnset'),
+										column = colset.keys[colIndex],
+										key = column.get('key'),
+										value = record.getValue(key),
+										editor = column.get('editor');
+									if (this._openEditor) {
+										this._openEditor.set('visible', false);
+									}
+									this._openEditor = editor;
+									this._key = key;
+									this._record = record;
+									this._liner = liner;
+									editor.setAttrs({
+										visible: true,
+										node: td,
+										value: value
+									});
+								}
+							},
+							_openEditor: null,
+							_record: null,
+							_key: null,
+							_liner: null,
+							_saveCellEditor: function (ev) {
+								var record = this._record,
+									key = this._key,
+									schema = this._openEditor.get(SCHEMA),
+									value = ev.value;
+									
+								if (record && key) {
+									record.get('data')[key] = value;
+									this._liner.setContent(DTs.invoke(schema, UI, FORMATTER, value));
+								}
+							}
+						},
+						{
+							NS:'DataTableCellEditor',
+							ATTRS: {
+								schema: {
+								}
+							}
+						}
+					);
 					
 					/*
 						And this is how easy it is to have a DataTable set up from a JSON Schema
 						using the plugin above
 					*/
-					
+					Y.Column.prototype._getClassnames = function () {
+						return Y.ClassNameManager.getClassName('column', this.get("key"));
+					};
 					var table = new Y.DataTable.Base({
 						recordset: internal,
-						plugins: [{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}}]
+						plugins: [
+							{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
+							{fn: DataTableCellEditor, cfg:{schema:transactionSchema}}
+						]
 					}).render("#datatable");
 					
 				}
