@@ -92,17 +92,18 @@ var transactionSchema = {
 };
 		
 		</pre>
-		<p>a couple of records: </p>
+		<p>a couple of records (the numbers were intentionally left as strings to show they do get parsed into actual numbers):</p>
 		<pre>
 var recordSet = [
-	{id:12345,descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:123123.45},
-	{id:67890,descr:"last transaction",date:"1972-12-07T02:55:03R",amount:678678.90}
+	{id:"12345",descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:"123123.45"},
+	{id:"67890",descr:"last transaction",date:"1972-12-07T02:55:03R",amount:"678678.90"}
 ];
 </pre>
-<p>and a base component I propose called Y.DataTypes, containing entries such as formatters, parsers, editors, validators and so on 
-for each field according to its type/format as per the JSON-Schema. </p>
-<p>Each sample below is shown with the code that produced it.  The objects and methods mentioned in that sample code are contained within this same file.
-There are no external references except to known YUI and Gallery modules.</p>
+		<p>and a base component I propose called <a href="datatypes.js">Y.DataTypes</a>, 
+		containing entries such as formatters, parsers, editors, validators and so on 
+		for each field according to its type/format as per the JSON-Schema. </p>
+		<p>Each sample below is shown with the code that produced it.  
+		The external resources used in each case are listed in each section.</p>
 
 		<hr/>
 		<h3>Simple reading from a record into native JavaScript types and then showing it in a simple tabular format</h3>
@@ -114,26 +115,29 @@ Y.one('#test').setContent(makeTable(internal, transactionSchema));
 		<hr/>
 		<h3>Showing it in a simple field editor</h3>
 		<pre>
-var inputField = new BaseCellEditor({
+var inputField = new Y.BaseCellEditor({
 	label:'Date Field',
 	value: internal[0].date,
 	schema: transactionSchema.properties.date,
-	plugins : [FormFieldPlugin]
+	plugins : [Y.FormFieldPlugin]
 	
 }).render('#field');
 		</pre>
 		<form id="field"></form>
+		
+		<p><a href="fields.js">BaseCellEditor</a></p>
 		<hr/>
 		<h3>Now a full form</h3>
 		<p>Actually, all fields are using the same editor because I did only the base one, however, each value is formatted
 		according to its type.  All labels are read from the JSON-Schema.</p>
 		<pre>
-var fullForm = new Form({
+var fullForm = new Y.Form({
 	schema:transactionSchema,
 	values:internal[0]
 }).render('#fullform');
 		</pre>
 		<div id="fullform"></div>
+		<p><a href="fields.js">BaseCellEditor</a></p>
 		<hr/>
 		<h3>A YUI3 Datatable using a plugin to read the JSON-Schema</h3>
 		<p>The table has also attached a cell editing plugin, you can click on any cell to edit it.  
@@ -143,12 +147,14 @@ var fullForm = new Form({
 var table = new Y.DataTable.Base({
 	recordset: internal,
 	plugins: [
-		{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
-		{fn: DataTableCellEditor, cfg:{schema:transactionSchema}}
+		{fn: Y.DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
+		{fn: Y.DataTableCellEditor, cfg:{schema:transactionSchema}}
 	]
 }).render("#datatable");
 		</pre>
 		<div id="datatable"></div>
+		<p><a href="datatable-schema-plugin.js">DataTableSchemaPlugin</a></p>
+		<p><a href="datatable-cell-editor.js">DataTableCellEditor</a></p>
 		
 
 		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
@@ -161,268 +167,43 @@ var table = new Y.DataTable.Base({
 				filter: 'debug',
 				combine: false,
 				*/
-				
+				groups: {
+					js: {
+						base: './',
+						modules: {
+							datatypes: {
+								path: 'datatypes.js',
+								requires:['datatype']
+							},
+							fields: {
+								path: 'fields.js',
+								requires:['base-build','widget', 'widget-parent', 'widget-child','plugin','widget-stdmod','datatypes','event-valuechange', 'gallery-makenode']
+							},
+							'datatable-cell-editor' : {
+								path: 'datatable-cell-editor.js',
+								requires:['base-build','plugin','datatypes']
+							},
+							'datatable-schema-plugin' : {
+								path: 'datatable-schema-plugin.js',
+								requires:['base-build','plugin','datatypes']
+							}
+						}
+					}
+				},
+
 				gallery: 'gallery-2011.09.14-20-40'
 			}).use(
-				'datatype','yui-base','oop','node','gallery-makenode','event-valuechange',
-				'plugin','widget','widget-child','widget-parent','widget-stdmod','datatable',
+				'datatypes','yui-base','oop','node',
+				'datatable','fields','datatable-cell-editor','datatable-schema-plugin',
 				function(Y) {
 					"use strict";
 					/*jslint vars: true */
 					
-					var Lang = Y.Lang,
-						PARSER = 'parser',
-						FORMATTER = 'formatter',
-						UI = 'UI',
-						SERVER = 'server',
-						SEPARATOR = '|';
-					
-					/*
-						I improved on the original DataTypes by providing methods to help manipulate the data.
-						Now, the data is stored under a private variable _types and the methods help you reach it.
-						
-						Normally, the data would be composed from bits and pieces loaded according to locale and other environment circumstances.
-						An entry can be reached via the use() method passing it the schema entry and which side, UI or server you want.
-						
-						The use() method reads from the _types and merges the information from all levels so that if an entry exists 
-						for a particular type and format, it will use that, but it will fall back to the entry for the generic type 
-						(without format) if there is no entry for format.  If there is not entry at all, it will default to a basic do-nothing
-						set.  Since assembling this datatype entry takes time, the results are cached so that in later requests, the 
-						cached value is read.  The cache is emptied if new data is added to the types (not implemented yet).
-						
-						Method get() takes an schema entry, the side UI or server and what is it that you want.  It returns the value for that
-						property.  
-						
-						Method invoke() takes the schema entry, the side, what function you want to call (usually 'formatter', 'parser',
-						'validator' and so on) and any extra arguments the function might need.  It will return the result of that function.
-						
-						Functions to be called by invoke will receive any values
-						the caller to invoke might have passed and a reference to the schema entry, 
-						so it could read any extra information stored there.  
-						
-						The number of arguments a function receives might vary.  It is usually one, the value to be formatted,
-						parsed or validated, but other functions might need more.  Thus schemaEntry might not always be the second
-						argument, it all depends on how many other values have been passed.  Originally, to avoid this issue
-						of getting the schema entry bumped to different positions according to how many values are there,
-						I placed it in the first position and then the values, but since the schema entry is rarely used,
-						it was really annoying to have it declared just as a placeholder and never used, so I put the
-						values firts.
-						
-						The context for the invoked function will be set to the data type entry.
-						This entry is a composition of the specific entries and all the fallback values.  
-						Thus, if there is a property formatMask for a particular type, lets say, type:number, format: currency,
-						it will have that, if it doesn't, the one for type:number will be available and, since the property
-						has no default, if that isn't available, formatMask would be undefined, otherwise you would get that default.
-						
-						This means that the entries for type/format do not need to repeat information that can be provided at
-						the type level.
-
-					*/
-					var DTs = {
-					
-						get: function (schemaEntry, side, what) {
-							return DTs.use(schemaEntry, side)[what];
-						},
-						invoke: function (schemaEntry, side, what) {
-							var branch = DTs.use(schemaEntry, side),
-								args = Y.Array(arguments).slice(3);
-							args.push(schemaEntry);
-							if (branch[what]) {
-								return branch[what].apply(branch, args);
-							}
-						},
-						use: function (schemaEntry, side) {
-							/* In order for Y.cached to work, the method needs to receive string arguments
-							   or objects whose toString() method produces unique strings so that cached
-							   can used them as keys.  Since schemaEntry has no toString() method,
-							   the fallback is Object.toString() which produces [object: object] or
-							   something like that, the very same key for all entries so it would always
-							   return the same value.  That's why I had to expand it.
-							*/
-							return this._use(schemaEntry.type, schemaEntry.format, side);
-						},
-						_flush: function  () {
-							var c = DTs._cache;
-							Y.each(c, function (value, key) {
-								delete c[key];
-							});
-						},
-						
-						add: function (type, format, side, entry, value) {
-							var self = this, item, next;
-							if (value) {
-								item = DTs._types;
-								if (format) {
-									type = type + SEPARATOR + format;
-								}
-								
-								next = type?item[type]:DTs._defaults;
-								if (!next) {
-									next = item[type] = {};
-								}
-								item = next;
-								next = item[side];
-								if (!next) {
-									next = item[side] = {};
-								}
-								next[entry] = value;
-								this._flush();
-								return;
-							} 
-							if (Lang.isObject(entry)) {
-								Y.each(entry, function (values, entry) {
-									self.add(type, format, side, entry, values);
-								});
-								return;
-							}
-							if (Lang.isObject(side)) {
-								Y.each(side, function (values, side) {
-									self.add(type, format, side, values);
-								});
-								return;
-							}
-									
-							if (Lang.isObject(format)) {
-								Y.each(format, function (values, format) {
-									self.add(type, format, values);
-								});
-								return;
-							}
-							if (Lang.isObject(type)) {
-								Y.each(type, function (values, type) {
-									self.add(type, values);
-								});
-								return;
-							}
-							Y.log('If it ever reaches this far, it is an error','error','datatypes');
-						},
-
-						_cache: {},
-						_defaults: {
-							UI: {
-								formatter: function (value) {
-									return value;
-								},
-								parser: function (value) {
-									return value;
-								},
-								validator: function() {
-									return null;
-								}
-							},
-							server: {
-								formatter: function (value) {
-									return value;
-								},
-								parser: function (value) {
-									return value;
-								}
-							}
-								
-						},
-						_types: {
-							'string|date-time': {
-								UI: {
-									formatMask: '%d/%b/%Y %T',
-									formatter: function (value) {
-										return Y.DataType.Date.format(value, {format:this.formatMask});
-									},
-									parser: function (value) {
-										return Date.parse(value);
-									}
-								},
-								server: {
-									// YYYY-MM-DDThh:mm:ssZ
-									formatMask:'%FT%T%Z',
-									formatter: function (value) {
-										return Y.DataType.Date.format(value, {format: this.formatMask});
-									},
-									// this one would fail in so many ways that it's worthless, but for an example, it will do.
-									parser: function (value) {
-										var tmz = value.substr(-1),  // I am doing nothing with the timezone, though I should :P
-											a = value.substr(0,value.length -1);
-										a = a.split('T');
-										a[0] = a[0].split('-');
-										a[1] = a[1].split(':');
-										return new Date(a[0][0],a[0][1] -1 ,a[0][2],a[1][0],a[1][1],a[1][2]);
-									}
-								}
-							},
-							'integer': {
-								UI: {
-									formatter: function (value) {
-										return value.toString();
-									},
-									parser: function (value) {
-										return parseInt(value, 10);
-									}
-								},
-								server: {
-									formatter: function (value) {
-										return value.toString();
-									},
-									parser: function (value) {
-										return parseInt(value, 10);
-									}
-								}
-							},
-							'number': {
-								UI: {
-									formatter: function (value) {
-										return value + '';
-									},
-									parser: function (value) {
-										return parseFloat(value);
-									}
-								},
-								server: {
-									formatter: function (value) {
-										return value + '';
-									},
-									parser: function (value) {
-										return parseFloat(value);
-									}
-								}
-							},
-							'number|currency': {
-								UI: {
-									formatter: function (value) {
-										return Y.DataType.Number.format(value, {
-											suffix:'€',
-											decimalPlaces:2,
-											decimalSeparator: ',',
-											thousandsSeparator:'.'
-										});
-									},
-									parser: function (value) {
-										return parseFloat(value.replace(/[€.]/g,'').replace(',','.'));
-									}
-								},
-								server: {
-									formatter: function (value) {
-										return value.toString();
-									},
-									parser: function (value) {
-										return parseFloat(value);
-									}
-								}
-							}
-						}
-					};	
-					
-					// I had to put this method here because the last argument, DTs._cache
-					// gives an error if defined within DTs because DTs itself is not defined
-					// at that point.
-					DTs._use = Y.cached(function (type, format, side) {
-						var t = DTs._types[type],
-							f = format?DTs._types[type + SEPARATOR + format]:{};
-						return Y.merge(
-							DTs._defaults[side],
-							(t?t[side]:{}),
-							(f[side] || {})
-						);
-					}, DTs._cache);
-					Y.DataTypes = DTs;
+					var DTs = Y.DataTypes,
+						PARSER = DTs.PARSER,
+						FORMATTER = DTs.FORMATTER,
+						UI = DTs.UI,
+						SERVER = DTs.SERVER;
 					
 					
 					/* This is the schema I am going to use which describes the data below.
@@ -455,19 +236,17 @@ var table = new Y.DataTable.Base({
 					};
 					
 					// And this is the data, supposedly just read from the server and JSON-parsed.
-					// The date, for example, remains as a string since it has not been processed according to the schema.
+					// All the fields have been intentionally made strings to show that the parser does convert them to numbers or dates.
 					var recordSet = [
-						{id:12345,descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:123123.45},
-						{id:67890,descr:"last transaction",date:"1972-12-07T02:55:03R",amount:678678.90}
+						{id:"12345",descr:"first transaction",date:"1969-07-20T20:17:39Z",amount:"123123.45"},
+						{id:"67890",descr:"last transaction",date:"1972-12-07T02:55:03R",amount:"678678.90"}
 					];
 					
 					/*
 						This function reads the data received from the server (above),
 						processes it according to the given schema
 						and returns an array with the values in their native JavaScript types.
-						In this case, the only one actually changed in any way is the date,
-						however, should the id or amount came as strings, they would have been converted
-						to actual numbers
+						The dates are turned into JavaScript Date instances and the numbers turned into actual numbers
 					*/
 					var readFromServer = function(recordSet, schema) {
 						var output = [], outRecord;
@@ -511,185 +290,10 @@ var table = new Y.DataTable.Base({
 						and processed via readFromServer, both using the same schema
 					*/
 					var internal = readFromServer(recordSet, transactionSchema);
-					// console.log(internal);
+					//console.log(internal);
 					Y.one('#test').setContent(makeTable(internal, transactionSchema));
 					
-					var CBX = 'contentBox',
-						BBX = 'boundingBox',
-						VALUE = 'value',
-						TITLE = 'title',
-						LABEL = 'label',
-						INPUT = 'input',
-						ERR_MSG = 'errorMsg',
-						VALIDATOR = 'validator',
-						SCHEMA = 'schema';
-						
-					/*
-						This is the base for a cell editor, basically, it uses a plain <input> box.
-						See methods _uiSetValue, _afterInputValueChange and _afterInputBlur
-						They all use the schema configuration attribute to pick the formatter, parser and validator
-						from Y.DataTypes.
-					*/
-						
-					var	BaseCellEditor = Y.Base.create(
-						'base-cell-editor',
-						Y.Widget,
-						[Y.WidgetChild, Y.MakeNode],
-						{
-							renderUI: function () {
-								this.get(CBX).append(this._makeNode());
-								this._locateNodes();
-							},
-							bindUI: function () {
-								// interim solution because as of 3.4.0, valueChange cannot be listened to by delegation
-								this._eventHandles.push(this._inputNode.after('valueChange', this._afterInputValueChange, this));
-							},
-							_uiSetValue: function (value, src) {
-								if (src === UI) {
-									return;
-								}
-								this._inputNode.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, FORMATTER, value));
-							},
-							_uiSetSchema: function (value) {
-								this._inputNode.set(TITLE, value.description || value.title);
-							},
-							_uiSetErrorMsg: function (value) {
-								this._inputNode.set(TITLE, value || this.get(LABEL));
-							},
-							_afterInputValueChange: function (ev) {
-								this.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, PARSER, ev.target.get(VALUE)), {src: UI});
-							},
-							_afterInputBlur: function (value)  {
-								this.set(ERR_MSG, DTs.invoke(this.get(SCHEMA), UI, VALIDATOR, value));
-							}								
-						},
-						{
-							ATTRS: {
-								value: {
-								},
-								errorMsg: {
-								},
-								schema: {
-								}
-							},
-							_TEMPLATE: '<input class="{c input}" />',
-							_CLASS_NAMES:[INPUT],
-							_ATTRS_2_UI: {
-								SYNC: [SCHEMA, VALUE],
-								BIND: [SCHEMA, ERR_MSG, VALUE]
-							},
-							_EVENTS: {
-								// Unfortunately, valueChange is a synthetic event and cannot be hooked via _EVENTS
-								// so I had to bind it in bindUI
-								// input: 'valueChange'
-								input: 'blur'
-							}
-						}
-					);
-					
-					/*
-						This is the plugin that adds a label in between the bounding box and the content box
-						and captures the _uiSetLabel method of the host to display it on the label.
-						
-						A similar plugin should be available to turn the base cell editor into a popup
-						that could be overlayed anywhere.
-					*/
-					
-					var FormFieldPlugin = Y.Base.create(
-						'form-field-plugin',
-						Y.Plugin.Base,
-						[],
-						{
-							initializer: function () {
-								this.afterHostEvent('render',this._afterHostRender);
-								this.afterHostEvent('schemaChange', this._afterHostSchemaChange);
-								
-							},
-							_afterHostSchemaChange: function(ev) {
-								this._setLabel(ev.newVal);
-								return new Y.Do.Prevent();
-							},
-							_setLabel: function (schema) {
-								this._labelNode.setAttrs({
-									innerHTML:schema.title || schema.description,
-									title:schema.description
-								});
-							},
-							
-							_afterHostRender: function () {
-								var host = this.get('host'),
-									bbx = host.get(BBX);
-								this._labelNode = Y.Node.create('<label class="yui3-form-field-plugin-label"><\/label>');
-								bbx.insert(this._labelNode,0);
-								this._setLabel(host.get(SCHEMA));
-							}
-							
-						},
-						{
-							NS:'FieldPlugin'							
-						}
-					);
-					
-					var FloatingFieldPlugin = Y.Base.create(
-						'floating-field-plugin',
-						Y.Plugin.Base,
-						[],
-						{
-							initializer: function (config) {
-								var host = config.host,
-									YCM = Y.ClassNameManager.getClassName;
-								this.afterHostEvent('render',this._afterHostRender);
-								this._classNames = {};
-								Y.each(this._classNameKeys, function (key) {
-									this._classNames[key] = YCM(this.name, key);
-								},this);
-								host.addAttr('node', {
-									setter: function (value) {
-										return Y.Node.one(value);
-									}
-								});
-								host.set('visible', false);
-								this.afterHostEvent('nodeChange', this._afterNodeChange, this);
-							},
-							_classNameKeys: ['buttons', 'button', 'ok','cancel','popup'],
-							_afterHostRender: function () {
-								var host = this.get('host'),
-									bbx = host.get(BBX);
-									
-								bbx.addClass(this._classNames['popup']);
-								this._buttonsNode = Y.Node.create(Lang.sub(this._template,this._classNames));
-								bbx.append(this._buttonsNode);
-								this._buttonsNode.delegate('click', this._afterButtonClick, '.' + this._classNames['button'], this);
-							},
-							_afterButtonClick: function (ev) {
-								var host = this.get('host');
-								if (ev.target.hasClass(this._classNames['ok'])) {
-									host.fire('cellEditorSave', {value: host.get(VALUE)});
-								}
-								host.set('visible', false);
-							},
-							_afterNodeChange: function (ev) {
-								var host = this.get('host'),
-									bbx = host.get(BBX),
-									node = ev.newVal,
-									region = node.get('region');
-									
-								bbx.setXY([region.left, region.top]);
-								bbx.set('offsetWidth', region.width);
-								
-							},
-							_template: [
-								'<div class="{buttons}">',
-								'<div class="{button} {ok}">Ok<\/div>',
-								'<div class="{button} {cancel}">Cancel<\/div>',
-								'<\/div>'
-							].join('')
-						},
-						{
-							// they have the same NS since the two cannot coexist so loading one implicitly unloads the other.
-							NS:'FieldPlugin'							
-						}
-					);
+
 					
 					/*
 						Here I create the cell editor plugged to have the label as a regular form field.
@@ -697,243 +301,45 @@ var table = new Y.DataTable.Base({
 						holds a reference to the corresponding field in the schema.
 						
 						Normally, it would be created by a form component, see below.
+						
+						I don't give it a whole schema but the properties for a single field in the schema.
+						Likewise, I don't give it a full record but a simple field.
 					*/
-					var inputField = new BaseCellEditor({
+					var inputField = new Y.BaseCellEditor({
 						label:'Date Field',
 						value: internal[0].date,
 						schema: transactionSchema.properties.date,
-						plugins : [FormFieldPlugin]
+						plugins : [Y.FormFieldPlugin]
 						
 					}).render('#field');
 					
-					inputField.set('node','#test td');
-					var HEADER = Y.WidgetStdMod.HEADER,
-						BODY = Y.WidgetStdMod.BODY,
-						VALUES = 'values',
-						EDITOR = 'editor';
-						
-					
 					/*
-						So, this is the real thing, finally.  
-						This form takes 
-							a) a full schema 
-							b) a set of values
-						and it builds a form from those.
-						It will take the header of the form from the description or the name of the schema.
-						Each of the fields is taken from the schema, their labels from the title or description.
-						The editor to use is taken from the Y.DataTypes based on the type/format in the schema.
-						Each cell editor field is plugged in with the FormFieldPlugin and passes the schema info
-						for that particular field.  The field itself will take the label from the title or description for that field,
-						and the formatter, parser and validator.
-						Each field will take its value from the record passed, using the formatter from the schema.
+						This is how to create a form out of a schema and its data.
 						
-						The form uses a three section WidgetStdMod and is also a WidgetParent, with the form fields its children.
-					*/
-					var Form = Y.Base.create(
-						'form',
-						Y.Widget,
-						[Y.WidgetStdMod, Y.WidgetParent, Y.MakeNode],
-						{
-							CONTENT_TEMPLATE: '<form><\/form>',
-							renderUI: function () {
-								this.setStdModContent(BODY,'');
-								this._childrenContainer = this.getStdModNode(BODY);
-							},
-								
-							_uiSetSchema: function (value) {
-
-								this.setStdModContent(HEADER, value.description || value.name);
-								Y.each(value.properties , function (schema) {
-									this.add(DTs.invoke(schema, UI, EDITOR, {
-										plugins: [FormFieldPlugin]
-									}));
-								}, this);
-								this._stdModParsed = {bodyContent:true};
-							},
-							_uiSetValues: function (value) {
-								var i = 0;
-								Y.each(this.get(SCHEMA).properties, function (schema, key) {
-									this.item(i).set(VALUE, value[key]);
-									i+=1;
-								}, this);
-							}
-						},
-						{
-							_ATTRS_2_UI: {
-								SYNC: [SCHEMA, VALUES],
-								BIND: [SCHEMA, VALUES]
-							},							
-							ATTRS:  {
-								schema: {
-								},
-								values: {
-								}
-							}
-						}
-					);
-					
-					/*
-						This is the trick on how a form library adds itself to the Y.DataTypes.
-						In this case, I am adding a function that returns an instance of BaseCellEditor as default editor for all types/formats (the first null, null).
-						Since I have only a single editor type, I add it as the default and since no type has any other, it will fall back to this one.
-						In a real case, a library would add the proper type for each individual schema type/format, though the default
-						will always remain as a fallback.
-						
-						** Important ** it is not DataTypes that should know about possible editors,
-						it is the library that should register its editors with Y.DataTypes when loaded.
-					*/
-					
-					DTs.add(null, null, UI, EDITOR, function (config, schema) {
-						return new BaseCellEditor( Y.merge({schema: schema}, config));
-					});
-					
-					
-					/*
-						In the end, all comes down to this, you create a form instance and give it a schema and a record with data
-						and that's it.
 						Not all functionality is implemented at this point, the most obvious one: the form has no buttons
 						or actions set for submiting it.  Eventually, I will add it.
 						
 						The basic point to show is how it reads the schema and using the information set in Y.DataTypes, 
 						it handles it according to which forms library is loaded
 					*/
-					var fullForm = new Form({
+					var fullForm = new Y.Form({
 						schema:transactionSchema,
 						values:internal[0]
 					}).render('#fullform');
 				
-					/*
-						This is a plugin that reads and schema and sets the column definitions of a DataTable
-						with information taken from the JSON-Schema and Y.DataTypes
-					*/
-				
-					var DataTableSchemaPlugin = Y.Base.create(
-						'datatable-sckema-plugin',
-						Y.Plugin.Base,
-						[],
-						{
-							initializer: function (config) {
-								var host = config.host,
-									colDefs = [],
-									schema = config[SCHEMA];
-								
-								host.set('caption', schema.description || schema.name);
-								
-								Y.each(schema.properties, function (fieldDefs, name) {
-									colDefs.push({
-										key: name,
-										label: fieldDefs.title || fieldDefs.description,
-										formatter: function (o) {
-											return DTs.invoke(fieldDefs, UI, FORMATTER, o.value);
-										}
-									});
-								});
-								host.set('columnset',colDefs);
-							}
-						},
-						{
-							NS:'DataTableSchemaPlugin',
-							ATTRS: {
-								schema: {
-								}
-							}
-						}
-					);
-					
-					/*
-						This plugin allows for cell editing, it uses the editor configured in Y.DataTypes which,
-						in these tests is a very simple input box for all fields.
-					*/
-					
-					var DataTableCellEditor = Y.Base.create(
-						'datatable-cell-editor',
-						Y.Plugin.Base,
-						[],
-						{
-							initializer: function (config) {
-								var host = config.host,
-									schema = config[SCHEMA],
-									column,
-									editor,
-									bbx = host.get(BBX);
-								
-								Y.each(schema.properties, function (fieldDefs, name) {
-									column = host.get('columnset').keyHash[name];
-									column.addAttr('editor', {});
-									editor = DTs.invoke(fieldDefs, UI, EDITOR, {
-										plugins:[FloatingFieldPlugin]
-									}).render(bbx);
-									column.set('editor', editor);
-									editor.after('cellEditorSave', this._saveCellEditor, this);
-								}, this);
-								bbx.delegate('click', this._afterCellClick, '.yui3-datatable-liner', this);
-							},
-							_afterCellClick: function (ev) {
-								var dt = this.get('host'),
-									liner = ev.target,
-									td = liner.get('parentNode'),
-									tr = td.get('parentNode'),
-									tbody = tr.get('parentNode'),
-									colIndex = td.get('cellIndex'),
-									rowIndex = tr.get('sectionRowIndex');
-								if (tbody.hasClass('yui3-datatable-data')) {
-									var record = dt.get('recordset').item(rowIndex),
-										colset = dt.get('columnset'),
-										column = colset.keys[colIndex],
-										key = column.get('key'),
-										value = record.getValue(key),
-										editor = column.get('editor');
-									if (this._openEditor) {
-										this._openEditor.set('visible', false);
-									}
-									this._openEditor = editor;
-									this._key = key;
-									this._record = record;
-									this._liner = liner;
-									editor.setAttrs({
-										visible: true,
-										node: td,
-										value: value
-									});
-								}
-							},
-							_openEditor: null,
-							_record: null,
-							_key: null,
-							_liner: null,
-							_saveCellEditor: function (ev) {
-								var record = this._record,
-									key = this._key,
-									schema = this._openEditor.get(SCHEMA),
-									value = ev.value;
-									
-								if (record && key) {
-									record.get('data')[key] = value;
-									this._liner.setContent(DTs.invoke(schema, UI, FORMATTER, value));
-								}
-							}
-						},
-						{
-							NS:'DataTableCellEditor',
-							ATTRS: {
-								schema: {
-								}
-							}
-						}
-					);
 					
 					/*
 						And this is how easy it is to have a DataTable set up from a JSON Schema
-						using the plugin above
+						using the plugin to read the schema.  
+						
+						I also added the cell editor plugin which uses the same schema to 
+						know what kind of editor to use.
 					*/
-					Y.Column.prototype._getClassnames = function () {
-						return Y.ClassNameManager.getClassName('column', this.get("key"));
-					};
 					var table = new Y.DataTable.Base({
 						recordset: internal,
 						plugins: [
-							{fn: DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
-							{fn: DataTableCellEditor, cfg:{schema:transactionSchema}}
+							{fn: Y.DataTableSchemaPlugin, cfg:{schema:transactionSchema}},
+							{fn: Y.DataTableCellEditor, cfg:{schema:transactionSchema}}
 						]
 					}).render("#datatable");
 					
