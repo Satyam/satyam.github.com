@@ -53,8 +53,13 @@
 			.yui3-floating-field-plugin-popup .yui3-base-cell-editor-input {
 				width:95%;
 			}
-			.yui3-base-cell-editor-hidden {
+			.yui3-base-cell-editor-hidden,
+			.yui3-calendar-cell-editor-hidden {
 				display: none;
+			}
+			.yui3-skin-sam .yui3-calendar .yui3-calendar-day-selected {
+				 background-color: #B3D4FF;
+				 color: #000000;
 			}
 		</style>
 
@@ -157,7 +162,7 @@ var table = new Y.DataTable.Base({
 		<p><a href="datatable-cell-editor.js">DataTableCellEditor</a></p>
 		
 
-		<script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
+		<script src="http://yui.yahooapis.com/3.4.1pr1/build/yui/yui-min.js"></script>
 
 		<script>
 			YUI({
@@ -193,7 +198,7 @@ var table = new Y.DataTable.Base({
 
 				gallery: 'gallery-2011.09.14-20-40'
 			}).use(
-				'datatypes','yui-base','oop','node',
+				'datatypes','yui-base','oop','node','calendar',
 				'datatable','fields','datatable-cell-editor','datatable-schema-plugin',
 				function(Y) {
 					"use strict";

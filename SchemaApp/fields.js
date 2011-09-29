@@ -53,7 +53,10 @@ YUI.add('fields', function (Y) {
 				this._inputNode.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, FORMATTER, value));
 			},
 			_uiSetSchema: function (value) {
-				this._inputNode.set(TITLE, value.description || value.title);
+				this._inputNode.setAttrs({
+					title: value.description || value.title,
+					name: value.name || ''
+				});
 			},
 			_uiSetErrorMsg: function (value) {
 				this._inputNode.set(TITLE, value || this.get(LABEL));
@@ -88,6 +91,38 @@ YUI.add('fields', function (Y) {
 			}
 		}
 	);
+	
+	Y.CalendarCellEditor = Y.Calendar?Y.Base.create(
+		'calendar-cell-editor',
+		Y.BaseCellEditor,
+		[],
+		{
+			renderUI: function () {
+				Y.CalendarCellEditor.superclass.renderUI.apply(this, arguments);
+				this._cal = new Y.Calendar().render(this.get(CBX));
+			},
+			bindUI: function () {
+				this._cal.after('selectionChange', this._afterSelectionChange, this);
+			},
+			_afterSelectionChange: function (ev) {
+				this.set(VALUE, ev.newSelection[0], {src: UI});
+			
+			},
+			_uiSetValue: function (value, src) {
+				value = value || '';
+				this._inputNode.set(VALUE, DTs.invoke(this.get(SCHEMA), UI, FORMATTER, value));
+				if (src === UI) {
+					return;
+				}
+				if (value) {
+					this._cal.set('date', value);
+				}
+			}
+		},
+		{
+			_TEMPLATE: '<input type="hidden" class="{c input}" />'
+		}
+	):Y.BaseCellEditor;
 	
 	/*
 		This is the plugin that adds a label in between the bounding box and the content box
@@ -224,7 +259,8 @@ YUI.add('fields', function (Y) {
 			_uiSetSchema: function (value) {
 
 				this.setStdModContent(HEADER, value.description || value.name);
-				Y.each(value.properties , function (schema) {
+				Y.each(value.properties , function (schema, key) {
+					schema.name = key;
 					this.add(DTs.invoke(schema, UI, EDITOR, {
 						plugins: [Y.FormFieldPlugin]
 					}));
@@ -266,6 +302,9 @@ YUI.add('fields', function (Y) {
 	
 	DTs.add(null, null, UI, EDITOR, function (config, schema) {
 		return new Y.BaseCellEditor( Y.merge({schema: schema}, config));
+	});
+	DTs.add('string','date-time', UI, EDITOR, function (config, schema) {
+		return new Y.CalendarCellEditor(Y.merge({schema: schema}, config));
 	});
 
 }, '0.99' ,{

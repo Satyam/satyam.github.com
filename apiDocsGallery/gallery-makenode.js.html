@@ -58,10 +58,10 @@
 <span class="cm"> * @class MakeNode</span>
 <span class="cm"> */</span>
 	<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
-	<span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">version</span> <span class="o">===</span> <span class="s1">&#39;3.4.0&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 		<span class="c1">// See: http://yuilibrary.com/projects/yui3/ticket/2531032</span>
 		<span class="kd">var</span> <span class="nx">L</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span> <span class="nx">DUMP</span> <span class="o">=</span> <span class="s1">&#39;dump&#39;</span><span class="p">,</span> <span class="nx">SPACE</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nx">LBRACE</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="nx">RBRACE</span> <span class="o">=</span> <span class="s1">&#39;}&#39;</span><span class="p">,</span>
-		<span class="nx">savedRegExp</span> <span class="o">=</span>  <span class="sr">/(~-(\d+)-~)/g</span><span class="p">,</span> <span class="nx">lBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{LBRACE\}/g</span><span class="p">,</span> <span class="nx">rBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{RBRACE\}/g</span><span class="p">;</span>
+			<span class="nx">savedRegExp</span> <span class="o">=</span>  <span class="sr">/(~-(\d+)-~)/g</span><span class="p">,</span> <span class="nx">lBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{LBRACE\}/g</span><span class="p">,</span> <span class="nx">rBraceRegExp</span> <span class="o">=</span> <span class="sr">/\{RBRACE\}/g</span><span class="p">;</span>
 		
 		<span class="nx">Y</span><span class="p">.</span><span class="nx">substitute</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">o</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">recurse</span><span class="p">)</span> <span class="p">{</span>
 			<span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">meta</span><span class="p">,</span> <span class="nx">saved</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">token</span><span class="p">,</span> <span class="nx">dump</span><span class="p">,</span>
@@ -146,7 +146,7 @@
 			<span class="p">;</span>
 
 		<span class="p">};</span>
-	<span class="p">})();</span>	
+	<span class="p">})();}</span>	
 	<span class="kd">var</span> <span class="nx">WS</span> <span class="o">=</span> <span class="sr">/\s+/</span><span class="p">,</span>
 		<span class="nx">NODE</span> <span class="o">=</span> <span class="s1">&#39;Node&#39;</span><span class="p">,</span>
 		<span class="nx">DOT</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
@@ -160,7 +160,9 @@
 <span class="cm">		 * Creates CSS classNames from suffixes listed in &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;/code&gt;&lt;/a&gt;, </span>
 <span class="cm">		 * stores them in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;/code&gt;&lt;/a&gt;.</span>
 <span class="cm">		 * Concatenates &lt;a href=&quot;#property__ATTRS_2_UI&quot;&gt;&lt;code&gt;_ATTRS_2_UI&lt;/code&gt;&lt;/a&gt; into &lt;code&gt;_UI_ATTRS&lt;/code&gt;.</span>
-<span class="cm">		 * Sets listeners to render and destroy events to attach/detach UI events</span>
+<span class="cm">		 * Sets listeners to render and destroy events to attach/detach UI events.</span>
+<span class="cm">		 * If there is no renderUI defined in this class or any of its ancestors (not counting Widget which has a dummy one)</span>
+<span class="cm">		 * it will add a default one appending the result of processing _TEMPLATE and then call _locateNodes.</span>
 <span class="cm">		 * @constructor</span>
 <span class="cm">		 */</span>
 		<span class="nx">MakeNode</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -171,8 +173,20 @@
 			<span class="nx">self</span><span class="p">.</span><span class="nx">_publishEvents</span><span class="p">();</span>
 			<span class="nx">self</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_attachEvents</span><span class="p">,</span> <span class="nx">self</span><span class="p">);</span>
 			<span class="nx">self</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_detachEvents</span><span class="p">,</span> <span class="nx">self</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">renderUI</span> <span class="o">===</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">renderUI</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">self</span><span class="p">.</span><span class="nx">renderUI</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_autoRenderUI</span><span class="p">;</span>
+			<span class="p">}</span>
 		<span class="p">};</span>
 	<span class="nx">MakeNode</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="cm">/**</span>
+<span class="cm">		 * Method to be used if no explicit renderUI method is defined.</span>
+<span class="cm">		 * @method _autoRenderUI</span>
+<span class="cm">		 * @private</span>
+<span class="cm">		 */</span>
+		<span class="nx">_autoRenderUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;contentBox&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">();</span>
+		<span class="p">},</span>
 		<span class="cm">/** </span>
 <span class="cm">		 * An array of event handles returned when attaching listeners to events,</span>
 <span class="cm">		 * meant to detach them all when destroying the instance.</span>
@@ -231,7 +245,22 @@
 			<span class="s1">&#39;1&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
 				<span class="nx">args</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_parseMakeNodeArgs</span><span class="p">(</span><span class="nx">args</span><span class="p">);</span>
 				<span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">10</span><span class="p">)</span> <span class="o">===</span><span class="mi">1</span><span class="o">?</span><span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="nx">args</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+			<span class="p">},</span>
+			<span class="s1">&#39;n&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="nx">extras</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+				<span class="nx">args</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">WS</span><span class="p">);</span>
+				
+				<span class="k">while</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">key</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+					<span class="nx">fn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_templateHandlers</span><span class="p">[</span><span class="nx">key</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()];</span>
+					<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">return</span><span class="p">;</span>
+					<span class="p">}</span>
+					<span class="nx">value</span> <span class="o">=</span>  <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">(),</span> <span class="nx">extras</span><span class="p">);</span>
+				<span class="p">}</span>
+				<span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
 			<span class="p">}</span>
+				
 		<span class="p">},</span>
 		<span class="cm">/**</span>
 <span class="cm">		 * Parses the arguments received by the processor of the &lt;code&gt;{m}&lt;/code&gt; placeholder.  </span>
@@ -521,7 +550,7 @@
 			<span class="k">this</span><span class="p">.</span><span class="nx">_forAllXinClasses</span><span class="p">(</span><span class="s1">&#39;_PUBLISH&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
 				<span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{};</span>
 				<span class="nx">Y</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">options</span> <span class="o">||</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">opt</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">opts</span><span class="p">[</span><span class="nx">opt</span><span class="p">]</span> <span class="o">=</span><span class="nx">opt</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;Fn&#39;</span><span class="o">?</span><span class="k">this</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">:</span><span class="nx">value</span><span class="p">;</span>
+					<span class="nx">opts</span><span class="p">[</span><span class="nx">opt</span><span class="p">]</span> <span class="o">=</span> <span class="nx">opt</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">opt</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;Fn&#39;</span><span class="o">?</span><span class="k">this</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">:</span><span class="nx">value</span><span class="p">;</span>
 				<span class="p">},</span><span class="k">this</span><span class="p">);</span>
 				<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">opts</span><span class="p">);</span>
 			<span class="p">});</span>
@@ -564,6 +593,10 @@
 <span class="cm">			Argument arg1 is usually a nested placeholder.&lt;/li&gt;</span>
 <span class="cm">			&lt;li&gt;&lt;code&gt;{1 arg1 arg2 arg3}&lt;/code&gt; If arg1 is 1 it returns arg2 otherwise arg3. Used to produce singular/plural text.</span>
 <span class="cm">			Argument arg1 is usually a nested placeholder.&lt;/li&gt;</span>
+<span class="cm">			&lt;li&gt;&lt;code&gt;{n p1 arg1 .... pn argn}&lt;/code&gt; It will read the value resulting from the processing code &lt;code&gt;p1&lt;/code&gt; with argument &lt;code&gt;arg1&lt;/code&gt;</span>
+<span class="cm">			and use that as the object to process the following processing code.  </span>
+<span class="cm">			It takes any number of processing codes and arguments.  </span>
+<span class="cm">			It only works with processing codes that take simple identifiers as arguments, ie.: not {m}.</span>
 <span class="cm">			&lt;li&gt;&lt;code&gt;{}&lt;/code&gt; any other value will be	handled just like &lt;code&gt;Y.substitute&lt;/code&gt; does. &lt;/li&gt;</span>
 <span class="cm">		&lt;/ul&gt;</span>
 <span class="cm">	 * For placeholders containing several arguments they must be separated by white spaces.  </span>
@@ -719,7 +752,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__forAllXinClasses", "access": "private", "host": "MakeNode", "type": "method", "name": "_forAllXinClasses"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
+    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#method__autoRenderUI", "access": "private", "host": "MakeNode", "type": "method", "name": "_autoRenderUI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__forAllXinClasses", "access": "private", "host": "MakeNode", "type": "method", "name": "_forAllXinClasses"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
 </script>
 </body>
 </html>
