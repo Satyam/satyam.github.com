@@ -2,7 +2,7 @@
 <html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>API: gallery-md-button-group  ButtonSeparator   (YUI Library)</title>
+	<title>API: gallery-stdmod  StdMod   (YUI Library)</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/api.css" />
@@ -16,10 +16,10 @@
 <div id="doc3" class="yui-t2">
 	<div id="hd">
         <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
-        <h3>gallery-md-button-group&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <h3>gallery-stdmod&nbsp; <span class="subtitle">1.0.0</span></h3>
         <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
-            &gt; <a href="./module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a>
-                 &gt; ButtonSeparator 
+            &gt; <a href="./module_gallery-stdmod.html" title="gallery-stdmod">gallery-stdmod</a>
+                 &gt; StdMod 
                 
         <form onsubmit="return false">
             <div id="propertysearch">
@@ -48,9 +48,9 @@
 
                         
                         
-                            Class <b property="yui:name">ButtonSeparator</b>
+                            Class <b property="yui:name">StdMod</b>
                         <span class="extends">
-                           - extends <a href="Y.Widget.html" title="Y.Widget">Y.Widget</a>
+                           - extends <a href="WidgetStdMod.html" title="WidgetStdMod">WidgetStdMod</a>
                         </span>
 
                     </h2>
@@ -60,14 +60,18 @@
   
 
                     <div class="summary description" property="yui:description">
-                        The ButtonSeparator class provides a passive divider to use in between groups of buttons
+                        A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
+the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
+This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
+and thus conflicts with the StdMod sections. (this can also be solved using the property <a href="http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer">_childrenContainer</a>)<br/><br/>
+For further documentation see <a href="http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html">WidgetStdMod</a>
                     </div>
 
                         <div class="section constructor details" rel="yui:constructor" resource="#constructor">
                         <h3 id="constructor">Constructor</h3>
                         <div class="content">
                             <div class="detail">
-                                <strong property="yui:name">ButtonSeparator</strong>
+                                <strong property="yui:name">StdMod</strong>
                                 <code>
                                     (
                                     )
@@ -81,26 +85,6 @@
                     </div>
                     
                     <div rel="yui:properties" resource="#properties">
-                        <div class="section field details">
-                            <h3 id="properties">Properties</h3>
-                            <div class="content">
-                                    <div class="" rel="yui:property" resource="#property_BOUNDING_TEMPLATE">
-                                    <h4><a name="property_BOUNDING_TEMPLATE" property="yui:name">BOUNDING_TEMPLATE</a>
-                                        - <code><span property="yui:type">String</span></code>
-                                    </h4>
-                                    <div class="detail">
-                                        <div class="description" property="yui:description">
-                                            Overrides the standard bounding box template to produce a &lt;span&gt;
-                                        </div>
-                                    </div>
-     
-                                        
-
-
-                                    <hr />
-                                    </div>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -128,35 +112,28 @@
                                 <li class=""><a href="module_gallery-makenode.html" title="gallery-makenode">gallery-makenode</a></li>
                                 <li class=""><a href="module_gallery-md-accordion.html" title="gallery-md-accordion">gallery-md-accordion</a></li>
                                 <li class=""><a href="module_gallery-md-button.html" title="gallery-md-button">gallery-md-button</a></li>
-                                <li class="selected"><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
+                                <li class=""><a href="module_gallery-md-button-group.html" title="gallery-md-button-group">gallery-md-button-group</a></li>
                                 <li class=""><a href="module_gallery-md-ibutton.html" title="gallery-md-ibutton">gallery-md-ibutton</a></li>
                                 <li class=""><a href="module_gallery-md-spinner.html" title="gallery-md-spinner">gallery-md-spinner</a></li>
                                 <li class=""><a href="module_gallery-md-timespinner.html" title="gallery-md-timespinner">gallery-md-timespinner</a></li>
-                                <li class=""><a href="module_gallery-stdmod.html" title="gallery-stdmod">gallery-stdmod</a></li>
+                                <li class="selected"><a href="module_gallery-stdmod.html" title="gallery-stdmod">gallery-stdmod</a></li>
                         </ul>
                     </div>
 
                     <div id="classList" class="module">
                         <h4>Classes</h4>
                         <ul class="content">
-                                <li class=""><a href="ButtonGroup.html" title="ButtonGroup">ButtonGroup</a></li>
-                                <li class="selected"><a href="ButtonSeparator.html" title="ButtonSeparator">ButtonSeparator</a></li>
+                                <li class="selected"><a href="StdMod.html" title="StdMod">StdMod</a></li>
                         </ul>
                     </div>
 
                     <div id="fileList" class="module">
                         <h4>Files</h4>
                         <ul class="content">        
-                                <li class=""><a href="gallery-md-button-group.js.html" title="gallery-md-button-group.js">gallery-md-button-group.js</a></li>
+                                <li class=""><a href="gallery-stdmod.js.html" title="gallery-stdmod.js">gallery-stdmod.js</a></li>
                         </ul>
                     </div>
 
-                    <div id="propertyList" class="module">
-                        <h4>Properties</h4>
-                        <ul class="content">        
-                                <li class=""><a href="#property_BOUNDING_TEMPLATE" title="BOUNDING_TEMPLATE">BOUNDING_TEMPLATE</a></li>
-                        </ul>
-                    </div>
 
 
 
@@ -171,7 +148,7 @@
 </div>
 <script type="text/javascript">
 
-    var ALL_YUI_PROPS = [{"url": "ButtonSeparator.html#property_BOUNDING_TEMPLATE", "access": "", "host": "ButtonSeparator", "type": "property", "name": "BOUNDING_TEMPLATE"}];
+    var ALL_YUI_PROPS = [];
 </script>
 </body>
 </html>
