@@ -4,11 +4,11 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<title>API: gallery-makenode  MakeNode   (YUI Library)</title>
 
-	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1319130372.25" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1319130372.25" />
 
-    <script type="text/javascript" src="assets/api-js"></script>
-    <script type="text/javascript" src="assets/ac-js"></script>
+    <script type="text/javascript" src="assets/api-js?stamp=1319130372.25"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1319130372.25"></script>
 </head>
 
 <body id="yahoo-com">
@@ -197,14 +197,19 @@ If the Y.WidgetStdMod extension is used the <code>"HEADER"</code>, <code>"BODY"<
 and <code>"FOOTER"</code> identifiers will also be available.<br/>
 Each entry contains a type of event to be listened to or an array of events.
 Each event can be described by its type (i.e.: <code>"key"</code>, <code>"mousedown"</code>, etc).
-MakeNode will associate this event with a method named <code>"_after"</code> followed by the element identifier with the first character capitalized 
-and the type of event with the first character capitalized (i.e.: <code>_afterBoundingBoxClick</code>, <code>_afterInputBlur</code>, <code>_afterThisValueChange</code>, etc.)
-Alternatively, the event listener can be described by an object literal containing properties <ul>
+MakeNode will set 'after' event listeners by default, but can be instructed to listen to 'before' ('on') events
+or do it by delegation on the boundingBox.
+MakeNode will associate this event with a method named <code>"_after"</code>,<code>"_before"</code> or <code>"_delegate"</code> followed by the element identifier with the first character capitalized 
+and the type of event with the first character capitalized (i.e.: <code>_afterBoundingBoxClick</code>, <code>_afterInputBlur</code>, <code>_afterThisValueChange</code>, <code>_beforeFormSubmit</code>, <code>_delegateListItemClick</code>, etc.).<br/>
+Alternatively, the event listener can be described by an object literal containing properties: <ul>
 <li><code>type</code> (mandatory) the type of event being listened to</li>
 <li><code>fn</code> the name of the method to handle the event.  
 Since _EVENTS is static, it has no access to <code>this</code> so the name of the method must be specified</li>
 <li><code>args</code> extra arguments to be passed to the listener, useful, 
-for example as a key descriptor for <code>key</code> events.
+for example as a key descriptor for <code>key</code> events.</li>
+<li><code>when</code> either 'before', 'after' or 'delegate'.  
+MakeNode defaults to set 'after' event listeners but can be told to set 'before' ('on') listeners 
+or to delegate on the BoundingBox the capture of events on inner elements.  Only className keys can be used with 'delegate'.</li></ul>
 <pre>_EVENTS: {
 &nbsp; &nbsp; boundingBox: [
 &nbsp; &nbsp;  &nbsp; &nbsp; {
@@ -215,7 +220,8 @@ for example as a key descriptor for <code>key</code> events.
 &nbsp; &nbsp;  &nbsp; &nbsp; 'mousedown' &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterBoundingBoxMousedown
 &nbsp; &nbsp; ],
 &nbsp; &nbsp; document: 'mouseup', &nbsp; &nbsp; // calls this._afterDocumentMouseup
-&nbsp; &nbsp; input: 'change' &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterInputChange
+&nbsp; &nbsp; input: 'change', &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterInputChange
+&nbsp; &nbsp; form: {type: 'submit', when:'before'}  &nbsp; &nbsp; // calls this._beforeFormSubmit
 },</pre>
                                         </div>
                                     </div>
@@ -343,6 +349,13 @@ and should return the replacement value for the placeholder.
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -373,6 +386,13 @@ and should return the replacement value for the placeholder.
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -404,6 +424,13 @@ into this instance _UI_ATTRS property for the benefit or Widget.  See Widget._UI
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -434,6 +461,13 @@ into this instance _UI_ATTRS property for the benefit or Widget.  See Widget._UI
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -491,6 +525,13 @@ and the key or index.</span>
                                                         </dd>
                                                 </dl>
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -542,6 +583,13 @@ If missing, all the classNames stored in <a href="#property__classNames"><code>t
                                                         </dd>
                                                 </dl>
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -576,6 +624,13 @@ If the WidgetStdMod is used, it will also add the classNames for the three secti
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -634,7 +689,7 @@ If missing, it will use the first static <a href="#property__TEMPLATE"><code>_TE
                                                 <dl>
                                                     <dt>Returns:
                                                     <code property="yui:return">
-                                                            Y.Node
+                                                        Y.Node
                                                     </code></dt>
                                                     <dd property="yui:returnInfo">Instance of <code>Y.Node</code> produced from the template</dd>
                                                 </dl>
@@ -687,7 +742,7 @@ It skips over anything else.
                                                 <dl>
                                                     <dt>Returns:
                                                     <code property="yui:return">
-                                                            Array
+                                                        Array
                                                     </code></dt>
                                                     <dd property="yui:returnInfo">Array of arguments found, each converted to its proper data type</dd>
                                                 </dl>
@@ -722,6 +777,13 @@ If an event has been publishes, the properties set in the descendants will overr
                                         <div class="description">
 
 
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
 
 
              
@@ -779,7 +841,7 @@ If an event has been publishes, the properties set in the descendants will overr
                                                 <dl>
                                                     <dt>Returns:
                                                     <code property="yui:return">
-                                                            String
+                                                        String
                                                     </code></dt>
                                                     <dd property="yui:returnInfo">Template with the placeholders replaced.</dd>
                                                 </dl>
@@ -881,8 +943,7 @@ If an event has been publishes, the properties set in the descendants will overr
 	</div>
 </div>
 <script type="text/javascript">
-
-    var ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#method__autoRenderUI", "access": "private", "host": "MakeNode", "type": "method", "name": "_autoRenderUI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__forAllXinClasses", "access": "private", "host": "MakeNode", "type": "method", "name": "_forAllXinClasses"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
+    ALL_YUI_PROPS = [{"url": "MakeNode.html#method__attachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_attachEvents"}, {"url": "MakeNode.html#property__ATTRS_2_UI", "access": "protected", "host": "MakeNode", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "MakeNode.html#method__autoRenderUI", "access": "private", "host": "MakeNode", "type": "method", "name": "_autoRenderUI"}, {"url": "MakeNode.html#property__CLASS_NAMES", "access": "protected", "host": "MakeNode", "type": "property", "name": "_CLASS_NAMES"}, {"url": "MakeNode.html#property__classNames", "access": "protected", "host": "MakeNode", "type": "property", "name": "_classNames"}, {"url": "MakeNode.html#method__concatUIAttrs", "access": "private", "host": "MakeNode", "type": "method", "name": "_concatUIAttrs"}, {"url": "MakeNode.html#method__detachEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_detachEvents"}, {"url": "MakeNode.html#property__eventHandles", "access": "private", "host": "MakeNode", "type": "property", "name": "_eventHandles"}, {"url": "MakeNode.html#property__EVENTS", "access": "protected", "host": "MakeNode", "type": "property", "name": "_EVENTS"}, {"url": "MakeNode.html#method__forAllXinClasses", "access": "private", "host": "MakeNode", "type": "method", "name": "_forAllXinClasses"}, {"url": "MakeNode.html#method__locateNodes", "access": "protected", "host": "MakeNode", "type": "method", "name": "_locateNodes"}, {"url": "MakeNode.html#method__makeClassNames", "access": "private", "host": "MakeNode", "type": "method", "name": "_makeClassNames"}, {"url": "MakeNode.html#method__makeNode", "access": "protected", "host": "MakeNode", "type": "method", "name": "_makeNode"}, {"url": "MakeNode.html#method__parseMakeNodeArgs", "access": "private", "host": "MakeNode", "type": "method", "name": "_parseMakeNodeArgs"}, {"url": "MakeNode.html#property__PUBLISH", "access": "protected", "host": "MakeNode", "type": "property", "name": "_PUBLISH"}, {"url": "MakeNode.html#method__publishEvents", "access": "private", "host": "MakeNode", "type": "method", "name": "_publishEvents"}, {"url": "MakeNode.html#method__substitute", "access": "protected", "host": "MakeNode", "type": "method", "name": "_substitute"}, {"url": "MakeNode.html#property__TEMPLATE", "access": "protected", "host": "MakeNode", "type": "property", "name": "_TEMPLATE"}, {"url": "MakeNode.html#property__templateHandlers", "access": "private", "host": "MakeNode", "type": "property", "name": "_templateHandlers"}];
 </script>
 </body>
 </html>

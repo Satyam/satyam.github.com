@@ -4,11 +4,11 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<title>API: gallery-md-ibutton   gallery-md-ibutton.js  (YUI Library)</title>
 
-	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1319130372.35" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1319130372.35" />
 
-    <script type="text/javascript" src="assets/api-js"></script>
-    <script type="text/javascript" src="assets/ac-js"></script>
+    <script type="text/javascript" src="assets/api-js?stamp=1319130372.35"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1319130372.35"></script>
 </head>
 
 <body id="yahoo-com">
@@ -47,7 +47,7 @@
                         <style>
                             #doc3 .classopts { display:none; }
                         </style>
-                        <div class="highlight"><pre><span class="cm">/**</span>
+<div class="highlight"><pre><span class="cm">/**</span>
 <span class="cm"> * Provides an iPhone-style toggle button (checkbox) object</span>
 <span class="cm"> * @module gallery-md-ibutton</span>
 <span class="cm"> */</span>
@@ -86,9 +86,10 @@
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>
 		<span class="nx">renderUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">(</span><span class="s1">&#39;sliding&#39;</span><span class="p">,</span><span class="nx">LABEL_ON</span><span class="p">,</span><span class="s1">&#39;slider&#39;</span><span class="p">,</span><span class="nx">LABEL_OFF</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_slidingNode</span><span class="p">.</span><span class="nx">plug</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">NodeFX</span><span class="p">,</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">cbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">);</span>
+			<span class="nx">cbx</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">(</span><span class="nx">LABEL_ON</span><span class="p">,</span><span class="s1">&#39;slider&#39;</span><span class="p">,</span><span class="nx">LABEL_OFF</span><span class="p">,</span> <span class="s1">&#39;leftEdge&#39;</span><span class="p">);</span>
+			<span class="nx">cbx</span><span class="p">.</span><span class="nx">plug</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">NodeFX</span><span class="p">,</span> <span class="p">{</span>
 				<span class="nx">from</span><span class="o">:</span> <span class="p">{</span>
 					<span class="nx">left</span><span class="o">:</span> <span class="mi">0</span>
 				<span class="p">},</span>
@@ -99,8 +100,8 @@
 				<span class="nx">easing</span><span class="o">:</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Easing</span><span class="p">.</span><span class="nx">easeOut</span><span class="p">,</span>
 				<span class="nx">duration</span><span class="o">:</span> <span class="mf">0.5</span>
 			<span class="p">});</span>
+			<span class="nx">cbx</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_endAnim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_resize</span><span class="p">();</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_slidingNode</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_endAnim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
 		<span class="p">},</span>
 		<span class="cm">/**</span>
 <span class="cm">		 * Calculates the size of the button based on the size of the labels.</span>
@@ -108,23 +109,24 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_resize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">AUTO</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">AUTO</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span><span class="nx">AUTO</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
+				<span class="nx">lOn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">,</span>
+				<span class="nx">lOff</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">,</span>
+				<span class="nx">w</span><span class="p">,</span> <span class="nx">sliderReg</span><span class="p">,</span> <span class="nx">lReg</span><span class="p">;</span>
+				
+			<span class="nx">lOn</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">AUTO</span><span class="p">);</span>
+			<span class="nx">lOff</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">AUTO</span><span class="p">);</span>
+			<span class="nx">bbx</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span><span class="nx">AUTO</span><span class="p">);</span>
 
-			<span class="kd">var</span> <span class="nx">onReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">),</span>
-				<span class="nx">offReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">),</span>
-				<span class="nx">w</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">onReg</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">offReg</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">-</span> <span class="mi">14</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">,</span>
-				<span class="nx">sliderReg</span><span class="p">;</span>
+			<span class="nx">w</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">lOn</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">).</span><span class="nx">width</span><span class="p">,</span> <span class="nx">lOff</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">).</span><span class="nx">width</span><span class="p">)</span> <span class="o">-</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
 
-			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">w</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">w</span><span class="p">);</span>
-			<span class="nx">onReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">);</span>
-			<span class="nx">offReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">);</span>
+			<span class="nx">lOn</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">w</span><span class="p">);</span>
+			<span class="nx">lOff</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">w</span><span class="p">);</span>
+			<span class="nx">lReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_leftEdgeNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">);</span>
 			<span class="nx">sliderReg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_sliderNode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">REGION</span><span class="p">);</span>
 			
-			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span><span class="nx">sliderReg</span><span class="p">.</span><span class="nx">right</span> <span class="o">-</span> <span class="nx">onReg</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">_slidingNode</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;to.left&#39;</span><span class="p">,</span> <span class="o">-</span> <span class="p">(</span><span class="nx">sliderReg</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">onReg</span><span class="p">.</span><span class="nx">left</span><span class="p">));</span>
+			<span class="nx">bbx</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">WIDTH</span><span class="p">,</span> <span class="nx">sliderReg</span><span class="p">.</span><span class="nx">right</span> <span class="o">-</span> <span class="nx">lReg</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">fx</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;to.left&#39;</span><span class="p">,</span> <span class="o">-</span> <span class="p">(</span><span class="nx">sliderReg</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">lReg</span><span class="p">.</span><span class="nx">left</span><span class="p">));</span>
 		<span class="p">},</span>
 		
 		<span class="cm">/**</span>
@@ -193,11 +195,11 @@
 <span class="cm">		 * @private</span>
 <span class="cm">		 */</span>
 		<span class="nx">_uiSetValue</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-			<span class="kd">var</span>  <span class="nx">slidingFx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_slidingNode</span><span class="p">.</span><span class="nx">fx</span><span class="p">;</span>
+			<span class="kd">var</span>  <span class="nx">fx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CBX</span><span class="p">).</span><span class="nx">fx</span><span class="p">;</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOnNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">BG_IMG</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 			<span class="k">this</span><span class="p">.</span><span class="nx">_labelOffNode</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">BG_IMG</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-			<span class="nx">slidingFx</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;reverse&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-			<span class="nx">slidingFx</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+			<span class="nx">fx</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;reverse&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+			<span class="nx">fx</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
 		<span class="p">}</span>
 	<span class="p">},</span> 
 	<span class="p">{</span>
@@ -209,15 +211,15 @@
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>			
 		<span class="nx">_TEMPLATE</span><span class="o">:</span> <span class="p">[</span>
-			<span class="s1">&#39;&lt;div class=&quot;{c sliding}&quot;&gt;&#39;</span><span class="p">,</span>
-				<span class="s1">&#39;&lt;div class=&quot;{c labelOn}&quot;&gt;{@ labelOn}&lt;/div&gt;&#39;</span><span class="p">,</span>
-				<span class="s1">&#39;&lt;div class=&quot;{c slider}&quot;&gt;&#39;</span><span class="p">,</span>
-					<span class="s1">&#39;&lt;div class=&quot;{c sliderLeft}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
-					<span class="s1">&#39;&lt;div class=&quot;{c sliderCenter}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
-					<span class="s1">&#39;&lt;div class=&quot;{c sliderRight}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
-				<span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">,</span>
-				<span class="s1">&#39;&lt;div class=&quot;{c labelOff}&quot;&gt;{@ labelOff}&lt;/div&gt;&#39;</span><span class="p">,</span>
-			<span class="s1">&#39;&lt;/div&gt;&#39;</span>
+			<span class="s1">&#39;&lt;div class=&quot;{c leftEdge}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;div class=&quot;{c labelOn}&quot;&gt;{@ labelOn}&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;div class=&quot;{c slider}&quot;&gt;&#39;</span><span class="p">,</span>
+				<span class="s1">&#39;&lt;div class=&quot;{c sliderLeft}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+				<span class="s1">&#39;&lt;div class=&quot;{c sliderCenter}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+				<span class="s1">&#39;&lt;div class=&quot;{c sliderRight}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;div class=&quot;{c labelOff}&quot;&gt;{@ labelOff}&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;&lt;div class=&quot;{c rightEdge}&quot;&gt;&lt;/div&gt;&#39;</span>
 		<span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
 		
 		<span class="cm">/**</span>
@@ -227,7 +229,7 @@
 <span class="cm">		 * @static</span>
 <span class="cm">		 * @protected</span>
 <span class="cm">		 */</span>
-		<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;sliding&#39;</span><span class="p">,</span><span class="nx">LABEL_ON</span><span class="p">,</span><span class="s1">&#39;slider&#39;</span><span class="p">,</span><span class="s1">&#39;sliderLeft&#39;</span><span class="p">,</span><span class="s1">&#39;sliderCenter&#39;</span><span class="p">,</span><span class="s1">&#39;sliderRight&#39;</span><span class="p">,</span><span class="nx">LABEL_OFF</span><span class="p">],</span>
+		<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="nx">LABEL_ON</span><span class="p">,</span><span class="s1">&#39;slider&#39;</span><span class="p">,</span><span class="s1">&#39;sliderLeft&#39;</span><span class="p">,</span><span class="s1">&#39;sliderCenter&#39;</span><span class="p">,</span><span class="s1">&#39;sliderRight&#39;</span><span class="p">,</span><span class="nx">LABEL_OFF</span><span class="p">,</span> <span class="s1">&#39;leftEdge&#39;</span><span class="p">,</span><span class="s1">&#39;rightEdge&#39;</span><span class="p">],</span>
 		<span class="cm">/**</span>
 <span class="cm">		 * DOM events to be listened to, used by the MakeNode extension</span>
 <span class="cm">		 * @property Y.Button._EVENTS</span>
@@ -302,7 +304,6 @@
 	<span class="p">}</span>
 <span class="p">);</span>
 </pre></div>
-
                     </div>
 			</div>
 		</div>
@@ -350,8 +351,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-
-    var ALL_YUI_PROPS = [{"url": "IButton.html#method__afterBoundingBoxClick", "access": "private", "host": "IButton", "type": "method", "name": "_afterBoundingBoxClick"}, {"url": "IButton.html#method__endAnim", "access": "private", "host": "IButton", "type": "method", "name": "_endAnim"}, {"url": "IButton.html#config_labelOff", "access": "", "host": "IButton", "type": "config", "name": "labelOff"}, {"url": "IButton.html#event_labelOffChange", "access": "", "host": "IButton", "type": "event", "name": "labelOffChange"}, {"url": "IButton.html#config_labelOn", "access": "", "host": "IButton", "type": "config", "name": "labelOn"}, {"url": "IButton.html#event_labelOnChange", "access": "", "host": "IButton", "type": "event", "name": "labelOnChange"}, {"url": "IButton.html#method_renderUI", "access": "protected", "host": "IButton", "type": "method", "name": "renderUI"}, {"url": "IButton.html#method__resize", "access": "private", "host": "IButton", "type": "method", "name": "_resize"}, {"url": "IButton.html#config_strings", "access": "", "host": "IButton", "type": "config", "name": "strings"}, {"url": "IButton.html#event_stringsChange", "access": "", "host": "IButton", "type": "event", "name": "stringsChange"}, {"url": "IButton.html#property__TEMPLATE", "access": "protected", "host": "IButton", "type": "property", "name": "_TEMPLATE"}, {"url": "IButton.html#config_title", "access": "", "host": "IButton", "type": "config", "name": "title"}, {"url": "IButton.html#event_titleChange", "access": "", "host": "IButton", "type": "event", "name": "titleChange"}, {"url": "IButton.html#method_toggle", "access": "", "host": "IButton", "type": "method", "name": "toggle"}, {"url": "IButton.html#method__uiSetLabelOff", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetLabelOff"}, {"url": "IButton.html#method__uiSetLabelOn", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetLabelOn"}, {"url": "IButton.html#method__uiSetTitle", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetTitle"}, {"url": "IButton.html#method__uiSetValue", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetValue"}, {"url": "IButton.html#config_value", "access": "", "host": "IButton", "type": "config", "name": "value"}, {"url": "IButton.html#event_valueChange", "access": "", "host": "IButton", "type": "event", "name": "valueChange"}, {"url": "IButton.html#property_Y.Button._CLASS_NAMES", "access": "protected", "host": "IButton", "type": "property", "name": "Y.Button._CLASS_NAMES"}, {"url": "IButton.html#property_Y.Button._EVENTS", "access": "protected", "host": "IButton", "type": "property", "name": "Y.Button._EVENTS"}];
+    ALL_YUI_PROPS = [{"url": "IButton.html#method__afterBoundingBoxClick", "access": "private", "host": "IButton", "type": "method", "name": "_afterBoundingBoxClick"}, {"url": "IButton.html#method__endAnim", "access": "private", "host": "IButton", "type": "method", "name": "_endAnim"}, {"url": "IButton.html#config_labelOff", "access": "", "host": "IButton", "type": "config", "name": "labelOff"}, {"url": "IButton.html#event_labelOffChange", "access": "", "host": "IButton", "type": "event", "name": "labelOffChange"}, {"url": "IButton.html#config_labelOn", "access": "", "host": "IButton", "type": "config", "name": "labelOn"}, {"url": "IButton.html#event_labelOnChange", "access": "", "host": "IButton", "type": "event", "name": "labelOnChange"}, {"url": "IButton.html#method_renderUI", "access": "protected", "host": "IButton", "type": "method", "name": "renderUI"}, {"url": "IButton.html#method__resize", "access": "private", "host": "IButton", "type": "method", "name": "_resize"}, {"url": "IButton.html#config_strings", "access": "", "host": "IButton", "type": "config", "name": "strings"}, {"url": "IButton.html#event_stringsChange", "access": "", "host": "IButton", "type": "event", "name": "stringsChange"}, {"url": "IButton.html#property__TEMPLATE", "access": "protected", "host": "IButton", "type": "property", "name": "_TEMPLATE"}, {"url": "IButton.html#config_title", "access": "", "host": "IButton", "type": "config", "name": "title"}, {"url": "IButton.html#event_titleChange", "access": "", "host": "IButton", "type": "event", "name": "titleChange"}, {"url": "IButton.html#method_toggle", "access": "", "host": "IButton", "type": "method", "name": "toggle"}, {"url": "IButton.html#method__uiSetLabelOff", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetLabelOff"}, {"url": "IButton.html#method__uiSetLabelOn", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetLabelOn"}, {"url": "IButton.html#method__uiSetTitle", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetTitle"}, {"url": "IButton.html#method__uiSetValue", "access": "private", "host": "IButton", "type": "method", "name": "_uiSetValue"}, {"url": "IButton.html#config_value", "access": "", "host": "IButton", "type": "config", "name": "value"}, {"url": "IButton.html#event_valueChange", "access": "", "host": "IButton", "type": "event", "name": "valueChange"}, {"url": "IButton.html#property_Y.Button._CLASS_NAMES", "access": "protected", "host": "IButton", "type": "property", "name": "Y.Button._CLASS_NAMES"}, {"url": "IButton.html#property_Y.Button._EVENTS", "access": "protected", "host": "IButton", "type": "property", "name": "Y.Button._EVENTS"}];
 </script>
 </body>
 </html>
