@@ -1,0 +1,3365 @@
+{
+    "project": {
+        "name": "Satyam's gallery components",
+        "description": "Gallery components written by Daniel Barreiro aka Satyam."
+    },
+    "files": {
+        "gallery-makenode/js/gallery-makenode.js": {
+            "name": "gallery-makenode/js/gallery-makenode.js",
+            "modules": {
+                "gallery-makenode": 1
+            },
+            "classes": {
+                "MakeNode": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-accordion/js/gallery-md-accordion.js": {
+            "name": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "modules": {
+                "gallery-md-accordion": 1
+            },
+            "classes": {
+                "AccordionPanel": 1,
+                "Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-button/js/gallery-md-button.js": {
+            "name": "gallery-md-button/js/gallery-md-button.js",
+            "modules": {
+                "gallery-md-button": 1
+            },
+            "classes": {
+                "Button": 1,
+                "ButtonToggle": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-button-group/js/gallery-md-button-group.js": {
+            "name": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "modules": {
+                "gallery-md-button-group": 1
+            },
+            "classes": {
+                "ButtonSeparator": 1,
+                "ButtonGroup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-ibutton/js/gallery-md-ibutton.js": {
+            "name": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "modules": {
+                "gallery-md-ibutton": 1
+            },
+            "classes": {
+                "IButton": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-spinner/js/gallery-md-spinner.js": {
+            "name": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "modules": {
+                "gallery-md-spinner": 1
+            },
+            "classes": {
+                "Spinner": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-md-timespinner/js/gallery-md-timespinner.js": {
+            "name": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "modules": {
+                "gallery-md-timespinner": 1
+            },
+            "classes": {
+                "TimeSpinner": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-timeline/js/gallery-timeline.js": {
+            "name": "gallery-timeline/js/gallery-timeline.js",
+            "modules": {
+                "timeline": 1
+            },
+            "classes": {
+                "Y.Timeline": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "gallery-stdmod/js/gallery-stdmod.js": {
+            "name": "gallery-stdmod/js/gallery-stdmod.js",
+            "modules": {
+                "gallery-stdmod": 1
+            },
+            "classes": {
+                "StdMod": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "gallery-makenode": {
+            "name": "gallery-makenode",
+            "submodules": {},
+            "classes": {
+                "MakeNode": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 1,
+            "description": "An extension for Widget to create markup from templates, \ncreate CSS classNames, locating elements,\nassist in attaching events to UI elements and to reflect attribute changes into the UI.\nAll of its members are either protected or private.  \nDevelopers using MakeNode should use only those marked protected.  \n<b>Enable the Show Protected checkbox to see them</b>."
+        },
+        "gallery-md-accordion": {
+            "name": "gallery-md-accordion",
+            "submodules": {},
+            "classes": {
+                "AccordionPanel": 1,
+                "Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 1,
+            "description": "The accordion module creates a control with titles and expandable sections for each"
+        },
+        "gallery-md-button": {
+            "name": "gallery-md-button",
+            "submodules": {},
+            "classes": {
+                "Button": 1,
+                "ButtonToggle": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 1,
+            "description": "Provides a better button object"
+        },
+        "gallery-md-button-group": {
+            "name": "gallery-md-button-group",
+            "submodules": {},
+            "classes": {
+                "ButtonSeparator": 1,
+                "ButtonGroup": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 1,
+            "description": "Provides a container to group buttons.\nIt can hold instances of Y.Button, Y.ButtonToggle or Y.ButtonSeparator."
+        },
+        "gallery-md-ibutton": {
+            "name": "gallery-md-ibutton",
+            "submodules": {},
+            "classes": {
+                "IButton": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 1,
+            "description": "Provides an iPhone-style toggle button (checkbox) object"
+        },
+        "gallery-md-spinner": {
+            "name": "gallery-md-spinner",
+            "submodules": {},
+            "classes": {
+                "Spinner": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 1,
+            "description": "Shows an input box with a set of up/down buttons to change its value.",
+            "is_constructor": 1,
+            "extends": "Widget",
+            "uses": [
+                "MakeNode"
+            ]
+        },
+        "gallery-md-timespinner": {
+            "name": "gallery-md-timespinner",
+            "submodules": {},
+            "classes": {
+                "TimeSpinner": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 3,
+            "description": "Shows and accepts a time via a set of spinners.  \nIt can run showing the current time."
+        },
+        "timeline": {
+            "name": "timeline",
+            "submodules": {},
+            "classes": {
+                "Y.Timeline": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 2,
+            "description": "Shows in the browser timeline files produced by the program from <a href=\"http://thetimelineproj.sourceforge.net/\">The Timeline Project</a>."
+        },
+        "gallery-stdmod": {
+            "name": "gallery-stdmod",
+            "submodules": {},
+            "classes": {
+                "StdMod": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "gallery-stdmod/js/gallery-stdmod.js",
+            "line": 1,
+            "description": "A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds\nthe Header and Footer sections on each side of it instead of having the three of them under the contentBox.\nThis turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox\nand thus conflicts with the StdMod sections. (this can also be solved using the property <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer\">_childrenContainer</a>)<br/><br/>\nFor further documentation see <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html\">WidgetStdMod</a>",
+            "is_constructor": 1,
+            "extends": "WidgetStdMod"
+        }
+    },
+    "classes": {
+        "MakeNode": {
+            "name": "MakeNode",
+            "shortname": "MakeNode",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-makenode",
+            "namespace": "",
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 1,
+            "description": "An extension for Widget to create markup from templates, \ncreate CSS classNames, locating elements,\nassist in attaching events to UI elements and to reflect attribute changes into the UI.\nAll of its members are either protected or private.  \nDevelopers using MakeNode should use only those marked protected.  \n<b>Enable the Show Protected checkbox to see them</b>."
+        },
+        "AccordionPanel": {
+            "name": "AccordionPanel",
+            "shortname": "AccordionPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-accordion",
+            "namespace": "",
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 25,
+            "description": "The AccordionPanel class represents one of the panels within an accordion",
+            "extends": "Widget",
+            "uses": [
+                "WidgetChild, WidgetStdMod, MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "(optional) configuration attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Accordion": {
+            "name": "Accordion",
+            "shortname": "Accordion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-accordion",
+            "namespace": "",
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 301,
+            "description": "A collection of vertically aligned collapsible panels",
+            "extends": "Widget",
+            "uses": [
+                "WidgetParent, MakeNode"
+            ]
+        },
+        "Button": {
+            "name": "Button",
+            "shortname": "Button",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-button",
+            "namespace": "",
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 29,
+            "description": "The Button class provides a fancier type of button.",
+            "extends": "Y.Widget",
+            "uses": [
+                "Y.MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Configuration Attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ButtonToggle": {
+            "name": "ButtonToggle",
+            "shortname": "ButtonToggle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-button",
+            "namespace": "",
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 475,
+            "description": "The ButtonToggle class provides a two-state button",
+            "extends": "Y.Button",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Configuration attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ButtonSeparator": {
+            "name": "ButtonSeparator",
+            "shortname": "ButtonSeparator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-button-group",
+            "namespace": "",
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 14,
+            "description": "The ButtonSeparator class provides a passive divider to use in between groups of buttons",
+            "extends": "Y.Widget",
+            "is_constructor": 1
+        },
+        "ButtonGroup": {
+            "name": "ButtonGroup",
+            "shortname": "ButtonGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-button-group",
+            "namespace": "",
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 36,
+            "description": "The ButtonGroup class provides a container for sets of Buttons.\nAll buttons added will be extended with Y.WidgetChild.",
+            "extends": "Y.Widget",
+            "uses": [
+                "Y.WidgetParent, Y.Makenode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Configuration attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "IButton": {
+            "name": "IButton",
+            "shortname": "IButton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-ibutton",
+            "namespace": "",
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 20,
+            "description": "The IButton class provides an IPhone style of sliding on/off button",
+            "extends": "Y.Widget",
+            "uses": [
+                "Y.MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Configuration Attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Spinner": {
+            "name": "Spinner",
+            "shortname": "Spinner",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-spinner",
+            "namespace": "",
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 1,
+            "description": "Shows an input box with a set of up/down buttons to change its value."
+        },
+        "TimeSpinner": {
+            "name": "TimeSpinner",
+            "shortname": "TimeSpinner",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-timespinner",
+            "namespace": "",
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 29,
+            "description": "The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.",
+            "extends": "Widget",
+            "uses": [
+                "Y.Spinner, Y.MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "(optional) configuration attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Y.Timeline": {
+            "name": "Y.Timeline",
+            "shortname": "Y.Timeline",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "timeline",
+            "namespace": "",
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 6,
+            "description": "Displays within a given container a timeline file from the given URL",
+            "extends": "Y.Base",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "configuration options",
+                    "type": "Object"
+                }
+            ]
+        },
+        "StdMod": {
+            "name": "StdMod",
+            "shortname": "StdMod",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-stdmod",
+            "namespace": "",
+            "file": "gallery-stdmod/js/gallery-stdmod.js",
+            "line": 1,
+            "description": "A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds\nthe Header and Footer sections on each side of it instead of having the three of them under the contentBox.\nThis turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox\nand thus conflicts with the StdMod sections. (this can also be solved using the property <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer\">_childrenContainer</a>)<br/><br/>\nFor further documentation see <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html\">WidgetStdMod</a>"
+        }
+    },
+    "classitems": [
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 110,
+            "description": "Creates CSS classNames from suffixes listed in <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>, \nstores them in <a href=\"#property__classNames\"><code>this._classNames</code></a>.\nConcatenates <a href=\"#property__ATTRS_2_UI\"><code>_ATTRS_2_UI</code></a> into <code>_UI_ATTRS</code>.\nSets listeners to render and destroy events to attach/detach UI events.\nIf there is no renderUI defined in this class or any of its ancestors (not counting Widget which has a dummy one)\nit will add a default one appending the result of processing _TEMPLATE and then call _locateNodes.",
+            "is_constructor": 1,
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 132,
+            "description": "Method to be used if no explicit renderUI method is defined.",
+            "itemtype": "method",
+            "name": "_autoRenderUI",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 141,
+            "description": "An array of event handles returned when attaching listeners to events,\nmeant to detach them all when destroying the instance.",
+            "itemtype": "property",
+            "name": "_eventHandles",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 149,
+            "description": "Contains a hash of CSS classNames generated from the entries in <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>\nindexed by those same values.\nIt will also have the following entries added automatically: <ul>\n<li><code>boundingBox</code> The className for the boundingBox</li>\n<li><code>content</code> The className for the contentBox</li>\n<li><code>HEADER</code> The className for the header section of a StdMod if Y.WidgetStdMod has been loaded</li>\n<li><code>BODY</code> The className for the body section of a StdMod if Y.WidgetStdMod has been loaded</li>\n<li><code>FOOTER</code> The className for the footer section of a StdMod if Y.WidgetStdMod has been loaded</li>\n</ul>",
+            "itemtype": "property",
+            "name": "_classNames",
+            "type": "Object",
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 164,
+            "description": "Hash listing the template processing codes and the functions to handle each.\nThe processing functions will receive a string with the arguments that follow the processing code,\nand the extra, second argument passed on to _makeNode (or _substitute)\nand should return the replacement value for the placeholder.",
+            "itemtype": "property",
+            "name": "_templateHandlers",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 216,
+            "description": "Parses the arguments received by the processor of the <code>{m}</code> placeholder.  \nIt recognizes numbers, <code>true</code>, <code>false</code>, <code>null</code> and double quoted strings, each separated by whitespace.\nIt skips over anything else.",
+            "itemtype": "method",
+            "name": "_parseMakeNodeArgs",
+            "params": [
+                {
+                    "name": "arg",
+                    "description": "String to be parsed for arguments",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Array of arguments found, each converted to its proper data type",
+                "type": "Array"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 266,
+            "description": "Enumerates all the values and keys of a given static properties for all classes in the hierarchy, \nstarting with the oldest ancestor (Base).",
+            "itemtype": "method",
+            "name": "_forAllXinClasses",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "name of the static property to be enumerated",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "function to be called for each value.  \nThe function will receive a reference to the class where it occurs, the value of the property \nand the key or index.",
+                    "type": "Function"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 292,
+            "description": "Processes the template given and returns a <code>Y.Node</code> instance.",
+            "itemtype": "method",
+            "name": "_makeNode",
+            "params": [
+                {
+                    "name": "template",
+                    "description": "(optional) Template to process.  \n       If missing, it will use the first static <a href=\"#property__TEMPLATE\"><code>_TEMPLATE</code></a> property found in the inheritance chain.",
+                    "type": "String"
+                },
+                {
+                    "name": "extras",
+                    "description": "(optional) Hash of extra values to replace into the template, beyond MakeNode's processing codes.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Instance of <code>Y.Node</code> produced from the template",
+                "type": "Y.Node"
+            },
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 310,
+            "description": "Processes the given template and returns a string",
+            "itemtype": "method",
+            "name": "_substitute",
+            "params": [
+                {
+                    "name": "template",
+                    "description": "Template to process.",
+                    "type": "String"
+                },
+                {
+                    "name": "extras",
+                    "description": "(optional) Hash of extra values to replace into the template, beyond MakeNode's processing codes.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Template with the placeholders replaced.",
+                "type": "String"
+            },
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 330,
+            "description": "Locates the nodes with the CSS classNames listed in the <a href=\"#property__classNames\"><code>this._classNames</code></a> property, \nor those specifically requested in its arguments and stores references to them\nin properties named after each className key, prefixed with an underscore\nand followed by <code>\"Node\"</code>.\nIf the className key contains a hyphen followed by a lowercase letter, the hyphen will be dropped and the letter capitalized.\nAny other characters invalid for identifiers will be turned into underscores, \nthus for the <code>no-label-1</code> className key a <code>_noLabel_1Node</code> property will be created.",
+            "itemtype": "method",
+            "name": "_locateNodes",
+            "params": [
+                {
+                    "name": "arg1,....",
+                    "description": "(optional) If given, list of className keys of the nodes to be located.\n       If missing, all the classNames stored in <a href=\"#property__classNames\"><code>this._classNames</code></a> will be located.",
+                    "type": "String"
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 363,
+            "description": "Looks for static properties called <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a> in each of the classes of the inheritance chain\nand generates CSS classNames based on the <code>_cssPrefix</code> of each class and each of the suffixes listed in each them.\nThe classNames generated will be stored in <a href=\"#property__classNames\"><code>this._classNames</code></a> indexed by the suffix.\nIt will also store the classNames of the boundingBox ( boundingBox )and the contentBox ( content ).  \nIf the WidgetStdMod is used, it will also add the classNames for the three sections ( HEADER, BODY, FOOTER )",
+            "itemtype": "method",
+            "name": "_makeClassNames",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 393,
+            "description": "Concatenates the entries of the <a href=\"#property__ATTRS_2_UI\"><code>_ATTRS_2_UI</code></a> static property of each class in the inheritance chain\ninto this instance _UI_ATTRS property for the benefit or Widget.  See Widget._UI_ATTRS",
+            "itemtype": "method",
+            "name": "_concatUIAttrs",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 422,
+            "description": "Attaches the events listed in the <a href=\"#property__EVENTS\"><code>_EVENTS</code></a> static property of each class in the inheritance chain.",
+            "itemtype": "method",
+            "name": "_attachEvents",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 490,
+            "description": "Publishes the events listed in the _PUBLISH static property of each of the classes in the inheritance chain.\nIf an event has been publishes, the properties set in the descendants will override those in the original publisher.",
+            "itemtype": "method",
+            "name": "_publishEvents",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 505,
+            "description": "Detaches all the events created by <a href=\"method__attachEvents\"><code>_attachEvents</code></a>",
+            "itemtype": "method",
+            "name": "_detachEvents",
+            "access": "private",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 518,
+            "description": "<b>**</b> This is a documentation entry only. \nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nHolds the default template to be used by <a href=\"#method__makeNode\"><code>_makeNode</code></a> when none is explicitly provided.<br/>\nThe string should contain HTML code with placeholders made of a set of curly braces\nenclosing an initial processing code and arguments.  \nPlaceholders can be nested, any of the arguments in a placeholder can be another placeholder.<br/>\nThe template may also contain regular placeholders as used by <code>Y.substitute</code>, \nwhose values will be extracted from the second argument to <a href=\"#method__makeNode\"><code>_makeNode</code></a>.\nThe processing codes are:\n\t\t\t \n\t\t<ul>\n\t\t\t<li><code>{@ attributeName}</code> configuration attribute values</li>\n\t\t\t<li><code>{p propertyName}</code> instance property values</li>\n\t\t\t<li><code>{m methodName arg1 arg2 ....}</code> return value from instance method. \n\t\t\tThe <code>m</code> code should be followed by the\n\t\t\tmethod name and any number of arguments. The\n\t\t\tplaceholder is replaced by the return value or the named method.</li>\n\t\t\t<li><code>{c classNameKey}</code> CSS className generated from the <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>\n\t\t\tstatic property </li>\n\t\t\t<li><code>{s key}</code> string from the <code>strings</code> attribute, using <code>key</code>\tas the sub-attribute.</li>\n\t\t\t<li><code>{? arg1 arg2 arg3}</code> If arg1 evaluates to true it returns arg2 otherwise arg3. \n\t\t\tArgument arg1 is usually a nested placeholder.</li>\n\t\t\t<li><code>{1 arg1 arg2 arg3}</code> If arg1 is 1 it returns arg2 otherwise arg3. Used to produce singular/plural text.\n\t\t\tArgument arg1 is usually a nested placeholder.</li>\n\t\t\t<li><code>{n p1 arg1 .... pn argn}</code> It will read the value resulting from the processing code <code>p1</code> with argument <code>arg1</code>\n\t\t\tand use that as the object to process the following processing code.  \n\t\t\tIt takes any number of processing codes and arguments.  \n\t\t\tIt only works with processing codes that take simple identifiers as arguments, ie.: not {m}.\n\t\t\t<li><code>{}</code> any other value will be\thandled just like <code>Y.substitute</code> does. </li>\n\t\t</ul>\nFor placeholders containing several arguments they must be separated by white spaces.  \nStrings must be enclosed in double quotes, no single quotes allowed.  \nThe backslash is the escape character within strings.\nNumbers, null, true and false will be recognized and converted to their native values.\nAny argument can be a further placeholder, enclosed in its own set of curly braces.",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 559,
+            "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nHolds an array of strings, each the suffix used to define a CSS className using the \n_cssPrefix of each class.  The names listed here are used as the keys into\n<a href=\"#property__classNames\"><code>this._classNames</code></a>, \nas the argument to the <code>{c}</code> template placeholder \nand as keys for the entries in the <a href=\"#property__EVENTS\"><code>_EVENTS</code></a> property.  \nThey are also used by <a href=\"#method__locateNodes\"><code>_locateNodes</code></a> to create the private properties that hold\nreferences to the nodes created.",
+            "itemtype": "property",
+            "name": "_CLASS_NAMES",
+            "type": "[String]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 575,
+            "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nLists the attributes whose value should be reflected in the UI.  \nIt contains an object with two properties, <code>BIND</code> and <code>SYNC</code>, each \ncontaining the name of an attribute or an array of names of attributes.\nThose listed in <code>BIND</code> will have listeners attached to their change event\nso every such change is refreshed in the UI. \nThose listed in <code>SYNC</code> will be refreshed when the UI is rendered.\nFor each entry in either list there should be a method named using the <code>_uiSet</code> prefix, followed by\nthe name of the attribute, with its first character in uppercase.\nThis function will receive the value to be set and the source of the change.",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 594,
+            "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nContains a hash of elements to attach event listeners to.  \nEach element is identified by the suffix of its generated className,\nas declared in the <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a> property.  <br/>\nThere are seveal virtual element identifiers,<ul>\n<li><code>\"boundingBox\"</code> identifies the boundingBox of the Widget</li>\n<li><code>\"content\"</code> its contextBox</li>\n<li><code>\"document\"</code> identifies the document where the component is in</li>\n<li><code>\"THIS\"</code> identifies this instance</li>\n<li><code>\"Y\"</code> identifies the YUI instance of the sandbox</li>\n</ul>\nIf the Y.WidgetStdMod extension is used the <code>\"HEADER\"</code>, <code>\"BODY\"</code> \nand <code>\"FOOTER\"</code> identifiers will also be available.<br/>\nEach entry contains a type of event to be listened to or an array of events.\nEach event can be described by its type (i.e.: <code>\"key\"</code>, <code>\"mousedown\"</code>, etc).\nMakeNode will set 'after' event listeners by default, but can be instructed to listen to 'before' ('on') events\nor do it by delegation on the boundingBox.\nMakeNode will associate this event with a method named <code>\"_after\"</code>,<code>\"_before\"</code> or <code>\"_delegate\"</code> followed by the element identifier with the first character capitalized \nand the type of event with the first character capitalized (i.e.: <code>_afterBoundingBoxClick</code>, <code>_afterInputBlur</code>, <code>_afterThisValueChange</code>, <code>_beforeFormSubmit</code>, <code>_delegateListItemClick</code>, etc.).<br/>\nAlternatively, the event listener can be described by an object literal containing properties: <ul>\n<li><code>type</code> (mandatory) the type of event being listened to</li>\n<li><code>fn</code> the name of the method to handle the event.  \nSince _EVENTS is static, it has no access to <code>this</code> so the name of the method must be specified</li>\n<li><code>args</code> extra arguments to be passed to the listener, useful, \nfor example as a key descriptor for <code>key</code> events.</li>\n<li><code>when</code> either 'before', 'after' or 'delegate'.  \nMakeNode defaults to set 'after' event listeners but can be told to set 'before' ('on') listeners \nor to delegate on the BoundingBox the capture of events on inner elements.  Only className keys can be used with 'delegate'.</li></ul>\n<pre>_EVENTS: {\n&nbsp; &nbsp; boundingBox: [\n&nbsp; &nbsp;  &nbsp; &nbsp; {\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; type: 'key',\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; fn:'_onDirectionKey',   // calls this._onDirectionKey\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; args:((!Y.UA.opera) ? \"down:\" : \"press:\") + \"38, 40, 33, 34\"\n&nbsp; &nbsp;  &nbsp; &nbsp; },\n&nbsp; &nbsp;  &nbsp; &nbsp; 'mousedown' &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterBoundingBoxMousedown\n&nbsp; &nbsp; ],\n&nbsp; &nbsp; document: 'mouseup', &nbsp; &nbsp; // calls this._afterDocumentMouseup\n&nbsp; &nbsp; input: 'change', &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterInputChange\n&nbsp; &nbsp; form: {type: 'submit', when:'before'}  &nbsp; &nbsp; // calls this._beforeFormSubmit\n},</pre>",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-makenode/js/gallery-makenode.js",
+            "line": 643,
+            "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nContains a hash of events to be published.  \nEach element has the name of the event as its key\nand the configuration object as its value.  \nIf the event has already been published, the configuration of the event will be modified by the\nconfiguration set in the new definition.\nWhen setting functions use the name of the function, not a function reference.",
+            "itemtype": "property",
+            "name": "_PUBLISH",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "MakeNode",
+            "module": "gallery-makenode"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 39,
+            "description": "With the accordion panel container filled with with WidgetStdMod divs\nit seems like too much to have a separate contentBox",
+            "itemtype": "property",
+            "name": "CONTENT_TEMPLATE",
+            "value": "null",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 47,
+            "description": "This is an override of WidgetStdMod method to prevent it from re-rendering the \nthree sections again and again and wiping out the resize handles",
+            "itemtype": "method",
+            "name": "_syncUIStdMod",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 56,
+            "description": "Adds the resizer to the body of the three section StdMod\nand creates a container for the actual content within",
+            "itemtype": "method",
+            "name": "renderUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 69,
+            "description": "Listener for the after Expanded change event, toggles the panel",
+            "itemtype": "method",
+            "name": "_afterExpanded",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 85,
+            "description": "Sets the label on the header of this panel",
+            "itemtype": "method",
+            "name": "_uiSetLabel",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text to be shown",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 94,
+            "description": "Sets the content on this panel",
+            "itemtype": "method",
+            "name": "_uiSetContent",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "content to be shown",
+                    "type": "String | Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 103,
+            "description": "Plugs/unplugs the resize-plugin (if available) in response to the resizeable attribute",
+            "itemtype": "method",
+            "name": "_uiSetResizeable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value for the resizeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 121,
+            "description": "Sets the close icon visible or not depending on the attribute <code>closeable</code>",
+            "itemtype": "method",
+            "name": "_uiSetCloseable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value for the closeeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 134,
+            "description": "Expands this panel",
+            "itemtype": "method",
+            "name": "expand",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 147,
+            "description": "Collapses this panel",
+            "itemtype": "method",
+            "name": "collapse",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 160,
+            "description": "Toggles this panel from expanded to collapsed",
+            "itemtype": "method",
+            "name": "toggle",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 168,
+            "description": "Responds to clicks in the header of this panel to toggle it",
+            "itemtype": "method",
+            "name": "_afterHEADERClick",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "uses target to make sure it is the \nheader of this accordion and not that of a nested one",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 181,
+            "description": "Convenience method to close this panel.\nCalled when the close icon, if present, is clicked.\nIt fires the <code>panelClose</code> event to signal \nthe container for it to remove the panel\nfrom the accordion.",
+            "itemtype": "method",
+            "name": "close",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 189,
+            "description": "Fired by the panel to signal the accordion to remove this panel.\nClosure of the panel can be prevented by listening and halting this event.",
+            "itemtype": "event",
+            "name": "panelClose",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 199,
+            "description": "Defines the class names used by MakeNode, later stored in this._classNames.",
+            "itemtype": "property",
+            "name": "_CLASS_NAMES",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 206,
+            "description": "Defines the template used by MakeNode to build the container for the body",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 213,
+            "description": "Defines the template used by MakeNode to build the container for the header",
+            "itemtype": "property",
+            "name": "_HEADER_TEMPLATE",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 220,
+            "description": "Defines the UI events to be attached through MakeNode,\nspecifically, click on the headers",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 235,
+            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 246,
+            "description": "State of this panel",
+            "itemtype": "attribute",
+            "name": "expanded",
+            "type": "Boolean",
+            "default": "false (collapsed)",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 256,
+            "description": "Text to be shown in the header of this accordion panel",
+            "itemtype": "attribute",
+            "name": "label",
+            "type": "String",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 265,
+            "description": "Content to be shown in the body of this accordion panel",
+            "itemtype": "attribute",
+            "name": "content",
+            "type": "String or Node instance",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 273,
+            "description": "Allows panels to be resized.\nRequires the optional resize-plugin module to be loaded.",
+            "itemtype": "attribute",
+            "name": "resizeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 284,
+            "description": "Allows panels to be closed via an icon in the header.\nIt shows or hides the close icon.  \nPanels can be closedvia programming at any time, regardless of this attribute.",
+            "itemtype": "attribute",
+            "name": "closeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 312,
+            "description": "Event listener for child expansion/collapse, ensures that only one is expanded\nat a time if multiExpand is not set.",
+            "itemtype": "method",
+            "name": "_afterThisAccordionPanel:expandedChange",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 329,
+            "description": "Listens to the <code>panelClose</code> and destroys the panel\nand removes it from the collection of panels.",
+            "itemtype": "method",
+            "name": "_afterThisAccordionPanel:panelClose",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "uses ev.target to locate the panel requesting the close",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 344,
+            "description": "Sets the resizeable attribute of all panels to the value set for the whole accordion",
+            "itemtype": "method",
+            "name": "_uiSetResizeable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the resizeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 355,
+            "description": "Sets the closeable attribute of all panels to the value set for the whole accordion",
+            "itemtype": "method",
+            "name": "_uiSetCloseable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the closeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 368,
+            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 378,
+            "description": "Defines events that are to be associated to listeners by MakeNode.\nHere it links a couple of events from the items,\nexpandedChange to ensure only one panel is open at a time and\npanelClose to destroy and remove a panel",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 396,
+            "description": "Default type of children to create.  Used by WidgetParent.",
+            "itemtype": "attribute",
+            "name": "defaultChildType",
+            "type": "WidgetChild",
+            "default": "AccordionPanel",
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 406,
+            "description": "Whether several panels may be expanded at once.",
+            "itemtype": "attribute",
+            "name": "multiExpand",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 416,
+            "description": "Helper attribute to set all panels resizeable attribute at once.\nMay be overriden in each panel separately.\nRequires the optional resize-plugin module to be loaded.",
+            "itemtype": "attribute",
+            "name": "resizeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 428,
+            "description": "Helper attribute to set all panels closeable attribute at once.\nMay be overriden in each panel separately.",
+            "itemtype": "attribute",
+            "name": "closeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 44,
+            "description": "Overrides the boundingBox template to make it an anchor",
+            "itemtype": "property",
+            "name": "BOUNDING_TEMPLATE",
+            "type": "string",
+            "default": "'&lt;a /&gt;'",
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 53,
+            "description": "Overrides the contentBox template to prevent a content box from being drawn",
+            "itemtype": "property",
+            "name": "CONTENT_TEMPLATE",
+            "type": "null",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 62,
+            "description": "Holds the previous value of the className assigned through the <a href=\"#config_icon\"><code>icon</code></a> \nattribute for easy removal\n(Eventually it will be dropped, see: http://yuilibrary.com/projects/yui3/ticket/2530486)",
+            "itemtype": "property",
+            "name": "_prevIconClassName",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 79,
+            "description": "Removes the pressed class.  \nMouseUp is listened to at the document body level since the cursor might have moved\naway from the pressed button when released.",
+            "itemtype": "method",
+            "name": "_afterDocumentMouseup",
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 90,
+            "description": "Adds the pressed class to bounding box",
+            "itemtype": "method",
+            "name": "_afterBoundingBoxMousedown",
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 100,
+            "description": "Sets the title attribute to the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 109,
+            "description": "Updates the default class on the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetDefault",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 125,
+            "description": "Sets the icon class for the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetIcon",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "class suffix (always prefixed with <code>yui3-button-icon-</code>)",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 141,
+            "description": "Sets the position of the icon relative to the label.\nSpans for icons are always set at either side, \nthis method changes a classname in the bounding box\nso that one of them is hidden",
+            "itemtype": "method",
+            "name": "_uiSetIconPosition",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "'left' or 'right'",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 156,
+            "description": "Sets the icon class for the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetLabel",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "label to be set or null for none",
+                    "type": "String or null"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 171,
+            "description": "Sets the href attribute on the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetHref",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "url of link to be set.",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 181,
+            "description": "Default click event handler",
+            "itemtype": "method",
+            "name": "_afterBoundingBoxClick",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "Event Facade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 203,
+            "description": "Default press callback function",
+            "itemtype": "method",
+            "name": "_defPressFn",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 218,
+            "description": "Returns a function based on the type of button. Form buttons such \n  as Submit and Reset are attached to their parent form if one is\n  found.  Otherwise null is returned.",
+            "itemtype": "method",
+            "name": "_callbackFromType",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Function or null"
+            },
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 245,
+            "description": "Constant for 'push' <a href=\"#config_type\">type</a> button (the default)",
+            "itemtype": "property",
+            "name": "Y.Button.PUSH",
+            "type": "String",
+            "default": "'push'",
+            "static": 1,
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 253,
+            "description": "Constant for 'submit' <a href=\"#config_type\">type</a> button",
+            "itemtype": "property",
+            "name": "Y.Button.SUBMIT",
+            "type": "String",
+            "default": "'submit'",
+            "static": 1,
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 261,
+            "description": "Constant for 'reset' <a href=\"#config_type\">type</a> button (the default)",
+            "itemtype": "property",
+            "name": "Y.Button.RESET",
+            "type": "String",
+            "default": "'reset'",
+            "static": 1,
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 269,
+            "description": "Constant to set the <a href=\"#config_iconPosition\">iconPosition</a> to be to the left of the label",
+            "itemtype": "property",
+            "name": "Y.Button.LEFT",
+            "type": "String",
+            "default": "'left'",
+            "static": 1,
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 277,
+            "description": "Constant to set the <a href=\"#config_iconPosition\">iconPosition</a> to be to the right of the label",
+            "itemtype": "property",
+            "name": "Y.Button.RIGHT",
+            "type": "String",
+            "default": "'right'",
+            "static": 1,
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 285,
+            "description": "Template to use by the MakeNode extension",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 297,
+            "description": "Class name suffixes for CSS classNames used in the widget",
+            "itemtype": "property",
+            "name": "Y.Button._CLASS_NAMES",
+            "type": "[Strings]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 305,
+            "description": "DOM events to be listened to, used by the MakeNode extension",
+            "itemtype": "property",
+            "name": "Y.Button._EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 322,
+            "description": "Label to be shown on the button",
+            "itemtype": "attribute",
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 332,
+            "description": "Function to be called on button click",
+            "itemtype": "attribute",
+            "name": "callback",
+            "type": "Function",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 340,
+            "description": "Button is to be the default button",
+            "itemtype": "attribute",
+            "name": "default",
+            "type": "Boolean",
+            "default": "false",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 350,
+            "description": "Suffix to be added to the <code>yui3-button-icon-</code> class to \nset on the button",
+            "itemtype": "attribute",
+            "name": "icon",
+            "type": "string or null for none",
+            "default": "null",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 363,
+            "description": "Whether the icon should go to the left or to the right of the label",
+            "itemtype": "attribute",
+            "name": "iconPosition",
+            "type": "String ('left' or 'right')",
+            "default": "'left'",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 375,
+            "description": "href property to set on the button A element",
+            "itemtype": "attribute",
+            "name": "href",
+            "default": "null",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 383,
+            "description": "Title (tooltip) to set on the button element",
+            "itemtype": "attribute",
+            "name": "title",
+            "type": "string",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 392,
+            "description": "Defines the button type. One of push, submit or reset.  Any value but submit or reset will assume push.",
+            "itemtype": "attribute",
+            "name": "type",
+            "type": "string",
+            "default": "push",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 408,
+            "description": "HTML Parser assumes srcNode is either a &lt;button&gt; or \n  &lt;input type=\"submit|reset\"&gt;",
+            "class": "Button",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 488,
+            "description": "Overrides Button's <a href=\"Button.html#method__defPressFn\">_defPressFn</a> \nto produce the two-state effect",
+            "itemtype": "method",
+            "name": "_defPressFn",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "ButtonToggle",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 514,
+            "description": "Class name suffixes for CSS classNames used in the widget.\nProduces the yui3-button-toggle-selected className to be added\nto the button if not within a ButtonGroup",
+            "itemtype": "property",
+            "name": "Y.ButtonToggle._CLASS_NAMES",
+            "type": "[Strings]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonToggle",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button/js/gallery-md-button.js",
+            "line": 525,
+            "description": "Function to be called when the toggle is deselected",
+            "itemtype": "attribute",
+            "name": "deselectedCallback",
+            "type": "function or null",
+            "default": "null",
+            "class": "ButtonToggle",
+            "module": "gallery-md-button"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 25,
+            "description": "Overrides the standard bounding box template to produce a &lt;span&gt;",
+            "itemtype": "property",
+            "name": "BOUNDING_TEMPLATE",
+            "type": "String",
+            "class": "ButtonSeparator",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 52,
+            "description": "Overrides the standard bounding box template to produce a &lt;fieldset&gt;",
+            "itemtype": "property",
+            "name": "BOUNDING_TEMPLATE",
+            "type": "String",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 58,
+            "description": "Sets the listener for the addChild event to extend children with Y.WidgetChild.\nPublishes the <code>press</code> event",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 84,
+            "description": "Sets listeners for the press event of child buttons, see <a href=\"#method__onButtonPress\">_onButtonPress</a>.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 92,
+            "description": "Processes the press event of child Buttons to enforce the <a href=\"#config__alwaysSelected\">_alwaysSelected</a> attribute,\nand to propagate the press event",
+            "itemtype": "method",
+            "name": "_onButtonPress",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 117,
+            "description": "Sets the label of the container from the value of the <a href=\"#config_label\">label</a> configuration attribute.\nCreates the &lt;legend&gt; element to hold it if it does not exists.",
+            "itemtype": "method",
+            "name": "_uiSetLabel",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text to be shown",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 133,
+            "description": "Template for the &lt;legend&gt; element to hold the label.  Used by MakeNode.",
+            "itemtype": "property",
+            "name": "Y.ButtonGroup._TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 141,
+            "description": "Creates the label className key to be used in the template",
+            "itemtype": "property",
+            "name": "Y.ButtonGroup._CLASS_NAMES",
+            "type": "[Strings]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 149,
+            "description": "Hooks up <a href=\"method__uiSetLabel\">_uiSetLabel</a> to respond to changes in the <a href=\"#config_label\">label</a> attribute.",
+            "itemtype": "property",
+            "name": "Y.ButtonGroup._ATTRS_2_UI",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 164,
+            "description": "Holds the label for this group of buttons",
+            "itemtype": "attribute",
+            "name": "label",
+            "type": "String",
+            "default": "\"\"",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 175,
+            "description": "Defines the default type of child to be contained in this group.  \nUsed by WidgetParent to create the default children",
+            "itemtype": "attribute",
+            "name": "defaultChildType",
+            "type": "object",
+            "default": "Y.Button",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "line": 186,
+            "description": "Forces this group to always have at least one toggle button selected",
+            "itemtype": "attribute",
+            "name": "alwaysSelected",
+            "type": "Boolean",
+            "default": "false",
+            "class": "ButtonGroup",
+            "module": "gallery-md-button-group"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 34,
+            "description": "Renders the elements and sets up the animation of the slider",
+            "itemtype": "method",
+            "name": "renderUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 57,
+            "description": "Calculates the size of the button based on the size of the labels.",
+            "itemtype": "method",
+            "name": "_resize",
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 83,
+            "description": "Responds to the end of the animation to completely hide the\nside that went off-screen",
+            "itemtype": "method",
+            "name": "_endAnim",
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 94,
+            "description": "Sets the title attribute to the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 104,
+            "description": "Default click event handler",
+            "itemtype": "method",
+            "name": "_afterBoundingBoxClick",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "Event Facade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 115,
+            "description": "Helper method to toggle the button state",
+            "itemtype": "method",
+            "name": "toggle",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 122,
+            "description": "Sets the label for the ON side of the slider",
+            "itemtype": "method",
+            "name": "_uiSetLabelOn",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text of the label",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 132,
+            "description": "Sets the label for the OFF side of the slider",
+            "itemtype": "method",
+            "name": "_uiSetLabelOff",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text of the label",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 142,
+            "description": "Responds to a change in the value of the slider by moving it",
+            "itemtype": "method",
+            "name": "_uiSetValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the button",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 157,
+            "description": "Template to use by the MakeNode extension",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 176,
+            "description": "Class name suffixes for CSS classNames used in the widget",
+            "itemtype": "property",
+            "name": "Y.Button._CLASS_NAMES",
+            "type": "[Strings]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 184,
+            "description": "DOM events to be listened to, used by the MakeNode extension",
+            "itemtype": "property",
+            "name": "Y.Button._EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 195,
+            "description": "Value of the button",
+            "itemtype": "attribute",
+            "name": "value",
+            "type": "Boolean",
+            "default": "false",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 205,
+            "description": "Title (tooltip) of the button",
+            "itemtype": "attribute",
+            "name": "title",
+            "type": "String",
+            "default": "\"\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 215,
+            "description": "Localizable strings.  Contains the default values for the on and off labels.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "type": "Object",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 226,
+            "description": "Text for the on side of the button",
+            "itemtype": "attribute",
+            "name": "labelOn",
+            "type": "String",
+            "default": "\"on\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 238,
+            "description": "Text for the off side of the button",
+            "itemtype": "attribute",
+            "name": "labelOff",
+            "type": "String",
+            "default": "\"off\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 33,
+            "description": "Renders the HTML elements of this component.  \nUses the TEMPLATE static variable to produce the markup.\nCalls _locateNodes to get the references to the elements created.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 44,
+            "description": "Bounding box mouse down handler. Will determine if the mouse down\nis on one of the spinner buttons, and increment/decrement the value\naccordingly.\n\nThe method also sets up a timer, to support the user holding the mouse\ndown on the spinner buttons. The timer is cleared when a mouse up event\nis detected.",
+            "itemtype": "method",
+            "name": "_afterBoundingBoxMousedown",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "Event facade produced by the event handler",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 78,
+            "description": "Override the default content box value, since we don't want the srcNode\nto be the content box for spinner.",
+            "itemtype": "property",
+            "name": "_defaultCB",
+            "type": "HTMLElement",
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 89,
+            "description": "Document mouse up handler. Clears the timers supporting\nthe \"mouse held down\" behavior.",
+            "itemtype": "method",
+            "name": "_afterDocumentMouseup",
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 99,
+            "description": "Bounding box Arrow up/down, Page up/down key listener.\n\nIncrements/Decrement the spinner value, based on the key pressed.",
+            "itemtype": "method",
+            "name": "_onDirectionKey",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "as provided by the key listener",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 132,
+            "description": "Simple change handler, to make sure user does not input an invalid value.\nIf an error is detected, focus will return to the input box and the input box highlighted briefly.",
+            "itemtype": "method",
+            "name": "_afterInputChange",
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 154,
+            "description": "Default parser for the user input.  It assumes only integers are expected",
+            "itemtype": "method",
+            "name": "parser",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value read from the input box",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "parsed value",
+                "type": "Integer"
+            },
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 163,
+            "description": "Formats the internal value to be shown to the user",
+            "itemtype": "method",
+            "name": "formatter",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value to be shown",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "formatted value actually displayed",
+                "type": "String"
+            },
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 173,
+            "description": "Initiates mouse down timers, to increment slider, while mouse button\nis held down",
+            "itemtype": "method",
+            "name": "_setMouseDownTimers",
+            "params": [
+                {
+                    "name": "dir",
+                    "description": "Direction, up or down, to change at each tick",
+                    "type": "1 | -1"
+                },
+                {
+                    "name": "step",
+                    "description": "Amount to change on each tick",
+                    "type": "Number"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 188,
+            "description": "If attribute <a href=\"#config_wraparound\"><code>wraparound</code></a> is true this method is set as a before listener \nfor the <a href=\"#event_valueChange\"><code>valueChange</code></a> event.\nWhen one end of the range is reached, it will make it jump to the other end. \nChanges the newVal property of the event facade, which will be the new value for the attribute.\nIf stepping by more than one, it will advance the value\nby the remaining amount of the step.\nFires the <a href=\"#event_wrapped\"><code>wrapped</code></a> event when the value is wrapped around.",
+            "itemtype": "method",
+            "name": "_wrap",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 200,
+            "description": "Fires when one end of the range is reached and the value is folded to the other end.",
+            "itemtype": "event",
+            "name": "wrapped",
+            "params": [
+                {
+                    "name": "prevVal",
+                    "description": "value that triggered the wrapping",
+                    "type": "Number"
+                },
+                {
+                    "name": "newVal",
+                    "description": "new value after wrapping",
+                    "type": "Number"
+                }
+            ],
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 219,
+            "description": "Clears timers used to support the \"mouse held down\" behavior",
+            "itemtype": "method",
+            "name": "_clearMouseDownTimers",
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 235,
+            "description": "Updates the value of the input box to reflect \nthe value passed in through the <code>value</code> configuration attribute",
+            "itemtype": "method",
+            "name": "_uiSetValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value to be set",
+                    "type": "Integer"
+                },
+                {
+                    "name": "src",
+                    "description": "source of the new value.  If the source is 'ui' the change will be ignored.",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 249,
+            "description": "Attaches the <a href=\"#method__wrap\"><code>_wrap</code></a> method as a before-event listener \nwhen <a href=\"#config_wraparound\"><code>wraparound</code></a> is set.",
+            "itemtype": "method",
+            "name": "_uiSetWraparound",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value of wraparound attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 266,
+            "description": "value attribute default validator. Verifies that\nthe value being set lies between the min/max value",
+            "itemtype": "method",
+            "name": "_validateValue",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "value to be validated",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "true if within bounds",
+                "type": "Boolean"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 279,
+            "description": "MakeNode template for this component",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 291,
+            "description": "List of CSS class name suffixes to be generated and used in the template",
+            "itemtype": "property",
+            "name": "_CLASS_NAMES",
+            "type": "[String]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 299,
+            "description": "Descriptor of DOM events to be listened to and the methods to handle them",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 319,
+            "description": "The minimum value for the spinner.",
+            "itemtype": "attribute",
+            "name": "min",
+            "type": "number",
+            "default": "0",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 329,
+            "description": "The maximum value for the spinner.",
+            "itemtype": "attribute",
+            "name": "min",
+            "type": "number",
+            "default": "100",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 339,
+            "description": "The current value of the spinner.",
+            "itemtype": "attribute",
+            "name": "value",
+            "type": "number",
+            "default": "0",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 350,
+            "description": "Amount to increment/decrement the spinner when the buttons or arrow up/down keys are pressed.",
+            "itemtype": "attribute",
+            "name": "minorStep",
+            "type": "number",
+            "default": "1",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 360,
+            "description": "Amount to increment/decrement the spinner when the page up/down keys are pressed.",
+            "itemtype": "attribute",
+            "name": "majorStep",
+            "type": "number",
+            "default": "10",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 370,
+            "description": "override default (\"null\"), required for focus()",
+            "itemtype": "attribute",
+            "name": "tabIndex",
+            "type": "integer",
+            "default": "0",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 380,
+            "description": "The strings for the spinner UI (used in the tooltip texts)",
+            "itemtype": "attribute",
+            "name": "strings",
+            "type": "hash",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 392,
+            "description": "Function to format the value to be shown to the user",
+            "itemtype": "attribute",
+            "name": "formatter",
+            "type": "function",
+            "default": "this.formatter",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 404,
+            "description": "Function to format the value entered by the user",
+            "itemtype": "attribute",
+            "name": "parser",
+            "type": "function",
+            "default": "this.parser",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 416,
+            "description": "Whether the values should wrap around to the other end when one end of the range is reached",
+            "itemtype": "attribute",
+            "name": "wraparound",
+            "type": "Boolean",
+            "default": "false",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 427,
+            "description": "Adds the <code>value</code> attribute to the list of attributes whose change needs to be reflected in the UI",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "line": 438,
+            "description": "Tells Widget to read the value from the input box if any existing markup is found",
+            "itemtype": "property",
+            "name": "HTML_PASER",
+            "type": "Object",
+            "static": 1,
+            "class": "Spinner",
+            "module": "gallery-md-spinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 42,
+            "description": "Reference to the Spinner showing the hours.",
+            "itemtype": "property",
+            "name": "_hourSp",
+            "type": "Y.Spinner",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 50,
+            "description": "Reference to the Spinner showing the minutes.",
+            "itemtype": "property",
+            "name": "_minSp",
+            "type": "Y.Spinner",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 58,
+            "description": "Reference to the Spinner showing the seconds.",
+            "itemtype": "property",
+            "name": "_secSp",
+            "type": "Y.Spinner",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 66,
+            "description": "Reference to the Spinner showingam/pm.",
+            "itemtype": "property",
+            "name": "_ampmSp",
+            "type": "Y.Spinner",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 74,
+            "description": "Reference to the timer created by Y.later that updates the time.",
+            "itemtype": "property",
+            "name": "_timer",
+            "type": "timer object",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 82,
+            "description": "Difference in milliseconds in between the current time and that displayed.  \nUsed when the timer is running to display times other than the current time.",
+            "itemtype": "property",
+            "name": "_offset",
+            "type": "Number",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 92,
+            "itemtype": "property",
+            "name": "_frozenTime",
+            "type": "Number (milliseconds)",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 100,
+            "description": "Helper factory to make a single Spinner",
+            "itemtype": "method",
+            "name": "_spFact",
+            "params": [
+                {
+                    "name": "which",
+                    "description": "ClassName key for the spinner and strings subkey for its title",
+                    "type": "String"
+                },
+                {
+                    "name": "cfg",
+                    "description": "(optional) configuration attribute overrides",
+                    "type": "Object"
+                },
+                {
+                    "name": "where",
+                    "description": "(optional) where to render it",
+                    "type": "Node"
+                }
+            ],
+            "return": {
+                "description": "Spinner instance",
+                "type": "Spinner"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 119,
+            "description": "Renders the hours and minutes spinners. \nThe other two, being optional, are rendered when set.",
+            "itemtype": "method",
+            "name": "renderUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 132,
+            "description": "Sets the listeners for events from the hours and minutes spinners.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 159,
+            "description": "Creates or destroys the seconds spinner and attaches/detaches the event listeners.",
+            "itemtype": "method",
+            "name": "_uiSetSeconds",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "whether to show the seconds spinner or not",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 186,
+            "description": "Creates or destroys the am/pm spinner and attaches/detaches the event listeners.",
+            "itemtype": "method",
+            "name": "_uiSetAmpm",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "whether to show the am/pm spinner or not",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 230,
+            "description": "Shows the current value in the set of spinners",
+            "itemtype": "method",
+            "name": "_uiSetValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value to be shown",
+                    "type": "Date"
+                },
+                {
+                    "name": "src",
+                    "description": "source of the change in value.  \n       If src===UI, the value comes from the spinners, it needs not be refreshed",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 258,
+            "description": "Sets the interval for refreshing the display",
+            "itemtype": "method",
+            "name": "_uiSetInterval",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "milliseconds in between refreshes",
+                    "type": "Number"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 273,
+            "description": "Sets the timer running.",
+            "itemtype": "method",
+            "name": "_uiSetRunning",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "run or not",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 285,
+            "description": "Listener for a change in any of the spinners, sets the value.",
+            "itemtype": "method",
+            "name": "_afterValueChange",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 302,
+            "description": "Listener for the wrapped event of the spinners to propagate \nthe changes from seconds to minutes and minutes to hours.",
+            "itemtype": "method",
+            "name": "",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "to find out which one wrapped and which way",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 320,
+            "description": "Callback for the interval timer to update the time shown",
+            "itemtype": "method",
+            "name": "_updateTime",
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 329,
+            "description": "Getter for the time value.  It returns the current time minus the offset \nor the time when it was stopped.",
+            "itemtype": "method",
+            "name": "_getTime",
+            "return": {
+                "description": "Time shown",
+                "type": "Date"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 344,
+            "description": "Setter for the time value.  \nIt calculates and saves the offset in between the current time and that set.",
+            "itemtype": "method",
+            "name": "_setTime",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "time to be shown",
+                    "type": "Date"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 357,
+            "description": "Helper method to set the timer running.\nSame as <code>this.set('running', true);</code>",
+            "itemtype": "method",
+            "name": "start",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 366,
+            "description": "Helper method to stop the timer.\nSame as <code>this.set('running', false);</code>",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 379,
+            "description": "Whether to show the am/pm indicator or show a 24 hours timer.",
+            "itemtype": "attribute",
+            "name": "showAmPm",
+            "type": "Boolean",
+            "default": "false",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 389,
+            "description": "Whether to show the seconds indicator",
+            "itemtype": "attribute",
+            "name": "showSeconds",
+            "type": "Boolean",
+            "default": "true",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 399,
+            "description": "Value of the timer",
+            "itemtype": "attribute",
+            "name": "value",
+            "type": "Date",
+            "default": "time at initialization or current time if running",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 416,
+            "description": "How often to refresh the time displayed",
+            "itemtype": "attribute",
+            "name": "interval",
+            "type": "Number (milliseconds)",
+            "default": "500",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 427,
+            "description": "Whether the timer is running.",
+            "itemtype": "attribute",
+            "name": "running",
+            "type": "Boolean",
+            "default": "true",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "line": 438,
+            "description": "Set of localizable strings to be used as tooltips on the spinners.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "class": "TimeSpinner",
+            "module": "gallery-md-timespinner"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 46,
+            "description": "Sets up listeners to respond to setting the URL,the CONTAINER or to the arrival of the timeline file.",
+            "itemtype": "method",
+            "name": "initializer",
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "configuration attributes",
+                    "type": "Object"
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 64,
+            "description": "Returns the boolean value of a given tag in an XML document",
+            "itemtype": "method",
+            "name": "_readBoolean",
+            "params": [
+                {
+                    "name": "xml",
+                    "description": "The XML document or fragment to parse",
+                    "type": "XMLDocument"
+                },
+                {
+                    "name": "tag",
+                    "description": "The tag for the value sought",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the value read or null if not found",
+                "type": "Boolean"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 76,
+            "description": "Returns and parses a date from a given tag in an XML document",
+            "itemtype": "method",
+            "name": "_readDate",
+            "params": [
+                {
+                    "name": "xml",
+                    "description": "The XML document or fragment to parse",
+                    "type": "XMLDocument"
+                },
+                {
+                    "name": "tag",
+                    "description": "The tag for the value sought",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the value read or null if not found",
+                "type": "Date"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 96,
+            "description": "Returns and parses a color value from a given tag in an XML document",
+            "itemtype": "method",
+            "name": "_readColor",
+            "params": [
+                {
+                    "name": "xml",
+                    "description": "The XML document or fragment to parse",
+                    "type": "XMLDocument"
+                },
+                {
+                    "name": "tag",
+                    "description": "The tag for the value sought",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the RGB value as #rrggbb read or null if not found",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 117,
+            "description": "Returns the textual contents from a given tag in an XML document",
+            "itemtype": "method",
+            "name": "_readValue",
+            "params": [
+                {
+                    "name": "xml",
+                    "description": "The XML document or fragment to parse",
+                    "type": "XMLDocument"
+                },
+                {
+                    "name": "tag",
+                    "description": "The tag for the value sought",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the content read or null if not found",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 129,
+            "description": "Returns the XML element from given tag in an XML document",
+            "itemtype": "method",
+            "name": "_readEl",
+            "params": [
+                {
+                    "name": "xml",
+                    "description": "The XML document or fragment to parse",
+                    "type": "XMLDocument"
+                },
+                {
+                    "name": "tag",
+                    "description": "The tag for the value sought",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the element read or null if not found",
+                "type": "XMLElement"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 141,
+            "description": "Reads the categories information",
+            "itemtype": "method",
+            "name": "_xmlReadCategories",
+            "params": [
+                {
+                    "name": "cats",
+                    "description": "collection of categories",
+                    "type": "XMLFragment"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 158,
+            "description": "Reads the view information",
+            "itemtype": "method",
+            "name": "_xmlReadView",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "view information",
+                    "type": "XMLFragment"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 179,
+            "description": "Reads the events to show",
+            "itemtype": "method",
+            "name": "_xmlReadEvents",
+            "params": [
+                {
+                    "name": "cats",
+                    "description": "collection of events",
+                    "type": "XMLFragment"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 203,
+            "description": "Sugar method to set the URL of the timeline file",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL of the timeline file",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 213,
+            "description": "Requests the timeline information from the configured URL and parses it when it arrives.\nSignals its arrival by setting the 'loaded' configuration attribute",
+            "itemtype": "method",
+            "name": "_load",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 236,
+            "description": "Adjusts the region information for the given node to make it relative to the container position",
+            "itemtype": "method",
+            "name": "_getRegion",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "node to find the region",
+                    "type": "Y.Node"
+                }
+            ],
+            "return": {
+                "description": "region of the node relative to the container",
+                "type": "Y.Region"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 249,
+            "description": "Draws the bars corresponding to the events in the container",
+            "itemtype": "method",
+            "name": "_resize",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "optional, the container for the bars.  It reads the container attribute if none given",
+                    "type": "Y.Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 337,
+            "description": "Locates the bars so that they don't overlap one another.  Range events are drawn above the middle line,\npoint events below.  Range events may be moved below if the start and end dates are indistinguishable",
+            "itemtype": "method",
+            "name": "_locate",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 380,
+            "description": "Draws the grid, adjusting the interval in between lines from an hour to ten thousand years\ndepending on the zoom factor",
+            "itemtype": "method",
+            "name": "_grid",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 458,
+            "description": "Sugar method to set the container attribute.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "CSS selector or reference to the container node.",
+                    "type": "String | Node"
+                }
+            ],
+            "chainable": 1,
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 468,
+            "description": "Renders the timeline in response to the container being set and the timeline file loaded",
+            "itemtype": "method",
+            "name": "_render",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 510,
+            "description": "Hides de extended description",
+            "itemtype": "method",
+            "name": "_hideDescr",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 518,
+            "description": "Shows the extended description above the event bar clicked",
+            "itemtype": "method",
+            "name": "_showDescr",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "to help locate the bar clicked",
+                    "type": "Event Façade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 557,
+            "description": "Saves the initial position of a drag and the initial values of the start and end dates",
+            "itemtype": "method",
+            "name": "_startMove",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "information about the cursor at the start",
+                    "type": "Event Façade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 570,
+            "description": "Respondes to the movement of the cursor at whatever rate the system sends the signal\nby updating the start and end times of the display, either panning or zooming",
+            "itemtype": "method",
+            "name": "_dragMove",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "event information, specially cursor coordinates and state of the control key",
+                    "type": "Event Façade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 596,
+            "description": "Listener for the mouse wheel change.  It will zoom or pan depending on the state of the control key.",
+            "itemtype": "method",
+            "name": "_mouseWheel",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "the state of the control key and the direction of the mouse wheel roll is extracted from it",
+                    "type": "Event Façade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 625,
+            "description": "Stores the categories, indexed by category name.",
+            "itemtype": "attribute",
+            "name": "categories",
+            "type": "{Object}",
+            "default": "{}",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 636,
+            "description": "Array of the names of the categories hidden",
+            "itemtype": "attribute",
+            "name": "hiddenCats",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 646,
+            "description": "Start time (left edge) of the current timeline, in miliseconds",
+            "itemtype": "attribute",
+            "name": "start",
+            "type": "integer",
+            "default": "one month before current time",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 656,
+            "description": "End time (right edge) of the current timeline, in miliseconds",
+            "itemtype": "attribute",
+            "name": "end",
+            "type": "integer",
+            "default": "one month after current time",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 666,
+            "description": "A reference to the HTML for rendering the timeline",
+            "itemtype": "attribute",
+            "name": "container",
+            "type": "{String | Y.Node}  A reference to a node or a CSS selector.  It will always be returned as a Node reference",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 676,
+            "description": "URL of the timeline file to be displayed",
+            "itemtype": "attribute",
+            "name": "url",
+            "type": "{String}",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 684,
+            "description": "Signals whether the timeline file has been loaded or not",
+            "itemtype": "attribute",
+            "name": "loaded",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "gallery-timeline/js/gallery-timeline.js",
+            "line": 694,
+            "description": "Localizable strings meant to be seen by the user",
+            "itemtype": "attribute",
+            "name": "strings",
+            "type": "{Object}",
+            "default": "English strings",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        }
+    ]
+}

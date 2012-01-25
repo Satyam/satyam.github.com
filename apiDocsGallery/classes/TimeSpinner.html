@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TimeSpinner - Satyam's gallery components</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.4.0/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png">Satyam's gallery components: TimeSpinner</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Accordion.html">Accordion</a></li>
+            
+                <li><a href="../classes/AccordionPanel.html">AccordionPanel</a></li>
+            
+                <li><a href="../classes/Button.html">Button</a></li>
+            
+                <li><a href="../classes/ButtonGroup.html">ButtonGroup</a></li>
+            
+                <li><a href="../classes/ButtonSeparator.html">ButtonSeparator</a></li>
+            
+                <li><a href="../classes/ButtonToggle.html">ButtonToggle</a></li>
+            
+                <li><a href="../classes/IButton.html">IButton</a></li>
+            
+                <li><a href="../classes/MakeNode.html">MakeNode</a></li>
+            
+                <li><a href="../classes/Spinner.html">Spinner</a></li>
+            
+                <li><a href="../classes/StdMod.html">StdMod</a></li>
+            
+                <li><a href="../classes/TimeSpinner.html">TimeSpinner</a></li>
+            
+                <li><a href="../classes/Y.Timeline.html">Y.Timeline</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-makenode.html">gallery-makenode</a></li>
+            
+                <li><a href="../modules/gallery-md-accordion.html">gallery-md-accordion</a></li>
+            
+                <li><a href="../modules/gallery-md-button.html">gallery-md-button</a></li>
+            
+                <li><a href="../modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
+            
+                <li><a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="../modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
+            
+                <li><a href="../modules/gallery-md-timespinner.html">gallery-md-timespinner</a></li>
+            
+                <li><a href="../modules/gallery-stdmod.html">gallery-stdmod</a></li>
+            
+                <li><a href="../modules/timeline.html">timeline</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main" class="content">
+                    <h1>TimeSpinner Class</h1>
+<div class="box meta">
+    
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="Y.Spinner, Y.MakeNode.html">Y.Spinner, Y.MakeNode</a></li>
+                
+            </ul>
+        </div>
+    
+    
+        <div class="uses">
+            Extension For
+            <ul class="inline commas">
+                
+            </ul>
+        </div>
+    
+
+    
+        <div class="extends">
+            Extends Widget
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l29"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:29</code></a>
+        </div>
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.</p>
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_TimeSpinner" class="method item">
+    <h3 class="name"><code>TimeSpinner</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cfg</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l29"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:29</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cfg</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        (optional) configuration attributes
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__afterValueChange">_afterValueChange</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__getTime">_getTime</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setTime">_setTime</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__spFact">_spFact</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__uiSetAmpm">_uiSetAmpm</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__uiSetInterval">_uiSetInterval</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__uiSetRunning">_uiSetRunning</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_"></a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__uiSetSeconds">_uiSetSeconds</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__uiSetValue">_uiSetValue</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__updateTime">_updateTime</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_bindUI">bindUI</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_renderUI">renderUI</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_start">start</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_stop">stop</a>
+
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property private">
+                                <a href="#property__ampmSp">_ampmSp</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__frozenTime">_frozenTime</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__hourSp">_hourSp</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__minSp">_minSp</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__offset">_offset</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__secSp">_secSp</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__timer">_timer</a>
+
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_interval">interval</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_running">running</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_showAmPm">showAmPm</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_showSeconds">showSeconds</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_strings">strings</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_value">value</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterValueChange" class="method item private">
+    <h3 class="name"><code>_afterValueChange</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l285"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:285</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Listener for a change in any of the spinners, sets the value.
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getTime" class="method item private">
+    <h3 class="name"><code>_getTime</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l329"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:329</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Getter for the time value.  It returns the current time minus the offset 
+or the time when it was stopped.
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>:
+                    
+                    Time shown
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__setTime" class="method item private">
+    <h3 class="name"><code>_setTime</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l344"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:344</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Setter for the time value. 
+It calculates and saves the offset in between the current time and that set.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        time to be shown
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__spFact" class="method item private">
+    <h3 class="name"><code>_spFact</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>which</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>cfg</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>where</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Spinner.html" class="crosslink">Spinner</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l100"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:100</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Helper factory to make a single Spinner
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">which</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        ClassName key for the spinner and strings subkey for its title
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">cfg</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        (optional) configuration attribute overrides
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">where</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        (optional) where to render it
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Spinner.html" class="crosslink">Spinner</a></span>:
+                    
+                    Spinner instance
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetAmpm" class="method item private">
+    <h3 class="name"><code>_uiSetAmpm</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l186"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:186</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Creates or destroys the am/pm spinner and attaches/detaches the event listeners.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        whether to show the am/pm spinner or not
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetInterval" class="method item private">
+    <h3 class="name"><code>_uiSetInterval</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l258"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:258</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Sets the interval for refreshing the display
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        milliseconds in between refreshes
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetRunning" class="method item private">
+    <h3 class="name"><code>_uiSetRunning</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l273"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:273</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Sets the timer running.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        run or not
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_" class="method item private">
+    <h3 class="name"><code></code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l302"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:302</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Listener for the wrapped event of the spinners to propagate 
+the changes from seconds to minutes and minutes to hours.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        to find out which one wrapped and which way
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetSeconds" class="method item private">
+    <h3 class="name"><code>_uiSetSeconds</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l159"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:159</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Creates or destroys the seconds spinner and attaches/detaches the event listeners.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        whether to show the seconds spinner or not
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetValue" class="method item private">
+    <h3 class="name"><code>_uiSetValue</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>src</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l230"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:230</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Shows the current value in the set of spinners
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        value to be shown
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">src</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        source of the change in value. 
+       If src===UI, the value comes from the spinners, it needs not be refreshed
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__updateTime" class="method item private">
+    <h3 class="name"><code>_updateTime</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l320"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:320</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Callback for the interval timer to update the time shown
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_bindUI" class="method item protected">
+    <h3 class="name"><code>bindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l132"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:132</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Sets the listeners for events from the hours and minutes spinners.
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_renderUI" class="method item protected">
+    <h3 class="name"><code>renderUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l119"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:119</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Renders the hours and minutes spinners. 
+The other two, being optional, are rendered when set.
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_start" class="method item">
+    <h3 class="name"><code>start</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l357"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:357</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Helper method to set the timer running.
+Same as <code>this.set('running', true);</code>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_stop" class="method item">
+    <h3 class="name"><code>stop</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l366"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:366</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Helper method to stop the timer.
+Same as <code>this.set('running', false);</code>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__ampmSp" class="property item private">
+    <h3 class="name"><code>_ampmSp</code></h3>
+    <span class="type">Y.Spinner</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l66"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:66</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the Spinner showingam/pm.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__frozenTime" class="property item private">
+    <h3 class="name"><code>_frozenTime</code></h3>
+    <span class="type">Number (milliseconds)</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l92"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:92</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__hourSp" class="property item private">
+    <h3 class="name"><code>_hourSp</code></h3>
+    <span class="type">Y.Spinner</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l42"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:42</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the Spinner showing the hours.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__minSp" class="property item private">
+    <h3 class="name"><code>_minSp</code></h3>
+    <span class="type">Y.Spinner</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l50"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:50</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the Spinner showing the minutes.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__offset" class="property item private">
+    <h3 class="name"><code>_offset</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l82"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:82</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Difference in milliseconds in between the current time and that displayed. 
+Used when the timer is running to display times other than the current time.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__secSp" class="property item private">
+    <h3 class="name"><code>_secSp</code></h3>
+    <span class="type">Y.Spinner</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l58"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:58</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the Spinner showing the seconds.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+</div>
+
+                
+                    <div id="property__timer" class="property item private">
+    <h3 class="name"><code>_timer</code></h3>
+    <span class="type">timer object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l74"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:74</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the timer created by Y.later that updates the time.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_interval" class="attr item">
+    <a name="config_interval"></a> 
+    <h3 class="name"><code>interval</code></h3>
+    <span class="type">Number (milliseconds)</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l416"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:416</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>How often to refresh the time displayed</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> 500</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>intervalChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>interval</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_running" class="attr item">
+    <a name="config_running"></a> 
+    <h3 class="name"><code>running</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l427"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:427</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether the timer is running.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>runningChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>running</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_showAmPm" class="attr item">
+    <a name="config_showAmPm"></a> 
+    <h3 class="name"><code>showAmPm</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l379"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:379</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether to show the am/pm indicator or show a 24 hours timer.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>showAmPmChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>showAmPm</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_showSeconds" class="attr item">
+    <a name="config_showSeconds"></a> 
+    <h3 class="name"><code>showSeconds</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l389"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:389</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether to show the seconds indicator</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>showSecondsChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>showSeconds</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_strings" class="attr item">
+    <a name="config_strings"></a> 
+    <h3 class="name"><code>strings</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l438"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:438</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set of localizable strings to be used as tooltips on the spinners.</p>
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>stringsChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>strings</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_value" class="attr item">
+    <a name="config_value"></a> 
+    <h3 class="name"><code>value</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/gallery-md-timespinner_js_gallery-md-timespinner.js.html#l399"><code>gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:399</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Value of the timer</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> time at initialization or current time if running</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>valueChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>value</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<!--script src="../assets/js/tabs.js"></script-->
+<script src="../assets/../api.js"></script>
+
+
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

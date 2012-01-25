@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-md-timespinner/js/gallery-md-timespinner.js - Satyam's gallery components</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.4.0/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png">Satyam's gallery components: gallery-md-timespinner/js/gallery-md-timespinner.js</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Accordion.html">Accordion</a></li>
+            
+                <li><a href="../classes/AccordionPanel.html">AccordionPanel</a></li>
+            
+                <li><a href="../classes/Button.html">Button</a></li>
+            
+                <li><a href="../classes/ButtonGroup.html">ButtonGroup</a></li>
+            
+                <li><a href="../classes/ButtonSeparator.html">ButtonSeparator</a></li>
+            
+                <li><a href="../classes/ButtonToggle.html">ButtonToggle</a></li>
+            
+                <li><a href="../classes/IButton.html">IButton</a></li>
+            
+                <li><a href="../classes/MakeNode.html">MakeNode</a></li>
+            
+                <li><a href="../classes/Spinner.html">Spinner</a></li>
+            
+                <li><a href="../classes/StdMod.html">StdMod</a></li>
+            
+                <li><a href="../classes/TimeSpinner.html">TimeSpinner</a></li>
+            
+                <li><a href="../classes/Y.Timeline.html">Y.Timeline</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-makenode.html">gallery-makenode</a></li>
+            
+                <li><a href="../modules/gallery-md-accordion.html">gallery-md-accordion</a></li>
+            
+                <li><a href="../modules/gallery-md-button.html">gallery-md-button</a></li>
+            
+                <li><a href="../modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
+            
+                <li><a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="../modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
+            
+                <li><a href="../modules/gallery-md-timespinner.html">gallery-md-timespinner</a></li>
+            
+                <li><a href="../modules/gallery-stdmod.html">gallery-stdmod</a></li>
+            
+                <li><a href="../modules/timeline.html">timeline</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main" class="content">
+                    <h1 class="file-heading">File: gallery-md-timespinner/js/gallery-md-timespinner.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*js lint white: true, nomen: true, maxerr: 50, indent: 4 */
+/*gl obal Y*/
+/**
+* Shows and accepts a time via a set of spinners.  
+* It can run showing the current time.
+* @module gallery-md-timespinner
+*/
+"use strict";
+
+var Spinner = Y.Spinner,
+	Lang = Y.Lang,
+	CBX = 'contentBox',
+	BBX = 'boundingBox',
+	CHANGE = 'Change',
+	VALUE = 'value',
+	UI = 'ui',
+	SHOW_AMPM = 'showAmPm',
+	MIN = 'min',
+	MAX = 'max',
+	INTERVAL = 'interval',
+	SHOW_SECONDS = 'showSeconds',
+	RUNNING = 'running',
+	AFTER = 'after',
+	WRAPPED = 'wrapped',
+	HOURS = 'hours',
+	MINUTES = 'minutes',
+	SECONDS = 'seconds',
+	AMPM = 'ampm';
+/**
+ * The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.
+ * @class TimeSpinner
+ * @extends Widget
+ * @uses Y.Spinner, Y.MakeNode
+ * @constructor 
+ * @param cfg {object} (optional) configuration attributes
+ */	
+Y.TimeSpinner = Y.Base.create(
+	'timeSpinner',
+	Y.Widget,
+	[Y.MakeNode],
+	{
+		/**
+		 * Reference to the Spinner showing the hours.
+		 * @property _hourSp
+		 * @type Y.Spinner
+		 * @default null
+		 * @private
+		 */
+		_hourSp: null,
+		/**
+		 * Reference to the Spinner showing the minutes.
+		 * @property _minSp
+		 * @type Y.Spinner
+		 * @default null
+		 * @private
+		 */
+		_minSp: null,
+		/**
+		 * Reference to the Spinner showing the seconds.
+		 * @property _secSp
+		 * @type Y.Spinner
+		 * @default null
+		 * @private
+		 */
+		_secSp: null,
+		/**
+		 * Reference to the Spinner showingam/pm.
+		 * @property _ampmSp
+		 * @type Y.Spinner
+		 * @default null
+		 * @private
+		 */
+		_ampmSp: null,
+		/**
+		 * Reference to the timer created by Y.later that updates the time.
+		 * @property _timer
+		 * @type timer object
+		 * @default null
+		 * @private
+		 */
+		_timer: null,
+		/**
+		 * Difference in milliseconds in between the current time and that displayed.  
+		 * Used when the timer is running to display times other than the current time.
+		 * @property _offset
+		 * @type Number
+		 * @default 0
+		 * @private
+		 */
+		_offset: 0,
+		
+		/** Used to store the moment when the timer was stopped
+		 * @property _frozenTime
+		 * @type Number (milliseconds)
+		 * @default 0
+		 * @private
+		 */
+		_frozenTime: 0,
+		
+		/**
+		 * Helper factory to make a single Spinner
+		 * @method _spFact
+		 * @param which {String} ClassName key for the spinner and strings subkey for its title
+		 * @param cfg {object} (optional) configuration attribute overrides
+		 * @param where {Node} (optional) where to render it
+		 * @return {Spinner} Spinner instance
+		 * @private
+		 */
+		_spFact: function (which, cfg, where) {
+			var sp = new Spinner(Y.merge({
+				min: 0,
+				max: 59,
+				wraparound: true,
+				'strings.input': this.get('strings.' + which)
+			},cfg)).render(where);
+			sp.get(BBX).addClass(this._classNames[which]);
+			return sp;
+		},
+		/**
+		 * Renders the hours and minutes spinners. 
+		 * The other two, being optional, are rendered when set.
+		 * @method renderUI
+		 * @protected
+		 */
+		renderUI: function() {
+			Y.log('renderUI', 'info', 'TimeSpinner');
+			var cbx = this.get(CBX);
+				
+			this._hourSp = this._spFact(HOURS, this.get(SHOW_AMPM)?{min:1,max:12}:{max:23}, cbx);
+			this._minSp = this._spFact(MINUTES, null, cbx);
+		},
+		/**
+		 * Sets the listeners for events from the hours and minutes spinners.
+		 * @method bindUI
+		 * @protected
+		 */
+		bindUI: function () {
+			Y.log('bindUI', 'info', 'TimeSpinner');
+			this._eventHandles = [
+				this._hourSp.after(VALUE + CHANGE, this._afterValueChange, this),
+				this._minSp.after(VALUE + CHANGE, this._afterValueChange, this),
+				this._minSp.after(WRAPPED, this._afterWrapped, this)
+			];
+		},
+		
+		destroy: function () {
+			Y.log('destroy', 'info', 'TimeSpinner');
+			if (this._timer) {
+				this._timer.cancel();
+			}
+			Y.each([].concat(this._eventHandles,this._secondsEventHandles,this._ampmEventHandle), function (eh) {
+				if (eh) {
+					eh.detach();
+				}
+			});
+			Y.TimeSpinner.superclass.destroy.call(this);
+		},
+		
+		/**
+		 * Creates or destroys the seconds spinner and attaches/detaches the event listeners.
+		 * @method _uiSetSeconds
+		 * @param value {Boolean} whether to show the seconds spinner or not
+		 * @private
+		 */
+		_uiSetShowSeconds: function(value) {
+			Y.log('_uiSetShowSeconds, value: ' + value, 'info', 'TimeSpinner');
+			if (value) {
+				this._secSp = this._spFact(SECONDS,{
+					value: this.get(VALUE).getSeconds()
+				});
+				this._minSp.get(BBX).insert(this._secSp.get(BBX), AFTER);
+				this._secondsEventHandles = [
+					this._secSp.after(VALUE + CHANGE, this._afterValueChange, this),
+					this._secSp.after(WRAPPED, this._afterWrapped, this)
+				];
+			} else if (this._secSp) {
+				if (this._secSp) {
+					Y.each(this._secondsEventHandles, function (eh) {
+						eh.detach();
+					});
+					this._secSp.destroy();
+					this._secSp = null;
+				}
+			}
+		},
+		/**
+		 * Creates or destroys the am/pm spinner and attaches/detaches the event listeners.
+		 * @method _uiSetAmpm
+		 * @param value {Boolean} whether to show the am/pm spinner or not
+		 * @private
+		 */
+		_uiSetShowAmPm: function (value) {
+			Y.log('_uiSetShowAmPm, value: ' + value, 'info', 'TimeSpinner');
+			if (value) {
+				this._ampmSp = this._spFact(AMPM, {
+					max:1,
+					formatter: function(value) {
+						return value?'PM':'AM';
+					},
+					parser: function (value) {
+						switch (value.toUpperCase()) {
+							case 'AM':
+								return 0;
+							case 'PM':
+								return 1;
+							default:
+								return false;
+						}
+					}
+				});
+				(this._secSp?this._secSp.get(BBX):this._minSp.get(BBX)).insert(this._ampmSp.get(BBX), AFTER);
+				this._ampmEventHandle = this._ampmSp.after(VALUE + CHANGE, this._afterValueChange, this);
+				this._hourSp.setAttrs({
+					max: 12,
+					min: 1
+				});
+				this._uiSetValue(this.get(VALUE));
+			} else {
+				this._hourSp.setAttrs({
+					max: 23,
+					min: 0
+				});
+				if (this._ampmSp) {
+					this._ampmEventHandle.detach();
+					this._ampmSp.destroy();
+					this._ampmSp = null;
+				}
+			}
+		},
+		/**
+		 * Shows the current value in the set of spinners
+		 * @method _uiSetValue
+		 * @param value {Date} value to be shown
+		 * @param src {String} source of the change in value.  
+		 *        If src===UI, the value comes from the spinners, it needs not be refreshed
+		 * @private
+		 */
+		_uiSetValue: function (value, src) {
+			this._setting = true;
+			Y.log('_uiSetValue, value: ' + value + ' src ' + src, 'info', 'TimeSpinner');
+			if (src === UI) {
+				return;
+			}
+			var hours = value.getHours();
+			if (this._ampmSp) {
+				this._hourSp.set(VALUE, (hours % 12) || 12);
+				this._ampmSp.set(VALUE, hours &gt;= 12?1:0);
+			} else {
+				this._hourSp.set(VALUE, hours);
+			}
+			this._minSp.set(VALUE, value.getMinutes());
+			if (this._secSp) {
+				this._secSp.set(VALUE, value.getSeconds());
+			}
+			this._setting = false;
+		},
+		
+		/**
+		 * Sets the interval for refreshing the display
+		 * @method _uiSetInterval
+		 * @param value {number} milliseconds in between refreshes
+		 * @private
+		 */
+		_uiSetInterval: function (value) {
+			Y.log('_uiSetInterval, value: ' + value, 'info', 'TimeSpinner');
+			if (this._timer) {
+				this._timer.cancel();
+			}
+			if (value) {
+				this._timer = Y.later(value, this, this._updateTime, [], true);
+			}
+		},
+		/**
+		 * Sets the timer running.
+		 * @method _uiSetRunning
+		 * @param value {Boolean} run or not
+		 * @private
+		 */
+		_uiSetRunning: function (value) {
+			Y.log('_uiSetRunning, value: ' + value, 'info', 'TimeSpinner');
+			this._uiSetInterval(value &amp;&amp; this.get(INTERVAL));
+			this._frozenTime = Date.now();
+		},
+		
+		/**
+		 * Listener for a change in any of the spinners, sets the value.
+		 * @method _afterValueChange
+		 * @private
+		 */
+		_afterValueChange: function () {
+			if (this._setting) {
+				return;
+			}
+			Y.log('_afterValueChange', 'info', 'TimeSpinner');
+			var d = new Date();
+			d.setHours((this._hourSp.get(VALUE) + (this._ampmSp? 12 * this._ampmSp.get(VALUE):0)) % 24);
+			d.setMinutes(this._minSp.get(VALUE));
+			d.setSeconds(this._secSp?this._secSp.get(VALUE):0);
+			this.set(VALUE, d, {src: UI}); 
+		},
+		
+		/**
+		 * Listener for the wrapped event of the spinners to propagate 
+		 * the changes from seconds to minutes and minutes to hours.
+		 * @method
+		 * @param ev {EventFacade} to find out which one wrapped and which way
+		 * @private
+		 */
+		_afterWrapped: function (ev) {
+			Y.log('_afterWrapped', 'info', 'TimeSpinner');
+			var dir = ev.newVal &gt; ev.prevVal?-1:1;
+			if (ev.target === this._secSp) {
+				this._minSp.set(VALUE, this._minSp.get(VALUE) + dir);
+			}
+			if (ev.target === this._minSp) {
+				this._hourSp.set(VALUE, this._hourSp.get(VALUE) + dir);
+			}
+		},
+		
+		/**
+		 * Callback for the interval timer to update the time shown
+		 * @method _updateTime
+		 * @private
+		 */
+		_updateTime: function() {
+			Y.log('_updateTime', 'info', 'TimeSpinner');
+			this._uiSetValue(this._getTime());
+		},
+		/**
+		 * Getter for the time value.  It returns the current time minus the offset 
+		 * or the time when it was stopped.
+		 * @method _getTime
+		 * @return {Date} Time shown
+		 * @private
+		 */
+		_getTime: function() {
+			Y.log('_getTime', 'info', 'TimeSpinner');
+			if (this.get(RUNNING)) {
+				return new Date(Date.now() - this._offset);
+			} else {
+				return new Date(this._frozenTime - this._offset);
+			}
+		},
+		/**
+		 * Setter for the time value.  
+		 * It calculates and saves the offset in between the current time and that set.
+		 * @method _setTime
+		 * @param value {Date} time to be shown
+		 * @private
+		 */
+		_setTime: function (value) {
+			Y.log('_setTime, value ' + value, 'info', 'TimeSpinner');
+			this._offset = Date.now() - value.getTime();
+			return value;
+		},
+		
+		/**
+		 * Helper method to set the timer running.
+		 * Same as &lt;code&gt;this.set('running', true);&lt;/code&gt;
+		 * @method start
+		 */
+		start: function () {
+			Y.log('start', 'info', 'TimeSpinner');
+			this.set(RUNNING, true);
+		},
+		/**
+		 * Helper method to stop the timer.
+		 * Same as &lt;code&gt;this.set('running', false);&lt;/code&gt;
+		 * @method stop
+		 */
+		stop: function () {
+			Y.log('stop', 'info', 'TimeSpinner');
+			this.set(RUNNING, false);
+		}
+	},
+	{
+		_CLASS_NAMES: [HOURS, MINUTES, SECONDS, AMPM],
+		ATTRS: {
+			/**
+			 * Whether to show the am/pm indicator or show a 24 hours timer.
+			 * @attribute showAmPm
+			 * @type Boolean
+			 * @default false
+			 */
+			showAmPm : {
+				value:false,
+				validator: Lang.isBoolean
+			},
+			/**
+			 * Whether to show the seconds indicator
+			 * @attribute showSeconds
+			 * @type Boolean
+			 * @default true
+			 */
+			showSeconds:{
+				value:true,
+				validator: Lang.isBoolean
+			},
+			/**
+			 * Value of the timer
+			 * @attribute value
+			 * @type Date
+			 * @default time at initialization or current time if running
+			 */
+			value: {
+				valueFn: function() {
+					return new Date();
+				},
+				validator: function (value) {
+					return value instanceof Date;
+				},
+				getter:'_getTime',
+				setter:'_setTime'
+			},
+			
+			/**
+			 * How often to refresh the time displayed
+			 * @attribute interval
+			 * @type Number (milliseconds)
+			 * @default 500
+			 */
+			interval: {
+				value: 500,
+				validator: Lang.isNumber
+			},
+			
+			/**
+			 * Whether the timer is running.
+			 * @attribute running
+			 * @type Boolean
+			 * @default true
+			 */
+			running: {
+				value: true,
+				validator: Lang.isBoolean
+			},
+			
+			/**
+			 * Set of localizable strings to be used as tooltips on the spinners.
+			 * @attribute strings
+			 */
+			strings: {
+				value: {
+					hours:HOURS,
+					minutes:MINUTES,
+					seconds: SECONDS,
+					ampm: 'am/pm'
+				}
+			}
+		},
+		_ATTRS_2_UI: {
+			BIND: [INTERVAL, RUNNING, SHOW_AMPM, SHOW_SECONDS, VALUE],
+			SYNC: [INTERVAL, RUNNING, SHOW_AMPM, SHOW_SECONDS, VALUE]
+		}
+	}
+);
+
+    </pre>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<!--script src="../assets/js/tabs.js"></script-->
+<script src="../assets/../api.js"></script>
+
+
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
