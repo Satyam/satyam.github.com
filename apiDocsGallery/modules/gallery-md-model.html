@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-stdmod/js/gallery-stdmod.js - Satyam's gallery components</title>
+    <title>gallery-md-model - Satyam's Gallery Modules</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.0/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -13,7 +13,7 @@
 <div id="doc">
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
-            <h1><a href="../index.html"><img src="../assets/css/logo.png">Satyam's gallery components: gallery-stdmod/js/gallery-stdmod.js</a></h1>
+            <h1><a href="../index.html"><img src="../assets/css/logo.png">Satyam's Gallery Modules: gallery-md-model</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
             <em>API Docs for: </em>
@@ -60,6 +60,8 @@
             
                 <li><a href="../classes/TimeSpinner.html">TimeSpinner</a></li>
             
+                <li><a href="../classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
+            
                 <li><a href="../classes/Y.Timeline.html">Y.Timeline</a></li>
             
             </ul>
@@ -75,6 +77,8 @@
                 <li><a href="../modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
             
                 <li><a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="../modules/gallery-md-model.html">gallery-md-model</a></li>
             
                 <li><a href="../modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
             
@@ -113,81 +117,44 @@
 
             <div class="apidocs">
                 <div id="docs-main" class="content">
-                    <h1 class="file-heading">File: gallery-stdmod/js/gallery-stdmod.js</h1>
+                    <h1>gallery-md-model Module</h1>
+<div class="box clearfix meta">
+    
+        <div class="foundat">
+            Defined in: <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1</code></a>
+        </div>
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href="http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer"&gt;_childrenContainer&lt;/a&gt;)&lt;br/&gt;&lt;br/&gt;
-* For further documentation see &lt;a href="http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html"&gt;WidgetStdMod&lt;/a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*/
+    
+</div>
 
-"use strict";
-var BBX = 'boundingBox',
-	CBX = 'contentBox',
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
 
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
 
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
-	},
-	_renderStdMod : function(section) {
+<div class="box intro">
+    <p>Record-based data model with APIs for getting, setting, validating, and
+syncing attribute values, as well as events for being notified of model changes.</p>
+</div>
 
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
 
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
-			}
-		}
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="../classes/Y.GalleryModel.html">
+                        Y.GalleryModel
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
 
-		this._insertStdModSection(contentBox, section, sectionNode);
-
-		return (this[section + 'Node'] = sectionNode);
-	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, 'after');
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, 'before');
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one("&gt; ." + WStdMod.SECTION_CLASS_NAMES[section]);
-	}
-};
-
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
-
-    </pre>
+    <div class="yui3-u-1-2">
+        
+    </div>
 </div>
 
                 </div>

@@ -1,11 +1,11 @@
 {
     "project": {
-        "name": "Satyam's gallery components",
-        "description": "Gallery components written by Daniel Barreiro aka Satyam."
+        "name": "Satyam's Gallery Modules",
+        "description": "Satyam's Gallery Modules"
     },
     "files": {
-        "gallery-makenode/js/gallery-makenode.js": {
-            "name": "gallery-makenode/js/gallery-makenode.js",
+        "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js": {
+            "name": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "modules": {
                 "gallery-makenode": 1
             },
@@ -15,20 +15,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-md-accordion/js/gallery-md-accordion.js": {
-            "name": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "modules": {
-                "gallery-md-accordion": 1
-            },
-            "classes": {
-                "AccordionPanel": 1,
-                "Accordion": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "gallery-md-button/js/gallery-md-button.js": {
-            "name": "gallery-md-button/js/gallery-md-button.js",
+        "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js": {
+            "name": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "modules": {
                 "gallery-md-button": 1
             },
@@ -39,8 +27,20 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-md-button-group/js/gallery-md-button-group.js": {
-            "name": "gallery-md-button-group/js/gallery-md-button-group.js",
+        "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js": {
+            "name": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "modules": {
+                "gallery-md-accordion": 1
+            },
+            "classes": {
+                "AccordionPanel": 1,
+                "Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js": {
+            "name": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "modules": {
                 "gallery-md-button-group": 1
             },
@@ -51,19 +51,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-md-ibutton/js/gallery-md-ibutton.js": {
-            "name": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "modules": {
-                "gallery-md-ibutton": 1
-            },
-            "classes": {
-                "IButton": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "gallery-md-spinner/js/gallery-md-spinner.js": {
-            "name": "gallery-md-spinner/js/gallery-md-spinner.js",
+        "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js": {
+            "name": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "modules": {
                 "gallery-md-spinner": 1
             },
@@ -73,8 +62,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-md-timespinner/js/gallery-md-timespinner.js": {
-            "name": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+        "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js": {
+            "name": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "modules": {
                 "gallery-md-timespinner": 1
             },
@@ -84,8 +73,30 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-timeline/js/gallery-timeline.js": {
-            "name": "gallery-timeline/js/gallery-timeline.js",
+        "yui3-gallery/src/gallery-stdmod/js/gallery-stdmod.js": {
+            "name": "yui3-gallery/src/gallery-stdmod/js/gallery-stdmod.js",
+            "modules": {
+                "gallery-stdmod": 1
+            },
+            "classes": {
+                "StdMod": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js": {
+            "name": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "modules": {
+                "gallery-md-ibutton": 1
+            },
+            "classes": {
+                "IButton": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js": {
+            "name": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
             "modules": {
                 "timeline": 1
             },
@@ -95,13 +106,13 @@
             "fors": {},
             "namespaces": {}
         },
-        "gallery-stdmod/js/gallery-stdmod.js": {
-            "name": "gallery-stdmod/js/gallery-stdmod.js",
+        "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js": {
+            "name": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "modules": {
-                "gallery-stdmod": 1
+                "gallery-md-model": 1
             },
             "classes": {
-                "StdMod": 1
+                "Y.GalleryModel": 1
             },
             "fors": {},
             "namespaces": {}
@@ -117,23 +128,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 1,
             "description": "An extension for Widget to create markup from templates, \ncreate CSS classNames, locating elements,\nassist in attaching events to UI elements and to reflect attribute changes into the UI.\nAll of its members are either protected or private.  \nDevelopers using MakeNode should use only those marked protected.  \n<b>Enable the Show Protected checkbox to see them</b>."
-        },
-        "gallery-md-accordion": {
-            "name": "gallery-md-accordion",
-            "submodules": {},
-            "classes": {
-                "AccordionPanel": 1,
-                "Accordion": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 1,
-            "description": "The accordion module creates a control with titles and expandable sections for each"
         },
         "gallery-md-button": {
             "name": "gallery-md-button",
@@ -145,9 +142,23 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 1,
             "description": "Provides a better button object"
+        },
+        "gallery-md-accordion": {
+            "name": "gallery-md-accordion",
+            "submodules": {},
+            "classes": {
+                "AccordionPanel": 1,
+                "Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 1,
+            "description": "The accordion module creates a control with titles and expandable sections for each"
         },
         "gallery-md-button-group": {
             "name": "gallery-md-button-group",
@@ -159,22 +170,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 1,
             "description": "Provides a container to group buttons.\nIt can hold instances of Y.Button, Y.ButtonToggle or Y.ButtonSeparator."
-        },
-        "gallery-md-ibutton": {
-            "name": "gallery-md-ibutton",
-            "submodules": {},
-            "classes": {
-                "IButton": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 1,
-            "description": "Provides an iPhone-style toggle button (checkbox) object"
         },
         "gallery-md-spinner": {
             "name": "gallery-md-spinner",
@@ -185,7 +183,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 1,
             "description": "Shows an input box with a set of up/down buttons to change its value.",
             "is_constructor": 1,
@@ -203,22 +201,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 3,
             "description": "Shows and accepts a time via a set of spinners.  \nIt can run showing the current time."
-        },
-        "timeline": {
-            "name": "timeline",
-            "submodules": {},
-            "classes": {
-                "Y.Timeline": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 2,
-            "description": "Shows in the browser timeline files produced by the program from <a href=\"http://thetimelineproj.sourceforge.net/\">The Timeline Project</a>."
         },
         "gallery-stdmod": {
             "name": "gallery-stdmod",
@@ -229,11 +214,50 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "gallery-stdmod/js/gallery-stdmod.js",
+            "file": "yui3-gallery/src/gallery-stdmod/js/gallery-stdmod.js",
             "line": 1,
             "description": "A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds\nthe Header and Footer sections on each side of it instead of having the three of them under the contentBox.\nThis turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox\nand thus conflicts with the StdMod sections. (this can also be solved using the property <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer\">_childrenContainer</a>)<br/><br/>\nFor further documentation see <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html\">WidgetStdMod</a>",
             "is_constructor": 1,
             "extends": "WidgetStdMod"
+        },
+        "gallery-md-ibutton": {
+            "name": "gallery-md-ibutton",
+            "submodules": {},
+            "classes": {
+                "IButton": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 1,
+            "description": "Provides an iPhone-style toggle button (checkbox) object"
+        },
+        "timeline": {
+            "name": "timeline",
+            "submodules": {},
+            "classes": {
+                "Y.Timeline": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 2,
+            "description": "Shows in the browser timeline files produced by the program from <a href=\"http://thetimelineproj.sourceforge.net/\">The Timeline Project</a>."
+        },
+        "gallery-md-model": {
+            "name": "gallery-md-model",
+            "submodules": {},
+            "classes": {
+                "Y.GalleryModel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1,
+            "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes."
         }
     },
     "classes": {
@@ -247,53 +271,9 @@
             "extension_for": [],
             "module": "gallery-makenode",
             "namespace": "",
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 1,
             "description": "An extension for Widget to create markup from templates, \ncreate CSS classNames, locating elements,\nassist in attaching events to UI elements and to reflect attribute changes into the UI.\nAll of its members are either protected or private.  \nDevelopers using MakeNode should use only those marked protected.  \n<b>Enable the Show Protected checkbox to see them</b>."
-        },
-        "AccordionPanel": {
-            "name": "AccordionPanel",
-            "shortname": "AccordionPanel",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "gallery-md-accordion",
-            "namespace": "",
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 25,
-            "description": "The AccordionPanel class represents one of the panels within an accordion",
-            "extends": "Widget",
-            "uses": [
-                "WidgetChild, WidgetStdMod, MakeNode"
-            ],
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "cfg",
-                    "description": "(optional) configuration attributes",
-                    "type": "Object"
-                }
-            ]
-        },
-        "Accordion": {
-            "name": "Accordion",
-            "shortname": "Accordion",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "gallery-md-accordion",
-            "namespace": "",
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 301,
-            "description": "A collection of vertically aligned collapsible panels",
-            "extends": "Widget",
-            "uses": [
-                "WidgetParent, MakeNode"
-            ]
         },
         "Button": {
             "name": "Button",
@@ -305,7 +285,7 @@
             "extension_for": [],
             "module": "gallery-md-button",
             "namespace": "",
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 29,
             "description": "The Button class provides a fancier type of button.",
             "extends": "Y.Widget",
@@ -331,7 +311,7 @@
             "extension_for": [],
             "module": "gallery-md-button",
             "namespace": "",
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 475,
             "description": "The ButtonToggle class provides a two-state button",
             "extends": "Y.Button",
@@ -344,6 +324,50 @@
                 }
             ]
         },
+        "AccordionPanel": {
+            "name": "AccordionPanel",
+            "shortname": "AccordionPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-accordion",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 25,
+            "description": "The AccordionPanel class represents one of the panels within an accordion",
+            "extends": "Widget",
+            "uses": [
+                "WidgetChild, WidgetStdMod, MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "(optional) configuration attributes",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Accordion": {
+            "name": "Accordion",
+            "shortname": "Accordion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-accordion",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 301,
+            "description": "A collection of vertically aligned collapsible panels",
+            "extends": "Widget",
+            "uses": [
+                "WidgetParent, MakeNode"
+            ]
+        },
         "ButtonSeparator": {
             "name": "ButtonSeparator",
             "shortname": "ButtonSeparator",
@@ -354,7 +378,7 @@
             "extension_for": [],
             "module": "gallery-md-button-group",
             "namespace": "",
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 14,
             "description": "The ButtonSeparator class provides a passive divider to use in between groups of buttons",
             "extends": "Y.Widget",
@@ -370,7 +394,7 @@
             "extension_for": [],
             "module": "gallery-md-button-group",
             "namespace": "",
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 36,
             "description": "The ButtonGroup class provides a container for sets of Buttons.\nAll buttons added will be extended with Y.WidgetChild.",
             "extends": "Y.Widget",
@@ -386,32 +410,6 @@
                 }
             ]
         },
-        "IButton": {
-            "name": "IButton",
-            "shortname": "IButton",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "gallery-md-ibutton",
-            "namespace": "",
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 20,
-            "description": "The IButton class provides an IPhone style of sliding on/off button",
-            "extends": "Y.Widget",
-            "uses": [
-                "Y.MakeNode"
-            ],
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "cfg",
-                    "description": "Configuration Attributes",
-                    "type": "Object"
-                }
-            ]
-        },
         "Spinner": {
             "name": "Spinner",
             "shortname": "Spinner",
@@ -422,7 +420,7 @@
             "extension_for": [],
             "module": "gallery-md-spinner",
             "namespace": "",
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 1,
             "description": "Shows an input box with a set of up/down buttons to change its value."
         },
@@ -436,7 +434,7 @@
             "extension_for": [],
             "module": "gallery-md-timespinner",
             "namespace": "",
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 29,
             "description": "The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.",
             "extends": "Widget",
@@ -452,6 +450,46 @@
                 }
             ]
         },
+        "StdMod": {
+            "name": "StdMod",
+            "shortname": "StdMod",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-stdmod",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-stdmod/js/gallery-stdmod.js",
+            "line": 1,
+            "description": "A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds\nthe Header and Footer sections on each side of it instead of having the three of them under the contentBox.\nThis turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox\nand thus conflicts with the StdMod sections. (this can also be solved using the property <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer\">_childrenContainer</a>)<br/><br/>\nFor further documentation see <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html\">WidgetStdMod</a>"
+        },
+        "IButton": {
+            "name": "IButton",
+            "shortname": "IButton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-ibutton",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 20,
+            "description": "The IButton class provides an IPhone style of sliding on/off button",
+            "extends": "Y.Widget",
+            "uses": [
+                "Y.MakeNode"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Configuration Attributes",
+                    "type": "Object"
+                }
+            ]
+        },
         "Y.Timeline": {
             "name": "Y.Timeline",
             "shortname": "Y.Timeline",
@@ -462,7 +500,7 @@
             "extension_for": [],
             "module": "timeline",
             "namespace": "",
-            "file": "gallery-timeline/js/gallery-timeline.js",
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
             "line": 6,
             "description": "Displays within a given container a timeline file from the given URL",
             "extends": "Y.Base",
@@ -475,24 +513,26 @@
                 }
             ]
         },
-        "StdMod": {
-            "name": "StdMod",
-            "shortname": "StdMod",
+        "Y.GalleryModel": {
+            "name": "Y.GalleryModel",
+            "shortname": "Y.GalleryModel",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "gallery-stdmod",
+            "module": "gallery-md-model",
             "namespace": "",
-            "file": "gallery-stdmod/js/gallery-stdmod.js",
-            "line": 1,
-            "description": "A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds\nthe Header and Footer sections on each side of it instead of having the three of them under the contentBox.\nThis turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox\nand thus conflicts with the StdMod sections. (this can also be solved using the property <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer\">_childrenContainer</a>)<br/><br/>\nFor further documentation see <a href=\"http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html\">WidgetStdMod</a>"
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 8,
+            "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes.\n \nIn most cases, you'll want to create your own subclass of Y.GalleryModel and\ncustomize it to meet your needs. In particular, the sync() and validate()\nmethods are meant to be overridden by custom implementations. You may also want\nto override the parse() method to parse non-generic server responses.",
+            "is_constructor": 1,
+            "extends": "Base"
         }
     },
     "classitems": [
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 110,
             "description": "Creates CSS classNames from suffixes listed in <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>, \nstores them in <a href=\"#property__classNames\"><code>this._classNames</code></a>.\nConcatenates <a href=\"#property__ATTRS_2_UI\"><code>_ATTRS_2_UI</code></a> into <code>_UI_ATTRS</code>.\nSets listeners to render and destroy events to attach/detach UI events.\nIf there is no renderUI defined in this class or any of its ancestors (not counting Widget which has a dummy one)\nit will add a default one appending the result of processing _TEMPLATE and then call _locateNodes.",
             "is_constructor": 1,
@@ -500,7 +540,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 132,
             "description": "Method to be used if no explicit renderUI method is defined.",
             "itemtype": "method",
@@ -511,7 +551,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 141,
             "description": "An array of event handles returned when attaching listeners to events,\nmeant to detach them all when destroying the instance.",
             "itemtype": "property",
@@ -523,7 +563,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 149,
             "description": "Contains a hash of CSS classNames generated from the entries in <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>\nindexed by those same values.\nIt will also have the following entries added automatically: <ul>\n<li><code>boundingBox</code> The className for the boundingBox</li>\n<li><code>content</code> The className for the contentBox</li>\n<li><code>HEADER</code> The className for the header section of a StdMod if Y.WidgetStdMod has been loaded</li>\n<li><code>BODY</code> The className for the body section of a StdMod if Y.WidgetStdMod has been loaded</li>\n<li><code>FOOTER</code> The className for the footer section of a StdMod if Y.WidgetStdMod has been loaded</li>\n</ul>",
             "itemtype": "property",
@@ -535,7 +575,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 164,
             "description": "Hash listing the template processing codes and the functions to handle each.\nThe processing functions will receive a string with the arguments that follow the processing code,\nand the extra, second argument passed on to _makeNode (or _substitute)\nand should return the replacement value for the placeholder.",
             "itemtype": "property",
@@ -547,7 +587,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 216,
             "description": "Parses the arguments received by the processor of the <code>{m}</code> placeholder.  \nIt recognizes numbers, <code>true</code>, <code>false</code>, <code>null</code> and double quoted strings, each separated by whitespace.\nIt skips over anything else.",
             "itemtype": "method",
@@ -569,7 +609,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 266,
             "description": "Enumerates all the values and keys of a given static properties for all classes in the hierarchy, \nstarting with the oldest ancestor (Base).",
             "itemtype": "method",
@@ -592,7 +632,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 292,
             "description": "Processes the template given and returns a <code>Y.Node</code> instance.",
             "itemtype": "method",
@@ -619,7 +659,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 310,
             "description": "Processes the given template and returns a string",
             "itemtype": "method",
@@ -646,7 +686,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 330,
             "description": "Locates the nodes with the CSS classNames listed in the <a href=\"#property__classNames\"><code>this._classNames</code></a> property, \nor those specifically requested in its arguments and stores references to them\nin properties named after each className key, prefixed with an underscore\nand followed by <code>\"Node\"</code>.\nIf the className key contains a hyphen followed by a lowercase letter, the hyphen will be dropped and the letter capitalized.\nAny other characters invalid for identifiers will be turned into underscores, \nthus for the <code>no-label-1</code> className key a <code>_noLabel_1Node</code> property will be created.",
             "itemtype": "method",
@@ -664,7 +704,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 363,
             "description": "Looks for static properties called <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a> in each of the classes of the inheritance chain\nand generates CSS classNames based on the <code>_cssPrefix</code> of each class and each of the suffixes listed in each them.\nThe classNames generated will be stored in <a href=\"#property__classNames\"><code>this._classNames</code></a> indexed by the suffix.\nIt will also store the classNames of the boundingBox ( boundingBox )and the contentBox ( content ).  \nIf the WidgetStdMod is used, it will also add the classNames for the three sections ( HEADER, BODY, FOOTER )",
             "itemtype": "method",
@@ -675,7 +715,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 393,
             "description": "Concatenates the entries of the <a href=\"#property__ATTRS_2_UI\"><code>_ATTRS_2_UI</code></a> static property of each class in the inheritance chain\ninto this instance _UI_ATTRS property for the benefit or Widget.  See Widget._UI_ATTRS",
             "itemtype": "method",
@@ -686,7 +726,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 422,
             "description": "Attaches the events listed in the <a href=\"#property__EVENTS\"><code>_EVENTS</code></a> static property of each class in the inheritance chain.",
             "itemtype": "method",
@@ -697,7 +737,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 490,
             "description": "Publishes the events listed in the _PUBLISH static property of each of the classes in the inheritance chain.\nIf an event has been publishes, the properties set in the descendants will override those in the original publisher.",
             "itemtype": "method",
@@ -708,7 +748,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 505,
             "description": "Detaches all the events created by <a href=\"method__attachEvents\"><code>_attachEvents</code></a>",
             "itemtype": "method",
@@ -719,7 +759,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 518,
             "description": "<b>**</b> This is a documentation entry only. \nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nHolds the default template to be used by <a href=\"#method__makeNode\"><code>_makeNode</code></a> when none is explicitly provided.<br/>\nThe string should contain HTML code with placeholders made of a set of curly braces\nenclosing an initial processing code and arguments.  \nPlaceholders can be nested, any of the arguments in a placeholder can be another placeholder.<br/>\nThe template may also contain regular placeholders as used by <code>Y.substitute</code>, \nwhose values will be extracted from the second argument to <a href=\"#method__makeNode\"><code>_makeNode</code></a>.\nThe processing codes are:\n\t\t\t \n\t\t<ul>\n\t\t\t<li><code>{@ attributeName}</code> configuration attribute values</li>\n\t\t\t<li><code>{p propertyName}</code> instance property values</li>\n\t\t\t<li><code>{m methodName arg1 arg2 ....}</code> return value from instance method. \n\t\t\tThe <code>m</code> code should be followed by the\n\t\t\tmethod name and any number of arguments. The\n\t\t\tplaceholder is replaced by the return value or the named method.</li>\n\t\t\t<li><code>{c classNameKey}</code> CSS className generated from the <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a>\n\t\t\tstatic property </li>\n\t\t\t<li><code>{s key}</code> string from the <code>strings</code> attribute, using <code>key</code>\tas the sub-attribute.</li>\n\t\t\t<li><code>{? arg1 arg2 arg3}</code> If arg1 evaluates to true it returns arg2 otherwise arg3. \n\t\t\tArgument arg1 is usually a nested placeholder.</li>\n\t\t\t<li><code>{1 arg1 arg2 arg3}</code> If arg1 is 1 it returns arg2 otherwise arg3. Used to produce singular/plural text.\n\t\t\tArgument arg1 is usually a nested placeholder.</li>\n\t\t\t<li><code>{n p1 arg1 .... pn argn}</code> It will read the value resulting from the processing code <code>p1</code> with argument <code>arg1</code>\n\t\t\tand use that as the object to process the following processing code.  \n\t\t\tIt takes any number of processing codes and arguments.  \n\t\t\tIt only works with processing codes that take simple identifiers as arguments, ie.: not {m}.\n\t\t\t<li><code>{}</code> any other value will be\thandled just like <code>Y.substitute</code> does. </li>\n\t\t</ul>\nFor placeholders containing several arguments they must be separated by white spaces.  \nStrings must be enclosed in double quotes, no single quotes allowed.  \nThe backslash is the escape character within strings.\nNumbers, null, true and false will be recognized and converted to their native values.\nAny argument can be a further placeholder, enclosed in its own set of curly braces.",
             "itemtype": "property",
@@ -732,7 +772,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 559,
             "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nHolds an array of strings, each the suffix used to define a CSS className using the \n_cssPrefix of each class.  The names listed here are used as the keys into\n<a href=\"#property__classNames\"><code>this._classNames</code></a>, \nas the argument to the <code>{c}</code> template placeholder \nand as keys for the entries in the <a href=\"#property__EVENTS\"><code>_EVENTS</code></a> property.  \nThey are also used by <a href=\"#method__locateNodes\"><code>_locateNodes</code></a> to create the private properties that hold\nreferences to the nodes created.",
             "itemtype": "property",
@@ -745,7 +785,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 575,
             "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nLists the attributes whose value should be reflected in the UI.  \nIt contains an object with two properties, <code>BIND</code> and <code>SYNC</code>, each \ncontaining the name of an attribute or an array of names of attributes.\nThose listed in <code>BIND</code> will have listeners attached to their change event\nso every such change is refreshed in the UI. \nThose listed in <code>SYNC</code> will be refreshed when the UI is rendered.\nFor each entry in either list there should be a method named using the <code>_uiSet</code> prefix, followed by\nthe name of the attribute, with its first character in uppercase.\nThis function will receive the value to be set and the source of the change.",
             "itemtype": "property",
@@ -758,7 +798,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 594,
             "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nContains a hash of elements to attach event listeners to.  \nEach element is identified by the suffix of its generated className,\nas declared in the <a href=\"#property__CLASS_NAMES\"><code>_CLASS_NAMES</code></a> property.  <br/>\nThere are seveal virtual element identifiers,<ul>\n<li><code>\"boundingBox\"</code> identifies the boundingBox of the Widget</li>\n<li><code>\"content\"</code> its contextBox</li>\n<li><code>\"document\"</code> identifies the document where the component is in</li>\n<li><code>\"THIS\"</code> identifies this instance</li>\n<li><code>\"Y\"</code> identifies the YUI instance of the sandbox</li>\n</ul>\nIf the Y.WidgetStdMod extension is used the <code>\"HEADER\"</code>, <code>\"BODY\"</code> \nand <code>\"FOOTER\"</code> identifiers will also be available.<br/>\nEach entry contains a type of event to be listened to or an array of events.\nEach event can be described by its type (i.e.: <code>\"key\"</code>, <code>\"mousedown\"</code>, etc).\nMakeNode will set 'after' event listeners by default, but can be instructed to listen to 'before' ('on') events\nor do it by delegation on the boundingBox.\nMakeNode will associate this event with a method named <code>\"_after\"</code>,<code>\"_before\"</code> or <code>\"_delegate\"</code> followed by the element identifier with the first character capitalized \nand the type of event with the first character capitalized (i.e.: <code>_afterBoundingBoxClick</code>, <code>_afterInputBlur</code>, <code>_afterThisValueChange</code>, <code>_beforeFormSubmit</code>, <code>_delegateListItemClick</code>, etc.).<br/>\nAlternatively, the event listener can be described by an object literal containing properties: <ul>\n<li><code>type</code> (mandatory) the type of event being listened to</li>\n<li><code>fn</code> the name of the method to handle the event.  \nSince _EVENTS is static, it has no access to <code>this</code> so the name of the method must be specified</li>\n<li><code>args</code> extra arguments to be passed to the listener, useful, \nfor example as a key descriptor for <code>key</code> events.</li>\n<li><code>when</code> either 'before', 'after' or 'delegate'.  \nMakeNode defaults to set 'after' event listeners but can be told to set 'before' ('on') listeners \nor to delegate on the BoundingBox the capture of events on inner elements.  Only className keys can be used with 'delegate'.</li></ul>\n<pre>_EVENTS: {\n&nbsp; &nbsp; boundingBox: [\n&nbsp; &nbsp;  &nbsp; &nbsp; {\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; type: 'key',\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; fn:'_onDirectionKey',   // calls this._onDirectionKey\n&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; args:((!Y.UA.opera) ? \"down:\" : \"press:\") + \"38, 40, 33, 34\"\n&nbsp; &nbsp;  &nbsp; &nbsp; },\n&nbsp; &nbsp;  &nbsp; &nbsp; 'mousedown' &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterBoundingBoxMousedown\n&nbsp; &nbsp; ],\n&nbsp; &nbsp; document: 'mouseup', &nbsp; &nbsp; // calls this._afterDocumentMouseup\n&nbsp; &nbsp; input: 'change', &nbsp; &nbsp;  &nbsp; &nbsp; // calls this._afterInputChange\n&nbsp; &nbsp; form: {type: 'submit', when:'before'}  &nbsp; &nbsp; // calls this._beforeFormSubmit\n},</pre>",
             "itemtype": "property",
@@ -771,7 +811,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-makenode/js/gallery-makenode.js",
+            "file": "yui3-gallery/src/gallery-makenode/js/gallery-makenode.js",
             "line": 643,
             "description": "<b>**</b> This is a documentation entry only.\nThis property is not defined in this file, it can be defined by the developer. <b>**</b><br/><br/>\nContains a hash of events to be published.  \nEach element has the name of the event as its key\nand the configuration object as its value.  \nIf the event has already been published, the configuration of the event will be modified by the\nconfiguration set in the new definition.\nWhen setting functions use the name of the function, not a function reference.",
             "itemtype": "property",
@@ -784,450 +824,7 @@
             "module": "gallery-makenode"
         },
         {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 39,
-            "description": "With the accordion panel container filled with with WidgetStdMod divs\nit seems like too much to have a separate contentBox",
-            "itemtype": "property",
-            "name": "CONTENT_TEMPLATE",
-            "value": "null",
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 47,
-            "description": "This is an override of WidgetStdMod method to prevent it from re-rendering the \nthree sections again and again and wiping out the resize handles",
-            "itemtype": "method",
-            "name": "_syncUIStdMod",
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 56,
-            "description": "Adds the resizer to the body of the three section StdMod\nand creates a container for the actual content within",
-            "itemtype": "method",
-            "name": "renderUI",
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 69,
-            "description": "Listener for the after Expanded change event, toggles the panel",
-            "itemtype": "method",
-            "name": "_afterExpanded",
-            "params": [
-                {
-                    "name": "ev",
-                    "description": "",
-                    "type": "EventFacade"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 85,
-            "description": "Sets the label on the header of this panel",
-            "itemtype": "method",
-            "name": "_uiSetLabel",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "text to be shown",
-                    "type": "String"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 94,
-            "description": "Sets the content on this panel",
-            "itemtype": "method",
-            "name": "_uiSetContent",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "content to be shown",
-                    "type": "String | Node"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 103,
-            "description": "Plugs/unplugs the resize-plugin (if available) in response to the resizeable attribute",
-            "itemtype": "method",
-            "name": "_uiSetResizeable",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "new value for the resizeable attribute",
-                    "type": "Boolean"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 121,
-            "description": "Sets the close icon visible or not depending on the attribute <code>closeable</code>",
-            "itemtype": "method",
-            "name": "_uiSetCloseable",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "new value for the closeeable attribute",
-                    "type": "Boolean"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 134,
-            "description": "Expands this panel",
-            "itemtype": "method",
-            "name": "expand",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 147,
-            "description": "Collapses this panel",
-            "itemtype": "method",
-            "name": "collapse",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 160,
-            "description": "Toggles this panel from expanded to collapsed",
-            "itemtype": "method",
-            "name": "toggle",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 168,
-            "description": "Responds to clicks in the header of this panel to toggle it",
-            "itemtype": "method",
-            "name": "_afterHEADERClick",
-            "params": [
-                {
-                    "name": "ev",
-                    "description": "uses target to make sure it is the \nheader of this accordion and not that of a nested one",
-                    "type": "EventFacade"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 181,
-            "description": "Convenience method to close this panel.\nCalled when the close icon, if present, is clicked.\nIt fires the <code>panelClose</code> event to signal \nthe container for it to remove the panel\nfrom the accordion.",
-            "itemtype": "method",
-            "name": "close",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 189,
-            "description": "Fired by the panel to signal the accordion to remove this panel.\nClosure of the panel can be prevented by listening and halting this event.",
-            "itemtype": "event",
-            "name": "panelClose",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 199,
-            "description": "Defines the class names used by MakeNode, later stored in this._classNames.",
-            "itemtype": "property",
-            "name": "_CLASS_NAMES",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 206,
-            "description": "Defines the template used by MakeNode to build the container for the body",
-            "itemtype": "property",
-            "name": "_TEMPLATE",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 213,
-            "description": "Defines the template used by MakeNode to build the container for the header",
-            "itemtype": "property",
-            "name": "_HEADER_TEMPLATE",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 220,
-            "description": "Defines the UI events to be attached through MakeNode,\nspecifically, click on the headers",
-            "itemtype": "property",
-            "name": "_EVENTS",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 235,
-            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
-            "itemtype": "property",
-            "name": "_ATTRS_2_UI",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 246,
-            "description": "State of this panel",
-            "itemtype": "attribute",
-            "name": "expanded",
-            "type": "Boolean",
-            "default": "false (collapsed)",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 256,
-            "description": "Text to be shown in the header of this accordion panel",
-            "itemtype": "attribute",
-            "name": "label",
-            "type": "String",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 265,
-            "description": "Content to be shown in the body of this accordion panel",
-            "itemtype": "attribute",
-            "name": "content",
-            "type": "String or Node instance",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 273,
-            "description": "Allows panels to be resized.\nRequires the optional resize-plugin module to be loaded.",
-            "itemtype": "attribute",
-            "name": "resizeable",
-            "type": "Boolean",
-            "default": "true",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 284,
-            "description": "Allows panels to be closed via an icon in the header.\nIt shows or hides the close icon.  \nPanels can be closedvia programming at any time, regardless of this attribute.",
-            "itemtype": "attribute",
-            "name": "closeable",
-            "type": "Boolean",
-            "default": "true",
-            "class": "AccordionPanel",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 312,
-            "description": "Event listener for child expansion/collapse, ensures that only one is expanded\nat a time if multiExpand is not set.",
-            "itemtype": "method",
-            "name": "_afterThisAccordionPanel:expandedChange",
-            "params": [
-                {
-                    "name": "ev",
-                    "description": "",
-                    "type": "EventFacade"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 329,
-            "description": "Listens to the <code>panelClose</code> and destroys the panel\nand removes it from the collection of panels.",
-            "itemtype": "method",
-            "name": "_afterThisAccordionPanel:panelClose",
-            "params": [
-                {
-                    "name": "ev",
-                    "description": "uses ev.target to locate the panel requesting the close",
-                    "type": "EventFacade"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 344,
-            "description": "Sets the resizeable attribute of all panels to the value set for the whole accordion",
-            "itemtype": "method",
-            "name": "_uiSetResizeable",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "new value of the resizeable attribute",
-                    "type": "Boolean"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 355,
-            "description": "Sets the closeable attribute of all panels to the value set for the whole accordion",
-            "itemtype": "method",
-            "name": "_uiSetCloseable",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "new value of the closeable attribute",
-                    "type": "Boolean"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 368,
-            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
-            "itemtype": "property",
-            "name": "_ATTRS_2_UI",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 378,
-            "description": "Defines events that are to be associated to listeners by MakeNode.\nHere it links a couple of events from the items,\nexpandedChange to ensure only one panel is open at a time and\npanelClose to destroy and remove a panel",
-            "itemtype": "property",
-            "name": "_EVENTS",
-            "type": "Object",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 396,
-            "description": "Default type of children to create.  Used by WidgetParent.",
-            "itemtype": "attribute",
-            "name": "defaultChildType",
-            "type": "WidgetChild",
-            "default": "AccordionPanel",
-            "access": "protected",
-            "tagname": "",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 406,
-            "description": "Whether several panels may be expanded at once.",
-            "itemtype": "attribute",
-            "name": "multiExpand",
-            "type": "Boolean",
-            "default": "true",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 416,
-            "description": "Helper attribute to set all panels resizeable attribute at once.\nMay be overriden in each panel separately.\nRequires the optional resize-plugin module to be loaded.",
-            "itemtype": "attribute",
-            "name": "resizeable",
-            "type": "Boolean",
-            "default": "true",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-accordion/js/gallery-md-accordion.js",
-            "line": 428,
-            "description": "Helper attribute to set all panels closeable attribute at once.\nMay be overriden in each panel separately.",
-            "itemtype": "attribute",
-            "name": "closeable",
-            "type": "Boolean",
-            "default": "true",
-            "class": "Accordion",
-            "module": "gallery-md-accordion"
-        },
-        {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 44,
             "description": "Overrides the boundingBox template to make it an anchor",
             "itemtype": "property",
@@ -1240,7 +837,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 53,
             "description": "Overrides the contentBox template to prevent a content box from being drawn",
             "itemtype": "property",
@@ -1253,7 +850,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 62,
             "description": "Holds the previous value of the className assigned through the <a href=\"#config_icon\"><code>icon</code></a> \nattribute for easy removal\n(Eventually it will be dropped, see: http://yuilibrary.com/projects/yui3/ticket/2530486)",
             "itemtype": "property",
@@ -1265,7 +862,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 79,
             "description": "Removes the pressed class.  \nMouseUp is listened to at the document body level since the cursor might have moved\naway from the pressed button when released.",
             "itemtype": "method",
@@ -1276,7 +873,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 90,
             "description": "Adds the pressed class to bounding box",
             "itemtype": "method",
@@ -1287,7 +884,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 100,
             "description": "Sets the title attribute to the bounding box",
             "itemtype": "method",
@@ -1305,7 +902,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 109,
             "description": "Updates the default class on the bounding box",
             "itemtype": "method",
@@ -1323,7 +920,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 125,
             "description": "Sets the icon class for the bounding box",
             "itemtype": "method",
@@ -1341,7 +938,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 141,
             "description": "Sets the position of the icon relative to the label.\nSpans for icons are always set at either side, \nthis method changes a classname in the bounding box\nso that one of them is hidden",
             "itemtype": "method",
@@ -1359,7 +956,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 156,
             "description": "Sets the icon class for the bounding box",
             "itemtype": "method",
@@ -1377,7 +974,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 171,
             "description": "Sets the href attribute on the bounding box",
             "itemtype": "method",
@@ -1395,7 +992,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 181,
             "description": "Default click event handler",
             "itemtype": "method",
@@ -1413,7 +1010,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 203,
             "description": "Default press callback function",
             "itemtype": "method",
@@ -1431,7 +1028,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 218,
             "description": "Returns a function based on the type of button. Form buttons such \n  as Submit and Reset are attached to their parent form if one is\n  found.  Otherwise null is returned.",
             "itemtype": "method",
@@ -1445,7 +1042,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 245,
             "description": "Constant for 'push' <a href=\"#config_type\">type</a> button (the default)",
             "itemtype": "property",
@@ -1457,7 +1054,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 253,
             "description": "Constant for 'submit' <a href=\"#config_type\">type</a> button",
             "itemtype": "property",
@@ -1469,7 +1066,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 261,
             "description": "Constant for 'reset' <a href=\"#config_type\">type</a> button (the default)",
             "itemtype": "property",
@@ -1481,7 +1078,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 269,
             "description": "Constant to set the <a href=\"#config_iconPosition\">iconPosition</a> to be to the left of the label",
             "itemtype": "property",
@@ -1493,7 +1090,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 277,
             "description": "Constant to set the <a href=\"#config_iconPosition\">iconPosition</a> to be to the right of the label",
             "itemtype": "property",
@@ -1505,7 +1102,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 285,
             "description": "Template to use by the MakeNode extension",
             "itemtype": "property",
@@ -1518,7 +1115,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 297,
             "description": "Class name suffixes for CSS classNames used in the widget",
             "itemtype": "property",
@@ -1531,7 +1128,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 305,
             "description": "DOM events to be listened to, used by the MakeNode extension",
             "itemtype": "property",
@@ -1544,7 +1141,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 322,
             "description": "Label to be shown on the button",
             "itemtype": "attribute",
@@ -1555,7 +1152,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 332,
             "description": "Function to be called on button click",
             "itemtype": "attribute",
@@ -1565,7 +1162,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 340,
             "description": "Button is to be the default button",
             "itemtype": "attribute",
@@ -1576,7 +1173,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 350,
             "description": "Suffix to be added to the <code>yui3-button-icon-</code> class to \nset on the button",
             "itemtype": "attribute",
@@ -1587,7 +1184,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 363,
             "description": "Whether the icon should go to the left or to the right of the label",
             "itemtype": "attribute",
@@ -1598,7 +1195,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 375,
             "description": "href property to set on the button A element",
             "itemtype": "attribute",
@@ -1608,7 +1205,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 383,
             "description": "Title (tooltip) to set on the button element",
             "itemtype": "attribute",
@@ -1618,7 +1215,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 392,
             "description": "Defines the button type. One of push, submit or reset.  Any value but submit or reset will assume push.",
             "itemtype": "attribute",
@@ -1629,14 +1226,14 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 408,
             "description": "HTML Parser assumes srcNode is either a &lt;button&gt; or \n  &lt;input type=\"submit|reset\"&gt;",
             "class": "Button",
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 488,
             "description": "Overrides Button's <a href=\"Button.html#method__defPressFn\">_defPressFn</a> \nto produce the two-state effect",
             "itemtype": "method",
@@ -1654,7 +1251,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 514,
             "description": "Class name suffixes for CSS classNames used in the widget.\nProduces the yui3-button-toggle-selected className to be added\nto the button if not within a ButtonGroup",
             "itemtype": "property",
@@ -1667,7 +1264,7 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button/js/gallery-md-button.js",
+            "file": "yui3-gallery/src/gallery-md-button/js/gallery-md-button.js",
             "line": 525,
             "description": "Function to be called when the toggle is deselected",
             "itemtype": "attribute",
@@ -1678,7 +1275,450 @@
             "module": "gallery-md-button"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 39,
+            "description": "With the accordion panel container filled with with WidgetStdMod divs\nit seems like too much to have a separate contentBox",
+            "itemtype": "property",
+            "name": "CONTENT_TEMPLATE",
+            "value": "null",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 47,
+            "description": "This is an override of WidgetStdMod method to prevent it from re-rendering the \nthree sections again and again and wiping out the resize handles",
+            "itemtype": "method",
+            "name": "_syncUIStdMod",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 56,
+            "description": "Adds the resizer to the body of the three section StdMod\nand creates a container for the actual content within",
+            "itemtype": "method",
+            "name": "renderUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 69,
+            "description": "Listener for the after Expanded change event, toggles the panel",
+            "itemtype": "method",
+            "name": "_afterExpanded",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 85,
+            "description": "Sets the label on the header of this panel",
+            "itemtype": "method",
+            "name": "_uiSetLabel",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text to be shown",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 94,
+            "description": "Sets the content on this panel",
+            "itemtype": "method",
+            "name": "_uiSetContent",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "content to be shown",
+                    "type": "String | Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 103,
+            "description": "Plugs/unplugs the resize-plugin (if available) in response to the resizeable attribute",
+            "itemtype": "method",
+            "name": "_uiSetResizeable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value for the resizeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 121,
+            "description": "Sets the close icon visible or not depending on the attribute <code>closeable</code>",
+            "itemtype": "method",
+            "name": "_uiSetCloseable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value for the closeeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 134,
+            "description": "Expands this panel",
+            "itemtype": "method",
+            "name": "expand",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 147,
+            "description": "Collapses this panel",
+            "itemtype": "method",
+            "name": "collapse",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 160,
+            "description": "Toggles this panel from expanded to collapsed",
+            "itemtype": "method",
+            "name": "toggle",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 168,
+            "description": "Responds to clicks in the header of this panel to toggle it",
+            "itemtype": "method",
+            "name": "_afterHEADERClick",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "uses target to make sure it is the \nheader of this accordion and not that of a nested one",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 181,
+            "description": "Convenience method to close this panel.\nCalled when the close icon, if present, is clicked.\nIt fires the <code>panelClose</code> event to signal \nthe container for it to remove the panel\nfrom the accordion.",
+            "itemtype": "method",
+            "name": "close",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 189,
+            "description": "Fired by the panel to signal the accordion to remove this panel.\nClosure of the panel can be prevented by listening and halting this event.",
+            "itemtype": "event",
+            "name": "panelClose",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 199,
+            "description": "Defines the class names used by MakeNode, later stored in this._classNames.",
+            "itemtype": "property",
+            "name": "_CLASS_NAMES",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 206,
+            "description": "Defines the template used by MakeNode to build the container for the body",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 213,
+            "description": "Defines the template used by MakeNode to build the container for the header",
+            "itemtype": "property",
+            "name": "_HEADER_TEMPLATE",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 220,
+            "description": "Defines the UI events to be attached through MakeNode,\nspecifically, click on the headers",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 235,
+            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 246,
+            "description": "State of this panel",
+            "itemtype": "attribute",
+            "name": "expanded",
+            "type": "Boolean",
+            "default": "false (collapsed)",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 256,
+            "description": "Text to be shown in the header of this accordion panel",
+            "itemtype": "attribute",
+            "name": "label",
+            "type": "String",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 265,
+            "description": "Content to be shown in the body of this accordion panel",
+            "itemtype": "attribute",
+            "name": "content",
+            "type": "String or Node instance",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 273,
+            "description": "Allows panels to be resized.\nRequires the optional resize-plugin module to be loaded.",
+            "itemtype": "attribute",
+            "name": "resizeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 284,
+            "description": "Allows panels to be closed via an icon in the header.\nIt shows or hides the close icon.  \nPanels can be closedvia programming at any time, regardless of this attribute.",
+            "itemtype": "attribute",
+            "name": "closeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "AccordionPanel",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 312,
+            "description": "Event listener for child expansion/collapse, ensures that only one is expanded\nat a time if multiExpand is not set.",
+            "itemtype": "method",
+            "name": "_afterThisAccordionPanel:expandedChange",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 329,
+            "description": "Listens to the <code>panelClose</code> and destroys the panel\nand removes it from the collection of panels.",
+            "itemtype": "method",
+            "name": "_afterThisAccordionPanel:panelClose",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "uses ev.target to locate the panel requesting the close",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 344,
+            "description": "Sets the resizeable attribute of all panels to the value set for the whole accordion",
+            "itemtype": "method",
+            "name": "_uiSetResizeable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the resizeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 355,
+            "description": "Sets the closeable attribute of all panels to the value set for the whole accordion",
+            "itemtype": "method",
+            "name": "_uiSetCloseable",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the closeable attribute",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 368,
+            "description": "Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.",
+            "itemtype": "property",
+            "name": "_ATTRS_2_UI",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 378,
+            "description": "Defines events that are to be associated to listeners by MakeNode.\nHere it links a couple of events from the items,\nexpandedChange to ensure only one panel is open at a time and\npanelClose to destroy and remove a panel",
+            "itemtype": "property",
+            "name": "_EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 396,
+            "description": "Default type of children to create.  Used by WidgetParent.",
+            "itemtype": "attribute",
+            "name": "defaultChildType",
+            "type": "WidgetChild",
+            "default": "AccordionPanel",
+            "access": "protected",
+            "tagname": "",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 406,
+            "description": "Whether several panels may be expanded at once.",
+            "itemtype": "attribute",
+            "name": "multiExpand",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 416,
+            "description": "Helper attribute to set all panels resizeable attribute at once.\nMay be overriden in each panel separately.\nRequires the optional resize-plugin module to be loaded.",
+            "itemtype": "attribute",
+            "name": "resizeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-accordion/js/gallery-md-accordion.js",
+            "line": 428,
+            "description": "Helper attribute to set all panels closeable attribute at once.\nMay be overriden in each panel separately.",
+            "itemtype": "attribute",
+            "name": "closeable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Accordion",
+            "module": "gallery-md-accordion"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 25,
             "description": "Overrides the standard bounding box template to produce a &lt;span&gt;",
             "itemtype": "property",
@@ -1688,7 +1728,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 52,
             "description": "Overrides the standard bounding box template to produce a &lt;fieldset&gt;",
             "itemtype": "property",
@@ -1698,14 +1738,14 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 58,
             "description": "Sets the listener for the addChild event to extend children with Y.WidgetChild.\nPublishes the <code>press</code> event",
             "class": "ButtonGroup",
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 84,
             "description": "Sets listeners for the press event of child buttons, see <a href=\"#method__onButtonPress\">_onButtonPress</a>.",
             "itemtype": "method",
@@ -1714,7 +1754,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 92,
             "description": "Processes the press event of child Buttons to enforce the <a href=\"#config__alwaysSelected\">_alwaysSelected</a> attribute,\nand to propagate the press event",
             "itemtype": "method",
@@ -1732,7 +1772,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 117,
             "description": "Sets the label of the container from the value of the <a href=\"#config_label\">label</a> configuration attribute.\nCreates the &lt;legend&gt; element to hold it if it does not exists.",
             "itemtype": "method",
@@ -1750,7 +1790,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 133,
             "description": "Template for the &lt;legend&gt; element to hold the label.  Used by MakeNode.",
             "itemtype": "property",
@@ -1763,7 +1803,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 141,
             "description": "Creates the label className key to be used in the template",
             "itemtype": "property",
@@ -1776,7 +1816,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 149,
             "description": "Hooks up <a href=\"method__uiSetLabel\">_uiSetLabel</a> to respond to changes in the <a href=\"#config_label\">label</a> attribute.",
             "itemtype": "property",
@@ -1789,7 +1829,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 164,
             "description": "Holds the label for this group of buttons",
             "itemtype": "attribute",
@@ -1800,7 +1840,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 175,
             "description": "Defines the default type of child to be contained in this group.  \nUsed by WidgetParent to create the default children",
             "itemtype": "attribute",
@@ -1811,7 +1851,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-button-group/js/gallery-md-button-group.js",
+            "file": "yui3-gallery/src/gallery-md-button-group/js/gallery-md-button-group.js",
             "line": 186,
             "description": "Forces this group to always have at least one toggle button selected",
             "itemtype": "attribute",
@@ -1822,232 +1862,7 @@
             "module": "gallery-md-button-group"
         },
         {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 34,
-            "description": "Renders the elements and sets up the animation of the slider",
-            "itemtype": "method",
-            "name": "renderUI",
-            "access": "protected",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 57,
-            "description": "Calculates the size of the button based on the size of the labels.",
-            "itemtype": "method",
-            "name": "_resize",
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 83,
-            "description": "Responds to the end of the animation to completely hide the\nside that went off-screen",
-            "itemtype": "method",
-            "name": "_endAnim",
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 94,
-            "description": "Sets the title attribute to the bounding box",
-            "itemtype": "method",
-            "name": "_uiSetTitle",
-            "params": [
-                {
-                    "name": "title",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 104,
-            "description": "Default click event handler",
-            "itemtype": "method",
-            "name": "_afterBoundingBoxClick",
-            "params": [
-                {
-                    "name": "ev",
-                    "description": "",
-                    "type": "Event Facade"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 115,
-            "description": "Helper method to toggle the button state",
-            "itemtype": "method",
-            "name": "toggle",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 122,
-            "description": "Sets the label for the ON side of the slider",
-            "itemtype": "method",
-            "name": "_uiSetLabelOn",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "text of the label",
-                    "type": "String"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 132,
-            "description": "Sets the label for the OFF side of the slider",
-            "itemtype": "method",
-            "name": "_uiSetLabelOff",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "text of the label",
-                    "type": "String"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 142,
-            "description": "Responds to a change in the value of the slider by moving it",
-            "itemtype": "method",
-            "name": "_uiSetValue",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "new value of the button",
-                    "type": "Boolean"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 157,
-            "description": "Template to use by the MakeNode extension",
-            "itemtype": "property",
-            "name": "_TEMPLATE",
-            "type": "String",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 176,
-            "description": "Class name suffixes for CSS classNames used in the widget",
-            "itemtype": "property",
-            "name": "Y.Button._CLASS_NAMES",
-            "type": "[Strings]",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 184,
-            "description": "DOM events to be listened to, used by the MakeNode extension",
-            "itemtype": "property",
-            "name": "Y.Button._EVENTS",
-            "type": "Object",
-            "static": 1,
-            "access": "protected",
-            "tagname": "",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 195,
-            "description": "Value of the button",
-            "itemtype": "attribute",
-            "name": "value",
-            "type": "Boolean",
-            "default": "false",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 205,
-            "description": "Title (tooltip) of the button",
-            "itemtype": "attribute",
-            "name": "title",
-            "type": "String",
-            "default": "\"\"",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 215,
-            "description": "Localizable strings.  Contains the default values for the on and off labels.",
-            "itemtype": "attribute",
-            "name": "strings",
-            "type": "Object",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 226,
-            "description": "Text for the on side of the button",
-            "itemtype": "attribute",
-            "name": "labelOn",
-            "type": "String",
-            "default": "\"on\"",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-ibutton/js/gallery-md-ibutton.js",
-            "line": 238,
-            "description": "Text for the off side of the button",
-            "itemtype": "attribute",
-            "name": "labelOff",
-            "type": "String",
-            "default": "\"off\"",
-            "class": "IButton",
-            "module": "gallery-md-ibutton"
-        },
-        {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 33,
             "description": "Renders the HTML elements of this component.  \nUses the TEMPLATE static variable to produce the markup.\nCalls _locateNodes to get the references to the elements created.",
             "itemtype": "method",
@@ -2056,7 +1871,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 44,
             "description": "Bounding box mouse down handler. Will determine if the mouse down\nis on one of the spinner buttons, and increment/decrement the value\naccordingly.\n\nThe method also sets up a timer, to support the user holding the mouse\ndown on the spinner buttons. The timer is cleared when a mouse up event\nis detected.",
             "itemtype": "method",
@@ -2074,7 +1889,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 78,
             "description": "Override the default content box value, since we don't want the srcNode\nto be the content box for spinner.",
             "itemtype": "property",
@@ -2086,7 +1901,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 89,
             "description": "Document mouse up handler. Clears the timers supporting\nthe \"mouse held down\" behavior.",
             "itemtype": "method",
@@ -2097,7 +1912,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 99,
             "description": "Bounding box Arrow up/down, Page up/down key listener.\n\nIncrements/Decrement the spinner value, based on the key pressed.",
             "itemtype": "method",
@@ -2115,7 +1930,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 132,
             "description": "Simple change handler, to make sure user does not input an invalid value.\nIf an error is detected, focus will return to the input box and the input box highlighted briefly.",
             "itemtype": "method",
@@ -2126,7 +1941,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 154,
             "description": "Default parser for the user input.  It assumes only integers are expected",
             "itemtype": "method",
@@ -2146,7 +1961,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 163,
             "description": "Formats the internal value to be shown to the user",
             "itemtype": "method",
@@ -2166,7 +1981,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 173,
             "description": "Initiates mouse down timers, to increment slider, while mouse button\nis held down",
             "itemtype": "method",
@@ -2189,7 +2004,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 188,
             "description": "If attribute <a href=\"#config_wraparound\"><code>wraparound</code></a> is true this method is set as a before listener \nfor the <a href=\"#event_valueChange\"><code>valueChange</code></a> event.\nWhen one end of the range is reached, it will make it jump to the other end. \nChanges the newVal property of the event facade, which will be the new value for the attribute.\nIf stepping by more than one, it will advance the value\nby the remaining amount of the step.\nFires the <a href=\"#event_wrapped\"><code>wrapped</code></a> event when the value is wrapped around.",
             "itemtype": "method",
@@ -2207,7 +2022,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 200,
             "description": "Fires when one end of the range is reached and the value is folded to the other end.",
             "itemtype": "event",
@@ -2228,7 +2043,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 219,
             "description": "Clears timers used to support the \"mouse held down\" behavior",
             "itemtype": "method",
@@ -2239,7 +2054,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 235,
             "description": "Updates the value of the input box to reflect \nthe value passed in through the <code>value</code> configuration attribute",
             "itemtype": "method",
@@ -2262,7 +2077,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 249,
             "description": "Attaches the <a href=\"#method__wrap\"><code>_wrap</code></a> method as a before-event listener \nwhen <a href=\"#config_wraparound\"><code>wraparound</code></a> is set.",
             "itemtype": "method",
@@ -2280,7 +2095,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 266,
             "description": "value attribute default validator. Verifies that\nthe value being set lies between the min/max value",
             "itemtype": "method",
@@ -2302,7 +2117,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 279,
             "description": "MakeNode template for this component",
             "itemtype": "property",
@@ -2315,7 +2130,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 291,
             "description": "List of CSS class name suffixes to be generated and used in the template",
             "itemtype": "property",
@@ -2328,7 +2143,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 299,
             "description": "Descriptor of DOM events to be listened to and the methods to handle them",
             "itemtype": "property",
@@ -2341,7 +2156,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 319,
             "description": "The minimum value for the spinner.",
             "itemtype": "attribute",
@@ -2352,7 +2167,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 329,
             "description": "The maximum value for the spinner.",
             "itemtype": "attribute",
@@ -2363,7 +2178,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 339,
             "description": "The current value of the spinner.",
             "itemtype": "attribute",
@@ -2374,7 +2189,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 350,
             "description": "Amount to increment/decrement the spinner when the buttons or arrow up/down keys are pressed.",
             "itemtype": "attribute",
@@ -2385,7 +2200,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 360,
             "description": "Amount to increment/decrement the spinner when the page up/down keys are pressed.",
             "itemtype": "attribute",
@@ -2396,7 +2211,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 370,
             "description": "override default (\"null\"), required for focus()",
             "itemtype": "attribute",
@@ -2407,7 +2222,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 380,
             "description": "The strings for the spinner UI (used in the tooltip texts)",
             "itemtype": "attribute",
@@ -2417,7 +2232,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 392,
             "description": "Function to format the value to be shown to the user",
             "itemtype": "attribute",
@@ -2428,7 +2243,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 404,
             "description": "Function to format the value entered by the user",
             "itemtype": "attribute",
@@ -2439,7 +2254,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 416,
             "description": "Whether the values should wrap around to the other end when one end of the range is reached",
             "itemtype": "attribute",
@@ -2450,7 +2265,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 427,
             "description": "Adds the <code>value</code> attribute to the list of attributes whose change needs to be reflected in the UI",
             "itemtype": "property",
@@ -2463,7 +2278,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-spinner/js/gallery-md-spinner.js",
+            "file": "yui3-gallery/src/gallery-md-spinner/js/gallery-md-spinner.js",
             "line": 438,
             "description": "Tells Widget to read the value from the input box if any existing markup is found",
             "itemtype": "property",
@@ -2474,7 +2289,7 @@
             "module": "gallery-md-spinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 42,
             "description": "Reference to the Spinner showing the hours.",
             "itemtype": "property",
@@ -2487,7 +2302,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 50,
             "description": "Reference to the Spinner showing the minutes.",
             "itemtype": "property",
@@ -2500,7 +2315,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 58,
             "description": "Reference to the Spinner showing the seconds.",
             "itemtype": "property",
@@ -2513,7 +2328,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 66,
             "description": "Reference to the Spinner showingam/pm.",
             "itemtype": "property",
@@ -2526,7 +2341,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 74,
             "description": "Reference to the timer created by Y.later that updates the time.",
             "itemtype": "property",
@@ -2539,7 +2354,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 82,
             "description": "Difference in milliseconds in between the current time and that displayed.  \nUsed when the timer is running to display times other than the current time.",
             "itemtype": "property",
@@ -2552,7 +2367,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 92,
             "itemtype": "property",
             "name": "_frozenTime",
@@ -2564,7 +2379,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 100,
             "description": "Helper factory to make a single Spinner",
             "itemtype": "method",
@@ -2596,7 +2411,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 119,
             "description": "Renders the hours and minutes spinners. \nThe other two, being optional, are rendered when set.",
             "itemtype": "method",
@@ -2607,7 +2422,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 132,
             "description": "Sets the listeners for events from the hours and minutes spinners.",
             "itemtype": "method",
@@ -2618,7 +2433,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 159,
             "description": "Creates or destroys the seconds spinner and attaches/detaches the event listeners.",
             "itemtype": "method",
@@ -2636,7 +2451,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 186,
             "description": "Creates or destroys the am/pm spinner and attaches/detaches the event listeners.",
             "itemtype": "method",
@@ -2654,7 +2469,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 230,
             "description": "Shows the current value in the set of spinners",
             "itemtype": "method",
@@ -2677,7 +2492,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 258,
             "description": "Sets the interval for refreshing the display",
             "itemtype": "method",
@@ -2695,7 +2510,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 273,
             "description": "Sets the timer running.",
             "itemtype": "method",
@@ -2713,7 +2528,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 285,
             "description": "Listener for a change in any of the spinners, sets the value.",
             "itemtype": "method",
@@ -2724,7 +2539,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 302,
             "description": "Listener for the wrapped event of the spinners to propagate \nthe changes from seconds to minutes and minutes to hours.",
             "itemtype": "method",
@@ -2742,7 +2557,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 320,
             "description": "Callback for the interval timer to update the time shown",
             "itemtype": "method",
@@ -2753,7 +2568,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 329,
             "description": "Getter for the time value.  It returns the current time minus the offset \nor the time when it was stopped.",
             "itemtype": "method",
@@ -2768,7 +2583,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 344,
             "description": "Setter for the time value.  \nIt calculates and saves the offset in between the current time and that set.",
             "itemtype": "method",
@@ -2786,7 +2601,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 357,
             "description": "Helper method to set the timer running.\nSame as <code>this.set('running', true);</code>",
             "itemtype": "method",
@@ -2795,7 +2610,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 366,
             "description": "Helper method to stop the timer.\nSame as <code>this.set('running', false);</code>",
             "itemtype": "method",
@@ -2804,7 +2619,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 379,
             "description": "Whether to show the am/pm indicator or show a 24 hours timer.",
             "itemtype": "attribute",
@@ -2815,7 +2630,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 389,
             "description": "Whether to show the seconds indicator",
             "itemtype": "attribute",
@@ -2826,7 +2641,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 399,
             "description": "Value of the timer",
             "itemtype": "attribute",
@@ -2837,7 +2652,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 416,
             "description": "How often to refresh the time displayed",
             "itemtype": "attribute",
@@ -2848,7 +2663,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 427,
             "description": "Whether the timer is running.",
             "itemtype": "attribute",
@@ -2859,7 +2674,7 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-md-timespinner/js/gallery-md-timespinner.js",
+            "file": "yui3-gallery/src/gallery-md-timespinner/js/gallery-md-timespinner.js",
             "line": 438,
             "description": "Set of localizable strings to be used as tooltips on the spinners.",
             "itemtype": "attribute",
@@ -2868,8 +2683,255 @@
             "module": "gallery-md-timespinner"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 46,
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 34,
+            "description": "Renders the elements and sets up the animation of the slider",
+            "itemtype": "method",
+            "name": "renderUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 57,
+            "description": "Calculates the size of the button based on the size of the labels.",
+            "itemtype": "method",
+            "name": "_resize",
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 83,
+            "description": "Responds to the end of the animation to completely hide the\nside that went off-screen",
+            "itemtype": "method",
+            "name": "_endAnim",
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 94,
+            "description": "Sets the title attribute to the bounding box",
+            "itemtype": "method",
+            "name": "_uiSetTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 104,
+            "description": "Default click event handler",
+            "itemtype": "method",
+            "name": "_afterBoundingBoxClick",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "",
+                    "type": "Event Facade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 115,
+            "description": "Helper method to toggle the button state",
+            "itemtype": "method",
+            "name": "toggle",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 122,
+            "description": "Sets the label for the ON side of the slider",
+            "itemtype": "method",
+            "name": "_uiSetLabelOn",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text of the label",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 132,
+            "description": "Sets the label for the OFF side of the slider",
+            "itemtype": "method",
+            "name": "_uiSetLabelOff",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "text of the label",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 142,
+            "description": "Responds to a change in the value of the slider by moving it",
+            "itemtype": "method",
+            "name": "_uiSetValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value of the button",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 157,
+            "description": "Template to use by the MakeNode extension",
+            "itemtype": "property",
+            "name": "_TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 176,
+            "description": "Class name suffixes for CSS classNames used in the widget",
+            "itemtype": "property",
+            "name": "Y.Button._CLASS_NAMES",
+            "type": "[Strings]",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 184,
+            "description": "DOM events to be listened to, used by the MakeNode extension",
+            "itemtype": "property",
+            "name": "Y.Button._EVENTS",
+            "type": "Object",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 195,
+            "description": "Value of the button",
+            "itemtype": "attribute",
+            "name": "value",
+            "type": "Boolean",
+            "default": "false",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 205,
+            "description": "Title (tooltip) of the button",
+            "itemtype": "attribute",
+            "name": "title",
+            "type": "String",
+            "default": "\"\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 215,
+            "description": "Localizable strings.  Contains the default values for the on and off labels.",
+            "itemtype": "attribute",
+            "name": "strings",
+            "type": "Object",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 226,
+            "description": "Text for the on side of the button",
+            "itemtype": "attribute",
+            "name": "labelOn",
+            "type": "String",
+            "default": "\"on\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-ibutton/js/gallery-md-ibutton.js",
+            "line": 238,
+            "description": "Text for the off side of the button",
+            "itemtype": "attribute",
+            "name": "labelOff",
+            "type": "String",
+            "default": "\"off\"",
+            "class": "IButton",
+            "module": "gallery-md-ibutton"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 47,
+            "description": "Stores the events to display.It contains the following properties, those starting with underscore are used internally:<ul>\n<li><b>start</b>: {timestamp} start time in milliseconds</li>\n<li><b>end</b>: {timestamp} end time in milliseconds</li>\n<li><b>text</b>: {string} text to be shown on the bar</li>\n<li><b>fuzzy</b>: {Boolean} the start and end days are uncertain </li>\n<li><b>locked</b>: {Boolean} the event cannot be edited (not relevant for this viewer </li>\n<li><b>endsToday</b>: {Boolean} the end day is today</li>\n<li><b>description</b>: {string} extended description</li>\n<li><b>icon</b>: {string} Base64-encoded image to go along the extended description</li>\n<li><b>category</b>: {string} the category this event belongs to</li>\n<li><b>_bar</b>: {Y.Node} reference to the Node for the bar representing this event</li>\n<li><b>_pointer</b>: {Y.Node} for point events, reference to the Node for the date pointer</li>\n<li><b>_isPoint</b>: {Boolean} signals that the event is a point event or a range event that has become too narrow to be displayed as a range</li>\n</ul>",
+            "itemtype": "property",
+            "name": "_events",
+            "type": "Object []",
+            "default": "null",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 67,
+            "description": "Display mode for the bars, to help calculate its location and handle crowding.  \nCan be standard (0), , compact (1) or overlappying (2)",
+            "itemtype": "property",
+            "name": "_mode",
+            "type": "{integer}",
+            "default": "0",
+            "class": "Y.Timeline",
+            "module": "timeline"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 75,
             "description": "Sets up listeners to respond to setting the URL,the CONTAINER or to the arrival of the timeline file.",
             "itemtype": "method",
             "name": "initializer",
@@ -2886,8 +2948,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 64,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 97,
             "description": "Returns the boolean value of a given tag in an XML document",
             "itemtype": "method",
             "name": "_readBoolean",
@@ -2913,8 +2975,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 76,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 109,
             "description": "Returns and parses a date from a given tag in an XML document",
             "itemtype": "method",
             "name": "_readDate",
@@ -2940,8 +3002,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 96,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 129,
             "description": "Returns and parses a color value from a given tag in an XML document",
             "itemtype": "method",
             "name": "_readColor",
@@ -2967,8 +3029,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 117,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 150,
             "description": "Returns the textual contents from a given tag in an XML document",
             "itemtype": "method",
             "name": "_readValue",
@@ -2994,8 +3056,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 129,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 162,
             "description": "Returns the XML element from given tag in an XML document",
             "itemtype": "method",
             "name": "_readEl",
@@ -3021,8 +3083,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 141,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 174,
             "description": "Reads the categories information",
             "itemtype": "method",
             "name": "_xmlReadCategories",
@@ -3039,8 +3101,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 158,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 191,
             "description": "Reads the view information",
             "itemtype": "method",
             "name": "_xmlReadView",
@@ -3057,8 +3119,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 179,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 211,
             "description": "Reads the events to show",
             "itemtype": "method",
             "name": "_xmlReadEvents",
@@ -3075,8 +3137,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 203,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 235,
             "description": "Sugar method to set the URL of the timeline file",
             "itemtype": "method",
             "name": "load",
@@ -3092,8 +3154,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 213,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 245,
             "description": "Requests the timeline information from the configured URL and parses it when it arrives.\nSignals its arrival by setting the 'loaded' configuration attribute",
             "itemtype": "method",
             "name": "_load",
@@ -3103,8 +3165,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 236,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 268,
             "description": "Adjusts the region information for the given node to make it relative to the container position",
             "itemtype": "method",
             "name": "_getRegion",
@@ -3125,8 +3187,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 249,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 281,
             "description": "Draws the bars corresponding to the events in the container",
             "itemtype": "method",
             "name": "_resize",
@@ -3143,8 +3205,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 337,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 378,
             "description": "Locates the bars so that they don't overlap one another.  Range events are drawn above the middle line,\npoint events below.  Range events may be moved below if the start and end dates are indistinguishable",
             "itemtype": "method",
             "name": "_locate",
@@ -3154,8 +3216,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 380,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 452,
             "description": "Draws the grid, adjusting the interval in between lines from an hour to ten thousand years\ndepending on the zoom factor",
             "itemtype": "method",
             "name": "_grid",
@@ -3165,8 +3227,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 458,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 530,
             "description": "Sugar method to set the container attribute.",
             "itemtype": "method",
             "name": "render",
@@ -3182,8 +3244,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 468,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 540,
             "description": "Renders the timeline in response to the container being set and the timeline file loaded",
             "itemtype": "method",
             "name": "_render",
@@ -3193,8 +3255,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 510,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 595,
             "description": "Hides de extended description",
             "itemtype": "method",
             "name": "_hideDescr",
@@ -3204,8 +3266,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 518,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 603,
             "description": "Shows the extended description above the event bar clicked",
             "itemtype": "method",
             "name": "_showDescr",
@@ -3222,8 +3284,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 557,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 654,
             "description": "Saves the initial position of a drag and the initial values of the start and end dates",
             "itemtype": "method",
             "name": "_startMove",
@@ -3240,8 +3302,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 570,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 667,
             "description": "Respondes to the movement of the cursor at whatever rate the system sends the signal\nby updating the start and end times of the display, either panning or zooming",
             "itemtype": "method",
             "name": "_dragMove",
@@ -3258,8 +3320,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 596,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 693,
             "description": "Listener for the mouse wheel change.  It will zoom or pan depending on the state of the control key.",
             "itemtype": "method",
             "name": "_mouseWheel",
@@ -3276,9 +3338,9 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 625,
-            "description": "Stores the categories, indexed by category name.",
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 722,
+            "description": "Stores the categories, indexed by category name.  Each category contains:<ul>\n<li><b>color</b>: {string} Background color for the bar in #rrggbb format</li>\n<li><b>fontColor</b>: {string} Color for the text in the bar in #rrggbb format</li>\n<li><b>hidden</b>: {Boolean} Events in this category should not be shown</li>\n</ul>",
             "itemtype": "attribute",
             "name": "categories",
             "type": "{Object}",
@@ -3287,19 +3349,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 636,
-            "description": "Array of the names of the categories hidden",
-            "itemtype": "attribute",
-            "name": "hiddenCats",
-            "type": "{Array}",
-            "default": "[]",
-            "class": "Y.Timeline",
-            "module": "timeline"
-        },
-        {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 646,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 737,
             "description": "Start time (left edge) of the current timeline, in miliseconds",
             "itemtype": "attribute",
             "name": "start",
@@ -3309,8 +3360,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 656,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 747,
             "description": "End time (right edge) of the current timeline, in miliseconds",
             "itemtype": "attribute",
             "name": "end",
@@ -3320,8 +3371,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 666,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 757,
             "description": "A reference to the HTML for rendering the timeline",
             "itemtype": "attribute",
             "name": "container",
@@ -3330,8 +3381,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 676,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 767,
             "description": "URL of the timeline file to be displayed",
             "itemtype": "attribute",
             "name": "url",
@@ -3340,8 +3391,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 684,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 775,
             "description": "Signals whether the timeline file has been loaded or not",
             "itemtype": "attribute",
             "name": "loaded",
@@ -3351,8 +3402,8 @@
             "module": "timeline"
         },
         {
-            "file": "gallery-timeline/js/gallery-timeline.js",
-            "line": 694,
+            "file": "yui3-gallery/src/gallery-timeline/js/gallery-timeline.js",
+            "line": 785,
             "description": "Localizable strings meant to be seen by the user",
             "itemtype": "attribute",
             "name": "strings",
@@ -3360,6 +3411,567 @@
             "default": "English strings",
             "class": "Y.Timeline",
             "module": "timeline"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 40,
+            "description": "Hash of values indexed by field name",
+            "itemtype": "property",
+            "name": "_values",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 47,
+            "description": "Hash of values as loaded from the remote source, \npresumed to be the current value there.",
+            "itemtype": "property",
+            "name": "_loadedValues",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 55,
+            "description": "Array of field names that make up the primary key for this record",
+            "itemtype": "property",
+            "name": "_primaryKeys",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 68,
+            "description": "Fired whenever a data value is changed.",
+            "itemtype": "event",
+            "name": "change",
+            "params": [
+                {
+                    "name": "ev.name",
+                    "description": "Name of the field changed",
+                    "type": "String"
+                },
+                {
+                    "name": "ev.newVal",
+                    "description": "New value of the field.",
+                    "type": "Any"
+                },
+                {
+                    "name": "ev.prevVal",
+                    "description": "Previous value of the field.",
+                    "type": "Any"
+                },
+                {
+                    "name": "ev.src",
+                    "description": "Source of the change event, if any.",
+                    "type": "String|null"
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 79,
+            "description": "Fired when new data has been received from the remote source.  \nIt will be fired even on a save operation if the response contains values.\nThe parsed values can be altered on the before (on) listener.",
+            "itemtype": "event",
+            "name": "loaded",
+            "params": [
+                {
+                    "name": "ev.response",
+                    "description": "Response data as received from the remote source",
+                    "type": "Object"
+                },
+                {
+                    "name": "ev.parsed",
+                    "description": "Data as returned from the parse method.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 90,
+            "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.",
+            "itemtype": "event",
+            "name": "saved",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 99,
+            "description": "Destroys this model instance and removes it from its containing lists, if\nany.\n\nIf there are any arguments then this method also delegates to the\nsync() method to delete the model from the persistence layer, which is an\nasynchronous action and thus requires at least a callback\notherwise, it returns immediately.",
+            "itemtype": "method",
+            "name": "destroy",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Options passed on to the sync method, if required.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "callback",
+                    "description": "function to be called when the sync operation finishes.",
+                    "type": "Function",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "Error message, if any or null.",
+                            "type": "String|null"
+                        },
+                        {
+                            "name": "response",
+                            "description": "The server response as received by sync(),",
+                            "type": "Any"
+                        }
+                    ]
+                }
+            ],
+            "chainable": 1,
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 143,
+            "description": "Returns the value of the field named or a hash with all values using the field names as keys",
+            "itemtype": "method",
+            "name": "getValue",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the field to return or all fields if omitted.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "If name is provided, the value of the field requested.  \nIf not, a hash with all the fields with the field names as keys.",
+                "type": "Any|Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 153,
+            "description": "Returns a hash with all values using the field names as keys.\nIt is an alias for getValue() with no arguments.",
+            "itemtype": "method",
+            "name": "getValues",
+            "return": {
+                "description": "a hash with all the fields with the field names as keys.",
+                "type": "Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 162,
+            "description": "Sets the value of the named field. \nFires the change event if the value is different from the current one.\nPrimary key fields cannot be changed unless still undefined.",
+            "itemtype": "method",
+            "name": "setValue",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the field to be set",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value to be assigned to the field",
+                    "type": "Any"
+                },
+                {
+                    "name": "src",
+                    "description": "Source of the change in the value.",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 182,
+            "description": "Default function for the change event, sets the value and marks the model as modified.",
+            "itemtype": "method",
+            "name": "_defSetValue",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "(see change event)",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 192,
+            "description": "Sets a series of values.   It simply loops over the hash of values provided calling setValue on each.",
+            "itemtype": "method",
+            "name": "setValues",
+            "params": [
+                {
+                    "name": "values",
+                    "description": "hash of values to change",
+                    "type": "Object"
+                },
+                {
+                    "name": "src",
+                    "description": "Source of the changes",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 204,
+            "description": "Returns a hash indexed by field name, of all the values in the model that have changed since the last time\nthey were synchornized with the remote source.   Each entry has a prevVal and newVal entry.",
+            "itemtype": "method",
+            "name": "getChangedValues",
+            "return": {
+                "description": "Has of all entries changed since last synched, each entry has a newVal and prevVal property contaning original and changed values.",
+                "type": "Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 223,
+            "description": "Returns a hash with the values of the primary key fields, indexed by their field names",
+            "itemtype": "method",
+            "name": "getPKValues",
+            "return": {
+                "description": "Hash with the primary key values, indexed by their field names",
+                "type": "Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 236,
+            "description": "Returns an HTML-escaped version of the value of the specified string\nattribute. The value is escaped using Y.Escape.html().",
+            "itemtype": "method",
+            "name": "getAsHTML",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Attribute name or object property path.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "HTML-escaped attribute value.",
+                "type": "String"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 249,
+            "description": "Returns a URL-encoded version of the value of the specified field,\nor a full URL with name=value sets for all fields if no name is given.\nThe names and values are encoded using the native encodeURIComponent()\nfunction.",
+            "itemtype": "method",
+            "name": "getAsURL",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Field name.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "URL-encoded field value if name is given or URL encoded set of name=value pairs for all fields.",
+                "type": "String"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 274,
+            "description": "Default function for the loaded event. Does the actual setting of the values just loaded.",
+            "itemtype": "method",
+            "name": "_defDataLoaded",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "see loaded event",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 287,
+            "description": "Loads this model from the server.\n\nThis method delegates to the sync() method to perform the actual load\noperation, which is an asynchronous action. Specify a _callback_ function to\nbe notified of success or failure.\n\nA successful load operation will fire a loaded event, while an unsuccessful\nload operation will fire an error event with the src value \"load\".",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Options to be passed to sync().\n\tUsually these will be or will include the keys used by the remote source \n\tto locate the data to be loaded.\n\tThey will be passed on unmodified to the sync method.\n\tIt is up to sync to determine what they mean.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Called when the sync operation finishes. Callback will receive:",
+                    "type": "Callback",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "Error message, if any or null.",
+                            "type": "String|null"
+                        },
+                        {
+                            "name": "response",
+                            "description": "The server response as received by sync(),",
+                            "type": "Any"
+                        }
+                    ]
+                }
+            ],
+            "chainable": 1,
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 341,
+            "description": "Called to parse the _response_ when a response is received from the server.\nThis method receives a server _response_ and is expected to return a\nvalue hash.\n\nThe default implementation assumes that _response_ is either an attribute\nhash or a JSON string that can be parsed into an attribute hash. If\n_response_ is a JSON string and either Y.JSON or the native JSON object\nare available, it will be parsed automatically. If a parse error occurs, an\nerror event will be fired and the model will not be updated.\n\nYou may override this method to implement custom parsing logic if necessary.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "Server response.",
+                    "type": "Any"
+                }
+            ],
+            "return": {
+                "description": "Values hash.",
+                "type": "Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 378,
+            "description": "Saves this model to the server.\n\nThis method delegates to the sync() method to perform the actual save\noperation, which is an asynchronous action. Specify a _callback_ function to\nbe notified of success or failure.\n\nA successful save operation will fire a saved event, while an unsuccessful\nload operation will fire an error event with the src value \"save\".\n\nIf the save operation succeeds and the parse method returns non-empty values\nwithin the response\ta loaded event will also be fired to read those values.",
+            "itemtype": "method",
+            "name": "save",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Options to be passed to sync() and to set()\n\twhen setting synced attributes. It's up to the custom sync implementation\n\tto determine what options it supports or requires, if any.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "callback",
+                    "description": "Called when the sync operation finishes.",
+                    "type": "Function",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "Error message, if any or null.",
+                            "type": "String|null"
+                        },
+                        {
+                            "name": "response",
+                            "description": "The server response as received by sync(),",
+                            "type": "Any"
+                        }
+                    ]
+                }
+            ],
+            "chainable": 1,
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 453,
+            "description": "Override this method to provide a custom persistence implementation for this\nmodel. The default just calls the callback without actually doing anything.\n\nThis method is called internally by load(), save(), and destroy().",
+            "itemtype": "method",
+            "name": "sync",
+            "params": [
+                {
+                    "name": "action",
+                    "description": "Sync action to perform. May be one of the following:\n\n\t* create: Store a newly-created model for the first time.\n\t* read  : Load an existing model.\n\t* update: Update an existing model.\n\t* delete: Delete an existing model.",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "Sync options. It's up to the custom sync\n\timplementation to determine what options it supports or requires, if any.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "callback",
+                    "description": "Called when the sync operation finishes.",
+                    "type": "Function",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "If an error occurred, this parameter will\n\t\tcontain the error. If the sync operation succeeded, _err_ will be\n\t\tfalsy.",
+                            "type": "Error|null"
+                        },
+                        {
+                            "name": "response",
+                            "description": "The server's response. This value will\n\t\tbe passed to the parse() method, which is expected to parse it and\n\t\treturn an attribute hash.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 483,
+            "description": "Override this method to provide custom validation logic for this model.\n\nWhile attribute-specific validators can be used to validate individual\nattributes, this method gives you a hook to validate a hash of all\nattributes before the model is saved. This method is called automatically\nbefore save() takes any action. If validation fails, the save() call\nwill be aborted.\n\nIn your validation method, call the provided callback function with no\narguments to indicate success. To indicate failure, pass a single argument,\nwhich may contain an error message, an array of error messages, or any other\nvalue. This value will be passed along to the error event.",
+            "example": [
+                "\n\nmodel.validate = function (attrs, callback) {\nif (attrs.pie !== true) {\n// No pie?! Invalid!\ncallback('Must provide pie.');\nreturn;\n}\n\n// Success!\ncallback();\n};"
+            ],
+            "itemtype": "method",
+            "name": "validate",
+            "params": [
+                {
+                    "name": "attrs",
+                    "description": "Attribute hash containing all model attributes to\nbe validated.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Validation callback. Call this function when your\nvalidation logic finishes. To trigger a validation failure, pass any\nvalue as the first argument to the callback (ideally a meaningful\nvalidation error of some kind).",
+                    "type": "Function",
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "Validation error. Don't provide this\nargument if validation succeeds. If validation fails, set this to an\nerror message or some other meaningful value. It will be passed\nalong to the resulting error event.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 526,
+            "description": "Calls the public, overridable validate() method and fires an error event\nif validation fails.",
+            "itemtype": "method",
+            "name": "_validate",
+            "params": [
+                {
+                    "name": "attributes",
+                    "description": "Attribute hash.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Validation callback.",
+                    "type": "Function",
+                    "props": [
+                        {
+                            "name": "err",
+                            "description": "Value on failure, non-value on success.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 556,
+            "description": "Returns a copy of this model's attributes that can be passed to\nY.JSON.stringify() or used for other nefarious purposes.\n\nThe clientId attribute is not included in the returned object.\n\nIf you've specified a custom attribute name in the idAttribute property,\nthe default id attribute will not be included in the returned object.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "Copy of this model's attributes.",
+                "type": "Object"
+            },
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 616,
+            "description": "Indicates whether any of the fields has been changed since created or loaded.\nField names can be given as sub-attributes to indicate if any particular field has beeen changed.\nmodel.get('isModified.name') returns true if the field _name_ has been modified.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
+            "itemtype": "attribute",
+            "name": "isModified",
+            "type": "Boolean",
+            "default": "false",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 634,
+            "description": "Indicates that the model is new and has not been modified since creation.\nField names can be given as sub-attributes to indicate if any particular field is new.\nmodel.get('isNew.name') returns true if the field _name_ is new.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
+            "itemtype": "attribute",
+            "name": "isNew",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 652,
+            "description": "List of fields making the primary key of this model. \nPrimary Key fields cannot be modified once initially loaded.\nIt can be set as an array of field names or, if the key is made of a single field, a string with the name of that field.\nIt will always be returned as an array.\nField names can be given as a sub-attribute to ask whether a particular field is a primary key, thus:\nmodel.get('primaryKeys.name') returns true of the field name is a primary key.\nIt can only be set once.",
+            "itemtype": "attribute",
+            "name": "primaryKeys",
+            "writeonce": "",
+            "type": "array",
+            "default": "[]",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
         }
     ]
 }
