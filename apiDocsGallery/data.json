@@ -112,7 +112,11 @@
                 "gallery-md-model": 1
             },
             "classes": {
-                "Y.GalleryModel": 1
+                "Y.GalleryModel": 1,
+                "Y.GalleryModelSimpleUndo": 1,
+                "Y.GalleryModelChronologicalUndo": 1,
+                "Y.GalleryModelMultiRecord": 1,
+                "Y.GalleryModelSortedMultiRecord": 1
             },
             "fors": {},
             "namespaces": {}
@@ -250,7 +254,11 @@
             "name": "gallery-md-model",
             "submodules": {},
             "classes": {
-                "Y.GalleryModel": 1
+                "Y.GalleryModel": 1,
+                "Y.GalleryModelSimpleUndo": 1,
+                "Y.GalleryModelChronologicalUndo": 1,
+                "Y.GalleryModelMultiRecord": 1,
+                "Y.GalleryModelSortedMultiRecord": 1
             },
             "fors": {},
             "namespaces": {},
@@ -527,7 +535,79 @@
             "line": 8,
             "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes.\n \nIn most cases, you'll want to create your own subclass of Y.GalleryModel and\ncustomize it to meet your needs. In particular, the sync() and validate()\nmethods are meant to be overridden by custom implementations. You may also want\nto override the parse() method to parse non-generic server responses.",
             "is_constructor": 1,
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "Initial configuration attribute plus:",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "values",
+                            "description": "Sets initial values for the model.  \n\tModel will be marked as new and not modified (as if just loaded).",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
             "extends": "Base"
+        },
+        "Y.GalleryModelSimpleUndo": {
+            "name": "Y.GalleryModelSimpleUndo",
+            "shortname": "Y.GalleryModelSimpleUndo",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-model",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 704,
+            "description": "An extension for Y.GalleryModel that provides a single level of undo for each field."
+        },
+        "Y.GalleryModelChronologicalUndo": {
+            "name": "Y.GalleryModelChronologicalUndo",
+            "shortname": "Y.GalleryModelChronologicalUndo",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-model",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 757,
+            "description": "Provides multiple levels of undo in strict chronological order \nwhatever the field was at each stage.\nChanges done on multiple fields via setValues\nwill also be undone in one step."
+        },
+        "Y.GalleryModelMultiRecord": {
+            "name": "Y.GalleryModelMultiRecord",
+            "shortname": "Y.GalleryModelMultiRecord",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-model",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 812,
+            "description": "Allows GalleryModel to handle a set of records using the Flyweight pattern.\nIt exposes one record at a time from a shelf of records.\nExposed records can be selected by setting the _index_ attribute."
+        },
+        "Y.GalleryModelSortedMultiRecord": {
+            "name": "Y.GalleryModelSortedMultiRecord",
+            "shortname": "Y.GalleryModelSortedMultiRecord",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-md-model",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1060,
+            "description": "Extension to sort records stored in GalleryModel, extended with GalleryModelMultiRecord"
         }
     },
     "classitems": [
@@ -3414,7 +3494,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 40,
+            "line": 45,
             "description": "Hash of values indexed by field name",
             "itemtype": "property",
             "name": "_values",
@@ -3426,7 +3506,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 47,
+            "line": 52,
             "description": "Hash of values as loaded from the remote source, \npresumed to be the current value there.",
             "itemtype": "property",
             "name": "_loadedValues",
@@ -3438,7 +3518,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 55,
+            "line": 60,
             "description": "Array of field names that make up the primary key for this record",
             "itemtype": "property",
             "name": "_primaryKeys",
@@ -3450,7 +3530,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 68,
+            "line": 73,
             "description": "Fired whenever a data value is changed.",
             "itemtype": "event",
             "name": "change",
@@ -3481,7 +3561,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 79,
+            "line": 84,
             "description": "Fired when new data has been received from the remote source.  \nIt will be fired even on a save operation if the response contains values.\nThe parsed values can be altered on the before (on) listener.",
             "itemtype": "event",
             "name": "loaded",
@@ -3502,7 +3582,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 90,
+            "line": 95,
             "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.",
             "itemtype": "event",
             "name": "saved",
@@ -3511,7 +3591,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 99,
+            "line": 111,
             "description": "Destroys this model instance and removes it from its containing lists, if\nany.\n\nIf there are any arguments then this method also delegates to the\nsync() method to delete the model from the persistence layer, which is an\nasynchronous action and thus requires at least a callback\notherwise, it returns immediately.",
             "itemtype": "method",
             "name": "destroy",
@@ -3547,29 +3627,28 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 143,
-            "description": "Returns the value of the field named or a hash with all values using the field names as keys",
+            "line": 155,
+            "description": "Returns the value of the field named",
             "itemtype": "method",
             "name": "getValue",
             "params": [
                 {
                     "name": "name",
-                    "description": "Name of the field to return or all fields if omitted.",
-                    "type": "String",
-                    "optional": true
+                    "description": "Name of the field to return.",
+                    "type": "String"
                 }
             ],
             "return": {
-                "description": "If name is provided, the value of the field requested.  \nIf not, a hash with all the fields with the field names as keys.",
-                "type": "Any|Object"
+                "description": "the value of the field requested.",
+                "type": "Any"
             },
             "class": "Y.GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 153,
-            "description": "Returns a hash with all values using the field names as keys.\nIt is an alias for getValue() with no arguments.",
+            "line": 164,
+            "description": "Returns a hash with all values using the field names as keys.",
             "itemtype": "method",
             "name": "getValues",
             "return": {
@@ -3581,7 +3660,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 162,
+            "line": 172,
             "description": "Sets the value of the named field. \nFires the change event if the value is different from the current one.\nPrimary key fields cannot be changed unless still undefined.",
             "itemtype": "method",
             "name": "setValue",
@@ -3608,7 +3687,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 182,
+            "line": 192,
             "description": "Default function for the change event, sets the value and marks the model as modified.",
             "itemtype": "method",
             "name": "_defSetValue",
@@ -3626,7 +3705,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 192,
+            "line": 209,
             "description": "Sets a series of values.   It simply loops over the hash of values provided calling setValue on each.",
             "itemtype": "method",
             "name": "setValues",
@@ -3648,7 +3727,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 204,
+            "line": 228,
             "description": "Returns a hash indexed by field name, of all the values in the model that have changed since the last time\nthey were synchornized with the remote source.   Each entry has a prevVal and newVal entry.",
             "itemtype": "method",
             "name": "getChangedValues",
@@ -3661,7 +3740,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 223,
+            "line": 247,
             "description": "Returns a hash with the values of the primary key fields, indexed by their field names",
             "itemtype": "method",
             "name": "getPKValues",
@@ -3674,7 +3753,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 236,
+            "line": 260,
             "description": "Returns an HTML-escaped version of the value of the specified string\nattribute. The value is escaped using Y.Escape.html().",
             "itemtype": "method",
             "name": "getAsHTML",
@@ -3694,7 +3773,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 249,
+            "line": 273,
             "description": "Returns a URL-encoded version of the value of the specified field,\nor a full URL with name=value sets for all fields if no name is given.\nThe names and values are encoded using the native encodeURIComponent()\nfunction.",
             "itemtype": "method",
             "name": "getAsURL",
@@ -3715,7 +3794,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 274,
+            "line": 298,
             "description": "Default function for the loaded event. Does the actual setting of the values just loaded.",
             "itemtype": "method",
             "name": "_defDataLoaded",
@@ -3733,7 +3812,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 287,
+            "line": 311,
             "description": "Loads this model from the server.\n\nThis method delegates to the sync() method to perform the actual load\noperation, which is an asynchronous action. Specify a _callback_ function to\nbe notified of success or failure.\n\nA successful load operation will fire a loaded event, while an unsuccessful\nload operation will fire an error event with the src value \"load\".",
             "itemtype": "method",
             "name": "load",
@@ -3768,7 +3847,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 341,
+            "line": 366,
             "description": "Called to parse the _response_ when a response is received from the server.\nThis method receives a server _response_ and is expected to return a\nvalue hash.\n\nThe default implementation assumes that _response_ is either an attribute\nhash or a JSON string that can be parsed into an attribute hash. If\n_response_ is a JSON string and either Y.JSON or the native JSON object\nare available, it will be parsed automatically. If a parse error occurs, an\nerror event will be fired and the model will not be updated.\n\nYou may override this method to implement custom parsing logic if necessary.",
             "itemtype": "method",
             "name": "parse",
@@ -3788,7 +3867,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 378,
+            "line": 403,
             "description": "Saves this model to the server.\n\nThis method delegates to the sync() method to perform the actual save\noperation, which is an asynchronous action. Specify a _callback_ function to\nbe notified of success or failure.\n\nA successful save operation will fire a saved event, while an unsuccessful\nload operation will fire an error event with the src value \"save\".\n\nIf the save operation succeeds and the parse method returns non-empty values\nwithin the response\ta loaded event will also be fired to read those values.",
             "itemtype": "method",
             "name": "save",
@@ -3824,7 +3903,16 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 453,
+            "line": 470,
+            "description": "Restores the values when last loaded, saved or created.",
+            "itemtype": "method",
+            "name": "reset",
+            "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 479,
             "description": "Override this method to provide a custom persistence implementation for this\nmodel. The default just calls the callback without actually doing anything.\n\nThis method is called internally by load(), save(), and destroy().",
             "itemtype": "method",
             "name": "sync",
@@ -3865,7 +3953,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 483,
+            "line": 509,
             "description": "Override this method to provide custom validation logic for this model.\n\nWhile attribute-specific validators can be used to validate individual\nattributes, this method gives you a hook to validate a hash of all\nattributes before the model is saved. This method is called automatically\nbefore save() takes any action. If validation fails, the save() call\nwill be aborted.\n\nIn your validation method, call the provided callback function with no\narguments to indicate success. To indicate failure, pass a single argument,\nwhich may contain an error message, an array of error messages, or any other\nvalue. This value will be passed along to the error event.",
             "example": [
                 "\n\nmodel.validate = function (attrs, callback) {\nif (attrs.pie !== true) {\n// No pie?! Invalid!\ncallback('Must provide pie.');\nreturn;\n}\n\n// Success!\ncallback();\n};"
@@ -3897,7 +3985,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 526,
+            "line": 552,
             "description": "Calls the public, overridable validate() method and fires an error event\nif validation fails.",
             "itemtype": "method",
             "name": "_validate",
@@ -3928,7 +4016,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 556,
+            "line": 582,
             "description": "Returns a copy of this model's attributes that can be passed to\nY.JSON.stringify() or used for other nefarious purposes.\n\nThe clientId attribute is not included in the returned object.\n\nIf you've specified a custom attribute name in the idAttribute property,\nthe default id attribute will not be included in the returned object.",
             "itemtype": "method",
             "name": "toJSON",
@@ -3941,29 +4029,31 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 616,
+            "line": 642,
             "description": "Indicates whether any of the fields has been changed since created or loaded.\nField names can be given as sub-attributes to indicate if any particular field has beeen changed.\nmodel.get('isModified.name') returns true if the field _name_ has been modified.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
             "itemtype": "attribute",
             "name": "isModified",
             "type": "Boolean",
+            "readonly": "",
             "default": "false",
             "class": "Y.GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 634,
+            "line": 661,
             "description": "Indicates that the model is new and has not been modified since creation.\nField names can be given as sub-attributes to indicate if any particular field is new.\nmodel.get('isNew.name') returns true if the field _name_ is new.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
             "itemtype": "attribute",
             "name": "isNew",
             "type": "Boolean",
+            "readonly": "",
             "default": "true",
             "class": "Y.GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 652,
+            "line": 680,
             "description": "List of fields making the primary key of this model. \nPrimary Key fields cannot be modified once initially loaded.\nIt can be set as an array of field names or, if the key is made of a single field, a string with the name of that field.\nIt will always be returned as an array.\nField names can be given as a sub-attribute to ask whether a particular field is a primary key, thus:\nmodel.get('primaryKeys.name') returns true of the field name is a primary key.\nIt can only be set once.",
             "itemtype": "attribute",
             "name": "primaryKeys",
@@ -3971,6 +4061,338 @@
             "type": "array",
             "default": "[]",
             "class": "Y.GalleryModel",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 717,
+            "description": "Event listener for the after value change event, it tracks changes for each field.  \nIt retains only the last change for each field.",
+            "itemtype": "method",
+            "name": "_trackChange",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "As provided by the change event",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSimpleUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 729,
+            "description": "After load or save operations, it drops any changes it might have tracked.",
+            "itemtype": "method",
+            "name": "_resetUndo",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSimpleUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 737,
+            "description": "Reverts one level of change for a specific field or all fields",
+            "itemtype": "method",
+            "name": "undo",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "If provided it will undo that particular field,\n\totherwise, it undoes the whole record.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "class": "Y.GalleryModelSimpleUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 773,
+            "description": "Event listener for the after value change event, it tracks changes for each field.  \nIt keeps a stack of each change.",
+            "itemtype": "method",
+            "name": "_trackChange",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "As provided by the change event",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelChronologicalUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 785,
+            "description": "After load or save operations, it drops any changes it might have tracked.",
+            "itemtype": "method",
+            "name": "_resetUndo",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelChronologicalUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 793,
+            "description": "Reverts one level of field changes.",
+            "itemtype": "method",
+            "name": "undo",
+            "class": "Y.GalleryModelChronologicalUndo",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 830,
+            "description": "Index of the shelf for the record being exposed.\nUse index attribute to check/set the index value.",
+            "itemtype": "property",
+            "name": "_currentIndex",
+            "type": "integer",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 839,
+            "description": "Storage for the records when not exposed.",
+            "itemtype": "property",
+            "name": "_shelves",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 846,
+            "description": "Saves the exposed record into the shelves at the position given by _currentIndex",
+            "itemtype": "method",
+            "name": "_shelve",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 868,
+            "description": "Retrives and exposes the record from the shelf at the position given by _currentIndex",
+            "itemtype": "method",
+            "name": "_fetch",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 889,
+            "description": "Initializes an exposed record",
+            "itemtype": "method",
+            "name": "_initNew",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 900,
+            "description": "Adds a new record at the index position given or at the end.\nThe new record becomes the current.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "values",
+                    "description": "set of values to set",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "position to add the values at or at the end if not provided.",
+                    "type": "Integer",
+                    "optional": true
+                }
+            ],
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 920,
+            "description": "Executes the given function for each record in the set.\nReturning exactly false from the function spares shelving the record.\nIf function does not modify the record, returning false will improve performance.",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "function to execute, it will be provided with:",
+                    "type": "Function",
+                    "props": [
+                        {
+                            "name": "index",
+                            "description": "index of the record exposed",
+                            "type": "Integer"
+                        }
+                    ]
+                }
+            ],
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 939,
+            "description": "Executes the given function for each record in the set.\nIt is faster than using each and then checking for isModified\nReturning exactly false from the function spares shelving the record.\nIf function does not modify the record, returning false will improve performance.",
+            "itemtype": "method",
+            "name": "eachModified",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "function to execute, it will be provided with:",
+                    "type": "Function",
+                    "props": [
+                        {
+                            "name": "index",
+                            "description": "index of the record exposed",
+                            "type": "Integer"
+                        }
+                    ]
+                }
+            ],
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 961,
+            "description": "Calls _save_ on each record modified.\nThis is not the best saving strategy for saving batches of records,\nbut it is the easiest and safest.  Implementors are encouraged to \ndesign their own.",
+            "itemtype": "method",
+            "name": "saveAllModified",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 971,
+            "description": "<em>This is a documentation entry only, this method does not define load.</em>\n   \nThis extension captures the _loaded_ event so that if a load \nreturns an array of records, they will be added to the shelves.\nExisting records are kept, call _empty_ if they should be discarded.\nSee method load of Y.GalleryModel for further info.",
+            "itemtype": "method",
+            "name": "load",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 980,
+            "description": "Listener for the loaded event, checks if the parsed response is an array\nand saves it into the shelves.",
+            "itemtype": "method",
+            "name": "_batchLoad",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "facade produced by load.",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 996,
+            "description": "Returns the number of records stored",
+            "itemtype": "method",
+            "name": "size",
+            "return": {
+                "description": "number of records in the shelves",
+                "type": "Integer"
+            },
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1004,
+            "description": "Empties the shelves of any records as well as the exposed record",
+            "itemtype": "method",
+            "name": "empty",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1013,
+            "description": "Setter for the _index_ attribute.\nValidates and copies the current index value into _currentIndex.",
+            "itemtype": "method",
+            "name": "_indexSetter",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "new value for the index",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "new value for the index or INVALID_VALUE if invalid.",
+                "type": "Integer|INVALID_VALUE"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1031,
+            "description": "Getter for the _index_ attribute\nReturns the value from _currentIndex",
+            "itemtype": "method",
+            "name": "_indexGetter",
+            "return": {
+                "description": "value of the index",
+                "type": "Integer"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1045,
+            "description": "Index of the record exposed.",
+            "itemtype": "attribute",
+            "name": "index",
+            "type": "Integer",
+            "default": "0",
+            "class": "Y.GalleryModelMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1143,
+            "description": "Adds a new record at its proper position according to the sort configuration.\nIt overrides GalleryModelMultiRecord's own add method, ignoring the index position requested, if any.\nThe new record becomes the current.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "values",
+                    "description": "set of values to set",
+                    "type": "Object"
+                }
+            ],
+            "class": "Y.GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         }
     ]

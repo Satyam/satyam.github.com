@@ -62,6 +62,14 @@
             
                 <li><a href="../classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
             
+                <li><a href="../classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="../classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
+            
+                <li><a href="../classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="../classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="../classes/Y.Timeline.html">Y.Timeline</a></li>
             
             </ul>
@@ -163,7 +171,17 @@ to override the parse() method to parse non-generic server responses.</p>
     <h3 class="name"><code>Y.GalleryModel</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[cfg]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -196,6 +214,46 @@ to override the parse() method to parse non-generic server responses.</p>
         
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[cfg]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        Initial configuration attribute plus:
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                <code class="param-name">values</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+                                <div class="param-description">
+                                    Sets initial values for the model. 
+    Model will be marked as new and not modified (as if just loaded).
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -302,6 +360,12 @@ to override the parse() method to parse non-generic server responses.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_parse">parse</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_reset">reset</a>
 
                                 
                             </li>
@@ -468,7 +532,7 @@ to override the parse() method to parse non-generic server responses.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l274"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:274</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l298"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:298</code></a></p>
 
         
 
@@ -548,7 +612,7 @@ to override the parse() method to parse non-generic server responses.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l182"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:182</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l192"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:192</code></a></p>
 
         
 
@@ -634,7 +698,7 @@ to override the parse() method to parse non-generic server responses.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l526"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:526</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l552"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:552</code></a></p>
 
         
 
@@ -751,7 +815,7 @@ if validation fails.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l99"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:99</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l111"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:111</code></a></p>
 
         
 
@@ -882,7 +946,7 @@ otherwise, it returns immediately.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l236"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:236</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l260"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:260</code></a></p>
 
         
 
@@ -978,7 +1042,7 @@ attribute. The value is escaped using Y.Escape.html().
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l249"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:249</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l273"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:273</code></a></p>
 
         
 
@@ -1067,7 +1131,7 @@ function.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l204"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:204</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l228"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:228</code></a></p>
 
         
 
@@ -1130,7 +1194,7 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l223"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:223</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l247"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:247</code></a></p>
 
         
 
@@ -1171,7 +1235,7 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
             
                 <li class="arg">
                     
-                        <code class="optional">[name]</code>
+                        <code>name</code>
                     
                 </li>
             
@@ -1181,7 +1245,7 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
 
     
         <span class="returns-inline">
-            <span class="type">Any | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+            <span class="type">Any</span>
         </span>
     
 
@@ -1202,7 +1266,7 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l143"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:143</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l155"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:155</code></a></p>
 
         
 
@@ -1210,7 +1274,7 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
     </div>
 
     <div class="description">
-        Returns the value of the field named or a hash with all values using the field names as keys
+        Returns the value of the field named
     </div>
 
     
@@ -1221,15 +1285,14 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
             
                 <li class="param">
                     
-                        <code class="param-name optional">[name]</code>
+                        <code class="param-name">name</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        Name of the field to return or all fields if omitted.
+                        Name of the field to return.
                     </div>
 
                     
@@ -1246,10 +1309,9 @@ they were synchornized with the remote source.   Each entry has a prevVal and ne
             <div class="returns-description">
                 
                     
-                        <span class="type">Any | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                        <span class="type">Any</span>:
                     
-                    If name is provided, the value of the field requested. 
-If not, a hash with all the fields with the field names as keys.
+                    the value of the field requested.
                 
             </div>
         </div>
@@ -1289,7 +1351,7 @@ If not, a hash with all the fields with the field names as keys.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l153"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:153</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l164"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:164</code></a></p>
 
         
 
@@ -1298,7 +1360,6 @@ If not, a hash with all the fields with the field names as keys.
 
     <div class="description">
         Returns a hash with all values using the field names as keys.
-It is an alias for getValue() with no arguments.
     </div>
 
     
@@ -1366,7 +1427,7 @@ It is an alias for getValue() with no arguments.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l287"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:287</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l311"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:311</code></a></p>
 
         
 
@@ -1501,7 +1562,7 @@ load operation will fire an error event with the src value "load".
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l341"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:341</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l366"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:366</code></a></p>
 
         
 
@@ -1566,6 +1627,51 @@ You may override this method to implement custom parsing logic if necessary.
 </div>
 
                 
+                    <div id="method_reset" class="method item">
+    <h3 class="name"><code>reset</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l470"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:470</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Restores the values when last loaded, saved or created.
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_save" class="method item">
     <h3 class="name"><code>save</code></h3>
 
@@ -1610,7 +1716,7 @@ You may override this method to implement custom parsing logic if necessary.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l378"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:378</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l403"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:403</code></a></p>
 
         
 
@@ -1755,7 +1861,7 @@ within the response    a loaded event will also be fired to read those values.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l162"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:162</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l172"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:172</code></a></p>
 
         
 
@@ -1872,7 +1978,7 @@ Primary key fields cannot be changed unless still undefined.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l192"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:192</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l209"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:209</code></a></p>
 
         
 
@@ -1978,7 +2084,7 @@ Primary key fields cannot be changed unless still undefined.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l453"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:453</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l479"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:479</code></a></p>
 
         
 
@@ -2122,7 +2228,7 @@ This method is called internally by load(), save(), and destroy().
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l556"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:556</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l582"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:582</code></a></p>
 
         
 
@@ -2202,7 +2308,7 @@ the default id attribute will not be included in the returned object.
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l483"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:483</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l509"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:509</code></a></p>
 
         
 
@@ -2338,7 +2444,7 @@ callback();
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l47"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:47</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l52"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:52</code></a></p>
 
         
 
@@ -2377,7 +2483,7 @@ presumed to be the current value there.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l55"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:55</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l60"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:60</code></a></p>
 
         
 
@@ -2415,7 +2521,7 @@ presumed to be the current value there.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l40"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:40</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l45"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:45</code></a></p>
 
         
 
@@ -2460,7 +2566,7 @@ presumed to be the current value there.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l616"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:616</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l642"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:642</code></a></p>
 
         
 
@@ -2558,7 +2664,7 @@ but the state of the record as a whole, which is far more useful.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l634"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:634</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l661"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:661</code></a></p>
 
         
 
@@ -2656,7 +2762,7 @@ but the state of the record as a whole, which is far more useful.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l652"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:652</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l680"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:680</code></a></p>
 
         
 
@@ -2761,7 +2867,7 @@ It can only be set once.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l68"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:68</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l73"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:73</code></a></p>
 
         
 
@@ -2866,7 +2972,7 @@ It can only be set once.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l79"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:79</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l84"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:84</code></a></p>
 
         
 
@@ -2943,7 +3049,7 @@ The parsed values can be altered on the before (on) listener.</p>
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l90"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:90</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l95"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:95</code></a></p>
 
         
 
