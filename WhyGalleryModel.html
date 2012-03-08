@@ -3,18 +3,18 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>Satyam's GalleryModel</TITLE>
-
 </HEAD>
-<BODY LANG="en-US" DIR="LTR">
+<BODY>
 <H1>Satyam's GalleryModel model</H1>
 <P>After stumbling over a few issues with the standard YUI Model
 component and adding patch over patch to the standard one, I found
 out that the patches were so large as to make the patched files
 irrelevant so I decided to release a separate version as a YUI
 Gallery component. Though GalleryModel is still compatible with View,
-it is not compatible with ModelList so it includes its own
-GalleryModelList, which does inherit from ModelList and can work with
-either Model or GalleryModel.</P>
+it is not compatible with ModelList.  At a later stage I expect to
+include a subclass to ModelList that can accept either Model or
+GalleryModel instances though, as I'll show later, it might be
+unnecessary.</P>
 <H2>Why a separate Model?</H2>
 <P>Though Model works nicely in new applications, it is not easy to
 use when dealing with legacy data fetched from existing SQL
@@ -97,8 +97,8 @@ the status of field <CODE>fieldOne</CODE>.</P>
 the existence of a value for the primary key field, a dangerous
 assumption in many cases. For example, a record using the Social
 Security Number (SSN) as a primary key will ask the operator for its
-value and thus would not be <I>undefined</I> <SPAN STYLE="font-style: normal">even
-for a newly created record.</SPAN> The standard Model would report
+value and thus would not be <I>undefined</I> even
+for a newly created record. The standard Model would report
 such a record as not being new and call <CODE>sync()</CODE>
 with action set to <CODE>'update'</CODE> instead of
 <CODE>'create'</CODE> as it should for a new record. 
@@ -123,12 +123,11 @@ sub-attribute allows us to ask whether a particular field is a
 primary key. Thus, <CODE>myModel.get('primaryKeys')
 </CODE>might return <CODE>['docType', 'doc']</CODE>
 while <CODE>myModel.get('primaryKeys.firstName')</CODE>
-would then return <I>false</I>,
-since <CODE>firstName</CODE> is not part of the
-primary key for that model.</P>
+would then return <I>false</I>, since <CODE>firstName</CODE>
+is not part of the primary key for that model.</P>
 <P>Primary key field values cannot be changed, <CODE>setValue</CODE>
-will fail to set a primary key field, unless <I>undefined</I>;
-once set, it won't change. 
+will fail to set a primary key field, unless <I>undefined</I>; once
+set, it won't change. 
 </P>
 <P>Method <CODE>getPKValues</CODE> returns an object
 with the field names and values of the fields that make the primary
@@ -138,22 +137,23 @@ key of the record.
 <H3>getValues and getChangedValues</H3>
 <P>Method getValues returns an object with the field names and values
 of all the data fields in the model, such as:</P>
-<PRE">{docType: 'SSN', doc:'123-456-7890', firstName:'John', lastName:'Doe'}</PRE><P>
-Method <CODE>getChangedValues</CODE> returns only
+<P>{docType: 'SSN', doc:'123-456-7890', firstName:'John',
+lastName:'Doe'}</P>
+<P>Method <CODE>getChangedValues</CODE> returns only
 those fields that have changed since loaded from or last saved to the
 remote source, in other words, since last synched against the remote
 source. For each field it returns an object containing <CODE>prevVal</CODE>
 and <CODE>newVal</CODE> properties. 
 </P>
-<PRE">{firstName: {prevVal:'John', newVal:'Jeff'}}</PRE><P>
-The previous value is useful for shared databases where multiple
+<P>{firstName: {prevVal:'John', newVal:'Jeff'}}</P>
+<P>The previous value is useful for shared databases where multiple
 users might be trying to change the same record. A simple way to
 prevent it is to include the previous value of the field to be
 changed as part of the UPDATE statement so that the change will fail
 if the affected field has been changed since last read, for example:</P>
-<PRE">UPDATE stock SET qty=3 WHERE prodID = '123456' and qty=5</PRE><P>
-If no records are affected by the SQL statement above it means that
-the item is no longer in the database or, more likely, that the
+<P>UPDATE stock SET qty=3 WHERE prodID = '123456' and qty=5</P>
+<P>If no records are affected by the SQL statement above it means
+that the item is no longer in the database or, more likely, that the
 quantity has already been changed by some other user and there are no
 longer 5 units in stock. (from a database point of view there are far
 better ways to solve this issue, but as an example it clearly shows
@@ -192,12 +192,12 @@ toJSON needs not be called directly. You rarely call <CODE>toString</CODE>,
 you safely assume that <CODE>toString</CODE> will be
 called if a string representation of the object is needed. Likewise,
 you do:</P>
-<PRE">Y.JSON.stringify(myModel)</PRE><P>
-and not 
+<P>Y.JSON.stringify(myModel)</P>
+<P>and not 
 </P>
-<PRE"><STRIKE>Y.JSON.stringify(myModel.toJSON())</STRIKE></PRE><P>
-It is the JSON serializer the one that will go and look for a <CODE>toJSON</CODE>
-method and use it if any exists. 
+<P><STRIKE>Y.JSON.stringify(myModel.toJSON())</STRIKE></P>
+<P>It is the JSON serializer the one that will go and look for a
+<CODE>toJSON</CODE> method and use it if any exists. 
 </P>
 <H3>The loaded and saved event</H3>
 <P>The first change is somewhat semantic, these events signal
@@ -252,13 +252,12 @@ remote source. To undo all changes since the record was synched,
 GalleryModel provides the <CODE>reset</CODE> method,
 which will do it in just one step.</P>
 <H3>Multiple Records</H3>
-<P><A NAME="__DdeLink__0_1256949876"></A>The
-Y.GalleryModelMultiRecord extension allows a single instance of
-GalleryModel to store multiple records using the Flyweight pattern.
-Records will be stored in shelves and only one at a time is exposed
-as a normal record would. To change the record being exposed, the
-<CODE>index</CODE> attribute allows moving about the
-shelves. 
+<P>The Y.GalleryModelMultiRecord extension allows a single instance
+of GalleryModel to store multiple records using the Flyweight
+pattern. Records will be stored in shelves and only one at a time is
+exposed as a normal record would. To change the record being exposed,
+the <CODE>index</CODE> attribute allows moving about
+the shelves. 
 </P>
 <P>This extension also captures the <CODE>loaded</CODE>
 event so that if the parsed response to a load from the server is an
@@ -279,9 +278,9 @@ the callback function has not modified the record, returning exactly
 </P>
 <P>The Y.GalleryModelSortedMultiRecord further enhances the
 multi-record model by ensuring that it is always kept sorted as
-defined by the <CODE>sortField</CODE> and <CODE>sortOrder</CODE>
+defined by the <CODE>sortField</CODE> and <CODE>sortDir</CODE>
 attributes. The <CODE>sortField</CODE> attribute is
-normally the name of a field to sort the records by. The <CODE>sortOrder</CODE>
+normally the name of a field to sort the records by. The <CODE>sortDir</CODE>
 attribute can be either <CODE>'asc'</CODE> or <CODE>'desc'</CODE>.
 Whenever either of these attributes is changed the records will be
 re-sorted. New records are placed in their proper order
@@ -299,17 +298,30 @@ clone. The <CODE>sortField</CODE> function should not
 expect <CODE>this</CODE> to contain any valid value.</P>
 <P>Existing records will also be re-arranged when setting a value if
 the name of the field changed is the same as that set in <CODE>sortField</CODE>.
- If the <CODE>sortField</CODE> contains a function a
-new position for the record will always be recalculated since it
-cannot know a priori that the record need not move.</P>
+If <CODE>sortField</CODE> contains a function a new
+position for the record will always be recalculated since it cannot
+know a priori that the record need not move.</P>
+<P>The <CODE>find</CODE> methods locates a record by
+the value of the field named in <CODE>sortField</CODE>
+only if it is a string and not a function. It will return the index
+of the record found or <EM>null</EM> if not. By default it will make
+the found record current unless asked not to by setting the second
+argument to <EM>false</EM>. If there are several records with the
+same value for the field, it may return any of them.</P>
 <H3>Conclusion</H3>
 <P>GalleryModel solves several deficiencies the standard Model has,
 specially as related to existing database tables. Data fields and
 information about them is now clearly separate and not all mixed up
 into regular YUI attributes. Unfortunately this has meant making it
 incompatible with Y.Model and, though Y.View can work with
-GalleryModel since it never made any assumptions about Y.Model,
-Y.ModelList also needs to be changed. GalleryModelList, included in
-the same component, takes care of that.</P>
+GalleryModel since it never made any assumptions about Y.Model;
+Y.ModelList, however, needs to be changed and though I plan to do it
+eventually, I am not sure it will be needed.  With the
+multiple-record extension, there might not be a need for many of the
+functions provided by ModelList.  ModelList might still be used to
+gather instances of models from different subclasses, that is, that
+don't represent occurrences of the same type of record, which can be
+better represented by a multi-record GalleryModel.  
+</P>
 </BODY>
 </HTML>

@@ -606,7 +606,7 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1060,
+            "line": 1058,
             "description": "Extension to sort records stored in GalleryModel, extended with GalleryModelMultiRecord"
         }
     },
@@ -4149,7 +4149,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 830,
+            "line": 828,
             "description": "Index of the shelf for the record being exposed.\nUse index attribute to check/set the index value.",
             "itemtype": "property",
             "name": "_currentIndex",
@@ -4162,7 +4162,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 839,
+            "line": 837,
             "description": "Storage for the records when not exposed.",
             "itemtype": "property",
             "name": "_shelves",
@@ -4174,7 +4174,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 846,
+            "line": 844,
             "description": "Saves the exposed record into the shelves at the position given by _currentIndex",
             "itemtype": "method",
             "name": "_shelve",
@@ -4185,7 +4185,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 868,
+            "line": 866,
             "description": "Retrives and exposes the record from the shelf at the position given by _currentIndex",
             "itemtype": "method",
             "name": "_fetch",
@@ -4196,7 +4196,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 889,
+            "line": 887,
             "description": "Initializes an exposed record",
             "itemtype": "method",
             "name": "_initNew",
@@ -4207,7 +4207,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 900,
+            "line": 898,
             "description": "Adds a new record at the index position given or at the end.\nThe new record becomes the current.",
             "itemtype": "method",
             "name": "add",
@@ -4229,7 +4229,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 920,
+            "line": 918,
             "description": "Executes the given function for each record in the set.\nReturning exactly false from the function spares shelving the record.\nIf function does not modify the record, returning false will improve performance.",
             "itemtype": "method",
             "name": "each",
@@ -4252,7 +4252,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 939,
+            "line": 937,
             "description": "Executes the given function for each record in the set.\nIt is faster than using each and then checking for isModified\nReturning exactly false from the function spares shelving the record.\nIf function does not modify the record, returning false will improve performance.",
             "itemtype": "method",
             "name": "eachModified",
@@ -4275,7 +4275,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 961,
+            "line": 959,
             "description": "Calls _save_ on each record modified.\nThis is not the best saving strategy for saving batches of records,\nbut it is the easiest and safest.  Implementors are encouraged to \ndesign their own.",
             "itemtype": "method",
             "name": "saveAllModified",
@@ -4284,7 +4284,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 971,
+            "line": 969,
             "description": "<em>This is a documentation entry only, this method does not define load.</em>\n   \nThis extension captures the _loaded_ event so that if a load \nreturns an array of records, they will be added to the shelves.\nExisting records are kept, call _empty_ if they should be discarded.\nSee method load of Y.GalleryModel for further info.",
             "itemtype": "method",
             "name": "load",
@@ -4293,7 +4293,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 980,
+            "line": 978,
             "description": "Listener for the loaded event, checks if the parsed response is an array\nand saves it into the shelves.",
             "itemtype": "method",
             "name": "_batchLoad",
@@ -4311,7 +4311,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 996,
+            "line": 994,
             "description": "Returns the number of records stored",
             "itemtype": "method",
             "name": "size",
@@ -4324,7 +4324,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1004,
+            "line": 1002,
             "description": "Empties the shelves of any records as well as the exposed record",
             "itemtype": "method",
             "name": "empty",
@@ -4333,7 +4333,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1013,
+            "line": 1011,
             "description": "Setter for the _index_ attribute.\nValidates and copies the current index value into _currentIndex.",
             "itemtype": "method",
             "name": "_indexSetter",
@@ -4355,7 +4355,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1031,
+            "line": 1029,
             "description": "Getter for the _index_ attribute\nReturns the value from _currentIndex",
             "itemtype": "method",
             "name": "_indexGetter",
@@ -4370,7 +4370,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1045,
+            "line": 1043,
             "description": "Index of the record exposed.",
             "itemtype": "attribute",
             "name": "index",
@@ -4381,7 +4381,107 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1143,
+            "line": 1069,
+            "description": "Compare function used in sorting.",
+            "itemtype": "method",
+            "name": "_compare",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "shelf to compare",
+                    "type": "Object"
+                },
+                {
+                    "name": "b",
+                    "description": "shelf to compare",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "-1, 0 or 1 as required by Array.sort",
+                "type": "Integer"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1078,
+            "description": "Initializer lifecycle method.  \nEnsures proper defaults, sets the compare method and\nsets listeners for relevant events",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1093,
+            "description": "Sets the compare function to be used in sorting the records\nbased on the sortField and sortDir and stores it into this._compare",
+            "itemtype": "method",
+            "name": "_setCompare",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1115,
+            "description": "Sorts the shelves whenever the sortField or sortDir is changes",
+            "itemtype": "method",
+            "name": "_sort",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1126,
+            "description": "Listens to value changes and if the name of the field is that of the sortField\nor if sortField is a function, it will relocate the record to its proper sort order",
+            "itemtype": "method",
+            "name": "_afterChange",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "Event façade as produced by the change event",
+                    "type": "EventFacade"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1149,
+            "description": "Finds the correct index position of a record within the shelves\naccording to the current sortField and sortDir",
+            "itemtype": "method",
+            "name": "_findIndex",
+            "params": [
+                {
+                    "name": "values",
+                    "description": "values of the record to be located",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "location for the record",
+                "type": "Integer"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1182,
             "description": "Adds a new record at its proper position according to the sort configuration.\nIt overrides GalleryModelMultiRecord's own add method, ignoring the index position requested, if any.\nThe new record becomes the current.",
             "itemtype": "method",
             "name": "add",
@@ -4392,6 +4492,54 @@
                     "type": "Object"
                 }
             ],
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1200,
+            "description": "Locates a record by value.  The record will be located by the field\ngiven in the sortField attribute.   It will return the index of the\nrecord in the shelves or null if not found.\nBy default it will expose that record.\nIf sortField contains a function, it will return null and do nothing.\nSince sort fields need not be unique, find may return any of the records\nwith the same value for that field.",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value to be found",
+                    "type": "Any"
+                },
+                {
+                    "name": "move",
+                    "description": "exposes the record found, defaults to true",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "index of the record found or null if not found.\nBe sure to differentiate a return of 0, a valid index, from null, a failed search.",
+                "type": "Integer | null"
+            },
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1233,
+            "description": "Name of the field to sort by or function to build the value used for comparisson.\nIf a function, it will receive a reference to the record to be sorted;\nit should return the value to be used for comparisson.  Functions are\nused when sorting on multiple keys, which the function should return\nconcatenated, or when any of the fields needs some pre-processing.",
+            "itemtype": "attribute",
+            "name": "sortField",
+            "type": "String | Function",
+            "default": "first primary key field",
+            "class": "Y.GalleryModelSortedMultiRecord",
+            "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
+            "line": 1248,
+            "description": "Sort direction either \"asc\" for ascending or \"desc\" for descending",
+            "itemtype": "attribute",
+            "name": "sortDir",
+            "type": "String",
+            "default": "\"asc\"",
             "class": "Y.GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         }

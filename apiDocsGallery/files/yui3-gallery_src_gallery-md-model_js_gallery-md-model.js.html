@@ -948,9 +948,7 @@ to override the parse() method to parse non-generic server responses.
 	 */
 	
 	var INDEX = 'index',
-		MR = function () {
-			this._shelves = [];
-		};
+		MR = function () {};
 	
 	MR.prototype = {
 		initializer: function () {
@@ -1199,7 +1197,22 @@ to override the parse() method to parse non-generic server responses.
 		SMR = function () {};
 	
 	SMR.prototype = {
+		/**
+		 * Compare function used in sorting.
+		 * @method _compare
+		 * @param a {object} shelf to compare
+		 * @param b {object} shelf to compare
+		 * @return {integer} -1, 0 or 1 as required by Array.sort
+		 * @private
+		 */
 		_compare: null,
+		/**
+		 * Initializer lifecycle method.  
+		 * Ensures proper defaults, sets the compare method and
+		 * sets listeners for relevant events
+		 * @method initializer
+		 * @protected
+		 */
 		initializer: function () {
 			if (this.get(SFIELD) === undefined) {
 				this._set(SFIELD, this.get('primaryKeys')[0]);
@@ -1208,6 +1221,12 @@ to override the parse() method to parse non-generic server responses.
 			this.after([SFIELD + CHANGE, SDIR + CHANGE], this._sort);
 			this.after('change', this._afterChange);
 		},
+		/**
+		 * Sets the compare function to be used in sorting the records
+		 * based on the sortField and sortDir and stores it into this._compare
+		 * @method _setCompare
+		 * @private
+		 */
 		_setCompare: function () {
 			var sortField = this.get(SFIELD),
 				sortAsc = this.get(SDIR) === ASC?1:-1,
@@ -1224,12 +1243,24 @@ to override the parse() method to parse non-generic server responses.
 				return (aValue &lt; bValue ? -1 : (aValue &gt; bValue ? 1 : 0)) * sortAsc;
 			};
 		},
+		/**
+		 * Sorts the shelves whenever the sortField or sortDir is changes
+		 * @method _sort
+		 * @private
+		 */
 		_sort: function() {
 			this._setCompare();
 			this._shelve();
 			this._shelves.sort(this._compare);
 			this._fetch();
 		},
+		/**
+		 * Listens to value changes and if the name of the field is that of the sortField
+		 * or if sortField is a function, it will relocate the record to its proper sort order
+		 * @method _afterChange
+		 * @param ev {EventFacade} Event façade as produced by the change event
+		 * @private
+		 */
 		_afterChange: function (ev) {
 			var fieldName = ev.name,
 				sField = this.get(SFIELD),
@@ -1246,6 +1277,14 @@ to override the parse() method to parse non-generic server responses.
 				this._currentIndex = index;
 			}
 		},
+		/**
+		 * Finds the correct index position of a record within the shelves
+		 * according to the current sortField and sortDir
+		 * @method _findIndex
+		 * @param values {Object} values of the record to be located
+		 * @return {Integer} location for the record
+		 * @private
+		 */
 		_findIndex: function (values) {
 			var shelves = this._shelves,
 				low = 0, 
@@ -1288,14 +1327,61 @@ to override the parse() method to parse non-generic server responses.
 			this._initNew();
 			this.setValues(values, 'add');
 			this._shelve(index);
+		},
+		/**
+		 * Locates a record by value.  The record will be located by the field
+		 * given in the sortField attribute.   It will return the index of the
+		 * record in the shelves or null if not found.
+		 * By default it will expose that record.
+		 * If sortField contains a function, it will return null and do nothing.
+		 * Since sort fields need not be unique, find may return any of the records
+		 * with the same value for that field.
+		 * @method find
+		 * @param value {Any} value to be found
+		 * @param [move] {Boolean} exposes the record found, defaults to true
+		 * @return {integer | null} index of the record found or null if not found.
+		 * Be sure to differentiate a return of 0, a valid index, from null, a failed search.
+		 */
+		find: function (value, move) {
+			var sfield = this.get(SFIELD),
+				index,
+				values = {};
+			if (Lang.isFunction(sfield)) {
+				return null;
+			}
+			values[sfield] = value;
+			index = this._findIndex(values);
+			if (this._shelves[index]._values[sfield] !== value) {
+				return null;
+			}
+			if (move || arguments.length &lt; 2) {
+				this.set(INDEX, index);
+			}
+			return index;
 		}
 	};
 	SMR.ATTRS = {
+		/**
+		 * Name of the field to sort by or function to build the value used for comparisson.
+		 * If a function, it will receive a reference to the record to be sorted;
+		 * it should return the value to be used for comparisson.  Functions are
+		 * used when sorting on multiple keys, which the function should return
+		 * concatenated, or when any of the fields needs some pre-processing.
+		 * @attribute sortField
+		 * @type String | Function
+		 * @default first primary key field
+		 */
 		sortField: {
 			validator: function (value){
 				return Lang.isString(value) || Lang.isFunction(value);
 			}
 		},
+		/**
+		 * Sort direction either "asc" for ascending or "desc" for descending
+		 * @attribute sortDir
+		 * @type String
+		 * @default "asc"
+		 */
 		sortDir: {
 			validator: function (value) {
 				return value === DESC || value === ASC;

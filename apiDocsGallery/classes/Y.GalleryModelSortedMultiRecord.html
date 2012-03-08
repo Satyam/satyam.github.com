@@ -141,7 +141,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1060"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1060</code></a>
+            Defined in: <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1058"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1058</code></a>
         </div>
     
 
@@ -165,6 +165,8 @@
         
         
         
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
         
     </ul>
 
@@ -178,8 +180,50 @@
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method private">
+                                <a href="#method__afterChange">_afterChange</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__compare">_compare</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__findIndex">_findIndex</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setCompare">_setCompare</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__sort">_sort</a>
+
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_add">add</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_find">find</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
 
                                 
                             </li>
@@ -191,6 +235,22 @@
             
 
             
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_sortDir">sortDir</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_sortField">sortField</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
         </div>
@@ -198,6 +258,398 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterChange" class="method item private">
+    <h3 class="name"><code>_afterChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1126"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1126</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Listens to value changes and if the name of the field is that of the sortField
+or if sortField is a function, it will relocate the record to its proper sort order
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        Event façade as produced by the change event
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__compare" class="method item private">
+    <h3 class="name"><code>_compare</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>a</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>b</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1069"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1069</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Compare function used in sorting.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">a</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        shelf to compare
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">b</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        shelf to compare
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    -1, 0 or 1 as required by Array.sort
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__findIndex" class="method item private">
+    <h3 class="name"><code>_findIndex</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>values</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1149"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1149</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Finds the correct index position of a record within the shelves
+according to the current sortField and sortDir
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">values</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        values of the record to be located
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    location for the record
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__setCompare" class="method item private">
+    <h3 class="name"><code>_setCompare</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1093"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1093</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Sets the compare function to be used in sorting the records
+based on the sortField and sortDir and stores it into this._compare
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__sort" class="method item private">
+    <h3 class="name"><code>_sort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1115"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1115</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Sorts the shelves whenever the sortField or sortDir is changes
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method_add" class="method item">
@@ -236,7 +688,7 @@
                 <p>Defined in
             
         
-        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1143"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1143</code></a></p>
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1182"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1182</code></a></p>
 
         
 
@@ -280,11 +732,378 @@ The new record becomes the current.
 </div>
 
                 
+                    <div id="method_find" class="method item">
+    <h3 class="name"><code>find</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[move]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer | null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1200"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1200</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Locates a record by value.  The record will be located by the field
+given in the sortField attribute.   It will return the index of the
+record in the shelves or null if not found.
+By default it will expose that record.
+If sortField contains a function, it will return null and do nothing.
+Since sort fields need not be unique, find may return any of the records
+with the same value for that field.
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        value to be found
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[move]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        exposes the record found, defaults to true
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer | null</span>:
+                    
+                    index of the record found or null if not found.
+Be sure to differentiate a return of 0, a valid index, from null, a failed search.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1078"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1078</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        Initializer lifecycle method. 
+Ensures proper defaults, sets the compare method and
+sets listeners for relevant events
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
             </div>
         
 
         
 
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_sortDir" class="attr item">
+    <a name="config_sortDir"></a> 
+    <h3 class="name"><code>sortDir</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1248"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1248</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sort direction either "asc" for ascending or "desc" for descending</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> "asc"</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>sortDirChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>sortDir</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_sortField" class="attr item">
+    <a name="config_sortField"></a> 
+    <h3 class="name"><code>sortField</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>Defined in
+            
+        
+        <a href="../files/yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1233"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1233</code></a></p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Name of the field to sort by or function to build the value used for comparisson.
+If a function, it will receive a reference to the record to be sorted;
+it should return the value to be used for comparisson.  Functions are
+used when sorting on multiple keys, which the function should return
+concatenated, or when any of the fields needs some pre-processing.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> first primary key field</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>sortFieldChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>sortField</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
