@@ -120,6 +120,19 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js": {
+            "name": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "modules": {
+                "gallery-button-plugin": 1
+            },
+            "classes": {
+                "ButtonPlugin": 1
+            },
+            "fors": {
+                "Node": 1
+            },
+            "namespaces": {}
         }
     },
     "modules": {
@@ -266,6 +279,23 @@
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1,
             "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes."
+        },
+        "gallery-button-plugin": {
+            "name": "gallery-button-plugin",
+            "submodules": {},
+            "classes": {
+                "ButtonPlugin": 1,
+                "Node": 1
+            },
+            "fors": {
+                "Node": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 1,
+            "description": "Node plugin to handle toggle buttons and groups of mutually exclusive toggle buttons.\nSearches a given container for buttons marked with the `yui3-button-toggle` className\nand turns them into toggle buttons and also any HTML element with the `yui3-button-group-exclusive`\nclassName and makes the toggle buttons within it mutually exclussive.\nAdds the `selected` attribute, for toggle buttons it tells whether the button is in the pressed state,\nfor groups of toggles points to the button currently presssed.\nRelies on the cssbutton module for styling.",
+            "static": 1
         }
     },
     "classes": {
@@ -608,6 +638,31 @@
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1058,
             "description": "Extension to sort records stored in GalleryModel, extended with GalleryModelMultiRecord"
+        },
+        "ButtonPlugin": {
+            "name": "ButtonPlugin",
+            "shortname": "ButtonPlugin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-button-plugin",
+            "namespace": "",
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 1,
+            "description": "Node plugin to handle toggle buttons and groups of mutually exclusive toggle buttons.\nSearches a given container for buttons marked with the `yui3-button-toggle` className\nand turns them into toggle buttons and also any HTML element with the `yui3-button-group-exclusive`\nclassName and makes the toggle buttons within it mutually exclussive.\nAdds the `selected` attribute, for toggle buttons it tells whether the button is in the pressed state,\nfor groups of toggles points to the button currently presssed.\nRelies on the cssbutton module for styling."
+        },
+        "Node": {
+            "name": "Node",
+            "shortname": "Node",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gallery-button-plugin",
+            "namespace": ""
         }
     },
     "classitems": [
@@ -4542,6 +4597,130 @@
             "default": "\"asc\"",
             "class": "Y.GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 28,
+            "description": "Getter for the augmented `selected` Node attribute",
+            "itemtype": "method",
+            "name": "_selectedGetter",
+            "return": {
+                "description": "Boolean for toggle buttons, Node reference for groups.   \n        State of the toggle button or Node of toggle button selected within group."
+            },
+            "static": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "ButtonPlugin",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 47,
+            "description": "Setter for the augmented `selected` Node attribute",
+            "itemtype": "method",
+            "name": "_selectedSetter",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "For toggle buttons: pressed state,\n       for groups of toggles, reference or css-selector of pressed button",
+                    "type": "Boolean|Node|String"
+                }
+            ],
+            "static": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "ButtonPlugin",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 84,
+            "description": "Plugs into a toggle button",
+            "itemtype": "method",
+            "name": "_addToggleButton",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Reference to the Node to be plugged into",
+                    "type": "Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "static": 1,
+            "class": "ButtonPlugin",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 99,
+            "description": "Plugs into a container of mutually exclusive toggle buttons",
+            "itemtype": "method",
+            "name": "_addButtonGroup",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Reference to the container of the buttons",
+                    "type": "Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "static": 1,
+            "class": "ButtonPlugin",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 114,
+            "description": "Searches within the given container or the body of the document for\nbuttons marked with the className `yui3-button-toggle`\nand elements with the className `yui3-button-group-exclusive` and\nplugs them with this module",
+            "itemtype": "method",
+            "name": "addToggles",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "Node instance or css selector of the element\n\tcontaining the buttons or button groups to be plugged into. \n\tAssumes the document body if missing.",
+                    "type": "Node|string",
+                    "optional": true
+                }
+            ],
+            "static": 1,
+            "class": "ButtonPlugin",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 133,
+            "description": "Augmented `selected` attribute. \nFor toggle buttons indicates whether the button is pressed.\nFor groups of toggle buttons sets/return the reference to the button pressed, null if none.",
+            "itemtype": "attribute",
+            "name": "selected",
+            "value": "Boolean for toggle buttons, Node reference or CSS selector for button groups",
+            "class": "Node",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 146,
+            "description": "Signals if it is a toggle button or a group of toggle buttons.\n1 for toggle buttons, 2 for groups of toggle buttons",
+            "itemtype": "property",
+            "name": "_toggleType",
+            "type": "integer",
+            "access": "private",
+            "tagname": "",
+            "class": "Node",
+            "module": "gallery-button-plugin"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-button-plugin/js/button-plugin.js",
+            "line": 154,
+            "description": "Holds a reference to the only pressed toggle button within a group",
+            "itemtype": "property",
+            "name": "_selectedToggle",
+            "type": "Y.Node",
+            "access": "private",
+            "tagname": "",
+            "class": "Node",
+            "module": "gallery-button-plugin"
         }
     ]
 }
