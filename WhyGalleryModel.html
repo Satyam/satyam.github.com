@@ -3,8 +3,24 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>Satyam's GalleryModel</TITLE>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.1/build/base/base-min.css">
+    <STYLE TYPE="text/css">
+    PRE { 
+        background-color: #e0e0e0;
+        border: 1px solid silver; 
+        padding: 1em ;
+        font-size:85%;
+		margin:1em
+    }
+	code {
+		background-color:#e0e0e0;
+		padding:0 3pt;
+	}
+    </STYLE>
 </HEAD>
-<BODY>
+  <body class="yui-skin-sam">
+    <div id="doc" class="yui-t1">
 <H1>Satyam's GalleryModel model</H1>
 <P>After stumbling over a few issues with the standard YUI Model
 component and adding patch over patch to the standard one, I found
@@ -137,21 +153,20 @@ key of the record.
 <H3>getValues and getChangedValues</H3>
 <P>Method getValues returns an object with the field names and values
 of all the data fields in the model, such as:</P>
-<P>{docType: 'SSN', doc:'123-456-7890', firstName:'John',
-lastName:'Doe'}</P>
+<PRE>{docType: 'SSN', doc:'123-456-7890', firstName:'John', lastName:'Doe'}</PRE>
 <P>Method <CODE>getChangedValues</CODE> returns only
 those fields that have changed since loaded from or last saved to the
 remote source, in other words, since last synched against the remote
 source. For each field it returns an object containing <CODE>prevVal</CODE>
 and <CODE>newVal</CODE> properties. 
 </P>
-<P>{firstName: {prevVal:'John', newVal:'Jeff'}}</P>
+<PRE>{firstName: {prevVal:'John', newVal:'Jeff'}}</PRE>
 <P>The previous value is useful for shared databases where multiple
 users might be trying to change the same record. A simple way to
 prevent it is to include the previous value of the field to be
 changed as part of the UPDATE statement so that the change will fail
 if the affected field has been changed since last read, for example:</P>
-<P>UPDATE stock SET qty=3 WHERE prodID = '123456' and qty=5</P>
+<PRE>UPDATE stock SET qty=3 WHERE prodID = '123456' and qty=5</PRE>
 <P>If no records are affected by the SQL statement above it means
 that the item is no longer in the database or, more likely, that the
 quantity has already been changed by some other user and there are no
@@ -192,10 +207,10 @@ toJSON needs not be called directly. You rarely call <CODE>toString</CODE>,
 you safely assume that <CODE>toString</CODE> will be
 called if a string representation of the object is needed. Likewise,
 you do:</P>
-<P>Y.JSON.stringify(myModel)</P>
+<PRE>Y.JSON.stringify(myModel)</PRE>
 <P>and not 
 </P>
-<P><STRIKE>Y.JSON.stringify(myModel.toJSON())</STRIKE></P>
+<PRE><STRIKE>Y.JSON.stringify(myModel.toJSON())</STRIKE></PRE>
 <P>It is the JSON serializer the one that will go and look for a
 <CODE>toJSON</CODE> method and use it if any exists. 
 </P>
@@ -251,7 +266,7 @@ cannot be undone. The undo stack is reset on any synching to the
 remote source. To undo all changes since the record was synched,
 GalleryModel provides the <CODE>reset</CODE> method,
 which will do it in just one step.</P>
-<H3>Multiple Records</H3>
+<A name="MultipleRecords"></A><H3>Multiple Records</H3>
 <P>The Y.GalleryModelMultiRecord extension allows a single instance
 of GalleryModel to store multiple records using the Flyweight
 pattern. Records will be stored in shelves and only one at a time is
@@ -323,5 +338,6 @@ gather instances of models from different subclasses, that is, that
 don't represent occurrences of the same type of record, which can be
 better represented by a multi-record GalleryModel.  
 </P>
+</div>
 </BODY>
 </HTML>
