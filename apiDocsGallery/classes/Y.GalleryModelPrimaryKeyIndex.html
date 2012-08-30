@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.GalleryModelSimpleUndo - Satyam&#x27;s Gallery Modules</title>
+    <title>Y.GalleryModelPrimaryKeyIndex - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -142,7 +142,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.GalleryModelSimpleUndo Class</h1>
+                        <h1>Y.GalleryModelPrimaryKeyIndex Class</h1>
 <div class="box meta">
     
 
@@ -150,7 +150,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l813"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:813</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1562"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1562</code></a>
         </div>
     
 
@@ -166,8 +166,11 @@
 
 
 <div class="box intro">
-    <p>An extension for Y.GalleryModel that provides a single level of undo for each field.
-It will never undo a field to <code>undefined</code> since it assumes an undefined field had not been set.</p>
+    <p>Extension to store the records in the GalleryModel using the field in the 
+Y.GalleryModel/primaryKeys attribute as its index.
+The primary key <strong>must</strong> be a <strong>single</strong> <strong>unique</strong> <strong>integer</strong> field.
+It should be used along <a href="../classes/Y.GalleryModelMultiRecord.html" class="crosslink">Y.GalleryModelMultiRecord</a>.
+It is incompatible with <a href="../classes/Y.GalleryModelSortedMultiRecord.html" class="crosslink">Y.GalleryModelSortedMultiRecord</a>.</p>
 </div>
 
 
@@ -195,21 +198,28 @@ It will never undo a field to <code>undefined</code> since it assumes an undefin
                     <ul class="index-list methods">
                         
                             <li class="index-item method private">
-                                <a href="#method__resetUndo">_resetUndo</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__trackChange">_trackChange</a>
+                                <a href="#method__defDataLoaded">_defDataLoaded</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_undo">undo</a>
+                                <a href="#method_add">add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_next">next</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_previous">previous</a>
 
                                 
                                 
@@ -231,64 +241,8 @@ It will never undo a field to <code>undefined</code> since it assumes an undefin
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__resetUndo" class="method item private">
-    <h3 class="name"><code>_resetUndo</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l841"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:841</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>After load or save operations, it drops any changes it might have tracked.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__trackChange" class="method item private">
-    <h3 class="name"><code>_trackChange</code></h3>
+                    <div id="method__defDataLoaded" class="method item private">
+    <h3 class="name"><code>_defDataLoaded</code></h3>
 
     
         <div class="args">
@@ -331,7 +285,7 @@ It will never undo a field to <code>undefined</code> since it assumes an undefin
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l829"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:829</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1593"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1593</code></a>
         
         </p>
 
@@ -342,8 +296,12 @@ It will never undo a field to <code>undefined</code> since it assumes an undefin
     </div>
 
     <div class="description">
-        <p>Event listener for the after value change event, it tracks changes for each field. <br />
-It retains only the last change for each field.</p>
+        <p>Default action for the Y.GalleryModel/loaded event, 
+checks if the parsed response is an array
+and saves it into the shelves using the value of the primary key field for its index.
+The model will be left positioned at the item with the lowest key value.
+If the primary key field has not been declared, items will not be loaded.
+If the primary key field is not unique, the duplicate will overwrite the previous.</p>
     </div>
 
     
@@ -361,7 +319,7 @@ It retains only the last change for each field.</p>
                     
 
                     <div class="param-description">
-                        <p>As provided by the Y.GalleryModel/change event</p>
+                        <p>facade produced by the Y.GalleryModel/loaded event,</p>
                     </div>
 
                     
@@ -377,8 +335,8 @@ It retains only the last change for each field.</p>
 </div>
 
                 
-                    <div id="method_undo" class="method item">
-    <h3 class="name"><code>undo</code></h3>
+                    <div id="method_add" class="method item">
+    <h3 class="name"><code>add</code></h3>
 
     
         <div class="args">
@@ -386,7 +344,7 @@ It retains only the last change for each field.</p>
             
                 <li class="arg">
                     
-                        <code class="optional">[name]</code>
+                        <code>values</code>
                     
                 </li>
             
@@ -421,7 +379,7 @@ It retains only the last change for each field.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l849"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:849</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1572"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1572</code></a>
         
         </p>
 
@@ -432,7 +390,8 @@ It retains only the last change for each field.</p>
     </div>
 
     <div class="description">
-        <p>Reverts one level of change for a specific field or all fields</p>
+        <p>Adds a new record at the index position given by its primary key.
+The new record becomes the current.</p>
     </div>
 
     
@@ -443,16 +402,15 @@ It retains only the last change for each field.</p>
             
                 <li class="param">
                     
-                        <code class="param-name optional">[name]</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                        <code class="param-name">values</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>If provided it will undo that particular field,
-    otherwise, it undoes the whole record.</p>
+                        <p>set of values to set. 
+If it is an array, it will call itself for each of the items in it.</p>
                     </div>
 
                     
@@ -462,6 +420,154 @@ It retains only the last change for each field.</p>
         </div>
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_next" class="method item">
+    <h3 class="name"><code>next</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1630"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1630</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method added because items might not be contiguous so 
+adding one to the index does not always get you to the next item.
+If there is no next element, <code>null</code> will be returned and the
+collection will still point to the last item.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    index of the next item or <code>null</code> if none found
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_previous" class="method item">
+    <h3 class="name"><code>previous</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1654"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1654</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method added because items might not be contiguous so 
+subtracting one to the index does not always get you to the previous item.
+If there is no next element, <code>null</code> will be returned and the
+collection will still point to the first item.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    index of the previous item or <code>null</code> if none found
+                
+            </div>
+        </div>
     
 
     
