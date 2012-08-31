@@ -168,7 +168,7 @@
 <div class="box intro">
     <p>Allows GalleryModel to handle a set of records using the Flyweight pattern.
 It exposes one record at a time from a shelf of records.
-Exposed records can be selected by setting the Y.GalleryModel/index attribute.</p>
+Exposed records can be selected by setting the Y.GalleryModel/index:attribute attribute.</p>
 </div>
 
 
@@ -718,7 +718,7 @@ and saves it into the shelves, otherwise it calls the default loader for single 
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModelMultiRecord/index attribute
+        <p>Getter for the <a href="../classes/Y.GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute
 Returns the value from Y.GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
@@ -802,7 +802,7 @@ Returns the value from Y.GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
     <div class="description">
-        <p>Setter for the Y.GalleryModelMultiRecord/index attribute.
+        <p>Setter for the <a href="../classes/Y.GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute.
 Validates and copies the current index value into Y.GalleryModel/_currentIndex.
 It shelves the current record and fetches the requested one.</p>
     </div>
@@ -972,7 +972,7 @@ It shelves the current record and fetches the requested one.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModel/isModified attribute used only for GalleryModelMultiRecord
+        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
 so that it is read from the shelf and not from the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1096,7 +1096,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Setter for the Y.GalleryModel/isModified attribute used only for GalleryModelMultiRecord
+        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
 so that it is written into the shelf and not into the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1210,7 +1210,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModel/isNew attribute used only for GalleryModelMultiRecord
+        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
 so that it is read from the shelf and not from the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1334,7 +1334,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Setter for the Y.GalleryModel/isNew attribute used only for GalleryModelMultiRecord
+        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
 so that it is written into the shelf and not into the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1868,7 +1868,7 @@ The function will run in the scope of the model so it can use
 <code>this.<a href="../classes/Y.GalleryModel.html#method_getValue" class="crosslink">getValue</a></code>
 or any such method to access the values of the current record.
 It is faster than using <a href="../classes/Y.GalleryModelMultiRecord.html#method_each" class="crosslink">each</a> 
-and then checking the Y.GalleryModel/isModified attribute
+and then checking the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute
 Returning exactly <code>false</code> from the function spares shelving the record.
 If the callback function does not modify the record, 
 returning <code>false</code> will improve performance.</p>
@@ -2022,7 +2022,7 @@ returning <code>false</code> will improve performance.</p>
 
     <div class="description">
         <p>This is a documentation entry only, this method does not define <code>load</code>. 
-This extension redefines the default action for the Y.GalleryModel/loaded event so 
+This extension redefines the default action for the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event so 
 that if a load returns an array of records, they will be added to the shelves. 
 Existing records are kept, call <a href="../classes/Y.GalleryModelMultiRecord.html#method_empty" class="crosslink">empty</a> if they should be discarded. 
 See method <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink">load</a> of <a href="../classes/Y.GalleryModel.html" class="crosslink">Y.GalleryModel</a> for further info.</p>
@@ -2210,7 +2210,7 @@ design their own.</p>
 
     <div class="description">
         <p>Index of the shelf for the record being exposed.
-Use Y.GalleryModel/index attribute to check/set the index value.</p>
+Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
     </div>
 
     
@@ -2463,7 +2463,7 @@ Use Y.GalleryModel/index attribute to check/set the index value.</p>
     </div>
 
     <div class="description">
-        <p>Merges the new setter into the existing Y.GalleryModel/isModified attribute.</p>
+        <p>Merges the new setter into the existing <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.</p>
     </div>
 
     
@@ -2563,7 +2563,7 @@ Use Y.GalleryModel/index attribute to check/set the index value.</p>
     </div>
 
     <div class="description">
-        <p>Merges the new setter into the existing Y.GalleryModel/isNew attribute</p>
+        <p>Merges the new setter into the existing <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute</p>
     </div>
 
     

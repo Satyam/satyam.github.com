@@ -646,7 +646,7 @@ to override the parse() method to parse non-generic server responses.</p>
     </div>
 
     <div class="description">
-        <p>Default function for the Y.GalleryModel/loaded event. 
+        <p>Default function for the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event. 
 Does the actual setting of the values just loaded and calls the callback function.</p>
     </div>
 
@@ -754,7 +754,7 @@ Does the actual setting of the values just loaded and calls the callback functio
                     
 
                     <div class="param-description">
-                        <p>(see Y.GalleryModel/change event)</p>
+                        <p>(see <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event)</p>
                     </div>
 
                     
@@ -829,7 +829,7 @@ Does the actual setting of the values just loaded and calls the callback functio
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModel/isModified attribute.
+        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.
 If the value contains a dot (<code>'.'</code>) the modified state of the field named as a sub-attribute will be returned.
 Otherwise, the modified status of the whole record will be returned.</p>
     </div>
@@ -937,7 +937,7 @@ Otherwise, the modified status of the whole record will be returned.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModel/isNew attribute.
+        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute.
 If the value contains a dot (<code>'.'</code>) the 'new' state of the field named as a sub-attribute will be returned.
 Otherwise, the 'new' status of the whole record will be returned.</p>
     </div>
@@ -1051,7 +1051,7 @@ Otherwise, the 'new' status of the whole record will be returned.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the Y.GalleryModel/primaryKeys attribute.
+        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
 If the name contains a dot (<code>'.'</code>) it will return a boolean indicating 
 whether the field named as a sub-attribute is part of the primary key.
 Otherwise, it returns the array of primary key fields.</p>
@@ -1175,7 +1175,7 @@ Otherwise, it returns the array of primary key fields.</p>
     </div>
 
     <div class="description">
-        <p>Setter for the Y.GalleryModel/primaryKeys attribute.
+        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
 If the value is already set, no further changes will be allowed.
 If the value is not an array, it will be converted to one.</p>
     </div>
@@ -1387,7 +1387,7 @@ and only if the arguments to the constructor had a <code>values</code> attribute
     </div>
 
     <div class="description">
-        <p>Function called when the Y.GalleryModel/loaded event is prevented, stopped or halted
+        <p>Function called when the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event is prevented, stopped or halted
 so that the callback is called with a suitable error</p>
     </div>
 
@@ -2314,8 +2314,8 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
 operation, which is an asynchronous action. Specify a <strong>callback</strong> function to
 be notified of success or failure.</p>
 
-<p>A successful load operation will fire a Y.GalleryModel/loaded event, while an unsuccessful
-load operation will fire an Y.GalleryModel/error event with the <code>src</code> set to <code>"load"</code>.</p>
+<p>A successful load operation will fire a <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, while an unsuccessful
+load operation will fire an Y.GalleryModel/error:event event with the <code>src</code> set to <code>"load"</code>.</p>
     </div>
 
     
@@ -2641,11 +2641,11 @@ error event will be fired and the model will not be updated.</p>
 operation, which is an asynchronous action. Specify a <strong>callback</strong> function to
 be notified of success or failure.</p>
 
-<p>A successful save operation will fire a Y.GalleryModel/saved event, while an unsuccessful
-load operation will fire an Y.GalleryModel/error event with the 'src' property set to <code>"save"</code>.</p>
+<p>A successful save operation will fire a <a href="../classes/Y.GalleryModel.html#event_saved" class="crosslink">saved</a> event, while an unsuccessful
+load operation will fire an Y.GalleryModel/error:event event with the 'src' property set to <code>"save"</code>.</p>
 
 <p>If the save operation succeeds and the <a href="../classes/Y.GalleryModel.html#method_parse" class="crosslink">parse</a> method returns non-empty values
-from the response received from the server a Y.GalleryModel/loaded event will also be fired to read those values.</p>
+from the response received from the server a <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event will also be fired to read those values.</p>
     </div>
 
     
@@ -2796,7 +2796,7 @@ from the response received from the server a Y.GalleryModel/loaded event will al
 
     <div class="description">
         <p>Sets the value of the named field. 
-Fires the Y.GalleryModel/change event if the new value is different from the current one.
+Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event if the new value is different from the current one.
 Primary key fields cannot be changed unless still <code>undefined</code>.</p>
     </div>
 
@@ -2925,7 +2925,7 @@ Primary key fields cannot be changed unless still <code>undefined</code>.</p>
     <div class="description">
         <p>Sets a series of values. <br />
 It simply loops over the hash of values provided calling <a href="../classes/Y.GalleryModel.html#method_setValue" class="crosslink">setValue</a> on each.
-Fires the Y.GalleryModel/change event.</p>
+Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event.</p>
     </div>
 
     
@@ -3948,8 +3948,11 @@ Preventing the change on a particular field will not prevent the others from bei
                         <ul class="params-list">
                             
                             <li class="param">
-                                <code class="param-name">name</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+                                    <code class="param-name optional">[name]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Name of the field changed</p>
@@ -3959,8 +3962,11 @@ Preventing the change on a particular field will not prevent the others from bei
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
+                                
+                                    <code class="param-name optional">[newVal]</code>
+                                    <span class="type">Any</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>New value of the field.</p>
@@ -3970,8 +3976,11 @@ Preventing the change on a particular field will not prevent the others from bei
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
+                                
+                                    <code class="param-name optional">[prevVal]</code>
+                                    <span class="type">Any</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Previous value of the field.</p>
@@ -3981,8 +3990,11 @@ Preventing the change on a particular field will not prevent the others from bei
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">newVals</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name optional">[newVals]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Hash with the new values for the listed fields.</p>
@@ -3992,8 +4004,11 @@ Preventing the change on a particular field will not prevent the others from bei
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">prevVals</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name optional">[prevVals]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Hash with the previous values for the listed fields.</p>
@@ -4003,8 +4018,10 @@ Preventing the change on a particular field will not prevent the others from bei
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">src</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | Null</span>
+                                
+                                    <code class="param-name">src</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | Null</span>
+                                
 
                                 <div class="param-description">
                                     <p>Source of the change event, if any.</p>
@@ -4086,8 +4103,10 @@ The parsed values can be altered on the before (on) listener.</p>
                         <ul class="params-list">
                             
                             <li class="param">
-                                <code class="param-name">response</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name">response</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Response data as received from the remote source</p>
@@ -4097,8 +4116,10 @@ The parsed values can be altered on the before (on) listener.</p>
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">parsed</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name">parsed</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Data as returned from the parse method.</p>
@@ -4108,8 +4129,10 @@ The parsed values can be altered on the before (on) listener.</p>
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">options</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name">options</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Options as received by the <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink">load</a> method.</p>
@@ -4119,8 +4142,10 @@ The parsed values can be altered on the before (on) listener.</p>
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">callback</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                
+                                    <code class="param-name">callback</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Function to call at the end of the load process</p>
@@ -4130,8 +4155,10 @@ The parsed values can be altered on the before (on) listener.</p>
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">src</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+                                    <code class="param-name">src</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>the source of the load, usually <code>'load'</code></p>
@@ -4191,7 +4218,7 @@ The event cannot be prevented. <br />
 The developer has full control of what is
 about to be saved and when it is saved so it would be pointless
 to try to prevent it at this stage.  This is in contrast to
-the Y.GalleryModel/loaded event where the developer has no control of what might
+the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event where the developer has no control of what might
 come from the server and might wish to do something about it.
 If in reply to the save operation the server replies with data, 
 the <strong>response</strong> and <strong>parsed</strong> properties will be filled.</p>
@@ -4219,8 +4246,11 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                         <ul class="params-list">
                             
                             <li class="param">
-                                <code class="param-name">response</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name optional">[response]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Response data as received from the remote source, if any.</p>
@@ -4230,8 +4260,11 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">parsed</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name optional">[parsed]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
 
                                 <div class="param-description">
                                     <p>Data as returned from the parse method, if any.</p>
@@ -4241,8 +4274,10 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">options</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+                                    <code class="param-name">options</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Options as received by the <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> method.</p>
@@ -4252,8 +4287,10 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">callback</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                
+                                    <code class="param-name">callback</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>Function to call at the end of the load process</p>
@@ -4263,8 +4300,10 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                             </li>
                             
                             <li class="param">
-                                <code class="param-name">src</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+                                    <code class="param-name">src</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
 
                                 <div class="param-description">
                                     <p>the source of the save, usually <code>'save'</code></p>

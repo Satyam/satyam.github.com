@@ -580,7 +580,7 @@
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 934,
-            "description": "Allows GalleryModel to handle a set of records using the Flyweight pattern.\nIt exposes one record at a time from a shelf of records.\nExposed records can be selected by setting the {{#crossLink \"Y.GalleryModel/index\"}}{{/crossLink}} attribute."
+            "description": "Allows GalleryModel to handle a set of records using the Flyweight pattern.\nIt exposes one record at a time from a shelf of records.\nExposed records can be selected by setting the {{#crossLink \"Y.GalleryModel/index:attribute\"}}{{/crossLink}} attribute."
         },
         "Y.GalleryModelSortedMultiRecord": {
             "name": "Y.GalleryModelSortedMultiRecord",
@@ -608,7 +608,7 @@
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1562,
-            "description": "Extension to store the records in the GalleryModel using the field in the \n{{#crossLink \"Y.GalleryModel/primaryKeys\"}}{{/crossLink}} attribute as its index.\nThe primary key __must__ be a __single__ __unique__ __integer__ field.\nIt should be used along {{#crossLink \"Y.GalleryModelMultiRecord\"}}{{/crossLink}}.\nIt is incompatible with {{#crossLink \"Y.GalleryModelSortedMultiRecord\"}}{{/crossLink}}."
+            "description": "Extension to store the records in the GalleryModel using the field in the \n{{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute as its index.\nThe primary key __must__ be a __single__ __unique__ __integer__ field.\nIt should be used along {{#crossLink \"Y.GalleryModelMultiRecord\"}}{{/crossLink}}.\nIt is incompatible with {{#crossLink \"Y.GalleryModelSortedMultiRecord\"}}{{/crossLink}}."
         },
         "Spinner": {
             "name": "Spinner",
@@ -2504,7 +2504,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 119,
-            "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.  \nThe developer has full control of what is\nabout to be saved and when it is saved so it would be pointless\nto try to prevent it at this stage.  This is in contrast to\nthe {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event where the developer has no control of what might\ncome from the server and might wish to do something about it.\nIf in reply to the save operation the server replies with data, \nthe __response__ and __parsed__ properties will be filled.",
+            "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.  \nThe developer has full control of what is\nabout to be saved and when it is saved so it would be pointless\nto try to prevent it at this stage.  This is in contrast to\nthe {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event where the developer has no control of what might\ncome from the server and might wish to do something about it.\nIf in reply to the save operation the server replies with data, \nthe __response__ and __parsed__ properties will be filled.",
             "itemtype": "event",
             "name": "saved",
             "params": [
@@ -2652,7 +2652,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 221,
-            "description": "Sets the value of the named field. \nFires the {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}} event if the new value is different from the current one.\nPrimary key fields cannot be changed unless still `undefined`.",
+            "description": "Sets the value of the named field. \nFires the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event if the new value is different from the current one.\nPrimary key fields cannot be changed unless still `undefined`.",
             "itemtype": "method",
             "name": "setValue",
             "params": [
@@ -2686,7 +2686,7 @@
             "params": [
                 {
                     "name": "ev",
-                    "description": "(see {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}} event)",
+                    "description": "(see {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event)",
                     "type": "EventFacade"
                 }
             ],
@@ -2698,7 +2698,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 260,
-            "description": "Sets a series of values.   \nIt simply loops over the hash of values provided calling {{#crossLink \"Y.GalleryModel/setValue\"}}{{/crossLink}} on each.\nFires the {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}} event.",
+            "description": "Sets a series of values.   \nIt simply loops over the hash of values provided calling {{#crossLink \"Y.GalleryModel/setValue\"}}{{/crossLink}} on each.\nFires the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event.",
             "itemtype": "method",
             "name": "setValues",
             "params": [
@@ -2788,7 +2788,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 353,
-            "description": "Default function for the {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event. \nDoes the actual setting of the values just loaded and calls the callback function.",
+            "description": "Default function for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event. \nDoes the actual setting of the values just loaded and calls the callback function.",
             "itemtype": "method",
             "name": "_defDataLoaded",
             "params": [
@@ -2806,7 +2806,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 368,
-            "description": "Function called when the {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event is prevented, stopped or halted\nso that the callback is called with a suitable error",
+            "description": "Function called when the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event is prevented, stopped or halted\nso that the callback is called with a suitable error",
             "itemtype": "method",
             "name": "_stoppedDataLoaded",
             "params": [
@@ -2824,7 +2824,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 378,
-            "description": "Loads this model from the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual load\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful load operation will fire a {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error\"}}{{/crossLink}} event with the `src` set to `\"load\"`.",
+            "description": "Loads this model from the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual load\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful load operation will fire a {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error:event\"}}{{/crossLink}} event with the `src` set to `\"load\"`.",
             "itemtype": "method",
             "name": "load",
             "params": [
@@ -2880,7 +2880,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 474,
-            "description": "Saves this model to the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual save\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful save operation will fire a {{#crossLink \"Y.GalleryModel/saved\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error\"}}{{/crossLink}} event with the 'src' property set to `\"save\"`.\n\nIf the save operation succeeds and the {{#crossLink \"Y.GalleryModel/parse\"}}{{/crossLink}} method returns non-empty values\nfrom the response received from the server a {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event will also be fired to read those values.",
+            "description": "Saves this model to the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual save\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful save operation will fire a {{#crossLink \"Y.GalleryModel/saved:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error:event\"}}{{/crossLink}} event with the 'src' property set to `\"save\"`.\n\nIf the save operation succeeds and the {{#crossLink \"Y.GalleryModel/parse\"}}{{/crossLink}} method returns non-empty values\nfrom the response received from the server a {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event will also be fired to read those values.",
             "itemtype": "method",
             "name": "save",
             "params": [
@@ -3043,7 +3043,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 670,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the modified state of the field named as a sub-attribute will be returned.\nOtherwise, the modified status of the whole record will be returned.",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the modified state of the field named as a sub-attribute will be returned.\nOtherwise, the modified status of the whole record will be returned.",
             "itemtype": "method",
             "name": "_isModifiedGetter",
             "params": [
@@ -3066,7 +3066,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 690,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the 'new' state of the field named as a sub-attribute will be returned.\nOtherwise, the 'new' status of the whole record will be returned.",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the 'new' state of the field named as a sub-attribute will be returned.\nOtherwise, the 'new' status of the whole record will be returned.",
             "itemtype": "method",
             "name": "_isNewGetter",
             "params": [
@@ -3089,7 +3089,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 710,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/primaryKeys\"}}{{/crossLink}} attribute.\nIf the value is already set, no further changes will be allowed.\nIf the value is not an array, it will be converted to one.",
+            "description": "Setter for the {{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the value is already set, no further changes will be allowed.\nIf the value is not an array, it will be converted to one.",
             "itemtype": "method",
             "name": "_primaryKeysSetter",
             "params": [
@@ -3111,7 +3111,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 727,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/primaryKeys\"}}{{/crossLink}} attribute.\nIf the name contains a dot (`'.'`) it will return a boolean indicating \nwhether the field named as a sub-attribute is part of the primary key.\nOtherwise, it returns the array of primary key fields.",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the name contains a dot (`'.'`) it will return a boolean indicating \nwhether the field named as a sub-attribute is part of the primary key.\nOtherwise, it returns the array of primary key fields.",
             "itemtype": "method",
             "name": "_primaryKeysGetter",
             "params": [
@@ -3180,7 +3180,7 @@
             "params": [
                 {
                     "name": "ev",
-                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}} event",
+                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event",
                     "type": "EventFacade"
                 }
             ],
@@ -3227,7 +3227,7 @@
             "params": [
                 {
                     "name": "ev",
-                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}} event",
+                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event",
                     "type": "EventFacade"
                 }
             ],
@@ -3298,7 +3298,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 973,
-            "description": "Index of the shelf for the record being exposed.\nUse {{#crossLink \"Y.GalleryModel/index\"}}{{/crossLink}} attribute to check/set the index value.",
+            "description": "Index of the shelf for the record being exposed.\nUse {{#crossLink \"Y.GalleryModel/index:attribute\"}}{{/crossLink}} attribute to check/set the index value.",
             "itemtype": "property",
             "name": "_currentIndex",
             "type": "integer",
@@ -3440,7 +3440,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1107,
-            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"Y.GalleryModel/getValue\"}}{{/crossLink}}`\nor any such method to access the values of the current record.\nIt is faster than using {{#crossLink \"Y.GalleryModelMultiRecord/each\"}}{{/crossLink}} \nand then checking the {{#crossLink \"Y.GalleryModel/isModified\"}}{{/crossLink}} attribute\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
+            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"Y.GalleryModel/getValue\"}}{{/crossLink}}`\nor any such method to access the values of the current record.\nIt is faster than using {{#crossLink \"Y.GalleryModelMultiRecord/each\"}}{{/crossLink}} \nand then checking the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
             "itemtype": "method",
             "name": "eachModified",
             "params": [
@@ -3474,7 +3474,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1148,
-            "description": "This is a documentation entry only, this method does not define `load`. \nThis extension redefines the default action for the {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event so \nthat if a load returns an array of records, they will be added to the shelves. \nExisting records are kept, call {{#crossLink \"Y.GalleryModelMultiRecord/empty\"}}{{/crossLink}} if they should be discarded. \nSee method {{#crossLink \"Y.GalleryModel/load\"}}{{/crossLink}} of {{#crossLink \"Y.GalleryModel\"}}{{/crossLink}} for further info.",
+            "description": "This is a documentation entry only, this method does not define `load`. \nThis extension redefines the default action for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event so \nthat if a load returns an array of records, they will be added to the shelves. \nExisting records are kept, call {{#crossLink \"Y.GalleryModelMultiRecord/empty\"}}{{/crossLink}} if they should be discarded. \nSee method {{#crossLink \"Y.GalleryModel/load\"}}{{/crossLink}} of {{#crossLink \"Y.GalleryModel\"}}{{/crossLink}} for further info.",
             "itemtype": "method",
             "name": "load",
             "class": "Y.GalleryModelMultiRecord",
@@ -3524,7 +3524,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1211,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModelMultiRecord/index\"}}{{/crossLink}} attribute.\nValidates and copies the current index value into {{#crossLink \"Y.GalleryModel/_currentIndex\"}}{{/crossLink}}.\nIt shelves the current record and fetches the requested one.",
+            "description": "Setter for the {{#crossLink \"Y.GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute.\nValidates and copies the current index value into {{#crossLink \"Y.GalleryModel/_currentIndex\"}}{{/crossLink}}.\nIt shelves the current record and fetches the requested one.",
             "itemtype": "method",
             "name": "_indexSetter",
             "params": [
@@ -3546,7 +3546,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1229,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModelMultiRecord/index\"}}{{/crossLink}} attribute\nReturns the value from {{#crossLink \"Y.GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute\nReturns the value from {{#crossLink \"Y.GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_indexGetter",
             "return": {
@@ -3561,7 +3561,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1239,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isNewGetter",
             "params": [
@@ -3588,7 +3588,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1257,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isNew\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
+            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isNewSetter",
             "params": [
@@ -3610,7 +3610,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1269,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
+            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isModifiedGetter",
             "params": [
@@ -3637,7 +3637,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1287,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isModified\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
+            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isModifiedSetter",
             "params": [
@@ -3670,7 +3670,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1315,
-            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isNew\"}}{{/crossLink}} attribute",
+            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "attribute",
             "name": "isNew",
             "class": "Y.GalleryModelMultiRecord",
@@ -3679,7 +3679,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1322,
-            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isModified\"}}{{/crossLink}} attribute.",
+            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "attribute",
             "name": "isModified",
             "class": "Y.GalleryModelMultiRecord",
@@ -3726,7 +3726,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1369,
-            "description": "Sets the compare function to be used in sorting the records\nbased on the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} \nand {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir\"}}{{/crossLink}} \nattributes and stores it into this._compare",
+            "description": "Sets the compare function to be used in sorting the records\nbased on the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nand {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes and stores it into this._compare",
             "itemtype": "method",
             "name": "_setCompare",
             "access": "private",
@@ -3737,7 +3737,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1393,
-            "description": "Sorts the shelves whenever the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir\"}}{{/crossLink}} \nattributes change.",
+            "description": "Sorts the shelves whenever the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes change.",
             "itemtype": "method",
             "name": "_sort",
             "access": "private",
@@ -3748,13 +3748,13 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1408,
-            "description": "Listens to value changes and if the name of the field is that of the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} attribute \nor if {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} \nis a function, it will relocate the record to its proper sort order",
+            "description": "Listens to value changes and if the name of the field is that of the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} attribute \nor if {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nis a function, it will relocate the record to its proper sort order",
             "itemtype": "method",
             "name": "_afterChange",
             "params": [
                 {
                     "name": "ev",
-                    "description": "Event façade as produced by the {{#crossLink \"Y.GalleryModel/change\"}}{{/crossLink}}  event",
+                    "description": "Event façade as produced by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}}  event",
                     "type": "EventFacade"
                 }
             ],
@@ -3766,7 +3766,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1433,
-            "description": "Finds the correct index position of a record within the shelves\naccording to the current \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir\"}}{{/crossLink}} \nattributes",
+            "description": "Finds the correct index position of a record within the shelves\naccording to the current \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes",
             "itemtype": "method",
             "name": "_findIndex",
             "params": [
@@ -3805,7 +3805,7 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1497,
-            "description": "Locates a record by value.  The record will be located by the field\ngiven in the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}}\n attribute.   It will return the index of the\nrecord in the shelves or `null` if not found.\nBy default it will expose that record.\nIf {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField\"}}{{/crossLink}} \ncontains a function, it will return `null` and do nothing.\nSince sort fields need not be unique, find may return any of the records\nwith the same value for that field.",
+            "description": "Locates a record by value.  The record will be located by the field\ngiven in the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}}\n attribute.   It will return the index of the\nrecord in the shelves or `null` if not found.\nBy default it will expose that record.\nIf {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \ncontains a function, it will return `null` and do nothing.\nSince sort fields need not be unique, find may return any of the records\nwith the same value for that field.",
             "itemtype": "method",
             "name": "find",
             "params": [
@@ -3870,13 +3870,13 @@
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
             "line": 1593,
-            "description": "Default action for the {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event, \nchecks if the parsed response is an array\nand saves it into the shelves using the value of the primary key field for its index.\nThe model will be left positioned at the item with the lowest key value.\nIf the primary key field has not been declared, items will not be loaded.\nIf the primary key field is not unique, the duplicate will overwrite the previous.",
+            "description": "Default action for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event, \nchecks if the parsed response is an array\nand saves it into the shelves using the value of the primary key field for its index.\nThe model will be left positioned at the item with the lowest key value.\nIf the primary key field has not been declared, items will not be loaded.\nIf the primary key field is not unique, the duplicate will overwrite the previous.",
             "itemtype": "method",
             "name": "_defDataLoaded",
             "params": [
                 {
                     "name": "ev",
-                    "description": "facade produced by the {{#crossLink \"Y.GalleryModel/loaded\"}}{{/crossLink}} event,",
+                    "description": "facade produced by the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event,",
                     "type": "EventFacade"
                 }
             ],
