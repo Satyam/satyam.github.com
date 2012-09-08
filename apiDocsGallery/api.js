@@ -27,10 +27,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Y.Timeline"
     ],
     "modules": [
-        "flyweight-tree-manager",
-        "flyweight-tree-tnode",
-        "fw-treenode",
-        "fw-treeview",
         "gallery-button-plugin",
         "gallery-flyweight-tree",
         "gallery-fwt-treeview",
@@ -47,26 +43,6 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "allModules": [
         {
-            "displayName": "flyweight-tree-manager",
-            "name": "flyweight-tree-manager",
-            "description": "Extension to handle its child nodes by using the flyweight pattern."
-        },
-        {
-            "displayName": "flyweight-tree-tnode",
-            "name": "flyweight-tree-tnode",
-            "description": "An implementation of the flyweight pattern.  \nThis object can be slid on top of a literal object containing the definition \nof a tree and will take its state from that node it is slid upon.\nIt relies for most of its functionality on the flyweight manager object,\nwhich contains most of the code."
-        },
-        {
-            "displayName": "fw-treenode",
-            "name": "fw-treenode",
-            "description": "Instances of it will be provided by Y.FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
-        },
-        {
-            "displayName": "fw-treeview",
-            "name": "fw-treeview",
-            "description": "It creates the tree based on an object passed as the `tree` attribute in the constructor."
-        },
-        {
             "displayName": "gallery-button-plugin",
             "name": "gallery-button-plugin",
             "description": "Node plugin to handle toggle buttons and groups of mutually exclusive toggle buttons.\nSearches a given container for buttons marked with the `yui3-button-toggle` className\nand turns them into toggle buttons and also any HTML element with the `yui3-button-group-exclusive`\nclassName and makes the toggle buttons within it mutually exclussive.\nAdds the `selected` attribute, for toggle buttons it tells whether the button is in the pressed state,\nfor groups of toggles points to the button currently presssed.\nRelies on the cssbutton module for styling."
@@ -77,7 +53,8 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "gallery-fwt-treeview",
-            "name": "gallery-fwt-treeview"
+            "name": "gallery-fwt-treeview",
+            "description": "Instances of it will be provided by Y.FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
         },
         {
             "displayName": "gallery-makenode",

@@ -93,14 +93,6 @@
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/flyweight-tree-manager.html">flyweight-tree-manager</a></li>
-            
-                <li><a href="..&#x2F;modules/flyweight-tree-tnode.html">flyweight-tree-tnode</a></li>
-            
-                <li><a href="..&#x2F;modules/fw-treenode.html">fw-treenode</a></li>
-            
-                <li><a href="..&#x2F;modules/fw-treeview.html">fw-treeview</a></li>
-            
                 <li><a href="..&#x2F;modules/gallery-button-plugin.html">gallery-button-plugin</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a></li>
@@ -180,9 +172,38 @@
 
 
 <div class="box intro">
-    
+    <p>Instances of it will be provided by Y.FWTreeView as required.</p>
+
+<p>Subclasses might be defined based on it. <br />
+Usually, they will add further attributes and redefine the TEMPLATE to 
+show those extra attributes.</p>
 </div>
 
+
+    <div class="example">
+        <h4>Example:</h4>
+        <div class="example-content">
+            <pre class="code"><code class="prettyprint">var tv = new Y.FWTreeView({tree: [
+    {
+        label:'label 0',
+        children: [
+            {
+                label: 'label 0-0',
+                children: [
+                    {label: 'label 0-0-0'},
+                    {label: 'label 0-0-1'}
+                ]
+            },
+            {label: 'label 0-1'}
+        ]
+    },
+    {label: 'label 1'}
+
+]});
+tv.render('#container');
+</code></pre>
+        </div>
+    </div>
 
 
 <div class="yui3-g">
@@ -209,36 +230,6 @@
     </div>
 
     <div class="yui3-u-1-2">
-        
-            <p>This module is a rollup of the following modules:</p>
-
-            <ul class="module-submodules">
-            
-                <li class="module-submodule">
-                    <a href="..&#x2F;modules/fw-treenode.html">
-                        fw-treenode
-                    </a>
-
-                    <div class="module-submodule-description">
-                        Instances of it will be provided by Y.FWTreeView as required.
-
-Subclasses might be defined based on it.  
-Usually, they will add further attributes and redefine the TEMPLATE to 
-show those extra attributes.
-                    </div>
-                </li>
-            
-                <li class="module-submodule">
-                    <a href="..&#x2F;modules/fw-treeview.html">
-                        fw-treeview
-                    </a>
-
-                    <div class="module-submodule-description">
-                        It creates the tree based on an object passed as the <code>tree</code> attribute in the constructor.
-                    </div>
-                </li>
-            
-            </ul>
         
     </div>
 </div>
