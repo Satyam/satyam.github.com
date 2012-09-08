@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js - Satyam&#x27;s Gallery Modules</title>
+    <title>Y.FWTreeNode - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,81 +162,254 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js</h1>
+                        <h1>Y.FWTreeNode Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-&#x2F;**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetParent.html#property__childrenContainer&quot;&gt;_childrenContainer&lt;&#x2F;a&gt;)&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-* For further documentation see &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetStdMod.html&quot;&gt;WidgetStdMod&lt;&#x2F;a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*&#x2F;
+    
 
-&quot;use strict&quot;;
-var BBX = &#x27;boundingBox&#x27;,
-	CBX = &#x27;contentBox&#x27;,
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l1"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:1</code></a>
+        </div>
+    
 
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
+    
+        
+            Module: <a href="../modules/fw-treenode.html">fw-treenode</a><br>
+            Parent Module: <a href="../modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a>
+        
+    
 
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
-	},
-	_renderStdMod : function(section) {
+    
+</div>
 
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
 
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
-			}
-		}
 
-		this._insertStdModSection(contentBox, section, sectionNode);
+<div class="box intro">
+    <p>Instances of it will be provided by Y.FWTreeView as required.</p>
 
-		return (this[section + &#x27;Node&#x27;] = sectionNode);
-	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, &#x27;after&#x27;);
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, &#x27;before&#x27;);
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one(&quot;&gt; .&quot; + WStdMod.SECTION_CLASS_NAMES[section]);
-	}
-};
+<p>Subclasses might be defined based on it. <br />
+Usually, they will add further attributes and redefine the TEMPLATE to 
+show those extra attributes.</p>
+</div>
 
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
 
-    </pre>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__afterClick">_afterClick</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_TEMPLATE">TEMPLATE</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterClick" class="method item private">
+    <h3 class="name"><code>_afterClick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l23"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to the click event by toggling the node</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_TEMPLATE" class="property item">
+    <h3 class="name"><code>TEMPLATE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l41"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Template to produce the markup for a node in the tree.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

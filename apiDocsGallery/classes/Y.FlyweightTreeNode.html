@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>TimeSpinner - Satyam&#x27;s Gallery Modules</title>
+    <title>Y.FlyweightTreeNode - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,36 +162,26 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>TimeSpinner Class</h1>
+                        <h1>Y.FlyweightTreeNode Class</h1>
 <div class="box meta">
-    
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                
-                    <li><a href="Y.Spinner.html">Y.Spinner</a></li>
-                
-                    <li><a href="Y.MakeNode.html">Y.MakeNode</a></li>
-                
-            </ul>
-        </div>
     
 
     
         <div class="extends">
-            Extends Widget
+            Extends Y.Base
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:29</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l12"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:12</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-md-timespinner.html">gallery-md-timespinner</a>
+            Module: <a href="../modules/flyweight-tree-tnode.html">flyweight-tree-tnode</a><br>
+            Parent Module: <a href="../modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a>
         
     
 
@@ -201,27 +191,18 @@
 
 
 <div class="box intro">
-    <p>The TimeSpinner shows a set of spinners for hour, minute and optionally seconds and AM/PM.</p>
+    <p>An implementation of the flyweight pattern.  This class should not be instantiated directly.
+Instances of this class can be requested from the flyweight manager class</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_TimeSpinner" class="method item">
-    <h3 class="name"><code>TimeSpinner</code></h3>
+        <div id="method_Y.FlyweightTreeNode" class="method item">
+    <h3 class="name"><code>Y.FlyweightTreeNode</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>cfg</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -249,7 +230,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:29</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l12"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:12</code></a>
         
         </p>
 
@@ -263,29 +244,6 @@
         
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">cfg</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>(optional) configuration attributes</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -322,106 +280,113 @@
 
                     <ul class="index-list methods extends">
                         
-                            <li class="index-item method private">
-                                <a href="#method__afterValueChange">_afterValueChange</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__getTime">_getTime</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__setTime">_setTime</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__spFact">_spFact</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__uiSetAmpm">_uiSetAmpm</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__uiSetInterval">_uiSetInterval</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__uiSetRunning">_uiSetRunning</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method_"></a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__uiSetSeconds">_uiSetSeconds</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__uiSetValue">_uiSetValue</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__updateTime">_updateTime</a>
+                            <li class="index-item method">
+                                <a href="#method__dynamicLoadReturn">_dynamicLoadReturn</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method_bindUI">bindUI</a>
+                                <a href="#method__expandedGetter">_expandedGetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__expandedSetter">_expandedSetter</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method_renderUI">renderUI</a>
+                                <a href="#method__genericGetter">_genericGetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__genericSetter">_genericSetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getHTML">_getHTML</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__loadDynamic">_loadDynamic</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__renderChildren">_renderChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__slideTo">_slideTo</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_start">start</a>
+                                <a href="#method_forEachChild">forEachChild</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_stop">stop</a>
+                                <a href="#method_getNextSibling">getNextSibling</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getParent">getParent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getPreviousSibling">getPreviousSibling</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_hold">hold</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_release">release</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_toggle">toggle</a>
 
                                 
                                 
@@ -438,50 +403,96 @@
                     <ul class="index-list properties extends">
                         
                             <li class="index-item property private">
-                                <a href="#property__ampmSp">_ampmSp</a>
+                                <a href="#property__node">_node</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property private">
-                                <a href="#property__frozenTime">_frozenTime</a>
+                                <a href="#property__root">_root</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property__hourSp">_hourSp</a>
+                            <li class="index-item property">
+                                <a href="#property_CNAME_CHILDREN">CNAME_CHILDREN</a>
 
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property__minSp">_minSp</a>
+                            <li class="index-item property">
+                                <a href="#property_CNAME_COLLAPSED">CNAME_COLLAPSED</a>
 
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property__offset">_offset</a>
+                            <li class="index-item property">
+                                <a href="#property_CNAME_EXPANDED">CNAME_EXPANDED</a>
 
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property__secSp">_secSp</a>
+                            <li class="index-item property">
+                                <a href="#property_CNAME_FIRSTCHILD">CNAME_FIRSTCHILD</a>
 
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property__timer">_timer</a>
+                            <li class="index-item property">
+                                <a href="#property_CNAME_LASTCHILD">CNAME_LASTCHILD</a>
 
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CNAME_LOADING">CNAME_LOADING</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CNAME_NOCHILDREN">CNAME_NOCHILDREN</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CNAME_NODE">CNAME_NODE</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_TEMPLATE">TEMPLATE</a>
+
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
@@ -497,27 +508,27 @@
                     <ul class="index-list attrs extends">
                         
                             <li class="index-item attr">
-                                <a href="#attr_interval">interval</a>
+                                <a href="#attr_depth">depth</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_running">running</a>
+                                <a href="#attr_expanded">expanded</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_showAmPm">showAmPm</a>
+                                <a href="#attr_id">id</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_showSeconds">showSeconds</a>
+                                <a href="#attr_label">label</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_strings">strings</a>
+                                <a href="#attr_root">root</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_value">value</a>
+                                <a href="#attr_template">template</a>
                             </li>
                         
                     </ul>
@@ -532,19 +543,27 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__afterValueChange" class="method item private">
-    <h3 class="name"><code>_afterValueChange</code></h3>
+                    <div id="method__dynamicLoadReturn" class="method item">
+    <h3 class="name"><code>_dynamicLoadReturn</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>response</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -566,7 +585,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l285"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:285</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l198"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:198</code></a>
         
         </p>
 
@@ -577,9 +596,32 @@
     </div>
 
     <div class="description">
-        <p>Listener for a change in any of the spinners, sets the value.</p>
+        <p>Callback for the dynamicLoader method.</p>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">response</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>array of child nodes</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -588,8 +630,8 @@
 </div>
 
                 
-                    <div id="method__getTime" class="method item private">
-    <h3 class="name"><code>_getTime</code></h3>
+                    <div id="method__expandedGetter" class="method item protected">
+    <h3 class="name"><code>_expandedGetter</code></h3>
 
     
         <span class="paren">()</span>
@@ -597,14 +639,14 @@
 
     
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
     
 
     
 
     
-        <span class="flag private">private</span>
+        <span class="flag protected">protected</span>
     
 
     
@@ -626,7 +668,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l329"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:329</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l141"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:141</code></a>
         
         </p>
 
@@ -637,8 +679,11 @@
     </div>
 
     <div class="description">
-        <p>Getter for the time value.  It returns the current time minus the offset 
-or the time when it was stopped.</p>
+        <p>Getter for the expanded configuration attribute.
+It is meant to be overriden by the developer.
+The supplied version defaults to true if the expanded property 
+is not set in the underlying configuration tree.
+It can be overriden to default to false.</p>
     </div>
 
     
@@ -650,9 +695,9 @@ or the time when it was stopped.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
                     
-                    Time shown
+                    The expanded state of the node.
                 
             </div>
         </div>
@@ -662,8 +707,8 @@ or the time when it was stopped.</p>
 </div>
 
                 
-                    <div id="method__setTime" class="method item private">
-    <h3 class="name"><code>_setTime</code></h3>
+                    <div id="method__expandedSetter" class="method item private">
+    <h3 class="name"><code>_expandedSetter</code></h3>
 
     
         <div class="args">
@@ -706,7 +751,7 @@ or the time when it was stopped.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l344"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:344</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l154"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:154</code></a>
         
         </p>
 
@@ -717,8 +762,10 @@ or the time when it was stopped.</p>
     </div>
 
     <div class="description">
-        <p>Setter for the time value. <br />
-It calculates and saves the offset in between the current time and that set.</p>
+        <p>Setter for the expanded configuration attribute.
+It renders the child nodes if this branch has never been expanded.
+Then sets the className on the node to the static constants 
+CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
     </div>
 
     
@@ -730,13 +777,13 @@ It calculates and saves the offset in between the current time and that set.</p>
                 <li class="param">
                     
                         <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>time to be shown</p>
+                        <p>new value for the expanded attribute</p>
                     </div>
 
                     
@@ -752,8 +799,8 @@ It calculates and saves the offset in between the current time and that set.</p>
 </div>
 
                 
-                    <div id="method__spFact" class="method item private">
-    <h3 class="name"><code>_spFact</code></h3>
+                    <div id="method__genericGetter" class="method item protected">
+    <h3 class="name"><code>_genericGetter</code></h3>
 
     
         <div class="args">
@@ -761,19 +808,13 @@ It calculates and saves the offset in between the current time and that set.</p>
             
                 <li class="arg">
                     
-                        <code>which</code>
+                        <code>value</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>cfg</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>where</code>
+                        <code>name</code>
                     
                 </li>
             
@@ -783,8 +824,380 @@ It calculates and saves the offset in between the current time and that set.</p>
 
     
         <span class="returns-inline">
-            <span class="type"><a href="../classes/Spinner.html" class="crosslink">Spinner</a></span>
+            <span class="type">Any</span>
         </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l259"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:259</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Generic getter for values stored in the underlying node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value stored by Attribute (not used).</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name of the attribute to be read.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    Value read.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__genericSetter" class="method item protected">
+    <h3 class="name"><code>_genericSetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l243"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:243</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Generic setter for values stored in the underlying node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to be set.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name of the attribute to be set.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getHTML" class="method item protected">
+    <h3 class="name"><code>_getHTML</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>nSiblings</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>depth</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l39"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a string with the markup for this node along that of its children
+produced from its attributes rendered
+via the first template string it finds in these locations:</p>
+
+<ul>
+<li>It's own Template configuration attribute</li>
+<li>The static FlyweightTreeNode/TEMPLATE class property</li>
+</ul>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>index of this node within the array of siblings</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">nSiblings</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>number of siblings including this node</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">depth</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>number of levels to the root</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    markup generated by this node
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__loadDynamic" class="method item private">
+    <h3 class="name"><code>_loadDynamic</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
     
 
     
@@ -812,7 +1225,7 @@ It calculates and saves the offset in between the current time and that set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l100"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:100</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l186"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:186</code></a>
         
         </p>
 
@@ -823,7 +1236,130 @@ It calculates and saves the offset in between the current time and that set.</p>
     </div>
 
     <div class="description">
-        <p>Helper factory to make a single Spinner</p>
+        <p>Triggers the dynamic loading of children for this node.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__renderChildren" class="method item private">
+    <h3 class="name"><code>_renderChildren</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l227"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:227</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Renders the children of this node. <br />
+It the children had been rendered, they will be replaced.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__slideTo" class="method item private">
+    <h3 class="name"><code>_slideTo</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>node</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l108"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:108</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method to slide this instance on top of another node in the configuration object</p>
     </div>
 
     
@@ -834,44 +1370,14 @@ It calculates and saves the offset in between the current time and that set.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">which</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>ClassName key for the spinner and strings subkey for its title</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">cfg</code>
+                        <code class="param-name">node</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>(optional) configuration attribute overrides</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">where</code>
-                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>(optional) where to render it</p>
+                        <p>node in the underlying configuration tree to slide this object on top of.</p>
                     </div>
 
                     
@@ -879,6 +1385,218 @@ It calculates and saves the offset in between the current time and that set.</p>
             
             </ul>
         </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_forEachChild" class="method item">
+    <h3 class="name"><code>forEachChild</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fn</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>scope</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l117"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:117</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Executes the given function on each of the child nodes of this node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fn</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Function to be executed on each node</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">child</code>
+                                    <span class="type"><a href="../classes/Y.FlyweightTreeNode.html" class="crosslink">Y.FlyweightTreeNode</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>Instance of a suitable subclass of FlyweightTreeNode, 
+        positioned on top of the child node</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">index</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Index of this child within the array of children</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">array</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>array containing itself and its siblings</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">scope</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The falue of this for the function.  Defaults to the parent.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getNextSibling" class="method item">
+    <h3 class="name"><code>getNextSibling</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l304"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:304</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the next sibling node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
+    </div>
+
     
 
     
@@ -888,9 +1606,7 @@ It calculates and saves the offset in between the current time and that set.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="../classes/Spinner.html" class="crosslink">Spinner</a></span>:
-                    
-                    Spinner instance
+                    Y.FlyweightTreeNode
                 
             </div>
         </div>
@@ -900,576 +1616,21 @@ It calculates and saves the offset in between the current time and that set.</p>
 </div>
 
                 
-                    <div id="method__uiSetAmpm" class="method item private">
-    <h3 class="name"><code>_uiSetAmpm</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l186"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:186</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Creates or destroys the am/pm spinner and attaches/detaches the event listeners.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>whether to show the am/pm spinner or not</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetInterval" class="method item private">
-    <h3 class="name"><code>_uiSetInterval</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l258"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:258</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Sets the interval for refreshing the display</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>milliseconds in between refreshes</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetRunning" class="method item private">
-    <h3 class="name"><code>_uiSetRunning</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l273"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:273</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Sets the timer running.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>run or not</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_" class="method item private">
-    <h3 class="name"><code></code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>ev</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l302"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:302</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Listener for the wrapped event of the spinners to propagate 
-the changes from seconds to minutes and minutes to hours.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">ev</code>
-                        <span class="type">EventFacade</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>to find out which one wrapped and which way</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetSeconds" class="method item private">
-    <h3 class="name"><code>_uiSetSeconds</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l159"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:159</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Creates or destroys the seconds spinner and attaches/detaches the event listeners.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>whether to show the seconds spinner or not</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetValue" class="method item private">
-    <h3 class="name"><code>_uiSetValue</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>src</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l230"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:230</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Shows the current value in the set of spinners</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>value to be shown</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">src</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>source of the change in value. <br />
-       If src===UI, the value comes from the spinners, it needs not be refreshed</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__updateTime" class="method item private">
-    <h3 class="name"><code>_updateTime</code></h3>
+                    <div id="method_getParent" class="method item">
+    <h3 class="name"><code>getParent</code></h3>
 
     
         <span class="paren">()</span>
     
 
     
-
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
-        <span class="flag private">private</span>
+
     
 
     
@@ -1491,7 +1652,7 @@ the changes from seconds to minutes and minutes to hours.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l320"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:320</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l293"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:293</code></a>
         
         </p>
 
@@ -1502,86 +1663,45 @@ the changes from seconds to minutes and minutes to hours.</p>
     </div>
 
     <div class="description">
-        <p>Callback for the interval timer to update the time shown</p>
+        <p>Returns the parent node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
     </div>
 
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    Y.FlyweightTreeNode
+                
+            </div>
+        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_bindUI" class="method item protected">
-    <h3 class="name"><code>bindUI</code></h3>
+                    <div id="method_getPreviousSibling" class="method item">
+    <h3 class="name"><code>getPreviousSibling</code></h3>
 
     
         <span class="paren">()</span>
     
 
     
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
 
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l132"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:132</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Sets the listeners for events from the hours and minutes spinners.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_renderUI" class="method item protected">
-    <h3 class="name"><code>renderUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
     
 
     
@@ -1603,7 +1723,7 @@ the changes from seconds to minutes and minutes to hours.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l119"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:119</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l320"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:320</code></a>
         
         </p>
 
@@ -1614,20 +1734,32 @@ the changes from seconds to minutes and minutes to hours.</p>
     </div>
 
     <div class="description">
-        <p>Renders the hours and minutes spinners. 
-The other two, being optional, are rendered when set.</p>
+        <p>Returns the previous sibling node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
     </div>
 
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    Y.FlyweightTreeNode
+                
+            </div>
+        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_start" class="method item">
-    <h3 class="name"><code>start</code></h3>
+                    <div id="method_hold" class="method item">
+    <h3 class="name"><code>hold</code></h3>
 
     
         <span class="paren">()</span>
@@ -1644,6 +1776,8 @@ The other two, being optional, are rendered when set.</p>
     
 
     
+        <span class="flag chainable">chainable</span>
+    
 
     
 
@@ -1658,7 +1792,7 @@ The other two, being optional, are rendered when set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l357"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:357</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l272"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:272</code></a>
         
         </p>
 
@@ -1669,8 +1803,8 @@ The other two, being optional, are rendered when set.</p>
     </div>
 
     <div class="description">
-        <p>Helper method to set the timer running.
-Same as <code>this.set('running', true);</code></p>
+        <p>Prevents this instance from being returned to the pool and reused.
+Remember to Release this instance when no longer needed.</p>
     </div>
 
     
@@ -1681,8 +1815,8 @@ Same as <code>this.set('running', true);</code></p>
 </div>
 
                 
-                    <div id="method_stop" class="method item">
-    <h3 class="name"><code>stop</code></h3>
+                    <div id="method_release" class="method item">
+    <h3 class="name"><code>release</code></h3>
 
     
         <span class="paren">()</span>
@@ -1699,6 +1833,8 @@ Same as <code>this.set('running', true);</code></p>
     
 
     
+        <span class="flag chainable">chainable</span>
+    
 
     
 
@@ -1713,7 +1849,7 @@ Same as <code>this.set('running', true);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l366"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:366</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l281"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:281</code></a>
         
         </p>
 
@@ -1724,8 +1860,65 @@ Same as <code>this.set('running', true);</code></p>
     </div>
 
     <div class="description">
-        <p>Helper method to stop the timer.
-Same as <code>this.set('running', false);</code></p>
+        <p>Allows this instance to be returned to the pool and reused.</p>
+
+<p><strong>Important</strong>: This instance should not be used after being released</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_toggle" class="method item">
+    <h3 class="name"><code>toggle</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l337"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:337</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method to toggle the expanded state of the node.</p>
     </div>
 
     
@@ -1744,9 +1937,9 @@ Same as <code>this.set('running', false);</code></p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property__ampmSp" class="property item private">
-    <h3 class="name"><code>_ampmSp</code></h3>
-    <span class="type">Y.Spinner</span>
+                    <div id="property__node" class="property item private">
+    <h3 class="name"><code>_node</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -1769,7 +1962,7 @@ Same as <code>this.set('running', false);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l66"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:66</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l24"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:24</code></a>
         
         </p>
 
@@ -1779,11 +1972,9 @@ Same as <code>this.set('running', false);</code></p>
     </div>
 
     <div class="description">
-        <p>Reference to the Spinner showingam/pm.</p>
+        <p>Reference to the node in the configuration tree it has been slid over.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1792,9 +1983,9 @@ Same as <code>this.set('running', false);</code></p>
 </div>
 
                 
-                    <div id="property__frozenTime" class="property item private">
-    <h3 class="name"><code>_frozenTime</code></h3>
-    <span class="type">Number (milliseconds)</span>
+                    <div id="property__root" class="property item private">
+    <h3 class="name"><code>_root</code></h3>
+    <span class="type"><a href="../classes/Y.FlyweightTreeManager.html" class="crosslink">Y.FlyweightTreeManager</a></span>
 
     
 
@@ -1817,7 +2008,7 @@ Same as <code>this.set('running', false);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l92"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:92</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l31"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:31</code></a>
         
         </p>
 
@@ -1827,11 +2018,10 @@ Same as <code>this.set('running', false);</code></p>
     </div>
 
     <div class="description">
-        
+        <p>Reference to the FlyweightTreeManager instance this node belongs to.
+It is set by the root and should be considered read-only.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -1840,18 +2030,18 @@ Same as <code>this.set('running', false);</code></p>
 </div>
 
                 
-                    <div id="property__hourSp" class="property item private">
-    <h3 class="name"><code>_hourSp</code></h3>
-    <span class="type">Y.Spinner</span>
+                    <div id="property_CNAME_CHILDREN" class="property item">
+    <h3 class="name"><code>CNAME_CHILDREN</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -1865,7 +2055,7 @@ Same as <code>this.set('running', false);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l42"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:42</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l377"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:377</code></a>
         
         </p>
 
@@ -1875,11 +2065,9 @@ Same as <code>this.set('running', false);</code></p>
     </div>
 
     <div class="description">
-        <p>Reference to the Spinner showing the hours.</p>
+        <p>CCS className constant to use as the class name for the DOM element that will containe the children of this node.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1888,18 +2076,18 @@ Same as <code>this.set('running', false);</code></p>
 </div>
 
                 
-                    <div id="property__minSp" class="property item private">
-    <h3 class="name"><code>_minSp</code></h3>
-    <span class="type">Y.Spinner</span>
+                    <div id="property_CNAME_COLLAPSED" class="property item">
+    <h3 class="name"><code>CNAME_COLLAPSED</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -1913,7 +2101,7 @@ Same as <code>this.set('running', false);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l50"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:50</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l384"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:384</code></a>
         
         </p>
 
@@ -1923,11 +2111,9 @@ Same as <code>this.set('running', false);</code></p>
     </div>
 
     <div class="description">
-        <p>Reference to the Spinner showing the minutes.</p>
+        <p>CCS className constant added to the DOM element for this node when its state is not expanded.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1936,18 +2122,18 @@ Same as <code>this.set('running', false);</code></p>
 </div>
 
                 
-                    <div id="property__offset" class="property item private">
-    <h3 class="name"><code>_offset</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    <div id="property_CNAME_EXPANDED" class="property item">
+    <h3 class="name"><code>CNAME_EXPANDED</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -1961,7 +2147,7 @@ Same as <code>this.set('running', false);</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l82"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:82</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l391"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:391</code></a>
         
         </p>
 
@@ -1971,12 +2157,9 @@ Same as <code>this.set('running', false);</code></p>
     </div>
 
     <div class="description">
-        <p>Difference in milliseconds in between the current time and that displayed. <br />
-Used when the timer is running to display times other than the current time.</p>
+        <p>CCS className constant added to the DOM element for this node when its state is expanded.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -1985,18 +2168,18 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="property__secSp" class="property item private">
-    <h3 class="name"><code>_secSp</code></h3>
-    <span class="type">Y.Spinner</span>
+                    <div id="property_CNAME_FIRSTCHILD" class="property item">
+    <h3 class="name"><code>CNAME_FIRSTCHILD</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -2010,7 +2193,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l58"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:58</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l405"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:405</code></a>
         
         </p>
 
@@ -2020,11 +2203,9 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Reference to the Spinner showing the seconds.</p>
+        <p>CCS className constant added to the DOM element for this node when it is the first in the group.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -2033,18 +2214,18 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="property__timer" class="property item private">
-    <h3 class="name"><code>_timer</code></h3>
-    <span class="type">Timer object</span>
+                    <div id="property_CNAME_LASTCHILD" class="property item">
+    <h3 class="name"><code>CNAME_LASTCHILD</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -2058,7 +2239,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l74"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:74</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l412"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:412</code></a>
         
         </p>
 
@@ -2068,11 +2249,211 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Reference to the timer created by Y.later that updates the time.</p>
+        <p>CCS className constant added to the DOM element for this node when it is the last in the group.</p>
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CNAME_LOADING" class="property item">
+    <h3 class="name"><code>CNAME_LOADING</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l419"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:419</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CCS className constant added to the DOM element for this node when dynamically loading its children.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CNAME_NOCHILDREN" class="property item">
+    <h3 class="name"><code>CNAME_NOCHILDREN</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l398"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:398</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CCS className constant added to the DOM element for this node when it has no children.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CNAME_NODE" class="property item">
+    <h3 class="name"><code>CNAME_NODE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l370"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:370</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CCS className constant to use as the class name for the DOM element representing the node.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_TEMPLATE" class="property item">
+    <h3 class="name"><code>TEMPLATE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l348"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:348</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Template string to be used to render this node.
+It should be overriden by the subclass.</p>
+
+<p>It contains the HTML markup for this node plus placeholders,
+enclosed in curly braces, that have access to any of the 
+configuration attributes of this node plus the following
+additional placeholders:</p>
+
+<ul>
+<li>children: The markup for the children of this node will be placed here</li>
+<li>cname_node: The className for the HTML element enclosing this node.
+The template should always use this className to help it locate the DOM element for this node.</li>
+<li>cname_children: The className for the HTML element enclosing the children of this node.
+The template should always use this className to help it locate the DOM element that contains the children of this node.</li>
+</ul>
+
+<p>The template should also add the <code>id</code> attribute to the DOM Element representing this node.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;div id=&quot;{id}&quot; class=&quot;{cname_node}&quot;&gt;&lt;div class=&quot;content&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;</p>
     
 
     
@@ -2089,10 +2470,10 @@ Used when the timer is running to display times other than the current time.</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_interval" class="attr item">
-    <a name="config_interval"></a> 
-    <h3 class="name"><code>interval</code></h3>
-    <span class="type">Number (milliseconds)</span>
+                    <div id="attr_depth" class="attr item">
+    <a name="config_depth"></a> 
+    <h3 class="name"><code>depth</code></h3>
+    <span class="type">Integer</span>
 
     
 
@@ -2117,7 +2498,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l416"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:416</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l480"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:480</code></a>
         
         </p>
 
@@ -2127,19 +2508,18 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>How often to refresh the time displayed</p>
+        <p>Returns the depth of this node from the root.
+This is calculated on-the-fly.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> 500</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>intervalChange</code></h4>
+            <h4>Fires event <code>depthChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>interval</code> is
+            Fires when the value for the configuration attribute <code>depth</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2191,9 +2571,9 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="attr_running" class="attr item">
-    <a name="config_running"></a> 
-    <h3 class="name"><code>running</code></h3>
+                    <div id="attr_expanded" class="attr item">
+    <a name="config_expanded"></a> 
+    <h3 class="name"><code>expanded</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
@@ -2219,7 +2599,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l427"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:427</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l499"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:499</code></a>
         
         </p>
 
@@ -2229,7 +2609,7 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Whether the timer is running.</p>
+        <p>Expanded state of this node.</p>
     </div>
 
     
@@ -2238,10 +2618,10 @@ Used when the timer is running to display times other than the current time.</p>
 
     
         <div class="emits box">
-            <h4>Fires event <code>runningChange</code></h4>
+            <h4>Fires event <code>expandedChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>running</code> is
+            Fires when the value for the configuration attribute <code>expanded</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2293,10 +2673,10 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="attr_showAmPm" class="attr item">
-    <a name="config_showAmPm"></a> 
-    <h3 class="name"><code>showAmPm</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    <div id="attr_id" class="attr item">
+    <a name="config_id"></a> 
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">Identifier</span>
 
     
 
@@ -2321,7 +2701,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l379"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:379</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l468"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:468</code></a>
         
         </p>
 
@@ -2331,19 +2711,20 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Whether to show the am/pm indicator or show a 24 hours timer.</p>
+        <p>Id to assign to the DOM element that contains this node. <br />
+If none was supplied, it will generate one</p>
     </div>
 
     
-        <p><strong>Default:</strong> false</p>
+        <p><strong>Default:</strong> Y.guid()</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>showAmPmChange</code></h4>
+            <h4>Fires event <code>idChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>showAmPm</code> is
+            Fires when the value for the configuration attribute <code>id</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2395,10 +2776,10 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="attr_showSeconds" class="attr item">
-    <a name="config_showSeconds"></a> 
-    <h3 class="name"><code>showSeconds</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    <div id="attr_label" class="attr item">
+    <a name="config_label"></a> 
+    <h3 class="name"><code>label</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
@@ -2423,7 +2804,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l389"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:389</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l456"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:456</code></a>
         
         </p>
 
@@ -2433,19 +2814,19 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Whether to show the seconds indicator</p>
+        <p>Label for this node. Nodes usually have some textual content, this is the place for it.</p>
     </div>
 
     
-        <p><strong>Default:</strong> true</p>
+        <p><strong>Default:</strong> &#x27;&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>showSecondsChange</code></h4>
+            <h4>Fires event <code>labelChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>showSeconds</code> is
+            Fires when the value for the configuration attribute <code>label</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2497,10 +2878,10 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="attr_strings" class="attr item">
-    <a name="config_strings"></a> 
-    <h3 class="name"><code>strings</code></h3>
-    <span class="type"></span>
+                    <div id="attr_root" class="attr item">
+    <a name="config_root"></a> 
+    <h3 class="name"><code>root</code></h3>
+    <span class="type"><a href="../classes/Y.FlyweightTreeManager.html" class="crosslink">Y.FlyweightTreeManager</a></span>
 
     
 
@@ -2525,7 +2906,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l438"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:438</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l427"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:427</code></a>
         
         </p>
 
@@ -2535,17 +2916,17 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Set of localizable strings to be used as tooltips on the spinners.</p>
+        <p>Reference to the FlyweightTreeManager this node belongs to</p>
     </div>
 
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>stringsChange</code></h4>
+            <h4>Fires event <code>rootChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>strings</code> is
+            Fires when the value for the configuration attribute <code>root</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2597,10 +2978,10 @@ Used when the timer is running to display times other than the current time.</p>
 </div>
 
                 
-                    <div id="attr_value" class="attr item">
-    <a name="config_value"></a> 
-    <h3 class="name"><code>value</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date" class="crosslink external" target="_blank">Date</a></span>
+                    <div id="attr_template" class="attr item">
+    <a name="config_template"></a> 
+    <h3 class="name"><code>template</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
@@ -2625,7 +3006,7 @@ Used when the timer is running to display times other than the current time.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-timespinner_js_gallery-md-timespinner.js.html#l399"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-timespinner&#x2F;js&#x2F;gallery-md-timespinner.js:399</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l442"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:442</code></a>
         
         </p>
 
@@ -2635,19 +3016,22 @@ Used when the timer is running to display times other than the current time.</p>
     </div>
 
     <div class="description">
-        <p>Value of the timer</p>
+        <p>Template to use on this particular instance. <br />
+The renderer will default to the static TEMPLATE property of this class 
+(the preferred way) or the nodeTemplate configuration attribute of the root.
+See the TEMPLATE static property.</p>
     </div>
 
     
-        <p><strong>Default:</strong> time at initialization or current time if running</p>
+        <p><strong>Default:</strong> undefined</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>valueChange</code></h4>
+            <h4>Fires event <code>templateChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>value</code> is
+            Fires when the value for the configuration attribute <code>template</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

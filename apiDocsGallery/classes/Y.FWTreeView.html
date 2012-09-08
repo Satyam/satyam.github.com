@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ButtonPlugin - Satyam&#x27;s Gallery Modules</title>
+    <title>Y.FWTreeView - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,7 +162,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ButtonPlugin Class</h1>
+                        <h1>Y.FWTreeView Class</h1>
 <div class="box meta">
     
 
@@ -170,13 +170,14 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l1"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:1</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l1"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-button-plugin.html">gallery-button-plugin</a>
+            Module: <a href="../modules/fw-treeview.html">fw-treeview</a><br>
+            Parent Module: <a href="../modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a>
         
     
 
@@ -186,13 +187,7 @@
 
 
 <div class="box intro">
-    <p>Node plugin to handle toggle buttons and groups of mutually exclusive toggle buttons.
-Searches a given container for buttons marked with the <code>yui3-button-toggle</code> className
-and turns them into toggle buttons and also any HTML element with the <code>yui3-button-group-exclusive</code>
-className and makes the toggle buttons within it mutually exclussive.
-Adds the <code>selected</code> attribute, for toggle buttons it tells whether the button is in the pressed state,
-for groups of toggles points to the button currently presssed.
-Relies on the cssbutton module for styling.</p>
+    <p>It creates the tree based on an object passed as the <code>tree</code> attribute in the constructor.</p>
 </div>
 
 
@@ -204,6 +199,8 @@ Relies on the cssbutton module for styling.</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
@@ -221,47 +218,16 @@ Relies on the cssbutton module for styling.</p>
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method private">
-                                <a href="#method__addButtonGroup">_addButtonGroup</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__addToggleButton">_addToggleButton</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__selectedGetter">_selectedGetter</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__selectedSetter">_selectedSetter</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method">
-                                <a href="#method_addToggles">addToggles</a>
+                                <a href="#method_initializer">initializer</a>
 
                                 
-                                    <span class="flag static">static</span>
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_renderUI">renderUI</a>
+
                                 
                                 
                             </li>
@@ -271,6 +237,21 @@ Relies on the cssbutton module for styling.</p>
             
 
             
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_CONTENT_TEMPLATE">CONTENT_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section attrs">
@@ -279,7 +260,7 @@ Relies on the cssbutton module for styling.</p>
                     <ul class="index-list attrs">
                         
                             <li class="index-item attr">
-                                <a href="#attr_selected">selected</a>
+                                <a href="#attr_defaultType">defaultType</a>
                             </li>
                         
                     </ul>
@@ -294,8 +275,8 @@ Relies on the cssbutton module for styling.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__addButtonGroup" class="method item private">
-    <h3 class="name"><code>_addButtonGroup</code></h3>
+                    <div id="method_initializer" class="method item">
+    <h3 class="name"><code>initializer</code></h3>
 
     
         <div class="args">
@@ -303,7 +284,7 @@ Relies on the cssbutton module for styling.</p>
             
                 <li class="arg">
                     
-                        <code>node</code>
+                        <code>config</code>
                     
                 </li>
             
@@ -316,13 +297,9 @@ Relies on the cssbutton module for styling.</p>
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
-    
-        <span class="flag static">static</span>
     
 
     
@@ -340,7 +317,7 @@ Relies on the cssbutton module for styling.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l99"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:99</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l44"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:44</code></a>
         
         </p>
 
@@ -351,7 +328,7 @@ Relies on the cssbutton module for styling.</p>
     </div>
 
     <div class="description">
-        <p>Plugs into a container of mutually exclusive toggle buttons</p>
+        <p>Widget lifecycle method</p>
     </div>
 
     
@@ -362,14 +339,15 @@ Relies on the cssbutton module for styling.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">node</code>
-                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+                        <code class="param-name">config</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Reference to the container of the buttons</p>
+                        <p>configuration object of which 
+<code>tree</code> contains the tree configuration.</p>
                     </div>
 
                     
@@ -385,120 +363,23 @@ Relies on the cssbutton module for styling.</p>
 </div>
 
                 
-                    <div id="method__addToggleButton" class="method item private">
-    <h3 class="name"><code>_addToggleButton</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>node</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l84"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:84</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Plugs into a toggle button</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">node</code>
-                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Reference to the Node to be plugged into</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__selectedGetter" class="method item private">
-    <h3 class="name"><code>_selectedGetter</code></h3>
+                    <div id="method_renderUI" class="method item protected">
+    <h3 class="name"><code>renderUI</code></h3>
 
     
         <span class="paren">()</span>
     
 
     
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
 
     
 
     
-        <span class="flag private">private</span>
+        <span class="flag protected">protected</span>
     
 
     
 
-    
-        <span class="flag static">static</span>
     
 
     
@@ -516,7 +397,7 @@ Relies on the cssbutton module for styling.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l28"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:28</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l54"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:54</code></a>
         
         </p>
 
@@ -527,208 +408,11 @@ Relies on the cssbutton module for styling.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the augmented <code>selected</code> Node attribute</p>
+        <p>Widget lifecyle method
+I opted for not including this method in FlyweightTreeManager so that
+it can be used to extend Base, not just Widget</p>
     </div>
 
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    Boolean for toggle buttons, Node reference for groups. 
-        State of the toggle button or Node of toggle button selected within group.
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__selectedSetter" class="method item private">
-    <h3 class="name"><code>_selectedSetter</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l47"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:47</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Setter for the augmented <code>selected</code> Node attribute</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> | <a href="../classes/Node.html" class="crosslink">Node</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>For toggle buttons: pressed state,
-       for groups of toggles, reference or css-selector of pressed button</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_addToggles" class="method item">
-    <h3 class="name"><code>addToggles</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code class="optional">[container]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l114"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:114</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Searches within the given container or the body of the document for
-buttons marked with the className <code>yui3-button-toggle</code>
-and elements with the className <code>yui3-button-group-exclusive</code> and
-plugs them with this module</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[container]</code>
-                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Node instance or css selector of the element
-    containing the buttons or button groups to be plugged into. 
-    Assumes the document body if missing.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -740,6 +424,56 @@ plugs them with this module</p>
             </div>
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_CONTENT_TEMPLATE" class="property item">
+    <h3 class="name"><code>CONTENT_TEMPLATE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l64"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:64</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
@@ -747,10 +481,10 @@ plugs them with this module</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_selected" class="attr item">
-    <a name="config_selected"></a> 
-    <h3 class="name"><code>selected</code></h3>
-    <span class="type"></span>
+                    <div id="attr_defaultType" class="attr item">
+    <a name="config_defaultType"></a> 
+    <h3 class="name"><code>defaultType</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
@@ -775,7 +509,7 @@ plugs them with this module</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-button-plugin_js_button-plugin.js.html#l133"><code>yui3-gallery&#x2F;src&#x2F;gallery-button-plugin&#x2F;js&#x2F;button-plugin.js:133</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l74"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:74</code></a>
         
         </p>
 
@@ -785,19 +519,20 @@ plugs them with this module</p>
     </div>
 
     <div class="description">
-        <p>Augmented <code>selected</code> attribute. 
-For toggle buttons indicates whether the button is pressed.
-For groups of toggle buttons sets/return the reference to the button pressed</p>
+        <p>Override for the <code>defaultType</code> value of FlyweightTreeManager
+so it creates FWTreeNode instances instead of the default.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> &#x27;FWTreeNode&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>selectedChange</code></h4>
+            <h4>Fires event <code>defaultTypeChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>selected</code> is
+            Fires when the value for the configuration attribute <code>defaultType</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js - Satyam&#x27;s Gallery Modules</title>
+    <title>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,79 +162,60 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js</h1>
+                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetParent.html#property__childrenContainer&quot;&gt;_childrenContainer&lt;&#x2F;a&gt;)&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-* For further documentation see &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetStdMod.html&quot;&gt;WidgetStdMod&lt;&#x2F;a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*&#x2F;
-
-&quot;use strict&quot;;
-var BBX = &#x27;boundingBox&#x27;,
-	CBX = &#x27;contentBox&#x27;,
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
-
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
-
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
-	},
-	_renderStdMod : function(section) {
-
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
-
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
+&#x2F;** This class must not be generated directly.  
+ *  Instances of it will be provided by Y.FWTreeView as required.
+ *  
+ *  Subclasses might be defined based on it.  
+ *  Usually, they will add further attributes and redefine the TEMPLATE to 
+ *  show those extra attributes.
+ *  
+ *  @module gallery-fwt-treeview
+ *  @submodule fw-treenode
+ *    
+ *  @class Y.FWTreeNode
+ *  @extends Y.FlyweightTreeNode
+ *  @constructor
+ *&#x2F;
+ Y.FWTreeNode = Y.Base.create(
+	&#x27;fw-treenode&#x27;,
+	Y.FlyweightTreeNode,
+	[],
+	{
+		initializer: function() {
+			this.after(&#x27;click&#x27;, this._afterClick, this);
+		},
+		&#x2F;**
+		 * Responds to the click event by toggling the node
+		 * @method _afterClick
+		 * @param ev {EventFacade}
+		 * @private
+		 *&#x2F;
+		_afterClick: function (ev) {
+			var target = ev.domEvent.target;
+			if (target.hasClass(CNAMES.toggle)) {
+				this.toggle();
+			} else if ((target.hasClass(CNAMES.content) || target.hasClass(CNAMES.icon)) &amp;&amp; this.get(&#x27;root&#x27;).get(&#x27;toggleOnLabelClick&#x27;)) {
+				this.toggle();
+			} else if (target.hasClass(CNAMES.selection)) {
+				this.toggleSelection();
 			}
 		}
-
-		this._insertStdModSection(contentBox, section, sectionNode);
-
-		return (this[section + &#x27;Node&#x27;] = sectionNode);
 	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, &#x27;after&#x27;);
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, &#x27;before&#x27;);
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one(&quot;&gt; .&quot; + WStdMod.SECTION_CLASS_NAMES[section]);
+	{
+		&#x2F;**
+		 * Template to produce the markup for a node in the tree.
+		 * @property TEMPLATE
+		 * @type String
+		 * @static
+		 *&#x2F;
+		TEMPLATE: Lang.sub(&#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node}&quot;&gt;&lt;div class=&quot;{toggle}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{icon}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{selection}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{content}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;ul class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;, CNAMES)
 	}
-};
+);
 
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
 
     </pre>
 </div>

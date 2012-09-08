@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js - Satyam&#x27;s Gallery Modules</title>
+    <title>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,79 +162,98 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js</h1>
+                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetParent.html#property__childrenContainer&quot;&gt;_childrenContainer&lt;&#x2F;a&gt;)&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-* For further documentation see &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetStdMod.html&quot;&gt;WidgetStdMod&lt;&#x2F;a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*&#x2F;
+&#x2F;** Creates a Treeview using the FlyweightTreeManager extension to handle its nodes.
+ * It creates the tree based on an object passed as the &#x60;tree&#x60; attribute in the constructor.
+ * @example
+ *
+	var tv = new Y.FWTreeView({tree: [
+		{
+			label:&#x27;label 0&#x27;,
+			children: [
+				{
+					label: &#x27;label 0-0&#x27;,
+					children: [
+						{label: &#x27;label 0-0-0&#x27;},
+						{label: &#x27;label 0-0-1&#x27;}
+					]
+				},
+				{label: &#x27;label 0-1&#x27;}
+			]
+		},
+		{label: &#x27;label 1&#x27;}
 
-&quot;use strict&quot;;
-var BBX = &#x27;boundingBox&#x27;,
-	CBX = &#x27;contentBox&#x27;,
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
+	]});
+	tv.render(&#x27;#container&#x27;);
+ * @module gallery-fwt-treeview
+ * @submodule fw-treeview
+ * @class Y.FWTreeView
+ * @extends Y.Widget
+ * @uses Y.FlyweightTreeManager
+ * @constructor
+ * @param config {Object} Configuration attributes, amongst them:
+ * @param config.tree {Array} Array of objects defining the first level of nodes.
+ * @param config.tree.label {String} Text of HTML markup to be shown in the node
+ * @param [config.tree.expanded=true] {Boolean} Whether the children of this node should be visible.
+ * @param [config.tree.children] {Array} Further definitions for the children of this node
+ * @param [config.tree.type=Y.FWTreeNode] {Y.FWTreeNode | String} Class used to create instances for this node.
+ * It can be a reference to an object or a name that can be resolved as &#x60;Y[name]&#x60;.
+ * @param [config.tree.id=Y.guid()] {String} Identifier to assign to the DOM element containing this node.
+ * @param [config.tree.template] {String} Template for this particular node. 
+ *&#x2F;
+Y.FWTreeView = Y.Base.create(
+	&#x27;fw-treeview&#x27;,
+	Y.Widget,
+	[Y.FlyweightTreeManager],
+	{
+		&#x2F;**
+		 * Widget lifecycle method
+		 * @method initializer
+		 * @param config {object} configuration object of which 
+		 * &#x60;tree&#x60; contains the tree configuration.
+		 *&#x2F;
+		initializer: function (config) {
+			this._domEvents = [&#x27;click&#x27;];
+			this._loadConfig(config.tree);
+		},
+		&#x2F;**
+		 * Widget lifecyle method
+		 * I opted for not including this method in FlyweightTreeManager so that
+		 * it can be used to extend Base, not just Widget
+		 * @method renderUI
+		 * @protected
+		 *&#x2F;
+		renderUI: function () {
+			this.get(CBX).setContent(this._getHTML());
+		},
+		&#x2F;**
+		 * Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div
+		 * @property CONTENT_TEMPLATE
+		 * @type String
+		 *&#x2F;
+		CONTENT_TEMPLATE: &#x27;&lt;ul&gt;&lt;&#x2F;ul&gt;&#x27;
 
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
-
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
 	},
-	_renderStdMod : function(section) {
-
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
-
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
+	{
+		ATTRS: {
+			&#x2F;**
+			 * Override for the &#x60;defaultType&#x60; value of FlyweightTreeManager
+			 * so it creates FWTreeNode instances instead of the default.
+			 * @attribute defaultType
+			 * @type String
+			 * @default &#x27;FWTreeNode&#x27;
+			 *&#x2F;
+			defaultType: {
+				value: &#x27;FWTreeNode&#x27;
 			}
+
 		}
 
-		this._insertStdModSection(contentBox, section, sectionNode);
-
-		return (this[section + &#x27;Node&#x27;] = sectionNode);
-	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, &#x27;after&#x27;);
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, &#x27;before&#x27;);
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one(&quot;&gt; .&quot; + WStdMod.SECTION_CLASS_NAMES[section]);
 	}
-};
-
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
+);
 
     </pre>
 </div>

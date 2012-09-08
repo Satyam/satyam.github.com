@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Satyam&#x27;s Gallery Modules"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Accordion.html">Accordion</a></li>
+            
+                <li><a href="..&#x2F;classes/AccordionPanel.html">AccordionPanel</a></li>
+            
+                <li><a href="..&#x2F;classes/Button.html">Button</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonGroup.html">ButtonGroup</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonPlugin.html">ButtonPlugin</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonSeparator.html">ButtonSeparator</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
+            
+                <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
+            
+                <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Node.html">Node</a></li>
+            
+                <li><a href="..&#x2F;classes/Spinner.html">Spinner</a></li>
+            
+                <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
+            
+                <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/flyweight-tree-manager.html">flyweight-tree-manager</a></li>
+            
+                <li><a href="..&#x2F;modules/flyweight-tree-tnode.html">flyweight-tree-tnode</a></li>
+            
+                <li><a href="..&#x2F;modules/fw-treenode.html">fw-treenode</a></li>
+            
+                <li><a href="..&#x2F;modules/fw-treeview.html">fw-treeview</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-button-plugin.html">gallery-button-plugin</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-makenode.html">gallery-makenode</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-accordion.html">gallery-md-accordion</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button.html">gallery-md-button</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-model.html">gallery-md-model</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-timespinner.html">gallery-md-timespinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-stdmod.html">gallery-stdmod</a></li>
+            
+                <li><a href="..&#x2F;modules/timeline.html">timeline</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+* An implementation of the flyweight pattern.  
+* This object can be slid on top of a literal object containing the definition 
+* of a tree and will take its state from that node it is slid upon.
+* It relies for most of its functionality on the flyweight manager object,
+* which contains most of the code.
+* @module gallery-flyweight-tree
+* @submodule flyweight-tree-tnode
+* @main flyweightmanager
+*&#x2F;
+
+&#x2F;**
+* An implementation of the flyweight pattern.  This class should not be instantiated directly.
+* Instances of this class can be requested from the flyweight manager class
+* @class Y.FlyweightTreeNode
+* @extends Y.Base
+* @constructor  Do not instantiate directly.
+*&#x2F;
+FWNode = Y.Base.create(
+	&#x27;flyweight-tree-node&#x27;,
+	Y.Base,
+	[],
+	{
+		&#x2F;**
+		 * Reference to the node in the configuration tree it has been slid over.
+		 * @property _node
+		 * @type {Object}
+		 * @private
+		 **&#x2F;
+		_node:null,
+		&#x2F;**
+		 * Reference to the FlyweightTreeManager instance this node belongs to.
+		 * It is set by the root and should be considered read-only.
+		 * @property _root
+		 * @type Y.FlyweightTreeManager
+		 * @private
+		 *&#x2F;
+		_root: null,
+		&#x2F;**
+		 * Returns a string with the markup for this node along that of its children
+		 * produced from its attributes rendered
+		 * via the first template string it finds in these locations:
+		 *
+		 * * It&#x27;s own {{#crossLink &quot;template&quot;}}{{&#x2F;crossLink}} configuration attribute
+		 * * The static {{#crossLink &quot;FlyweightTreeNode&#x2F;TEMPLATE&quot;}}{{&#x2F;crossLink}} class property
+		 *
+		 * @method _getHTML
+		 * @param index {Integer} index of this node within the array of siblings
+		 * @param nSiblings {Integer} number of siblings including this node
+		 * @param depth {Integer} number of levels to the root
+		 * @return {String} markup generated by this node
+		 * @protected
+		 *&#x2F;
+		_getHTML: function(index, nSiblings, depth) {
+			&#x2F;&#x2F; assumes that if you asked for the HTML it is because you are rendering it
+			var self = this,
+				&#x2F;&#x2F; this is a patch until this:  http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2532712  gets fixed.
+				getAttrs = function() {
+					var o = {},
+					i, l, attr,
+
+					attrs = Y.Object.keys(self._state.data);
+
+					for (i = 0, l = attrs.length; i &lt; l; i+=1) {
+						attr = attrs[i];
+						o[attr] = self.get(attr);
+					}
+
+					return o;
+				},
+				node = this._node,
+				attrs = getAttrs(),
+				s = &#x27;&#x27;, 
+				templ = node.template || this.constructor.TEMPLATE,
+				childCount = node.children &amp;&amp; node.children.length,
+				nodeClasses = [CNAME_NODE];
+
+			node._rendered = true;
+			if (childCount) {
+				if (attrs.expanded) {
+					node._childrenRendered = true;
+					this.forEachChild( function (fwNode, index, array) {
+						s += fwNode._getHTML(index, array.length, depth+1);
+					});
+					nodeClasses.push(CNAME_EXPANDED);
+				} else {
+					nodeClasses.push(CNAME_COLLAPSED);
+				}
+			} else {
+				if (this._root.get(&#x27;dynamicLoader&#x27;) &amp;&amp; !node.isLeaf) {
+					nodeClasses.push(CNAME_COLLAPSED);
+				} else {
+					nodeClasses.push(CNAME_NOCHILDREN);
+				}
+			}
+			if (index === 0) {
+				nodeClasses.push(CNAME_FIRSTCHILD);
+			} else if (index === nSiblings - 1) {
+				nodeClasses.push(CNAME_LASTCHILD);
+			}
+			attrs.children = s;
+			attrs.cname_node = nodeClasses.join(&#x27; &#x27;);
+			attrs.cname_children = CNAME_CHILDREN;
+
+			return Lang.sub(templ, attrs);
+
+		},
+		&#x2F;**
+		 * Method to slide this instance on top of another node in the configuration object
+		 * @method _slideTo
+		 * @param node {Object} node in the underlying configuration tree to slide this object on top of.
+		 * @private
+		 *&#x2F;
+		_slideTo: function (node) {
+			this._node = node;
+		},
+		&#x2F;**
+		 * Executes the given function on each of the child nodes of this node.
+		 * @method forEachChild
+		 * @param fn {Function} Function to be executed on each node
+		 *		@param fn.child {Y.FlyweightTreeNode} Instance of a suitable subclass of FlyweightTreeNode, 
+		 *		positioned on top of the child node
+		 *		@param fn.index {Integer} Index of this child within the array of children
+		 *		@param fn.array {Array} array containing itself and its siblings
+		 * @param scope {object} The falue of this for the function.  Defaults to the parent.
+		**&#x2F;
+		forEachChild: function(fn, scope) {
+			var root = this._root,
+				children = this._node.children,
+				child, ret;
+			scope = scope || this;
+			if (children &amp;&amp; children.length) {
+				YArray.each(children, function (node, index, array) {
+					child = root._poolFetch(node);
+					ret = fn.call(scope, child, index, array);
+					root._poolReturn(child);
+					return ret;
+				});
+			}
+		},
+		&#x2F;**
+		 * Getter for the expanded configuration attribute.
+		 * It is meant to be overriden by the developer.
+		 * The supplied version defaults to true if the expanded property 
+		 * is not set in the underlying configuration tree.
+		 * It can be overriden to default to false.
+		 * @method _expandedGetter
+		 * @return {Boolean} The expanded state of the node.
+		 * @protected
+		 *&#x2F;
+		_expandedGetter: function () {
+			return this._node.expanded !== false;
+		},
+		&#x2F;**
+		 * Setter for the expanded configuration attribute.
+		 * It renders the child nodes if this branch has never been expanded.
+		 * Then sets the className on the node to the static constants 
+		 * CNAME_COLLAPSED or CNAME_EXPANDED from Y.FlyweightTreeManager
+		 * @method _expandedSetter
+		 * @param value {Boolean} new value for the expanded attribute
+		 * @private
+		 *&#x2F;
+		_expandedSetter: function (value) {
+			var self = this,
+				node = self._node,
+				root = self._root,
+				el = Y.one(&#x27;#&#x27; + node.id),
+				dynLoader = root.get(&#x27;dynamicLoader&#x27;);
+				
+			node.expanded = value = !!value;
+			if (dynLoader &amp;&amp; !node.isLeaf &amp;&amp; (!node.children  || !node.children.length)) {
+				this._loadDynamic();
+				return;
+			}
+			if (node.children &amp;&amp; node.children.length) {
+				if (value) {
+					if (!node._childrenRendered) {
+						self._renderChildren();
+					}
+					el.replaceClass(CNAME_COLLAPSED, CNAME_EXPANDED);
+				} else {
+					el.replaceClass(CNAME_EXPANDED, CNAME_COLLAPSED);
+				}
+			}
+		},
+		&#x2F;**
+		 * Triggers the dynamic loading of children for this node.
+		 * @method _loadDynamic
+		 * @private
+		 *&#x2F;
+		_loadDynamic: function () {
+			var self = this,
+				root = self._root;
+			Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;)).replaceClass(CNAME_COLLAPSED, CNAME_LOADING);
+			root.get(&#x27;dynamicLoader&#x27;).call(root, self, Y.bind(self._dynamicLoadReturn, self));
+			
+		},
+		&#x2F;**
+		 * Callback for the dynamicLoader method.
+		 * @method _dynamicLoadReturn
+		 * @param response {Array} array of child nodes 
+		 *&#x2F;
+		_dynamicLoadReturn: function (response) {
+			var self = this,
+				node = self._node,
+				root = self._root,
+				initNodes = function (children) {
+					YArray.each(children, function (child) {
+						child._parent = node;
+						child._root = root;
+						child.id = child.id || Y.guid();
+						initNodes(child.children || []);
+					});
+				};
+
+			if (response) {
+				initNodes(response);
+
+				node.children = response;
+				self._renderChildren();
+			} else {
+				node.isLeaf = true;
+			}
+			&#x2F;&#x2F; isLeaf might have been set in the response, not just in the line above.
+			Y.one(&#x27;#&#x27; + node.id).replaceClass(CNAME_LOADING, (node.isLeaf?CNAME_NOCHILDREN:CNAME_EXPANDED));
+		},
+		&#x2F;**
+		 * Renders the children of this node.  
+		 * It the children had been rendered, they will be replaced.
+		 * @method _renderChildren
+		 * @private
+		 *&#x2F;
+		_renderChildren: function () {
+			var s = &#x27;&#x27;,
+				node = this._node,
+				depth = this.get(&#x27;depth&#x27;);
+			node._childrenRendered = true;
+			this.forEachChild(function (fwNode, index, array) {
+				s += fwNode._getHTML(index, array.length, depth + 1);
+			});
+			Y.one(&#x27;#&#x27; + node.id + &#x27; .&#x27; + CNAME_CHILDREN).setContent(s);
+		},
+		&#x2F;**
+		 * Generic setter for values stored in the underlying node.
+		 * @method _genericSetter
+		 * @param value {Any} Value to be set.
+		 * @param name {String} Name of the attribute to be set.
+		 * @protected
+		 *&#x2F;
+		_genericSetter: function (value, name) {
+			if (this._state.data[name].initializing) {
+				&#x2F;&#x2F; This is to let the initial value pass through
+				return value;
+			}
+			this._node[name] = value;
+			&#x2F;&#x2F; this is to prevent the initial value to be changed.
+			return  Y.Attribute.INVALID_VALUE;
+		},
+		&#x2F;**
+		 * Generic getter for values stored in the underlying node.
+		 * @method _genericGetter
+		 * @param value {Any} Value stored by Attribute (not used).
+		 * @param name {String} Name of the attribute to be read.
+		 * @return {Any} Value read.
+		 * @protected
+		 *&#x2F;
+		_genericGetter: function (value, name) {
+			&#x2F;&#x2F; since value is never actually set, 
+			&#x2F;&#x2F; value will always keep the default (initial) value.
+			return this._node[name] || value;
+		},
+		&#x2F;**
+		 * Prevents this instance from being returned to the pool and reused.
+		 * Remember to {{#crossLink &quot;release&quot;}}{{&#x2F;crossLink}} this instance when no longer needed.
+		 * @method hold
+		 * @chainable
+		 *&#x2F;
+		hold: function () {
+			return (this._node._held = this);
+		},
+		&#x2F;**
+		 * Allows this instance to be returned to the pool and reused.
+		 * 
+		 * __Important__: This instance should not be used after being released
+		 * @method release
+		 * @chainable
+		 *&#x2F;
+		release: function () {
+			this._node._held = null;
+			this._root._poolReturn(this);
+			return this;
+		},
+		&#x2F;**
+		 * Returns the parent node for this node or null if none exists.
+		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
+		 * Remember to release the copy to the pool when done.
+		 * @method getParent
+		 * @return Y.FlyweightTreeNode
+		 *&#x2F;
+		getParent: function() {
+			var node = this._node._parent;
+			return (node?this._root._poolFetch(node):null);
+		},
+		&#x2F;**
+		 * Returns the next sibling node for this node or null if none exists.
+		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
+		 * Remember to release the copy to the pool when done.
+		 * @method getNextSibling
+		 * @return Y.FlyweightTreeNode
+		 *&#x2F;
+		getNextSibling: function() {
+			var parent = this._node._parent,
+				siblings = (parent &amp;&amp; parent.children) || [],
+				index = siblings.indexOf(this) + 1;
+			if (index === 0 || index &gt; siblings.length) {
+				return null;
+			}
+			return this._root._poolFetch(siblings[index]);
+		},
+		&#x2F;**
+		 * Returns the previous sibling node for this node or null if none exists.
+		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
+		 * Remember to release the copy to the pool when done.
+		 * @method getPreviousSibling
+		 * @return Y.FlyweightTreeNode
+		 *&#x2F;
+		getPreviousSibling: function() {
+			var parent = this._node._parent,
+				siblings = (parent &amp;&amp; parent.children) || [],
+				index = siblings.indexOf(this) - 1;
+			if (index &lt; 0) {
+				return null;
+			}
+			return this._root._poolFetch(siblings[index]);
+		},
+		
+		&#x2F;**
+		 * Sugar method to toggle the expanded state of the node.
+		 * @method toggle
+		 * @chainable
+		 *&#x2F;
+		toggle: function() {
+			this.set(&#x27;expanded&#x27;, !this.get(&#x27;expanded&#x27;));
+			return this;
+		}
+	},
+	{
+		&#x2F;**
+		 * Template string to be used to render this node.
+		 * It should be overriden by the subclass.
+		 *    
+		 * It contains the HTML markup for this node plus placeholders,
+		 * enclosed in curly braces, that have access to any of the 
+		 * configuration attributes of this node plus the following
+		 * additional placeholders:
+		 * 
+		 * * children: The markup for the children of this node will be placed here
+		 * * cname_node: The className for the HTML element enclosing this node.
+		 *   The template should always use this className to help it locate the DOM element for this node.
+		 * * cname_children: The className for the HTML element enclosing the children of this node.
+		 * The template should always use this className to help it locate the DOM element that contains the children of this node.
+		 * 
+		 * The template should also add the &#x60;id&#x60; attribute to the DOM Element representing this node. 
+		 * @property TEMPLATE
+		 * @type {String}
+		 * @default &#x27;&lt;div id=&quot;{id}&quot; class=&quot;{cname_node}&quot;&gt;&lt;div class=&quot;content&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;
+		 * @static
+		 *&#x2F;
+		TEMPLATE: &#x27;&lt;div id=&quot;{id}&quot; class=&quot;{cname_node}&quot;&gt;&lt;div class=&quot;content&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;,
+		&#x2F;**
+		 * CCS className constant to use as the class name for the DOM element representing the node.
+		 * @property CNAME_NODE
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_NODE: CNAME_NODE,
+		&#x2F;**
+		 * CCS className constant to use as the class name for the DOM element that will containe the children of this node.
+		 * @property CNAME_CHILDREN
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_CHILDREN: CNAME_CHILDREN,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when its state is not expanded.
+		 * @property CNAME_COLLAPSED
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_COLLAPSED: CNAME_COLLAPSED,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when its state is expanded.
+		 * @property CNAME_EXPANDED
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_EXPANDED: CNAME_EXPANDED,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when it has no children.
+		 * @property CNAME_NOCHILDREN
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_NOCHILDREN: CNAME_NOCHILDREN,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when it is the first in the group.
+		 * @property CNAME_FIRSTCHILD
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_FIRSTCHILD: CNAME_FIRSTCHILD,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when it is the last in the group.
+		 * @property CNAME_LASTCHILD
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_LASTCHILD: CNAME_LASTCHILD,
+		&#x2F;**
+		 * CCS className constant added to the DOM element for this node when dynamically loading its children.
+		 * @property CNAME_LOADING
+		 * @type String
+		 * @static
+		 *&#x2F;
+		CNAME_LOADING: CNAME_LOADING,
+		ATTRS: {
+			&#x2F;**
+			 * Reference to the FlyweightTreeManager this node belongs to
+			 * @attribute root
+			 * @type {Y.FlyweightTreeManager}
+			 * @readOnly
+			 * 
+			 *&#x2F;
+
+			root: {
+				readOnly: true,
+				getter: function() {
+					return this._root;
+				}
+			},
+
+			&#x2F;**
+			 * Template to use on this particular instance.  
+			 * The renderer will default to the static TEMPLATE property of this class 
+			 * (the preferred way) or the nodeTemplate configuration attribute of the root.
+			 * See the TEMPLATE static property.
+			 * @attribute template
+			 * @type {String}
+			 * @default undefined
+			 *&#x2F;
+			template: {
+				validator: Lang.isString,
+				getter: &#x27;_genericGetter&#x27;,
+				setter: &#x27;_genericSetter&#x27;
+			},
+			&#x2F;**
+			 * Label for this node. Nodes usually have some textual content, this is the place for it.
+			 * @attribute label
+			 * @type {String}
+			 * @default &#x27;&#x27;
+			 *&#x2F;
+			label: {
+				validator: Lang.isString,
+				getter: &#x27;_genericGetter&#x27;,
+				setter: &#x27;_genericSetter&#x27;,
+				value: &#x27;&#x27;
+			},
+			&#x2F;**
+			 * Id to assign to the DOM element that contains this node.  
+			 * If none was supplied, it will generate one
+			 * @attribute id
+			 * @type {Identifier}
+			 * @default Y.guid()
+			 * @readOnly
+			 *&#x2F;
+			id: {
+				getter: &#x27;_genericGetter&#x27;,
+				readOnly: true
+			},
+			&#x2F;**
+			 * Returns the depth of this node from the root.
+			 * This is calculated on-the-fly.
+			 * @attribute depth
+			 * @type Integer
+			 * @readOnly
+			 *&#x2F;
+			depth: {
+				readOnly: true,
+				getter: function () {
+					var count = 0, 
+						node = this._node;
+					while (node._parent) {
+						count += 1;
+						node = node._parent;
+					}
+					return count-1;
+				}
+			},
+			&#x2F;**
+			 * Expanded state of this node.
+			 * @attribute expanded
+			 * @type Boolean
+			 * @default true
+			 *&#x2F;
+			expanded: {
+				getter: &#x27;_expandedGetter&#x27;,
+				setter: &#x27;_expandedSetter&#x27;
+			}
+		}
+	}
+);
+Y.FlyweightTreeNode = FWNode;
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

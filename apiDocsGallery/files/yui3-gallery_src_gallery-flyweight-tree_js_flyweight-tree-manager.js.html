@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Satyam&#x27;s Gallery Modules"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Accordion.html">Accordion</a></li>
+            
+                <li><a href="..&#x2F;classes/AccordionPanel.html">AccordionPanel</a></li>
+            
+                <li><a href="..&#x2F;classes/Button.html">Button</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonGroup.html">ButtonGroup</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonPlugin.html">ButtonPlugin</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonSeparator.html">ButtonSeparator</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
+            
+                <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
+            
+                <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Node.html">Node</a></li>
+            
+                <li><a href="..&#x2F;classes/Spinner.html">Spinner</a></li>
+            
+                <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
+            
+                <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/flyweight-tree-manager.html">flyweight-tree-manager</a></li>
+            
+                <li><a href="..&#x2F;modules/flyweight-tree-tnode.html">flyweight-tree-tnode</a></li>
+            
+                <li><a href="..&#x2F;modules/fw-treenode.html">fw-treenode</a></li>
+            
+                <li><a href="..&#x2F;modules/fw-treeview.html">fw-treeview</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-button-plugin.html">gallery-button-plugin</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-makenode.html">gallery-makenode</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-accordion.html">gallery-md-accordion</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button.html">gallery-md-button</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-model.html">gallery-md-model</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-timespinner.html">gallery-md-timespinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-stdmod.html">gallery-stdmod</a></li>
+            
+                <li><a href="..&#x2F;modules/timeline.html">timeline</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+* @module gallery-flyweight-tree
+* @submodule flyweight-tree-manager
+*
+*&#x2F;
+
+&#x2F;**
+ * Extension to handle its child nodes by using the flyweight pattern.
+ * @class Y.FlyweightTreeManager
+ * @constructor
+ *&#x2F;
+FWMgr = function () {
+	this._pool = {
+		_default: []
+	};
+};
+
+FWMgr.ATTRS = {
+	&#x2F;**
+	 * Default object type of the child nodes if no explicit type is given in the configuration tree.
+	 * It can be specified as an object reference, these two are equivalent: &#x60;Y.FWTreeNode&#x60; or  &#x60;&#x27;FWTreeNode&#x27;&#x60;.  
+	 * 
+	 * @attribute defaultType
+	 * @type {String | Object}
+	 * @default &#x27;FlyweightTreeNode&#x27;
+	 *&#x2F;
+	defaultType: {
+		value: &#x27;FlyweightTreeNode&#x27;			
+	},
+	&#x2F;**
+	 * Function used to load the nodes dynamically.
+	 * Function will run in the scope of the FlyweightTreeManager instance and will
+	 * receive:
+	 * 
+	 * * node {Y.FlyweightTreeNode} reference to the parent of the children to be loaded.
+	 * * callback {Function} function to call with the configuration info for the children.
+	 * 
+	 * The function shall fetch the nodes and create a configuration object 
+	 * much like the one a whole tree might receive.  
+	 * It is not limited to just one level of nodes, it might contain children elements as well.
+	 * When the data is processed, it should call the callback with the configuration object.
+	 * The function is responsible of handling any errors.
+	 * If the the callback is called with no arguments, the parent node will be marked as having no children.
+	 * @attribute dynamicLoader
+	 * @type {Function}
+	 * @default null
+	 *&#x2F;
+	dynamicLoader: {
+		validator: Lang.isFunction,
+		value: null
+	}
+};
+
+
+FWMgr.prototype = {
+	&#x2F;**
+	 * Clone of the configuration tree.
+	 * The FlyweightTreeNode instances will use the nodes in this tree as the storage for their state.
+	 * @property _tree
+	 * @type Object
+	 * @private
+	 *&#x2F;
+	_tree: null,
+	&#x2F;**
+	 * Pool of FlyweightTreeNode instances to use and reuse by the manager.  
+	 * It contains a hash of arrays indexed by the node type. 
+	 * Each array contains a series of FlyweightTreeNode subclasses of the corresponding type.
+	 * @property _pool
+	 * @type {Object}
+	 * @private
+	 *&#x2F;
+	_pool: null,
+	&#x2F;**
+	 * List of dom events to be listened for at the outer contained and fired again
+	 * at the node once positioned over the source node.
+	 * @property _domEvents
+	 * @type Array of strings
+	 * @protected
+	 * @default null
+	 *&#x2F;
+	_domEvents: null,
+	
+	&#x2F;**
+	 * Method to load the configuration tree.
+	 * This is not done in the constructor so as to allow the subclass 
+	 * to process the tree definition anyway it wants, adding defaults and such
+	 * and to name the tree whatever is suitable.
+	 * For TreeView, the configuration property is named &#x60;tree&#x60;, for a form, it is named &#x60;form&#x60;.
+	 * It also sets initial values for some default properties such as &#x60;parent&#x60; references and &#x60;id&#x60; for all nodes.
+	 * @method _loadConfig
+	 * @param tree {Array} Configuration for the first level of nodes. 
+	 * Contains objects with the following attributes:
+	 * @param tree.label {String} Text or HTML markup to be shown in the node
+	 * @param [tree.expanded=true] {Boolean} Whether the children of this node should be visible.
+	 * @param [tree.children] {Array} Further definitions for the children of this node
+	 * @param [tree.type=Y.FWTreeNode] {Y.FWTreeNode | String} Class used to create instances for this node.  
+	 * It can be a reference to an object or a name that can be resolved as &#x60;Y[name]&#x60;.
+	 * @param [tree.id=Y.guid()] {String} Identifier to assign to the DOM element containing this node.
+	 * @param [tree.template] {String} Template for this particular node. 
+	 * @protected
+	 *&#x2F;
+	_loadConfig: function (tree) {
+		this._tree = {
+			children: Y.clone(tree)
+		};
+		var initNodes = function (parent) {
+			Y.Array.each(parent.children, function (child) {
+				child._parent = parent;
+				child.id = child.id || Y.guid();
+				initNodes(child);
+			});
+		};
+		initNodes(this._tree);
+		if (this._domEvents) {
+			Y.Array.each(this._domEvents, function (event) {
+				this.after(event, this._afterDomEvent, this);
+			}, this);
+		}
+	},
+	&#x2F;** Generic event listener for DOM events listed in the {{#crossLink &quot;_domEvents&quot;}}{{&#x2F;crossLink}} array.
+	 *  It will locate the node that caused the event, slide a suitable instance on it and fire the
+	 *  same event on that node.
+	 *  @method _afterEvent
+	 *  @param ev {EventFacade} Event facade as produced by the event
+	 *  @private
+	 *&#x2F;
+	_afterDomEvent: function (ev) {
+		var node = this._poolFetchFromEvent(ev);
+		if (node) {
+			node.fire(ev.type.split(&#x27;:&#x27;)[1], {domEvent:ev.domEvent});
+			this._poolReturn(node);			
+		}
+	},
+	&#x2F;**
+	 * Pulls from the pool an instance of the type declared in the given node
+	 * and slides it over that node.
+	 * If there are no instances of the given type in the pool, a new one will be created via {{#crossLink &quot;_getNode&quot;}}{{&#x2F;crossLink}}
+	 * If an instance is held (see: {{#crossLink &quot;Y.FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}), it will be returned instead.
+	 * @method _poolFetch
+	 * @param node {Object} reference to a node within the configuration tree
+	 * @return {Y.FlyweightTreeNode} Usually a subclass of FlyweightTreeNode positioned over the given node
+	 * @protected
+	 *&#x2F;
+	_poolFetch: function(node) {
+		var pool,
+			fwNode = node._held,
+			type = node.type || DEFAULT_POOL;
+			
+		if (fwNode) {
+			return fwNode;
+		}
+		if (Lang.isObject(type)) {
+			&#x2F;&#x2F; If the type of object cannot be identified, return a default type.
+			type = type.NAME || DEFAULT_POOL;
+		}
+		pool = this._pool[type] || [];
+		if (pool === undefined) {
+			pool = this._pool[type] = [];
+		}
+		if (pool.length) {
+			fwNode = pool.pop();
+			fwNode._slideTo(node);
+			return fwNode;
+		}
+		return this._getNode(node);
+	},
+	&#x2F;**
+	 * Returns the FlyweightTreeNode instance to the pool.
+	 * Instances held (see: {{#crossLink &quot;Y.FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}) are never returned.
+	 * @method _poolReturn
+	 * @param fwNode {Y.FlyweightTreeNode} Instance to return.
+	 * @protected
+	 *&#x2F;
+	_poolReturn: function (fwNode) {
+		if (fwNode._node._held) {
+			return;
+		}
+		var pool,
+			type = fwNode._node.type || DEFAULT_POOL;
+		if (Lang.isObject(type)) {
+			type = type.NAME;
+			if (!type) {
+				&#x2F;&#x2F; Don&#x27;t know where to put it, drop it.
+				return;
+			}
+		}
+		pool = this._pool[type];
+		if (pool) {
+			pool.push(fwNode);
+		}
+		
+	},
+	&#x2F;**
+	 * Returns a new instance of the type given in node or the 
+	 * {{#crossLink &quot;defaultType&quot;}}{{&#x2F;crossLink}} if none specified
+	 * and slides it on top of the node provided.
+	 * @method _getNode
+	 * @param node {Object} reference to a node within the configuration tree
+	 * @return {Y.FlyweightTreeNode} Instance of the corresponding subclass of FlyweightTreeNode
+	 * @protected
+	 *&#x2F;
+	_getNode: function (node) {
+		var newNode,
+			Type = node.type || this.get(&#x27;defaultType&#x27;);
+		if (Lang.isString(Type)) {
+			Type = Y[Type];
+		}
+		if (Type) {
+			newNode = new Type();
+			if (newNode instanceof Y.FlyweightTreeNode) {
+				newNode._root =  this;
+				newNode._slideTo(node);
+				return newNode;
+			}
+		}
+		return null;
+	},
+	&#x2F;**
+	 * Returns an instance of Flyweight node positioned over the root
+	 * @method _getRootNode
+	 * @return {Y.FlyweightTreeNode} 
+	 * @protected
+	 *&#x2F;
+	_getRootNode: function () {
+		return this._poolFetch(this._tree);
+	},
+	&#x2F;**
+	 * Returns a string with the markup for the whole tree. 
+	 * A subclass might opt to produce markup for those parts visible. (lazy rendering)
+	 * @method _getHTML
+	 * @return {String} HTML for this widget
+	 * @protected
+	 *&#x2F;
+	_getHTML: function () {
+		var s = &#x27;&#x27;,
+			root = this._getRootNode();
+		root.forEachChild( function (fwNode, index, array) {
+			s += fwNode._getHTML(index, array.length, 0);
+		});
+		this._poolReturn(root);
+		return s;
+	},
+	&#x2F;**
+	 * Locates a node in the tree by the element that represents it.
+	 * @method _findNodeByElement
+	 * @param el {Y.Node} Any element belonging to the tree
+	 * @return {Object} Node that produced the markup for that element or null if not found
+	 * @protected
+	 *&#x2F;
+	_findNodeByElement: function(el) {
+		var id = el.ancestor(DOT + FWNode.CNAME_NODE, true).get(&#x27;id&#x27;),
+			found = null,
+			scan = function (node) {
+				if (node.id === id) {
+					found = node;
+					return true;
+				}
+				if (node.children) {
+					return Y.Array.some(node.children, scan);
+				}
+				return false;
+			};
+		if (scan(this._tree)) {
+			return found;
+		}
+		return null;
+	},
+	&#x2F;**
+	 * Returns a FlyweightTreeNode instance from the pool, positioned over the node whose markup generated some event.
+	 * @method _poolFetchFromEvent
+	 * @param ev {EventFacade}
+	 * @return {Y.FlyweightTreeNode} The FlyweightTreeNode instance or null if not found.
+	 * @private
+	 *&#x2F;
+	_poolFetchFromEvent: function (ev) {
+		var found = this._findNodeByElement(ev.domEvent.target);
+		if (found) {
+			return this._poolFetch(found);
+		}
+		return null;			
+	},
+	&#x2F;**
+	 * Traverses the whole configuration tree, calling a given function for each node.
+	 * If the function returns true, the traversing will terminate.
+	 * @method _forSomeCfgNode
+	 * @param fn {Function} Function to call on each configuration node
+	 *		@param fn.cfgNode {Object} node in the configuratino tree
+	 *		@param fn.depth {Integer} depth of this node within the tee
+	 *		@param fn.index {Integer} index of this node within the array of its siblings
+	 * @param scope {Object} scope to run the function in, defaults to this.
+	 * @return true if any of the function calls returned true (the traversal was terminated earlier)
+	 * @protected
+	 *&#x2F;
+	_forSomeCfgNode: function(fn, scope) {
+		scope = scope || this;
+		var loop = function(cfgNode, depth) {
+			return Y.Array.some(cfgNode.children || [], function(childNode, index) {
+				fn.call(scope, childNode,depth, index);
+				return loop(childNode,depth + 1);
+			});
+		};
+		return loop(this._tree, 0);
+	}
+};
+
+Y.FlyweightTreeManager = FWMgr;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js - Satyam&#x27;s Gallery Modules</title>
+    <title>gallery-flyweight-tree - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -162,81 +162,85 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js</h1>
+                        <h1>gallery-flyweight-tree Module</h1>
+<div class="box clearfix meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-&#x2F;**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetParent.html#property__childrenContainer&quot;&gt;_childrenContainer&lt;&#x2F;a&gt;)&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-* For further documentation see &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetStdMod.html&quot;&gt;WidgetStdMod&lt;&#x2F;a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*&#x2F;
+    
 
-&quot;use strict&quot;;
-var BBX = &#x27;boundingBox&#x27;,
-	CBX = &#x27;contentBox&#x27;,
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l12"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:12</code></a>
+        </div>
+    
 
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
+    
+</div>
 
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
-	},
-	_renderStdMod : function(section) {
 
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
 
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
-			}
-		}
+<div class="box intro">
+    
+</div>
 
-		this._insertStdModSection(contentBox, section, sectionNode);
 
-		return (this[section + &#x27;Node&#x27;] = sectionNode);
-	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, &#x27;after&#x27;);
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, &#x27;before&#x27;);
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one(&quot;&gt; .&quot; + WStdMod.SECTION_CLASS_NAMES[section]);
-	}
-};
 
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
 
-    </pre>
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.FlyweightTreeManager.html">
+                        Y.FlyweightTreeManager
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.FlyweightTreeNode.html">
+                        Y.FlyweightTreeNode
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
+
+    <div class="yui3-u-1-2">
+        
+            <p>This module is a rollup of the following modules:</p>
+
+            <ul class="module-submodules">
+            
+                <li class="module-submodule">
+                    <a href="..&#x2F;modules/flyweight-tree-manager.html">
+                        flyweight-tree-manager
+                    </a>
+
+                    <div class="module-submodule-description">
+                        Extension to handle its child nodes by using the flyweight pattern.
+                    </div>
+                </li>
+            
+                <li class="module-submodule">
+                    <a href="..&#x2F;modules/flyweight-tree-tnode.html">
+                        flyweight-tree-tnode
+                    </a>
+
+                    <div class="module-submodule-description">
+                        An implementation of the flyweight pattern.  
+This object can be slid on top of a literal object containing the definition 
+of a tree and will take its state from that node it is slid upon.
+It relies for most of its functionality on the flyweight manager object,
+which contains most of the code.
+                    </div>
+                </li>
+            
+            </ul>
+        
+    </div>
 </div>
 
                     </div>
