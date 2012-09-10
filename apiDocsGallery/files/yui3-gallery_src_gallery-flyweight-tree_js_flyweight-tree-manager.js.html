@@ -169,9 +169,8 @@
  * @constructor
  *&#x2F;
 FWMgr = function () {
-	this._pool = {
-		_default: []
-	};
+	this._pool = {};
+	this._initialValues = {};
 };
 
 FWMgr.ATTRS = {
@@ -230,6 +229,14 @@ FWMgr.prototype = {
 	 *&#x2F;
 	_pool: null,
 	&#x2F;**
+	 * Initial values for node attributes.  
+	 * Contains default values for each node type, indexed by node type and attribute name.
+	 * @property _initialValues
+	 * @type Object
+	 * @private
+	 *&#x2F;
+	_initialValues: null,
+	&#x2F;**
 	 * List of dom events to be listened for at the outer contained and fired again
 	 * at the node once positioned over the source node.
 	 * @property _domEvents
@@ -259,23 +266,58 @@ FWMgr.prototype = {
 	 * @protected
 	 *&#x2F;
 	_loadConfig: function (tree) {
-		this._tree = {
+		var self = this;
+		self._tree = {
 			children: Y.clone(tree)
 		};
-		var initNodes = function (parent) {
-			Y.Array.each(parent.children, function (child) {
-				child._parent = parent;
-				child.id = child.id || Y.guid();
-				initNodes(child);
+		self._initNodes(this._tree);
+		if (self._domEvents) {
+			Y.Array.each(self._domEvents, function (event) {
+				self.after(event, self._afterDomEvent, self);
 			});
-		};
-		initNodes(this._tree);
-		if (this._domEvents) {
-			Y.Array.each(this._domEvents, function (event) {
-				this.after(event, this._afterDomEvent, this);
-			}, this);
 		}
 	},
+	&#x2F;** Initializes the node configuration with default values and management info.
+	 * @method _initNodes
+	 * @param parent {Object} Parent of the nodes to be set
+	 * @private
+	 *&#x2F;
+	_initNodes: function (parent) {
+		var self = this, 
+			fwNode,
+			type,
+			defaultValues,
+			name,
+			value;
+		Y.Array.each(parent.children, function (child) {
+			type = child.type || DEFAULT_POOL;
+			defaultValues = self._initialValues[type];
+			if (!defaultValues) {
+				defaultValues = {type:child.type};
+				fwNode = self._poolFetch(defaultValues);
+					for (name in fwNode._attrs) {
+					if (fwNode._attrs.hasOwnProperty(name) &amp;&amp; [&#x27;initialized&#x27;,&#x27;destroyed&#x27;].indexOf(name) === -1) {
+						value = fwNode._state.get(name,&#x27;value&#x27;);
+						if (value !== undefined) {
+							defaultValues[name] =  value;
+							fwNode._state.remove(name,&#x27;value&#x27;);
+						}
+					}
+				}
+				self._initialValues[type] = defaultValues;
+				self._poolReturn(fwNode);
+			}
+			Y.Object.each(defaultValues, function(value, name) {
+				if (child[name] === undefined) {
+					child[name] = value;
+				}
+			});
+			child._parent = parent;
+			child.id = child.id || Y.guid();
+			self._initNodes(child);
+		});
+	},
+
 	&#x2F;** Generic event listener for DOM events listed in the {{#crossLink &quot;_domEvents&quot;}}{{&#x2F;crossLink}} array.
 	 *  It will locate the node that caused the event, slide a suitable instance on it and fire the
 	 *  same event on that node.
@@ -312,7 +354,7 @@ FWMgr.prototype = {
 			&#x2F;&#x2F; If the type of object cannot be identified, return a default type.
 			type = type.NAME || DEFAULT_POOL;
 		}
-		pool = this._pool[type] || [];
+		pool = this._pool[type];
 		if (pool === undefined) {
 			pool = this._pool[type] = [];
 		}
@@ -367,6 +409,10 @@ FWMgr.prototype = {
 		if (Type) {
 			newNode = new Type();
 			if (newNode instanceof Y.FlyweightTreeNode) {
+				&#x2F;&#x2F; I need to do this otherwise Attribute will initialize the real node with default values
+				newNode._slideTo({});
+				newNode.getAttrs();
+				&#x2F;&#x2F; That&#x27;s it (see above)
 				newNode._root =  this;
 				newNode._slideTo(node);
 				return newNode;

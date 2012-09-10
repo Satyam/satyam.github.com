@@ -271,6 +271,7 @@ FWNode = Y.Base.create(
 		 *&#x2F;
 		_slideTo: function (node) {
 			this._node = node;
+			this._stateProxy = node;
 		},
 		&#x2F;**
 		 * Executes the given function on each of the child nodes of this node.
@@ -361,20 +362,12 @@ FWNode = Y.Base.create(
 		_dynamicLoadReturn: function (response) {
 			var self = this,
 				node = self._node,
-				root = self._root,
-				initNodes = function (children) {
-					YArray.each(children, function (child) {
-						child._parent = node;
-						child._root = root;
-						child.id = child.id || Y.guid();
-						initNodes(child.children || []);
-					});
-				};
+				root = self._root;
 
 			if (response) {
-				initNodes(response);
 
 				node.children = response;
+				root._initNodes(node);
 				self._renderChildren();
 			} else {
 				node.isLeaf = true;
@@ -397,35 +390,6 @@ FWNode = Y.Base.create(
 				s += fwNode._getHTML(index, array.length, depth + 1);
 			});
 			Y.one(&#x27;#&#x27; + node.id + &#x27; .&#x27; + CNAME_CHILDREN).setContent(s);
-		},
-		&#x2F;**
-		 * Generic setter for values stored in the underlying node.
-		 * @method _genericSetter
-		 * @param value {Any} Value to be set.
-		 * @param name {String} Name of the attribute to be set.
-		 * @protected
-		 *&#x2F;
-		_genericSetter: function (value, name) {
-			if (this._state.data[name].initializing) {
-				&#x2F;&#x2F; This is to let the initial value pass through
-				return value;
-			}
-			this._node[name] = value;
-			&#x2F;&#x2F; this is to prevent the initial value to be changed.
-			return  Y.Attribute.INVALID_VALUE;
-		},
-		&#x2F;**
-		 * Generic getter for values stored in the underlying node.
-		 * @method _genericGetter
-		 * @param value {Any} Value stored by Attribute (not used).
-		 * @param name {String} Name of the attribute to be read.
-		 * @return {Any} Value read.
-		 * @protected
-		 *&#x2F;
-		_genericGetter: function (value, name) {
-			&#x2F;&#x2F; since value is never actually set, 
-			&#x2F;&#x2F; value will always keep the default (initial) value.
-			return this._node[name] || value;
 		},
 		&#x2F;**
 		 * Prevents this instance from being returned to the pool and reused.
@@ -591,6 +555,7 @@ FWNode = Y.Base.create(
 			 *&#x2F;
 
 			root: {
+				_bypassProxy: true,
 				readOnly: true,
 				getter: function() {
 					return this._root;
@@ -607,9 +572,7 @@ FWNode = Y.Base.create(
 			 * @default undefined
 			 *&#x2F;
 			template: {
-				validator: Lang.isString,
-				getter: &#x27;_genericGetter&#x27;,
-				setter: &#x27;_genericSetter&#x27;
+				validator: Lang.isString
 			},
 			&#x2F;**
 			 * Label for this node. Nodes usually have some textual content, this is the place for it.
@@ -619,8 +582,6 @@ FWNode = Y.Base.create(
 			 *&#x2F;
 			label: {
 				validator: Lang.isString,
-				getter: &#x27;_genericGetter&#x27;,
-				setter: &#x27;_genericSetter&#x27;,
 				value: &#x27;&#x27;
 			},
 			&#x2F;**
@@ -632,7 +593,6 @@ FWNode = Y.Base.create(
 			 * @readOnly
 			 *&#x2F;
 			id: {
-				getter: &#x27;_genericGetter&#x27;,
 				readOnly: true
 			},
 			&#x2F;**
@@ -643,6 +603,7 @@ FWNode = Y.Base.create(
 			 * @readOnly
 			 *&#x2F;
 			depth: {
+				_bypassProxy: true,
 				readOnly: true,
 				getter: function () {
 					var count = 0, 
@@ -661,6 +622,7 @@ FWNode = Y.Base.create(
 			 * @default true
 			 *&#x2F;
 			expanded: {
+				_bypassProxy: true,
 				getter: &#x27;_expandedGetter&#x27;,
 				setter: &#x27;_expandedSetter&#x27;
 			}
