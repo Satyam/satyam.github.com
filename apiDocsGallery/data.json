@@ -1054,18 +1054,6 @@
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
             "line": 71,
-            "description": "Initial values for node attributes.  \nContains default values for each node type, indexed by node type and attribute name.",
-            "itemtype": "property",
-            "name": "_initialValues",
-            "type": "Object",
-            "access": "private",
-            "tagname": "",
-            "class": "Y.FlyweightTreeManager",
-            "module": "gallery-flyweight-tree"
-        },
-        {
-            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 79,
             "description": "List of dom events to be listened for at the outer contained and fired again\nat the node once positioned over the source node.",
             "itemtype": "property",
             "name": "_domEvents",
@@ -1078,7 +1066,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 89,
+            "line": 81,
             "description": "Method to load the configuration tree.\nThis is not done in the constructor so as to allow the subclass \nto process the tree definition anyway it wants, adding defaults and such\nand to name the tree whatever is suitable.\nFor TreeView, the configuration property is named `tree`, for a form, it is named `form`.\nIt also sets initial values for some default properties such as `parent` references and `id` for all nodes.",
             "itemtype": "method",
             "name": "_loadConfig",
@@ -1136,7 +1124,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 120,
+            "line": 112,
             "itemtype": "method",
             "name": "_initNodes",
             "params": [
@@ -1153,7 +1141,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 161,
+            "line": 126,
             "description": "It will locate the node that caused the event, slide a suitable instance on it and fire the\nsame event on that node.",
             "itemtype": "method",
             "name": "_afterEvent",
@@ -1171,8 +1159,30 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 175,
-            "description": "Pulls from the pool an instance of the type declared in the given node\nand slides it over that node.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_getNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"Y.FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
+            "line": 140,
+            "description": "Returns a string identifying the type of the object to handle the node\nor null if type was not a FlyweightNode instance.",
+            "itemtype": "method",
+            "name": "_getTypeString",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Node in the tree configuration",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "type of node.",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 159,
+            "description": "Pulls from the pool an instance of the type declared in the given node\nand slides it over that node.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_createNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"Y.FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
             "itemtype": "method",
             "name": "_poolFetch",
             "params": [
@@ -1193,7 +1203,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 208,
+            "line": 188,
             "description": "Returns the FlyweightTreeNode instance to the pool.\nInstances held (see: {{#crossLink \"Y.FlyweightTreeNode/hold\"}}{{/crossLink}}) are never returned.",
             "itemtype": "method",
             "name": "_poolReturn",
@@ -1211,10 +1221,10 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 234,
+            "line": 207,
             "description": "Returns a new instance of the type given in node or the \n{{#crossLink \"defaultType\"}}{{/crossLink}} if none specified\nand slides it on top of the node provided.",
             "itemtype": "method",
-            "name": "_getNode",
+            "name": "_createNode",
             "params": [
                 {
                     "name": "node",
@@ -1233,7 +1243,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 263,
+            "line": 237,
             "description": "Returns an instance of Flyweight node positioned over the root",
             "itemtype": "method",
             "name": "_getRootNode",
@@ -1248,7 +1258,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 272,
+            "line": 246,
             "description": "Returns a string with the markup for the whole tree. \nA subclass might opt to produce markup for those parts visible. (lazy rendering)",
             "itemtype": "method",
             "name": "_getHTML",
@@ -1263,7 +1273,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 288,
+            "line": 262,
             "description": "Locates a node in the tree by the element that represents it.",
             "itemtype": "method",
             "name": "_findNodeByElement",
@@ -1285,7 +1295,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 313,
+            "line": 287,
             "description": "Returns a FlyweightTreeNode instance from the pool, positioned over the node whose markup generated some event.",
             "itemtype": "method",
             "name": "_poolFetchFromEvent",
@@ -1307,7 +1317,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 327,
+            "line": 301,
             "description": "Traverses the whole configuration tree, calling a given function for each node.\nIf the function returns true, the traversing will terminate.",
             "itemtype": "method",
             "name": "_forSomeCfgNode",
