@@ -212,26 +212,19 @@ FWNode = Y.Base.create(
 		_getHTML: function(index, nSiblings, depth) {
 			&#x2F;&#x2F; assumes that if you asked for the HTML it is because you are rendering it
 			var self = this,
-				&#x2F;&#x2F; this is a patch until this:  http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2532712  gets fixed.
-				getAttrs = function() {
-					var o = {},
-					i, l, attr,
-
-					attrs = Y.Object.keys(self._state.data);
-
-					for (i = 0, l = attrs.length; i &lt; l; i+=1) {
-						attr = attrs[i];
-						o[attr] = self.get(attr);
-					}
-
-					return o;
-				},
 				node = this._node,
-				attrs = getAttrs(),
+				attrs = this.getAttrs(),
 				s = &#x27;&#x27;, 
-				templ = node.template || this.constructor.TEMPLATE,
+				templ = node.template,
 				childCount = node.children &amp;&amp; node.children.length,
-				nodeClasses = [CNAME_NODE];
+				nodeClasses = [CNAME_NODE],
+				superConstructor = this.constructor;
+				
+			while (!templ) {
+				templ = superConstructor.TEMPLATE;
+				superConstructor = superConstructor.superclass.constructor;
+				
+			}
 
 			node._rendered = true;
 			if (childCount) {
@@ -253,7 +246,8 @@ FWNode = Y.Base.create(
 			}
 			if (index === 0) {
 				nodeClasses.push(CNAME_FIRSTCHILD);
-			} else if (index === nSiblings - 1) {
+			} 
+			if (index === nSiblings - 1) {
 				nodeClasses.push(CNAME_LASTCHILD);
 			}
 			attrs.children = s;
@@ -358,6 +352,7 @@ FWNode = Y.Base.create(
 		 * Callback for the dynamicLoader method.
 		 * @method _dynamicLoadReturn
 		 * @param response {Array} array of child nodes 
+		 * @private
 		 *&#x2F;
 		_dynamicLoadReturn: function (response) {
 			var self = this,
@@ -464,6 +459,51 @@ FWNode = Y.Base.create(
 		toggle: function() {
 			this.set(&#x27;expanded&#x27;, !this.get(&#x27;expanded&#x27;));
 			return this;
+		},
+		&#x2F;**
+		 * Returns true if this node is the root node
+		 * @method isRoot
+		 * @return {Boolean} true if root node
+		 *&#x2F;
+		isRoot: function() {
+			return this._root._tree === this._node;
+		},
+		&#x2F;**
+		* Gets the stored value for the attribute, from either the
+		* internal state object, or the state proxy if it exits
+		*
+		* @method _getStateVal
+		* @private
+		* @param {String} name The name of the attribute
+		* @return {Any} The stored value of the attribute
+		*&#x2F;
+		_getStateVal : function(name) {
+			var node = this._node;
+			if (this._state.get(name, BYPASS_PROXY) || !node) {
+				return this._state.get(name, VALUE);
+			}
+			if (node.hasOwnProperty(name)) {
+				return node[name];
+			}
+			return this._state.get(name, VALUE);
+		},
+
+		&#x2F;**
+		* Sets the stored value for the attribute, in either the
+		* internal state object, or the state proxy if it exits
+		*
+		* @method _setStateVal
+		* @private
+		* @param {String} name The name of the attribute
+		* @param {Any} value The value of the attribute
+		*&#x2F;
+		_setStateVal : function(name, value) {
+			var node = this._node;
+			if (this._state.get(name, BYPASS_PROXY) || this._state.get(name, &#x27;initializing&#x27;) || !node) {
+				this._state.add(name, VALUE, value);
+			} else {
+				node[name] = value;
+			}
 		}
 	},
 	{

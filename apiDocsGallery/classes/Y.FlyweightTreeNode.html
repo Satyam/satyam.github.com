@@ -271,7 +271,7 @@ Instances of this class can be requested from the flyweight manager class</p>
 
                     <ul class="index-list methods extends">
                         
-                            <li class="index-item method">
+                            <li class="index-item method private">
                                 <a href="#method__dynamicLoadReturn">_dynamicLoadReturn</a>
 
                                 
@@ -300,6 +300,13 @@ Instances of this class can be requested from the flyweight manager class</p>
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__getStateVal">_getStateVal</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__loadDynamic">_loadDynamic</a>
 
                                 
@@ -308,6 +315,13 @@ Instances of this class can be requested from the flyweight manager class</p>
                         
                             <li class="index-item method private">
                                 <a href="#method__renderChildren">_renderChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setStateVal">_setStateVal</a>
 
                                 
                                 
@@ -350,6 +364,13 @@ Instances of this class can be requested from the flyweight manager class</p>
                         
                             <li class="index-item method">
                                 <a href="#method_hold">hold</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isRoot">isRoot</a>
 
                                 
                                 
@@ -520,7 +541,7 @@ Instances of this class can be requested from the flyweight manager class</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__dynamicLoadReturn" class="method item">
+                    <div id="method__dynamicLoadReturn" class="method item private">
     <h3 class="name"><code>_dynamicLoadReturn</code></h3>
 
     
@@ -542,6 +563,8 @@ Instances of this class can be requested from the flyweight manager class</p>
     
 
     
+        <span class="flag private">private</span>
+    
 
     
 
@@ -562,7 +585,7 @@ Instances of this class can be requested from the flyweight manager class</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l197"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:197</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l191"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:191</code></a>
         
         </p>
 
@@ -645,7 +668,7 @@ Instances of this class can be requested from the flyweight manager class</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l140"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:140</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l134"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:134</code></a>
         
         </p>
 
@@ -728,7 +751,7 @@ It can be overriden to default to false.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l153"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:153</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l147"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:147</code></a>
         
         </p>
 
@@ -931,6 +954,113 @@ via the first template string it finds in these locations:</p>
 </div>
 
                 
+                    <div id="method__getStateVal" class="method item private">
+    <h3 class="name"><code>_getStateVal</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l311"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:311</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the stored value for the attribute, from either the
+internal state object, or the state proxy if it exits</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    The stored value of the attribute
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__loadDynamic" class="method item private">
     <h3 class="name"><code>_loadDynamic</code></h3>
 
@@ -965,7 +1095,7 @@ via the first template string it finds in these locations:</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l185"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:185</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l179"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:179</code></a>
         
         </p>
 
@@ -1021,7 +1151,7 @@ via the first template string it finds in these locations:</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l218"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:218</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l213"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:213</code></a>
         
         </p>
 
@@ -1036,6 +1166,117 @@ via the first template string it finds in these locations:</p>
 It the children had been rendered, they will be replaced.</p>
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setStateVal" class="method item private">
+    <h3 class="name"><code>_setStateVal</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l331"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:331</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the stored value for the attribute, in either the
+internal state object, or the state proxy if it exits</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The value of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -1088,7 +1329,7 @@ It the children had been rendered, they will be replaced.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l106"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:106</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l100"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:100</code></a>
         
         </p>
 
@@ -1181,7 +1422,7 @@ It the children had been rendered, they will be replaced.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l116"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:116</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l110"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:110</code></a>
         
         </p>
 
@@ -1321,7 +1562,7 @@ It the children had been rendered, they will be replaced.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l266"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:266</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l261"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:261</code></a>
         
         </p>
 
@@ -1392,7 +1633,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l255"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:255</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l250"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:250</code></a>
         
         </p>
 
@@ -1463,7 +1704,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l282"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:282</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l277"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:277</code></a>
         
         </p>
 
@@ -1532,7 +1773,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l234"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:234</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l229"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:229</code></a>
         
         </p>
 
@@ -1549,6 +1790,77 @@ Remember to Release this instance when no longer needed.</p>
 
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_isRoot" class="method item">
+    <h3 class="name"><code>isRoot</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l303"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:303</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns true if this node is the root node</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    true if root node
+                
+            </div>
+        </div>
     
 
     
@@ -1589,7 +1901,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l243"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:243</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l238"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:238</code></a>
         
         </p>
 
@@ -1647,7 +1959,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l299"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:299</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l294"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:294</code></a>
         
         </p>
 
@@ -1795,7 +2107,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l339"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:339</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l379"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:379</code></a>
         
         </p>
 
@@ -1841,7 +2153,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l346"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:346</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l386"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:386</code></a>
         
         </p>
 
@@ -1887,7 +2199,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l353"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:353</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l393"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:393</code></a>
         
         </p>
 
@@ -1933,7 +2245,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l367"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:367</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l407"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:407</code></a>
         
         </p>
 
@@ -1979,7 +2291,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l374"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:374</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l414"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:414</code></a>
         
         </p>
 
@@ -2025,7 +2337,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l381"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:381</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l421"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:421</code></a>
         
         </p>
 
@@ -2071,7 +2383,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l360"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:360</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l400"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:400</code></a>
         
         </p>
 
@@ -2117,7 +2429,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l332"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:332</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l372"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:372</code></a>
         
         </p>
 
@@ -2163,7 +2475,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l310"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:310</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l350"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:350</code></a>
         
         </p>
 
@@ -2238,7 +2550,7 @@ The template should always use this className to help it locate the DOM element 
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l438"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:438</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l478"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:478</code></a>
         
         </p>
 
@@ -2339,7 +2651,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l458"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:458</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l498"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:498</code></a>
         
         </p>
 
@@ -2441,7 +2753,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l427"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:427</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l467"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:467</code></a>
         
         </p>
 
@@ -2544,7 +2856,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l417"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:417</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l457"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:457</code></a>
         
         </p>
 
@@ -2646,7 +2958,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l389"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:389</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l429"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:429</code></a>
         
         </p>
 
@@ -2746,7 +3058,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l405"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:405</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l445"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:445</code></a>
         
         </p>
 

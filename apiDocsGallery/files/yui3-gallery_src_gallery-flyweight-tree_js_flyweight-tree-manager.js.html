@@ -385,7 +385,8 @@ FWMgr.prototype = {
 				&#x2F;&#x2F; I need to do this otherwise Attribute will initialize 
 				&#x2F;&#x2F; the real node with default values when activating a lazyAdd attribute.
 				newNode._slideTo({});
-				newNode.getAttrs();
+				Y.Array.each(Y.Object.keys(newNode._state.data), newNode._addLazyAttr, newNode);
+				&#x2F;&#x2F; newNode.getAttrs();
 				&#x2F;&#x2F; That&#x27;s it (see above)
 				newNode._root =  this;
 				newNode._slideTo(node);
@@ -396,11 +397,10 @@ FWMgr.prototype = {
 	},
 	&#x2F;**
 	 * Returns an instance of Flyweight node positioned over the root
-	 * @method _getRootNode
+	 * @method getRoot
 	 * @return {Y.FlyweightTreeNode} 
-	 * @protected
 	 *&#x2F;
-	_getRootNode: function () {
+	getRoot: function () {
 		return this._poolFetch(this._tree);
 	},
 	&#x2F;**
@@ -412,7 +412,7 @@ FWMgr.prototype = {
 	 *&#x2F;
 	_getHTML: function () {
 		var s = &#x27;&#x27;,
-			root = this._getRootNode();
+			root = this.getRoot();
 		root.forEachChild( function (fwNode, index, array) {
 			s += fwNode._getHTML(index, array.length, 0);
 		});

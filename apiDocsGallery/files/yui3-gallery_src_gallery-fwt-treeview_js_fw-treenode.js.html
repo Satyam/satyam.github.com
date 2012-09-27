@@ -178,6 +178,7 @@
 	{
 		initializer: function() {
 			this.after(&#x27;click&#x27;, this._afterClick, this);
+			this.after(&#x27;selectedChange&#x27;, this._afterSelectedChange, this);
 		},
 		&#x2F;**
 		 * Responds to the click event by toggling the node
@@ -194,7 +195,52 @@
 			} else if (target.hasClass(CNAMES.selection)) {
 				this.toggleSelection();
 			}
+		},
+		&#x2F;**
+		 * Sugar method to toggle the selected state of a node.
+		 * @method toggleSelection
+		 *&#x2F;
+		toggleSelection: function() {
+			this.set(&#x27;selected&#x27;, (this.get(&#x27;selected&#x27;)?0:2));
+		},
+		&#x2F;**
+		 * Changes the UI to reflect the selected state and propagates the selection up and&#x2F;or down.
+		 * @method _afterSelectedChange
+		 * @param ev {EventFacade} out of which
+		 * @param ev.src {String} if not undefined it can be &#x60;&#x27;propagateUp&#x27;&#x60; or &#x60;&#x27;propagateDown&#x27;&#x60; so that propagation goes in just one direction and doesn&#x27;t bounce back.
+		 * @private
+		 *&#x2F;
+		_afterSelectedChange: function (ev) {
+			var newVal = ev.newVal;
+				
+			if (!this.isRoot()) {
+				Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;)).replaceClass(&#x27;yui3-fw-treeview-selected-state-&#x27; + ev.prevVal,&#x27;yui3-fw-treeview-selected-state-&#x27; + newVal);
+				if (this.get(&#x27;propagateUp&#x27;) &amp;&amp; ev.src !== &#x27;propagatingDown&#x27;) {
+					this.getParent()._childSelectedChange().release();
+				}
+			}
+			if (this.get(&#x27;propagateDown&#x27;) &amp;&amp; ev.src !== &#x27;propagatingUp&#x27;) {
+				this.forEachChild(function(node) {
+					node.set(&#x27;selected&#x27; , newVal, &#x27;propagatingDown&#x27;);
+				});
+			}
+		},
+		&#x2F;**
+		 * When propagating selection up, it is called by a child when changing its selected state
+		 * so that the parent adjusts its own state accordingly.
+		 * @method _childSelectedChange
+		 * @private
+		 *&#x2F;
+		_childSelectedChange: function () {
+			var count = 0, selCount = 0;
+			this.forEachChild(function (node) {
+				count +=2;
+				selCount += node.get(&#x27;selected&#x27;);
+			});
+			this.set(&#x27;selected&#x27;, (selCount === 0?0:(selCount === count?2:1)), {src:&#x27;propagatingUp&#x27;});
+			return this;
 		}
+		
 	},
 	{
 		&#x2F;**
@@ -203,7 +249,48 @@
 		 * @type String
 		 * @static
 		 *&#x2F;
-		TEMPLATE: Lang.sub(&#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node}&quot;&gt;&lt;div class=&quot;{toggle}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{icon}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{selection}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{content}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;ul class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;, CNAMES)
+		TEMPLATE: Lang.sub(&#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node} {sel_prefix}-{selected}&quot;&gt;&lt;div class=&quot;{toggle}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{icon}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{selection}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{content}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;ul class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;, CNAMES),
+		ATTRS: {
+			&#x2F;**
+			 * Selected&#x2F;highlighted state of the node. 
+			 * It can be
+			 * 
+			 * - 0 not selected
+			 * - 1 partially selected: some children are selected, some not or partially selected.
+			 * - 2 fully selected.
+			 * 
+			 * The partially selected state can only be the result of selection propagating up from a child node.
+			 * @attribute selected
+			 * @type Integer
+			 * @value 0
+			 *&#x2F;
+			selected: {
+				value:0,
+				validator:function (value) {
+					return value === 0 || value === 1 || value === 2;
+				}
+			},
+			&#x2F;**
+			 * Whether selection of one node should propagate to its parent.
+			 * @attribute propagateUp
+			 * @type Boolean
+			 * @value true
+			 *&#x2F;
+			propagateUp: {
+				value: true,
+				validator: Lang.isBoolean
+			},
+			&#x2F;**
+			 * Whether selection of one node should propagate to its children.
+			 * @attribute propagateDown
+			 * @type Boolean
+			 * @value true
+			 *&#x2F;
+			propagateDown: {
+				value: true,
+				validator: Lang.isBoolean
+			}
+		}
 	}
 );
 
