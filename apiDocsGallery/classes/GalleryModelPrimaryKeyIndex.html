@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.GalleryModelPrimaryKeyIndex - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>GalleryModelPrimaryKeyIndex - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.GalleryModelPrimaryKeyIndex Class</h1>
+                        <h1>GalleryModelPrimaryKeyIndex Class</h1>
 <div class="box meta">
     
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1562"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1562</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1563"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1563</code></a>
         </div>
     
 
@@ -179,10 +179,10 @@
 
 <div class="box intro">
     <p>Extension to store the records in the GalleryModel using the field in the 
-<a href="../classes/Y.GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute as its index.
+<a href="../classes/GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute as its index.
 The primary key <strong>must</strong> be a <strong>single</strong> <strong>unique</strong> <strong>integer</strong> field.
-It should be used along <a href="../classes/Y.GalleryModelMultiRecord.html" class="crosslink">Y.GalleryModelMultiRecord</a>.
-It is incompatible with <a href="../classes/Y.GalleryModelSortedMultiRecord.html" class="crosslink">Y.GalleryModelSortedMultiRecord</a>.</p>
+It should be used along <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>.
+It is incompatible with <a href="../classes/GalleryModelSortedMultiRecord.html" class="crosslink">GalleryModelSortedMultiRecord</a>.</p>
 </div>
 
 
@@ -297,7 +297,7 @@ It is incompatible with <a href="../classes/Y.GalleryModelSortedMultiRecord.html
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1593"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1593</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1594"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1594</code></a>
         
         </p>
 
@@ -308,7 +308,7 @@ It is incompatible with <a href="../classes/Y.GalleryModelSortedMultiRecord.html
     </div>
 
     <div class="description">
-        <p>Default action for the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, 
+        <p>Default action for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, 
 checks if the parsed response is an array
 and saves it into the shelves using the value of the primary key field for its index.
 The model will be left positioned at the item with the lowest key value.
@@ -331,7 +331,7 @@ If the primary key field is not unique, the duplicate will overwrite the previou
                     
 
                     <div class="param-description">
-                        <p>facade produced by the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event,</p>
+                        <p>facade produced by the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event,</p>
                     </div>
 
                     
@@ -391,7 +391,7 @@ If the primary key field is not unique, the duplicate will overwrite the previou
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1572"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1572</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1573"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1573</code></a>
         
         </p>
 
@@ -474,7 +474,7 @@ If it is an array, it will call itself for each of the items in it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1630"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1630</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1631"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1631</code></a>
         
         </p>
 
@@ -548,7 +548,7 @@ collection will still point to the last item.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1654"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1654</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1655"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1655</code></a>
         
         </p>
 

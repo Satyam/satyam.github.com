@@ -23,7 +23,7 @@
                 "gallery-flyweight-tree": 1
             },
             "classes": {
-                "Y.FlyweightTreeManager": 1
+                "FlyweightTreeManager": 1
             },
             "fors": {},
             "namespaces": {}
@@ -32,7 +32,7 @@
             "name": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
             "modules": {},
             "classes": {
-                "Y.FlyweightTreeNode": 1
+                "FlyweightTreeNode": 1
             },
             "fors": {},
             "namespaces": {}
@@ -43,7 +43,7 @@
                 "gallery-fwt-treeview": 1
             },
             "classes": {
-                "Y.FWTreeNode": 1
+                "FWTreeNode": 1
             },
             "fors": {},
             "namespaces": {}
@@ -52,7 +52,7 @@
             "name": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
             "modules": {},
             "classes": {
-                "Y.FWTreeView": 1
+                "FWTreeView": 1
             },
             "fors": {},
             "namespaces": {}
@@ -121,12 +121,12 @@
                 "gallery-md-model": 1
             },
             "classes": {
-                "Y.GalleryModel": 1,
-                "Y.GalleryModelSimpleUndo": 1,
-                "Y.GalleryModelChronologicalUndo": 1,
-                "Y.GalleryModelMultiRecord": 1,
-                "Y.GalleryModelSortedMultiRecord": 1,
-                "Y.GalleryModelPrimaryKeyIndex": 1
+                "GalleryModel": 1,
+                "GalleryModelSimpleUndo": 1,
+                "GalleryModelChronologicalUndo": 1,
+                "GalleryModelMultiRecord": 1,
+                "GalleryModelSortedMultiRecord": 1,
+                "GalleryModelPrimaryKeyIndex": 1
             },
             "fors": {},
             "namespaces": {}
@@ -198,8 +198,8 @@
             "name": "gallery-flyweight-tree",
             "submodules": {},
             "classes": {
-                "Y.FlyweightTreeManager": 1,
-                "Y.FlyweightTreeNode": 1
+                "FlyweightTreeManager": 1,
+                "FlyweightTreeNode": 1
             },
             "fors": {},
             "namespaces": {},
@@ -211,76 +211,17 @@
             "name": "gallery-fwt-treeview",
             "submodules": {},
             "classes": {
-                "Y.FWTreeNode": 1,
-                "Y.FWTreeView": 1
+                "FWTreeNode": 1,
+                "FWTreeView": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 1,
-            "description": "Instances of it will be provided by Y.FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes.",
-            "extends": "Y.FlyweightTreeNode",
-            "is_constructor": 1,
+            "line": 26,
+            "description": "Instances of it will be provided by FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes.",
             "example": [
                 "\n\n\tvar tv = new Y.FWTreeView({tree: [\n\t\t{\n\t\t\tlabel:'label 0',\n\t\t\tchildren: [\n\t\t\t\t{\n\t\t\t\t\tlabel: 'label 0-0',\n\t\t\t\t\tchildren: [\n\t\t\t\t\t\t{label: 'label 0-0-0'},\n\t\t\t\t\t\t{label: 'label 0-0-1'}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{label: 'label 0-1'}\n\t\t\t]\n\t\t},\n\t\t{label: 'label 1'}\n\n\t]});\n\ttv.render('#container');"
-            ],
-            "uses": [
-                "Y.FlyweightTreeManager"
-            ],
-            "params": [
-                {
-                    "name": "config",
-                    "description": "Configuration attributes, amongst them:",
-                    "type": "Object",
-                    "props": [
-                        {
-                            "name": "tree",
-                            "description": "Array of objects defining the first level of nodes.",
-                            "type": "Array",
-                            "props": [
-                                {
-                                    "name": "label",
-                                    "description": "Text of HTML markup to be shown in the node",
-                                    "type": "String"
-                                },
-                                {
-                                    "name": "expanded",
-                                    "description": "Whether the children of this node should be visible.",
-                                    "type": "Boolean",
-                                    "optional": true,
-                                    "optdefault": "true"
-                                },
-                                {
-                                    "name": "children",
-                                    "description": "Further definitions for the children of this node",
-                                    "type": "Array",
-                                    "optional": true
-                                },
-                                {
-                                    "name": "type",
-                                    "description": "Class used to create instances for this node.\nIt can be a reference to an object or a name that can be resolved as `Y[name]`.",
-                                    "type": "Y.FWTreeNode | String",
-                                    "optional": true,
-                                    "optdefault": "Y.FWTreeNode"
-                                },
-                                {
-                                    "name": "id",
-                                    "description": "Identifier to assign to the DOM element containing this node.",
-                                    "type": "String",
-                                    "optional": true,
-                                    "optdefault": "Y.guid()"
-                                },
-                                {
-                                    "name": "template",
-                                    "description": "Template for this particular node.",
-                                    "type": "String",
-                                    "optional": true
-                                }
-                            ]
-                        }
-                    ]
-                }
             ]
         },
         "gallery-makenode": {
@@ -355,18 +296,18 @@
             "name": "gallery-md-model",
             "submodules": {},
             "classes": {
-                "Y.GalleryModel": 1,
-                "Y.GalleryModelSimpleUndo": 1,
-                "Y.GalleryModelChronologicalUndo": 1,
-                "Y.GalleryModelMultiRecord": 1,
-                "Y.GalleryModelSortedMultiRecord": 1,
-                "Y.GalleryModelPrimaryKeyIndex": 1
+                "GalleryModel": 1,
+                "GalleryModelSimpleUndo": 1,
+                "GalleryModelChronologicalUndo": 1,
+                "GalleryModelMultiRecord": 1,
+                "GalleryModelSortedMultiRecord": 1,
+                "GalleryModelPrimaryKeyIndex": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1562,
+            "line": 1563,
             "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes."
         },
         "gallery-md-spinner": {
@@ -455,14 +396,16 @@
             "module": "gallery-button-plugin",
             "namespace": ""
         },
-        "Y.FlyweightTreeManager": {
-            "name": "Y.FlyweightTreeManager",
-            "shortname": "Y.FlyweightTreeManager",
+        "FlyweightTreeManager": {
+            "name": "FlyweightTreeManager",
+            "shortname": "FlyweightTreeManager",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [],
+            "extension_for": [
+                "FWTreeView"
+            ],
             "module": "gallery-flyweight-tree",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
@@ -470,9 +413,9 @@
             "description": "Extension to handle its child nodes by using the flyweight pattern.",
             "is_constructor": 1
         },
-        "Y.FlyweightTreeNode": {
-            "name": "Y.FlyweightTreeNode",
-            "shortname": "Y.FlyweightTreeNode",
+        "FlyweightTreeNode": {
+            "name": "FlyweightTreeNode",
+            "shortname": "FlyweightTreeNode",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -483,12 +426,12 @@
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
             "line": 10,
             "description": "An implementation of the flyweight pattern.  This class should not be instantiated directly.\nInstances of this class can be requested from the flyweight manager class",
-            "extends": "Y.Base",
+            "extends": "Base",
             "is_constructor": 1
         },
-        "Y.FWTreeNode": {
-            "name": "Y.FWTreeNode",
-            "shortname": "Y.FWTreeNode",
+        "FWTreeNode": {
+            "name": "FWTreeNode",
+            "shortname": "FWTreeNode",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -497,12 +440,12 @@
             "module": "gallery-fwt-treeview",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 1,
-            "description": "Instances of it will be provided by Y.FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
+            "line": 10,
+            "extends": "FlyweightTreeNode"
         },
-        "Y.FWTreeView": {
-            "name": "Y.FWTreeView",
-            "shortname": "Y.FWTreeView",
+        "FWTreeView": {
+            "name": "FWTreeView",
+            "shortname": "FWTreeView",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -511,10 +454,10 @@
             "module": "gallery-fwt-treeview",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 1,
-            "description": "It creates the tree based on an object passed as the `tree` attribute in the constructor.",
-            "example": [
-                "\n\n\tvar tv = new Y.FWTreeView({tree: [\n\t\t{\n\t\t\tlabel:'label 0',\n\t\t\tchildren: [\n\t\t\t\t{\n\t\t\t\t\tlabel: 'label 0-0',\n\t\t\t\t\tchildren: [\n\t\t\t\t\t\t{label: 'label 0-0-0'},\n\t\t\t\t\t\t{label: 'label 0-0-1'}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{label: 'label 0-1'}\n\t\t\t]\n\t\t},\n\t\t{label: 'label 1'}\n\n\t]});\n\ttv.render('#container');"
+            "line": 26,
+            "extends": "Widget",
+            "uses": [
+                "FlyweightTreeManager"
             ]
         },
         "MakeNode": {
@@ -699,9 +642,9 @@
                 }
             ]
         },
-        "Y.GalleryModel": {
-            "name": "Y.GalleryModel",
-            "shortname": "Y.GalleryModel",
+        "GalleryModel": {
+            "name": "GalleryModel",
+            "shortname": "GalleryModel",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -710,8 +653,8 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 8,
-            "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes.\n \nIn most cases, you'll want to create your own subclass of Y.GalleryModel and\ncustomize it to meet your needs. In particular, the sync() and validate()\nmethods are meant to be overridden by custom implementations. You may also want\nto override the parse() method to parse non-generic server responses.",
+            "line": 10,
+            "description": "Record-based data model with APIs for getting, setting, validating, and\nsyncing attribute values, as well as events for being notified of model changes.\n \nIn most cases, you'll want to create your own subclass of GalleryModel and\ncustomize it to meet your needs. In particular, the sync() and validate()\nmethods are meant to be overridden by custom implementations. You may also want\nto override the parse() method to parse non-generic server responses.",
             "is_constructor": 1,
             "params": [
                 {
@@ -731,9 +674,9 @@
             ],
             "extends": "Base"
         },
-        "Y.GalleryModelSimpleUndo": {
-            "name": "Y.GalleryModelSimpleUndo",
-            "shortname": "Y.GalleryModelSimpleUndo",
+        "GalleryModelSimpleUndo": {
+            "name": "GalleryModelSimpleUndo",
+            "shortname": "GalleryModelSimpleUndo",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -742,12 +685,12 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 813,
-            "description": "An extension for Y.GalleryModel that provides a single level of undo for each field.\nIt will never undo a field to `undefined` since it assumes an undefined field had not been set."
+            "line": 814,
+            "description": "An extension for GalleryModel that provides a single level of undo for each field.\nIt will never undo a field to `undefined` since it assumes an undefined field had not been set."
         },
-        "Y.GalleryModelChronologicalUndo": {
-            "name": "Y.GalleryModelChronologicalUndo",
-            "shortname": "Y.GalleryModelChronologicalUndo",
+        "GalleryModelChronologicalUndo": {
+            "name": "GalleryModelChronologicalUndo",
+            "shortname": "GalleryModelChronologicalUndo",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -756,12 +699,12 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 875,
+            "line": 876,
             "description": "Provides multiple levels of undo in strict chronological order \nwhatever the field was at each stage.\nChanges done on multiple fields via setValues\nwill also be undone in one step."
         },
-        "Y.GalleryModelMultiRecord": {
-            "name": "Y.GalleryModelMultiRecord",
-            "shortname": "Y.GalleryModelMultiRecord",
+        "GalleryModelMultiRecord": {
+            "name": "GalleryModelMultiRecord",
+            "shortname": "GalleryModelMultiRecord",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -770,12 +713,12 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 934,
-            "description": "Allows GalleryModel to handle a set of records using the Flyweight pattern.\nIt exposes one record at a time from a shelf of records.\nExposed records can be selected by setting the {{#crossLink \"Y.GalleryModel/index:attribute\"}}{{/crossLink}} attribute."
+            "line": 935,
+            "description": "Allows GalleryModel to handle a set of records using the Flyweight pattern.\nIt exposes one record at a time from a shelf of records.\nExposed records can be selected by setting the {{#crossLink \"GalleryModel/index:attribute\"}}{{/crossLink}} attribute."
         },
-        "Y.GalleryModelSortedMultiRecord": {
-            "name": "Y.GalleryModelSortedMultiRecord",
-            "shortname": "Y.GalleryModelSortedMultiRecord",
+        "GalleryModelSortedMultiRecord": {
+            "name": "GalleryModelSortedMultiRecord",
+            "shortname": "GalleryModelSortedMultiRecord",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -784,12 +727,12 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1333,
-            "description": "Extension to sort records stored in {{#crossLink \"Y.GalleryModel\"}}{{/crossLink}}, extended with {{#crossLink \"Y.GalleryModelMultiRecord\"}}{{/crossLink}}\nIt is incompatible with {{#crossLink \"Y.GalleryModelPrimaryKeyIndex\"}}{{/crossLink}}"
+            "line": 1334,
+            "description": "Extension to sort records stored in {{#crossLink \"GalleryModel\"}}{{/crossLink}}, extended with {{#crossLink \"GalleryModelMultiRecord\"}}{{/crossLink}}\nIt is incompatible with {{#crossLink \"GalleryModelPrimaryKeyIndex\"}}{{/crossLink}}"
         },
-        "Y.GalleryModelPrimaryKeyIndex": {
-            "name": "Y.GalleryModelPrimaryKeyIndex",
-            "shortname": "Y.GalleryModelPrimaryKeyIndex",
+        "GalleryModelPrimaryKeyIndex": {
+            "name": "GalleryModelPrimaryKeyIndex",
+            "shortname": "GalleryModelPrimaryKeyIndex",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -798,8 +741,8 @@
             "module": "gallery-md-model",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1562,
-            "description": "Extension to store the records in the GalleryModel using the field in the \n{{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute as its index.\nThe primary key __must__ be a __single__ __unique__ __integer__ field.\nIt should be used along {{#crossLink \"Y.GalleryModelMultiRecord\"}}{{/crossLink}}.\nIt is incompatible with {{#crossLink \"Y.GalleryModelSortedMultiRecord\"}}{{/crossLink}}."
+            "line": 1563,
+            "description": "Extension to store the records in the GalleryModel using the field in the \n{{#crossLink \"GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute as its index.\nThe primary key __must__ be a __single__ __unique__ __integer__ field.\nIt should be used along {{#crossLink \"GalleryModelMultiRecord\"}}{{/crossLink}}.\nIt is incompatible with {{#crossLink \"GalleryModelSortedMultiRecord\"}}{{/crossLink}}."
         },
         "Spinner": {
             "name": "Spinner",
@@ -1013,18 +956,18 @@
             "name": "defaultType",
             "type": "{String | Object}",
             "default": "'FlyweightTreeNode'",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
             "line": 28,
-            "description": "Function used to load the nodes dynamically.\nFunction will run in the scope of the FlyweightTreeManager instance and will\nreceive:\n\n* node {Y.FlyweightTreeNode} reference to the parent of the children to be loaded.\n* callback {Function} function to call with the configuration info for the children.\n\nThe function shall fetch the nodes and create a configuration object \nmuch like the one a whole tree might receive.  \nIt is not limited to just one level of nodes, it might contain children elements as well.\nWhen the data is processed, it should call the callback with the configuration object.\nThe function is responsible of handling any errors.\nIf the the callback is called with no arguments, the parent node will be marked as having no children.",
+            "description": "Function used to load the nodes dynamically.\nFunction will run in the scope of the FlyweightTreeManager instance and will\nreceive:\n\n* node {FlyweightTreeNode} reference to the parent of the children to be loaded.\n* callback {Function} function to call with the configuration info for the children.\n\nThe function shall fetch the nodes and create a configuration object \nmuch like the one a whole tree might receive.  \nIt is not limited to just one level of nodes, it might contain children elements as well.\nWhen the data is processed, it should call the callback with the configuration object.\nThe function is responsible of handling any errors.\nIf the the callback is called with no arguments, the parent node will be marked as having no children.",
             "itemtype": "attribute",
             "name": "dynamicLoader",
             "type": "{Function}",
             "default": "null",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1036,7 +979,7 @@
             "type": "Object",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1048,7 +991,7 @@
             "type": "{Object}",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1061,7 +1004,7 @@
             "access": "protected",
             "tagname": "",
             "default": "null",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1097,9 +1040,9 @@
                         {
                             "name": "type",
                             "description": "Class used to create instances for this node.  \nIt can be a reference to an object or a name that can be resolved as `Y[name]`.",
-                            "type": "Y.FWTreeNode | String",
+                            "type": "FWTreeNode | String",
                             "optional": true,
-                            "optdefault": "Y.FWTreeNode"
+                            "optdefault": "FWTreeNode"
                         },
                         {
                             "name": "id",
@@ -1119,7 +1062,7 @@
             ],
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1136,7 +1079,7 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1154,7 +1097,7 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1176,13 +1119,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
             "line": 159,
-            "description": "Pulls from the pool an instance of the type declared in the given node\nand slides it over that node.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_createNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"Y.FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
+            "description": "Pulls from the pool an instance of the type declared in the given node\nand slides it over that node.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_createNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
             "itemtype": "method",
             "name": "_poolFetch",
             "params": [
@@ -1194,29 +1137,29 @@
             ],
             "return": {
                 "description": "Usually a subclass of FlyweightTreeNode positioned over the given node",
-                "type": "Y.FlyweightTreeNode"
+                "type": "FlyweightTreeNode"
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
             "line": 188,
-            "description": "Returns the FlyweightTreeNode instance to the pool.\nInstances held (see: {{#crossLink \"Y.FlyweightTreeNode/hold\"}}{{/crossLink}}) are never returned.",
+            "description": "Returns the FlyweightTreeNode instance to the pool.\nInstances held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}) are never returned.",
             "itemtype": "method",
             "name": "_poolReturn",
             "params": [
                 {
                     "name": "fwNode",
                     "description": "Instance to return.",
-                    "type": "Y.FlyweightTreeNode"
+                    "type": "FlyweightTreeNode"
                 }
             ],
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1234,11 +1177,11 @@
             ],
             "return": {
                 "description": "Instance of the corresponding subclass of FlyweightTreeNode",
-                "type": "Y.FlyweightTreeNode"
+                "type": "FlyweightTreeNode"
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1249,9 +1192,9 @@
             "name": "getRoot",
             "return": {
                 "description": "",
-                "type": "Y.FlyweightTreeNode"
+                "type": "FlyweightTreeNode"
             },
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1266,7 +1209,7 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1279,7 +1222,7 @@
                 {
                     "name": "el",
                     "description": "Any element belonging to the tree",
-                    "type": "Y.Node"
+                    "type": "Node"
                 }
             ],
             "return": {
@@ -1288,7 +1231,7 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1306,11 +1249,11 @@
             ],
             "return": {
                 "description": "The FlyweightTreeNode instance or null if not found.",
-                "type": "Y.FlyweightTreeNode"
+                "type": "FlyweightTreeNode"
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1353,7 +1296,54 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeManager",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 323,
+            "description": "Executes the given function over all the nodes in the tree or until the function returns true.\nIf dynamic loading is enabled, it will not run over nodes not yet loaded.",
+            "itemtype": "method",
+            "name": "forSomeNodes",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "function to execute on each node.  It will receive:",
+                    "type": "Function",
+                    "props": [
+                        {
+                            "name": "node",
+                            "description": "node being visited.",
+                            "type": "FlyweightTreeNode"
+                        },
+                        {
+                            "name": "depth",
+                            "description": "depth from the root. The root node is level zero and it is not traversed.",
+                            "type": "Integer"
+                        },
+                        {
+                            "name": "index",
+                            "description": "position of this node within its branch",
+                            "type": "Integer"
+                        },
+                        {
+                            "name": "array",
+                            "description": "array containing itself and its siblings",
+                            "type": "Array"
+                        }
+                    ]
+                },
+                {
+                    "name": "scope",
+                    "description": "Scope to run the function in.  Defaults to the FlyweightTreeManager instance.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "true if any function calls returned true (the traversal was interrupted)",
+                "type": "Boolean"
+            },
+            "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1365,7 +1355,7 @@
             "type": "{Object}",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1374,10 +1364,10 @@
             "description": "Reference to the FlyweightTreeManager instance this node belongs to.\nIt is set by the root and should be considered read-only.",
             "itemtype": "property",
             "name": "_root",
-            "type": "Y.FlyweightTreeManager",
+            "type": "FlyweightTreeManager",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1409,7 +1399,7 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1427,7 +1417,7 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1435,7 +1425,7 @@
             "line": 110,
             "description": "Executes the given function on each of the child nodes of this node.",
             "itemtype": "method",
-            "name": "forEachChild",
+            "name": "forSomeChildren",
             "params": [
                 {
                     "name": "fn",
@@ -1445,7 +1435,7 @@
                         {
                             "name": "child",
                             "description": "Instance of a suitable subclass of FlyweightTreeNode, \n\t\tpositioned on top of the child node",
-                            "type": "Y.FlyweightTreeNode"
+                            "type": "FlyweightTreeNode"
                         },
                         {
                             "name": "index",
@@ -1465,7 +1455,7 @@
                     "type": "Object"
                 }
             ],
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1480,7 +1470,7 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1498,7 +1488,7 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1509,7 +1499,7 @@
             "name": "_loadDynamic",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1527,7 +1517,7 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1538,7 +1528,7 @@
             "name": "_renderChildren",
             "access": "private",
             "tagname": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1548,7 +1538,7 @@
             "itemtype": "method",
             "name": "hold",
             "chainable": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1558,7 +1548,7 @@
             "itemtype": "method",
             "name": "release",
             "chainable": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1568,9 +1558,9 @@
             "itemtype": "method",
             "name": "getParent",
             "return": {
-                "description": "Y.FlyweightTreeNode"
+                "description": "FlyweightTreeNode"
             },
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1580,9 +1570,9 @@
             "itemtype": "method",
             "name": "getNextSibling",
             "return": {
-                "description": "Y.FlyweightTreeNode"
+                "description": "FlyweightTreeNode"
             },
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1592,9 +1582,9 @@
             "itemtype": "method",
             "name": "getPreviousSibling",
             "return": {
-                "description": "Y.FlyweightTreeNode"
+                "description": "FlyweightTreeNode"
             },
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1604,7 +1594,7 @@
             "itemtype": "method",
             "name": "toggle",
             "chainable": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1617,7 +1607,7 @@
                 "description": "true if root node",
                 "type": "Boolean"
             },
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1639,7 +1629,7 @@
                 "description": "The stored value of the attribute",
                 "type": "Any"
             },
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1662,7 +1652,7 @@
                     "type": "Any"
                 }
             ],
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1674,7 +1664,7 @@
             "type": "{String}",
             "default": "'<div id=\"{id}\" class=\"{cname_node}\"><div class=\"content\">{label}</div><div class=\"{cname_children}\">{children}</div></div>'",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1685,7 +1675,7 @@
             "name": "CNAME_NODE",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1696,7 +1686,7 @@
             "name": "CNAME_CHILDREN",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1707,7 +1697,7 @@
             "name": "CNAME_COLLAPSED",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1718,7 +1708,7 @@
             "name": "CNAME_EXPANDED",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1729,7 +1719,7 @@
             "name": "CNAME_NOCHILDREN",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1740,7 +1730,7 @@
             "name": "CNAME_FIRSTCHILD",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1751,7 +1741,7 @@
             "name": "CNAME_LASTCHILD",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1762,7 +1752,7 @@
             "name": "CNAME_LOADING",
             "type": "String",
             "static": 1,
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1771,9 +1761,9 @@
             "description": "Reference to the FlyweightTreeManager this node belongs to",
             "itemtype": "attribute",
             "name": "root",
-            "type": "{Y.FlyweightTreeManager}",
+            "type": "{FlyweightTreeManager}",
             "readonly": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1784,7 +1774,7 @@
             "name": "template",
             "type": "{String}",
             "default": "undefined",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1795,7 +1785,7 @@
             "name": "label",
             "type": "{String}",
             "default": "''",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1805,9 +1795,9 @@
             "itemtype": "attribute",
             "name": "id",
             "type": "{Identifier}",
-            "default": "Y.guid()",
+            "default": "guid()",
             "readonly": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1818,7 +1808,7 @@
             "name": "depth",
             "type": "Integer",
             "readonly": "",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
@@ -1829,12 +1819,19 @@
             "name": "expanded",
             "type": "Boolean",
             "default": "true",
-            "class": "Y.FlyweightTreeNode",
+            "class": "FlyweightTreeNode",
             "module": "gallery-flyweight-tree"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 23,
+            "line": 15,
+            "is_constructor": 1,
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 27,
             "description": "Responds to the click event by toggling the node",
             "itemtype": "method",
             "name": "_afterClick",
@@ -1847,21 +1844,21 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 39,
+            "line": 45,
             "description": "Sugar method to toggle the selected state of a node.",
             "itemtype": "method",
             "name": "toggleSelection",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 46,
+            "line": 52,
             "description": "Changes the UI to reflect the selected state and propagates the selection up and/or down.",
             "itemtype": "method",
             "name": "_afterSelectedChange",
@@ -1881,67 +1878,178 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 68,
+            "line": 74,
+            "description": "Overrides the original in FlyweightTreeNode so as to propagate the selected state\non dynamically loaded nodes.",
+            "itemtype": "method",
+            "name": "_dynamicLoadReturn",
+            "access": "private",
+            "tagname": "",
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 90,
             "description": "When propagating selection up, it is called by a child when changing its selected state\nso that the parent adjusts its own state accordingly.",
             "itemtype": "method",
             "name": "_childSelectedChange",
             "access": "private",
             "tagname": "",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 86,
+            "line": 108,
             "description": "Template to produce the markup for a node in the tree.",
             "itemtype": "property",
             "name": "TEMPLATE",
             "type": "String",
             "static": 1,
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 94,
-            "description": "Selected/highlighted state of the node. \nIt can be\n\n- 0 not selected\n- 1 partially selected: some children are selected, some not or partially selected.\n- 2 fully selected.\n\nThe partially selected state can only be the result of selection propagating up from a child node.",
+            "line": 115,
+            "description": "Constant to use with the `selected` attribute to indicate the node is not selected.",
+            "itemtype": "property",
+            "name": "NOT_SELECTED",
+            "type": "integer",
+            "value": "0",
+            "static": 1,
+            "final": 1,
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 124,
+            "description": "Constant to use with the `selected` attribute to indicate some \nbut not all of the children of this node are selected.\nThis state should only be acquired by upward propagation from descendants.",
+            "itemtype": "property",
+            "name": "PARTIALLY_SELECTED",
+            "type": "integer",
+            "value": "1",
+            "static": 1,
+            "final": 1,
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 135,
+            "description": "Constant to use with the `selected` attribute to indicate the node is selected.",
+            "itemtype": "property",
+            "name": "FULLY_SELECTED",
+            "type": "integer",
+            "value": "2",
+            "static": 1,
+            "final": 1,
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 145,
+            "description": "Selected/highlighted state of the node. \nIt can be\n\n- Y.FWTreeNode.NOT_SELECTED (0) not selected\n- Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.\n- Y.FWTreeNode.FULLY_SELECTED (2) fully selected.\n\nThe partially selected state can only be the result of selection propagating up from a child node.\nThe attribute might return PARTIALLY_SELECTED but the developer should never set that value.",
             "itemtype": "attribute",
             "name": "selected",
             "type": "Integer",
-            "value": "0",
-            "class": "Y.FWTreeNode",
+            "value": "NOT_SELECTED",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 113,
+            "line": 165,
             "description": "Whether selection of one node should propagate to its parent.",
             "itemtype": "attribute",
             "name": "propagateUp",
             "type": "Boolean",
             "value": "true",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 123,
+            "line": 175,
             "description": "Whether selection of one node should propagate to its children.",
             "itemtype": "attribute",
             "name": "propagateDown",
             "type": "Boolean",
             "value": "true",
-            "class": "Y.FWTreeNode",
+            "class": "FWTreeNode",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 43,
+            "line": 31,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration attributes, amongst them:",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "tree",
+                            "description": "Array of objects defining the first level of nodes.",
+                            "type": "Array",
+                            "props": [
+                                {
+                                    "name": "label",
+                                    "description": "Text of HTML markup to be shown in the node",
+                                    "type": "String"
+                                },
+                                {
+                                    "name": "expanded",
+                                    "description": "Whether the children of this node should be visible.",
+                                    "type": "Boolean",
+                                    "optional": true,
+                                    "optdefault": "true"
+                                },
+                                {
+                                    "name": "children",
+                                    "description": "Further definitions for the children of this node",
+                                    "type": "Array",
+                                    "optional": true
+                                },
+                                {
+                                    "name": "type",
+                                    "description": "Class used to create instances for this node.\nIt can be a reference to an object or a name that can be resolved as `Y[name]`.",
+                                    "type": "FWTreeNode | String",
+                                    "optional": true,
+                                    "optdefault": "FWTreeNode"
+                                },
+                                {
+                                    "name": "id",
+                                    "description": "Identifier to assign to the DOM element containing this node.",
+                                    "type": "String",
+                                    "optional": true,
+                                    "optdefault": "Y.guid()"
+                                },
+                                {
+                                    "name": "template",
+                                    "description": "Template for this particular node.",
+                                    "type": "String",
+                                    "optional": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "class": "FWTreeView",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
+            "line": 48,
             "description": "Widget lifecycle method",
             "itemtype": "method",
             "name": "initializer",
@@ -1952,39 +2060,50 @@
                     "type": "Object"
                 }
             ],
-            "class": "Y.FWTreeView",
+            "class": "FWTreeView",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 53,
+            "line": 58,
             "description": "Widget lifecyle method\nI opted for not including this method in FlyweightTreeManager so that\nit can be used to extend Base, not just Widget",
             "itemtype": "method",
             "name": "renderUI",
             "access": "protected",
             "tagname": "",
-            "class": "Y.FWTreeView",
+            "class": "FWTreeView",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 63,
+            "line": 68,
             "description": "Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div",
             "itemtype": "property",
             "name": "CONTENT_TEMPLATE",
             "type": "String",
-            "class": "Y.FWTreeView",
+            "class": "FWTreeView",
             "module": "gallery-fwt-treeview"
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 73,
+            "line": 78,
             "description": "Override for the `defaultType` value of FlyweightTreeManager\nso it creates FWTreeNode instances instead of the default.",
             "itemtype": "attribute",
             "name": "defaultType",
             "type": "String",
             "default": "'FWTreeNode'",
-            "class": "Y.FWTreeView",
+            "class": "FWTreeView",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
+            "line": 88,
+            "description": "Enables toggling by clicking on the label item instead of just the toggle icon.",
+            "itemtype": "attribute",
+            "name": "toggleOnLabelClick",
+            "type": "Boolean",
+            "value": "false",
+            "class": "FWTreeView",
             "module": "gallery-fwt-treeview"
         },
         {
@@ -3544,44 +3663,44 @@
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 51,
+            "line": 52,
             "description": "Hash of values indexed by field name",
             "itemtype": "property",
             "name": "_values",
             "type": "Object",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 58,
+            "line": 59,
             "description": "Hash of values as loaded from the remote source, \npresumed to be the current value there.",
             "itemtype": "property",
             "name": "_loadedValues",
             "type": "Object",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 66,
+            "line": 67,
             "description": "Array of field names that make up the primary key for this record",
             "itemtype": "property",
             "name": "_primaryKeys",
             "type": "Array",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 79,
-            "description": "Fired whenever a value or values are changed. \nIf changed via {{#crossLink \"Y.GalleryModel/setValues\"}}{{/crossLink}} the facade will not contain a __name__.  \nInstead, __prevVals__ and __newVals__ (both plural) properties will contain \nhashes with the names and values of the fields changed.\nAfter firing the event for a group of fields changed via {{#crossLink \"Y.GalleryModel/setValues\"}}{{/crossLink}},\na new change event will be fired for each individual field changed.\nFor individual field changes via {{#crossLink \"Y.GalleryModel/setValue\"}}{{/crossLink}}, the __name__, __prevVal__ and __newVal__\nwill be provided.\nThe event can be prevented on a per group change basis or per individual field change.\nPreventing the change on a particular field will not prevent the others from being changed.",
+            "line": 80,
+            "description": "Fired whenever a value or values are changed. \nIf changed via {{#crossLink \"GalleryModel/setValues\"}}{{/crossLink}} the facade will not contain a __name__.  \nInstead, __prevVals__ and __newVals__ (both plural) properties will contain \nhashes with the names and values of the fields changed.\nAfter firing the event for a group of fields changed via {{#crossLink \"GalleryModel/setValues\"}}{{/crossLink}},\na new change event will be fired for each individual field changed.\nFor individual field changes via {{#crossLink \"GalleryModel/setValue\"}}{{/crossLink}}, the __name__, __prevVal__ and __newVal__\nwill be provided.\nThe event can be prevented on a per group change basis or per individual field change.\nPreventing the change on a particular field will not prevent the others from being changed.",
             "itemtype": "event",
             "name": "change",
             "params": [
@@ -3628,13 +3747,13 @@
                     ]
                 }
             ],
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 102,
-            "description": "Fired when new data has been received from the remote source.  \nIt will also be fired even on a {{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}} operation if the response contains values.\nThe parsed values can be altered on the before (on) listener.",
+            "line": 103,
+            "description": "Fired when new data has been received from the remote source.  \nIt will also be fired even on a {{#crossLink \"GalleryModel/save\"}}{{/crossLink}} operation if the response contains values.\nThe parsed values can be altered on the before (on) listener.",
             "itemtype": "event",
             "name": "loaded",
             "params": [
@@ -3655,7 +3774,7 @@
                         },
                         {
                             "name": "options",
-                            "description": "Options as received by the {{#crossLink \"Y.GalleryModel/load\"}}{{/crossLink}} method.",
+                            "description": "Options as received by the {{#crossLink \"GalleryModel/load\"}}{{/crossLink}} method.",
                             "type": "Object"
                         },
                         {
@@ -3671,13 +3790,13 @@
                     ]
                 }
             ],
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 119,
-            "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.  \nThe developer has full control of what is\nabout to be saved and when it is saved so it would be pointless\nto try to prevent it at this stage.  This is in contrast to\nthe {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event where the developer has no control of what might\ncome from the server and might wish to do something about it.\nIf in reply to the save operation the server replies with data, \nthe __response__ and __parsed__ properties will be filled.",
+            "line": 120,
+            "description": "Fired when the data has been saved to the remote source\nThe event cannot be prevented.  \nThe developer has full control of what is\nabout to be saved and when it is saved so it would be pointless\nto try to prevent it at this stage.  This is in contrast to\nthe {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event where the developer has no control of what might\ncome from the server and might wish to do something about it.\nIf in reply to the save operation the server replies with data, \nthe __response__ and __parsed__ properties will be filled.",
             "itemtype": "event",
             "name": "saved",
             "params": [
@@ -3700,7 +3819,7 @@
                         },
                         {
                             "name": "options",
-                            "description": "Options as received by the {{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}} method.",
+                            "description": "Options as received by the {{#crossLink \"GalleryModel/save\"}}{{/crossLink}} method.",
                             "type": "Object"
                         },
                         {
@@ -3716,12 +3835,12 @@
                     ]
                 }
             ],
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 145,
+            "line": 146,
             "description": "Sets the initial values if any were provided to the constructor.\nIt is only ever called after the initialization of this class and all its extensions\nand only if the arguments to the constructor had a `values` attribute",
             "itemtype": "method",
             "name": "_setInitialValues",
@@ -3741,19 +3860,19 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 160,
-            "description": "Destroys this model instance and removes it from its containing lists, if\nany.\n\nIf __options.remove__ is true then this method also delegates to the\n{{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to delete the model from the persistence layer.",
+            "line": 161,
+            "description": "Destroys this model instance and removes it from its containing lists, if\nany.\n\nIf __options.remove__ is true then this method also delegates to the\n{{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} method to delete the model from the persistence layer.",
             "itemtype": "method",
             "name": "destroy",
             "params": [
                 {
                     "name": "options",
-                    "description": "Options passed on to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method, if required.",
+                    "description": "Options passed on to the {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} method, if required.",
                     "type": "Object",
                     "optional": true,
                     "props": [
@@ -3779,19 +3898,19 @@
                         },
                         {
                             "name": "response",
-                            "description": "The server response as received by {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}}.",
+                            "description": "The server response as received by {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}}.",
                             "type": "Any"
                         }
                     ]
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 204,
+            "line": 205,
             "description": "Returns the value of the field named",
             "itemtype": "method",
             "name": "getValue",
@@ -3806,12 +3925,12 @@
                 "description": "the value of the field requested.",
                 "type": "Any"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 213,
+            "line": 214,
             "description": "Returns a hash with all values using the field names as keys.",
             "itemtype": "method",
             "name": "getValues",
@@ -3819,13 +3938,13 @@
                 "description": "a hash with all the fields with the field names as keys.",
                 "type": "Object"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 221,
-            "description": "Sets the value of the named field. \nFires the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event if the new value is different from the current one.\nPrimary key fields cannot be changed unless still `undefined`.",
+            "line": 222,
+            "description": "Sets the value of the named field. \nFires the {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}} event if the new value is different from the current one.\nPrimary key fields cannot be changed unless still `undefined`.",
             "itemtype": "method",
             "name": "setValue",
             "params": [
@@ -3847,31 +3966,31 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 243,
+            "line": 244,
             "description": "Default function for the change event, sets the value and marks the model as modified.",
             "itemtype": "method",
             "name": "_defSetValue",
             "params": [
                 {
                     "name": "ev",
-                    "description": "(see {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event)",
+                    "description": "(see {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}} event)",
                     "type": "EventFacade"
                 }
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 260,
-            "description": "Sets a series of values.   \nIt simply loops over the hash of values provided calling {{#crossLink \"Y.GalleryModel/setValue\"}}{{/crossLink}} on each.\nFires the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event.",
+            "line": 261,
+            "description": "Sets a series of values.   \nIt simply loops over the hash of values provided calling {{#crossLink \"GalleryModel/setValue\"}}{{/crossLink}} on each.\nFires the {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}} event.",
             "itemtype": "method",
             "name": "setValues",
             "params": [
@@ -3888,12 +4007,12 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 283,
+            "line": 284,
             "description": "Returns a hash indexed by field name, of all the values in the model that have changed since the last time\nthey were synchornized with the remote source.   Each entry has a __prevVal__ and __newVal__ entry.",
             "itemtype": "method",
             "name": "getChangedValues",
@@ -3901,12 +4020,12 @@
                 "description": "Hash of all entries changed since last synched.\nEach entry has a __newVal__ and __prevVal__ property contaning original and changed values.",
                 "type": "Object"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 303,
+            "line": 304,
             "description": "Returns a hash with the values of the primary key fields, indexed by their field names",
             "itemtype": "method",
             "name": "getPKValues",
@@ -3914,12 +4033,12 @@
                 "description": "Hash with the primary key values, indexed by their field names",
                 "type": "Object"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 316,
+            "line": 317,
             "description": "Returns an HTML-escaped version of the value of the specified string\nattribute. The value is escaped using Y.Escape.html().",
             "itemtype": "method",
             "name": "getAsHTML",
@@ -3934,12 +4053,12 @@
                 "description": "HTML-escaped attribute value.",
                 "type": "String"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 329,
+            "line": 330,
             "description": "Returns a URL-encoded version of the value of the specified field,\nor a full URL with `name=value` sets for all fields if no name is given.\nThe names and values are encoded using the native `encodeURIComponent()`\nfunction.",
             "itemtype": "method",
             "name": "getAsURL",
@@ -3955,13 +4074,13 @@
                 "description": "URL-encoded field value if name is given or URL encoded set of `name=value` pairs for all fields.",
                 "type": "String"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 353,
-            "description": "Default function for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event. \nDoes the actual setting of the values just loaded and calls the callback function.",
+            "line": 354,
+            "description": "Default function for the {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event. \nDoes the actual setting of the values just loaded and calls the callback function.",
             "itemtype": "method",
             "name": "_defDataLoaded",
             "params": [
@@ -3973,13 +4092,13 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 368,
-            "description": "Function called when the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event is prevented, stopped or halted\nso that the callback is called with a suitable error",
+            "line": 369,
+            "description": "Function called when the {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event is prevented, stopped or halted\nso that the callback is called with a suitable error",
             "itemtype": "method",
             "name": "_stoppedDataLoaded",
             "params": [
@@ -3991,19 +4110,19 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 378,
-            "description": "Loads this model from the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual load\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful load operation will fire a {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error:event\"}}{{/crossLink}} event with the `src` set to `\"load\"`.",
+            "line": 379,
+            "description": "Loads this model from the server.\n\nThis method delegates to the {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} method to perform the actual load\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful load operation will fire a {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"GalleryModel/error:event\"}}{{/crossLink}} event with the `src` set to `\"load\"`.",
             "itemtype": "method",
             "name": "load",
             "params": [
                 {
                     "name": "options",
-                    "description": "Options to be passed to {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}}.\n\tUsually these will be or will include the keys used by the remote source \n\tto locate the data to be loaded.\n\tThey will be passed on unmodified to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method.\n\tIt is up to {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} to determine what they mean.",
+                    "description": "Options to be passed to {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}}.\n\tUsually these will be or will include the keys used by the remote source \n\tto locate the data to be loaded.\n\tThey will be passed on unmodified to the {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} method.\n\tIt is up to {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} to determine what they mean.",
                     "type": "Object",
                     "optional": true
                 },
@@ -4027,12 +4146,12 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 437,
+            "line": 438,
             "description": "Called to parse the __response__ when a response is received from the server.\nThis method receives a server __response__ and is expected to return a\nvalue hash.\n\nThe default implementation assumes that __response__ is either an attribute\nhash or a JSON string that can be parsed into an attribute hash. If\n__response__ is a JSON string and either Y.JSON or the native JSON object\nare available, it will be parsed automatically. If a parse error occurs, an\nerror event will be fired and the model will not be updated.\n\nYou may override this method to implement custom parsing logic if necessary.",
             "itemtype": "method",
             "name": "parse",
@@ -4047,19 +4166,19 @@
                 "description": "Values hash.",
                 "type": "Object"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 474,
-            "description": "Saves this model to the server.\n\nThis method delegates to the {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}} method to perform the actual save\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful save operation will fire a {{#crossLink \"Y.GalleryModel/saved:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"Y.GalleryModel/error:event\"}}{{/crossLink}} event with the 'src' property set to `\"save\"`.\n\nIf the save operation succeeds and the {{#crossLink \"Y.GalleryModel/parse\"}}{{/crossLink}} method returns non-empty values\nfrom the response received from the server a {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event will also be fired to read those values.",
+            "line": 475,
+            "description": "Saves this model to the server.\n\nThis method delegates to the {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}} method to perform the actual save\noperation, which is an asynchronous action. Specify a __callback__ function to\nbe notified of success or failure.\n\nA successful save operation will fire a {{#crossLink \"GalleryModel/saved:event\"}}{{/crossLink}} event, while an unsuccessful\nload operation will fire an {{#crossLink \"GalleryModel/error:event\"}}{{/crossLink}} event with the 'src' property set to `\"save\"`.\n\nIf the save operation succeeds and the {{#crossLink \"GalleryModel/parse\"}}{{/crossLink}} method returns non-empty values\nfrom the response received from the server a {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event will also be fired to read those values.",
             "itemtype": "method",
             "name": "save",
             "params": [
                 {
                     "name": "options",
-                    "description": "Options to be passed to {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}}. \n\tIt's up to the custom sync implementation\n\tto determine what options it supports or requires, if any.",
+                    "description": "Options to be passed to {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}}. \n\tIt's up to the custom sync implementation\n\tto determine what options it supports or requires, if any.",
                     "type": "Object",
                     "optional": true
                 },
@@ -4076,30 +4195,30 @@
                         },
                         {
                             "name": "response",
-                            "description": "The server response as received by {{#crossLink \"Y.GalleryModel/sync\"}}{{/crossLink}},",
+                            "description": "The server response as received by {{#crossLink \"GalleryModel/sync\"}}{{/crossLink}},",
                             "type": "Any"
                         }
                     ]
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 542,
+            "line": 543,
             "description": "Restores the values when last loaded, saved or created.",
             "itemtype": "method",
             "name": "reset",
             "chainable": 1,
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 552,
-            "description": "Override this method to provide a custom persistence implementation for this\nmodel. The default just calls the callback without actually doing anything.\n\nThis method is called internally by {{#crossLink \"Y.GalleryModel/load\"}}{{/crossLink}}, \n{{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}}, \nand {{#crossLink \"Y.GalleryModel/destroy\"}}{{/crossLink}} (when `options.remove==true).",
+            "line": 553,
+            "description": "Override this method to provide a custom persistence implementation for this\nmodel. The default just calls the callback without actually doing anything.\n\nThis method is called internally by {{#crossLink \"GalleryModel/load\"}}{{/crossLink}}, \n{{#crossLink \"GalleryModel/save\"}}{{/crossLink}}, \nand {{#crossLink \"GalleryModel/destroy\"}}{{/crossLink}} (when `options.remove==true).",
             "itemtype": "method",
             "name": "sync",
             "params": [
@@ -4127,20 +4246,20 @@
                         },
                         {
                             "name": "response",
-                            "description": "The server's response. This value will\n\t\tbe passed to the {{#crossLink \"Y.GalleryModel/parse\"}}{{/crossLink}} method, which is expected to parse it and\n\t\treturn an attribute hash.",
+                            "description": "The server's response. This value will\n\t\tbe passed to the {{#crossLink \"GalleryModel/parse\"}}{{/crossLink}} method, which is expected to parse it and\n\t\treturn an attribute hash.",
                             "type": "Any",
                             "optional": true
                         }
                     ]
                 }
             ],
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 581,
-            "description": "Override this method to provide custom validation logic for this model.\n\nThis method gives you a hook to validate a hash of all\nattributes before the model is saved. This method is called automatically\nbefore {{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}} takes any action. \nIf validation fails, the {{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}} call\nwill be aborted.\n\nIn your validation method, call the provided callback function with no\narguments to indicate success. To indicate failure, pass a single argument,\nwhich may contain an error message, an array of error messages, or any other\nvalue. This value will be passed along to the error event.",
+            "line": 582,
+            "description": "Override this method to provide custom validation logic for this model.\n\nThis method gives you a hook to validate a hash of all\nattributes before the model is saved. This method is called automatically\nbefore {{#crossLink \"GalleryModel/save\"}}{{/crossLink}} takes any action. \nIf validation fails, the {{#crossLink \"GalleryModel/save\"}}{{/crossLink}} call\nwill be aborted.\n\nIn your validation method, call the provided callback function with no\narguments to indicate success. To indicate failure, pass a single argument,\nwhich may contain an error message, an array of error messages, or any other\nvalue. This value will be passed along to the error event.",
             "example": [
                 "\n\n\tmodel.validate = function (attrs, callback) {\n\t\tif (attrs.pie !== true) {\n\t\t\t// No pie?! Invalid!\n\t\t\tcallback('Must provide pie.');\n\t\t\treturn;\n\t\t}\n\n\t\t// Success!\n\t\tcallback();\n\t};"
             ],
@@ -4166,12 +4285,12 @@
                     ]
                 }
             ],
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 624,
+            "line": 625,
             "description": "Calls the public, overridable validate() method and fires an error event\nif validation fails.",
             "itemtype": "method",
             "name": "_validate",
@@ -4197,26 +4316,26 @@
             ],
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 654,
-            "description": "The default implementation calls {{#crossLink \"Y.GalleryModel/getValues\"}}{{/crossLink}}\nso that it returns a copy of the record.  \nThe developer may redefine this method to serialize this object\nin any way that might be needed.  \nFor example, it might be desirable to call \n{{#crossLink \"Y.GalleryModel/getChangedValues\"}}{{/crossLink}}\nto return only changed fields, along with \n{{#crossLink \"Y.GalleryModel/getPKValues\"}}{{/crossLink}} \nto identify the record with the changes.",
+            "line": 655,
+            "description": "The default implementation calls {{#crossLink \"GalleryModel/getValues\"}}{{/crossLink}}\nso that it returns a copy of the record.  \nThe developer may redefine this method to serialize this object\nin any way that might be needed.  \nFor example, it might be desirable to call \n{{#crossLink \"GalleryModel/getChangedValues\"}}{{/crossLink}}\nto return only changed fields, along with \n{{#crossLink \"GalleryModel/getPKValues\"}}{{/crossLink}} \nto identify the record with the changes.",
             "itemtype": "method",
             "name": "toJSON",
             "return": {
                 "description": "Copy of this model field values.",
                 "type": "Object"
             },
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 670,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the modified state of the field named as a sub-attribute will be returned.\nOtherwise, the modified status of the whole record will be returned.",
+            "line": 671,
+            "description": "Getter for the {{#crossLink \"GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the modified state of the field named as a sub-attribute will be returned.\nOtherwise, the modified status of the whole record will be returned.",
             "itemtype": "method",
             "name": "_isModifiedGetter",
             "params": [
@@ -4233,13 +4352,13 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 690,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the 'new' state of the field named as a sub-attribute will be returned.\nOtherwise, the 'new' status of the whole record will be returned.",
+            "line": 691,
+            "description": "Getter for the {{#crossLink \"GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute.\nIf the value contains a dot (`'.'`) the 'new' state of the field named as a sub-attribute will be returned.\nOtherwise, the 'new' status of the whole record will be returned.",
             "itemtype": "method",
             "name": "_isNewGetter",
             "params": [
@@ -4256,13 +4375,13 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 710,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the value is already set, no further changes will be allowed.\nIf the value is not an array, it will be converted to one.",
+            "line": 711,
+            "description": "Setter for the {{#crossLink \"GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the value is already set, no further changes will be allowed.\nIf the value is not an array, it will be converted to one.",
             "itemtype": "method",
             "name": "_primaryKeysSetter",
             "params": [
@@ -4278,13 +4397,13 @@
             },
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 727,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the name contains a dot (`'.'`) it will return a boolean indicating \nwhether the field named as a sub-attribute is part of the primary key.\nOtherwise, it returns the array of primary key fields.",
+            "line": 728,
+            "description": "Getter for the {{#crossLink \"GalleryModel/primaryKeys:attribute\"}}{{/crossLink}} attribute.\nIf the name contains a dot (`'.'`) it will return a boolean indicating \nwhether the field named as a sub-attribute is part of the primary key.\nOtherwise, it returns the array of primary key fields.",
             "itemtype": "method",
             "name": "_primaryKeysGetter",
             "params": [
@@ -4305,77 +4424,77 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 751,
+            "line": 752,
             "description": "Indicates whether any of the fields has been changed since created or loaded.\nField names can be given as sub-attributes to indicate if any particular field has beeen changed.\n`model.get('isModified.name')` returns `true` if the field `name` has been modified.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
             "itemtype": "attribute",
             "name": "isModified",
             "type": "Boolean",
             "readonly": "",
             "default": "false",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 770,
+            "line": 771,
             "description": "Indicates that the model is new and has not been modified since creation.\nField names can be given as sub-attributes to indicate if any particular field is new.\n`model.get('isNew.name')` returns `true` if the field `name` is new.\n<b>Note:</b> contrary to common practice in Attributes with sub-attributes, \nrequesting the state of the record does not\nreturn an object with the state of each individual field keyed by field name,\nbut the state of the record as a whole, which is far more useful.",
             "itemtype": "attribute",
             "name": "isNew",
             "type": "Boolean",
             "readonly": "",
             "default": "true",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 789,
+            "line": 790,
             "description": "List of fields making the primary key of this model. \nPrimary Key fields cannot be modified once initially loaded.\nIt can be set as an array of field names or, if the key is made of a single field, a string with the name of that field.\nIt will always be returned as an array.\nField names can be given as a sub-attribute to ask whether a particular field is a primary key, thus:\n`model.get('primaryKeys.name')` returns `true` if the field `name` is a primary key.\nIt can only be set once.",
             "itemtype": "attribute",
             "name": "primaryKeys",
             "writeonce": "",
             "type": "array",
             "default": "[]",
-            "class": "Y.GalleryModel",
+            "class": "GalleryModel",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 829,
+            "line": 830,
             "description": "Event listener for the after value change event, it tracks changes for each field.  \nIt retains only the last change for each field.",
             "itemtype": "method",
             "name": "_trackChange",
             "params": [
                 {
                     "name": "ev",
-                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event",
+                    "description": "As provided by the {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}} event",
                     "type": "EventFacade"
                 }
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSimpleUndo",
+            "class": "GalleryModelSimpleUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 841,
+            "line": 842,
             "description": "After load or save operations, it drops any changes it might have tracked.",
             "itemtype": "method",
             "name": "_resetUndo",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSimpleUndo",
+            "class": "GalleryModelSimpleUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 849,
+            "line": 850,
             "description": "Reverts one level of change for a specific field or all fields",
             "itemtype": "method",
             "name": "undo",
@@ -4388,51 +4507,51 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelSimpleUndo",
+            "class": "GalleryModelSimpleUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 893,
+            "line": 894,
             "description": "Event listener for the after value change event, it tracks changes for each field.  \nIt keeps a stack of each change.",
             "itemtype": "method",
             "name": "_trackChange",
             "params": [
                 {
                     "name": "ev",
-                    "description": "As provided by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}} event",
+                    "description": "As provided by the {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}} event",
                     "type": "EventFacade"
                 }
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelChronologicalUndo",
+            "class": "GalleryModelChronologicalUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 905,
+            "line": 906,
             "description": "After load or save operations, it drops any changes it might have tracked.",
             "itemtype": "method",
             "name": "_resetUndo",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelChronologicalUndo",
+            "class": "GalleryModelChronologicalUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 913,
+            "line": 914,
             "description": "Reverts one level of field changes.",
             "itemtype": "method",
             "name": "undo",
             "chainable": 1,
-            "class": "Y.GalleryModelChronologicalUndo",
+            "class": "GalleryModelChronologicalUndo",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 945,
+            "line": 946,
             "description": "Added this property to have `ModelSync.REST getURL()` return the proper URL.",
             "itemtype": "property",
             "name": "_isYUIModelList",
@@ -4440,13 +4559,13 @@
             "value": "true",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 958,
-            "description": "Sets the initial values if any were provided to the constructor.\nIt is only ever called after the initialization of this class and all its extensions\nand only if the arguments to the constructor had a `values` attribute.\nIt overrides the {{#crossLink \"Y.GalleryModel/_setInitialValues\"}}{{/crossLink}} \nso as to handle arrays.",
+            "line": 959,
+            "description": "Sets the initial values if any were provided to the constructor.\nIt is only ever called after the initialization of this class and all its extensions\nand only if the arguments to the constructor had a `values` attribute.\nIt overrides the {{#crossLink \"GalleryModel/_setInitialValues\"}}{{/crossLink}} \nso as to handle arrays.",
             "itemtype": "method",
             "name": "_setInitialValues",
             "params": [
@@ -4465,38 +4584,38 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 973,
-            "description": "Index of the shelf for the record being exposed.\nUse {{#crossLink \"Y.GalleryModel/index:attribute\"}}{{/crossLink}} attribute to check/set the index value.",
+            "line": 974,
+            "description": "Index of the shelf for the record being exposed.\nUse {{#crossLink \"GalleryModel/index:attribute\"}}{{/crossLink}} attribute to check/set the index value.",
             "itemtype": "property",
             "name": "_currentIndex",
             "type": "integer",
             "default": "0",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 982,
+            "line": 983,
             "description": "Storage for the records when not exposed.",
             "itemtype": "property",
             "name": "_shelves",
             "type": "Array",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 989,
-            "description": "Saves the exposed record into the shelves at the position specified or given by {{#crossLink \"Y.GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
+            "line": 990,
+            "description": "Saves the exposed record into the shelves at the position specified or given by {{#crossLink \"GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_shelve",
             "params": [
@@ -4510,13 +4629,13 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1007,
-            "description": "Retrives and exposes the record from the shelf at the position specified or given by {{#crossLink \"Y.GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
+            "line": 1008,
+            "description": "Retrives and exposes the record from the shelf at the position specified or given by {{#crossLink \"GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_fetch",
             "params": [
@@ -4530,12 +4649,12 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1031,
+            "line": 1032,
             "description": "Adds the names of properties that are to be preserved in the shelf when moving,\nand taken out of the shelf when fetching.",
             "itemtype": "method",
             "name": "_addPreserve",
@@ -4549,23 +4668,23 @@
             ],
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1042,
+            "line": 1043,
             "description": "Initializes an exposed record",
             "itemtype": "method",
             "name": "_initNew",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1053,
+            "line": 1054,
             "description": "Adds a new record at the index position given or at the end.\nThe new record becomes the current.",
             "itemtype": "method",
             "name": "add",
@@ -4583,13 +4702,13 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1082,
-            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"Y.GalleryModel/getValue\"}}{{/crossLink}}()`\nor any such method to access the values of the current record.\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
+            "line": 1083,
+            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"GalleryModel/getValue\"}}{{/crossLink}}()`\nor any such method to access the values of the current record.\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
             "itemtype": "method",
             "name": "each",
             "params": [
@@ -4607,13 +4726,13 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1107,
-            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"Y.GalleryModel/getValue\"}}{{/crossLink}}`\nor any such method to access the values of the current record.\nIt is faster than using {{#crossLink \"Y.GalleryModelMultiRecord/each\"}}{{/crossLink}} \nand then checking the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
+            "line": 1108,
+            "description": "Executes the given function for each record in the set.\nThe function will run in the scope of the model so it can use \n`this.{{#crossLink \"GalleryModel/getValue\"}}{{/crossLink}}`\nor any such method to access the values of the current record.\nIt is faster than using {{#crossLink \"GalleryModelMultiRecord/each\"}}{{/crossLink}} \nand then checking the {{#crossLink \"GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute\nReturning exactly `false` from the function spares shelving the record.\nIf the callback function does not modify the record, \nreturning `false` will improve performance.",
             "itemtype": "method",
             "name": "eachModified",
             "params": [
@@ -4631,31 +4750,31 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1136,
-            "description": "Calls {{#crossLink \"Y.GalleryModel/save\"}}{{/crossLink}} on each record modified.\nThis is not the best saving strategy for saving batches of records,\nbut it is the easiest and safest.  Implementors are encouraged to \ndesign their own.",
+            "line": 1137,
+            "description": "Calls {{#crossLink \"GalleryModel/save\"}}{{/crossLink}} on each record modified.\nThis is not the best saving strategy for saving batches of records,\nbut it is the easiest and safest.  Implementors are encouraged to \ndesign their own.",
             "itemtype": "method",
             "name": "saveAllModified",
             "chainable": 1,
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1148,
-            "description": "This is a documentation entry only, this method does not define `load`. \nThis extension redefines the default action for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event so \nthat if a load returns an array of records, they will be added to the shelves. \nExisting records are kept, call {{#crossLink \"Y.GalleryModelMultiRecord/empty\"}}{{/crossLink}} if they should be discarded. \nSee method {{#crossLink \"Y.GalleryModel/load\"}}{{/crossLink}} of {{#crossLink \"Y.GalleryModel\"}}{{/crossLink}} for further info.",
+            "line": 1149,
+            "description": "This is a documentation entry only, this method does not define `load`. \nThis extension redefines the default action for the {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event so \nthat if a load returns an array of records, they will be added to the shelves. \nExisting records are kept, call {{#crossLink \"GalleryModelMultiRecord/empty\"}}{{/crossLink}} if they should be discarded. \nSee method {{#crossLink \"GalleryModel/load\"}}{{/crossLink}} of {{#crossLink \"GalleryModel\"}}{{/crossLink}} for further info.",
             "itemtype": "method",
             "name": "load",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1156,
+            "line": 1157,
             "description": "Default action for the loaded event, checks if the parsed response is an array\nand saves it into the shelves, otherwise it calls the default loader for single records.",
             "itemtype": "method",
             "name": "_defDataLoaded",
@@ -4668,12 +4787,12 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1188,
+            "line": 1189,
             "description": "Returns the number of records stored, skipping over empty slots.",
             "itemtype": "method",
             "name": "size",
@@ -4681,23 +4800,23 @@
                 "description": "number of records in the shelves",
                 "type": "Integer"
             },
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1200,
+            "line": 1201,
             "description": "Empties the shelves of any records as well as the exposed record",
             "itemtype": "method",
             "name": "empty",
             "chainable": 1,
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1211,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute.\nValidates and copies the current index value into {{#crossLink \"Y.GalleryModel/_currentIndex\"}}{{/crossLink}}.\nIt shelves the current record and fetches the requested one.",
+            "line": 1212,
+            "description": "Setter for the {{#crossLink \"GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute.\nValidates and copies the current index value into {{#crossLink \"GalleryModel/_currentIndex\"}}{{/crossLink}}.\nIt shelves the current record and fetches the requested one.",
             "itemtype": "method",
             "name": "_indexSetter",
             "params": [
@@ -4713,13 +4832,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1229,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute\nReturns the value from {{#crossLink \"Y.GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
+            "line": 1230,
+            "description": "Getter for the {{#crossLink \"GalleryModelMultiRecord/index:attribute\"}}{{/crossLink}} attribute\nReturns the value from {{#crossLink \"GalleryModelMultiRecord/_currentIndex\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "_indexGetter",
             "return": {
@@ -4728,13 +4847,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1239,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
+            "line": 1240,
+            "description": "Getter for the {{#crossLink \"GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isNewGetter",
             "params": [
@@ -4755,13 +4874,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1257,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
+            "line": 1258,
+            "description": "Setter for the {{#crossLink \"GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isNewSetter",
             "params": [
@@ -4777,13 +4896,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1269,
-            "description": "Getter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
+            "line": 1270,
+            "description": "Getter for the {{#crossLink \"GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is read from the shelf and not from the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isModifiedGetter",
             "params": [
@@ -4804,13 +4923,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1287,
-            "description": "Setter for the {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
+            "line": 1288,
+            "description": "Setter for the {{#crossLink \"GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute used only for GalleryModelMultiRecord\nso that it is written into the shelf and not into the actual attribute, \nwhich is expensive to shelve",
             "itemtype": "method",
             "name": "_isModifiedSetter",
             "params": [
@@ -4826,41 +4945,41 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1304,
+            "line": 1305,
             "description": "Index of the record exposed.",
             "itemtype": "attribute",
             "name": "index",
             "type": "Integer",
             "default": "0",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1315,
-            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute",
+            "line": 1316,
+            "description": "Merges the new setter into the existing {{#crossLink \"GalleryModel/isNew:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "attribute",
             "name": "isNew",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1322,
-            "description": "Merges the new setter into the existing {{#crossLink \"Y.GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.",
+            "line": 1323,
+            "description": "Merges the new setter into the existing {{#crossLink \"GalleryModel/isModified:attribute\"}}{{/crossLink}} attribute.",
             "itemtype": "attribute",
             "name": "isModified",
-            "class": "Y.GalleryModelMultiRecord",
+            "class": "GalleryModelMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1345,
+            "line": 1346,
             "description": "Compare function used in sorting.",
             "itemtype": "method",
             "name": "_compare",
@@ -4882,64 +5001,64 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1354,
+            "line": 1355,
             "description": "Initializer lifecycle method.  \nEnsures proper defaults, sets the compare method and\nsets listeners for relevant events",
             "itemtype": "method",
             "name": "initializer",
             "access": "protected",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1369,
-            "description": "Sets the compare function to be used in sorting the records\nbased on the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nand {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes and stores it into this._compare",
+            "line": 1370,
+            "description": "Sets the compare function to be used in sorting the records\nbased on the {{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nand {{#crossLink \"GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes and stores it into this._compare",
             "itemtype": "method",
             "name": "_setCompare",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1393,
-            "description": "Sorts the shelves whenever the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes change.",
+            "line": 1394,
+            "description": "Sorts the shelves whenever the \n{{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes change.",
             "itemtype": "method",
             "name": "_sort",
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1408,
-            "description": "Listens to value changes and if the name of the field is that of the \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} attribute \nor if {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nis a function, it will relocate the record to its proper sort order",
+            "line": 1409,
+            "description": "Listens to value changes and if the name of the field is that of the \n{{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} attribute \nor if {{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nis a function, it will relocate the record to its proper sort order",
             "itemtype": "method",
             "name": "_afterChange",
             "params": [
                 {
                     "name": "ev",
-                    "description": "Event façade as produced by the {{#crossLink \"Y.GalleryModel/change:event\"}}{{/crossLink}}  event",
+                    "description": "Event façade as produced by the {{#crossLink \"GalleryModel/change:event\"}}{{/crossLink}}  event",
                     "type": "EventFacade"
                 }
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1433,
-            "description": "Finds the correct index position of a record within the shelves\naccording to the current \n{{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes",
+            "line": 1434,
+            "description": "Finds the correct index position of a record within the shelves\naccording to the current \n{{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \nor {{#crossLink \"GalleryModelSortedMultiRecord/sortDir:attribute\"}}{{/crossLink}} \nattributes",
             "itemtype": "method",
             "name": "_findIndex",
             "params": [
@@ -4955,13 +5074,13 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1469,
-            "description": "Adds a new record at its proper position according to the sort configuration.\nIt overrides  \n{{#crossLink \"Y.GalleryModelMultiRecord\"}}{{/crossLink}}'s own\n{{#crossLink \"Y.GalleryModelMultiRecord/add\"}}{{/crossLink}} \nmethod, ignoring the index position requested, if any.\nThe new record becomes the current.",
+            "line": 1470,
+            "description": "Adds a new record at its proper position according to the sort configuration.\nIt overrides  \n{{#crossLink \"GalleryModelMultiRecord\"}}{{/crossLink}}'s own\n{{#crossLink \"GalleryModelMultiRecord/add\"}}{{/crossLink}} \nmethod, ignoring the index position requested, if any.\nThe new record becomes the current.",
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -4972,13 +5091,13 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1497,
-            "description": "Locates a record by value.  The record will be located by the field\ngiven in the {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}}\n attribute.   It will return the index of the\nrecord in the shelves or `null` if not found.\nBy default it will expose that record.\nIf {{#crossLink \"Y.GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \ncontains a function, it will return `null` and do nothing.\nSince sort fields need not be unique, find may return any of the records\nwith the same value for that field.",
+            "line": 1498,
+            "description": "Locates a record by value.  The record will be located by the field\ngiven in the {{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}}\n attribute.   It will return the index of the\nrecord in the shelves or `null` if not found.\nBy default it will expose that record.\nIf {{#crossLink \"GalleryModelSortedMultiRecord/sortField:attribute\"}}{{/crossLink}} \ncontains a function, it will return `null` and do nothing.\nSince sort fields need not be unique, find may return any of the records\nwith the same value for that field.",
             "itemtype": "method",
             "name": "find",
             "params": [
@@ -4998,34 +5117,34 @@
                 "description": "index of the record found or `null` if not found.\nBe sure to differentiate a return of `0`, a valid index, from `null`, a failed search.",
                 "type": "Integer | null"
             },
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1532,
+            "line": 1533,
             "description": "Name of the field to sort by or function to build the value used for comparisson.\nIf a function, it will receive a reference to the record to be sorted;\nit should return the value to be used for comparisson.  Functions are\nused when sorting on multiple keys, which the function should return\nconcatenated, or when any of the fields needs some pre-processing.",
             "itemtype": "attribute",
             "name": "sortField",
             "type": "String | Function",
             "default": "first primary key field",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1547,
+            "line": 1548,
             "description": "Sort direction either `\"asc\"` for ascending or `\"desc\"` for descending",
             "itemtype": "attribute",
             "name": "sortDir",
             "type": "String",
             "default": "\"asc\"",
-            "class": "Y.GalleryModelSortedMultiRecord",
+            "class": "GalleryModelSortedMultiRecord",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1572,
+            "line": 1573,
             "description": "Adds a new record at the index position given by its primary key.\nThe new record becomes the current.",
             "itemtype": "method",
             "name": "add",
@@ -5037,30 +5156,30 @@
                 }
             ],
             "chainable": 1,
-            "class": "Y.GalleryModelPrimaryKeyIndex",
+            "class": "GalleryModelPrimaryKeyIndex",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1593,
-            "description": "Default action for the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event, \nchecks if the parsed response is an array\nand saves it into the shelves using the value of the primary key field for its index.\nThe model will be left positioned at the item with the lowest key value.\nIf the primary key field has not been declared, items will not be loaded.\nIf the primary key field is not unique, the duplicate will overwrite the previous.",
+            "line": 1594,
+            "description": "Default action for the {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event, \nchecks if the parsed response is an array\nand saves it into the shelves using the value of the primary key field for its index.\nThe model will be left positioned at the item with the lowest key value.\nIf the primary key field has not been declared, items will not be loaded.\nIf the primary key field is not unique, the duplicate will overwrite the previous.",
             "itemtype": "method",
             "name": "_defDataLoaded",
             "params": [
                 {
                     "name": "ev",
-                    "description": "facade produced by the {{#crossLink \"Y.GalleryModel/loaded:event\"}}{{/crossLink}} event,",
+                    "description": "facade produced by the {{#crossLink \"GalleryModel/loaded:event\"}}{{/crossLink}} event,",
                     "type": "EventFacade"
                 }
             ],
             "access": "private",
             "tagname": "",
-            "class": "Y.GalleryModelPrimaryKeyIndex",
+            "class": "GalleryModelPrimaryKeyIndex",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1630,
+            "line": 1631,
             "description": "Sugar method added because items might not be contiguous so \nadding one to the index does not always get you to the next item.\nIf there is no next element, `null` will be returned and the\ncollection will still point to the last item.",
             "itemtype": "method",
             "name": "next",
@@ -5068,12 +5187,12 @@
                 "description": "index of the next item or `null` if none found",
                 "type": "Integer"
             },
-            "class": "Y.GalleryModelPrimaryKeyIndex",
+            "class": "GalleryModelPrimaryKeyIndex",
             "module": "gallery-md-model"
         },
         {
             "file": "yui3-gallery/src/gallery-md-model/js/gallery-md-model.js",
-            "line": 1654,
+            "line": 1655,
             "description": "Sugar method added because items might not be contiguous so \nsubtracting one to the index does not always get you to the previous item.\nIf there is no next element, `null` will be returned and the\ncollection will still point to the first item.",
             "itemtype": "method",
             "name": "previous",
@@ -5081,7 +5200,7 @@
                 "description": "index of the previous item or `null` if none found",
                 "type": "Integer"
             },
-            "class": "Y.GalleryModelPrimaryKeyIndex",
+            "class": "GalleryModelPrimaryKeyIndex",
             "module": "gallery-md-model"
         },
         {

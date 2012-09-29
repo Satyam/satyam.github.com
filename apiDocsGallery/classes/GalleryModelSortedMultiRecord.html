@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.GalleryModelSortedMultiRecord - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>GalleryModelSortedMultiRecord - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.GalleryModelSortedMultiRecord Class</h1>
+                        <h1>GalleryModelSortedMultiRecord Class</h1>
 <div class="box meta">
     
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1333"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1333</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1334"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1334</code></a>
         </div>
     
 
@@ -178,8 +178,8 @@
 
 
 <div class="box intro">
-    <p>Extension to sort records stored in <a href="../classes/Y.GalleryModel.html" class="crosslink">Y.GalleryModel</a>, extended with <a href="../classes/Y.GalleryModelMultiRecord.html" class="crosslink">Y.GalleryModelMultiRecord</a>
-It is incompatible with <a href="../classes/Y.GalleryModelPrimaryKeyIndex.html" class="crosslink">Y.GalleryModelPrimaryKeyIndex</a></p>
+    <p>Extension to sort records stored in <a href="../classes/GalleryModel.html" class="crosslink">GalleryModel</a>, extended with <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>
+It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" class="crosslink">GalleryModelPrimaryKeyIndex</a></p>
 </div>
 
 
@@ -340,7 +340,7 @@ It is incompatible with <a href="../classes/Y.GalleryModelPrimaryKeyIndex.html" 
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1408"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1408</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1409"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1409</code></a>
         
         </p>
 
@@ -352,8 +352,8 @@ It is incompatible with <a href="../classes/Y.GalleryModelPrimaryKeyIndex.html" 
 
     <div class="description">
         <p>Listens to value changes and if the name of the field is that of the 
-<a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> attribute 
-or if <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> attribute 
+or if <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
 is a function, it will relocate the record to its proper sort order</p>
     </div>
 
@@ -372,7 +372,7 @@ is a function, it will relocate the record to its proper sort order</p>
                     
 
                     <div class="param-description">
-                        <p>Event façade as produced by the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a>  event</p>
+                        <p>Event façade as produced by the <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a>  event</p>
                     </div>
 
                     
@@ -442,7 +442,7 @@ is a function, it will relocate the record to its proper sort order</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1345"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1345</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1346"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1346</code></a>
         
         </p>
 
@@ -563,7 +563,7 @@ is a function, it will relocate the record to its proper sort order</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1433"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1433</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1434"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1434</code></a>
         
         </p>
 
@@ -576,8 +576,8 @@ is a function, it will relocate the record to its proper sort order</p>
     <div class="description">
         <p>Finds the correct index position of a record within the shelves
 according to the current 
-<a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-or <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
 attributes</p>
     </div>
 
@@ -659,7 +659,7 @@ attributes</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1369"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1369</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1370"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1370</code></a>
         
         </p>
 
@@ -671,8 +671,8 @@ attributes</p>
 
     <div class="description">
         <p>Sets the compare function to be used in sorting the records
-based on the <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-and <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+based on the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+and <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
 attributes and stores it into this._compare</p>
     </div>
 
@@ -718,7 +718,7 @@ attributes and stores it into this._compare</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1393"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1393</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1394"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1394</code></a>
         
         </p>
 
@@ -730,8 +730,8 @@ attributes and stores it into this._compare</p>
 
     <div class="description">
         <p>Sorts the shelves whenever the 
-<a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-or <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
 attributes change.</p>
     </div>
 
@@ -787,7 +787,7 @@ attributes change.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1469"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1469</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1470"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1470</code></a>
         
         </p>
 
@@ -800,8 +800,8 @@ attributes change.</p>
     <div class="description">
         <p>Adds a new record at its proper position according to the sort configuration.
 It overrides <br />
-<a href="../classes/Y.GalleryModelMultiRecord.html" class="crosslink">Y.GalleryModelMultiRecord</a>'s own
-<a href="../classes/Y.GalleryModelMultiRecord.html#method_add" class="crosslink">add</a> 
+<a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>'s own
+<a href="../classes/GalleryModelMultiRecord.html#method_add" class="crosslink">add</a> 
 method, ignoring the index position requested, if any.
 The new record becomes the current.</p>
     </div>
@@ -890,7 +890,7 @@ If it is an array, it will call itself for each of the items in it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1497"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1497</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1498"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1498</code></a>
         
         </p>
 
@@ -902,11 +902,11 @@ If it is an array, it will call itself for each of the items in it.</p>
 
     <div class="description">
         <p>Locates a record by value.  The record will be located by the field
-given in the <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+given in the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
  attribute.   It will return the index of the
 record in the shelves or <code>null</code> if not found.
 By default it will expose that record.
-If <a href="../classes/Y.GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+If <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
 contains a function, it will return <code>null</code> and do nothing.
 Since sort fields need not be unique, find may return any of the records
 with the same value for that field.</p>
@@ -1007,7 +1007,7 @@ Be sure to differentiate a return of <code>0</code>, a valid index, from <code>n
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1354"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1354</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1355"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1355</code></a>
         
         </p>
 
@@ -1058,6 +1058,8 @@ sets listeners for relevant events</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -1069,7 +1071,7 @@ sets listeners for relevant events</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1547"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1547</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1548"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1548</code></a>
         
         </p>
 
@@ -1160,6 +1162,8 @@ sets listeners for relevant events</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -1171,7 +1175,7 @@ sets listeners for relevant events</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1532"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1532</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1533"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1533</code></a>
         
         </p>
 

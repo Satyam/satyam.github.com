@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.FlyweightTreeNode - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>FlyweightTreeNode - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -154,13 +154,13 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.FlyweightTreeNode Class</h1>
+                        <h1>FlyweightTreeNode Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends Y.Base
+            Extends Base
         </div>
     
 
@@ -189,8 +189,8 @@ Instances of this class can be requested from the flyweight manager class</p>
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Y.FlyweightTreeNode" class="method item">
-    <h3 class="name"><code>Y.FlyweightTreeNode</code></h3>
+        <div id="method_FlyweightTreeNode" class="method item">
+    <h3 class="name"><code>FlyweightTreeNode</code></h3>
 
     
         <span class="paren">()</span>
@@ -335,7 +335,7 @@ Instances of this class can be requested from the flyweight manager class</p>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_forEachChild">forEachChild</a>
+                                <a href="#method_forSomeChildren">forSomeChildren</a>
 
                                 
                                 
@@ -1374,8 +1374,8 @@ internal state object, or the state proxy if it exits</p>
 </div>
 
                 
-                    <div id="method_forEachChild" class="method item">
-    <h3 class="name"><code>forEachChild</code></h3>
+                    <div id="method_forSomeChildren" class="method item">
+    <h3 class="name"><code>forSomeChildren</code></h3>
 
     
         <div class="args">
@@ -1460,7 +1460,7 @@ internal state object, or the state proxy if it exits</p>
                             <li class="param">
                                 
                                     <code class="param-name">child</code>
-                                    <span class="type"><a href="../classes/Y.FlyweightTreeNode.html" class="crosslink">Y.FlyweightTreeNode</a></span>
+                                    <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
                                 
 
                                 <div class="param-description">
@@ -1587,7 +1587,7 @@ Remember to release the copy to the pool when done.</p>
             <div class="returns-description">
                 
                     
-                    Y.FlyweightTreeNode
+                    FlyweightTreeNode
                 
             </div>
         </div>
@@ -1658,7 +1658,7 @@ Remember to release the copy to the pool when done.</p>
             <div class="returns-description">
                 
                     
-                    Y.FlyweightTreeNode
+                    FlyweightTreeNode
                 
             </div>
         </div>
@@ -1729,7 +1729,7 @@ Remember to release the copy to the pool when done.</p>
             <div class="returns-description">
                 
                     
-                    Y.FlyweightTreeNode
+                    FlyweightTreeNode
                 
             </div>
         </div>
@@ -2037,7 +2037,7 @@ Remember to Release this instance when no longer needed.</p>
                 
                     <div id="property__root" class="property item private">
     <h3 class="name"><code>_root</code></h3>
-    <span class="type"><a href="../classes/Y.FlyweightTreeManager.html" class="crosslink">Y.FlyweightTreeManager</a></span>
+    <span class="type"><a href="../classes/FlyweightTreeManager.html" class="crosslink">FlyweightTreeManager</a></span>
 
     
 
@@ -2539,6 +2539,10 @@ The template should always use this className to help it locate the DOM element 
 
     
 
+    
+        <span class="flag readonly">readonly</span>
+    
+
     <div class="meta">
         
             
@@ -2627,6 +2631,8 @@ This is calculated on-the-fly.</p>
     <a name="config_expanded"></a> 
     <h3 class="name"><code>expanded</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
 
     
 
@@ -2742,6 +2748,10 @@ This is calculated on-the-fly.</p>
 
     
 
+    
+        <span class="flag readonly">readonly</span>
+    
+
     <div class="meta">
         
             
@@ -2768,7 +2778,7 @@ If none was supplied, it will generate one</p>
     </div>
 
     
-        <p><strong>Default:</strong> Y.guid()</p>
+        <p><strong>Default:</strong> guid()</p>
     
 
     
@@ -2832,6 +2842,8 @@ If none was supplied, it will generate one</p>
     <a name="config_label"></a> 
     <h3 class="name"><code>label</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
 
     
 
@@ -2933,7 +2945,7 @@ If none was supplied, it will generate one</p>
                     <div id="attr_root" class="attr item">
     <a name="config_root"></a> 
     <h3 class="name"><code>root</code></h3>
-    <span class="type"><a href="../classes/Y.FlyweightTreeManager.html" class="crosslink">Y.FlyweightTreeManager</a></span>
+    <span class="type"><a href="../classes/FlyweightTreeManager.html" class="crosslink">FlyweightTreeManager</a></span>
 
     
 
@@ -2945,6 +2957,10 @@ If none was supplied, it will generate one</p>
 
     
 
+    
+
+    
+        <span class="flag readonly">readonly</span>
     
 
     <div class="meta">
@@ -3034,6 +3050,8 @@ If none was supplied, it will generate one</p>
     <a name="config_template"></a> 
     <h3 class="name"><code>template</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
 
     
 

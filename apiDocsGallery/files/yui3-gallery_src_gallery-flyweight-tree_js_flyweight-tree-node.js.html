@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -170,8 +170,8 @@
 &#x2F;**
 * An implementation of the flyweight pattern.  This class should not be instantiated directly.
 * Instances of this class can be requested from the flyweight manager class
-* @class Y.FlyweightTreeNode
-* @extends Y.Base
+* @class FlyweightTreeNode
+* @extends Base
 * @constructor  Do not instantiate directly.
 *&#x2F;
 FWNode = Y.Base.create(
@@ -190,7 +190,7 @@ FWNode = Y.Base.create(
 		 * Reference to the FlyweightTreeManager instance this node belongs to.
 		 * It is set by the root and should be considered read-only.
 		 * @property _root
-		 * @type Y.FlyweightTreeManager
+		 * @type FlyweightTreeManager
 		 * @private
 		 *&#x2F;
 		_root: null,
@@ -230,7 +230,7 @@ FWNode = Y.Base.create(
 			if (childCount) {
 				if (attrs.expanded) {
 					node._childrenRendered = true;
-					this.forEachChild( function (fwNode, index, array) {
+					this.forSomeChildren( function (fwNode, index, array) {
 						s += fwNode._getHTML(index, array.length, depth+1);
 					});
 					nodeClasses.push(CNAME_EXPANDED);
@@ -269,21 +269,21 @@ FWNode = Y.Base.create(
 		},
 		&#x2F;**
 		 * Executes the given function on each of the child nodes of this node.
-		 * @method forEachChild
+		 * @method forSomeChildren
 		 * @param fn {Function} Function to be executed on each node
-		 *		@param fn.child {Y.FlyweightTreeNode} Instance of a suitable subclass of FlyweightTreeNode, 
+		 *		@param fn.child {FlyweightTreeNode} Instance of a suitable subclass of FlyweightTreeNode, 
 		 *		positioned on top of the child node
 		 *		@param fn.index {Integer} Index of this child within the array of children
 		 *		@param fn.array {Array} array containing itself and its siblings
 		 * @param scope {object} The falue of this for the function.  Defaults to the parent.
 		**&#x2F;
-		forEachChild: function(fn, scope) {
+		forSomeChildren: function(fn, scope) {
 			var root = this._root,
 				children = this._node.children,
 				child, ret;
 			scope = scope || this;
 			if (children &amp;&amp; children.length) {
-				YArray.each(children, function (node, index, array) {
+				YArray.some(children, function (node, index, array) {
 					child = root._poolFetch(node);
 					ret = fn.call(scope, child, index, array);
 					root._poolReturn(child);
@@ -381,7 +381,7 @@ FWNode = Y.Base.create(
 				node = this._node,
 				depth = this.get(&#x27;depth&#x27;);
 			node._childrenRendered = true;
-			this.forEachChild(function (fwNode, index, array) {
+			this.forSomeChildren(function (fwNode, index, array) {
 				s += fwNode._getHTML(index, array.length, depth + 1);
 			});
 			Y.one(&#x27;#&#x27; + node.id + &#x27; .&#x27; + CNAME_CHILDREN).setContent(s);
@@ -412,7 +412,7 @@ FWNode = Y.Base.create(
 		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
 		 * Remember to release the copy to the pool when done.
 		 * @method getParent
-		 * @return Y.FlyweightTreeNode
+		 * @return FlyweightTreeNode
 		 *&#x2F;
 		getParent: function() {
 			var node = this._node._parent;
@@ -423,7 +423,7 @@ FWNode = Y.Base.create(
 		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
 		 * Remember to release the copy to the pool when done.
 		 * @method getNextSibling
-		 * @return Y.FlyweightTreeNode
+		 * @return FlyweightTreeNode
 		 *&#x2F;
 		getNextSibling: function() {
 			var parent = this._node._parent,
@@ -439,7 +439,7 @@ FWNode = Y.Base.create(
 		 * The copy is not on {{#crossLink &quot;hold&quot;}}{{&#x2F;crossLink}}.  
 		 * Remember to release the copy to the pool when done.
 		 * @method getPreviousSibling
-		 * @return Y.FlyweightTreeNode
+		 * @return FlyweightTreeNode
 		 *&#x2F;
 		getPreviousSibling: function() {
 			var parent = this._node._parent,
@@ -589,7 +589,7 @@ FWNode = Y.Base.create(
 			&#x2F;**
 			 * Reference to the FlyweightTreeManager this node belongs to
 			 * @attribute root
-			 * @type {Y.FlyweightTreeManager}
+			 * @type {FlyweightTreeManager}
 			 * @readOnly
 			 * 
 			 *&#x2F;
@@ -629,7 +629,7 @@ FWNode = Y.Base.create(
 			 * If none was supplied, it will generate one
 			 * @attribute id
 			 * @type {Identifier}
-			 * @default Y.guid()
+			 * @default guid()
 			 * @readOnly
 			 *&#x2F;
 			id: {

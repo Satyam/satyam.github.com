@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -165,7 +165,7 @@
 
 &#x2F;**
  * Extension to handle its child nodes by using the flyweight pattern.
- * @class Y.FlyweightTreeManager
+ * @class FlyweightTreeManager
  * @constructor
  *&#x2F;
 FWMgr = function () {
@@ -190,7 +190,7 @@ FWMgr.ATTRS = {
 	 * Function will run in the scope of the FlyweightTreeManager instance and will
 	 * receive:
 	 * 
-	 * * node {Y.FlyweightTreeNode} reference to the parent of the children to be loaded.
+	 * * node {FlyweightTreeNode} reference to the parent of the children to be loaded.
 	 * * callback {Function} function to call with the configuration info for the children.
 	 * 
 	 * The function shall fetch the nodes and create a configuration object 
@@ -251,7 +251,7 @@ FWMgr.prototype = {
 	 * @param tree.label {String} Text or HTML markup to be shown in the node
 	 * @param [tree.expanded=true] {Boolean} Whether the children of this node should be visible.
 	 * @param [tree.children] {Array} Further definitions for the children of this node
-	 * @param [tree.type=Y.FWTreeNode] {Y.FWTreeNode | String} Class used to create instances for this node.  
+	 * @param [tree.type=FWTreeNode] {FWTreeNode | String} Class used to create instances for this node.  
 	 * It can be a reference to an object or a name that can be resolved as &#x60;Y[name]&#x60;.
 	 * @param [tree.id=Y.guid()] {String} Identifier to assign to the DOM element containing this node.
 	 * @param [tree.template] {String} Template for this particular node. 
@@ -320,10 +320,10 @@ FWMgr.prototype = {
 	 * Pulls from the pool an instance of the type declared in the given node
 	 * and slides it over that node.
 	 * If there are no instances of the given type in the pool, a new one will be created via {{#crossLink &quot;_createNode&quot;}}{{&#x2F;crossLink}}
-	 * If an instance is held (see: {{#crossLink &quot;Y.FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}), it will be returned instead.
+	 * If an instance is held (see: {{#crossLink &quot;FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}), it will be returned instead.
 	 * @method _poolFetch
 	 * @param node {Object} reference to a node within the configuration tree
-	 * @return {Y.FlyweightTreeNode} Usually a subclass of FlyweightTreeNode positioned over the given node
+	 * @return {FlyweightTreeNode} Usually a subclass of FlyweightTreeNode positioned over the given node
 	 * @protected
 	 *&#x2F;
 	_poolFetch: function(node) {
@@ -347,9 +347,9 @@ FWMgr.prototype = {
 	},
 	&#x2F;**
 	 * Returns the FlyweightTreeNode instance to the pool.
-	 * Instances held (see: {{#crossLink &quot;Y.FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}) are never returned.
+	 * Instances held (see: {{#crossLink &quot;FlyweightTreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}}) are never returned.
 	 * @method _poolReturn
-	 * @param fwNode {Y.FlyweightTreeNode} Instance to return.
+	 * @param fwNode {FlyweightTreeNode} Instance to return.
 	 * @protected
 	 *&#x2F;
 	_poolReturn: function (fwNode) {
@@ -370,7 +370,7 @@ FWMgr.prototype = {
 	 * and slides it on top of the node provided.
 	 * @method _createNode
 	 * @param node {Object} reference to a node within the configuration tree
-	 * @return {Y.FlyweightTreeNode} Instance of the corresponding subclass of FlyweightTreeNode
+	 * @return {FlyweightTreeNode} Instance of the corresponding subclass of FlyweightTreeNode
 	 * @protected
 	 *&#x2F;
 	_createNode: function (node) {
@@ -398,7 +398,7 @@ FWMgr.prototype = {
 	&#x2F;**
 	 * Returns an instance of Flyweight node positioned over the root
 	 * @method getRoot
-	 * @return {Y.FlyweightTreeNode} 
+	 * @return {FlyweightTreeNode} 
 	 *&#x2F;
 	getRoot: function () {
 		return this._poolFetch(this._tree);
@@ -413,7 +413,7 @@ FWMgr.prototype = {
 	_getHTML: function () {
 		var s = &#x27;&#x27;,
 			root = this.getRoot();
-		root.forEachChild( function (fwNode, index, array) {
+		root.forSomeChildren( function (fwNode, index, array) {
 			s += fwNode._getHTML(index, array.length, 0);
 		});
 		this._poolReturn(root);
@@ -422,7 +422,7 @@ FWMgr.prototype = {
 	&#x2F;**
 	 * Locates a node in the tree by the element that represents it.
 	 * @method _findNodeByElement
-	 * @param el {Y.Node} Any element belonging to the tree
+	 * @param el {Node} Any element belonging to the tree
 	 * @return {Object} Node that produced the markup for that element or null if not found
 	 * @protected
 	 *&#x2F;
@@ -448,7 +448,7 @@ FWMgr.prototype = {
 	 * Returns a FlyweightTreeNode instance from the pool, positioned over the node whose markup generated some event.
 	 * @method _poolFetchFromEvent
 	 * @param ev {EventFacade}
-	 * @return {Y.FlyweightTreeNode} The FlyweightTreeNode instance or null if not found.
+	 * @return {FlyweightTreeNode} The FlyweightTreeNode instance or null if not found.
 	 * @private
 	 *&#x2F;
 	_poolFetchFromEvent: function (ev) {
@@ -479,6 +479,31 @@ FWMgr.prototype = {
 			});
 		};
 		return loop(this._tree, 0);
+	},
+	&#x2F;**
+	 * Executes the given function over all the nodes in the tree or until the function returns true.
+	 * If dynamic loading is enabled, it will not run over nodes not yet loaded.
+	 * @method forSomeNodes
+	 * @param fn {function} function to execute on each node.  It will receive:
+	 *	@param fn.node {FlyweightTreeNode} node being visited.
+	 *	@param fn.depth {Integer} depth from the root. The root node is level zero and it is not traversed.
+	 *	@param fn.index {Integer} position of this node within its branch
+	 *	@param fn.array {Array} array containing itself and its siblings
+	 * @param scope {Object} Scope to run the function in.  Defaults to the FlyweightTreeManager instance.
+	 * @return {Boolean} true if any function calls returned true (the traversal was interrupted)
+	 *&#x2F;
+	forSomeNodes: function (fn, scope) {
+		scope = scope || this;
+		
+		var forOneLevel = function (node, depth) {
+			node.forSomeChildren(function (node, index, array) {
+				if (fn.call(scope,node, depth, index, array) === true) {
+					return true;
+				}
+				return forOneLevel(node, depth+1);
+			});
+		};
+		return forOneLevel(this.getRoot(), 1);
 	}
 };
 

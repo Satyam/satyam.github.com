@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.GalleryModel - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>GalleryModel - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.GalleryModel Class</h1>
+                        <h1>GalleryModel Class</h1>
 <div class="box meta">
     
 
@@ -166,7 +166,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l8"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:8</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:10</code></a>
         </div>
     
 
@@ -185,7 +185,7 @@
     <p>Record-based data model with APIs for getting, setting, validating, and
 syncing attribute values, as well as events for being notified of model changes.</p>
 
-<p>In most cases, you'll want to create your own subclass of Y.GalleryModel and
+<p>In most cases, you'll want to create your own subclass of GalleryModel and
 customize it to meet your needs. In particular, the sync() and validate()
 methods are meant to be overridden by custom implementations. You may also want
 to override the parse() method to parse non-generic server responses.</p>
@@ -194,8 +194,8 @@ to override the parse() method to parse non-generic server responses.</p>
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Y.GalleryModel" class="method item">
-    <h3 class="name"><code>Y.GalleryModel</code></h3>
+        <div id="method_GalleryModel" class="method item">
+    <h3 class="name"><code>GalleryModel</code></h3>
 
     
         <div class="args">
@@ -236,7 +236,7 @@ to override the parse() method to parse non-generic server responses.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l8"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:8</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:10</code></a>
         
         </p>
 
@@ -647,7 +647,7 @@ to override the parse() method to parse non-generic server responses.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l353"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:353</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l354"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:354</code></a>
         
         </p>
 
@@ -658,7 +658,7 @@ to override the parse() method to parse non-generic server responses.</p>
     </div>
 
     <div class="description">
-        <p>Default function for the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event. 
+        <p>Default function for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event. 
 Does the actual setting of the values just loaded and calls the callback function.</p>
     </div>
 
@@ -737,7 +737,7 @@ Does the actual setting of the values just loaded and calls the callback functio
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l243"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:243</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l244"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:244</code></a>
         
         </p>
 
@@ -766,7 +766,7 @@ Does the actual setting of the values just loaded and calls the callback functio
                     
 
                     <div class="param-description">
-                        <p>(see <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event)</p>
+                        <p>(see <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a> event)</p>
                     </div>
 
                     
@@ -830,7 +830,7 @@ Does the actual setting of the values just loaded and calls the callback functio
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l670"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:670</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l671"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:671</code></a>
         
         </p>
 
@@ -841,7 +841,7 @@ Does the actual setting of the values just loaded and calls the callback functio
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.
+        <p>Getter for the <a href="../classes/GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.
 If the value contains a dot (<code>'.'</code>) the modified state of the field named as a sub-attribute will be returned.
 Otherwise, the modified status of the whole record will be returned.</p>
     </div>
@@ -938,7 +938,7 @@ Otherwise, the modified status of the whole record will be returned.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l690"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:690</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l691"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:691</code></a>
         
         </p>
 
@@ -949,7 +949,7 @@ Otherwise, the modified status of the whole record will be returned.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute.
+        <p>Getter for the <a href="../classes/GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute.
 If the value contains a dot (<code>'.'</code>) the 'new' state of the field named as a sub-attribute will be returned.
 Otherwise, the 'new' status of the whole record will be returned.</p>
     </div>
@@ -1052,7 +1052,7 @@ Otherwise, the 'new' status of the whole record will be returned.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l727"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:727</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l728"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:728</code></a>
         
         </p>
 
@@ -1063,7 +1063,7 @@ Otherwise, the 'new' status of the whole record will be returned.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
+        <p>Getter for the <a href="../classes/GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
 If the name contains a dot (<code>'.'</code>) it will return a boolean indicating 
 whether the field named as a sub-attribute is part of the primary key.
 Otherwise, it returns the array of primary key fields.</p>
@@ -1176,7 +1176,7 @@ Otherwise, it returns the array of primary key fields.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l710"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:710</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l711"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:711</code></a>
         
         </p>
 
@@ -1187,7 +1187,7 @@ Otherwise, it returns the array of primary key fields.</p>
     </div>
 
     <div class="description">
-        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
+        <p>Setter for the <a href="../classes/GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute.
 If the value is already set, no further changes will be allowed.
 If the value is not an array, it will be converted to one.</p>
     </div>
@@ -1280,7 +1280,7 @@ If the value is not an array, it will be converted to one.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l145"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:145</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l146"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:146</code></a>
         
         </p>
 
@@ -1388,7 +1388,7 @@ and only if the arguments to the constructor had a <code>values</code> attribute
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l368"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:368</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l369"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:369</code></a>
         
         </p>
 
@@ -1399,7 +1399,7 @@ and only if the arguments to the constructor had a <code>values</code> attribute
     </div>
 
     <div class="description">
-        <p>Function called when the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event is prevented, stopped or halted
+        <p>Function called when the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event is prevented, stopped or halted
 so that the callback is called with a suitable error</p>
     </div>
 
@@ -1484,7 +1484,7 @@ so that the callback is called with a suitable error</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l624"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:624</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l625"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:625</code></a>
         
         </p>
 
@@ -1613,7 +1613,7 @@ if validation fails.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l160"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:160</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l161"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:161</code></a>
         
         </p>
 
@@ -1628,7 +1628,7 @@ if validation fails.</p>
 any.</p>
 
 <p>If <strong>options.remove</strong> is true then this method also delegates to the
-<a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> method to delete the model from the persistence layer.</p>
+<a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> method to delete the model from the persistence layer.</p>
     </div>
 
     
@@ -1647,7 +1647,7 @@ any.</p>
                     
 
                     <div class="param-description">
-                        <p>Options passed on to the <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> method, if required.</p>
+                        <p>Options passed on to the <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> method, if required.</p>
                     </div>
 
                     
@@ -1707,7 +1707,7 @@ any.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>The server response as received by <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a>.</p>
+                                    <p>The server response as received by <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a>.</p>
                                 </div>
 
                                 
@@ -1773,7 +1773,7 @@ any.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l316"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:316</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l317"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:317</code></a>
         
         </p>
 
@@ -1878,7 +1878,7 @@ attribute. The value is escaped using Y.Escape.html().</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l329"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:329</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l330"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:330</code></a>
         
         </p>
 
@@ -1976,7 +1976,7 @@ function.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l283"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:283</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l284"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:284</code></a>
         
         </p>
 
@@ -2049,7 +2049,7 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l303"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:303</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l304"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:304</code></a>
         
         </p>
 
@@ -2130,7 +2130,7 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l204"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:204</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l205"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:205</code></a>
         
         </p>
 
@@ -2224,7 +2224,7 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l213"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:213</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l214"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:214</code></a>
         
         </p>
 
@@ -2309,7 +2309,7 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l378"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:378</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l379"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:379</code></a>
         
         </p>
 
@@ -2322,12 +2322,12 @@ Each entry has a <strong>newVal</strong> and <strong>prevVal</strong> property c
     <div class="description">
         <p>Loads this model from the server.</p>
 
-<p>This method delegates to the <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> method to perform the actual load
+<p>This method delegates to the <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> method to perform the actual load
 operation, which is an asynchronous action. Specify a <strong>callback</strong> function to
 be notified of success or failure.</p>
 
-<p>A successful load operation will fire a <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, while an unsuccessful
-load operation will fire an Y.GalleryModel/error:event event with the <code>src</code> set to <code>"load"</code>.</p>
+<p>A successful load operation will fire a <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, while an unsuccessful
+load operation will fire an GalleryModel/error:event event with the <code>src</code> set to <code>"load"</code>.</p>
     </div>
 
     
@@ -2346,11 +2346,11 @@ load operation will fire an Y.GalleryModel/error:event event with the <code>src<
                     
 
                     <div class="param-description">
-                        <p>Options to be passed to <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a>.
+                        <p>Options to be passed to <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a>.
     Usually these will be or will include the keys used by the remote source 
     to locate the data to be loaded.
-    They will be passed on unmodified to the <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> method.
-    It is up to <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> to determine what they mean.</p>
+    They will be passed on unmodified to the <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> method.
+    It is up to <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> to determine what they mean.</p>
                     </div>
 
                     
@@ -2462,7 +2462,7 @@ load operation will fire an Y.GalleryModel/error:event event with the <code>src<
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l437"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:437</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l438"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:438</code></a>
         
         </p>
 
@@ -2564,7 +2564,7 @@ error event will be fired and the model will not be updated.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l542"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:542</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l543"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:543</code></a>
         
         </p>
 
@@ -2636,7 +2636,7 @@ error event will be fired and the model will not be updated.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l474"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:474</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l475"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:475</code></a>
         
         </p>
 
@@ -2649,15 +2649,15 @@ error event will be fired and the model will not be updated.</p>
     <div class="description">
         <p>Saves this model to the server.</p>
 
-<p>This method delegates to the <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a> method to perform the actual save
+<p>This method delegates to the <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a> method to perform the actual save
 operation, which is an asynchronous action. Specify a <strong>callback</strong> function to
 be notified of success or failure.</p>
 
-<p>A successful save operation will fire a <a href="../classes/Y.GalleryModel.html#event_saved" class="crosslink">saved</a> event, while an unsuccessful
-load operation will fire an Y.GalleryModel/error:event event with the 'src' property set to <code>"save"</code>.</p>
+<p>A successful save operation will fire a <a href="../classes/GalleryModel.html#event_saved" class="crosslink">saved</a> event, while an unsuccessful
+load operation will fire an GalleryModel/error:event event with the 'src' property set to <code>"save"</code>.</p>
 
-<p>If the save operation succeeds and the <a href="../classes/Y.GalleryModel.html#method_parse" class="crosslink">parse</a> method returns non-empty values
-from the response received from the server a <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event will also be fired to read those values.</p>
+<p>If the save operation succeeds and the <a href="../classes/GalleryModel.html#method_parse" class="crosslink">parse</a> method returns non-empty values
+from the response received from the server a <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event will also be fired to read those values.</p>
     </div>
 
     
@@ -2676,7 +2676,7 @@ from the response received from the server a <a href="../classes/Y.GalleryModel.
                     
 
                     <div class="param-description">
-                        <p>Options to be passed to <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a>. 
+                        <p>Options to be passed to <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a>. 
     It's up to the custom sync implementation
     to determine what options it supports or requires, if any.</p>
                     </div>
@@ -2720,7 +2720,7 @@ from the response received from the server a <a href="../classes/Y.GalleryModel.
                                 
 
                                 <div class="param-description">
-                                    <p>The server response as received by <a href="../classes/Y.GalleryModel.html#method_sync" class="crosslink">sync</a>,</p>
+                                    <p>The server response as received by <a href="../classes/GalleryModel.html#method_sync" class="crosslink">sync</a>,</p>
                                 </div>
 
                                 
@@ -2796,7 +2796,7 @@ from the response received from the server a <a href="../classes/Y.GalleryModel.
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l221"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:221</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l222"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:222</code></a>
         
         </p>
 
@@ -2808,7 +2808,7 @@ from the response received from the server a <a href="../classes/Y.GalleryModel.
 
     <div class="description">
         <p>Sets the value of the named field. 
-Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event if the new value is different from the current one.
+Fires the <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a> event if the new value is different from the current one.
 Primary key fields cannot be changed unless still <code>undefined</code>.</p>
     </div>
 
@@ -2924,7 +2924,7 @@ Primary key fields cannot be changed unless still <code>undefined</code>.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l260"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:260</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l261"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:261</code></a>
         
         </p>
 
@@ -2936,8 +2936,8 @@ Primary key fields cannot be changed unless still <code>undefined</code>.</p>
 
     <div class="description">
         <p>Sets a series of values. <br />
-It simply loops over the hash of values provided calling <a href="../classes/Y.GalleryModel.html#method_setValue" class="crosslink">setValue</a> on each.
-Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink">change</a> event.</p>
+It simply loops over the hash of values provided calling <a href="../classes/GalleryModel.html#method_setValue" class="crosslink">setValue</a> on each.
+Fires the <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a> event.</p>
     </div>
 
     
@@ -3041,7 +3041,7 @@ Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l552"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:552</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l553"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:553</code></a>
         
         </p>
 
@@ -3055,9 +3055,9 @@ Fires the <a href="../classes/Y.GalleryModel.html#event_change" class="crosslink
         <p>Override this method to provide a custom persistence implementation for this
 model. The default just calls the callback without actually doing anything.</p>
 
-<p>This method is called internally by <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink">load</a>, 
-<a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a>, 
-and <a href="../classes/Y.GalleryModel.html#method_destroy" class="crosslink">destroy</a> (when `options.remove==true).</p>
+<p>This method is called internally by <a href="../classes/GalleryModel.html#method_load" class="crosslink">load</a>, 
+<a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a>, 
+and <a href="../classes/GalleryModel.html#method_destroy" class="crosslink">destroy</a> (when `options.remove==true).</p>
     </div>
 
     
@@ -3144,7 +3144,7 @@ and <a href="../classes/Y.GalleryModel.html#method_destroy" class="crosslink">de
 
                                 <div class="param-description">
                                     <p>The server's response. This value will
-        be passed to the <a href="../classes/Y.GalleryModel.html#method_parse" class="crosslink">parse</a> method, which is expected to parse it and
+        be passed to the <a href="../classes/GalleryModel.html#method_parse" class="crosslink">parse</a> method, which is expected to parse it and
         return an attribute hash.</p>
                                 </div>
 
@@ -3201,7 +3201,7 @@ and <a href="../classes/Y.GalleryModel.html#method_destroy" class="crosslink">de
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l654"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:654</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l655"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:655</code></a>
         
         </p>
 
@@ -3212,14 +3212,14 @@ and <a href="../classes/Y.GalleryModel.html#method_destroy" class="crosslink">de
     </div>
 
     <div class="description">
-        <p>The default implementation calls <a href="../classes/Y.GalleryModel.html#method_getValues" class="crosslink">getValues</a>
+        <p>The default implementation calls <a href="../classes/GalleryModel.html#method_getValues" class="crosslink">getValues</a>
 so that it returns a copy of the record. <br />
 The developer may redefine this method to serialize this object
 in any way that might be needed. <br />
 For example, it might be desirable to call 
-<a href="../classes/Y.GalleryModel.html#method_getChangedValues" class="crosslink">getChangedValues</a>
+<a href="../classes/GalleryModel.html#method_getChangedValues" class="crosslink">getChangedValues</a>
 to return only changed fields, along with 
-<a href="../classes/Y.GalleryModel.html#method_getPKValues" class="crosslink">getPKValues</a> 
+<a href="../classes/GalleryModel.html#method_getPKValues" class="crosslink">getPKValues</a> 
 to identify the record with the changes.</p>
     </div>
 
@@ -3292,7 +3292,7 @@ to identify the record with the changes.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l581"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:581</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l582"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:582</code></a>
         
         </p>
 
@@ -3307,8 +3307,8 @@ to identify the record with the changes.</p>
 
 <p>This method gives you a hook to validate a hash of all
 attributes before the model is saved. This method is called automatically
-before <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> takes any action. 
-If validation fails, the <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> call
+before <a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a> takes any action. 
+If validation fails, the <a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a> call
 will be aborted.</p>
 
 <p>In your validation method, call the provided callback function with no
@@ -3439,7 +3439,7 @@ along to the resulting error event.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l58"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:58</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l59"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:59</code></a>
         
         </p>
 
@@ -3486,7 +3486,7 @@ presumed to be the current value there.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l66"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:66</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l67"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:67</code></a>
         
         </p>
 
@@ -3532,7 +3532,7 @@ presumed to be the current value there.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l51"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:51</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l52"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:52</code></a>
         
         </p>
 
@@ -3578,6 +3578,10 @@ presumed to be the current value there.</p>
 
     
 
+    
+        <span class="flag readonly">readonly</span>
+    
+
     <div class="meta">
         
             
@@ -3589,7 +3593,7 @@ presumed to be the current value there.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l751"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:751</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l752"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:752</code></a>
         
         </p>
 
@@ -3686,6 +3690,10 @@ but the state of the record as a whole, which is far more useful.</p>
 
     
 
+    
+        <span class="flag readonly">readonly</span>
+    
+
     <div class="meta">
         
             
@@ -3697,7 +3705,7 @@ but the state of the record as a whole, which is far more useful.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l770"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:770</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l771"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:771</code></a>
         
         </p>
 
@@ -3794,6 +3802,8 @@ but the state of the record as a whole, which is far more useful.</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -3805,7 +3815,7 @@ but the state of the record as a whole, which is far more useful.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l789"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:789</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l790"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:790</code></a>
         
         </p>
 
@@ -3916,7 +3926,7 @@ It can only be set once.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l79"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:79</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l80"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:80</code></a>
         
         </p>
 
@@ -3927,12 +3937,12 @@ It can only be set once.</p>
 
     <div class="description">
         <p>Fired whenever a value or values are changed. 
-If changed via <a href="../classes/Y.GalleryModel.html#method_setValues" class="crosslink">setValues</a> the facade will not contain a <strong>name</strong>. <br />
+If changed via <a href="../classes/GalleryModel.html#method_setValues" class="crosslink">setValues</a> the facade will not contain a <strong>name</strong>. <br />
 Instead, <strong>prevVals</strong> and <strong>newVals</strong> (both plural) properties will contain 
 hashes with the names and values of the fields changed.
-After firing the event for a group of fields changed via <a href="../classes/Y.GalleryModel.html#method_setValues" class="crosslink">setValues</a>,
+After firing the event for a group of fields changed via <a href="../classes/GalleryModel.html#method_setValues" class="crosslink">setValues</a>,
 a new change event will be fired for each individual field changed.
-For individual field changes via <a href="../classes/Y.GalleryModel.html#method_setValue" class="crosslink">setValue</a>, the <strong>name</strong>, <strong>prevVal</strong> and <strong>newVal</strong>
+For individual field changes via <a href="../classes/GalleryModel.html#method_setValue" class="crosslink">setValue</a>, the <strong>name</strong>, <strong>prevVal</strong> and <strong>newVal</strong>
 will be provided.
 The event can be prevented on a per group change basis or per individual field change.
 Preventing the change on a particular field will not prevent the others from being changed.</p>
@@ -4078,7 +4088,7 @@ Preventing the change on a particular field will not prevent the others from bei
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l102"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:102</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l103"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:103</code></a>
         
         </p>
 
@@ -4089,7 +4099,7 @@ Preventing the change on a particular field will not prevent the others from bei
 
     <div class="description">
         <p>Fired when new data has been received from the remote source. <br />
-It will also be fired even on a <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> operation if the response contains values.
+It will also be fired even on a <a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a> operation if the response contains values.
 The parsed values can be altered on the before (on) listener.</p>
     </div>
 
@@ -4147,7 +4157,7 @@ The parsed values can be altered on the before (on) listener.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>Options as received by the <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink">load</a> method.</p>
+                                    <p>Options as received by the <a href="../classes/GalleryModel.html#method_load" class="crosslink">load</a> method.</p>
                                 </div>
 
                                 
@@ -4215,7 +4225,7 @@ The parsed values can be altered on the before (on) listener.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l119"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:119</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l120"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:120</code></a>
         
         </p>
 
@@ -4230,7 +4240,7 @@ The event cannot be prevented. <br />
 The developer has full control of what is
 about to be saved and when it is saved so it would be pointless
 to try to prevent it at this stage.  This is in contrast to
-the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event where the developer has no control of what might
+the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event where the developer has no control of what might
 come from the server and might wish to do something about it.
 If in reply to the save operation the server replies with data, 
 the <strong>response</strong> and <strong>parsed</strong> properties will be filled.</p>
@@ -4292,7 +4302,7 @@ the <strong>response</strong> and <strong>parsed</strong> properties will be fil
                                 
 
                                 <div class="param-description">
-                                    <p>Options as received by the <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> method.</p>
+                                    <p>Options as received by the <a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a> method.</p>
                                 </div>
 
                                 

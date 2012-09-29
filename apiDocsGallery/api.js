@@ -8,22 +8,22 @@ YUI.add("yuidoc-meta", function(Y) {
         "ButtonPlugin",
         "ButtonSeparator",
         "ButtonToggle",
+        "FWTreeNode",
+        "FWTreeView",
+        "FlyweightTreeManager",
+        "FlyweightTreeNode",
+        "GalleryModel",
+        "GalleryModelChronologicalUndo",
+        "GalleryModelMultiRecord",
+        "GalleryModelPrimaryKeyIndex",
+        "GalleryModelSimpleUndo",
+        "GalleryModelSortedMultiRecord",
         "IButton",
         "MakeNode",
         "Node",
         "Spinner",
         "StdMod",
         "TimeSpinner",
-        "Y.FWTreeNode",
-        "Y.FWTreeView",
-        "Y.FlyweightTreeManager",
-        "Y.FlyweightTreeNode",
-        "Y.GalleryModel",
-        "Y.GalleryModelChronologicalUndo",
-        "Y.GalleryModelMultiRecord",
-        "Y.GalleryModelPrimaryKeyIndex",
-        "Y.GalleryModelSimpleUndo",
-        "Y.GalleryModelSortedMultiRecord",
         "Y.Timeline"
     ],
     "modules": [
@@ -54,7 +54,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "gallery-fwt-treeview",
             "name": "gallery-fwt-treeview",
-            "description": "Instances of it will be provided by Y.FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
+            "description": "Instances of it will be provided by FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
         },
         {
             "displayName": "gallery-makenode",

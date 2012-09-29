@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Spinner - Satyam&#x27;s Gallery Modules</title>
+    <title>FWTreeNode - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -154,21 +154,25 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Spinner Class</h1>
+                        <h1>FWTreeNode Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l1"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:1</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:10</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-md-spinner.html">gallery-md-spinner</a>
+            Module: <a href="../modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a>
         
     
 
@@ -178,7 +182,7 @@
 
 
 <div class="box intro">
-    <p>Shows an input box with a set of up/down buttons to change its value.</p>
+    
 </div>
 
 
@@ -197,8 +201,6 @@
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
-            <li class="api-class-tab events"><a href="#events">Events</a></li>
-        
     </ul>
 
     <div>
@@ -209,94 +211,150 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
                             <li class="index-item method private">
-                                <a href="#method__afterBoundingBoxMousedown">_afterBoundingBoxMousedown</a>
+                                <a href="#method__afterClick">_afterClick</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__afterDocumentMouseup">_afterDocumentMouseup</a>
+                                <a href="#method__afterSelectedChange">_afterSelectedChange</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__afterInputChange">_afterInputChange</a>
+                                <a href="#method__childSelectedChange">_childSelectedChange</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__clearMouseDownTimers">_clearMouseDownTimers</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method__dynamicLoadReturn">_dynamicLoadReturn</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__onDirectionKey">_onDirectionKey</a>
+                            <li class="index-item method protected inherited">
+                                <a href="#method__expandedGetter">_expandedGetter</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__setMouseDownTimers">_setMouseDownTimers</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method__expandedSetter">_expandedSetter</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__uiSetValue">_uiSetValue</a>
+                            <li class="index-item method protected inherited">
+                                <a href="#method__getHTML">_getHTML</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__uiSetWraparound">_uiSetWraparound</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method__getStateVal">_getStateVal</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__validateValue">_validateValue</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method__loadDynamic">_loadDynamic</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__wrap">_wrap</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method__renderChildren">_renderChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__setStateVal">_setStateVal</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__slideTo">_slideTo</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_forSomeChildren">forSomeChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getNextSibling">getNextSibling</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getParent">getParent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getPreviousSibling">getPreviousSibling</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hold">hold</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_isRoot">isRoot</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_release">release</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_toggle">toggle</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_formatter">formatter</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_parser">parser</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_renderUI">renderUI</a>
+                                <a href="#method_toggleSelection">toggleSelection</a>
 
                                 
                                 
@@ -310,44 +368,24 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
-                            <li class="index-item property protected">
-                                <a href="#property__ATTRS_2_UI">_ATTRS_2_UI</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property protected">
-                                <a href="#property__CLASS_NAMES">_CLASS_NAMES</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property__defaultCB">_defaultCB</a>
+                            <li class="index-item property private inherited">
+                                <a href="#property__node">_node</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property protected">
-                                <a href="#property__EVENTS">_EVENTS</a>
+                            <li class="index-item property private inherited">
+                                <a href="#property__root">_root</a>
 
-                                
-                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
                         
-                            <li class="index-item property protected">
-                                <a href="#property__TEMPLATE">_TEMPLATE</a>
+                            <li class="index-item property">
+                                <a href="#property_FULLY_SELECTED">FULLY_SELECTED</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -356,7 +394,25 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_HTML_PASER">HTML_PASER</a>
+                                <a href="#property_NOT_SELECTED">NOT_SELECTED</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_PARTIALLY_SELECTED">PARTIALLY_SELECTED</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_TEMPLATE">TEMPLATE</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -372,67 +428,48 @@
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
-                    <ul class="index-list attrs">
+                    <ul class="index-list attrs extends">
                         
-                            <li class="index-item attr">
-                                <a href="#attr_formatter">formatter</a>
+                            <li class="index-item attr inherited">
+                                <a href="#attr_depth">depth</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_expanded">expanded</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_id">id</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_label">label</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_majorStep">majorStep</a>
+                                <a href="#attr_propagateDown">propagateDown</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_min">min</a>
+                                <a href="#attr_propagateUp">propagateUp</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_root">root</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_min">min</a>
+                                <a href="#attr_selected">selected</a>
                             </li>
                         
-                            <li class="index-item attr">
-                                <a href="#attr_minorStep">minorStep</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_parser">parser</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_strings">strings</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_tabIndex">tabIndex</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_value">value</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_wraparound">wraparound</a>
+                            <li class="index-item attr inherited">
+                                <a href="#attr_template">template</a>
                             </li>
                         
                     </ul>
                 </div>
             
 
-            
-                <div class="index-section events">
-                    <h3>Events</h3>
-
-                    <ul class="index-list events">
-                        
-                            <li class="index-item event">
-                                <a href="#event_wrapped">wrapped</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
         </div>
 
@@ -441,8 +478,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__afterBoundingBoxMousedown" class="method item private">
-    <h3 class="name"><code>_afterBoundingBoxMousedown</code></h3>
+                    <div id="method__afterClick" class="method item private">
+    <h3 class="name"><code>_afterClick</code></h3>
 
     
         <div class="args">
@@ -485,7 +522,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l44"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:44</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l27"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:27</code></a>
         
         </p>
 
@@ -496,788 +533,7 @@
     </div>
 
     <div class="description">
-        <p>Bounding box mouse down handler. Will determine if the mouse down
-is on one of the spinner buttons, and increment/decrement the value
-accordingly.</p>
-
-<p>The method also sets up a timer, to support the user holding the mouse
-down on the spinner buttons. The timer is cleared when a mouse up event
-is detected.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">ev</code>
-                        <span class="type">EventFacade</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Event facade produced by the event handler</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__afterDocumentMouseup" class="method item private">
-    <h3 class="name"><code>_afterDocumentMouseup</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l89"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:89</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Document mouse up handler. Clears the timers supporting
-the "mouse held down" behavior.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__afterInputChange" class="method item private">
-    <h3 class="name"><code>_afterInputChange</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l132"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:132</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Simple change handler, to make sure user does not input an invalid value.
-If an error is detected, focus will return to the input box and the input box highlighted briefly.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__clearMouseDownTimers" class="method item private">
-    <h3 class="name"><code>_clearMouseDownTimers</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l219"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:219</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Clears timers used to support the "mouse held down" behavior</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__onDirectionKey" class="method item private">
-    <h3 class="name"><code>_onDirectionKey</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>ev</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l99"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:99</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Bounding box Arrow up/down, Page up/down key listener.</p>
-
-<p>Increments/Decrement the spinner value, based on the key pressed.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">ev</code>
-                        <span class="type">EventFacade</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>as provided by the key listener</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__setMouseDownTimers" class="method item private">
-    <h3 class="name"><code>_setMouseDownTimers</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>dir</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>step</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l173"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:173</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initiates mouse down timers, to increment slider, while mouse button
-is held down</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">dir</code>
-                        <span class="type">1 | -1</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Direction, up or down, to change at each tick</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">step</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Amount to change on each tick</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetValue" class="method item private">
-    <h3 class="name"><code>_uiSetValue</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>src</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l235"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:235</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Updates the value of the input box to reflect 
-the value passed in through the <code>value</code> configuration attribute</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type">Integer</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>new value to be set</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">src</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>source of the new value.  If the source is 'ui' the change will be ignored.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__uiSetWraparound" class="method item private">
-    <h3 class="name"><code>_uiSetWraparound</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l249"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:249</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Attaches the <a href="#method__wrap"><code>_wrap</code></a> method as a before-event listener 
-when <a href="#config_wraparound"><code>wraparound</code></a> is set.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>value of wraparound attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__validateValue" class="method item private">
-    <h3 class="name"><code>_validateValue</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>val</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l266"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:266</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>value attribute default validator. Verifies that
-the value being set lies between the min/max value</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">val</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>value to be validated</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-                    
-                    true if within bounds
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__wrap" class="method item private">
-    <h3 class="name"><code>_wrap</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>ev</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l188"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:188</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>If attribute <a href="#config_wraparound"><code>wraparound</code></a> is true this method is set as a before listener 
-for the <a href="#event_valueChange"><code>valueChange</code></a> event.
-When one end of the range is reached, it will make it jump to the other end. 
-Changes the newVal property of the event facade, which will be the new value for the attribute.
-If stepping by more than one, it will advance the value
-by the remaining amount of the step.
-Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value is wrapped around.</p>
+        <p>Responds to the click event by toggling the node</p>
     </div>
 
     
@@ -1311,8 +567,8 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
 </div>
 
                 
-                    <div id="method_formatter" class="method item">
-    <h3 class="name"><code>formatter</code></h3>
+                    <div id="method__afterSelectedChange" class="method item private">
+    <h3 class="name"><code>_afterSelectedChange</code></h3>
 
     
         <div class="args">
@@ -1320,7 +576,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
             
                 <li class="arg">
                     
-                        <code>value</code>
+                        <code>ev</code>
                     
                 </li>
             
@@ -1329,13 +585,11 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     
 
     
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-    
 
     
 
+    
+        <span class="flag private">private</span>
     
 
     
@@ -1357,7 +611,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l163"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:163</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l52"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:52</code></a>
         
         </p>
 
@@ -1368,7 +622,301 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     </div>
 
     <div class="description">
-        <p>Formats the internal value to be shown to the user</p>
+        <p>Changes the UI to reflect the selected state and propagates the selection up and/or down.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>out of which</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">src</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>if not undefined it can be <code>'propagateUp'</code> or <code>'propagateDown'</code> so that propagation goes in just one direction and doesn't bounce back.</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__childSelectedChange" class="method item private">
+    <h3 class="name"><code>_childSelectedChange</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l90"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:90</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>When propagating selection up, it is called by a child when changing its selected state
+so that the parent adjusts its own state accordingly.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__dynamicLoadReturn" class="method item private">
+    <h3 class="name"><code>_dynamicLoadReturn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__dynamicLoadReturn">
+                FlyweightTreeNode
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l74"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:74</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Overrides the original in FlyweightTreeNode so as to propagate the selected state
+on dynamically loaded nodes.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__expandedGetter" class="method item protected inherited">
+    <h3 class="name"><code>_expandedGetter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__expandedGetter">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l134"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:134</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Getter for the expanded configuration attribute.
+It is meant to be overriden by the developer.
+The supplied version defaults to true if the expanded property 
+is not set in the underlying configuration tree.
+It can be overriden to default to false.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    The expanded state of the node.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__expandedSetter" class="method item private inherited">
+    <h3 class="name"><code>_expandedSetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__expandedSetter">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l147"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:147</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter for the expanded configuration attribute.
+It renders the child nodes if this branch has never been expanded.
+Then sets the className on the node to the static constants 
+CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
     </div>
 
     
@@ -1380,13 +928,152 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
                 <li class="param">
                     
                         <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>new value for the expanded attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getHTML" class="method item protected inherited">
+    <h3 class="name"><code>_getHTML</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>nSiblings</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>depth</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__getHTML">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l37"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:37</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a string with the markup for this node along that of its children
+produced from its attributes rendered
+via the first template string it finds in these locations:</p>
+
+<ul>
+<li>It's own Template configuration attribute</li>
+<li>The static FlyweightTreeNode/TEMPLATE class property</li>
+</ul>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
                         <span class="type">Integer</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>value to be shown</p>
+                        <p>index of this node within the array of siblings</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">nSiblings</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>number of siblings including this node</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">depth</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>number of levels to the root</p>
                     </div>
 
                     
@@ -1405,7 +1092,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
                     
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
                     
-                    formatted value actually displayed
+                    markup generated by this node
                 
             </div>
         </div>
@@ -1415,12 +1102,229 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
 </div>
 
                 
-                    <div id="method_parser" class="method item">
-    <h3 class="name"><code>parser</code></h3>
+                    <div id="method__getStateVal" class="method item private inherited">
+    <h3 class="name"><code>_getStateVal</code></h3>
 
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__getStateVal">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l311"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:311</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the stored value for the attribute, from either the
+internal state object, or the state proxy if it exits</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    The stored value of the attribute
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__loadDynamic" class="method item private inherited">
+    <h3 class="name"><code>_loadDynamic</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__loadDynamic">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l179"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:179</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Triggers the dynamic loading of children for this node.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__renderChildren" class="method item private inherited">
+    <h3 class="name"><code>_renderChildren</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__renderChildren">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l213"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:213</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Renders the children of this node. <br />
+It the children had been rendered, they will be replaced.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setStateVal" class="method item private inherited">
+    <h3 class="name"><code>_setStateVal</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
             
                 <li class="arg">
                     
@@ -1433,8 +1337,335 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     
 
     
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__setStateVal">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l331"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:331</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the stored value for the attribute, in either the
+internal state object, or the state proxy if it exits</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The value of the attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__slideTo" class="method item private inherited">
+    <h3 class="name"><code>_slideTo</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>node</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__slideTo">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l100"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:100</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method to slide this instance on top of another node in the configuration object</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">node</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>node in the underlying configuration tree to slide this object on top of.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_forSomeChildren" class="method item inherited">
+    <h3 class="name"><code>forSomeChildren</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fn</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>scope</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_forSomeChildren">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l110"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:110</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Executes the given function on each of the child nodes of this node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fn</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Function to be executed on each node</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">child</code>
+                                    <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>Instance of a suitable subclass of FlyweightTreeNode, 
+        positioned on top of the child node</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">index</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Index of this child within the array of children</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">array</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>array containing itself and its siblings</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">scope</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The falue of this for the function.  Defaults to the parent.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getNextSibling" class="method item inherited">
+    <h3 class="name"><code>getNextSibling</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
         <span class="returns-inline">
-            <span class="type">Integer</span>
+            <span class="type"></span>
         </span>
     
 
@@ -1453,15 +1684,12 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_getNextSibling">FlyweightTreeNode</a>:
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l154"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:154</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l261"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:261</code></a>
         
         </p>
 
@@ -1472,32 +1700,11 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     </div>
 
     <div class="description">
-        <p>Default parser for the user input.  It assumes only integers are expected</p>
+        <p>Returns the next sibling node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>value read from the input box</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1507,9 +1714,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
             <div class="returns-description">
                 
                     
-                        <span class="type">Integer</span>:
-                    
-                    parsed value
+                    FlyweightTreeNode
                 
             </div>
         </div>
@@ -1519,8 +1724,374 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
 </div>
 
                 
-                    <div id="method_renderUI" class="method item">
-    <h3 class="name"><code>renderUI</code></h3>
+                    <div id="method_getParent" class="method item inherited">
+    <h3 class="name"><code>getParent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_getParent">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l250"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:250</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the parent node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    FlyweightTreeNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getPreviousSibling" class="method item inherited">
+    <h3 class="name"><code>getPreviousSibling</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_getPreviousSibling">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l277"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:277</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the previous sibling node for this node or null if none exists.
+The copy is not on Hold. <br />
+Remember to release the copy to the pool when done.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    FlyweightTreeNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hold" class="method item inherited">
+    <h3 class="name"><code>hold</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_hold">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l229"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:229</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Prevents this instance from being returned to the pool and reused.
+Remember to Release this instance when no longer needed.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_isRoot" class="method item inherited">
+    <h3 class="name"><code>isRoot</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_isRoot">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l303"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:303</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns true if this node is the root node</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    true if root node
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_release" class="method item inherited">
+    <h3 class="name"><code>release</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_release">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l238"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:238</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Allows this instance to be returned to the pool and reused.</p>
+
+<p><strong>Important</strong>: This instance should not be used after being released</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_toggle" class="method item inherited">
+    <h3 class="name"><code>toggle</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_toggle">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l294"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:294</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method to toggle the expanded state of the node.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_toggleSelection" class="method item">
+    <h3 class="name"><code>toggleSelection</code></h3>
 
     
         <span class="paren">()</span>
@@ -1551,7 +2122,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l33"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:33</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l45"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:45</code></a>
         
         </p>
 
@@ -1562,9 +2133,7 @@ Fires the <a href="#event_wrapped"><code>wrapped</code></a> event when the value
     </div>
 
     <div class="description">
-        <p>Renders the HTML elements of this component. <br />
-Uses the TEMPLATE static variable to produce the markup.
-Calls _locateNodes to get the references to the elements created.</p>
+        <p>Sugar method to toggle the selected state of a node.</p>
     </div>
 
     
@@ -1583,105 +2152,9 @@ Calls _locateNodes to get the references to the elements created.</p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property__ATTRS_2_UI" class="property item protected">
-    <h3 class="name"><code>_ATTRS_2_UI</code></h3>
+                    <div id="property__node" class="property item private inherited">
+    <h3 class="name"><code>_node</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l427"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:427</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Adds the <code>value</code> attribute to the list of attributes whose change needs to be reflected in the UI</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__CLASS_NAMES" class="property item protected">
-    <h3 class="name"><code>_CLASS_NAMES</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">[String]</a></span>
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l291"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:291</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>List of CSS class name suffixes to be generated and used in the template</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__defaultCB" class="property item private">
-    <h3 class="name"><code>_defaultCB</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
 
     
 
@@ -1696,15 +2169,12 @@ Calls _locateNodes to get the references to the elements created.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#property__node">FlyweightTreeNode</a>:
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l78"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:78</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l22"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:22</code></a>
         
         </p>
 
@@ -1714,8 +2184,7 @@ Calls _locateNodes to get the references to the elements created.</p>
     </div>
 
     <div class="description">
-        <p>Override the default content box value, since we don't want the srcNode
-to be the content box for spinner.</p>
+        <p>Reference to the node in the configuration tree it has been slid over.</p>
     </div>
 
     
@@ -1726,16 +2195,60 @@ to be the content box for spinner.</p>
 </div>
 
                 
-                    <div id="property__EVENTS" class="property item protected">
-    <h3 class="name"><code>_EVENTS</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    <div id="property__root" class="property item private inherited">
+    <h3 class="name"><code>_root</code></h3>
+    <span class="type"><a href="../classes/FlyweightTreeManager.html" class="crosslink">FlyweightTreeManager</a></span>
 
     
 
     
-        <span class="flag protected">protected</span>
+        <span class="flag private">private</span>
     
 
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#property__root">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:29</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the FlyweightTreeManager instance this node belongs to.
+It is set by the root and should be considered read-only.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_FULLY_SELECTED" class="property item">
+    <h3 class="name"><code>FULLY_SELECTED</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+        <span class="flag final">final</span>
     
 
     
@@ -1753,7 +2266,7 @@ to be the content box for spinner.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l299"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:299</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l135"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:135</code></a>
         
         </p>
 
@@ -1763,7 +2276,7 @@ to be the content box for spinner.</p>
     </div>
 
     <div class="description">
-        <p>Descriptor of DOM events to be listened to and the methods to handle them</p>
+        <p>Constant to use with the <code>selected</code> attribute to indicate the node is selected.</p>
     </div>
 
     
@@ -1774,15 +2287,111 @@ to be the content box for spinner.</p>
 </div>
 
                 
-                    <div id="property__TEMPLATE" class="property item protected">
-    <h3 class="name"><code>_TEMPLATE</code></h3>
+                    <div id="property_NOT_SELECTED" class="property item">
+    <h3 class="name"><code>NOT_SELECTED</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+        <span class="flag final">final</span>
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l115"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Constant to use with the <code>selected</code> attribute to indicate the node is not selected.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_PARTIALLY_SELECTED" class="property item">
+    <h3 class="name"><code>PARTIALLY_SELECTED</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+        <span class="flag final">final</span>
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l124"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:124</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Constant to use with the <code>selected</code> attribute to indicate some 
+but not all of the children of this node are selected.
+This state should only be acquired by upward propagation from descendants.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_TEMPLATE" class="property item">
+    <h3 class="name"><code>TEMPLATE</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-        <span class="flag protected">protected</span>
-    
 
     
 
@@ -1801,7 +2410,7 @@ to be the content box for spinner.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l279"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:279</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l108"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:108</code></a>
         
         </p>
 
@@ -1811,53 +2420,7 @@ to be the content box for spinner.</p>
     </div>
 
     <div class="description">
-        <p>MakeNode template for this component</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_HTML_PASER" class="property item">
-    <h3 class="name"><code>HTML_PASER</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l438"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:438</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Tells Widget to read the value from the input box if any existing markup is found</p>
+        <p>Template to produce the markup for a node in the tree.</p>
     </div>
 
     
@@ -1876,735 +2439,9 @@ to be the content box for spinner.</p>
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_formatter" class="attr item">
-    <a name="config_formatter"></a> 
-    <h3 class="name"><code>formatter</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l392"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:392</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Function to format the value to be shown to the user</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> this.formatter</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>formatterChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>formatter</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_majorStep" class="attr item">
-    <a name="config_majorStep"></a> 
-    <h3 class="name"><code>majorStep</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l360"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:360</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Amount to increment/decrement the spinner when the page up/down keys are pressed.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> 10</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>majorStepChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>majorStep</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_min" class="attr item">
-    <a name="config_min"></a> 
-    <h3 class="name"><code>min</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l319"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:319</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The minimum value for the spinner.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>minChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>min</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_min" class="attr item">
-    <a name="config_min"></a> 
-    <h3 class="name"><code>min</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l329"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:329</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The maximum value for the spinner.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> 100</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>minChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>min</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_minorStep" class="attr item">
-    <a name="config_minorStep"></a> 
-    <h3 class="name"><code>minorStep</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l350"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:350</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Amount to increment/decrement the spinner when the buttons or arrow up/down keys are pressed.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> 1</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>minorStepChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>minorStep</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_parser" class="attr item">
-    <a name="config_parser"></a> 
-    <h3 class="name"><code>parser</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l404"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:404</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Function to format the value entered by the user</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> this.parser</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>parserChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>parser</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_strings" class="attr item">
-    <a name="config_strings"></a> 
-    <h3 class="name"><code>strings</code></h3>
-    <span class="type">Hash</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l380"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:380</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The strings for the spinner UI (used in the tooltip texts)</p>
-    </div>
-
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>stringsChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>strings</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_tabIndex" class="attr item">
-    <a name="config_tabIndex"></a> 
-    <h3 class="name"><code>tabIndex</code></h3>
+                    <div id="attr_depth" class="attr item inherited">
+    <a name="config_depth"></a> 
+    <h3 class="name"><code>depth</code></h3>
     <span class="type">Integer</span>
 
     
@@ -2620,19 +2457,18 @@ to be the content box for spinner.</p>
     
 
     
+        <span class="flag readonly">readonly</span>
+    
 
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_depth">FlyweightTreeNode</a>:
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l370"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:370</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l478"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:478</code></a>
         
         </p>
 
@@ -2642,19 +2478,18 @@ to be the content box for spinner.</p>
     </div>
 
     <div class="description">
-        <p>override default ("null"), required for focus()</p>
+        <p>Returns the depth of this node from the root.
+This is calculated on-the-fly.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> 0</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>tabIndexChange</code></h4>
+            <h4>Fires event <code>depthChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>tabIndex</code> is
+            Fires when the value for the configuration attribute <code>depth</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2706,10 +2541,10 @@ to be the content box for spinner.</p>
 </div>
 
                 
-                    <div id="attr_value" class="attr item">
-    <a name="config_value"></a> 
-    <h3 class="name"><code>value</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    <div id="attr_expanded" class="attr item inherited">
+    <a name="config_expanded"></a> 
+    <h3 class="name"><code>expanded</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
 
@@ -2728,15 +2563,12 @@ to be the content box for spinner.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_expanded">FlyweightTreeNode</a>:
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l339"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:339</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l498"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:498</code></a>
         
         </p>
 
@@ -2746,19 +2578,19 @@ to be the content box for spinner.</p>
     </div>
 
     <div class="description">
-        <p>The current value of the spinner.</p>
+        <p>Expanded state of this node.</p>
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> true</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>valueChange</code></h4>
+            <h4>Fires event <code>expandedChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>value</code> is
+            Fires when the value for the configuration attribute <code>expanded</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2810,9 +2642,214 @@ to be the content box for spinner.</p>
 </div>
 
                 
-                    <div id="attr_wraparound" class="attr item">
-    <a name="config_wraparound"></a> 
-    <h3 class="name"><code>wraparound</code></h3>
+                    <div id="attr_id" class="attr item inherited">
+    <a name="config_id"></a> 
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">Identifier</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_id">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l467"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:467</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Id to assign to the DOM element that contains this node. <br />
+If none was supplied, it will generate one</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> guid()</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>idChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>id</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_label" class="attr item inherited">
+    <a name="config_label"></a> 
+    <h3 class="name"><code>label</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_label">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l457"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:457</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Label for this node. Nodes usually have some textual content, this is the place for it.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&#x27;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>labelChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>label</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_propagateDown" class="attr item">
+    <a name="config_propagateDown"></a> 
+    <h3 class="name"><code>propagateDown</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
@@ -2840,7 +2877,7 @@ to be the content box for spinner.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l416"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:416</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l175"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:175</code></a>
         
         </p>
 
@@ -2850,19 +2887,436 @@ to be the content box for spinner.</p>
     </div>
 
     <div class="description">
-        <p>Whether the values should wrap around to the other end when one end of the range is reached</p>
+        <p>Whether selection of one node should propagate to its children.</p>
     </div>
 
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>wraparoundChange</code></h4>
+            <h4>Fires event <code>propagateDownChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>wraparound</code> is
+            Fires when the value for the configuration attribute <code>propagateDown</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_propagateUp" class="attr item">
+    <a name="config_propagateUp"></a> 
+    <h3 class="name"><code>propagateUp</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l165"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:165</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether selection of one node should propagate to its parent.</p>
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>propagateUpChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>propagateUp</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_root" class="attr item inherited">
+    <a name="config_root"></a> 
+    <h3 class="name"><code>root</code></h3>
+    <span class="type"><a href="../classes/FlyweightTreeManager.html" class="crosslink">FlyweightTreeManager</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_root">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l429"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:429</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the FlyweightTreeManager this node belongs to</p>
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>rootChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>root</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_selected" class="attr item">
+    <a name="config_selected"></a> 
+    <h3 class="name"><code>selected</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l145"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:145</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Selected/highlighted state of the node. 
+It can be</p>
+
+<ul>
+<li>Y.FWTreeNode.NOT_SELECTED (0) not selected</li>
+<li>Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.</li>
+<li>Y.FWTreeNode.FULLY_SELECTED (2) fully selected.</li>
+</ul>
+
+<p>The partially selected state can only be the result of selection propagating up from a child node.
+The attribute might return PARTIALLY_SELECTED but the developer should never set that value.</p>
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>selectedChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>selected</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_template" class="attr item inherited">
+    <a name="config_template"></a> 
+    <h3 class="name"><code>template</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#attr_template">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l445"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:445</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Template to use on this particular instance. <br />
+The renderer will default to the static TEMPLATE property of this class 
+(the preferred way) or the nodeTemplate configuration attribute of the root.
+See the TEMPLATE static property.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>templateChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>template</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -2917,93 +3371,6 @@ to be the content box for spinner.</p>
             </div>
         
 
-        
-            <div id="events" class="api-class-tabpanel">
-                <h2 class="off-left">Events</h2>
-
-                
-                    <div id="event_wrapped" class="events item">
-    <h3 class="name"><code>wrapped</code></h3>
-    <span class="type"></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-spinner_js_gallery-md-spinner.js.html#l200"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-spinner&#x2F;js&#x2F;gallery-md-spinner.js:200</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Fires when one end of the range is reached and the value is folded to the other end.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Event Payload:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">prevVal</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>value that triggered the wrapping</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">newVal</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>new value after wrapping</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-
-    
-</div>
-
-                
-            </div>
         
     </div>
 </div>

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.GalleryModelMultiRecord - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>GalleryModelMultiRecord - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.GalleryModelMultiRecord Class</h1>
+                        <h1>GalleryModelMultiRecord Class</h1>
 <div class="box meta">
     
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l934"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:934</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l935"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:935</code></a>
         </div>
     
 
@@ -180,7 +180,7 @@
 <div class="box intro">
     <p>Allows GalleryModel to handle a set of records using the Flyweight pattern.
 It exposes one record at a time from a shelf of records.
-Exposed records can be selected by setting the Y.GalleryModel/index:attribute attribute.</p>
+Exposed records can be selected by setting the GalleryModel/index:attribute attribute.</p>
 </div>
 
 
@@ -453,7 +453,7 @@ Exposed records can be selected by setting the Y.GalleryModel/index:attribute at
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1031"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1031</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1032"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1032</code></a>
         
         </p>
 
@@ -545,7 +545,7 @@ and taken out of the shelf when fetching.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1156"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1156</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1157"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1157</code></a>
         
         </p>
 
@@ -635,7 +635,7 @@ and saves it into the shelves, otherwise it calls the default loader for single 
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1007"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1007</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1008"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1008</code></a>
         
         </p>
 
@@ -646,7 +646,7 @@ and saves it into the shelves, otherwise it calls the default loader for single 
     </div>
 
     <div class="description">
-        <p>Retrives and exposes the record from the shelf at the position specified or given by Y.GalleryModelMultiRecord/_currentIndex</p>
+        <p>Retrives and exposes the record from the shelf at the position specified or given by GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
     
@@ -719,7 +719,7 @@ and saves it into the shelves, otherwise it calls the default loader for single 
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1229"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1229</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1230"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1230</code></a>
         
         </p>
 
@@ -730,8 +730,8 @@ and saves it into the shelves, otherwise it calls the default loader for single 
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute
-Returns the value from Y.GalleryModelMultiRecord/_currentIndex</p>
+        <p>Getter for the <a href="../classes/GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute
+Returns the value from GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
     
@@ -803,7 +803,7 @@ Returns the value from Y.GalleryModelMultiRecord/_currentIndex</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1211"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1211</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1212"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1212</code></a>
         
         </p>
 
@@ -814,8 +814,8 @@ Returns the value from Y.GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
     <div class="description">
-        <p>Setter for the <a href="../classes/Y.GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute.
-Validates and copies the current index value into Y.GalleryModel/_currentIndex.
+        <p>Setter for the <a href="../classes/GalleryModelMultiRecord.html#attr_index" class="crosslink">index</a> attribute.
+Validates and copies the current index value into GalleryModel/_currentIndex.
 It shelves the current record and fetches the requested one.</p>
     </div>
 
@@ -897,7 +897,7 @@ It shelves the current record and fetches the requested one.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1042"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1042</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1043"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1043</code></a>
         
         </p>
 
@@ -973,7 +973,7 @@ It shelves the current record and fetches the requested one.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1269"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1269</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1270"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1270</code></a>
         
         </p>
 
@@ -984,7 +984,7 @@ It shelves the current record and fetches the requested one.</p>
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
+        <p>Getter for the <a href="../classes/GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
 so that it is read from the shelf and not from the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1097,7 +1097,7 @@ which is expensive to shelve</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1287"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1287</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1288"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1288</code></a>
         
         </p>
 
@@ -1108,7 +1108,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
+        <p>Setter for the <a href="../classes/GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute used only for GalleryModelMultiRecord
 so that it is written into the shelf and not into the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1211,7 +1211,7 @@ which is expensive to shelve</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1239"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1239</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1240"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1240</code></a>
         
         </p>
 
@@ -1222,7 +1222,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Getter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
+        <p>Getter for the <a href="../classes/GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
 so that it is read from the shelf and not from the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1335,7 +1335,7 @@ which is expensive to shelve</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1257"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1257</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1258"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1258</code></a>
         
         </p>
 
@@ -1346,7 +1346,7 @@ which is expensive to shelve</p>
     </div>
 
     <div class="description">
-        <p>Setter for the <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
+        <p>Setter for the <a href="../classes/GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute used only for GalleryModelMultiRecord
 so that it is written into the shelf and not into the actual attribute, 
 which is expensive to shelve</p>
     </div>
@@ -1439,7 +1439,7 @@ which is expensive to shelve</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l958"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:958</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l959"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:959</code></a>
         
         </p>
 
@@ -1453,7 +1453,7 @@ which is expensive to shelve</p>
         <p>Sets the initial values if any were provided to the constructor.
 It is only ever called after the initialization of this class and all its extensions
 and only if the arguments to the constructor had a <code>values</code> attribute.
-It overrides the <a href="../classes/Y.GalleryModel.html#method__setInitialValues" class="crosslink">_setInitialValues</a> 
+It overrides the <a href="../classes/GalleryModel.html#method__setInitialValues" class="crosslink">_setInitialValues</a> 
 so as to handle arrays.</p>
     </div>
 
@@ -1549,7 +1549,7 @@ so as to handle arrays.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l989"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:989</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l990"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:990</code></a>
         
         </p>
 
@@ -1560,7 +1560,7 @@ so as to handle arrays.</p>
     </div>
 
     <div class="description">
-        <p>Saves the exposed record into the shelves at the position specified or given by Y.GalleryModelMultiRecord/_currentIndex</p>
+        <p>Saves the exposed record into the shelves at the position specified or given by GalleryModelMultiRecord/_currentIndex</p>
     </div>
 
     
@@ -1645,7 +1645,7 @@ so as to handle arrays.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1053"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1053</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1054"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1054</code></a>
         
         </p>
 
@@ -1752,7 +1752,7 @@ If it is an array, it will call itself for each of the items in it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1082"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1082</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1083"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1083</code></a>
         
         </p>
 
@@ -1765,7 +1765,7 @@ If it is an array, it will call itself for each of the items in it.</p>
     <div class="description">
         <p>Executes the given function for each record in the set.
 The function will run in the scope of the model so it can use 
-<code>this.<a href="../classes/Y.GalleryModel.html#method_getValue" class="crosslink">getValue</a>()</code>
+<code>this.<a href="../classes/GalleryModel.html#method_getValue" class="crosslink">getValue</a>()</code>
 or any such method to access the values of the current record.
 Returning exactly <code>false</code> from the function spares shelving the record.
 If the callback function does not modify the record, 
@@ -1864,7 +1864,7 @@ returning <code>false</code> will improve performance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1107"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1107</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1108"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1108</code></a>
         
         </p>
 
@@ -1877,10 +1877,10 @@ returning <code>false</code> will improve performance.</p>
     <div class="description">
         <p>Executes the given function for each record in the set.
 The function will run in the scope of the model so it can use 
-<code>this.<a href="../classes/Y.GalleryModel.html#method_getValue" class="crosslink">getValue</a></code>
+<code>this.<a href="../classes/GalleryModel.html#method_getValue" class="crosslink">getValue</a></code>
 or any such method to access the values of the current record.
-It is faster than using <a href="../classes/Y.GalleryModelMultiRecord.html#method_each" class="crosslink">each</a> 
-and then checking the <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute
+It is faster than using <a href="../classes/GalleryModelMultiRecord.html#method_each" class="crosslink">each</a> 
+and then checking the <a href="../classes/GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute
 Returning exactly <code>false</code> from the function spares shelving the record.
 If the callback function does not modify the record, 
 returning <code>false</code> will improve performance.</p>
@@ -1968,7 +1968,7 @@ returning <code>false</code> will improve performance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1200"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1200</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1201"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1201</code></a>
         
         </p>
 
@@ -2022,7 +2022,7 @@ returning <code>false</code> will improve performance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1148"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1148</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1149"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1149</code></a>
         
         </p>
 
@@ -2034,10 +2034,10 @@ returning <code>false</code> will improve performance.</p>
 
     <div class="description">
         <p>This is a documentation entry only, this method does not define <code>load</code>. 
-This extension redefines the default action for the <a href="../classes/Y.GalleryModel.html#event_loaded" class="crosslink">loaded</a> event so 
+This extension redefines the default action for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event so 
 that if a load returns an array of records, they will be added to the shelves. 
-Existing records are kept, call <a href="../classes/Y.GalleryModelMultiRecord.html#method_empty" class="crosslink">empty</a> if they should be discarded. 
-See method <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink">load</a> of <a href="../classes/Y.GalleryModel.html" class="crosslink">Y.GalleryModel</a> for further info.</p>
+Existing records are kept, call <a href="../classes/GalleryModelMultiRecord.html#method_empty" class="crosslink">empty</a> if they should be discarded. 
+See method <a href="../classes/GalleryModel.html#method_load" class="crosslink">load</a> of <a href="../classes/GalleryModel.html" class="crosslink">GalleryModel</a> for further info.</p>
     </div>
 
     
@@ -2082,7 +2082,7 @@ See method <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1136"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1136</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1137"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1137</code></a>
         
         </p>
 
@@ -2093,7 +2093,7 @@ See method <a href="../classes/Y.GalleryModel.html#method_load" class="crosslink
     </div>
 
     <div class="description">
-        <p>Calls <a href="../classes/Y.GalleryModel.html#method_save" class="crosslink">save</a> on each record modified.
+        <p>Calls <a href="../classes/GalleryModel.html#method_save" class="crosslink">save</a> on each record modified.
 This is not the best saving strategy for saving batches of records,
 but it is the easiest and safest.  Implementors are encouraged to 
 design their own.</p>
@@ -2143,7 +2143,7 @@ design their own.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1188"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1188</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1189"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1189</code></a>
         
         </p>
 
@@ -2211,7 +2211,7 @@ design their own.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l973"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:973</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l974"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:974</code></a>
         
         </p>
 
@@ -2222,7 +2222,7 @@ design their own.</p>
 
     <div class="description">
         <p>Index of the shelf for the record being exposed.
-Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
+Use GalleryModel/index:attribute attribute to check/set the index value.</p>
     </div>
 
     
@@ -2260,7 +2260,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l945"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:945</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l946"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:946</code></a>
         
         </p>
 
@@ -2306,7 +2306,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l982"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:982</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l983"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:983</code></a>
         
         </p>
 
@@ -2352,6 +2352,8 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -2363,7 +2365,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1304"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1304</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1305"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1305</code></a>
         
         </p>
 
@@ -2454,6 +2456,8 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -2465,7 +2469,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1322"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1322</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1323"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1323</code></a>
         
         </p>
 
@@ -2475,7 +2479,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
     </div>
 
     <div class="description">
-        <p>Merges the new setter into the existing <a href="../classes/Y.GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.</p>
+        <p>Merges the new setter into the existing <a href="../classes/GalleryModel.html#attr_isModified" class="crosslink">isModified</a> attribute.</p>
     </div>
 
     
@@ -2554,6 +2558,8 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
 
     
 
+    
+
     <div class="meta">
         
             
@@ -2565,7 +2571,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1315"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1315</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1316"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1316</code></a>
         
         </p>
 
@@ -2575,7 +2581,7 @@ Use Y.GalleryModel/index:attribute attribute to check/set the index value.</p>
     </div>
 
     <div class="description">
-        <p>Merges the new setter into the existing <a href="../classes/Y.GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute</p>
+        <p>Merges the new setter into the existing <a href="../classes/GalleryModel.html#attr_isNew" class="crosslink">isNew</a> attribute</p>
     </div>
 
     

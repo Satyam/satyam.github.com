@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -55,6 +55,26 @@
             
                 <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
             
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
                 <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
             
                 <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
@@ -66,26 +86,6 @@
                 <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
             
                 <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeManager.html">Y.FlyweightTreeManager</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FlyweightTreeNode.html">Y.FlyweightTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeNode.html">Y.FWTreeNode</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.FWTreeView.html">Y.FWTreeView</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModel.html">Y.GalleryModel</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelChronologicalUndo.html">Y.GalleryModelChronologicalUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelMultiRecord.html">Y.GalleryModelMultiRecord</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelPrimaryKeyIndex.html">Y.GalleryModelPrimaryKeyIndex</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSimpleUndo.html">Y.GalleryModelSimpleUndo</a></li>
-            
-                <li><a href="..&#x2F;classes/Y.GalleryModelSortedMultiRecord.html">Y.GalleryModelSortedMultiRecord</a></li>
             
                 <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
             
@@ -159,16 +159,20 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;** This class must not be generated directly.  
- *  Instances of it will be provided by Y.FWTreeView as required.
+ *  Instances of it will be provided by FWTreeView as required.
  *  
  *  Subclasses might be defined based on it.  
  *  Usually, they will add further attributes and redefine the TEMPLATE to 
  *  show those extra attributes.
  *  
  *  @module gallery-fwt-treeview
+ *&#x2F;
+&#x2F;**
  *    
- *  @class Y.FWTreeNode
- *  @extends Y.FlyweightTreeNode
+ *  @class FWTreeNode
+ *  @extends FlyweightTreeNode
+ *&#x2F;
+&#x2F;**
  *  @constructor
  *&#x2F;
  Y.FWTreeNode = Y.Base.create(
@@ -190,10 +194,12 @@
 			var target = ev.domEvent.target;
 			if (target.hasClass(CNAMES.toggle)) {
 				this.toggle();
-			} else if ((target.hasClass(CNAMES.content) || target.hasClass(CNAMES.icon)) &amp;&amp; this.get(&#x27;root&#x27;).get(&#x27;toggleOnLabelClick&#x27;)) {
-				this.toggle();
 			} else if (target.hasClass(CNAMES.selection)) {
 				this.toggleSelection();
+			} else if (target.hasClass(CNAMES.content) || target.hasClass(CNAMES.icon)) {
+				if (this.get(&#x27;root&#x27;).get(&#x27;toggleOnLabelClick&#x27;)) {
+					this.toggle();
+				}
 			}
 		},
 		&#x2F;**
@@ -201,7 +207,7 @@
 		 * @method toggleSelection
 		 *&#x2F;
 		toggleSelection: function() {
-			this.set(&#x27;selected&#x27;, (this.get(&#x27;selected&#x27;)?0:2));
+			this.set(&#x27;selected&#x27;, (this.get(&#x27;selected&#x27;)?NOT_SELECTED:FULLY_SELECTED));
 		},
 		&#x2F;**
 		 * Changes the UI to reflect the selected state and propagates the selection up and&#x2F;or down.
@@ -211,19 +217,35 @@
 		 * @private
 		 *&#x2F;
 		_afterSelectedChange: function (ev) {
-			var newVal = ev.newVal;
+			var selected = ev.newVal;
 				
 			if (!this.isRoot()) {
-				Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;)).replaceClass(&#x27;yui3-fw-treeview-selected-state-&#x27; + ev.prevVal,&#x27;yui3-fw-treeview-selected-state-&#x27; + newVal);
+				Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;)).replaceClass(&#x27;yui3-fw-treeview-selected-state-&#x27; + ev.prevVal,&#x27;yui3-fw-treeview-selected-state-&#x27; + selected);
 				if (this.get(&#x27;propagateUp&#x27;) &amp;&amp; ev.src !== &#x27;propagatingDown&#x27;) {
 					this.getParent()._childSelectedChange().release();
 				}
 			}
 			if (this.get(&#x27;propagateDown&#x27;) &amp;&amp; ev.src !== &#x27;propagatingUp&#x27;) {
-				this.forEachChild(function(node) {
-					node.set(&#x27;selected&#x27; , newVal, &#x27;propagatingDown&#x27;);
+				this.forSomeChildren(function(node) {
+					node.set(&#x27;selected&#x27; , selected, &#x27;propagatingDown&#x27;);
 				});
 			}
+		},
+		&#x2F;**
+		 * Overrides the original in FlyweightTreeNode so as to propagate the selected state
+		 * on dynamically loaded nodes.
+		 * @method _dynamicLoadReturn
+		 * @private
+		 *&#x2F;
+		_dynamicLoadReturn: function () {
+			 Y.FWTreeNode.superclass._dynamicLoadReturn.apply(this, arguments);
+			 if (this.get(&#x27;propagateDown&#x27;)) {
+				var selected = this.get(&#x27;selected&#x27;);
+				this.forSomeChildren(function(node) {
+					node.set(&#x27;selected&#x27; , selected, &#x27;propagatingDown&#x27;);
+				});
+			}
+			 
 		},
 		&#x2F;**
 		 * When propagating selection up, it is called by a child when changing its selected state
@@ -233,11 +255,11 @@
 		 *&#x2F;
 		_childSelectedChange: function () {
 			var count = 0, selCount = 0;
-			this.forEachChild(function (node) {
+			this.forSomeChildren(function (node) {
 				count +=2;
 				selCount += node.get(&#x27;selected&#x27;);
 			});
-			this.set(&#x27;selected&#x27;, (selCount === 0?0:(selCount === count?2:1)), {src:&#x27;propagatingUp&#x27;});
+			this.set(&#x27;selected&#x27;, (selCount === 0?NOT_SELECTED:(selCount === count?FULLY_SELECTED:PARTIALLY_SELECTED)), {src:&#x27;propagatingUp&#x27;});
 			return this;
 		}
 		
@@ -250,24 +272,54 @@
 		 * @static
 		 *&#x2F;
 		TEMPLATE: Lang.sub(&#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node} {sel_prefix}-{selected}&quot;&gt;&lt;div class=&quot;{toggle}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{icon}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{selection}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{content}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;ul class=&quot;{cname_children}&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;, CNAMES),
+		&#x2F;**
+		 * Constant to use with the &#x60;selected&#x60; attribute to indicate the node is not selected.
+		 * @property NOT_SELECTED
+		 * @type integer
+		 * @value 0
+		 * @static
+		 * @final
+		 *&#x2F;
+		NOT_SELECTED:NOT_SELECTED,
+		&#x2F;**
+		 * Constant to use with the &#x60;selected&#x60; attribute to indicate some 
+		 * but not all of the children of this node are selected.
+		 * This state should only be acquired by upward propagation from descendants.
+		 * @property PARTIALLY_SELECTED
+		 * @type integer
+		 * @value 1
+		 * @static
+		 * @final
+		 *&#x2F;
+		PARTIALLY_SELECTED:PARTIALLY_SELECTED,
+		&#x2F;**
+		 * Constant to use with the &#x60;selected&#x60; attribute to indicate the node is selected.
+		 * @property FULLY_SELECTED
+		 * @type integer
+		 * @value 2
+		 * @static
+		 * @final
+		 *&#x2F;
+		FULLY_SELECTED:FULLY_SELECTED,
 		ATTRS: {
 			&#x2F;**
 			 * Selected&#x2F;highlighted state of the node. 
 			 * It can be
 			 * 
-			 * - 0 not selected
-			 * - 1 partially selected: some children are selected, some not or partially selected.
-			 * - 2 fully selected.
+			 * - Y.FWTreeNode.NOT_SELECTED (0) not selected
+			 * - Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.
+			 * - Y.FWTreeNode.FULLY_SELECTED (2) fully selected.
 			 * 
 			 * The partially selected state can only be the result of selection propagating up from a child node.
+			 * The attribute might return PARTIALLY_SELECTED but the developer should never set that value.
 			 * @attribute selected
 			 * @type Integer
-			 * @value 0
+			 * @value NOT_SELECTED
 			 *&#x2F;
 			selected: {
-				value:0,
+				value:NOT_SELECTED,
 				validator:function (value) {
-					return value === 0 || value === 1 || value === 2;
+					return value === NOT_SELECTED || value === FULLY_SELECTED || value === PARTIALLY_SELECTED;
 				}
 			},
 			&#x2F;**
