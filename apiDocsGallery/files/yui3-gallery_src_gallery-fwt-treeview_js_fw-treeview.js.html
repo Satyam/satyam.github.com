@@ -187,8 +187,6 @@
  * @class FWTreeView
  * @extends Widget
  * @uses FlyweightTreeManager
- *&#x2F;
-&#x2F;**
  * @constructor
  * @param config {Object} Configuration attributes, amongst them:
  * @param config.tree {Array} Array of objects defining the first level of nodes.
@@ -198,17 +196,36 @@
  * @param [config.tree.type=FWTreeNode] {FWTreeNode | String} Class used to create instances for this node.
  * It can be a reference to an object or a name that can be resolved as &#x60;Y[name]&#x60;.
  * @param [config.tree.id=Y.guid()] {String} Identifier to assign to the DOM element containing this node.
- * @param [config.tree.template] {String} Template for this particular node. 
+ * @param [config.tree.template] {String} Template for this particular node.
  *&#x2F;
 Y.FWTreeView = Y.Base.create(
 	&#x27;fw-treeview&#x27;,
 	Y.Widget,
 	[Y.FlyweightTreeManager],
 	{
+        &#x2F;**
+         * Array of iNodes containing a flat list of all nodes visible regardless
+         * of their depth in the tree.
+         * Used to handle keyboard navigation.
+         * @property _visibleSequence
+         * @type Array or null
+         * @default null
+         * @private
+         *&#x2F;
+        _visibleSequence: null,
+        &#x2F;**
+         * Index, within {{#crossLink &quot;_visibleSequence&quot;}}{{&#x2F;crossLink}}, of the iNode having the focus.
+         * Used for keyboard navigation.
+         * @property _visibleIndex
+         * @type Integer
+         * @default null
+         * @private
+         *&#x2F;
+        _visibleIndex: null,
 		&#x2F;**
 		 * Widget lifecycle method
 		 * @method initializer
-		 * @param config {object} configuration object of which 
+		 * @param config {object} configuration object of which
 		 * &#x60;tree&#x60; contains the tree configuration.
 		 *&#x2F;
 		initializer: function (config) {
@@ -223,8 +240,157 @@ Y.FWTreeView = Y.Base.create(
 		 * @protected
 		 *&#x2F;
 		renderUI: function () {
-			this.get(CBX).setContent(this._getHTML());
+			var cbx = this.get(CBX);
+            cbx.setContent(this._getHTML());
+            cbx.set(&#x27;role&#x27;,&#x27;tree&#x27;);
 		},
+		&#x2F;**
+		 * Widget lifecyle method
+		 * I opted for not including this method in FlyweightTreeManager so that
+		 * it can be used to extend Base, not just Widget
+		 * @method renderUI
+		 * @protected
+		 *&#x2F;
+        bindUI: function () {
+            this.get(CBX).on(&#x27;keydown&#x27;, this._onKeyDown, this);
+        },
+        &#x2F;**
+         * Listener for keyboard events to handle keyboard navigation
+         * @method _onKeyDown
+         * @param ev {EventFacade} Standard YUI key facade
+         * @private
+         *&#x2F;
+        _onKeyDown: function (ev) {
+            var ch = ev.charCode,
+                shift = ev.shiftKey,
+                ctrl = ev.ctrlKey,
+                iNode = this._focusedINode,
+                seq = this._visibleSequence,
+                index = this._visibleIndex,
+                fwNode;
+
+            switch (ch) {
+                case 38: &#x2F;&#x2F; up
+                    if (!seq) {
+                        seq = this._rebuildSequence();
+                        index = seq.indexOf(iNode);
+                    }
+                    index -=1;
+                    if (index &gt;= 0) {
+                        iNode = seq[index];
+                        this._visibleIndex = index;
+                    } else {
+                        iNode = null;
+                    }
+                    break;
+                case 39: &#x2F;&#x2F; right
+                    if (iNode.expanded) {
+                        if (iNode.children &amp;&amp; iNode.children.length) {
+                            iNode = iNode.children[0];
+                        } else {
+                            iNode = null;
+                        }
+                    } else {
+                        this._poolReturn(this._poolFetch(iNode).set(EXPANDED, true));
+                        iNode = null;
+                    }
+
+                    break;
+                case 40: &#x2F;&#x2F; down
+                    if (!seq) {
+                        seq = this._rebuildSequence();
+                        index = seq.indexOf(iNode);
+                    }
+                    index +=1;
+                    if (index &lt; seq.length) {
+                        iNode = seq[index];
+                        this._visibleIndex = index;
+                    } else {
+                        iNode = null;
+                    }
+                    break;
+                case 37: &#x2F;&#x2F; left
+                    if (iNode.expanded &amp;&amp; iNode.children) {
+                        this._poolReturn(this._poolFetch(iNode).set(EXPANDED, false));
+                        iNode = null;
+                    } else {
+                        iNode = iNode._parent;
+                        if (iNode === this._tree) {
+                            iNode = null;
+                        }
+                    }
+
+                    break;
+                case 36: &#x2F;&#x2F; home
+                    iNode = this._tree.children &amp;&amp; this._tree.children[0];
+                    break;
+                case 35: &#x2F;&#x2F; end
+                    index = this._tree.children &amp;&amp; this._tree.children.length;
+                    if (index) {
+                        iNode = this._tree.children[index -1];
+                    } else {
+                        iNode = null;
+                    }
+                    break;
+                case 13: &#x2F;&#x2F; enter
+                    fwNode = this._poolFetch(iNode);
+                    fwNode.fire(&#x27;enterkey&#x27;, {domEvent:ev});
+                    this._poolReturn(fwNode);
+                    iNode = null;
+                    break;
+                case 32: &#x2F;&#x2F; spacebar
+                    fwNode = this._poolFetch(iNode);
+                    fwNode.fire(&#x27;spacebar&#x27;, {domEvent:ev});
+                    this._poolReturn(fwNode);
+                    iNode = null;
+                    break;
+                case 106: &#x2F;&#x2F; asterisk on the numeric keypad
+                    this.expandAll();
+                    break;
+                default: &#x2F;&#x2F; initial
+                    iNode = null;
+                    break;
+            }
+            if (iNode) {
+                this._focusOnINode(iNode);
+                ev.halt();
+                return false;
+            }
+            return true;
+        },
+        &#x2F;**
+         * Listener for the focus event.
+         * Updates the node receiving the focus when the widget gets the focus.
+         * @method _aferFocus
+         * @param ev {EventFacade} Standard event facade
+         * @private
+         *&#x2F;
+        _afterFocus: function (ev) {
+            var iNode = this._findINodeByElement(ev.domEvent.target);
+            this._focusOnINode(iNode);
+            if (this._visibleSequence) {
+                this._visibleIndex = this._visibleSequence.indexOf(iNode);
+            }
+        },
+        &#x2F;**
+         * Rebuilds the array of {{#crossLink &quot;_visibleSequence&quot;}}{{&#x2F;crossLink}} that can be traversed with the up&#x2F;down arrow keys
+         * @method _rebuildSequence
+         * @private
+         *&#x2F;
+        _rebuildSequence: function () {
+            var seq = [],
+                loop = function(iNode) {
+                    YArray.each(iNode.children || [], function(childINode) {
+                        seq.push(childINode);
+                        if (childINode.expanded) {
+                            loop(childINode);
+                        }
+                    });
+                };
+            loop(this._tree);
+            return (this._visibleSequence = seq);
+
+        },
 		&#x2F;**
 		 * Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div
 		 * @property CONTENT_TEMPLATE

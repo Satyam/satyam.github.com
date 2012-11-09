@@ -179,6 +179,24 @@
 
 <div class="box intro">
     <p>Extension to handle its child nodes by using the flyweight pattern.</p>
+
+<p>The information for the tree is stored internally in a plain object without methods,
+events or attributes.
+This manager will position FlyweightTreeNode instances (or subclasses of it)
+over these iNodes from a small pool of them, in order to save memory.</p>
+
+<p>The nodes on this configuration tree are referred to in this documentation as <code>iNodes</code>
+for 'internal nodes', to tell them apart from the pooled FlyweightTreeNode instances
+that will be used to manipulate them.  The FlyweightTreeNode instances will usually
+be declared as <code>fwNodes</code> when confusion might arise.
+If a variable or argument is not explicitly named <code>iNode</code> or a related name it is
+FlyweightTreeNode instance.</p>
+
+<p>The developer should not be concerned about the iNodes,
+except in the initial configuration tree.
+If the developer finds anything that needs to be done through iNodes,
+it is a bug and should be reported (thanks).
+iNodes should be private.</p>
 </div>
 
 
@@ -266,6 +284,34 @@
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method protected">
+                                <a href="#method__loadConfig">_loadConfig</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_"></a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__doAfterRender">_doAfterRender</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_expandAll">expandAll</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method private">
                                 <a href="#method__afterEvent">_afterEvent</a>
 
@@ -273,36 +319,29 @@
                                 
                             </li>
                         
-                            <li class="index-item method protected">
-                                <a href="#method__createNode">_createNode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__findNodeByElement">_findNodeByElement</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__forSomeCfgNode">_forSomeCfgNode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method protected">
-                                <a href="#method__getHTML">_getHTML</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method private">
                                 <a href="#method__getTypeString">_getTypeString</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__poolFetch">_poolFetch</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__poolReturn">_poolReturn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createNode">_createNode</a>
 
                                 
                                 
@@ -316,14 +355,14 @@
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__loadConfig">_loadConfig</a>
+                                <a href="#method__getHTML">_getHTML</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__poolFetch">_poolFetch</a>
+                                <a href="#method__findINodeByElement">_findINodeByElement</a>
 
                                 
                                 
@@ -337,7 +376,7 @@
                             </li>
                         
                             <li class="index-item method protected">
-                                <a href="#method__poolReturn">_poolReturn</a>
+                                <a href="#method__forSomeINode">_forSomeINode</a>
 
                                 
                                 
@@ -345,6 +384,27 @@
                         
                             <li class="index-item method">
                                 <a href="#method_forSomeNodes">forSomeNodes</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__focusedNodeGetter">_focusedNodeGetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__focusedNodeSetter">_focusedNodeSetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__focusOnINode">_focusOnINode</a>
 
                                 
                                 
@@ -369,6 +429,13 @@
                         
                             <li class="index-item property protected">
                                 <a href="#property__domEvents">_domEvents</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__focusedINode">_focusedINode</a>
 
                                 
                                 
@@ -406,6 +473,10 @@
                                 <a href="#attr_dynamicLoader">dynamicLoader</a>
                             </li>
                         
+                            <li class="index-item attr">
+                                <a href="#attr_focusedNode">focusedNode</a>
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -416,749 +487,6 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method__afterEvent" class="method item private">
-    <h3 class="name"><code>_afterEvent</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>ev</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l126"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:126</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>It will locate the node that caused the event, slide a suitable instance on it and fire the
-same event on that node.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">ev</code>
-                        <span class="type">EventFacade</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Event facade as produced by the event</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__createNode" class="method item protected">
-    <h3 class="name"><code>_createNode</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>node</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l207"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:207</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a new instance of the type given in node or the 
-DefaultType if none specified
-and slides it on top of the node provided.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">node</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>reference to a node within the configuration tree</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>:
-                    
-                    Instance of the corresponding subclass of FlyweightTreeNode
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__findNodeByElement" class="method item protected">
-    <h3 class="name"><code>_findNodeByElement</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>el</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l262"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:262</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Locates a node in the tree by the element that represents it.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">el</code>
-                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Any element belonging to the tree</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-                    
-                    Node that produced the markup for that element or null if not found
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__forSomeCfgNode" class="method item protected">
-    <h3 class="name"><code>_forSomeCfgNode</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>fn</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>scope</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l301"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:301</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Traverses the whole configuration tree, calling a given function for each node.
-If the function returns true, the traversing will terminate.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">fn</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Function to call on each configuration node</p>
-                    </div>
-
-                    
-                        <ul class="params-list">
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">cfgNode</code>
-                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                
-
-                                <div class="param-description">
-                                    <p>node in the configuratino tree</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">depth</code>
-                                    <span class="type">Integer</span>
-                                
-
-                                <div class="param-description">
-                                    <p>depth of this node within the tee</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">index</code>
-                                    <span class="type">Integer</span>
-                                
-
-                                <div class="param-description">
-                                    <p>index of this node within the array of its siblings</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                        </ul>
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">scope</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>scope to run the function in, defaults to this.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    true if any of the function calls returned true (the traversal was terminated earlier)
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getHTML" class="method item protected">
-    <h3 class="name"><code>_getHTML</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l246"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:246</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a string with the markup for the whole tree. 
-A subclass might opt to produce markup for those parts visible. (lazy rendering)</p>
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    
-                    HTML for this widget
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getTypeString" class="method item private">
-    <h3 class="name"><code>_getTypeString</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>node</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l140"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:140</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a string identifying the type of the object to handle the node
-or null if type was not a FlyweightNode instance.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">node</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Node in the tree configuration</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    
-                    type of node.
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__initNodes" class="method item private">
-    <h3 class="name"><code>_initNodes</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>parent</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l112"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:112</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">parent</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Parent of the nodes to be set</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="method__loadConfig" class="method item protected">
@@ -1205,7 +533,7 @@ or null if type was not a FlyweightNode instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l81"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:81</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l128"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:128</code></a>
         
         </p>
 
@@ -1217,11 +545,14 @@ or null if type was not a FlyweightNode instance.</p>
 
     <div class="description">
         <p>Method to load the configuration tree.
-This is not done in the constructor so as to allow the subclass 
+The nodes in this tree are copied into iNodes (internal nodes) for internal use.</p>
+
+<p>The constructor does not load the tree automatically so as to allow the subclass
+of this manager
 to process the tree definition anyway it wants, adding defaults and such
 and to name the tree whatever is suitable.
 For TreeView, the configuration property is named <code>tree</code>, for a form, it is named <code>form</code>.
-It also sets initial values for some default properties such as <code>parent</code> references and <code>id</code> for all nodes.</p>
+It also sets initial values for some default properties such as <code>parent</code> references and <code>id</code> for all iNodes.</p>
     </div>
 
     
@@ -1239,7 +570,7 @@ It also sets initial values for some default properties such as <code>parent</co
                     
 
                     <div class="param-description">
-                        <p>Configuration for the first level of nodes. 
+                        <p>Configuration for the first level of nodes.
 Contains objects with the following attributes:</p>
                     </div>
 
@@ -1295,7 +626,7 @@ Contains objects with the following attributes:</p>
                                 
 
                                 <div class="param-description">
-                                    <p>Class used to create instances for this node. <br />
+                                    <p>Class used to create instances for this iNode.
 It can be a reference to an object or a name that can be resolved as <code>Y[name]</code>.</p>
                                 </div>
 
@@ -1310,7 +641,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                                 
 
                                 <div class="param-description">
-                                    <p>Identifier to assign to the DOM element containing this node.</p>
+                                    <p>Identifier to assign to the DOM element containing the UI for this node.</p>
                                 </div>
 
                                 
@@ -1344,6 +675,427 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
 </div>
 
                 
+                    <div id="method_" class="method item private">
+    <h3 class="name"><code></code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> | null | INVALID_VALUE</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l483"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:483</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter for the DynamicLoader:attribute attribute.
+It changes the expanded attribute to false on childless iNodes not marked with `isLeaf
+since they can now be expanded.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> | null</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Function to handle the loading of nodes on demand</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> | null | INVALID_VALUE</span>:
+                    
+                    function set or rejection
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__doAfterRender" class="method item private">
+    <h3 class="name"><code>_doAfterRender</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l179"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:179</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializes the events for its internal use and those requested in
+the _domEvents array.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_expandAll" class="method item">
+    <h3 class="name"><code>expandAll</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l194"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:194</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Expands all the nodes of the tree.</p>
+
+<p>It will only expand existing nodes.  If there is a DynamicLoader:attribute configured
+it will not expand those since that might lead to extreme situations.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterEvent" class="method item private">
+    <h3 class="name"><code>_afterEvent</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l210"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:210</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>It will locate the iNode represented by the UI elements that received the event,
+slide a suitable instance on it and fire the same event on that node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event facade as produced by the event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getTypeString" class="method item private">
+    <h3 class="name"><code>_getTypeString</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>iNode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l224"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:224</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a string identifying the type of the object to handle the iNode
+or null if type was not a FlyweightNode instance.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">iNode</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Internal node in the tree configuration</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    type of iNode.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__poolFetch" class="method item protected">
     <h3 class="name"><code>_poolFetch</code></h3>
 
@@ -1353,7 +1105,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
             
                 <li class="arg">
                     
-                        <code>node</code>
+                        <code>iNode</code>
                     
                 </li>
             
@@ -1392,7 +1144,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l159"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:159</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l243"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:243</code></a>
         
         </p>
 
@@ -1403,8 +1155,8 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
     </div>
 
     <div class="description">
-        <p>Pulls from the pool an instance of the type declared in the given node
-and slides it over that node.
+        <p>Pulls from the pool an instance of the type declared in the given iNode
+and slides it over that iNode.
 If there are no instances of the given type in the pool, a new one will be created via _createNode
 If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" class="crosslink">hold</a>), it will be returned instead.</p>
     </div>
@@ -1417,14 +1169,14 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
                 <li class="param">
                     
-                        <code class="param-name">node</code>
+                        <code class="param-name">iNode</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>reference to a node within the configuration tree</p>
+                        <p>reference to a iNode within the configuration tree</p>
                     </div>
 
                     
@@ -1443,7 +1195,474 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
                     
                         <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>:
                     
-                    Usually a subclass of FlyweightTreeNode positioned over the given node
+                    Usually a subclass of FlyweightTreeNode positioned over the given iNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__poolReturn" class="method item protected">
+    <h3 class="name"><code>_poolReturn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fwNode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l272"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:272</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the FlyweightTreeNode instance to the pool.
+Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" class="crosslink">hold</a>) are never returned.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fwNode</code>
+                        <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Instance to return.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createNode" class="method item protected">
+    <h3 class="name"><code>_createNode</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>iNode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l291"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:291</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new instance of the type given in iNode or the
+DefaultType if none specified
+and slides it on top of the iNode provided.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">iNode</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>reference to a iNode within the configuration tree</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>:
+                    
+                    Instance of the corresponding subclass of FlyweightTreeNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__initNodes" class="method item private">
+    <h3 class="name"><code>_initNodes</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>parentINode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l157"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:157</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">parentINode</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Parent of the iNodes to be set</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getHTML" class="method item protected">
+    <h3 class="name"><code>_getHTML</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l330"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:330</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a string with the markup for the whole tree.
+A subclass might opt to produce markup for those parts visible. (lazy rendering)</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    HTML for this widget
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__findINodeByElement" class="method item protected">
+    <h3 class="name"><code>_findINodeByElement</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>el</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l346"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:346</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Locates a iNode in the tree by the element that represents it.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">el</code>
+                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Any element belonging to the tree</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    
+                    iNode that produced the markup for that element or null if not found
                 
             </div>
         </div>
@@ -1501,7 +1720,7 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l287"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:287</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l371"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:371</code></a>
         
         </p>
 
@@ -1512,7 +1731,7 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
     </div>
 
     <div class="description">
-        <p>Returns a FlyweightTreeNode instance from the pool, positioned over the node whose markup generated some event.</p>
+        <p>Returns a FlyweightTreeNode instance from the pool, positioned over the iNode whose markup generated some event.</p>
     </div>
 
     
@@ -1559,8 +1778,8 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
 </div>
 
                 
-                    <div id="method__poolReturn" class="method item protected">
-    <h3 class="name"><code>_poolReturn</code></h3>
+                    <div id="method__forSomeINode" class="method item protected">
+    <h3 class="name"><code>_forSomeINode</code></h3>
 
     
         <div class="args">
@@ -1568,7 +1787,13 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
                 <li class="arg">
                     
-                        <code>fwNode</code>
+                        <code>fn</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>scope</code>
                     
                 </li>
             
@@ -1576,6 +1801,10 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
         </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -1603,7 +1832,7 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l188"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:188</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l385"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:385</code></a>
         
         </p>
 
@@ -1614,8 +1843,8 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
     </div>
 
     <div class="description">
-        <p>Returns the FlyweightTreeNode instance to the pool.
-Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" class="crosslink">hold</a>) are never returned.</p>
+        <p>Traverses the whole configuration tree, calling a given function for each iNode.
+If the function returns true, the traversing will terminate.</p>
     </div>
 
     
@@ -1626,14 +1855,72 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
             
                 <li class="param">
                     
-                        <code class="param-name">fwNode</code>
-                        <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+                        <code class="param-name">fn</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Instance to return.</p>
+                        <p>Function to call on each configuration iNode</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">iNode</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>iNode in the configuration tree</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">depth</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>depth of this iNode within the tree</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">index</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>index of this iNode within the array of its siblings</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">scope</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>scope to run the function in, defaults to <code>this</code>.</p>
                     </div>
 
                     
@@ -1643,6 +1930,17 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
         </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    true if any of the function calls returned true (the traversal was terminated earlier)
+                
+            </div>
+        </div>
     
 
     
@@ -1701,7 +1999,7 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l323"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:323</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l409"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:409</code></a>
         
         </p>
 
@@ -1831,6 +2129,274 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
 </div>
 
                 
+                    <div id="method__focusedNodeGetter" class="method item private">
+    <h3 class="name"><code>_focusedNodeGetter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">FlyweightNode</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l434"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:434</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Getter for the FocusedNode:attribute attribute</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">FlyweightNode</span>:
+                    
+                    Node that would have the focus if the widget is focused
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__focusedNodeSetter" class="method item private">
+    <h3 class="name"><code>_focusedNodeSetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l443"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:443</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter for the FocusedNode:attribute attribute</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">FlyweightNode</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node to receive the focus.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    
+                    iNode matching the focused node.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__focusOnINode" class="method item private">
+    <h3 class="name"><code>_focusOnINode</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>iNode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l459"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:459</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the focus on the given iNode</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">iNode</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>iNode to receive the focus</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_getRoot" class="method item">
     <h3 class="name"><code>getRoot</code></h3>
 
@@ -1867,7 +2433,7 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l238"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:238</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l322"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:322</code></a>
         
         </p>
 
@@ -1934,7 +2500,7 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l71"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:71</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l108"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:108</code></a>
         
         </p>
 
@@ -1944,8 +2510,58 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
     </div>
 
     <div class="description">
-        <p>List of dom events to be listened for at the outer contained and fired again
-at the node once positioned over the source node.</p>
+        <p>List of dom events to be listened for at the outer container and fired again
+at the FlyweightTreeNode level once positioned over the source iNode.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__focusedINode" class="property item private">
+    <h3 class="name"><code>_focusedINode</code></h3>
+    <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l117"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:117</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reference to the element that has the focus or should have the focus
+when this widget is active (ie, tabbed into).
+Mostly used for WAI-ARIA support.</p>
     </div>
 
     
@@ -1983,7 +2599,7 @@ at the node once positioned over the source node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l62"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:62</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l99"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:99</code></a>
         
         </p>
 
@@ -1993,8 +2609,8 @@ at the node once positioned over the source node.</p>
     </div>
 
     <div class="description">
-        <p>Pool of FlyweightTreeNode instances to use and reuse by the manager. <br />
-It contains a hash of arrays indexed by the node type. 
+        <p>Pool of FlyweightTreeNode instances to use and reuse by the manager.
+It contains a hash of arrays indexed by the iNode (internal node) type.
 Each array contains a series of FlyweightTreeNode subclasses of the corresponding type.</p>
     </div>
 
@@ -2031,7 +2647,7 @@ Each array contains a series of FlyweightTreeNode subclasses of the correspondin
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l54"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:54</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l91"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:91</code></a>
         
         </p>
 
@@ -2042,7 +2658,7 @@ Each array contains a series of FlyweightTreeNode subclasses of the correspondin
 
     <div class="description">
         <p>Clone of the configuration tree.
-The FlyweightTreeNode instances will use the nodes in this tree as the storage for their state.</p>
+The FlyweightTreeNode instances will use the iNodes (internal nodes) in this tree as the storage for their state.</p>
     </div>
 
     
@@ -2091,7 +2707,7 @@ The FlyweightTreeNode instances will use the nodes in this tree as the storage f
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l17"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:17</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l38"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:38</code></a>
         
         </p>
 
@@ -2101,7 +2717,7 @@ The FlyweightTreeNode instances will use the nodes in this tree as the storage f
     </div>
 
     <div class="description">
-        <p>Default object type of the child nodes if no explicit type is given in the configuration tree.
+        <p>Default object type of the nodes if no explicit type is given in the configuration tree.
 It can be specified as an object reference, these two are equivalent: <code>Y.FWTreeNode</code> or  <code>'FWTreeNode'</code>.</p>
     </div>
 
@@ -2169,7 +2785,7 @@ It can be specified as an object reference, these two are equivalent: <code>Y.FW
                     <div id="attr_dynamicLoader" class="attr item">
     <a name="config_dynamicLoader"></a> 
     <h3 class="name"><code>dynamicLoader</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+    <span class="type">Function or null</span>
 
     
 
@@ -2196,7 +2812,7 @@ It can be specified as an object reference, these two are equivalent: <code>Y.FW
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l28"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:28</code></a>
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l49"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:49</code></a>
         
         </p>
 
@@ -2215,12 +2831,16 @@ receive:</p>
 <li>callback {Function} function to call with the configuration info for the children.</li>
 </ul>
 
-<p>The function shall fetch the nodes and create a configuration object 
-much like the one a whole tree might receive. <br />
+<p>The function shall fetch the nodes and create a configuration object
+much like the one a whole tree might receive.
 It is not limited to just one level of nodes, it might contain children elements as well.
 When the data is processed, it should call the callback with the configuration object.
 The function is responsible of handling any errors.
 If the the callback is called with no arguments, the parent node will be marked as having no children.</p>
+
+<p>This attribute should be set before the tree is rendered as childless nodes
+render differently when there is a dynamic loader than when there isn't.
+(childless nodes can be expanded when a dynamic loader is present and the UI should reflect that).</p>
     </div>
 
     
@@ -2233,6 +2853,111 @@ If the the callback is called with no arguments, the parent node will be marked 
 
             <p>
             Fires when the value for the configuration attribute <code>dynamicLoader</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_focusedNode" class="attr item">
+    <a name="config_focusedNode"></a> 
+    <h3 class="name"><code>focusedNode</code></h3>
+    <span class="type"><a href="../classes/FlyweightTreeNode.html" class="crosslink">FlyweightTreeNode</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l75"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:75</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Points to the node that currently has the focus.
+If read, please make sure to release the node instance to the pool when done.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> First node in the tree</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>focusedNodeChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>focusedNode</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

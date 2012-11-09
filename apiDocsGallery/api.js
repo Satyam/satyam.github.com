@@ -54,7 +54,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "gallery-fwt-treeview",
             "name": "gallery-fwt-treeview",
-            "description": "Instances of it will be provided by FWTreeView as required.\n\nSubclasses might be defined based on it.  \nUsually, they will add further attributes and redefine the TEMPLATE to \nshow those extra attributes."
+            "description": "Instances of it will be provided by FWTreeView as required.\n\nSubclasses might be defined based on it.\nUsually, they will add further attributes and redefine the TEMPLATE to\nshow those extra attributes."
         },
         {
             "displayName": "gallery-makenode",

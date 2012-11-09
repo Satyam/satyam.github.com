@@ -167,7 +167,7 @@
  * Displays within a given container a timeline file from the given URL
  * @class Y.Timeline
  * @extends Y.Base
- * @constructor 
+ * @constructor
  * @param config {Object} configuration options
  *&#x2F;
 
@@ -187,7 +187,7 @@ var Lang = Y.Lang,
 	TOP = &#x27;top&#x27;,
 	CENTER = &#x27;center&#x27;,
 	RIGHT = &#x27;right&#x27;,
-	PX = &#x27;px&#x27;,	
+	PX = &#x27;px&#x27;,
 	STRINGS = &#x27;strings&#x27;,
 	TIMELINE = &#x27;timeline&#x27;,
 	SHOW_DESCR = &#x27;showDescr&#x27;,
@@ -197,7 +197,7 @@ var Lang = Y.Lang,
 	BLOCK_TEMPLATE = Y.Node.create(&#x27;&lt;div class=&quot;&#x27; + cName(&#x27;bar&#x27;) + &#x27;&quot; &#x2F;&gt;&#x27;),
 	GRID_TEMPLATE = Y.Node.create(&#x27;&lt;div class=&quot;&#x27; + cName(&#x27;grid&#x27;) + &#x27;&quot;&#x2F;&gt;&#x27;),
 	POINTER_TEMPLATE = Y.Node.create(&#x27;&lt;div class=&quot;&#x27; + cName(&#x27;pointer&#x27;) + &#x27;&quot; &#x2F;&gt;&#x27;),
-	CATEGORIES_TEMPLATE = &#x27;&lt;div class=&quot;&#x27; + cName(&#x27;cats&#x27;) + &#x27;&quot;&gt;{categories}&lt;p class=&quot;&#x27; + cName(&#x27;noCat&#x27;) + &#x27;&quot;&gt;{noCategory}&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;&#x27;;		
+	CATEGORIES_TEMPLATE = &#x27;&lt;div class=&quot;&#x27; + cName(&#x27;cats&#x27;) + &#x27;&quot;&gt;{categories}&lt;p class=&quot;&#x27; + cName(&#x27;noCat&#x27;) + &#x27;&quot;&gt;{noCategory}&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;&#x27;;
 
 Y.Timeline = Y.Base.create(
 	TIMELINE,
@@ -217,7 +217,8 @@ Y.Timeline = Y.Base.create(
 		 * &lt;li&gt;&lt;b&gt;category&lt;&#x2F;b&gt;: {string} the category this event belongs to&lt;&#x2F;li&gt;
 		 * &lt;li&gt;&lt;b&gt;_bar&lt;&#x2F;b&gt;: {Y.Node} reference to the Node for the bar representing this event&lt;&#x2F;li&gt;
 		 * &lt;li&gt;&lt;b&gt;_pointer&lt;&#x2F;b&gt;: {Y.Node} for point events, reference to the Node for the date pointer&lt;&#x2F;li&gt;
-		 * &lt;li&gt;&lt;b&gt;_isPoint&lt;&#x2F;b&gt;: {Boolean} signals that the event is a point event or a range event that has become too narrow to be displayed as a range&lt;&#x2F;li&gt;
+		 * &lt;li&gt;&lt;b&gt;_isPoint&lt;&#x2F;b&gt;: {Boolean} signals that the event is a point event or a range event
+		 *      that has become too narrow to be displayed as a range&lt;&#x2F;li&gt;
 		 * &lt;&#x2F;ul&gt;
 		 * @property _events
 		 * @type Object []
@@ -225,7 +226,7 @@ Y.Timeline = Y.Base.create(
 		 *&#x2F;
 		_events: null,
 		&#x2F;**
-		 * Display mode for the bars, to help calculate its location and handle crowding.  
+		 * Display mode for the bars, to help calculate its location and handle crowding.
 		 * Can be standard (0), , compact (1) or overlappying (2)
 		 * @property _mode
 		 * @type {integer}
@@ -377,7 +378,7 @@ Y.Timeline = Y.Base.create(
 		_xmlReadEvents: function (events) {
 			this._events = [];
 			Y.each(events.children, function (event) {
-				this._events.push({						
+				this._events.push({
 					start: this._readDate(event, START),
 					end: this._readDate(event,END),
 					text: this._readValue(event,&#x27;text&#x27;),
@@ -542,7 +543,7 @@ Y.Timeline = Y.Base.create(
 		 * @private
 		 *&#x2F;
 		_locate: function () {
-			var width, left, region,
+			var width, left, region, pointer,
 				middle = this._height &#x2F; 2,
 				points = [], ranges = [],levels, isPoint,
 				mode = this._mode, highest = 0, lowest = 0,
@@ -566,13 +567,13 @@ Y.Timeline = Y.Base.create(
 						levels[i] = [];
 					}
 					levels[i].push({left:left, width:width});
-					var pointer = bar.getData(EVENT)._pointer;
+					pointer = bar.getData(EVENT)._pointer;
 					if (pointer) {
 						pointer.setStyle(&#x27;height&#x27;, 30 * i + 15);
 					}
 				};
 			this.get(CONTAINER).all(&#x27;div.&#x27; + cName(&#x27;bar&#x27;)).each(function(bar) {
-				region = this._getRegion(bar); 
+				region = this._getRegion(bar);
 				width = region.width;
 				left = region.left;
 				isPoint = bar.getData(EVENT)._isPoint;
@@ -624,7 +625,7 @@ Y.Timeline = Y.Base.create(
 				range = end - start,
 				&#x2F;&#x2F; this cover periods of 0:hours, 1:days, 2:months, 3:years, 4:decades, 5:centuries, 6:millenia, 7:tens of millenia
 				&#x2F;&#x2F; JavaScript&#x27;s Date object cannot go any further anyway&#x27;
-				periods = [1000*60*60, 24, 30, 12, 10, 10, 10, 10], 
+				periods = [1000*60*60, 24, 30, 12, 10, 10, 10, 10],
 				period = 1, i, next, p, edge,label, date,
 
 			round = function (what, precision, add) {
@@ -670,7 +671,7 @@ Y.Timeline = Y.Base.create(
 							label[3] = date.getFullYear();
 						}
 						label[2] = Y.DataType.Date.format(date, {format: &#x27;%b&#x27;});
-					} 
+					}
 				}
 
 				p.setContent(label.slice(Math.min(3,i)).join(&#x27;, &#x27;));
@@ -691,7 +692,7 @@ Y.Timeline = Y.Base.create(
 		 * Sugar method to set the container attribute.
 		 * @method render
 		 * @param container {String | Node} CSS selector or reference to the container node.
-		 * @chainable 
+		 * @chainable
 		 *&#x2F;
 		render: function (container) {
 			this.set(CONTAINER, container);
@@ -703,7 +704,8 @@ Y.Timeline = Y.Base.create(
 		 * @private
 		 *&#x2F;
 		_render:function() {
-			var container = this.get(CONTAINER);
+			var container = this.get(CONTAINER),
+				region, cats;
 			if (!( container &amp;&amp; this.get(LOADED))) {
 				return;
 			}
@@ -717,14 +719,14 @@ Y.Timeline = Y.Base.create(
 			});
 
 
-			var region = container.get(REGION);
+			region = container.get(REGION);
 			this._left = region.left;
 			this._top = region.top;
 			this._height = region.height;
 			this._width = region.width;
 
 			container.append(Y.Node.create(&#x27;&lt;div class=&quot;&#x27; + cName(&#x27;divider&#x27;) + &#x27;&quot;&#x2F;&gt;&#x27;));
-			var cats = container.appendChild(Y.Node.create(Lang.sub(CATEGORIES_TEMPLATE,this.get(STRINGS))));
+			cats = container.appendChild(Y.Node.create(Lang.sub(CATEGORIES_TEMPLATE,this.get(STRINGS))));
 			Y.each(this.get(CATEGORIES), function (cat, name) {
 				if (!cat.hidden) {
 					cats.append(Y.Node.create(&#x27;&lt;p style=&quot;color:&#x27; + cat.fontColor + &#x27;;background-color:&#x27; + cat.color + &#x27;&quot;&gt;&#x27; + name + &#x27;&lt;&#x2F;p&gt;&#x27;));
@@ -737,7 +739,7 @@ Y.Timeline = Y.Base.create(
 
 			container.delegate(&#x27;click&#x27;,this._showDescr,&#x27;div.&#x27; + cName(&#x27;bar&#x27;),this);
 			container.delegate(
-				&#x27;hover&#x27;, 
+				&#x27;hover&#x27;,
 				function(ev) {
 					ev.target.setStyle(&#x27;zIndex&#x27;, 9);
 				},
@@ -884,7 +886,7 @@ Y.Timeline = Y.Base.create(
 			 * &lt;li&gt;&lt;b&gt;color&lt;&#x2F;b&gt;: {string} Background color for the bar in #rrggbb format&lt;&#x2F;li&gt;
 			 * &lt;li&gt;&lt;b&gt;fontColor&lt;&#x2F;b&gt;: {string} Color for the text in the bar in #rrggbb format&lt;&#x2F;li&gt;
 			 * &lt;li&gt;&lt;b&gt;hidden&lt;&#x2F;b&gt;: {Boolean} Events in this category should not be shown&lt;&#x2F;li&gt;
-			 * &lt;&#x2F;ul&gt; 
+			 * &lt;&#x2F;ul&gt;
 			 * @attribute categories
 			 * @type {Object}
 			 * @default {}
@@ -892,7 +894,7 @@ Y.Timeline = Y.Base.create(
 				
 			categories: {
 				validator: Lang.isObject,
-				value:{}					
+				value:{}
 			},
 			&#x2F;**
 			 * Start time (left edge) of the current timeline, in miliseconds
@@ -922,7 +924,7 @@ Y.Timeline = Y.Base.create(
 			container: {
 				setter: function (val) {
 					return Y.one(val);
-				}	
+				}
 			},
 			&#x2F;**
 			 * URL of the timeline file to be displayed
@@ -959,6 +961,7 @@ Y.Timeline = Y.Base.create(
 		}
 	}
 );
+
 
 
     </pre>
