@@ -262,8 +262,6 @@ Y.FWTreeView = Y.Base.create(
          *&#x2F;
         _onKeyDown: function (ev) {
             var ch = ev.charCode,
-                shift = ev.shiftKey,
-                ctrl = ev.ctrlKey,
                 iNode = this._focusedINode,
                 seq = this._visibleSequence,
                 index = this._visibleIndex,
@@ -334,13 +332,27 @@ Y.FWTreeView = Y.Base.create(
                     break;
                 case 13: &#x2F;&#x2F; enter
                     fwNode = this._poolFetch(iNode);
-                    fwNode.fire(&#x27;enterkey&#x27;, {domEvent:ev});
+                    this.fire(&#x27;enterkey&#x27;, {
+                        domEvent:ev,
+                        node: fwNode
+                    });
+                    fwNode.fire(&#x27;enterkey&#x27;, {
+                        domEvent:ev,
+                        node: fwNode
+                    });
                     this._poolReturn(fwNode);
                     iNode = null;
                     break;
                 case 32: &#x2F;&#x2F; spacebar
                     fwNode = this._poolFetch(iNode);
-                    fwNode.fire(&#x27;spacebar&#x27;, {domEvent:ev});
+                    this.fire(&#x27;spacebar&#x27;, {
+                        domEvent:ev,
+                        node: fwNode
+                    });
+                    fwNode.fire(&#x27;spacebar&#x27;, {
+                        domEvent:ev,
+                        node: fwNode
+                    });
                     this._poolReturn(fwNode);
                     iNode = null;
                     break;
@@ -427,6 +439,35 @@ Y.FWTreeView = Y.Base.create(
 
 	}
 );
+
+&#x2F;**
+ * TreeView provides all the events that Widget relays from the DOM.
+ * It adds an additional property to the EventFacade called &#x60;node&#x60;
+ * that points to the TreeNode instance that received the event.
+ *
+ * This instance is pooled and will be discarded upon return from the listener.
+ * If you need to hold on to this instance,
+ * use the {{#crossLink &quot;TreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}} method to preserve it.
+ * @event -any-
+ * @param type {String} The full name of the event fired
+ * @param ev {EventFacade} Standard YUI event facade for DOM events plus:
+ * @param ev.node {TreeNode} TreeNode instance that received the event
+ *&#x2F;
+&#x2F;**
+ * Fires when the space bar is pressed.
+ * Used internally to toggle node selection.
+ * @event spacebar
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
+ *&#x2F;
+&#x2F;**
+ * Fires when the enter key is pressed.
+ * @event enterkey
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
+ *&#x2F;
 
     </pre>
 </div>

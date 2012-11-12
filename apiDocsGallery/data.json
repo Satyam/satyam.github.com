@@ -1175,7 +1175,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 194,
+            "line": 209,
             "description": "Expands all the nodes of the tree.\n\nIt will only expand existing nodes.  If there is a {{#crossLink \"dynamicLoader:attribute\"}}{{/crossLink}} configured\nit will not expand those since that might lead to extreme situations.",
             "itemtype": "method",
             "name": "expandAll",
@@ -1185,7 +1185,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 210,
+            "line": 225,
             "description": "It will locate the iNode represented by the UI elements that received the event,\nslide a suitable instance on it and fire the same event on that node.",
             "itemtype": "method",
             "name": "_afterEvent",
@@ -1203,7 +1203,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 224,
+            "line": 238,
             "description": "Returns a string identifying the type of the object to handle the iNode\nor null if type was not a FlyweightNode instance.",
             "itemtype": "method",
             "name": "_getTypeString",
@@ -1225,7 +1225,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 243,
+            "line": 257,
             "description": "Pulls from the pool an instance of the type declared in the given iNode\nand slides it over that iNode.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_createNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
             "itemtype": "method",
             "name": "_poolFetch",
@@ -1247,7 +1247,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 272,
+            "line": 286,
             "description": "Returns the FlyweightTreeNode instance to the pool.\nInstances held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}) are never returned.",
             "itemtype": "method",
             "name": "_poolReturn",
@@ -1265,7 +1265,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 291,
+            "line": 305,
             "description": "Returns a new instance of the type given in iNode or the\n{{#crossLink \"defaultType\"}}{{/crossLink}} if none specified\nand slides it on top of the iNode provided.",
             "itemtype": "method",
             "name": "_createNode",
@@ -1287,7 +1287,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 322,
+            "line": 336,
             "description": "Returns an instance of Flyweight node positioned over the root",
             "itemtype": "method",
             "name": "getRoot",
@@ -1300,7 +1300,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 330,
+            "line": 344,
             "description": "Returns a string with the markup for the whole tree.\nA subclass might opt to produce markup for those parts visible. (lazy rendering)",
             "itemtype": "method",
             "name": "_getHTML",
@@ -1315,7 +1315,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 346,
+            "line": 360,
             "description": "Locates a iNode in the tree by the element that represents it.",
             "itemtype": "method",
             "name": "_findINodeByElement",
@@ -1337,7 +1337,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 371,
+            "line": 385,
             "description": "Returns a FlyweightTreeNode instance from the pool, positioned over the iNode whose markup generated some event.",
             "itemtype": "method",
             "name": "_poolFetchFromEvent",
@@ -1359,7 +1359,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 385,
+            "line": 399,
             "description": "Traverses the whole configuration tree, calling a given function for each iNode.\nIf the function returns true, the traversing will terminate.",
             "itemtype": "method",
             "name": "_forSomeINode",
@@ -1402,7 +1402,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 409,
+            "line": 423,
             "description": "Executes the given function over all the nodes in the tree or until the function returns true.\nIf dynamic loading is enabled, it will not run over nodes not yet loaded.",
             "itemtype": "method",
             "name": "forSomeNodes",
@@ -1449,7 +1449,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 434,
+            "line": 448,
             "description": "Getter for the {{#crossLink \"focusedNode:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "method",
             "name": "_focusedNodeGetter",
@@ -1464,7 +1464,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 443,
+            "line": 457,
             "description": "Setter for the {{#crossLink \"focusedNode:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "method",
             "name": "_focusedNodeSetter",
@@ -1486,7 +1486,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 459,
+            "line": 473,
             "description": "Sets the focus on the given iNode",
             "itemtype": "method",
             "name": "_focusOnINode",
@@ -1504,7 +1504,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 483,
+            "line": 497,
             "description": "Setter for the {{#crossLink \"dynamicLoader:attribute\"}}{{/crossLink}} attribute.\nIt changes the expanded attribute to false on childless iNodes not marked with `isLeaf\nsince they can now be expanded.",
             "itemtype": "method",
             "name": "",
@@ -2083,7 +2083,7 @@
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
             "line": 55,
-            "description": "Sugar method to toggle the selected state of a node.",
+            "description": "Sugar method to toggle the selected state of a node.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "toggleSelection",
             "class": "FWTreeNode",
@@ -2091,7 +2091,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 62,
+            "line": 63,
             "description": "Changes the UI to reflect the selected state and propagates the selection up and/or down.",
             "itemtype": "method",
             "name": "_afterSelectedChange",
@@ -2116,7 +2116,22 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 86,
+            "line": 90,
+            "description": "Getter for the {{#crossLink \"_aria_checked:attribute\"}}{{/crossLink}}.\nTranslate the internal {{#crossLink \"selected:attribute\"}}{{/crossLink}}\nto the strings the `aria_checked` attribute expects",
+            "itemtype": "method",
+            "name": "_ariaCheckedGetter",
+            "return": {
+                "description": "One of 'false', 'true' or 'mixed'",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 101,
             "description": "Overrides the original in FlyweightTreeNode so as to propagate the selected state\non dynamically loaded nodes.",
             "itemtype": "method",
             "name": "_dynamicLoadReturn",
@@ -2127,7 +2142,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 103,
+            "line": 118,
             "description": "When propagating selection up, it is called by a child when changing its selected state\nso that the parent adjusts its own state accordingly.",
             "itemtype": "method",
             "name": "_childSelectedChange",
@@ -2138,7 +2153,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 121,
+            "line": 136,
             "description": "Template to produce the markup for a node in the tree.",
             "itemtype": "property",
             "name": "TEMPLATE",
@@ -2149,7 +2164,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 132,
+            "line": 148,
             "description": "Constant to use with the `selected` attribute to indicate the node is not selected.",
             "itemtype": "property",
             "name": "NOT_SELECTED",
@@ -2162,7 +2177,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 141,
+            "line": 157,
             "description": "Constant to use with the `selected` attribute to indicate some\nbut not all of the children of this node are selected.\nThis state should only be acquired by upward propagation from descendants.",
             "itemtype": "property",
             "name": "PARTIALLY_SELECTED",
@@ -2175,7 +2190,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 152,
+            "line": 168,
             "description": "Constant to use with the `selected` attribute to indicate the node is selected.",
             "itemtype": "property",
             "name": "FULLY_SELECTED",
@@ -2188,8 +2203,8 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 162,
-            "description": "Selected/highlighted state of the node.\nIt can be\n\n- Y.FWTreeNode.NOT_SELECTED (0) not selected\n- Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.\n- Y.FWTreeNode.FULLY_SELECTED (2) fully selected.\n\nThe partially selected state can only be the result of selection propagating up from a child node.\nThe attribute might return PARTIALLY_SELECTED but the developer should never set that value.",
+            "line": 178,
+            "description": "Selected/highlighted state of the node.\n\nThe node selection mechanism is always enabled though it might not be visible.\nIt only sets a suitable className on the tree node.\nThe module is provided with a default CSS style that makes node selection visible.\nTo enable it, add the `yui3-fw-treeview-checkbox` className to the container of the tree.\n\n`selected` can be\n\n- Y.FWTreeNode.NOT_SELECTED (0) not selected\n- Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.\n- Y.FWTreeNode.FULLY_SELECTED (2) fully selected.\n\nThe partially selected state can only be the result of selection propagating up from a child node.\nThe attribute might return PARTIALLY_SELECTED but the developer should never set that value.",
             "itemtype": "attribute",
             "name": "selected",
             "type": "Integer",
@@ -2199,8 +2214,22 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 182,
-            "description": "Whether selection of one node should propagate to its parent.",
+            "line": 204,
+            "description": "String value equivalent to the {{#crossLink \"selected:attribute\"}}{{/crossLink}}\nfor use in template expansion.",
+            "itemtype": "attribute",
+            "name": "_aria_checked",
+            "type": "String",
+            "default": "false",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "FWTreeNode",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
+            "line": 217,
+            "description": "Whether selection of one node should propagate to its parent.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "attribute",
             "name": "propagateUp",
             "type": "Boolean",
@@ -2210,8 +2239,8 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 192,
-            "description": "Whether selection of one node should propagate to its children.",
+            "line": 228,
+            "description": "Whether selection of one node should propagate to its children.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "attribute",
             "name": "propagateDown",
             "type": "Boolean",
@@ -2221,15 +2250,27 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 206,
+            "line": 243,
             "description": "Fires when the space bar is pressed.\nUsed internally to toggle node selection.",
             "itemtype": "event",
             "name": "spacebar",
             "params": [
                 {
                     "name": "ev",
-                    "description": "Standard YUI event facade for keyboard events.",
-                    "type": "EventFacade"
+                    "description": "YUI event facade for keyboard events, including:",
+                    "type": "EventFacade",
+                    "props": [
+                        {
+                            "name": "domEvent",
+                            "description": "The original event produced by the DOM",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "node",
+                            "description": "The node that had the focus when the key was pressed",
+                            "type": "FWTreeNode"
+                        }
+                    ]
                 }
             ],
             "class": "FWTreeNode",
@@ -2237,15 +2278,27 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 212,
+            "line": 251,
             "description": "Fires when the enter key is pressed.",
             "itemtype": "event",
             "name": "enterkey",
             "params": [
                 {
                     "name": "ev",
-                    "description": "Standard YUI event facade for keyboard events.",
-                    "type": "EventFacade"
+                    "description": "YUI event facade for keyboard events, including:",
+                    "type": "EventFacade",
+                    "props": [
+                        {
+                            "name": "domEvent",
+                            "description": "The original event produced by the DOM",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "node",
+                            "description": "The node that had the focus when the key was pressed",
+                            "type": "FWTreeNode"
+                        }
+                    ]
                 }
             ],
             "class": "FWTreeNode",
@@ -2253,8 +2306,8 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 217,
-            "description": "Fires when this node is clicked.\nUsed internally to toggle expansion or selection when clicked\non the corresponding icons.",
+            "line": 258,
+            "description": "Fires when this node is clicked.\nUsed internally to toggle expansion or selection when clicked\non the corresponding icons.\n\nIt cannot be prevented.  This is a helper event, the actual event\nhappens on the TreeView instance and it is relayed here for convenience.",
             "itemtype": "event",
             "name": "click",
             "params": [
@@ -2351,7 +2404,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 201,
+            "line": 213,
             "description": "Listener for the focus event.\nUpdates the node receiving the focus when the widget gets the focus.",
             "itemtype": "method",
             "name": "_aferFocus",
@@ -2369,7 +2422,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 215,
+            "line": 227,
             "description": "Rebuilds the array of {{#crossLink \"_visibleSequence\"}}{{/crossLink}} that can be traversed with the up/down arrow keys",
             "itemtype": "method",
             "name": "_rebuildSequence",
@@ -2380,7 +2433,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 234,
+            "line": 246,
             "description": "Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div",
             "itemtype": "property",
             "name": "CONTENT_TEMPLATE",
@@ -2390,7 +2443,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 244,
+            "line": 256,
             "description": "Override for the `defaultType` value of FlyweightTreeManager\nso it creates FWTreeNode instances instead of the default.",
             "itemtype": "attribute",
             "name": "defaultType",
@@ -2401,12 +2454,96 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 254,
+            "line": 266,
             "description": "Enables toggling by clicking on the label item instead of just the toggle icon.",
             "itemtype": "attribute",
             "name": "toggleOnLabelClick",
             "type": "Boolean",
             "value": "false",
+            "class": "FWTreeView",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
+            "line": 283,
+            "description": "TreeView provides all the events that Widget relays from the DOM.\nIt adds an additional property to the EventFacade called `node`\nthat points to the TreeNode instance that received the event.\n\nThis instance is pooled and will be discarded upon return from the listener.\nIf you need to hold on to this instance,\nuse the {{#crossLink \"TreeNode/hold\"}}{{/crossLink}} method to preserve it.",
+            "itemtype": "event",
+            "name": "-any-",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The full name of the event fired",
+                    "type": "String"
+                },
+                {
+                    "name": "ev",
+                    "description": "Standard YUI event facade for DOM events plus:",
+                    "type": "EventFacade",
+                    "props": [
+                        {
+                            "name": "node",
+                            "description": "TreeNode instance that received the event",
+                            "type": "TreeNode"
+                        }
+                    ]
+                }
+            ],
+            "class": "FWTreeView",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
+            "line": 296,
+            "description": "Fires when the space bar is pressed.\nUsed internally to toggle node selection.",
+            "itemtype": "event",
+            "name": "spacebar",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "YUI event facade for keyboard events, including:",
+                    "type": "EventFacade",
+                    "props": [
+                        {
+                            "name": "domEvent",
+                            "description": "The original event produced by the DOM",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "node",
+                            "description": "The node that had the focus when the key was pressed",
+                            "type": "FWTreeNode"
+                        }
+                    ]
+                }
+            ],
+            "class": "FWTreeView",
+            "module": "gallery-fwt-treeview"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
+            "line": 304,
+            "description": "Fires when the enter key is pressed.",
+            "itemtype": "event",
+            "name": "enterkey",
+            "params": [
+                {
+                    "name": "ev",
+                    "description": "YUI event facade for keyboard events, including:",
+                    "type": "EventFacade",
+                    "props": [
+                        {
+                            "name": "domEvent",
+                            "description": "The original event produced by the DOM",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "node",
+                            "description": "The node that had the focus when the key was pressed",
+                            "type": "FWTreeNode"
+                        }
+                    ]
+                }
+            ],
             "class": "FWTreeView",
             "module": "gallery-fwt-treeview"
         },

@@ -180,9 +180,9 @@
 	{
 		initializer: function() {
 			this.after(&#x27;click&#x27;, this._afterClick);
-			this.after(&#x27;selectedChange&#x27;, this._afterSelectedChange);
+			this.after(SELECTED + CHANGE, this._afterSelectedChange);
             this.after(&#x27;spacebar&#x27;, this.toggleSelection);
-            this.after(&#x27;expandedChange&#x27;, this._afterExpandedChanged);
+            this.after(EXPANDED + CHANGE, this._afterExpandedChanged);
 		},
         &#x2F;**
          * Listens to changes in the expanded attribute to invalidate and force
@@ -214,10 +214,11 @@
 		},
 		&#x2F;**
 		 * Sugar method to toggle the selected state of a node.
+         * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
 		 * @method toggleSelection
 		 *&#x2F;
 		toggleSelection: function() {
-			this.set(&#x27;selected&#x27;, (this.get(&#x27;selected&#x27;)?NOT_SELECTED:FULLY_SELECTED));
+			this.set(SELECTED, (this.get(SELECTED)?NOT_SELECTED:FULLY_SELECTED));
 		},
 		&#x2F;**
 		 * Changes the UI to reflect the selected state and propagates the selection up and&#x2F;or down.
@@ -229,20 +230,34 @@
 		 *&#x2F;
 		_afterSelectedChange: function (ev) {
 			var selected = ev.newVal,
-                prefix = CNAMES.cname_sel_prefix + &#x27;-&#x27;;
+                prefix = CNAMES.cname_sel_prefix + &#x27;-&#x27;,
+                el;
 
 			if (!this.isRoot()) {
-				Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;)).replaceClass(prefix + ev.prevVal, prefix + selected);
+				el = Y.one(&#x27;#&#x27; + this.get(&#x27;id&#x27;));
+                el.replaceClass(prefix + ev.prevVal, prefix + selected);
+                el.set(&#x27;aria-checked&#x27;, this._ariaCheckedGetter());
 				if (this.get(&#x27;propagateUp&#x27;) &amp;&amp; ev.src !== &#x27;propagatingDown&#x27;) {
 					this.getParent()._childSelectedChange().release();
 				}
 			}
 			if (this.get(&#x27;propagateDown&#x27;) &amp;&amp; ev.src !== &#x27;propagatingUp&#x27;) {
 				this.forSomeChildren(function(node) {
-					node.set(&#x27;selected&#x27; , selected, &#x27;propagatingDown&#x27;);
+					node.set(SELECTED , selected, &#x27;propagatingDown&#x27;);
 				});
 			}
 		},
+        &#x2F;**
+         * Getter for the {{#crossLink &quot;_aria_checked:attribute&quot;}}{{&#x2F;crossLink}}.
+         * Translate the internal {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}
+         * to the strings the &#x60;aria_checked&#x60; attribute expects
+         * @method _ariaCheckedGetter
+         * @return {String} One of &#x27;false&#x27;, &#x27;true&#x27; or &#x27;mixed&#x27;
+         * @private
+         *&#x2F;
+        _ariaCheckedGetter: function () {
+            return [&#x27;false&#x27;,&#x27;mixed&#x27;,&#x27;true&#x27;][this.get(SELECTED)];
+        },
 		&#x2F;**
 		 * Overrides the original in FlyweightTreeNode so as to propagate the selected state
 		 * on dynamically loaded nodes.
@@ -252,9 +267,9 @@
 		_dynamicLoadReturn: function () {
             Y.FWTreeNode.superclass._dynamicLoadReturn.apply(this, arguments);
 			if (this.get(&#x27;propagateDown&#x27;)) {
-				var selected = this.get(&#x27;selected&#x27;);
+				var selected = this.get(SELECTED);
 				this.forSomeChildren(function(node) {
-					node.set(&#x27;selected&#x27; , selected, &#x27;propagatingDown&#x27;);
+					node.set(SELECTED , selected, &#x27;propagatingDown&#x27;);
 				});
 			}
             this._root._visibleSequence = null;
@@ -270,9 +285,9 @@
 			var count = 0, selCount = 0;
 			this.forSomeChildren(function (node) {
 				count +=2;
-				selCount += node.get(&#x27;selected&#x27;);
+				selCount += node.get(SELECTED);
 			});
-			this.set(&#x27;selected&#x27;, (selCount === 0?NOT_SELECTED:(selCount === count?FULLY_SELECTED:PARTIALLY_SELECTED)), {src:&#x27;propagatingUp&#x27;});
+			this.set(SELECTED, (selCount === 0?NOT_SELECTED:(selCount === count?FULLY_SELECTED:PARTIALLY_SELECTED)), {src:&#x27;propagatingUp&#x27;});
 			return this;
 		}
 
@@ -285,7 +300,8 @@
 		 * @static
 		 *&#x2F;
 		TEMPLATE: Lang.sub(
-            &#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node} {cname_sel_prefix}-{selected}&quot; role=&quot;treeitem&quot; aria-expanded=&quot;{expanded}&quot;&gt;&#x27; +
+            &#x27;&lt;li id=&quot;{id}&quot; class=&quot;{cname_node} {cname_sel_prefix}-{selected}&quot; &#x27; +
+                &#x27;role=&quot;treeitem&quot; aria-expanded=&quot;{expanded}&quot; aria-checked=&quot;{_aria_checked}&quot;&gt;&#x27; +
             &#x27;&lt;div tabIndex=&quot;{tabIndex}&quot; class=&quot;{cname_content}&quot;&gt;&lt;div class=&quot;{cname_toggle}&quot;&gt;&lt;&#x2F;div&gt;&#x27; +
             &#x27;&lt;div class=&quot;{cname_icon}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_selection}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_label}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27; +
             &#x27;&lt;ul class=&quot;{cname_children}&quot; role=&quot;group&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;, CNAMES),
@@ -321,7 +337,13 @@
 		ATTRS: {
 			&#x2F;**
 			 * Selected&#x2F;highlighted state of the node.
-			 * It can be
+             *
+             * The node selection mechanism is always enabled though it might not be visible.
+             * It only sets a suitable className on the tree node.
+             * The module is provided with a default CSS style that makes node selection visible.
+             * To enable it, add the &#x60;yui3-fw-treeview-checkbox&#x60; className to the container of the tree.
+             *
+			 * &#x60;selected&#x60; can be
 			 *
 			 * - Y.FWTreeNode.NOT_SELECTED (0) not selected
 			 * - Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.
@@ -339,8 +361,22 @@
 					return value === NOT_SELECTED || value === FULLY_SELECTED || value === PARTIALLY_SELECTED;
 				}
 			},
+            &#x2F;**
+             * String value equivalent to the {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}
+             * for use in template expansion.
+             * @attribute _aria_checked
+             * @type String
+             * @default false
+             * @readonly
+             * @protected
+             *&#x2F;
+            _aria_checked: {
+                readOnly: true,
+                getter: &#x27;_ariaCheckedGetter&#x27;
+            },
 			&#x2F;**
 			 * Whether selection of one node should propagate to its parent.
+             * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
 			 * @attribute propagateUp
 			 * @type Boolean
 			 * @value true
@@ -351,7 +387,8 @@
 			},
 			&#x2F;**
 			 * Whether selection of one node should propagate to its children.
-			 * @attribute propagateDown
+             * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
+             * @attribute propagateDown
 			 * @type Boolean
 			 * @value true
 			 *&#x2F;
@@ -367,17 +404,24 @@
  * Fires when the space bar is pressed.
  * Used internally to toggle node selection.
  * @event spacebar
- * @param ev {EventFacade} Standard YUI event facade for keyboard events.
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
  *&#x2F;
 &#x2F;**
  * Fires when the enter key is pressed.
  * @event enterkey
- * @param ev {EventFacade} Standard YUI event facade for keyboard events.
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
  *&#x2F;
 &#x2F;**
  * Fires when this node is clicked.
  * Used internally to toggle expansion or selection when clicked
  * on the corresponding icons.
+ *
+ * It cannot be prevented.  This is a helper event, the actual event
+ * happens on the TreeView instance and it is relayed here for convenience.
  * @event click
  * @param ev {EventFacade} Standard YUI event facade for mouse events.
  *&#x2F;
