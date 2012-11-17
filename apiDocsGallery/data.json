@@ -403,14 +403,13 @@
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [
-                "FWTreeView"
-            ],
+            "extension_for": [],
             "module": "gallery-flyweight-tree",
             "namespace": "",
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
             "line": 6,
-            "description": "Extension to handle its child nodes by using the flyweight pattern.\n\nThe information for the tree is stored internally in a plain object without methods,\nevents or attributes.\nThis manager will position FlyweightTreeNode instances (or subclasses of it)\nover these iNodes from a small pool of them, in order to save memory.\n\nThe nodes on this configuration tree are referred to in this documentation as `iNodes`\nfor 'internal nodes', to tell them apart from the pooled FlyweightTreeNode instances\nthat will be used to manipulate them.  The FlyweightTreeNode instances will usually\nbe declared as `fwNodes` when confusion might arise.\nIf a variable or argument is not explicitly named `iNode` or a related name it is\nFlyweightTreeNode instance.\n\nThe developer should not be concerned about the iNodes,\nexcept in the initial configuration tree.\nIf the developer finds anything that needs to be done through iNodes,\nit is a bug and should be reported (thanks).\niNodes should be private.",
+            "description": "Widget to handle its child nodes by using the flyweight pattern.\n\nThe information for the tree is stored internally in a plain object without methods,\nevents or attributes.\nThis manager will position FlyweightTreeNode instances (or subclasses of it)\nover these iNodes from a small pool of them, in order to save memory.\n\nThe nodes on this configuration tree are referred to in this documentation as `iNodes`\nfor 'internal nodes', to tell them apart from the pooled FlyweightTreeNode instances\nthat will be used to manipulate them.  The FlyweightTreeNode instances will usually\nbe declared as `fwNodes` when confusion might arise.\nIf a variable or argument is not explicitly named `iNode` or a related name it is\nFlyweightTreeNode instance.\n\nThe developer should not be concerned about the iNodes,\nexcept in the initial configuration tree.\nIf the developer finds anything that needs to be done through iNodes,\nit is a bug and should be reported (thanks).\niNodes should be private.",
+            "extends": "Widget",
             "is_constructor": 1
         },
         "FlyweightTreeNode": {
@@ -456,10 +455,7 @@
             "namespace": "",
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
             "line": 26,
-            "extends": "Widget",
-            "uses": [
-                "FlyweightTreeManager"
-            ],
+            "extends": "FlyweightTreeManager",
             "is_constructor": 1,
             "params": [
                 {
@@ -1006,40 +1002,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 38,
-            "description": "Default object type of the nodes if no explicit type is given in the configuration tree.\nIt can be specified as an object reference, these two are equivalent: `Y.FWTreeNode` or  `'FWTreeNode'`.",
-            "itemtype": "attribute",
-            "name": "defaultType",
-            "type": "{String | Object}",
-            "default": "'FlyweightTreeNode'",
-            "class": "FlyweightTreeManager",
-            "module": "gallery-flyweight-tree"
-        },
-        {
-            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 49,
-            "description": "Function used to load the nodes dynamically.\nFunction will run in the scope of the FlyweightTreeManager instance and will\nreceive:\n\n* node {FlyweightTreeNode} reference to the parent of the children to be loaded.\n* callback {Function} function to call with the configuration info for the children.\n\nThe function shall fetch the nodes and create a configuration object\nmuch like the one a whole tree might receive.\nIt is not limited to just one level of nodes, it might contain children elements as well.\nWhen the data is processed, it should call the callback with the configuration object.\nThe function is responsible of handling any errors.\nIf the the callback is called with no arguments, the parent node will be marked as having no children.\n\nThis attribute should be set before the tree is rendered as childless nodes\nrender differently when there is a dynamic loader than when there isn't.\n(childless nodes can be expanded when a dynamic loader is present and the UI should reflect that).",
-            "itemtype": "attribute",
-            "name": "dynamicLoader",
-            "type": "{Function or null}",
-            "default": "null",
-            "class": "FlyweightTreeManager",
-            "module": "gallery-flyweight-tree"
-        },
-        {
-            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 75,
-            "description": "Points to the node that currently has the focus.\nIf read, please make sure to release the node instance to the pool when done.",
-            "itemtype": "attribute",
-            "name": "focusedNode",
-            "type": "FlyweightTreeNode",
-            "default": "First node in the tree",
-            "class": "FlyweightTreeManager",
-            "module": "gallery-flyweight-tree"
-        },
-        {
-            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 91,
+            "line": 37,
             "description": "Clone of the configuration tree.\nThe FlyweightTreeNode instances will use the iNodes (internal nodes) in this tree as the storage for their state.",
             "itemtype": "property",
             "name": "_tree",
@@ -1051,7 +1014,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 99,
+            "line": 45,
             "description": "Pool of FlyweightTreeNode instances to use and reuse by the manager.\nIt contains a hash of arrays indexed by the iNode (internal node) type.\nEach array contains a series of FlyweightTreeNode subclasses of the corresponding type.",
             "itemtype": "property",
             "name": "_pool",
@@ -1063,8 +1026,8 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 108,
-            "description": "List of dom events to be listened for at the outer container and fired again\nat the FlyweightTreeNode level once positioned over the source iNode.",
+            "line": 54,
+            "description": "List of dom events to be listened for at the outer container and fired again\nat the FlyweightTreeNode level once positioned over the source iNode.\n\nSince the node instances are not actually there, they can't listen to the events themselves\nso the events listed here will serve to wake up those instances and get the event\nas if they had been there all along.",
             "itemtype": "property",
             "name": "_domEvents",
             "type": "Array of strings",
@@ -1076,7 +1039,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 117,
+            "line": 67,
             "description": "Reference to the element that has the focus or should have the focus\nwhen this widget is active (ie, tabbed into).\nMostly used for WAI-ARIA support.",
             "itemtype": "property",
             "name": "_focusedINode",
@@ -1089,8 +1052,42 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 128,
-            "description": "Method to load the configuration tree.\nThe nodes in this tree are copied into iNodes (internal nodes) for internal use.\n\nThe constructor does not load the tree automatically so as to allow the subclass\nof this manager\nto process the tree definition anyway it wants, adding defaults and such\nand to name the tree whatever is suitable.\nFor TreeView, the configuration property is named `tree`, for a form, it is named `form`.\nIt also sets initial values for some default properties such as `parent` references and `id` for all iNodes.",
+            "line": 78,
+            "description": "Event handles of events subscribed to, to detach them on destroy",
+            "itemtype": "property",
+            "name": "_eventHandles",
+            "type": "Array of EventHandles",
+            "access": "private",
+            "tagname": "",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 86,
+            "description": "Part of the Widget lifecycle.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "protected",
+            "tagname": "",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 95,
+            "description": "Part of the lifecycle.  Destroys the pools.",
+            "itemtype": "method",
+            "name": "destructor",
+            "access": "protected",
+            "tagname": "",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 111,
+            "description": "Method to load the configuration tree.\nThe nodes in this tree are copied into iNodes (internal nodes) for internal use.\n\nThe initializer does not load the tree automatically so as to allow the subclass\nof this manager\nto process the tree definition anyway it wants, adding defaults and such\nand to name the tree whatever is suitable.\nFor TreeView, the configuration property is named `tree`, for a form, it is named `form`.\nIt also sets initial values for some default properties such as `parent` references and `id` for all iNodes.",
             "itemtype": "method",
             "name": "_loadConfig",
             "params": [
@@ -1147,7 +1144,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 157,
+            "line": 140,
             "itemtype": "method",
             "name": "_initNodes",
             "params": [
@@ -1164,18 +1161,54 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 179,
-            "description": "Initializes the events for its internal use and those requested in\nthe {{#crossLink \"_domEvents\"}}{{/crossLink}} array.",
+            "line": 162,
+            "description": "Widget lifecyle method.\n\nGets the HTML markup for the visible nodes and inserts it into the contentbox.",
             "itemtype": "method",
-            "name": "_doAfterRender",
-            "access": "private",
+            "name": "renderUI",
+            "access": "protected",
             "tagname": "",
             "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 209,
+            "line": 172,
+            "description": "Initializes the events for its internal use and those requested in\nthe {{#crossLink \"_domEvents\"}}{{/crossLink}} array.",
+            "itemtype": "method",
+            "name": "bindUI",
+            "access": "protected",
+            "tagname": "",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 188,
+            "description": "Overrides the native `fire` method so that for DOM events,\nit will fetch from the pool the fwNode that should have received\nthe event and add it to the event facade as property `node`.",
+            "itemtype": "method",
+            "name": "fire",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of the event, or an object that contains\na 'type' property.",
+                    "type": "String|Object"
+                },
+                {
+                    "name": "arguments",
+                    "description": "an arbitrary set of parameters to pass to\nthe handler. If the first of these is an object literal and the event is\nconfigured to emit an event facade, the event facade will replace that\nparameter after the properties the object literal contains are copied to\nthe event facade.",
+                    "type": "Object*"
+                }
+            ],
+            "return": {
+                "description": "false if the event was halted.",
+                "type": "Boolean"
+            },
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 213,
             "description": "Expands all the nodes of the tree.\n\nIt will only expand existing nodes.  If there is a {{#crossLink \"dynamicLoader:attribute\"}}{{/crossLink}} configured\nit will not expand those since that might lead to extreme situations.",
             "itemtype": "method",
             "name": "expandAll",
@@ -1185,7 +1218,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 225,
+            "line": 229,
             "description": "It will locate the iNode represented by the UI elements that received the event,\nslide a suitable instance on it and fire the same event on that node.",
             "itemtype": "method",
             "name": "_afterEvent",
@@ -1203,7 +1236,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 238,
+            "line": 242,
             "description": "Returns a string identifying the type of the object to handle the iNode\nor null if type was not a FlyweightNode instance.",
             "itemtype": "method",
             "name": "_getTypeString",
@@ -1225,7 +1258,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 257,
+            "line": 261,
             "description": "Pulls from the pool an instance of the type declared in the given iNode\nand slides it over that iNode.\nIf there are no instances of the given type in the pool, a new one will be created via {{#crossLink \"_createNode\"}}{{/crossLink}}\nIf an instance is held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}), it will be returned instead.",
             "itemtype": "method",
             "name": "_poolFetch",
@@ -1247,7 +1280,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 286,
+            "line": 290,
             "description": "Returns the FlyweightTreeNode instance to the pool.\nInstances held (see: {{#crossLink \"FlyweightTreeNode/hold\"}}{{/crossLink}}) are never returned.",
             "itemtype": "method",
             "name": "_poolReturn",
@@ -1265,7 +1298,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 305,
+            "line": 309,
             "description": "Returns a new instance of the type given in iNode or the\n{{#crossLink \"defaultType\"}}{{/crossLink}} if none specified\nand slides it on top of the iNode provided.",
             "itemtype": "method",
             "name": "_createNode",
@@ -1287,7 +1320,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 336,
+            "line": 340,
             "description": "Returns an instance of Flyweight node positioned over the root",
             "itemtype": "method",
             "name": "getRoot",
@@ -1300,7 +1333,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 344,
+            "line": 348,
             "description": "Returns a string with the markup for the whole tree.\nA subclass might opt to produce markup for those parts visible. (lazy rendering)",
             "itemtype": "method",
             "name": "_getHTML",
@@ -1315,7 +1348,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 360,
+            "line": 364,
             "description": "Locates a iNode in the tree by the element that represents it.",
             "itemtype": "method",
             "name": "_findINodeByElement",
@@ -1337,7 +1370,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 385,
+            "line": 389,
             "description": "Returns a FlyweightTreeNode instance from the pool, positioned over the iNode whose markup generated some event.",
             "itemtype": "method",
             "name": "_poolFetchFromEvent",
@@ -1359,7 +1392,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 399,
+            "line": 403,
             "description": "Traverses the whole configuration tree, calling a given function for each iNode.\nIf the function returns true, the traversing will terminate.",
             "itemtype": "method",
             "name": "_forSomeINode",
@@ -1402,7 +1435,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 423,
+            "line": 427,
             "description": "Executes the given function over all the nodes in the tree or until the function returns true.\nIf dynamic loading is enabled, it will not run over nodes not yet loaded.",
             "itemtype": "method",
             "name": "forSomeNodes",
@@ -1449,7 +1482,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 448,
+            "line": 452,
             "description": "Getter for the {{#crossLink \"focusedNode:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "method",
             "name": "_focusedNodeGetter",
@@ -1464,7 +1497,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 457,
+            "line": 461,
             "description": "Setter for the {{#crossLink \"focusedNode:attribute\"}}{{/crossLink}} attribute",
             "itemtype": "method",
             "name": "_focusedNodeSetter",
@@ -1486,7 +1519,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 473,
+            "line": 477,
             "description": "Sets the focus on the given iNode",
             "itemtype": "method",
             "name": "_focusOnINode",
@@ -1504,7 +1537,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
-            "line": 497,
+            "line": 501,
             "description": "Setter for the {{#crossLink \"dynamicLoader:attribute\"}}{{/crossLink}} attribute.\nIt changes the expanded attribute to false on childless iNodes not marked with `isLeaf\nsince they can now be expanded.",
             "itemtype": "method",
             "name": "",
@@ -1521,6 +1554,39 @@
             },
             "access": "private",
             "tagname": "",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 526,
+            "description": "Default object type of the nodes if no explicit type is given in the configuration tree.\nIt can be specified as an object reference, these two are equivalent: `Y.FWTreeNode` or  `'FWTreeNode'`.",
+            "itemtype": "attribute",
+            "name": "defaultType",
+            "type": "{String | Object}",
+            "default": "'FlyweightTreeNode'",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 537,
+            "description": "Function used to load the nodes dynamically.\nFunction will run in the scope of the FlyweightTreeManager instance and will\nreceive:\n\n* node {FlyweightTreeNode} reference to the parent of the children to be loaded.\n* callback {Function} function to call with the configuration info for the children.\n\nThe function shall fetch the nodes and create a configuration object\nmuch like the one a whole tree might receive.\nIt is not limited to just one level of nodes, it might contain children elements as well.\nWhen the data is processed, it should call the callback with the configuration object.\nThe function is responsible of handling any errors.\nIf the the callback is called with no arguments, the parent node will be marked as having no children.\n\nThis attribute should be set before the tree is rendered as childless nodes\nrender differently when there is a dynamic loader than when there isn't.\n(childless nodes can be expanded when a dynamic loader is present and the UI should reflect that).",
+            "itemtype": "attribute",
+            "name": "dynamicLoader",
+            "type": "{Function or null}",
+            "default": "null",
+            "class": "FlyweightTreeManager",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-manager.js",
+            "line": 563,
+            "description": "Points to the node that currently has the focus.\nIf read, please make sure to release the node instance to the pool when done.",
+            "itemtype": "attribute",
+            "name": "focusedNode",
+            "type": "FlyweightTreeNode",
+            "default": "First node in the tree",
             "class": "FlyweightTreeManager",
             "module": "gallery-flyweight-tree"
         },
@@ -1551,6 +1617,24 @@
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
             "line": 37,
+            "description": "Standard lifecycle method, reads the root node from the config",
+            "itemtype": "method",
+            "name": "initializer",
+            "params": [
+                {
+                    "name": "cfg",
+                    "description": "configuration data",
+                    "type": "Object"
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "FlyweightTreeNode",
+            "module": "gallery-flyweight-tree"
+        },
+        {
+            "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
+            "line": 46,
             "description": "Returns a string with the markup for this node along that of its children\nproduced from its attributes rendered\nvia the first template string it finds in these locations:\n\n* It's own {{#crossLink \"template\"}}{{/crossLink}} configuration attribute\n* The static {{#crossLink \"FlyweightTreeNode/TEMPLATE\"}}{{/crossLink}} class property",
             "itemtype": "method",
             "name": "_getHTML",
@@ -1582,7 +1666,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 102,
+            "line": 111,
             "description": "Method to slide this instance on top of another iNode in the configuration object",
             "itemtype": "method",
             "name": "_slideTo",
@@ -1600,7 +1684,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 112,
+            "line": 121,
             "description": "Executes the given function on each of the child nodes of this node.",
             "itemtype": "method",
             "name": "forSomeChildren",
@@ -1638,7 +1722,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 136,
+            "line": 145,
             "description": "Getter for the expanded configuration attribute.\nIt is meant to be overriden by the developer.\nThe supplied version defaults to true if the expanded property\nis not set in the underlying configuration tree.\nIt can be overriden to default to false.",
             "itemtype": "method",
             "name": "_expandedGetter",
@@ -1653,7 +1737,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 149,
+            "line": 158,
             "description": "Setter for the expanded configuration attribute.\nIt renders the child nodes if this branch has never been expanded.\nThen sets the className on the node to the static constants\nCNAME_COLLAPSED or CNAME_EXPANDED from Y.FlyweightTreeManager",
             "itemtype": "method",
             "name": "_expandedSetter",
@@ -1671,7 +1755,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 182,
+            "line": 191,
             "description": "Triggers the dynamic loading of children for this node.",
             "itemtype": "method",
             "name": "_loadDynamic",
@@ -1682,7 +1766,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 194,
+            "line": 203,
             "description": "Callback for the dynamicLoader method.",
             "itemtype": "method",
             "name": "_dynamicLoadReturn",
@@ -1700,7 +1784,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 216,
+            "line": 225,
             "description": "Renders the children of this node.\nIt the children had been rendered, they will be replaced.",
             "itemtype": "method",
             "name": "_renderChildren",
@@ -1711,7 +1795,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 232,
+            "line": 241,
             "description": "Prevents this instance from being returned to the pool and reused.\nRemember to {{#crossLink \"release\"}}{{/crossLink}} this instance when no longer needed.",
             "itemtype": "method",
             "name": "hold",
@@ -1721,7 +1805,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 241,
+            "line": 250,
             "description": "Allows this instance to be returned to the pool and reused.\n\n__Important__: This instance should not be used after being released",
             "itemtype": "method",
             "name": "release",
@@ -1731,7 +1815,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 253,
+            "line": 262,
             "description": "Returns the parent node for this node or null if none exists.\nThe copy is not on {{#crossLink \"hold\"}}{{/crossLink}}.\nRemember to release the copy to the pool when done.",
             "itemtype": "method",
             "name": "getParent",
@@ -1743,7 +1827,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 264,
+            "line": 273,
             "description": "Returns the next sibling node for this node or null if none exists.\nThe copy is not on {{#crossLink \"hold\"}}{{/crossLink}}.\nRemember to release the copy to the pool when done.",
             "itemtype": "method",
             "name": "getNextSibling",
@@ -1755,7 +1839,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 280,
+            "line": 289,
             "description": "Returns the previous sibling node for this node or null if none exists.\nThe copy is not on {{#crossLink \"hold\"}}{{/crossLink}}.\nRemember to release the copy to the pool when done.",
             "itemtype": "method",
             "name": "getPreviousSibling",
@@ -1767,7 +1851,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 296,
+            "line": 305,
             "description": "Sets the focus to this node.",
             "itemtype": "method",
             "name": "focus",
@@ -1777,7 +1861,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 304,
+            "line": 313,
             "description": "Removes the focus from this node",
             "itemtype": "method",
             "name": "blur",
@@ -1787,7 +1871,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 312,
+            "line": 321,
             "description": "Sugar method to toggle the expanded state of the node.",
             "itemtype": "method",
             "name": "toggle",
@@ -1797,7 +1881,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 320,
+            "line": 329,
             "description": "Sugar method to expand a node",
             "itemtype": "method",
             "name": "expand",
@@ -1807,7 +1891,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 328,
+            "line": 337,
             "description": "Sugar method to collapse this node",
             "itemtype": "method",
             "name": "collapse",
@@ -1817,7 +1901,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 336,
+            "line": 345,
             "description": "Returns true if this node is the root node",
             "itemtype": "method",
             "name": "isRoot",
@@ -1830,7 +1914,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 344,
+            "line": 353,
             "description": "Gets the stored value for the attribute, from either the\ninternal state object, or the state proxy if it exits",
             "itemtype": "method",
             "name": "_getStateVal",
@@ -1852,7 +1936,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 364,
+            "line": 373,
             "description": "Sets the stored value for the attribute, in either the\ninternal state object, or the state proxy if it exits",
             "itemtype": "method",
             "name": "_setStateVal",
@@ -1875,7 +1959,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 383,
+            "line": 392,
             "description": "Template string to be used to render this node.\nIt should be overriden by the subclass.\n\nIt contains the HTML markup for this node plus placeholders,\nenclosed in curly braces, that have access to any of the\nconfiguration attributes of this node plus several predefined placeholders.\n\nIt must contain at least three elements identified by their classNames:\n\n        +----------------------------+\n        | {cname_node}               |\n        | +------------------------+ |\n        | | {cname_content}        | |\n        | +------------------------+ |\n        |                            |\n        | +------------------------+ |\n        | | {cname_children}       | |\n        | +------------------------+ |\n        +----------------------------+\n\nFor example:\n\n        '<div id=\"{id}\" class=\"{cname_node}\" role=\"\" aria-expanded=\"{expanded}\">' +\n              '<div tabIndex=\"{tabIndex}\" class=\"{cname_content}\">{label}</div>' +\n              '<div class=\"{cname_children}\" role=\"group\">{children}</div>' +\n        '</div>'\n\nThe outermost container identified by the className `{cname_node}`\nmust also use the `{id}` placeholder to set the `id` of the node.\nIt should also have the proper ARIA role assigned and the\n`aria-expanded` set to the `{expanded}` placeholder.\n\nIt must contain two further elements:\n\n* A container for the contents of this node, identified by the className\n  `{cname_content}` which should contain everything the user would associate\n  with this node, such as the label and other status indicators\n  such as toggle and selection indicators.\n  This is the element that would receive the focus of the node, thus,\n  it must have a `{tabIndex}` placeholder to receive the appropriate\n  value for the `tabIndex` attribute.\n\n* The other element is the container for the children of this node.\n  It will be identified by the className `{cname_children}` and it\n  should enclose the placeholder `{children}`.",
             "itemtype": "property",
             "name": "TEMPLATE",
@@ -1887,7 +1971,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 440,
+            "line": 449,
             "description": "CCS className constant to use as the class name for the DOM element representing the node.",
             "itemtype": "property",
             "name": "CNAME_NODE",
@@ -1898,7 +1982,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 447,
+            "line": 456,
             "description": "CCS className constant to use as the class name for the DOM element that will contain the label and/or status of this node.",
             "itemtype": "property",
             "name": "CNAME_CONTENT",
@@ -1909,7 +1993,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 454,
+            "line": 463,
             "description": "CCS className constant to use as the class name for the DOM element that will contain the children of this node.",
             "itemtype": "property",
             "name": "CNAME_CHILDREN",
@@ -1920,7 +2004,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 461,
+            "line": 470,
             "description": "CCS className constant added to the DOM element for this node when its state is not expanded.",
             "itemtype": "property",
             "name": "CNAME_COLLAPSED",
@@ -1931,7 +2015,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 468,
+            "line": 477,
             "description": "CCS className constant added to the DOM element for this node when its state is expanded.",
             "itemtype": "property",
             "name": "CNAME_EXPANDED",
@@ -1942,7 +2026,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 475,
+            "line": 484,
             "description": "CCS className constant added to the DOM element for this node when it has no children.",
             "itemtype": "property",
             "name": "CNAME_NOCHILDREN",
@@ -1953,7 +2037,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 482,
+            "line": 491,
             "description": "CCS className constant added to the DOM element for this node when it is the first in the group.",
             "itemtype": "property",
             "name": "CNAME_FIRSTCHILD",
@@ -1964,7 +2048,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 489,
+            "line": 498,
             "description": "CCS className constant added to the DOM element for this node when it is the last in the group.",
             "itemtype": "property",
             "name": "CNAME_LASTCHILD",
@@ -1975,7 +2059,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 496,
+            "line": 505,
             "description": "CCS className constant added to the DOM element for this node when dynamically loading its children.",
             "itemtype": "property",
             "name": "CNAME_LOADING",
@@ -1986,7 +2070,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 504,
+            "line": 513,
             "description": "Reference to the FlyweightTreeManager this node belongs to",
             "itemtype": "attribute",
             "name": "root",
@@ -1997,7 +2081,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 520,
+            "line": 529,
             "description": "Template to use on this particular instance.\nThe renderer will default to the static TEMPLATE property of this class\n(the preferred way) or the nodeTemplate configuration attribute of the root.\nSee the TEMPLATE static property.",
             "itemtype": "attribute",
             "name": "template",
@@ -2008,7 +2092,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 532,
+            "line": 541,
             "description": "Label for this node. Nodes usually have some textual content, this is the place for it.",
             "itemtype": "attribute",
             "name": "label",
@@ -2019,7 +2103,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 542,
+            "line": 551,
             "description": "Id to assign to the DOM element that contains this node.\nIf none was supplied, it will generate one",
             "itemtype": "attribute",
             "name": "id",
@@ -2031,7 +2115,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 553,
+            "line": 562,
             "description": "Returns the depth of this node from the root.\nThis is calculated on-the-fly.",
             "itemtype": "attribute",
             "name": "depth",
@@ -2042,7 +2126,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-flyweight-tree/js/flyweight-tree-node.js",
-            "line": 573,
+            "line": 582,
             "description": "Expanded state of this node.",
             "itemtype": "attribute",
             "name": "expanded",
@@ -2053,7 +2137,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 27,
+            "line": 29,
             "description": "Listens to changes in the expanded attribute to invalidate and force\na rebuild of the list of visible nodes\nthe user can navigate through via the keyboard.",
             "itemtype": "method",
             "name": "_afterExpandedChanged",
@@ -2064,7 +2148,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 37,
+            "line": 39,
             "description": "Responds to the click event by toggling the node",
             "itemtype": "method",
             "name": "_afterClick",
@@ -2082,7 +2166,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 55,
+            "line": 57,
             "description": "Sugar method to toggle the selected state of a node.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "toggleSelection",
@@ -2091,7 +2175,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 63,
+            "line": 65,
             "description": "Changes the UI to reflect the selected state and propagates the selection up and/or down.",
             "itemtype": "method",
             "name": "_afterSelectedChange",
@@ -2116,7 +2200,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 90,
+            "line": 92,
             "description": "Getter for the {{#crossLink \"_aria_checked:attribute\"}}{{/crossLink}}.\nTranslate the internal {{#crossLink \"selected:attribute\"}}{{/crossLink}}\nto the strings the `aria_checked` attribute expects",
             "itemtype": "method",
             "name": "_ariaCheckedGetter",
@@ -2131,7 +2215,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 101,
+            "line": 103,
             "description": "Overrides the original in FlyweightTreeNode so as to propagate the selected state\non dynamically loaded nodes.",
             "itemtype": "method",
             "name": "_dynamicLoadReturn",
@@ -2142,7 +2226,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 118,
+            "line": 120,
             "description": "When propagating selection up, it is called by a child when changing its selected state\nso that the parent adjusts its own state accordingly.",
             "itemtype": "method",
             "name": "_childSelectedChange",
@@ -2153,7 +2237,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 136,
+            "line": 138,
             "description": "Template to produce the markup for a node in the tree.",
             "itemtype": "property",
             "name": "TEMPLATE",
@@ -2164,7 +2248,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 148,
+            "line": 150,
             "description": "Constant to use with the `selected` attribute to indicate the node is not selected.",
             "itemtype": "property",
             "name": "NOT_SELECTED",
@@ -2177,7 +2261,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 157,
+            "line": 159,
             "description": "Constant to use with the `selected` attribute to indicate some\nbut not all of the children of this node are selected.\nThis state should only be acquired by upward propagation from descendants.",
             "itemtype": "property",
             "name": "PARTIALLY_SELECTED",
@@ -2190,7 +2274,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 168,
+            "line": 170,
             "description": "Constant to use with the `selected` attribute to indicate the node is selected.",
             "itemtype": "property",
             "name": "FULLY_SELECTED",
@@ -2203,7 +2287,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 178,
+            "line": 180,
             "description": "Selected/highlighted state of the node.\n\nThe node selection mechanism is always enabled though it might not be visible.\nIt only sets a suitable className on the tree node.\nThe module is provided with a default CSS style that makes node selection visible.\nTo enable it, add the `yui3-fw-treeview-checkbox` className to the container of the tree.\n\n`selected` can be\n\n- Y.FWTreeNode.NOT_SELECTED (0) not selected\n- Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.\n- Y.FWTreeNode.FULLY_SELECTED (2) fully selected.\n\nThe partially selected state can only be the result of selection propagating up from a child node.\nThe attribute might return PARTIALLY_SELECTED but the developer should never set that value.",
             "itemtype": "attribute",
             "name": "selected",
@@ -2214,7 +2298,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 204,
+            "line": 206,
             "description": "String value equivalent to the {{#crossLink \"selected:attribute\"}}{{/crossLink}}\nfor use in template expansion.",
             "itemtype": "attribute",
             "name": "_aria_checked",
@@ -2228,7 +2312,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 217,
+            "line": 219,
             "description": "Whether selection of one node should propagate to its parent.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "attribute",
             "name": "propagateUp",
@@ -2239,7 +2323,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 228,
+            "line": 230,
             "description": "Whether selection of one node should propagate to its children.\nSee {{#crossLink \"selected:attribute\"}}{{/crossLink}}.",
             "itemtype": "attribute",
             "name": "propagateDown",
@@ -2250,7 +2334,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 243,
+            "line": 245,
             "description": "Fires when the space bar is pressed.\nUsed internally to toggle node selection.",
             "itemtype": "event",
             "name": "spacebar",
@@ -2278,7 +2362,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 251,
+            "line": 253,
             "description": "Fires when the enter key is pressed.",
             "itemtype": "event",
             "name": "enterkey",
@@ -2306,7 +2390,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treenode.js",
-            "line": 258,
+            "line": 260,
             "description": "Fires when this node is clicked.\nUsed internally to toggle expansion or selection when clicked\non the corresponding icons.\n\nIt cannot be prevented.  This is a helper event, the actual event\nhappens on the TreeView instance and it is relayed here for convenience.",
             "itemtype": "event",
             "name": "click",
@@ -2322,7 +2406,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 46,
+            "line": 45,
             "description": "Array of iNodes containing a flat list of all nodes visible regardless\nof their depth in the tree.\nUsed to handle keyboard navigation.",
             "itemtype": "property",
             "name": "_visibleSequence",
@@ -2335,7 +2419,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 56,
+            "line": 55,
             "description": "Index, within {{#crossLink \"_visibleSequence\"}}{{/crossLink}}, of the iNode having the focus.\nUsed for keyboard navigation.",
             "itemtype": "property",
             "name": "_visibleIndex",
@@ -2348,7 +2432,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 65,
+            "line": 64,
             "description": "Widget lifecycle method",
             "itemtype": "method",
             "name": "initializer",
@@ -2364,8 +2448,8 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 75,
-            "description": "Widget lifecyle method\nI opted for not including this method in FlyweightTreeManager so that\nit can be used to extend Base, not just Widget",
+            "line": 74,
+            "description": "Widget lifecyle method.\nAdds the `tree` role to the content box.",
             "itemtype": "method",
             "name": "renderUI",
             "access": "protected",
@@ -2375,10 +2459,10 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 87,
-            "description": "Widget lifecyle method\nI opted for not including this method in FlyweightTreeManager so that\nit can be used to extend Base, not just Widget",
+            "line": 84,
+            "description": "Widget lifecyle method.\nSets the keydown listener to handle keyboard navigation.",
             "itemtype": "method",
-            "name": "renderUI",
+            "name": "bindUI",
             "access": "protected",
             "tagname": "",
             "class": "FWTreeView",
@@ -2386,7 +2470,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 97,
+            "line": 94,
             "description": "Listener for keyboard events to handle keyboard navigation",
             "itemtype": "method",
             "name": "_onKeyDown",
@@ -2404,7 +2488,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 213,
+            "line": 210,
             "description": "Listener for the focus event.\nUpdates the node receiving the focus when the widget gets the focus.",
             "itemtype": "method",
             "name": "_aferFocus",
@@ -2422,7 +2506,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 227,
+            "line": 224,
             "description": "Rebuilds the array of {{#crossLink \"_visibleSequence\"}}{{/crossLink}} that can be traversed with the up/down arrow keys",
             "itemtype": "method",
             "name": "_rebuildSequence",
@@ -2433,7 +2517,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 246,
+            "line": 243,
             "description": "Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div",
             "itemtype": "property",
             "name": "CONTENT_TEMPLATE",
@@ -2443,7 +2527,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 256,
+            "line": 253,
             "description": "Override for the `defaultType` value of FlyweightTreeManager\nso it creates FWTreeNode instances instead of the default.",
             "itemtype": "attribute",
             "name": "defaultType",
@@ -2454,7 +2538,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 266,
+            "line": 263,
             "description": "Enables toggling by clicking on the label item instead of just the toggle icon.",
             "itemtype": "attribute",
             "name": "toggleOnLabelClick",
@@ -2465,7 +2549,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 283,
+            "line": 280,
             "description": "TreeView provides all the events that Widget relays from the DOM.\nIt adds an additional property to the EventFacade called `node`\nthat points to the TreeNode instance that received the event.\n\nThis instance is pooled and will be discarded upon return from the listener.\nIf you need to hold on to this instance,\nuse the {{#crossLink \"TreeNode/hold\"}}{{/crossLink}} method to preserve it.",
             "itemtype": "event",
             "name": "-any-",
@@ -2493,7 +2577,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 296,
+            "line": 293,
             "description": "Fires when the space bar is pressed.\nUsed internally to toggle node selection.",
             "itemtype": "event",
             "name": "spacebar",
@@ -2521,7 +2605,7 @@
         },
         {
             "file": "yui3-gallery/src/gallery-fwt-treeview/js/fw-treeview.js",
-            "line": 304,
+            "line": 301,
             "description": "Fires when the enter key is pressed.",
             "itemtype": "event",
             "name": "enterkey",

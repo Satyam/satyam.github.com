@@ -194,6 +194,15 @@ FWNode = Y.Base.create(
 		 * @private
 		 *&#x2F;
 		_root: null,
+        &#x2F;**
+         * Standard lifecycle method, reads the root node from the config
+         * @method initializer
+         * @param cfg {object} configuration data
+         * @protected
+         *&#x2F;
+        initializer: function (cfg) {
+            this._root = cfg.root;
+        },
 		&#x2F;**
 		 * Returns a string with the markup for this node along that of its children
 		 * produced from its attributes rendered

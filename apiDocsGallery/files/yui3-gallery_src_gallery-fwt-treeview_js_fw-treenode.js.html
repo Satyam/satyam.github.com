@@ -179,10 +179,12 @@
 	[],
 	{
 		initializer: function() {
-			this.after(&#x27;click&#x27;, this._afterClick);
-			this.after(SELECTED + CHANGE, this._afterSelectedChange);
-            this.after(&#x27;spacebar&#x27;, this.toggleSelection);
-            this.after(EXPANDED + CHANGE, this._afterExpandedChanged);
+			this._root._eventHandles.push(
+                this.after(&#x27;click&#x27;, this._afterClick),
+                this.after(SELECTED + CHANGE, this._afterSelectedChange),
+                this.after(&#x27;spacebar&#x27;, this.toggleSelection),
+                this.after(EXPANDED + CHANGE, this._afterExpandedChanged)
+            );
 		},
         &#x2F;**
          * Listens to changes in the expanded attribute to invalidate and force
