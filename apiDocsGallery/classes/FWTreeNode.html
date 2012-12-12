@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>FWTreeNode - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -166,13 +166,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:10</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l1"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a>
+            Module: <a href="../modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a>
         
     
 
@@ -182,7 +182,12 @@
 
 
 <div class="box intro">
-    
+    <p>This class must not be generated directly.
+Instances of it will be provided by FWTreeView as required.</p>
+
+<p>Subclasses might be defined based on it.
+Usually, they will add further attributes and redefine the TEMPLATE to
+show those extra attributes.</p>
 </div>
 
 
@@ -220,7 +225,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:10</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l1"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:1</code></a>
         
         </p>
 
@@ -279,8 +284,22 @@
                                 
                             </li>
                         
+                            <li class="index-item method private inherited">
+                                <a href="#method__afterExpandedChange">_afterExpandedChange</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method protected">
                                 <a href="#method__afterExpandedChanged">_afterExpandedChanged</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__afterLabelChange">_afterLabelChange</a>
 
                                 
                                 
@@ -294,7 +313,21 @@
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__afterSelectionEnabledChange">_afterSelectionEnabledChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__ariaCheckedGetter">_ariaCheckedGetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__buildCfgPatch">_buildCfgPatch</a>
 
                                 
                                 
@@ -321,22 +354,8 @@
                                 
                             </li>
                         
-                            <li class="index-item method private inherited">
-                                <a href="#method__expandedSetter">_expandedSetter</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method protected inherited">
                                 <a href="#method__getHTML">_getHTML</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private inherited">
-                                <a href="#method__getStateVal">_getStateVal</a>
 
                                 
                                 
@@ -349,8 +368,29 @@
                                 
                             </li>
                         
+                            <li class="index-item method private">
+                                <a href="#method__propagateGetter">_propagateGetter</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method private inherited">
                                 <a href="#method__renderChildren">_renderChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__selectedGetter">_selectedGetter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__selectedSetter">_selectedSetter</a>
 
                                 
                                 
@@ -427,6 +467,13 @@
                             </li>
                         
                             <li class="index-item method inherited">
+                                <a href="#method_hasChildren">hasChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
                                 <a href="#method_hold">hold</a>
 
                                 
@@ -493,7 +540,25 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_CNAMES">CNAMES</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_FULLY_SELECTED">FULLY_SELECTED</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_INNER_TEMPLATE">INNER_TEMPLATE</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -511,7 +576,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_PARTIALLY_SELECTED">PARTIALLY_SELECTED</a>
+                                <a href="#property_OUTER_TEMPLATE">OUTER_TEMPLATE</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -520,7 +585,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_TEMPLATE">TEMPLATE</a>
+                                <a href="#property_PARTIALLY_SELECTED">PARTIALLY_SELECTED</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -572,6 +637,10 @@
                         
                             <li class="index-item attr">
                                 <a href="#attr_selected">selected</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_selectEnabled">selectEnabled</a>
                             </li>
                         
                             <li class="index-item attr inherited">
@@ -663,7 +732,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l39"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:39</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l37"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:37</code></a>
         
         </p>
 
@@ -693,6 +762,95 @@
 
                     <div class="param-description">
                          
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterExpandedChange" class="method item private inherited">
+    <h3 class="name"><code>_afterExpandedChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__afterExpandedChange">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l207"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:207</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to the change in the Expanded:attribute attribute.
+It renders the child nodes if this branch has never been expanded.
+Then sets the className on the node to the static constants
+CNAME_COLLAPSED or CNAME_EXPANDED from Y.FlyweightTreeManager</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>standard attribute change event facade</p>
                     </div>
 
                     
@@ -742,7 +900,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:29</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l27"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:27</code></a>
         
         </p>
 
@@ -758,6 +916,95 @@ a rebuild of the list of visible nodes
 the user can navigate through via the keyboard.</p>
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterLabelChange" class="method item private">
+    <h3 class="name"><code>_afterLabelChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__afterLabelChange">
+                FlyweightTreeNode
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l64"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to the change in the Label:attribute attribute.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>standard attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -810,7 +1057,7 @@ the user can navigate through via the keyboard.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l65"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:65</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l76"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:76</code></a>
         
         </p>
 
@@ -873,6 +1120,95 @@ so that propagation goes in just one direction and doesn't bounce back.</p>
 </div>
 
                 
+                    <div id="method__afterSelectionEnabledChange" class="method item private">
+    <h3 class="name"><code>_afterSelectionEnabledChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l107"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:107</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Changes the UI to reflect whether the item has selection enabled.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Attribute event change facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method__ariaCheckedGetter" class="method item private">
     <h3 class="name"><code>_ariaCheckedGetter</code></h3>
 
@@ -911,7 +1247,7 @@ so that propagation goes in just one direction and doesn't bounce back.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l92"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:92</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l124"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:124</code></a>
         
         </p>
 
@@ -942,6 +1278,60 @@ to the strings the <code>aria_checked</code> attribute expects</p>
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__buildCfgPatch" class="method item private inherited">
+    <h3 class="name"><code>_buildCfgPatch</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__buildCfgPatch">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l51"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Patch to work around the issue with the static _buildCfg property of Base
+that doesn't quite work.</p>
+    </div>
+
+    
+
     
 
     
@@ -982,7 +1372,7 @@ to the strings the <code>aria_checked</code> attribute expects</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l120"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:120</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l183"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:183</code></a>
         
         </p>
 
@@ -1039,7 +1429,7 @@ so that the parent adjusts its own state accordingly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l103"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:103</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l166"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:166</code></a>
         
         </p>
 
@@ -1097,7 +1487,7 @@ on dynamically loaded nodes.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l145"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:145</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l189"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:189</code></a>
         
         </p>
 
@@ -1130,95 +1520,6 @@ It can be overriden to default to false.</p>
                 
             </div>
         </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__expandedSetter" class="method item private inherited">
-    <h3 class="name"><code>_expandedSetter</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__expandedSetter">FlyweightTreeNode</a>:
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l158"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:158</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Setter for the expanded configuration attribute.
-It renders the child nodes if this branch has never been expanded.
-Then sets the className on the node to the static constants
-CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>new value for the expanded attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
     
 
     
@@ -1282,7 +1583,7 @@ CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l46"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:46</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l68"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:68</code></a>
         
         </p>
 
@@ -1377,110 +1678,6 @@ via the first template string it finds in these locations:</p>
 </div>
 
                 
-                    <div id="method__getStateVal" class="method item private inherited">
-    <h3 class="name"><code>_getStateVal</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Any</span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method__getStateVal">FlyweightTreeNode</a>:
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l353"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:353</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets the stored value for the attribute, from either the
-internal state object, or the state proxy if it exits</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The name of the attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Any</span>:
-                    
-                    The stored value of the attribute
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method__loadDynamic" class="method item private inherited">
     <h3 class="name"><code>_loadDynamic</code></h3>
 
@@ -1512,7 +1709,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l191"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:191</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l244"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:244</code></a>
         
         </p>
 
@@ -1534,11 +1731,127 @@ internal state object, or the state proxy if it exits</p>
 </div>
 
                 
+                    <div id="method__propagateGetter" class="method item private">
+    <h3 class="name"><code>_propagateGetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l156"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:156</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Getter for both the <code>propagateUp</code> and <code>propagateDown</code> attributes.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>current value</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    the state of the attribute
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__renderChildren" class="method item private inherited">
     <h3 class="name"><code>_renderChildren</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>el</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -1565,7 +1878,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l225"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:225</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l279"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:279</code></a>
         
         </p>
 
@@ -1580,6 +1893,227 @@ internal state object, or the state proxy if it exits</p>
 It the children had been rendered, they will be replaced.</p>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">el</code>
+                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Container to render the children into.
+Used only for rendering of the root when it will be the contentBox.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__selectedGetter" class="method item private">
+    <h3 class="name"><code>_selectedGetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l145"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:145</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Getter for the <code>selected</code> attribute.
+Returns false when selection is not enabled.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>current value</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    current value or false if not enabled
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__selectedSetter" class="method item private">
+    <h3 class="name"><code>_selectedSetter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l135"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:135</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter for the {{ćrossLink "selected:attribute}}{{/crossLink}}.
+Translates a truish or falsy value into FULLY<em>SELECTED or NOT</em>SELECTED.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -1635,7 +2169,7 @@ It the children had been rendered, they will be replaced.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l373"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:373</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l415"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:415</code></a>
         
         </p>
 
@@ -1737,7 +2271,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l111"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:111</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l132"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:132</code></a>
         
         </p>
 
@@ -1813,7 +2347,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l313"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:313</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l374"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:374</code></a>
         
         </p>
 
@@ -1866,7 +2400,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l337"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:337</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l398"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:398</code></a>
         
         </p>
 
@@ -1919,7 +2453,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l329"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:329</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l390"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:390</code></a>
         
         </p>
 
@@ -1972,7 +2506,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l305"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:305</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l366"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:366</code></a>
         
         </p>
 
@@ -2039,7 +2573,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l121"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:121</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l154"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:154</code></a>
         
         </p>
 
@@ -2082,7 +2616,7 @@ internal state object, or the state proxy if it exits</p>
 
                                 <div class="param-description">
                                     <p>Instance of a suitable subclass of FlyweightTreeNode,
-        positioned on top of the child node</p>
+       positioned on top of the child node</p>
                                 </div>
 
                                 
@@ -2096,19 +2630,6 @@ internal state object, or the state proxy if it exits</p>
 
                                 <div class="param-description">
                                     <p>Index of this child within the array of children</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">array</code>
-                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                
-
-                                <div class="param-description">
-                                    <p>array containing itself and its siblings</p>
                                 </div>
 
                                 
@@ -2176,7 +2697,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l273"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:273</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l334"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:334</code></a>
         
         </p>
 
@@ -2188,8 +2709,8 @@ internal state object, or the state proxy if it exits</p>
 
     <div class="description">
         <p>Returns the next sibling node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -2244,7 +2765,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l262"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:262</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l323"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:323</code></a>
         
         </p>
 
@@ -2256,8 +2777,8 @@ Remember to release the copy to the pool when done.</p>
 
     <div class="description">
         <p>Returns the parent node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -2312,7 +2833,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l289"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:289</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l350"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:350</code></a>
         
         </p>
 
@@ -2324,8 +2845,8 @@ Remember to release the copy to the pool when done.</p>
 
     <div class="description">
         <p>Returns the previous sibling node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -2338,6 +2859,76 @@ Remember to release the copy to the pool when done.</p>
                 
                     
                     FlyweightTreeNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hasChildren" class="method item inherited">
+    <h3 class="name"><code>hasChildren</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeNode.html#method_hasChildren">FlyweightTreeNode</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l143"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:143</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether this node has children.
+If there are children, it actually returns the number of children,
+otherwise it might return 0 or undefined.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    true if the node has children
                 
             </div>
         </div>
@@ -2378,7 +2969,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l241"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:241</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l298"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:298</code></a>
         
         </p>
 
@@ -2442,7 +3033,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l37"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:37</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l38"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:38</code></a>
         
         </p>
 
@@ -2520,7 +3111,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l345"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:345</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l406"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:406</code></a>
         
         </p>
 
@@ -2586,7 +3177,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l250"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:250</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l311"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:311</code></a>
         
         </p>
 
@@ -2641,7 +3232,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l321"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:321</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l382"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:382</code></a>
         
         </p>
 
@@ -2695,7 +3286,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l57"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:57</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l56"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:56</code></a>
         
         </p>
 
@@ -2748,7 +3339,7 @@ See Selected:attribute.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l22"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:22</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l23"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:23</code></a>
         
         </p>
 
@@ -2791,7 +3382,7 @@ See Selected:attribute.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:29</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l30"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:30</code></a>
         
         </p>
 
@@ -2803,6 +3394,54 @@ See Selected:attribute.</p>
     <div class="description">
         <p>Reference to the FlyweightTreeManager instance this node belongs to.
 It is set by the root and should be considered read-only.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CNAMES" class="property item">
+    <h3 class="name"><code>CNAMES</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+        <span class="flag final">final</span>
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l235"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:235</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Collection of classNames to set in the template.</p>
     </div>
 
     
@@ -2840,7 +3479,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l170"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:170</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l269"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:269</code></a>
         
         </p>
 
@@ -2851,6 +3490,54 @@ It is set by the root and should be considered read-only.</p>
 
     <div class="description">
         <p>Constant to use with the <code>selected</code> attribute to indicate the node is selected.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_INNER_TEMPLATE" class="property item">
+    <h3 class="name"><code>INNER_TEMPLATE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l224"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:224</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Template to produce the markup for a node in the tree.
+It replaces the standard one provided by FlyweightTreeNode.
+Adds places for the toggle and selection icons, an extra app-dependent icon and the label.</p>
     </div>
 
     
@@ -2888,7 +3575,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l150"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:150</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l249"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:249</code></a>
         
         </p>
 
@@ -2899,6 +3586,54 @@ It is set by the root and should be considered read-only.</p>
 
     <div class="description">
         <p>Constant to use with the <code>selected</code> attribute to indicate the node is not selected.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_OUTER_TEMPLATE" class="property item">
+    <h3 class="name"><code>OUTER_TEMPLATE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l212"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:212</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Outer template to produce the markup for a node in the tree.
+It replaces the standard one provided by FlyweightTreeNode.
+Adds the proper ARIA role and node selection.</p>
     </div>
 
     
@@ -2936,7 +3671,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l159"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:159</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l258"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:258</code></a>
         
         </p>
 
@@ -2949,52 +3684,6 @@ It is set by the root and should be considered read-only.</p>
         <p>Constant to use with the <code>selected</code> attribute to indicate some
 but not all of the children of this node are selected.
 This state should only be acquired by upward propagation from descendants.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_TEMPLATE" class="property item">
-    <h3 class="name"><code>TEMPLATE</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l138"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:138</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Template to produce the markup for a node in the tree.</p>
     </div>
 
     
@@ -3047,7 +3736,7 @@ This state should only be acquired by upward propagation from descendants.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l206"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:206</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l313"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:313</code></a>
         
         </p>
 
@@ -3151,7 +3840,7 @@ for use in template expansion.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l562"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:562</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l584"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:584</code></a>
         
         </p>
 
@@ -3251,7 +3940,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l582"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:582</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l604"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:604</code></a>
         
         </p>
 
@@ -3343,8 +4032,6 @@ This is calculated on-the-fly.</p>
     
 
     
-        <span class="flag readonly">readonly</span>
-    
 
     <div class="meta">
         
@@ -3354,7 +4041,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l551"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:551</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l571"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:571</code></a>
         
         </p>
 
@@ -3365,7 +4052,8 @@ This is calculated on-the-fly.</p>
 
     <div class="description">
         <p>Id to assign to the DOM element that contains this node.
-If none was supplied, it will generate one</p>
+Once rendered, it cannot be changed.
+If none was supplied, it will generate one.</p>
     </div>
 
     
@@ -3456,7 +4144,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l541"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:541</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l561"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:561</code></a>
         
         </p>
 
@@ -3560,7 +4248,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l230"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:230</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l348"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:348</code></a>
         
         </p>
 
@@ -3574,6 +4262,8 @@ If none was supplied, it will generate one</p>
 See Selected:attribute.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> true</p>
     
 
     
@@ -3663,7 +4353,7 @@ See Selected:attribute.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l219"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:219</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l336"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:336</code></a>
         
         </p>
 
@@ -3677,6 +4367,8 @@ See Selected:attribute.</p>
 See Selected:attribute.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> true</p>
     
 
     
@@ -3765,7 +4457,7 @@ See Selected:attribute.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l513"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:513</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l533"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:533</code></a>
         
         </p>
 
@@ -3867,7 +4559,7 @@ See Selected:attribute.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l180"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:180</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l279"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:279</code></a>
         
         </p>
 
@@ -3884,18 +4576,30 @@ It only sets a suitable className on the tree node.
 The module is provided with a default CSS style that makes node selection visible.
 To enable it, add the <code>yui3-fw-treeview-checkbox</code> className to the container of the tree.</p>
 
-<p><code>selected</code> can be</p>
+<p><code>selected</code> can return</p>
 
 <ul>
 <li>Y.FWTreeNode.NOT_SELECTED (0) not selected</li>
 <li>Y.FWTreeNode.PARTIALLY_SELECTED (1) partially selected: some children are selected, some not or partially selected.</li>
 <li>Y.FWTreeNode.FULLY_SELECTED (2) fully selected.</li>
+<li>null when {{#crossLing "selectionEnabled:attribute"}}{{/crossLink}} is not enabled</li>
+</ul>
+
+<p><code>selected</code>can be set to:</p>
+
+<ul>
+<li>any true value:  will produce a FULLY_SELECTED state.</li>
+<li>any false value: will produce a NOT_SELECTED state.</li>
 </ul>
 
 <p>The partially selected state can only be the result of selection propagating up from a child node.
-The attribute might return PARTIALLY_SELECTED but the developer should never set that value.</p>
+Since PARTIALLY_SELECTED cannot be set, leaving just two possible values for setting,
+any true or false value will be valid when setting.  However, no matter what values were
+used when setting, one of the three possible values above will be returned.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> NOT_SELECTED</p>
     
 
     
@@ -3904,6 +4608,110 @@ The attribute might return PARTIALLY_SELECTED but the developer should never set
 
             <p>
             Fires when the value for the configuration attribute <code>selected</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_selectEnabled" class="attr item">
+    <a name="config_selectEnabled"></a> 
+    <h3 class="name"><code>selectEnabled</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l326"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:326</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enables node selection. Nodes with selection enabled w</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>selectEnabledChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>selectEnabled</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -3982,7 +4790,7 @@ The attribute might return PARTIALLY_SELECTED but the developer should never set
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l529"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:529</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l549"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:549</code></a>
         
         </p>
 
@@ -4090,7 +4898,7 @@ See the TEMPLATE static property.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l260"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:260</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l381"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:381</code></a>
         
         </p>
 
@@ -4161,7 +4969,7 @@ happens on the TreeView instance and it is relayed here for convenience.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l253"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:253</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l373"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:373</code></a>
         
         </p>
 
@@ -4202,9 +5010,22 @@ happens on the TreeView instance and it is relayed here for convenience.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>The original event produced by the DOM</p>
+                                    <p>The original event produced by the DOM, except:</p>
                                 </div>
 
+                                
+                                    <ul class="params-list">
+                                        
+                                        <li class="param">
+                                            <code class="param-name">target</code>
+                                            <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+
+                                            <div class="param-description">
+                                                The DOM element that had the focus when the key was pressed
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
                                 
                             </li>
                             
@@ -4257,7 +5078,7 @@ happens on the TreeView instance and it is relayed here for convenience.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treenode.js.html#l245"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:245</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treenode.js.html#l364"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js:364</code></a>
         
         </p>
 
@@ -4299,9 +5120,22 @@ Used internally to toggle node selection.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>The original event produced by the DOM</p>
+                                    <p>The original event produced by the DOM, except:</p>
                                 </div>
 
+                                
+                                    <ul class="params-list">
+                                        
+                                        <li class="param">
+                                            <code class="param-name">target</code>
+                                            <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+
+                                            <div class="param-description">
+                                                The DOM element that had the focus when the key was pressed
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
                                 
                             </li>
                             

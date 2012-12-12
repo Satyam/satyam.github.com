@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-stdmod - Satyam&#x27;s Gallery Modules</title>
+    <title>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fwtv-constants.js - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -154,54 +154,56 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-stdmod Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fwtv-constants.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+ * Creates a Treeview using the FlyweightTreeManager Widget to handle its nodes.
+ * It creates the tree based on an object passed as the &#x60;tree&#x60; attribute in the constructor.
+ * @example
+ *
+	var tv = new Y.FWTreeView({tree: [
+		{
+			label:&#x27;label 0&#x27;,
+			children: [
+				{
+					label: &#x27;label 0-0&#x27;,
+					children: [
+						{label: &#x27;label 0-0-0&#x27;},
+						{label: &#x27;label 0-0-1&#x27;}
+					]
+				},
+				{label: &#x27;label 0-1&#x27;}
+			]
+		},
+		{label: &#x27;label 1&#x27;}
 
-    
-        <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-stdmod_js_gallery-stdmod.js.html#l1"><code>src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js:1</code></a>
-        </div>
-    
+	]});
+	tv.render(&#x27;#container&#x27;);
 
-    
-</div>
+ * @module gallery-fwt-treeview
+ *&#x2F;
+&#x27;use strict&#x27;;
+&#x2F;*jslint white: true *&#x2F;
+var Lang = Y.Lang,
+    FWTV,
+    FWTN,
+    HASH = &#x27;#&#x27;,
+	getCName = Y.ClassNameManager.getClassName,
+	cName = function (name) {
+		return getCName(&#x27;fw-treeview&#x27;, name);
+	},
+	CBX = &#x27;contentBox&#x27;,
+    EXPANDED = &#x27;expanded&#x27;,
+    SEL_ENABLED = &#x27;selectionEnabled&#x27;,
+    SELECTED = &#x27;selected&#x27;,
+    CHANGE = &#x27;Change&#x27;,
+	NOT_SELECTED = 0,
+	PARTIALLY_SELECTED = 1,
+	FULLY_SELECTED = 2;
 
-
-
-<div class="box intro">
-    <p>A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-and thus conflicts with the StdMod sections. (this can also be solved using the property
-<a href="http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer">_childrenContainer</a>)<br/><br/>
-For further documentation see <a href="http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html">WidgetStdMod</a></p>
-</div>
-
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/StdMod.html">
-                        StdMod
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

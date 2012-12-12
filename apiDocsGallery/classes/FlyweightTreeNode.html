@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>FlyweightTreeNode - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -166,7 +166,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:10</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l3"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:3</code></a>
         </div>
     
 
@@ -184,6 +184,14 @@
 <div class="box intro">
     <p>An implementation of the flyweight pattern.  This class should not be instantiated directly.
 Instances of this class can be requested from the flyweight manager class</p>
+
+<p>The FlyweightTreeManager will create instances of this class as required and
+pool them when not in use.
+The instances can be slid on top of the nodes (iNodes, for internal nodes)
+in literal object containing the definition
+of a tree and will take its state from the <code>iNode</code> it is slid upon.
+It relies for most of its functionality on the flyweight manager object,
+which contains most of the code.</p>
 </div>
 
 
@@ -221,7 +229,7 @@ Instances of this class can be requested from the flyweight manager class</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l10"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:10</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l3"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:3</code></a>
         
         </p>
 
@@ -272,6 +280,27 @@ Instances of this class can be requested from the flyweight manager class</p>
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method private">
+                                <a href="#method__afterExpandedChange">_afterExpandedChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__afterLabelChange">_afterLabelChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__buildCfgPatch">_buildCfgPatch</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__dynamicLoadReturn">_dynamicLoadReturn</a>
 
                                 
@@ -285,22 +314,8 @@ Instances of this class can be requested from the flyweight manager class</p>
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__expandedSetter">_expandedSetter</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method protected">
                                 <a href="#method__getHTML">_getHTML</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__getStateVal">_getStateVal</a>
 
                                 
                                 
@@ -391,6 +406,13 @@ Instances of this class can be requested from the flyweight manager class</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_hasChildren">hasChildren</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_hold">hold</a>
 
                                 
@@ -450,7 +472,7 @@ Instances of this class can be requested from the flyweight manager class</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_CNAME_CHILDREN">CNAME_CHILDREN</a>
+                                <a href="#property_INNER_TEMPLATE">INNER_TEMPLATE</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -459,79 +481,7 @@ Instances of this class can be requested from the flyweight manager class</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_CNAME_COLLAPSED">CNAME_COLLAPSED</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_CONTENT">CNAME_CONTENT</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_EXPANDED">CNAME_EXPANDED</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_FIRSTCHILD">CNAME_FIRSTCHILD</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_LASTCHILD">CNAME_LASTCHILD</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_LOADING">CNAME_LOADING</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_NOCHILDREN">CNAME_NOCHILDREN</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_CNAME_NODE">CNAME_NODE</a>
-
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_TEMPLATE">TEMPLATE</a>
+                                <a href="#property_OUTER_TEMPLATE">OUTER_TEMPLATE</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -548,6 +498,10 @@ Instances of this class can be requested from the flyweight manager class</p>
                     <h3>Attributes</h3>
 
                     <ul class="index-list attrs extends">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_CNAMES">CNAMES</a>
+                            </li>
                         
                             <li class="index-item attr">
                                 <a href="#attr_depth">depth</a>
@@ -583,6 +537,244 @@ Instances of this class can be requested from the flyweight manager class</p>
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterExpandedChange" class="method item private">
+    <h3 class="name"><code>_afterExpandedChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l207"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:207</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to the change in the Expanded:attribute attribute.
+It renders the child nodes if this branch has never been expanded.
+Then sets the className on the node to the static constants
+CNAME_COLLAPSED or CNAME_EXPANDED from Y.FlyweightTreeManager</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>standard attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterLabelChange" class="method item private">
+    <h3 class="name"><code>_afterLabelChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l177"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:177</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to the change in the Label:attribute attribute.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>standard attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__buildCfgPatch" class="method item private">
+    <h3 class="name"><code>_buildCfgPatch</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l51"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Patch to work around the issue with the static _buildCfg property of Base
+that doesn't quite work.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method__dynamicLoadReturn" class="method item private">
@@ -629,7 +821,7 @@ Instances of this class can be requested from the flyweight manager class</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l203"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:203</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l256"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:256</code></a>
         
         </p>
 
@@ -712,7 +904,7 @@ Instances of this class can be requested from the flyweight manager class</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l145"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:145</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l189"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:189</code></a>
         
         </p>
 
@@ -745,98 +937,6 @@ It can be overriden to default to false.</p>
                 
             </div>
         </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__expandedSetter" class="method item private">
-    <h3 class="name"><code>_expandedSetter</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l158"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:158</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Setter for the expanded configuration attribute.
-It renders the child nodes if this branch has never been expanded.
-Then sets the className on the node to the static constants
-CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>new value for the expanded attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
     
 
     
@@ -903,7 +1003,7 @@ CNAME<em>COLLAPSED or CNAME</em>EXPANDED from Y.FlyweightTreeManager</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l46"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:46</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l68"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:68</code></a>
         
         </p>
 
@@ -998,113 +1098,6 @@ via the first template string it finds in these locations:</p>
 </div>
 
                 
-                    <div id="method__getStateVal" class="method item private">
-    <h3 class="name"><code>_getStateVal</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Any</span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l353"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:353</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets the stored value for the attribute, from either the
-internal state object, or the state proxy if it exits</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The name of the attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Any</span>:
-                    
-                    The stored value of the attribute
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method__loadDynamic" class="method item private">
     <h3 class="name"><code>_loadDynamic</code></h3>
 
@@ -1139,7 +1132,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l191"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:191</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l244"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:244</code></a>
         
         </p>
 
@@ -1165,7 +1158,17 @@ internal state object, or the state proxy if it exits</p>
     <h3 class="name"><code>_renderChildren</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>el</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -1195,7 +1198,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l225"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:225</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l279"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:279</code></a>
         
         </p>
 
@@ -1210,6 +1213,30 @@ internal state object, or the state proxy if it exits</p>
 It the children had been rendered, they will be replaced.</p>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">el</code>
+                        <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Container to render the children into.
+Used only for rendering of the root when it will be the contentBox.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -1268,7 +1295,7 @@ It the children had been rendered, they will be replaced.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l373"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:373</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l415"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:415</code></a>
         
         </p>
 
@@ -1373,7 +1400,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l111"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:111</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l132"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:132</code></a>
         
         </p>
 
@@ -1452,7 +1479,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l313"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:313</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l374"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:374</code></a>
         
         </p>
 
@@ -1508,7 +1535,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l337"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:337</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l398"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:398</code></a>
         
         </p>
 
@@ -1564,7 +1591,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l329"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:329</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l390"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:390</code></a>
         
         </p>
 
@@ -1620,7 +1647,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l305"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:305</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l366"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:366</code></a>
         
         </p>
 
@@ -1690,7 +1717,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l121"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:121</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l154"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:154</code></a>
         
         </p>
 
@@ -1733,7 +1760,7 @@ internal state object, or the state proxy if it exits</p>
 
                                 <div class="param-description">
                                     <p>Instance of a suitable subclass of FlyweightTreeNode,
-        positioned on top of the child node</p>
+       positioned on top of the child node</p>
                                 </div>
 
                                 
@@ -1747,19 +1774,6 @@ internal state object, or the state proxy if it exits</p>
 
                                 <div class="param-description">
                                     <p>Index of this child within the array of children</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">array</code>
-                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                
-
-                                <div class="param-description">
-                                    <p>array containing itself and its siblings</p>
                                 </div>
 
                                 
@@ -1830,7 +1844,7 @@ internal state object, or the state proxy if it exits</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l273"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:273</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l334"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:334</code></a>
         
         </p>
 
@@ -1842,8 +1856,8 @@ internal state object, or the state proxy if it exits</p>
 
     <div class="description">
         <p>Returns the next sibling node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -1901,7 +1915,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l262"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:262</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l323"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:323</code></a>
         
         </p>
 
@@ -1913,8 +1927,8 @@ Remember to release the copy to the pool when done.</p>
 
     <div class="description">
         <p>Returns the parent node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -1972,7 +1986,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l289"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:289</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l350"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:350</code></a>
         
         </p>
 
@@ -1984,8 +1998,8 @@ Remember to release the copy to the pool when done.</p>
 
     <div class="description">
         <p>Returns the previous sibling node for this node or null if none exists.
-The copy is not on Hold.
-Remember to release the copy to the pool when done.</p>
+The copy is on Hold.
+Remember to Release the copy to the pool when done.</p>
     </div>
 
     
@@ -1998,6 +2012,79 @@ Remember to release the copy to the pool when done.</p>
                 
                     
                     FlyweightTreeNode
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hasChildren" class="method item">
+    <h3 class="name"><code>hasChildren</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l143"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:143</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Whether this node has children.
+If there are children, it actually returns the number of children,
+otherwise it might return 0 or undefined.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    true if the node has children
                 
             </div>
         </div>
@@ -2041,7 +2128,7 @@ Remember to release the copy to the pool when done.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l241"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:241</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l298"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:298</code></a>
         
         </p>
 
@@ -2108,7 +2195,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l37"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:37</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l38"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:38</code></a>
         
         </p>
 
@@ -2189,7 +2276,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l345"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:345</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l406"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:406</code></a>
         
         </p>
 
@@ -2258,7 +2345,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l250"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:250</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l311"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:311</code></a>
         
         </p>
 
@@ -2316,7 +2403,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l321"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:321</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l382"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:382</code></a>
         
         </p>
 
@@ -2371,7 +2458,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l22"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:22</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l23"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:23</code></a>
         
         </p>
 
@@ -2417,7 +2504,7 @@ Remember to Release this instance when no longer needed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l29"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:29</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l30"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:30</code></a>
         
         </p>
 
@@ -2439,8 +2526,8 @@ It is set by the root and should be considered read-only.</p>
 </div>
 
                 
-                    <div id="property_CNAME_CHILDREN" class="property item">
-    <h3 class="name"><code>CNAME_CHILDREN</code></h3>
+                    <div id="property_INNER_TEMPLATE" class="property item">
+    <h3 class="name"><code>INNER_TEMPLATE</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -2464,7 +2551,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l463"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:463</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l485"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:485</code></a>
         
         </p>
 
@@ -2474,9 +2561,27 @@ It is set by the root and should be considered read-only.</p>
     </div>
 
     <div class="description">
-        <p>CCS className constant to use as the class name for the DOM element that will contain the children of this node.</p>
+        <p>The template for what the user will see of the node.
+It has been broken appart from the outer template because
+this is the part that the developer is most likely to modify
+so that there is no need to repeat the outer envelope over and over again.
+For example:</p>
+
+<pre class="code prettyprint"><code>       INNER_TEMPLATE:'&lt;div tabIndex="{tabIndex}" class="{CNAME_CONTENT}"&gt;{label}&lt;/div&gt;',
+</code></pre>
+
+<p>This element must have at least a palceholder for the <code>{label}</code> attribute
+and any other visual clues to the user.  It must also have the CSS className
+<code>{CNAME_CONTENT}</code> which will be replaced by a suitable name at execution
+and that will help to locate the contents of this node.</p>
+
+<p>This is the element that would receive the focus of the node, thus,
+it must have a <code>{tabIndex}</code> placeholder to receive the appropriate
+value for the <code>tabIndex</code> attribute.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> &#x27;&lt;div tabIndex=&quot;{tabIndex}&quot; class=&quot;{CNAME_CONTENT}&quot;&gt;{label}&lt;&#x2F;div&gt;&#x27;</p>
     
 
     
@@ -2485,8 +2590,8 @@ It is set by the root and should be considered read-only.</p>
 </div>
 
                 
-                    <div id="property_CNAME_COLLAPSED" class="property item">
-    <h3 class="name"><code>CNAME_COLLAPSED</code></h3>
+                    <div id="property_OUTER_TEMPLATE" class="property item">
+    <h3 class="name"><code>OUTER_TEMPLATE</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -2510,7 +2615,7 @@ It is set by the root and should be considered read-only.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l470"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:470</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l434"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:434</code></a>
         
         </p>
 
@@ -2520,404 +2625,35 @@ It is set by the root and should be considered read-only.</p>
     </div>
 
     <div class="description">
-        <p>CCS className constant added to the DOM element for this node when its state is not expanded.</p>
-    </div>
+        <p>Outer template string to be used to render this node.
+It may be overriden by the subclass.</p>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_CONTENT" class="property item">
-    <h3 class="name"><code>CNAME_CONTENT</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l456"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:456</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant to use as the class name for the DOM element that will contain the label and/or status of this node.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_EXPANDED" class="property item">
-    <h3 class="name"><code>CNAME_EXPANDED</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l477"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:477</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant added to the DOM element for this node when its state is expanded.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_FIRSTCHILD" class="property item">
-    <h3 class="name"><code>CNAME_FIRSTCHILD</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l491"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:491</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant added to the DOM element for this node when it is the first in the group.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_LASTCHILD" class="property item">
-    <h3 class="name"><code>CNAME_LASTCHILD</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l498"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:498</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant added to the DOM element for this node when it is the last in the group.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_LOADING" class="property item">
-    <h3 class="name"><code>CNAME_LOADING</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l505"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:505</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant added to the DOM element for this node when dynamically loading its children.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_NOCHILDREN" class="property item">
-    <h3 class="name"><code>CNAME_NOCHILDREN</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l484"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:484</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant added to the DOM element for this node when it has no children.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_CNAME_NODE" class="property item">
-    <h3 class="name"><code>CNAME_NODE</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l449"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:449</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>CCS className constant to use as the class name for the DOM element representing the node.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_TEMPLATE" class="property item">
-    <h3 class="name"><code>TEMPLATE</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l392"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:392</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Template string to be used to render this node.
-It should be overriden by the subclass.</p>
-
-<p>It contains the HTML markup for this node plus placeholders,
+<p>It contains the HTML markup for the wrapper for the node plus placeholders,
 enclosed in curly braces, that have access to any of the
 configuration attributes of this node plus several predefined placeholders.</p>
 
-<p>It must contain at least three elements identified by their classNames:</p>
+<p>It must contain at least three elements identified by their CSS classNames
+and a special placeholder:</p>
 
-<pre class="code"><code class="prettyprint">    +----------------------------+
-    | {cname_node}               |
+<pre class="code prettyprint"><code>    +----------------------------+
+    | {CNAME_NODE}               |
     | +------------------------+ |
-    | | {cname_content}        | |
+    | | {INNER_TEMPLATE}        | |
     | +------------------------+ |
     |                            |
     | +------------------------+ |
-    | | {cname_children}       | |
+    | | {CNAME_CHILDREN}       | |
     | +------------------------+ |
     +----------------------------+
 </code></pre>
 
 <p>For example:</p>
 
-<pre class="code"><code class="prettyprint">    '&lt;div id="{id}" class="{cname_node}" role="" aria-expanded="{expanded}"&gt;' +
-          '&lt;div tabIndex="{tabIndex}" class="{cname_content}"&gt;{label}&lt;/div&gt;' +
-          '&lt;div class="{cname_children}" role="group"&gt;{children}&lt;/div&gt;' +
-    '&lt;/div&gt;'
+<pre class="code prettyprint"><code>   OUTER_TEMPLATE:'&lt;div id="{id}" class="{CNAME_NODE}" role="" aria-expanded="{expanded}"&gt;{INNER_TEMPLATE}' +
+                       '&lt;div class="{CNAME_CHILDREN}" role="group"&gt;{children}&lt;/div&gt;&lt;/div&gt;',
 </code></pre>
 
-<p>The outermost container identified by the className <code>{cname_node}</code>
+<p>The outermost container identified by the className <code>{CNAME_NODE}</code>
 must also use the <code>{id}</code> placeholder to set the <code>id</code> of the node.
 It should also have the proper ARIA role assigned and the
 <code>aria-expanded</code> set to the <code>{expanded}</code> placeholder.</p>
@@ -2925,22 +2661,19 @@ It should also have the proper ARIA role assigned and the
 <p>It must contain two further elements:</p>
 
 <ul>
-<li><p>A container for the contents of this node, identified by the className
-<code>{cname_content}</code> which should contain everything the user would associate
+<li><p>A placeholder for the INNER_TEMPLATE of this node, identified by the placeholder
+<code>{INNER_TEMPLATE}</code> which should contain everything the user would associate
 with this node, such as the label and other status indicators
-such as toggle and selection indicators.
-This is the element that would receive the focus of the node, thus,
-it must have a <code>{tabIndex}</code> placeholder to receive the appropriate
-value for the <code>tabIndex</code> attribute.</p></li>
+such as toggle and selection indicators.</p></li>
 <li><p>The other element is the container for the children of this node.
-It will be identified by the className <code>{cname_children}</code> and it
+It will be identified by the className <code>{CNAME_CHILDREN}</code> and it
 should enclose the placeholder <code>{children}</code>.</p></li>
 </ul>
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;&lt;div id=&quot;{id}&quot; class=&quot;{cname_node}&quot; role=&quot;&quot; aria-expanded=&quot;{expanded}&quot;&gt;&lt;div tabIndex=&quot;{tabIndex}&quot;
-        class=&quot;{cname_content}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;div class=&quot;{cname_children}&quot; role=&quot;group&quot;&gt;{children}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;</p>
+        <p><strong>Default:</strong> &#x27;&lt;div id=&quot;{id}&quot; class=&quot;{CNAME_NODE}&quot; role=&quot;&quot; aria-expanded=&quot;{expanded}&quot;&gt;&lt;div tabIndex=&quot;{tabIndex}&quot;
+        class=&quot;{CNAME_CONTENT}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;div class=&quot;{CNAME_CHILDREN}&quot; role=&quot;group&quot;&gt;{children}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;</p>
     
 
     
@@ -2955,6 +2688,112 @@ should enclose the placeholder <code>{children}</code>.</p></li>
         
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_CNAMES" class="attr item">
+    <a name="config_CNAMES"></a> 
+    <h3 class="name"><code>CNAMES</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l508"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:508</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Collection of CSS class names used in the template.
+It is written all uppercase because its contents are meant to be constants,
+this object itself being augmented by class names added by its subclasses</p>
+    </div>
+
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>CNAMESChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>CNAMES</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
 
                 
                     <div id="attr_depth" class="attr item">
@@ -2989,7 +2828,7 @@ should enclose the placeholder <code>{children}</code>.</p></li>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l562"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:562</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l584"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:584</code></a>
         
         </p>
 
@@ -3092,7 +2931,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l582"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:582</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l604"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:604</code></a>
         
         </p>
 
@@ -3184,8 +3023,6 @@ This is calculated on-the-fly.</p>
     
 
     
-        <span class="flag readonly">readonly</span>
-    
 
     <div class="meta">
         
@@ -3198,7 +3035,7 @@ This is calculated on-the-fly.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l551"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:551</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l571"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:571</code></a>
         
         </p>
 
@@ -3209,7 +3046,8 @@ This is calculated on-the-fly.</p>
 
     <div class="description">
         <p>Id to assign to the DOM element that contains this node.
-If none was supplied, it will generate one</p>
+Once rendered, it cannot be changed.
+If none was supplied, it will generate one.</p>
     </div>
 
     
@@ -3303,7 +3141,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l541"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:541</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l561"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:561</code></a>
         
         </p>
 
@@ -3409,7 +3247,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l513"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:513</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l533"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:533</code></a>
         
         </p>
 
@@ -3511,7 +3349,7 @@ If none was supplied, it will generate one</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l529"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:529</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-node.js.html#l549"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-node.js:549</code></a>
         
         </p>
 

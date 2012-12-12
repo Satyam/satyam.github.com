@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>src&#x2F;gallery-md-model&#x2F;js&#x2F;simple-undo.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,79 +154,71 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js</h1>
+                        <h1 class="file-heading">File: src&#x2F;gallery-md-model&#x2F;js&#x2F;simple-undo.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-* A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-* the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-* This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-* and thus conflicts with the StdMod sections. (this can also be solved using the property &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetParent.html#property__childrenContainer&quot;&gt;_childrenContainer&lt;&#x2F;a&gt;)&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-* For further documentation see &lt;a href=&quot;http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;WidgetStdMod.html&quot;&gt;WidgetStdMod&lt;&#x2F;a&gt;
-*
-* @module gallery-stdmod
-* @class StdMod
-* @constructor
-* @extends WidgetStdMod
-*&#x2F;
+ * An extension for GalleryModel that provides a single level of undo for each field.
+ * It will never undo a field to &#x60;undefined&#x60; since it assumes an undefined field had not been set.
+ * @class GalleryModelSimpleUndo
+ *&#x2F;
+Y.GalleryModelSimpleUndo = function () {};
 
-&quot;use strict&quot;;
-var BBX = &#x27;boundingBox&#x27;,
-	CBX = &#x27;contentBox&#x27;,
-	WStdMod = Y.WidgetStdMod,
-	HEADER = WStdMod.HEADER,
-	BODY = WStdMod.BODY,
-	FOOTER = WStdMod.FOOTER,
-
-	StdMod = function () {
-		WStdMod.apply(this, arguments);
-		this._stdModNode = this.get(BBX);
-	};
-
-	
-StdMod.prototype = {
-	_renderUIStdMod : function () {
-		var cbx = this.get(CBX);
-		
-		cbx.addClass(WStdMod.SECTION_CLASS_NAMES[BODY]);
-		this.bodyNode = cbx;
-		WStdMod.prototype._renderUIStdMod.apply(this,arguments);
-	},
-	_renderStdMod : function(section) {
-
-		var contentBox = this.get(CBX),
-			sectionNode = this._findStdModSection(section);
-
-		if (!sectionNode) {
-			if (section === BODY) {
-				sectionNode = contentBox;
-			} else {
-				sectionNode = this._getStdModTemplate(section);
-			}
-		}
-
-		this._insertStdModSection(contentBox, section, sectionNode);
-
-		return (this[section + &#x27;Node&#x27;] = sectionNode);
-	},
-	_insertStdModSection : function(contentBox, section, sectionNode) {
- 
-		switch (section) {
-			case FOOTER:
-				contentBox.insert(sectionNode, &#x27;after&#x27;);
-				break;
-			case HEADER:
-				contentBox.insert(sectionNode, &#x27;before&#x27;);
-				break;
-		}
-	},
-	_findStdModSection: function(section) {
-		return this.get(BBX).one(&quot;&gt; .&quot; + WStdMod.SECTION_CLASS_NAMES[section]);
-	}
+Y.GalleryModelSimpleUndo.prototype = {
+    initializer: function () {
+        this._lastChange = {};
+        if (this._addPreserve) {
+            this._addPreserve(&#x27;_lastChange&#x27;);
+        }
+        this.after(EVT_CHANGE, this._trackChange);
+        this.on([EVT_LOADED, EVT_SAVED, EVT_RESET], this._resetUndo);
+    },
+    &#x2F;**
+     * Event listener for the after value change event, it tracks changes for each field.
+     * It retains only the last change for each field.
+     * @method _trackChange
+     * @param ev {EventFacade} As provided by the {{#crossLink &quot;GalleryModel&#x2F;change:event&quot;}}{{&#x2F;crossLink}} event
+     * @private
+     *&#x2F;
+    _trackChange: function (ev) {
+        if (ev.name &amp;&amp; ev.src !== UNDO) {
+            this._lastChange[ev.name] = ev.prevVal;
+        }
+    },
+    &#x2F;**
+     * After load or save operations, it drops any changes it might have tracked.
+     * @method _resetUndo
+     * @private
+     *&#x2F;
+    _resetUndo: function () {
+        this._lastChange = {};
+    },
+    &#x2F;**
+     * Reverts one level of change for a specific field or all fields
+     * @method undo
+     * @param [name] {String} If provided it will undo that particular field,
+     *	otherwise, it undoes the whole record.
+     * @chainable
+     *&#x2F;
+    undo: function (name) {
+        var self = this;
+        if (name) {
+            if (self._lastChange[name] !== undefined) {
+                self.setValue(name, self._lastChange[name], UNDO);
+                delete self._lastChange[name];
+            }
+        } else {
+            YObject.each(self._lastChange, function (value, name) {
+                if (value !== undefined) {
+                    self.setValue(name, value, UNDO);
+                }
+            });
+            self._lastChange = {};
+        }
+        return self;
+    }
 };
-
-Y.StdMod = Y.mix(StdMod, WStdMod, false, undefined, 2);
 
     </pre>
 </div>

@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>GalleryModelChronologicalUndo - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l876"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:876</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l877"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:877</code></a>
         </div>
     
 
@@ -178,7 +178,7 @@
 
 
 <div class="box intro">
-    <p>Provides multiple levels of undo in strict chronological order 
+    <p>Provides multiple levels of undo in strict chronological order
 whatever the field was at each stage.
 Changes done on multiple fields via setValues
 will also be undone in one step.</p>
@@ -216,7 +216,28 @@ will also be undone in one step.</p>
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__resetUndo">_resetUndo</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__trackChange">_trackChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__trackChange">_trackChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_undo">undo</a>
 
                                 
                                 
@@ -272,6 +293,8 @@ will also be undone in one step.</p>
         
             
                 
+                    <p>Provided by the <a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a> module.</p>
+                
                 <p>
                 
                 Defined in
@@ -279,7 +302,63 @@ will also be undone in one step.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l906"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:906</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_chrono-undo.js.html#l31"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;chrono-undo.js:31</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>After load or save operations, it drops any changes it might have tracked.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__resetUndo" class="method item private">
+    <h3 class="name"><code>_resetUndo</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l907"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:907</code></a>
         
         </p>
 
@@ -338,6 +417,8 @@ will also be undone in one step.</p>
         
             
                 
+                    <p>Provided by the <a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a> module.</p>
+                
                 <p>
                 
                 Defined in
@@ -345,7 +426,7 @@ will also be undone in one step.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l894"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:894</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_chrono-undo.js.html#l19"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;chrono-undo.js:19</code></a>
         
         </p>
 
@@ -356,7 +437,97 @@ will also be undone in one step.</p>
     </div>
 
     <div class="description">
-        <p>Event listener for the after value change event, it tracks changes for each field. <br />
+        <p>Event listener for the after value change event, it tracks changes for each field.
+It keeps a stack of each change.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>As provided by the <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a> event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__trackChange" class="method item private">
+    <h3 class="name"><code>_trackChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l895"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:895</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event listener for the after value change event, it tracks changes for each field.
 It keeps a stack of each change.</p>
     </div>
 
@@ -418,6 +589,8 @@ It keeps a stack of each change.</p>
         
             
                 
+                    <p>Provided by the <a href="../modules/gallery-md-ibutton.html">gallery-md-ibutton</a> module.</p>
+                
                 <p>
                 
                 Defined in
@@ -425,7 +598,63 @@ It keeps a stack of each change.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l914"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:914</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_chrono-undo.js.html#l39"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;chrono-undo.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reverts one level of field changes.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_undo" class="method item">
+    <h3 class="name"><code>undo</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l915"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:915</code></a>
         
         </p>
 

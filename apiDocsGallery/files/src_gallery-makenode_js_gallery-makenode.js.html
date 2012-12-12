@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-makenode&#x2F;js&#x2F;gallery-makenode.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>src&#x2F;gallery-makenode&#x2F;js&#x2F;gallery-makenode.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,16 +154,16 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-makenode&#x2F;js&#x2F;gallery-makenode.js</h1>
+                        <h1 class="file-heading">File: src&#x2F;gallery-makenode&#x2F;js&#x2F;gallery-makenode.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
- * An extension for Widget to create markup from templates, 
+ * An extension for Widget to create markup from templates,
  * create CSS classNames, locating elements,
  * assist in attaching events to UI elements and to reflect attribute changes into the UI.
- * All of its members are either protected or private.  
- * Developers using MakeNode should use only those marked protected.  
+ * All of its members are either protected or private.
+ * Developers using MakeNode should use only those marked protected.
  * &lt;b&gt;Enable the Show Protected checkbox to see them&lt;&#x2F;b&gt;.
  * @module gallery-makenode
  * @class MakeNode
@@ -173,7 +173,7 @@
 		&#x2F;&#x2F; See: http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2531032
 		var L = Y.Lang, DUMP = &#x27;dump&#x27;, SPACE = &#x27; &#x27;, LBRACE = &#x27;{&#x27;, RBRACE = &#x27;}&#x27;,
 			savedRegExp =  &#x2F;(~-(\d+)-~)&#x2F;g, lBraceRegExp = &#x2F;\{LBRACE\}&#x2F;g, rBraceRegExp = &#x2F;\{RBRACE\}&#x2F;g;
-		
+
 		Y.substitute = function(s, o, f, recurse) {
 			var i, j, k, key, v, meta, saved = [], token, dump,
 				lidx = s.length;
@@ -257,18 +257,18 @@
 			;
 
 		};
-	})();}	
+	})();}
 	var WS = &#x2F;\s+&#x2F;,
 		NODE = &#x27;Node&#x27;,
 		DOT = &#x27;.&#x27;,
 		BBX = &#x27;boundingBox&#x27;,
 		Lang = Y.Lang,
 		DUPLICATE = &#x27; for &quot;{name}&quot; defined in class {recentDef} also defined in class {prevDef}&#x27;,
-		parsingRegExp = &#x2F;^(?:([ \t]+)|(&quot;[^&quot;\\]*(?:\\.[^&quot;\\]*)*&quot;)|(true)|(false)|(null)|([\-+]?[0-9]*(?:\.[0-9]+)?))&#x2F;, 
+		parsingRegExp = &#x2F;^(?:([ \t]+)|(&quot;[^&quot;\\]*(?:\\.[^&quot;\\]*)*&quot;)|(true)|(false)|(null)|([\-+]?[0-9]*(?:\.[0-9]+)?))&#x2F;,
 		quotesRegExp = &#x2F;\\&quot;&#x2F;g,
-				
-		&#x2F;** 
-		 * Creates CSS classNames from suffixes listed in &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, 
+
+		&#x2F;**
+		 * Creates CSS classNames from suffixes listed in &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;,
 		 * stores them in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;.
 		 * Concatenates &lt;a href=&quot;#property__ATTRS_2_UI&quot;&gt;&lt;code&gt;_ATTRS_2_UI&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; into &lt;code&gt;_UI_ATTRS&lt;&#x2F;code&gt;.
 		 * Sets listeners to render and destroy events to attach&#x2F;detach UI events.
@@ -298,13 +298,13 @@
 			this.get(&#x27;contentBox&#x27;).append(this._makeNode());
 			this._locateNodes();
 		},
-		&#x2F;** 
+		&#x2F;**
 		 * An array of event handles returned when attaching listeners to events,
 		 * meant to detach them all when destroying the instance.
 		 * @property _eventHandles
 		 * @type Array
 		 * @private
-		 *&#x2F;	
+		 *&#x2F;
 		_eventHandles:null,
 		&#x2F;**
 		 * Contains a hash of CSS classNames generated from the entries in &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
@@ -320,7 +320,7 @@
 		 * @type Object
 		 * @protected
 		 *&#x2F;
-		 _classNames:null,
+		_classNames:null,
 		&#x2F;**
 		 * Hash listing the template processing codes and the functions to handle each.
 		 * The processing functions will receive a string with the arguments that follow the processing code,
@@ -329,7 +329,7 @@
 		 * @property _templateHandlers
 		 * @type Object
 		 * @private
-		 *&#x2F;		 
+		 *&#x2F;
 		_templateHandlers: {
 			&#x27;@&#x27;: function (arg) {
 				return this.get(arg);
@@ -360,7 +360,7 @@
 			&#x27;n&#x27;: function (args, extras) {
 				var fn, key, value = this;
 				args = args.split(WS);
-				
+
 				while (value &amp;&amp; args.length) {
 					key = args.shift();
 					fn = this._templateHandlers[key.toLowerCase()];
@@ -371,11 +371,12 @@
 				}
 				return value;
 			}
-				
+
 		},
 		&#x2F;**
-		 * Parses the arguments received by the processor of the &lt;code&gt;{m}&lt;&#x2F;code&gt; placeholder.  
-		 * It recognizes numbers, &lt;code&gt;true&lt;&#x2F;code&gt;, &lt;code&gt;false&lt;&#x2F;code&gt;, &lt;code&gt;null&lt;&#x2F;code&gt; and double quoted strings, each separated by whitespace.
+		 * Parses the arguments received by the processor of the &lt;code&gt;{m}&lt;&#x2F;code&gt; placeholder.
+		 * It recognizes numbers, &lt;code&gt;true&lt;&#x2F;code&gt;, &lt;code&gt;false&lt;&#x2F;code&gt;, &lt;code&gt;null&lt;&#x2F;code&gt;
+         * and double quoted strings, each separated by whitespace.
 		 * It skips over anything else.
 		 * @method _parseMakeNodeArgs
 		 * @param arg {String} String to be parsed for arguments
@@ -418,22 +419,22 @@
 					}
 				};
 			while (arg.length) {
-				
+
 				Y.some(parsingRegExp.exec(arg), matcher);
 			}
 			return args;
 		},
 		&#x2F;**
-		 * Enumerates all the values and keys of a given static properties for all classes in the hierarchy, 
+		 * Enumerates all the values and keys of a given static properties for all classes in the hierarchy,
 		 * starting with the oldest ancestor (Base).
 		 * @method _forAllXinClasses
 		 * @param x {String} name of the static property to be enumerated
-		 * @param fn {function} function to be called for each value.  
-		 * The function will receive a reference to the class where it occurs, the value of the property 
+		 * @param fn {function} function to be called for each value.
+		 * The function will receive a reference to the class where it occurs, the value of the property
 		 * and the key or index.
 		 * @private
 		 *&#x2F;
-		
+
 		_forAllXinClasses: function(x, fn) {
 			var self = this,
 				cs = this._getClasses(),
@@ -452,9 +453,12 @@
 		&#x2F;**
 		 * Processes the template given and returns a &lt;code&gt;Y.Node&lt;&#x2F;code&gt; instance.
 		 * @method _makeNode
-		 * @param template {String} (optional) Template to process.  
-		 *        If missing, it will use the first static &lt;a href=&quot;#property__TEMPLATE&quot;&gt;&lt;code&gt;_TEMPLATE&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property found in the inheritance chain.
-		 * @param extras {Object} (optional) Hash of extra values to replace into the template, beyond MakeNode&#x27;s processing codes.
+		 * @param template {String} (optional) Template to process.
+		 *        If missing, it will use the first static
+         *        &lt;a href=&quot;#property__TEMPLATE&quot;&gt;&lt;code&gt;_TEMPLATE&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
+         *        property found in the inheritance chain.
+		 * @param extras {Object} (optional) Hash of extra values to replace into
+         *      the template, beyond MakeNode&#x27;s processing codes.
 		 * @return {Y.Node} Instance of &lt;code&gt;Y.Node&lt;&#x2F;code&gt; produced from the template
 		 * @protected
 		 *&#x2F;
@@ -470,8 +474,9 @@
 		&#x2F;**
 		 * Processes the given template and returns a string
 		 * @method _substitute
-		 * @param template {String} Template to process.  
-		 * @param extras {Object} (optional) Hash of extra values to replace into the template, beyond MakeNode&#x27;s processing codes.
+		 * @param template {String} Template to process.
+		 * @param extras {Object} (optional) Hash of extra values to replace into
+         *      the template, beyond MakeNode&#x27;s processing codes.
 		 * @return {String} Template with the placeholders replaced.
 		 * @protected
 		 *&#x2F;
@@ -488,24 +493,28 @@
 			}, this),true);
 		},
 		&#x2F;**
-		 * Locates the nodes with the CSS classNames listed in the &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property, 
+		 * Locates the nodes with the CSS classNames listed in the
+         * &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property,
 		 * or those specifically requested in its arguments and stores references to them
 		 * in properties named after each className key, prefixed with an underscore
 		 * and followed by &lt;code&gt;&quot;Node&quot;&lt;&#x2F;code&gt;.
-		 * If the className key contains a hyphen followed by a lowercase letter, the hyphen will be dropped and the letter capitalized.
-		 * Any other characters invalid for identifiers will be turned into underscores, 
-		 * thus for the &lt;code&gt;no-label-1&lt;&#x2F;code&gt; className key a &lt;code&gt;_noLabel_1Node&lt;&#x2F;code&gt; property will be created.
+		 * If the className key contains a hyphen followed by a lowercase letter,
+         * the hyphen will be dropped and the letter capitalized.
+		 * Any other characters invalid for identifiers will be turned into underscores,
+		 * thus for the &lt;code&gt;no-label-1&lt;&#x2F;code&gt; className key a &lt;code&gt;_noLabel_1Node&lt;&#x2F;code&gt;
+         * property will be created.
 		 * @method _locateNodes
 		 * @param arg1,.... {String} (optional) If given, list of className keys of the nodes to be located.
-		 *        If missing, all the classNames stored in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; will be located.
+		 *        If missing, all the classNames stored in
+         *        &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; will be located.
 		 * @protected
 		 *&#x2F;
 		_locateNodes: function () {
-			var bbx = this.get(BBX), 
+			var bbx = this.get(BBX),
 				self = this,
 				makeName = function (el, name) {
 					if (el) {
-						self[&#x27;_&#x27; + name.replace(&#x2F;\-([a-z])&#x2F;g,function (str, p1, p2) {
+						self[&#x27;_&#x27; + name.replace(&#x2F;\-([a-z])&#x2F;g,function (str, p1) {
 							return p1.toUpperCase();
 						}).replace(&#x2F;\W&#x2F;g,&#x27;_&#x27;) + NODE] = el;
 					}
@@ -521,11 +530,16 @@
 			}
 		},
 		&#x2F;**
-		 * Looks for static properties called &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; in each of the classes of the inheritance chain
-		 * and generates CSS classNames based on the &lt;code&gt;_cssPrefix&lt;&#x2F;code&gt; of each class and each of the suffixes listed in each them.
-		 * The classNames generated will be stored in &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; indexed by the suffix.
-		 * It will also store the classNames of the boundingBox ( boundingBox )and the contentBox ( content ).  
-		 * If the WidgetStdMod is used, it will also add the classNames for the three sections ( HEADER, BODY, FOOTER )
+		 * Looks for static properties called
+         * &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
+         * in each of the classes of the inheritance chain
+		 * and generates CSS classNames based on the &lt;code&gt;_cssPrefix&lt;&#x2F;code&gt; of each
+         * class and each of the suffixes listed in each them.
+		 * The classNames generated will be stored in
+         * &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; indexed by the suffix.
+		 * It will also store the classNames of the boundingBox ( boundingBox )and the contentBox ( content ).
+		 * If the WidgetStdMod is used, it will also add the classNames for the
+         * three sections ( HEADER, BODY, FOOTER )
 		 * @method _makeClassNames
 		 * @private
 		 *&#x2F;
@@ -533,7 +547,7 @@
 			var YCM = Y.ClassNameManager.getClassName,
 				defined = {},
 				cns = this._classNames = {};
-				
+
 			this._forAllXinClasses(&#x27;_CLASS_NAMES&#x27;, function(c, name) {
 				if (defined[name]) {
 					Y.log(Y.substitute(&#x27;ClassName&#x27; + DUPLICATE, {name:name, recentDef: defined[name], prevDef: c.NAME}), &#x27;warn&#x27;, &#x27;MakeNode&#x27;);
@@ -542,7 +556,7 @@
 					defined[name] = c.NAME;
 				}
 			});
-			
+
 			cns.content = (cns[BBX] = YCM(this.constructor.NAME.toLowerCase())) + &#x27;-content&#x27;;
 			if (this.getStdModNode) {
 				cns.HEADER = &#x27;yui3-widget-hd&#x27;;
@@ -551,7 +565,8 @@
 			}
 		},
 		&#x2F;**
-		 * Concatenates the entries of the &lt;a href=&quot;#property__ATTRS_2_UI&quot;&gt;&lt;code&gt;_ATTRS_2_UI&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; static property of each class in the inheritance chain
+		 * Concatenates the entries of the &lt;a href=&quot;#property__ATTRS_2_UI&quot;&gt;&lt;code&gt;_ATTRS_2_UI&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
+         * static property of each class in the inheritance chain
 		 * into this instance _UI_ATTRS property for the benefit or Widget.  See Widget._UI_ATTRS
 		 * @method _concatUIAttrs
 		 * @private
@@ -568,7 +583,11 @@
 					if (u) {
 						Y.each(Y.Array(u[which]), function (name) {
 							if (defined[name]) {
-								Y.log(Y.substitute(&#x27;UI &#x27; + which + &#x27; Attribute&#x27; + DUPLICATE, {name:name, recentDef: defined[name], prevDef: c.NAME}), &#x27;warn&#x27;, &#x27;MakeNode&#x27;);
+								Y.log(
+                                    Y.substitute(
+                                        &#x27;UI &#x27; + which + &#x27; Attribute&#x27; + DUPLICATE,
+                                        {name:name, recentDef: defined[name], prevDef: c.NAME}
+                                    ), &#x27;warn&#x27;, &#x27;MakeNode&#x27;);
 							} else {
 								defined[name] = c.NAME;
 							}
@@ -580,7 +599,8 @@
 			this._UI_ATTRS = U;
 		},
 		&#x2F;**
-		 * Attaches the events listed in the &lt;a href=&quot;#property__EVENTS&quot;&gt;&lt;code&gt;_EVENTS&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; static property of each class in the inheritance chain.
+		 * Attaches the events listed in the &lt;a href=&quot;#property__EVENTS&quot;&gt;&lt;code&gt;_EVENTS&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
+         * static property of each class in the inheritance chain.
 		 * @method _attachEvents
 		 * @private
 		 *&#x2F;
@@ -593,8 +613,8 @@
 					return name.charAt(0).toUpperCase() + name.substr(1);
 				},
 				equivalents = {
-					boundingBox:bbx, 
-					document:bbx.get(&#x27;ownerDocument&#x27;), 
+					boundingBox:bbx,
+					document:bbx.get(&#x27;ownerDocument&#x27;),
 					THIS:self,
 					Y:Y
 				};
@@ -604,7 +624,7 @@
 				Y.each(Y.Array(handlers), function (handler) {
 					if (Lang.isString(handler)) {
 						handler = {type: handler};
-					} 
+					}
 					if (Lang.isObject(handler)) {
 						type = handler.type;
 						when = (handler.when || &#x27;after&#x27;);
@@ -613,7 +633,9 @@
 					} else {
 						Y.log(&#x27;Bad event handler for class: &#x27; + c.NAME + &#x27; key: &#x27; + key,&#x27;error&#x27;,&#x27;MakeNode&#x27;);
 					}
-					if (!&#x2F;^(before|after|delegate)$&#x2F;.test(when)) { Y.log(&#x27;When can only be before, after or delegate: &#x27; + when, &#x27;error&#x27;, &#x27;MakeNode&#x27;); }
+					if (!&#x2F;^(before|after|delegate)$&#x2F;.test(when)) {
+                        Y.log(&#x27;When can only be before, after or delegate: &#x27; + when, &#x27;error&#x27;, &#x27;MakeNode&#x27;);
+                    }
 					when = when.replace(&#x27;before&#x27;,&#x27;on&#x27;);
 					if (type) {
 						if (self[fn]) {
@@ -646,7 +668,7 @@
 			});
 			this._eventHandles = this._eventHandles.concat(eh);
 		},
-		
+
 		&#x2F;**
 		 * Publishes the events listed in the _PUBLISH static property of each of the classes in the inheritance chain.
 		 * If an event has been publishes, the properties set in the descendants will override those in the original publisher.
@@ -673,41 +695,42 @@
 			});
 		}
 
-				
+
 	};
 	&#x2F;**
-	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only. 
+	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only.
 	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
 	 * Holds the default template to be used by &lt;a href=&quot;#method__makeNode&quot;&gt;&lt;code&gt;_makeNode&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; when none is explicitly provided.&lt;br&#x2F;&gt;
 	 * The string should contain HTML code with placeholders made of a set of curly braces
-	 * enclosing an initial processing code and arguments.  
+	 * enclosing an initial processing code and arguments.
 	 * Placeholders can be nested, any of the arguments in a placeholder can be another placeholder.&lt;br&#x2F;&gt;
-	 * The template may also contain regular placeholders as used by &lt;code&gt;Y.substitute&lt;&#x2F;code&gt;, 
+	 * The template may also contain regular placeholders as used by &lt;code&gt;Y.substitute&lt;&#x2F;code&gt;,
 	 * whose values will be extracted from the second argument to &lt;a href=&quot;#method__makeNode&quot;&gt;&lt;code&gt;_makeNode&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;.
 	 * The processing codes are:
-			 
+
 		&lt;ul&gt;
 			&lt;li&gt;&lt;code&gt;{@ attributeName}&lt;&#x2F;code&gt; configuration attribute values&lt;&#x2F;li&gt;
 			&lt;li&gt;&lt;code&gt;{p propertyName}&lt;&#x2F;code&gt; instance property values&lt;&#x2F;li&gt;
-			&lt;li&gt;&lt;code&gt;{m methodName arg1 arg2 ....}&lt;&#x2F;code&gt; return value from instance method. 
+			&lt;li&gt;&lt;code&gt;{m methodName arg1 arg2 ....}&lt;&#x2F;code&gt; return value from instance method.
 			The &lt;code&gt;m&lt;&#x2F;code&gt; code should be followed by the
 			method name and any number of arguments. The
 			placeholder is replaced by the return value or the named method.&lt;&#x2F;li&gt;
 			&lt;li&gt;&lt;code&gt;{c classNameKey}&lt;&#x2F;code&gt; CSS className generated from the &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
 			static property &lt;&#x2F;li&gt;
 			&lt;li&gt;&lt;code&gt;{s key}&lt;&#x2F;code&gt; string from the &lt;code&gt;strings&lt;&#x2F;code&gt; attribute, using &lt;code&gt;key&lt;&#x2F;code&gt;	as the sub-attribute.&lt;&#x2F;li&gt;
-			&lt;li&gt;&lt;code&gt;{? arg1 arg2 arg3}&lt;&#x2F;code&gt; If arg1 evaluates to true it returns arg2 otherwise arg3. 
+			&lt;li&gt;&lt;code&gt;{? arg1 arg2 arg3}&lt;&#x2F;code&gt; If arg1 evaluates to true it returns arg2 otherwise arg3.
 			Argument arg1 is usually a nested placeholder.&lt;&#x2F;li&gt;
 			&lt;li&gt;&lt;code&gt;{1 arg1 arg2 arg3}&lt;&#x2F;code&gt; If arg1 is 1 it returns arg2 otherwise arg3. Used to produce singular&#x2F;plural text.
 			Argument arg1 is usually a nested placeholder.&lt;&#x2F;li&gt;
-			&lt;li&gt;&lt;code&gt;{n p1 arg1 .... pn argn}&lt;&#x2F;code&gt; It will read the value resulting from the processing code &lt;code&gt;p1&lt;&#x2F;code&gt; with argument &lt;code&gt;arg1&lt;&#x2F;code&gt;
-			and use that as the object to process the following processing code.  
-			It takes any number of processing codes and arguments.  
+			&lt;li&gt;&lt;code&gt;{n p1 arg1 .... pn argn}&lt;&#x2F;code&gt; It will read the value resulting from the processing code
+            &lt;code&gt;p1&lt;&#x2F;code&gt; with argument &lt;code&gt;arg1&lt;&#x2F;code&gt;
+			and use that as the object to process the following processing code.
+			It takes any number of processing codes and arguments.
 			It only works with processing codes that take simple identifiers as arguments, ie.: not {m}.
 			&lt;li&gt;&lt;code&gt;{}&lt;&#x2F;code&gt; any other value will be	handled just like &lt;code&gt;Y.substitute&lt;&#x2F;code&gt; does. &lt;&#x2F;li&gt;
 		&lt;&#x2F;ul&gt;
-	 * For placeholders containing several arguments they must be separated by white spaces.  
-	 * Strings must be enclosed in double quotes, no single quotes allowed.  
+	 * For placeholders containing several arguments they must be separated by white spaces.
+	 * Strings must be enclosed in double quotes, no single quotes allowed.
 	 * The backslash is the escape character within strings.
 	 * Numbers, null, true and false will be recognized and converted to their native values.
 	 * Any argument can be a further placeholder, enclosed in its own set of curly braces.
@@ -719,11 +742,11 @@
 	&#x2F;**
 	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only.
 	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-	 * Holds an array of strings, each the suffix used to define a CSS className using the 
+	 * Holds an array of strings, each the suffix used to define a CSS className using the
 	 * _cssPrefix of each class.  The names listed here are used as the keys into
-	 * &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, 
-	 * as the argument to the &lt;code&gt;{c}&lt;&#x2F;code&gt; template placeholder 
-	 * and as keys for the entries in the &lt;a href=&quot;#property__EVENTS&quot;&gt;&lt;code&gt;_EVENTS&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property.  
+	 * &lt;a href=&quot;#property__classNames&quot;&gt;&lt;code&gt;this._classNames&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;,
+	 * as the argument to the &lt;code&gt;{c}&lt;&#x2F;code&gt; template placeholder
+	 * and as keys for the entries in the &lt;a href=&quot;#property__EVENTS&quot;&gt;&lt;code&gt;_EVENTS&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property.
 	 * They are also used by &lt;a href=&quot;#method__locateNodes&quot;&gt;&lt;code&gt;_locateNodes&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; to create the private properties that hold
 	 * references to the nodes created.
 	 * @property _CLASS_NAMES
@@ -735,11 +758,11 @@
 	&#x2F;**
 	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only.
 	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-	 * Lists the attributes whose value should be reflected in the UI.  
-	 * It contains an object with two properties, &lt;code&gt;BIND&lt;&#x2F;code&gt; and &lt;code&gt;SYNC&lt;&#x2F;code&gt;, each 
+	 * Lists the attributes whose value should be reflected in the UI.
+	 * It contains an object with two properties, &lt;code&gt;BIND&lt;&#x2F;code&gt; and &lt;code&gt;SYNC&lt;&#x2F;code&gt;, each
 	 * containing the name of an attribute or an array of names of attributes.
 	 * Those listed in &lt;code&gt;BIND&lt;&#x2F;code&gt; will have listeners attached to their change event
-	 * so every such change is refreshed in the UI. 
+	 * so every such change is refreshed in the UI.
 	 * Those listed in &lt;code&gt;SYNC&lt;&#x2F;code&gt; will be refreshed when the UI is rendered.
 	 * For each entry in either list there should be a method named using the &lt;code&gt;_uiSet&lt;&#x2F;code&gt; prefix, followed by
 	 * the name of the attribute, with its first character in uppercase.
@@ -750,11 +773,11 @@
 	 * @protected
 	 *&#x2F;
 
-	 
+
 	&#x2F;**
 	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only.
 	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-	 * Contains a hash of elements to attach event listeners to.  
+	 * Contains a hash of elements to attach event listeners to.
 	 * Each element is identified by the suffix of its generated className,
 	 * as declared in the &lt;a href=&quot;#property__CLASS_NAMES&quot;&gt;&lt;code&gt;_CLASS_NAMES&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; property.  &lt;br&#x2F;&gt;
 	 * There are seveal virtual element identifiers,&lt;ul&gt;
@@ -764,22 +787,25 @@
 	 * &lt;li&gt;&lt;code&gt;&quot;THIS&quot;&lt;&#x2F;code&gt; identifies this instance&lt;&#x2F;li&gt;
 	 * &lt;li&gt;&lt;code&gt;&quot;Y&quot;&lt;&#x2F;code&gt; identifies the YUI instance of the sandbox&lt;&#x2F;li&gt;
 	 * &lt;&#x2F;ul&gt;
-	 * If the Y.WidgetStdMod extension is used the &lt;code&gt;&quot;HEADER&quot;&lt;&#x2F;code&gt;, &lt;code&gt;&quot;BODY&quot;&lt;&#x2F;code&gt; 
+	 * If the Y.WidgetStdMod extension is used the &lt;code&gt;&quot;HEADER&quot;&lt;&#x2F;code&gt;, &lt;code&gt;&quot;BODY&quot;&lt;&#x2F;code&gt;
 	 * and &lt;code&gt;&quot;FOOTER&quot;&lt;&#x2F;code&gt; identifiers will also be available.&lt;br&#x2F;&gt;
 	 * Each entry contains a type of event to be listened to or an array of events.
 	 * Each event can be described by its type (i.e.: &lt;code&gt;&quot;key&quot;&lt;&#x2F;code&gt;, &lt;code&gt;&quot;mousedown&quot;&lt;&#x2F;code&gt;, etc).
 	 * MakeNode will set &#x27;after&#x27; event listeners by default, but can be instructed to listen to &#x27;before&#x27; (&#x27;on&#x27;) events
 	 * or do it by delegation on the boundingBox.
-	 * MakeNode will associate this event with a method named &lt;code&gt;&quot;_after&quot;&lt;&#x2F;code&gt;,&lt;code&gt;&quot;_before&quot;&lt;&#x2F;code&gt; or &lt;code&gt;&quot;_delegate&quot;&lt;&#x2F;code&gt; followed by the element identifier with the first character capitalized 
-	 * and the type of event with the first character capitalized (i.e.: &lt;code&gt;_afterBoundingBoxClick&lt;&#x2F;code&gt;, &lt;code&gt;_afterInputBlur&lt;&#x2F;code&gt;, &lt;code&gt;_afterThisValueChange&lt;&#x2F;code&gt;, &lt;code&gt;_beforeFormSubmit&lt;&#x2F;code&gt;, &lt;code&gt;_delegateListItemClick&lt;&#x2F;code&gt;, etc.).&lt;br&#x2F;&gt;
+	 * MakeNode will associate this event with a method named &lt;code&gt;&quot;_after&quot;&lt;&#x2F;code&gt;,
+     * &lt;code&gt;&quot;_before&quot;&lt;&#x2F;code&gt; or &lt;code&gt;&quot;_delegate&quot;&lt;&#x2F;code&gt; followed by the element identifier with the first character capitalized
+	 * and the type of event with the first character capitalized
+     * (i.e.: &lt;code&gt;_afterBoundingBoxClick&lt;&#x2F;code&gt;, &lt;code&gt;_afterInputBlur&lt;&#x2F;code&gt;,
+     * &lt;code&gt;_afterThisValueChange&lt;&#x2F;code&gt;, &lt;code&gt;_beforeFormSubmit&lt;&#x2F;code&gt;, &lt;code&gt;_delegateListItemClick&lt;&#x2F;code&gt;, etc.).&lt;br&#x2F;&gt;
 	 * Alternatively, the event listener can be described by an object literal containing properties: &lt;ul&gt;
 	 * &lt;li&gt;&lt;code&gt;type&lt;&#x2F;code&gt; (mandatory) the type of event being listened to&lt;&#x2F;li&gt;
-	 * &lt;li&gt;&lt;code&gt;fn&lt;&#x2F;code&gt; the name of the method to handle the event.  
+	 * &lt;li&gt;&lt;code&gt;fn&lt;&#x2F;code&gt; the name of the method to handle the event.
 	 * Since _EVENTS is static, it has no access to &lt;code&gt;this&lt;&#x2F;code&gt; so the name of the method must be specified&lt;&#x2F;li&gt;
-	 * &lt;li&gt;&lt;code&gt;args&lt;&#x2F;code&gt; extra arguments to be passed to the listener, useful, 
+	 * &lt;li&gt;&lt;code&gt;args&lt;&#x2F;code&gt; extra arguments to be passed to the listener, useful,
 	 * for example as a key descriptor for &lt;code&gt;key&lt;&#x2F;code&gt; events.&lt;&#x2F;li&gt;
-	 * &lt;li&gt;&lt;code&gt;when&lt;&#x2F;code&gt; either &#x27;before&#x27;, &#x27;after&#x27; or &#x27;delegate&#x27;.  
-	 * MakeNode defaults to set &#x27;after&#x27; event listeners but can be told to set &#x27;before&#x27; (&#x27;on&#x27;) listeners 
+	 * &lt;li&gt;&lt;code&gt;when&lt;&#x2F;code&gt; either &#x27;before&#x27;, &#x27;after&#x27; or &#x27;delegate&#x27;.
+	 * MakeNode defaults to set &#x27;after&#x27; event listeners but can be told to set &#x27;before&#x27; (&#x27;on&#x27;) listeners
 	 * or to delegate on the BoundingBox the capture of events on inner elements.  Only className keys can be used with &#x27;delegate&#x27;.&lt;&#x2F;li&gt;&lt;&#x2F;ul&gt;
 	 * &lt;pre&gt;_EVENTS: {
  &amp;nbsp; &amp;nbsp; boundingBox: [
@@ -799,13 +825,13 @@
 	 * @static
 	 * @protected
 	 *&#x2F;
-	 
+
 	&#x2F;**
 	 * &lt;b&gt;**&lt;&#x2F;b&gt; This is a documentation entry only.
 	 * This property is not defined in this file, it can be defined by the developer. &lt;b&gt;**&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;br&#x2F;&gt;
-	 * Contains a hash of events to be published.  
+	 * Contains a hash of events to be published.
 	 * Each element has the name of the event as its key
-	 * and the configuration object as its value.  
+	 * and the configuration object as its value.
 	 * If the event has already been published, the configuration of the event will be modified by the
 	 * configuration set in the new definition.
 	 * When setting functions use the name of the function, not a function reference.
@@ -814,9 +840,9 @@
 	 * @static
 	 * @protected
 	 *&#x2F;
-	 
-	 Y.MakeNode = MakeNode;
-		
+
+Y.MakeNode = MakeNode;
+
 
     </pre>
 </div>

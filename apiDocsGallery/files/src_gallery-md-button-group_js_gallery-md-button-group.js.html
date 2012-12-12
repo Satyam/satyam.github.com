@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-stdmod - Satyam&#x27;s Gallery Modules</title>
+    <title>src&#x2F;gallery-md-button-group&#x2F;js&#x2F;gallery-md-button-group.js - Satyam&#x27;s Gallery Modules</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -154,54 +154,210 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-stdmod Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src&#x2F;gallery-md-button-group&#x2F;js&#x2F;gallery-md-button-group.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+* Provides a container to group buttons.
+* It can hold instances of Y.Button, Y.ButtonToggle or Y.ButtonSeparator.
+* @module gallery-md-button-group
+*&#x2F;
 
-    
-        <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-stdmod_js_gallery-stdmod.js.html#l1"><code>src&#x2F;gallery-stdmod&#x2F;js&#x2F;gallery-stdmod.js:1</code></a>
-        </div>
-    
+&quot;use strict&quot;;
 
-    
-</div>
+var Lang = Y.Lang,
+	BBX = &#x27;boundingBox&#x27;,
+	EVENT_PRESS = &#x27;press&#x27;,
+	LABEL = &#x27;label&#x27;;
+
+&#x2F;**
+ * The ButtonSeparator class provides a passive divider to use in between groups of buttons
+ * @class ButtonSeparator
+ * @extends Y.Widget
+ * @constructor
+ *&#x2F;
+Y.ButtonSeparator = Y.Base.create(
+	&#x27;buttonSeparator&#x27;,
+	Y.Widget,
+	[],
+	{
+		&#x2F;**
+		 * Overrides the standard bounding box template to produce a &amp;lt;span&amp;gt;
+		 * @property BOUNDING_TEMPLATE
+		 * @type String
+		 *&#x2F;
+		BOUNDING_TEMPLATE: &#x27;&lt;span &#x2F;&gt;&#x27;
+	},
+	{
+	}
+);
+
+&#x2F;**
+ * The ButtonGroup class provides a container for sets of Buttons.
+ * All buttons added will be extended with Y.WidgetChild.
+ * @class ButtonGroup
+ * @extends Y.Widget
+ * @uses Y.WidgetParent, Y.Makenode
+ * @constructor
+ * @param cfg {object} Configuration attributes
+ *&#x2F;
 
 
+Y.ButtonGroup = Y.Base.create(
+	&#x27;buttonGroup&#x27;,
+	Y.Widget,
+	[Y.WidgetParent,Y.MakeNode],
+	{
+		&#x2F;**
+		 * Overrides the standard bounding box template to produce a &amp;lt;fieldset&amp;gt;
+		 * @property BOUNDING_TEMPLATE
+		 * @type String
+		 *&#x2F;
+		BOUNDING_TEMPLATE: &#x27;&lt;fieldset &#x2F;&gt;&#x27;,
+		&#x2F;**
+		 * Sets the listener for the addChild event to extend children with Y.WidgetChild.
+		 * Publishes the &lt;code&gt;press&lt;&#x2F;code&gt; event
+		 *&#x2F;
+		initializer: function () {
+			this.on(&#x27;addChild&#x27;, function (ev) {
+				var child = ev.child,
+					WC = Y.WidgetChild;
+				if (child) {
+					if (child instanceof Y.Button || child instanceof Y.ButtonSeparator) {
+						if (!child.ancestor) {
 
-<div class="box intro">
-    <p>A version of Widget-StdMod that uses the ContentBox of the Widget as its Body section and adds
-the Header and Footer sections on each side of it instead of having the three of them under the contentBox.
-This turns quite handy when used along WidgetParent since the later assumes children will be added in the contentBox
-and thus conflicts with the StdMod sections. (this can also be solved using the property
-<a href="http://yuilibrary.com/yui/docs/api/classes/WidgetParent.html#property__childrenContainer">_childrenContainer</a>)<br/><br/>
-For further documentation see <a href="http://yuilibrary.com/yui/docs/api/classes/WidgetStdMod.html">WidgetStdMod</a></p>
-</div>
+							Y.augment(child, WC);
+
+							child.addAttrs(child._protectAttrs(WC.ATTRS));
+
+							WC.constructor.apply(child);
+						}
+					} else {
+						ev.preventDefault();
+					}
+				}
+			});
+		},
 
 
+		&#x2F;**
+		 * Sets listeners for the press event of child buttons, see &lt;a href=&quot;#method__onButtonPress&quot;&gt;_onButtonPress&lt;&#x2F;a&gt;.
+		 * @method bindUI
+		 *&#x2F;
+		bindUI : function() {
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+			this.on([&#x27;button:press&#x27;,&#x27;buttonToggle:press&#x27;], this._onButtonPress ,this);
+		},
+		&#x2F;**
+		 * Processes the press event of child Buttons to enforce the &lt;a href=&quot;#config__alwaysSelected&quot;&gt;_alwaysSelected&lt;&#x2F;a&gt; attribute,
+		 * and to propagate the press event
+		 * @method _onButtonPress
+		 * @param ev {EventFacade}
+		 * @private
+		 *&#x2F;
+		_onButtonPress: function(ev) {
+			if(this.get(&#x27;alwaysSelected&#x27;)) {
+				var selection = this.get(&#x27;selection&#x27;),
+					button = ev.target;
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/StdMod.html">
-                        StdMod
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
+				if(selection === button || &#x2F;&#x2F; selection is the button OR
+					(
+						selection instanceof Y.ArrayList &amp;&amp;		&#x2F;&#x2F; selection is an array AND
+						selection.size() === 1 &amp;&amp;				&#x2F;&#x2F; there is only one item AND
+						selection.item(0) === button			&#x2F;&#x2F; that one item is the button
+					)
+				) {
+					ev.preventDefault();
+					return;
+				}
+			}
+			this.fire(EVENT_PRESS, {pressed: ev.target});
+		},
+		&#x2F;**
+		 * Sets the label of the container from the value of the &lt;a href=&quot;#config_label&quot;&gt;label&lt;&#x2F;a&gt; configuration attribute.
+		 * Creates the &amp;lt;legend&amp;gt; element to hold it if it does not exists.
+		 * @method _uiSetLabel
+		 * @param value {String} text to be shown
+		 * @private
+		 *&#x2F;
+		_uiSetLabel: function (value) {
+			if (!this._labelNode) {
+				this.get(BBX).prepend(this._makeNode());
+				this._locateNodes();
+			}
+			this._labelNode.setContent(value);
+		}
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+	}, {
+		&#x2F;**
+		 * Template for the &amp;lt;legend&amp;gt; element to hold the label.  Used by MakeNode.
+		 * @property Y.ButtonGroup._TEMPLATE
+		 * @type String
+		 * @static
+		 * @protected
+		 *&#x2F;
+		_TEMPLATE: &#x27;&lt;legend class=&quot;{c label}&quot;&gt;{@ label}&lt;&#x2F;legend&gt;&#x27;,
+		&#x2F;**
+		 * Creates the label className key to be used in the template
+		 * @property Y.ButtonGroup._CLASS_NAMES
+		 * @type [Strings]
+		 * @static
+		 * @protected
+		 *&#x2F;
+		_CLASS_NAMES: [LABEL],
+		&#x2F;**
+		 * Hooks up &lt;a href=&quot;method__uiSetLabel&quot;&gt;_uiSetLabel&lt;&#x2F;a&gt; to respond to changes in the &lt;a href=&quot;#config_label&quot;&gt;label&lt;&#x2F;a&gt; attribute.
+		 * @property Y.ButtonGroup._ATTRS_2_UI
+		 * @type Object
+		 * @static
+		 * @protected
+		 *&#x2F;
+		_ATTRS_2_UI: {
+			BIND: LABEL,
+			SYNC: LABEL
+		},
+		_PUBLISH: {
+			press:null
+		},
+		ATTRS : {
+			&#x2F;**
+			 * Holds the label for this group of buttons
+			 * @attribute label
+			 * @type String
+			 * @default &quot;&quot;
+			 *&#x2F;
+			label : {
+				value:&#x27;&#x27;,
+				validator : Lang.isString
+			},
+
+			&#x2F;**
+			 * Defines the default type of child to be contained in this group.
+			 * Used by WidgetParent to create the default children
+			 * @attribute defaultChildType
+			 * @type object
+			 * @default Y.Button
+			 *&#x2F;
+			defaultChildType : {
+				value : Y.Button
+			},
+
+			&#x2F;**
+			 * Forces this group to always have at least one toggle button selected
+			 * @attribute alwaysSelected
+			 * @type Boolean
+			 * @default false
+			 *&#x2F;
+			alwaysSelected : {
+				value : false,
+				validator: Lang.isBoolean
+			}
+		}
+	}
+);
+
+    </pre>
 </div>
 
                     </div>

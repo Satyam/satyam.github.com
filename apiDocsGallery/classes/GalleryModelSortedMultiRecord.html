@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>GalleryModelSortedMultiRecord - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1334"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1334</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l2"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:2</code></a>
         </div>
     
 
@@ -178,7 +178,8 @@
 
 
 <div class="box intro">
-    <p>Extension to sort records stored in <a href="../classes/GalleryModel.html" class="crosslink">GalleryModel</a>, extended with <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>
+    <p>Extension to sort records stored in <a href="../classes/GalleryModel.html" class="crosslink">GalleryModel</a>,
+extended with <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>
 It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" class="crosslink">GalleryModelPrimaryKeyIndex</a></p>
 </div>
 
@@ -216,7 +217,28 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__afterChange">_afterChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__compare">_compare</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__compare">_compare</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__findIndex">_findIndex</a>
 
                                 
                                 
@@ -237,6 +259,20 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__setCompare">_setCompare</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__sort">_sort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__sort">_sort</a>
 
                                 
@@ -251,7 +287,28 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_add">add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_find">find</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_find">find</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
 
                                 
                                 
@@ -278,6 +335,14 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
                         
                             <li class="index-item attr">
                                 <a href="#attr_sortDir">sortDir</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_sortDir">sortDir</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_sortField">sortField</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -340,7 +405,7 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1409"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1409</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l74"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:74</code></a>
         
         </p>
 
@@ -351,9 +416,101 @@ It is incompatible with <a href="../classes/GalleryModelPrimaryKeyIndex.html" cl
     </div>
 
     <div class="description">
-        <p>Listens to value changes and if the name of the field is that of the 
-<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> attribute 
-or if <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+        <p>Listens to value changes and if the name of the field is that of the
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> attribute
+or if <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+is a function, it will relocate the record to its proper sort order</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event façade as produced by the <a href="../classes/GalleryModel.html#event_change" class="crosslink">change</a>  event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterChange" class="method item private">
+    <h3 class="name"><code>_afterChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1413"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1413</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listens to value changes and if the name of the field is that of the
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> attribute
+or if <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
 is a function, it will relocate the record to its proper sort order</p>
     </div>
 
@@ -442,7 +599,134 @@ is a function, it will relocate the record to its proper sort order</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1346"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1346</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l11"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Compare function used in sorting.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">a</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>shelf to compare</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">b</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>shelf to compare</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    -1, 0 or 1 as required by Array.sort
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__compare" class="method item private">
+    <h3 class="name"><code>_compare</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>a</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>b</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1350"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1350</code></a>
         
         </p>
 
@@ -563,7 +847,7 @@ is a function, it will relocate the record to its proper sort order</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1434"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1434</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l99"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:99</code></a>
         
         </p>
 
@@ -575,9 +859,119 @@ is a function, it will relocate the record to its proper sort order</p>
 
     <div class="description">
         <p>Finds the correct index position of a record within the shelves
-according to the current 
-<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+according to the current
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
+attributes</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">values</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>values of the record to be located</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    location for the record
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__findIndex" class="method item private">
+    <h3 class="name"><code>_findIndex</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>values</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1438"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1438</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Finds the correct index position of a record within the shelves
+according to the current
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
 attributes</p>
     </div>
 
@@ -659,7 +1053,7 @@ attributes</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1370"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1370</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l35"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:35</code></a>
         
         </p>
 
@@ -671,8 +1065,67 @@ attributes</p>
 
     <div class="description">
         <p>Sets the compare function to be used in sorting the records
-based on the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-and <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+based on the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+and <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
+attributes and stores it into this._compare</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setCompare" class="method item private">
+    <h3 class="name"><code>_setCompare</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1374"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1374</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the compare function to be used in sorting the records
+based on the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+and <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
 attributes and stores it into this._compare</p>
     </div>
 
@@ -718,7 +1171,7 @@ attributes and stores it into this._compare</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1394"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1394</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l59"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:59</code></a>
         
         </p>
 
@@ -729,9 +1182,68 @@ attributes and stores it into this._compare</p>
     </div>
 
     <div class="description">
-        <p>Sorts the shelves whenever the 
-<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
-or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a> 
+        <p>Sorts the shelves whenever the
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
+attributes change.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__sort" class="method item private">
+    <h3 class="name"><code>_sort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1398"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1398</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sorts the shelves whenever the
+<a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+or <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortDir" class="crosslink">sortDir</a>
 attributes change.</p>
     </div>
 
@@ -787,7 +1299,7 @@ attributes change.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1470"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1470</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1474"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1474</code></a>
         
         </p>
 
@@ -799,9 +1311,9 @@ attributes change.</p>
 
     <div class="description">
         <p>Adds a new record at its proper position according to the sort configuration.
-It overrides <br />
+It overrides
 <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>'s own
-<a href="../classes/GalleryModelMultiRecord.html#method_add" class="crosslink">add</a> 
+<a href="../classes/GalleryModelMultiRecord.html#method_add" class="crosslink">add</a>
 method, ignoring the index position requested, if any.
 The new record becomes the current.</p>
     </div>
@@ -821,7 +1333,102 @@ The new record becomes the current.</p>
                     
 
                     <div class="param-description">
-                        <p>set of values to set. 
+                        <p>set of values to set.
+If it is an array, it will call itself for each of the items in it.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_add" class="method item">
+    <h3 class="name"><code>add</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>values</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l135"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:135</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a new record at its proper position according to the sort configuration.
+It overrides
+<a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>'s own
+<a href="../classes/GalleryModelMultiRecord.html#method_add" class="crosslink">add</a>
+method, ignoring the index position requested, if any.
+The new record becomes the current.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">values</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>set of values to set.
 If it is an array, it will call itself for each of the items in it.</p>
                     </div>
 
@@ -890,7 +1497,7 @@ If it is an array, it will call itself for each of the items in it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1498"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1498</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1502"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1502</code></a>
         
         </p>
 
@@ -906,7 +1513,142 @@ given in the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortFie
  attribute.   It will return the index of the
 record in the shelves or <code>null</code> if not found.
 By default it will expose that record.
-If <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a> 
+If <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+contains a function, it will return <code>null</code> and do nothing.
+Since sort fields need not be unique, find may return any of the records
+with the same value for that field.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>value to be found</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[move]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>exposes the record found, defaults to <code>true</code></p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer | null</span>:
+                    
+                    index of the record found or <code>null</code> if not found.
+Be sure to differentiate a return of <code>0</code>, a valid index, from <code>null</code>, a failed search.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_find" class="method item">
+    <h3 class="name"><code>find</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[move]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer | null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l163"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:163</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Locates a record by value.  The record will be located by the field
+given in the <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
+ attribute.   It will return the index of the
+record in the shelves or <code>null</code> if not found.
+By default it will expose that record.
+If <a href="../classes/GalleryModelSortedMultiRecord.html#attr_sortField" class="crosslink">sortField</a>
 contains a function, it will return <code>null</code> and do nothing.
 Since sort fields need not be unique, find may return any of the records
 with the same value for that field.</p>
@@ -1007,7 +1749,7 @@ Be sure to differentiate a return of <code>0</code>, a valid index, from <code>n
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1355"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1355</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l20"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:20</code></a>
         
         </p>
 
@@ -1018,7 +1760,65 @@ Be sure to differentiate a return of <code>0</code>, a valid index, from <code>n
     </div>
 
     <div class="description">
-        <p>Initializer lifecycle method. <br />
+        <p>Initializer lifecycle method.
+Ensures proper defaults, sets the compare method and
+sets listeners for relevant events</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1359"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1359</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializer lifecycle method.
 Ensures proper defaults, sets the compare method and
 sets listeners for relevant events</p>
     </div>
@@ -1071,7 +1871,111 @@ sets listeners for relevant events</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1548"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1548</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1552"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1552</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sort direction either <code>"asc"</code> for ascending or <code>"desc"</code> for descending</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;asc&quot;</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>sortDirChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>sortDir</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_sortDir" class="attr item">
+    <a name="config_sortDir"></a> 
+    <h3 class="name"><code>sortDir</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l213"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:213</code></a>
         
         </p>
 
@@ -1175,7 +2079,115 @@ sets listeners for relevant events</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1533"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1533</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1537"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1537</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Name of the field to sort by or function to build the value used for comparisson.
+If a function, it will receive a reference to the record to be sorted;
+it should return the value to be used for comparisson.  Functions are
+used when sorting on multiple keys, which the function should return
+concatenated, or when any of the fields needs some pre-processing.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> first primary key field</p>
+    
+
+    
+        <div class="emits box">
+            <h4>Fires event <code>sortFieldChange</code></h4>
+
+            <p>
+            Fires when the value for the configuration attribute <code>sortField</code> is
+            changed. You can listen for the event using the <code>on</code> method if you
+            wish to be notified before the attribute's value has changed, or
+            using the <code>after</code> method if you wish to be notified after the
+            attribute's value has changed.
+            </p>
+
+            <div class="params">
+                <h4>Parameters:</h4>
+
+                <ul class="params-list">
+                    <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+
+                        <div class="param-description">
+                            An Event Facade object with the following
+                            attribute-specific properties added:
+                        </div>
+
+                        <ul class="params-list">
+                            <li class="param">
+                                <code class="param-name">prevVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value of the attribute, prior to it being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">newVal</code>
+                                <span class="type">Any</span>
+                                <div class="param-description">The value the attribute is to be set to.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">attrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">The name of the attribute being set.</div>
+                            </li>
+                            <li class="param">
+                                <code class="param-name">subAttrName</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="attr_sortField" class="attr item">
+    <a name="config_sortField"></a> 
+    <h3 class="name"><code>sortField</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_multi-record-sorted.js.html#l198"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;multi-record-sorted.js:198</code></a>
         
         </p>
 

@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>gallery-fwt-treeview - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l26"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:26</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fwtv-constants.js.html#l1"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fwtv-constants.js:1</code></a>
         </div>
     
 
@@ -172,18 +172,15 @@
 
 
 <div class="box intro">
-    <p>Instances of it will be provided by FWTreeView as required.</p>
-
-<p>Subclasses might be defined based on it.
-Usually, they will add further attributes and redefine the TEMPLATE to
-show those extra attributes.</p>
+    <p>Creates a Treeview using the FlyweightTreeManager Widget to handle its nodes.
+It creates the tree based on an object passed as the <code>tree</code> attribute in the constructor.</p>
 </div>
 
 
     <div class="example">
         <h4>Example:</h4>
         <div class="example-content">
-            <pre class="code"><code class="prettyprint">var tv = new Y.FWTreeView({tree: [
+            <pre class="code prettyprint"><code>var tv = new Y.FWTreeView({tree: [
     {
         label:'label 0',
         children: [
@@ -208,24 +205,6 @@ tv.render('#container');
 
 <div class="yui3-g">
     <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/FWTreeNode.html">
-                        FWTreeNode
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/FWTreeView.html">
-                        FWTreeView
-                    </a>
-                </li>
-            
-            </ul>
         
     </div>
 

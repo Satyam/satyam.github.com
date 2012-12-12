@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="Satyam&#x27;s Gallery Modules"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Accordion.html">Accordion</a></li>
+            
+                <li><a href="..&#x2F;classes/AccordionPanel.html">AccordionPanel</a></li>
+            
+                <li><a href="..&#x2F;classes/Button.html">Button</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonGroup.html">ButtonGroup</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonPlugin.html">ButtonPlugin</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonSeparator.html">ButtonSeparator</a></li>
+            
+                <li><a href="..&#x2F;classes/ButtonToggle.html">ButtonToggle</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeManager.html">FlyweightTreeManager</a></li>
+            
+                <li><a href="..&#x2F;classes/FlyweightTreeNode.html">FlyweightTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeNode.html">FWTreeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/FWTreeView.html">FWTreeView</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModel.html">GalleryModel</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelChronologicalUndo.html">GalleryModelChronologicalUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelMultiRecord.html">GalleryModelMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelPrimaryKeyIndex.html">GalleryModelPrimaryKeyIndex</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSimpleUndo.html">GalleryModelSimpleUndo</a></li>
+            
+                <li><a href="..&#x2F;classes/GalleryModelSortedMultiRecord.html">GalleryModelSortedMultiRecord</a></li>
+            
+                <li><a href="..&#x2F;classes/IButton.html">IButton</a></li>
+            
+                <li><a href="..&#x2F;classes/MakeNode.html">MakeNode</a></li>
+            
+                <li><a href="..&#x2F;classes/Node.html">Node</a></li>
+            
+                <li><a href="..&#x2F;classes/Spinner.html">Spinner</a></li>
+            
+                <li><a href="..&#x2F;classes/StdMod.html">StdMod</a></li>
+            
+                <li><a href="..&#x2F;classes/TimeSpinner.html">TimeSpinner</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Timeline.html">Y.Timeline</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/gallery-button-plugin.html">gallery-button-plugin</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-makenode.html">gallery-makenode</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-accordion.html">gallery-md-accordion</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button.html">gallery-md-button</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-button-group.html">gallery-md-button-group</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-ibutton.html">gallery-md-ibutton</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-model.html">gallery-md-model</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-spinner.html">gallery-md-spinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-md-timespinner.html">gallery-md-timespinner</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-stdmod.html">gallery-stdmod</a></li>
+            
+                <li><a href="..&#x2F;modules/timeline.html">timeline</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treenode.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+ *  This class must not be generated directly.
+ *  Instances of it will be provided by FWTreeView as required.
+ *
+ *  Subclasses might be defined based on it.
+ *  Usually, they will add further attributes and redefine the TEMPLATE to
+ *  show those extra attributes.
+ *
+ *  @class FWTreeNode
+ *  @extends FlyweightTreeNode
+ *  @constructor
+ *&#x2F;
+ FWTN = Y.Base.create(
+    &#x27;fw-treenode&#x27;,
+    Y.FlyweightTreeNode,
+    [],
+    {
+        initializer: function() {
+            this._root._eventHandles.push(
+                this.after(&#x27;click&#x27;, this._afterClick),
+                this.after(SELECTED + CHANGE, this._afterSelectedChange),
+                this.after(&#x27;spacebar&#x27;, this.toggleSelection),
+                this.after(EXPANDED + CHANGE, this._afterExpandedChanged),
+                this.after(&#x27;selectionEnabled&#x27; + CHANGE, this._afterSelectionEnabledChange)
+            );
+        },
+        &#x2F;**
+         * Listens to changes in the expanded attribute to invalidate and force
+         * a rebuild of the list of visible nodes
+         * the user can navigate through via the keyboard.
+         * @method _afterExpandedChanged
+         * @protected
+         *&#x2F;
+        _afterExpandedChanged: function () {
+            this._root._visibleSequence = null;
+        },
+        &#x2F;**
+         * Responds to the click event by toggling the node
+         * @method _afterClick
+         * @param ev {EventFacade}
+         * @private
+         *&#x2F;
+        _afterClick: function (ev) {
+            var target = ev.domEvent.target,
+                CNAMES = FWTN.CNAMES;
+            if (target.hasClass(CNAMES.CNAME_TOGGLE)) {
+                this.toggle();
+            } else if (target.hasClass(CNAMES.CNAME_SELECTION)) {
+                this.toggleSelection();
+            } else if (target.hasClass(CNAMES.CNAME_LABEL) || target.hasClass(CNAMES.CNAME_ICON)) {
+                if (this.get(&#x27;root&#x27;).get(&#x27;toggleOnLabelClick&#x27;)) {
+                    this.toggle();
+                }
+            }
+        },
+        &#x2F;**
+         * Sugar method to toggle the selected state of a node.
+         * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
+         * @method toggleSelection
+         *&#x2F;
+        toggleSelection: function() {
+            this.set(SELECTED, (this._iNode[SELECTED]?NOT_SELECTED:FULLY_SELECTED));
+        },
+        &#x2F;**
+         * Responds to the change in the {{#crossLink &quot;label:attribute&quot;}}{{&#x2F;crossLink}} attribute.
+         * @method _afterLabelChange
+         * @param ev {EventFacade} standard attribute change event facade
+         * @private
+         *&#x2F;
+        _afterLabelChange: function (ev) {
+            var el = Y.one(HASH + this._iNode.id + &#x27; .&#x27; + FWTN.CNAMES.CNAME_LABEL);
+            if (el) {
+                el.setHTML(ev.newVal);
+            }
+        },
+        &#x2F;**
+         * Changes the UI to reflect the selected state and propagates the selection up and&#x2F;or down.
+         * @method _afterSelectedChange
+         * @param ev {EventFacade} out of which
+         * @param ev.src {String} if not undefined it can be &#x60;&#x27;propagateUp&#x27;&#x60; or &#x60;&#x27;propagateDown&#x27;&#x60;
+         * so that propagation goes in just one direction and doesn&#x27;t bounce back.
+         * @private
+         *&#x2F;
+        _afterSelectedChange: function (ev) {
+            var selected = ev.newVal,
+                prefix = FWTN.CNAMES.CNAME_SEL_PREFIX + &#x27;-&#x27;,
+                el;
+            if (!this.get(SEL_ENABLED)) {
+                return;
+            }
+            if (!this.isRoot()) {
+                el = Y.one(HASH + this.get(&#x27;id&#x27;));
+                if (el) {
+                    el.replaceClass(prefix + ev.prevVal, prefix + selected);
+                    el.set(&#x27;aria-checked&#x27;, this._ariaCheckedGetter());
+                }
+                if (this.get(&#x27;propagateUp&#x27;) &amp;&amp; ev.src !== &#x27;propagatingDown&#x27;) {
+                    this.getParent()._childSelectedChange().release();
+                }
+                if (this.get(&#x27;propagateDown&#x27;) &amp;&amp; ev.src !== &#x27;propagatingUp&#x27;) {
+                    this.forSomeChildren(function(node) {
+                        node.set(SELECTED , selected, {src:&#x27;propagatingDown&#x27;});
+                    });
+                }
+            }
+        },
+        &#x2F;**
+         * Changes the UI to reflect whether the item has selection enabled.
+         * @method _afterSelectionEnabledChange
+         * @param ev {EventFacade} Attribute event change facade
+         * @private
+         *&#x2F;
+        _afterSelectionEnabledChange: function (ev) {
+            var selected = this._iNode[SELECTED],
+                el = Y.one(HASH + this.get(&#x27;id&#x27;)),
+                prefix = FWTN.CNAMES.CNAME_SEL_PREFIX + &#x27;-&#x27;;
+            if (ev.newVal) {
+                el.replaceClass(prefix + &#x27;null&#x27;, prefix + selected);
+            } else {
+                el.replaceClass(prefix + selected, prefix + &#x27;null&#x27;);
+            }
+
+        },
+        &#x2F;**
+         * Getter for the {{#crossLink &quot;_aria_checked:attribute&quot;}}{{&#x2F;crossLink}}.
+         * Translate the internal {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}
+         * to the strings the &#x60;aria_checked&#x60; attribute expects
+         * @method _ariaCheckedGetter
+         * @return {String} One of &#x27;false&#x27;, &#x27;true&#x27; or &#x27;mixed&#x27;
+         * @private
+         *&#x2F;
+        _ariaCheckedGetter: function () {
+            return [&#x27;false&#x27;,&#x27;mixed&#x27;,&#x27;true&#x27;][this.get(SELECTED) ||0];
+        },
+        &#x2F;**
+         * Setter for the {{ćrossLink &quot;selected:attribute}}{{&#x2F;crossLink}}.
+         * Translates a truish or falsy value into FULLY_SELECTED or NOT_SELECTED.
+         * @method _selectedSetter
+         * @param value
+         * @private
+         *&#x2F;
+        _selectedSetter: function (value) {
+            return (value?FULLY_SELECTED:NOT_SELECTED);
+        },
+        &#x2F;**
+         * Getter for the &#x60;selected&#x60; attribute.
+         * Returns false when selection is not enabled.
+         * @method _selectedGetter
+         * @param value {integer} current value
+         * @return {integer} current value or false if not enabled
+         * @private
+         *&#x2F;
+        _selectedGetter: function (value) {
+            return (this.get(SEL_ENABLED)?value||0:null);
+        },
+        &#x2F;**
+         * Getter for both the &#x60;propagateUp&#x60; and &#x60;propagateDown&#x60; attributes.
+         * @method _propagateGetter
+         * @param value {Boolean} current value
+         * @return {Boolean} the state of the attribute
+         * @private
+         *&#x2F;
+        _propagateGetter: function (value) {
+            return (this.get(SEL_ENABLED)?(value !== false):false);
+        },
+        &#x2F;**
+         * Overrides the original in FlyweightTreeNode so as to propagate the selected state
+         * on dynamically loaded nodes.
+         * @method _dynamicLoadReturn
+         * @private
+         *&#x2F;
+        _dynamicLoadReturn: function () {
+            FWTN.superclass._dynamicLoadReturn.apply(this, arguments);
+            if (this.get(&#x27;propagateDown&#x27;)) {
+                var selected = this.get(SELECTED);
+                this.forSomeChildren(function(node) {
+                    node.set(SELECTED , selected, {src:&#x27;propagatingDown&#x27;});
+                });
+            }
+            this._root._visibleSequence = null;
+
+        },
+        &#x2F;**
+         * When propagating selection up, it is called by a child when changing its selected state
+         * so that the parent adjusts its own state accordingly.
+         * @method _childSelectedChange
+         * @private
+         *&#x2F;
+        _childSelectedChange: function () {
+            var count = 0, selCount = 0, value, prevVal = this._iNode[SELECTED];
+            this.forSomeChildren(function (node) {
+                count +=2;
+                selCount += node.get(SELECTED);
+            });
+            &#x2F;&#x2F; While this is not solved:  http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2532810
+            &#x2F;&#x2F; This is the good line:
+            &#x2F;&#x2F;this.set(SELECTED, (selCount === 0?NOT_SELECTED:(selCount === count?FULLY_SELECTED:PARTIALLY_SELECTED)), {src:&#x27;propagatingUp&#x27;});
+            &#x2F;&#x2F; This is the patch:
+            value = (selCount === 0?NOT_SELECTED:(selCount === count?FULLY_SELECTED:PARTIALLY_SELECTED));
+            this._iNode[SELECTED] = value;
+            this._afterSelectedChange({
+                prevVal: prevVal,
+                newVal: value,
+                src: &#x27;propagatingUp&#x27;
+            });
+            &#x2F;&#x2F; end of the patch
+            return this;
+        }
+
+    },
+    {
+        &#x2F;**
+         * Outer template to produce the markup for a node in the tree.
+         * It replaces the standard one provided by FlyweightTreeNode.
+         * Adds the proper ARIA role and node selection.
+         * @property OUTER_TEMPLATE
+         * @type String
+         * @static
+         *&#x2F;
+        OUTER_TEMPLATE: &#x27;&lt;li id=&quot;{id}&quot; class=&quot;{CNAME_NODE} {CNAME_SEL_PREFIX}-{selected}&quot; &#x27; +
+                &#x27;role=&quot;treeitem&quot; aria-expanded=&quot;{expanded}&quot; aria-checked=&quot;{_aria_checked}&quot;&gt;&#x27; +
+            &#x27;{INNER_TEMPLATE}&#x27; +
+            &#x27;&lt;ul class=&quot;{CNAME_CHILDREN}&quot; role=&quot;group&quot;&gt;{children}&lt;&#x2F;ul&gt;&lt;&#x2F;li&gt;&#x27;,
+        &#x2F;**
+         * Template to produce the markup for a node in the tree.
+         * It replaces the standard one provided by FlyweightTreeNode.
+         * Adds places for the toggle and selection icons, an extra app-dependent icon and the label.
+         * @property INNER_TEMPLATE
+         * @type String
+         *
+         * @static
+         *&#x2F;
+        INNER_TEMPLATE: &#x27;&lt;div tabIndex=&quot;{tabIndex}&quot; class=&quot;{CNAME_CONTENT}&quot;&gt;&lt;div class=&quot;{CNAME_TOGGLE}&quot;&gt;&lt;&#x2F;div&gt;&#x27; +
+            &#x27;&lt;div class=&quot;{CNAME_ICON}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{CNAME_SELECTION}&quot;&gt;&lt;&#x2F;div&gt;&lt;div class=&quot;{CNAME_LABEL}&quot;&gt;{label}&lt;&#x2F;div&gt;&lt;&#x2F;div&gt;&#x27;,
+        &#x2F;**
+         * Collection of classNames to set in the template.
+         * @property CNAMES
+         * @type Object
+         * @static
+         * @final
+         *&#x2F;
+        CNAMES: {
+            CNAME_TOGGLE: cName(&#x27;toggle&#x27;),
+            CNAME_ICON: cName(&#x27;icon&#x27;),
+            CNAME_SELECTION: cName(&#x27;selection&#x27;),
+            CNAME_SEL_PREFIX: cName(&#x27;selected-state&#x27;),
+            CNAME_LABEL: cName(&#x27;label&#x27;)
+        },
+        &#x2F;**
+         * Constant to use with the &#x60;selected&#x60; attribute to indicate the node is not selected.
+         * @property NOT_SELECTED
+         * @type integer
+         * @value 0
+         * @static
+         * @final
+         *&#x2F;
+        NOT_SELECTED:NOT_SELECTED,
+        &#x2F;**
+         * Constant to use with the &#x60;selected&#x60; attribute to indicate some
+         * but not all of the children of this node are selected.
+         * This state should only be acquired by upward propagation from descendants.
+         * @property PARTIALLY_SELECTED
+         * @type integer
+         * @value 1
+         * @static
+         * @final
+         *&#x2F;
+        PARTIALLY_SELECTED:PARTIALLY_SELECTED,
+        &#x2F;**
+         * Constant to use with the &#x60;selected&#x60; attribute to indicate the node is selected.
+         * @property FULLY_SELECTED
+         * @type integer
+         * @value 2
+         * @static
+         * @final
+         *&#x2F;
+        FULLY_SELECTED:FULLY_SELECTED,
+        ATTRS: {
+            &#x2F;**
+             * Selected&#x2F;highlighted state of the node.
+             *
+             * The node selection mechanism is always enabled though it might not be visible.
+             * It only sets a suitable className on the tree node.
+             * The module is provided with a default CSS style that makes node selection visible.
+             * To enable it, add the &#x60;yui3-fw-treeview-checkbox&#x60; className to the container of the tree.
+             *
+             * &#x60;selected&#x60; can return
+             *
+             * - Y.FWTreeNode.NOT\_SELECTED (0) not selected
+             * - Y.FWTreeNode.PARTIALLY\_SELECTED (1) partially selected: some children are selected, some not or partially selected.
+             * - Y.FWTreeNode.FULLY\_SELECTED (2) fully selected.
+             * - null when {{#crossLing &quot;selectionEnabled:attribute&quot;}}{{&#x2F;crossLink}} is not enabled
+             *
+             * &#x60;selected&#x60;can be set to:
+             *
+             * - any true value:  will produce a FULLY\_SELECTED state.
+             * - any false value: will produce a NOT\_SELECTED state.
+             *
+             * The partially selected state can only be the result of selection propagating up from a child node.
+             * Since PARTIALLY\_SELECTED cannot be set, leaving just two possible values for setting,
+             * any true or false value will be valid when setting.  However, no matter what values were
+             * used when setting, one of the three possible values above will be returned.
+             *
+             * @attribute selected
+             * @type Integer
+             * @default NOT_SELECTED
+             *&#x2F;
+            selected: {
+                value:NOT_SELECTED,
+                setter: &#x27;_selectedSetter&#x27;,
+                getter: &#x27;_selectedGetter&#x27;
+            },
+            &#x2F;**
+             * String value equivalent to the {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}
+             * for use in template expansion.
+             * @attribute _aria_checked
+             * @type String
+             * @default false
+             * @readonly
+             * @protected
+             *&#x2F;
+            _aria_checked: {
+                readOnly: true,
+                getter: &#x27;_ariaCheckedGetter&#x27;
+            },
+            &#x2F;**
+             * Enables node selection. Nodes with selection enabled w
+             * @attribute selectEnabled
+             * @type Boolean
+             * @default true
+             *&#x2F;
+            selectionEnabled: {
+                value: true,
+                validator: Lang.isBoolean
+            },
+            &#x2F;**
+             * Whether selection of one node should propagate to its parent.
+             * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
+             * @attribute propagateUp
+             * @type Boolean
+             * @default true
+             *&#x2F;
+            propagateUp: {
+                value: true,
+                validator: Lang.isBoolean,
+                getter: &#x27;_propagateGetter&#x27;
+            },
+            &#x2F;**
+             * Whether selection of one node should propagate to its children.
+             * See {{#crossLink &quot;selected:attribute&quot;}}{{&#x2F;crossLink}}.
+             * @attribute propagateDown
+             * @type Boolean
+             * @default true
+             *&#x2F;
+            propagateDown: {
+                value: true,
+                validator: Lang.isBoolean,
+                getter: &#x27;_propagateGetter&#x27;
+            }
+        }
+    }
+);
+
+&#x2F;**
+ * Fires when the space bar is pressed.
+ * Used internally to toggle node selection.
+ * @event spacebar
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM, except:
+ * @param ev.domEvent.target {Node} The DOM element that had the focus when the key was pressed
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
+ *&#x2F;
+&#x2F;**
+ * Fires when the enter key is pressed.
+ * @event enterkey
+ * @param ev {EventFacade} YUI event facade for keyboard events, including:
+ * @param ev.domEvent {Object} The original event produced by the DOM, except:
+ * @param ev.domEvent.target {Node} The DOM element that had the focus when the key was pressed
+ * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
+ *&#x2F;
+&#x2F;**
+ * Fires when this node is clicked.
+ * Used internally to toggle expansion or selection when clicked
+ * on the corresponding icons.
+ *
+ * It cannot be prevented.  This is a helper event, the actual event
+ * happens on the TreeView instance and it is relayed here for convenience.
+ * @event click
+ * @param ev {EventFacade} Standard YUI event facade for mouse events.
+ *&#x2F;
+
+Y.FWTreeNode = FWTN;
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

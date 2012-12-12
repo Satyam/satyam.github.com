@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>GalleryModelPrimaryKeyIndex - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1563"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1563</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_primary-key-index.js.html#l1"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js:1</code></a>
         </div>
     
 
@@ -178,7 +178,7 @@
 
 
 <div class="box intro">
-    <p>Extension to store the records in the GalleryModel using the field in the 
+    <p>Extension to store the records in the GalleryModel using the field in the
 <a href="../classes/GalleryModel.html#attr_primaryKeys" class="crosslink">primaryKeys</a> attribute as its index.
 The primary key <strong>must</strong> be a <strong>single</strong> <strong>unique</strong> <strong>integer</strong> field.
 It should be used along <a href="../classes/GalleryModelMultiRecord.html" class="crosslink">GalleryModelMultiRecord</a>.
@@ -216,6 +216,20 @@ It is incompatible with <a href="../classes/GalleryModelSortedMultiRecord.html" 
                                 
                             </li>
                         
+                            <li class="index-item method private">
+                                <a href="#method__defDataLoaded">_defDataLoaded</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_add">add</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_add">add</a>
 
@@ -225,6 +239,20 @@ It is incompatible with <a href="../classes/GalleryModelSortedMultiRecord.html" 
                         
                             <li class="index-item method">
                                 <a href="#method_next">next</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_next">next</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_previous">previous</a>
 
                                 
                                 
@@ -297,7 +325,7 @@ It is incompatible with <a href="../classes/GalleryModelSortedMultiRecord.html" 
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1594"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1594</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1598"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1598</code></a>
         
         </p>
 
@@ -308,7 +336,101 @@ It is incompatible with <a href="../classes/GalleryModelSortedMultiRecord.html" 
     </div>
 
     <div class="description">
-        <p>Default action for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event, 
+        <p>Default action for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event,
+checks if the parsed response is an array
+and saves it into the shelves using the value of the primary key field for its index.
+The model will be left positioned at the item with the lowest key value.
+If the primary key field has not been declared, items will not be loaded.
+If the primary key field is not unique, the duplicate will overwrite the previous.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>facade produced by the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event,</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defDataLoaded" class="method item private">
+    <h3 class="name"><code>_defDataLoaded</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>ev</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_primary-key-index.js.html#l32"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js:32</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Default action for the <a href="../classes/GalleryModel.html#event_loaded" class="crosslink">loaded</a> event,
 checks if the parsed response is an array
 and saves it into the shelves using the value of the primary key field for its index.
 The model will be left positioned at the item with the lowest key value.
@@ -391,7 +513,7 @@ If the primary key field is not unique, the duplicate will overwrite the previou
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1573"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1573</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1577"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1577</code></a>
         
         </p>
 
@@ -421,7 +543,98 @@ The new record becomes the current.</p>
                     
 
                     <div class="param-description">
-                        <p>set of values to set. 
+                        <p>set of values to set.
+If it is an array, it will call itself for each of the items in it.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_add" class="method item">
+    <h3 class="name"><code>add</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>values</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_primary-key-index.js.html#l11"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a new record at the index position given by its primary key.
+The new record becomes the current.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">values</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>set of values to set.
 If it is an array, it will call itself for each of the items in it.</p>
                     </div>
 
@@ -474,7 +687,7 @@ If it is an array, it will call itself for each of the items in it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1631"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1631</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1635"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1635</code></a>
         
         </p>
 
@@ -485,7 +698,81 @@ If it is an array, it will call itself for each of the items in it.</p>
     </div>
 
     <div class="description">
-        <p>Sugar method added because items might not be contiguous so 
+        <p>Sugar method added because items might not be contiguous so
+adding one to the index does not always get you to the next item.
+If there is no next element, <code>null</code> will be returned and the
+collection will still point to the last item.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    index of the next item or <code>null</code> if none found
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_next" class="method item">
+    <h3 class="name"><code>next</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_primary-key-index.js.html#l69"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js:69</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method added because items might not be contiguous so
 adding one to the index does not always get you to the next item.
 If there is no next element, <code>null</code> will be returned and the
 collection will still point to the last item.</p>
@@ -548,7 +835,7 @@ collection will still point to the last item.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-md-model_js_gallery-md-model.js.html#l1655"><code>yui3-gallery&#x2F;src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1655</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_gallery-md-model.js.html#l1659"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;gallery-md-model.js:1659</code></a>
         
         </p>
 
@@ -559,7 +846,81 @@ collection will still point to the last item.</p>
     </div>
 
     <div class="description">
-        <p>Sugar method added because items might not be contiguous so 
+        <p>Sugar method added because items might not be contiguous so
+subtracting one to the index does not always get you to the previous item.
+If there is no next element, <code>null</code> will be returned and the
+collection will still point to the first item.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    index of the previous item or <code>null</code> if none found
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_previous" class="method item">
+    <h3 class="name"><code>previous</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-md-model_js_primary-key-index.js.html#l93"><code>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js:93</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sugar method added because items might not be contiguous so
 subtracting one to the index does not always get you to the previous item.
 If there is no next element, <code>null</code> will be returned and the
 collection will still point to the first item.</p>

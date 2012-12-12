@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,41 +154,41 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js</h1>
+                        <h1 class="file-heading">File: src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;** Creates a Treeview using the FlyweightTreeManager Widget to handle its nodes.
+&#x2F;**
+ * TreeView widget.
  * It creates the tree based on an object passed as the &#x60;tree&#x60; attribute in the constructor.
  * @example
  *
-	var tv = new Y.FWTreeView({tree: [
-		{
-			label:&#x27;label 0&#x27;,
-			children: [
-				{
-					label: &#x27;label 0-0&#x27;,
-					children: [
-						{label: &#x27;label 0-0-0&#x27;},
-						{label: &#x27;label 0-0-1&#x27;}
-					]
-				},
-				{label: &#x27;label 0-1&#x27;}
-			]
-		},
-		{label: &#x27;label 1&#x27;}
+    var tv = new Y.FWTreeView({tree: [
+        {
+            label:&#x27;label 0&#x27;,
+            children: [
+                {
+                    label: &#x27;label 0-0&#x27;,
+                    children: [
+                        {label: &#x27;label 0-0-0&#x27;},
+                        {label: &#x27;label 0-0-1&#x27;}
+                    ]
+                },
+                {label: &#x27;label 0-1&#x27;}
+            ]
+        },
+        {label: &#x27;label 1&#x27;}
 
-	]});
-	tv.render(&#x27;#container&#x27;);
+    ]});
+    tv.render(&#x27;#container&#x27;);
 
- * @module gallery-fwt-treeview
- *&#x2F;
-&#x2F;**
+ *
  * @class FWTreeView
  * @extends FlyweightTreeManager
  * @constructor
  * @param config {Object} Configuration attributes, amongst them:
- * @param config.tree {Array} Array of objects defining the first level of nodes.
+ * @param config.tree {Array} Array of strings or objects defining the first level of nodes.
+ * If a string, it will be used as the label, if an object, it may contain:
  * @param config.tree.label {String} Text of HTML markup to be shown in the node
  * @param [config.tree.expanded=true] {Boolean} Whether the children of this node should be visible.
  * @param [config.tree.children] {Array} Further definitions for the children of this node
@@ -198,10 +198,10 @@
  * @param [config.tree.template] {String} Template for this particular node.
  *&#x2F;
 FWTV = Y.Base.create(
-	NAME,
-	Y.FlyweightTreeManager,
-	[],
-	{
+    NAME,
+    Y.FlyweightTreeManager,
+    [],
+    {
         &#x2F;**
          * Array of iNodes containing a flat list of all nodes visible regardless
          * of their depth in the tree.
@@ -221,32 +221,42 @@ FWTV = Y.Base.create(
          * @private
          *&#x2F;
         _visibleIndex: null,
-		&#x2F;**
-		 * Widget lifecycle method
-		 * @method initializer
-		 * @param config {object} configuration object of which
-		 * &#x60;tree&#x60; contains the tree configuration.
-		 *&#x2F;
-		initializer: function (config) {
-			this._domEvents = [&#x27;click&#x27;];
-			this._loadConfig(config.tree);
-		},
-		&#x2F;**
-		 * Widget lifecyle method.
+        &#x2F;**
+         * Widget lifecycle method
+         * @method initializer
+         * @param config {object} configuration object of which
+         * &#x60;tree&#x60; contains the tree configuration.
+         *&#x2F;
+        initializer: function (config) {
+            this._domEvents = [&#x27;click&#x27;];
+            this._loadConfig(config.tree);
+        },
+        &#x2F;**
+         * Overrides the same function to process the selected attribute
+         * @method _initNodes
+         * @param parentINode {Object} Parent of the iNodes to be set
+         * @protected
+         *&#x2F;
+        _initNodes: function (parentINode) {
+            FWTV.superclass._initNodes.call(this, parentINode);
+            parentINode[SELECTED] = parentINode[SELECTED]?FULLY_SELECTED:NOT_SELECTED;
+        },
+        &#x2F;**
+         * Widget lifecyle method.
          * Adds the &#x60;tree&#x60; role to the content box.
-		 * @method renderUI
-		 * @protected
-		 *&#x2F;
-		renderUI: function () {
+         * @method renderUI
+         * @protected
+         *&#x2F;
+        renderUI: function () {
             FWTV.superclass.renderUI.apply(this, arguments);
             this.get(CBX).set(&#x27;role&#x27;,&#x27;tree&#x27;);
-		},
-		&#x2F;**
-		 * Widget lifecyle method.
+        },
+        &#x2F;**
+         * Widget lifecyle method.
          * Sets the keydown listener to handle keyboard navigation.
-		 * @method bindUI
-		 * @protected
-		 *&#x2F;
+         * @method bindUI
+         * @protected
+         *&#x2F;
         bindUI: function () {
             FWTV.superclass.bindUI.apply(this, arguments);
             this._eventHandles.push(this.get(CBX).on(&#x27;keydown&#x27;, this._onKeyDown, this));
@@ -258,112 +268,111 @@ FWTV = Y.Base.create(
          * @private
          *&#x2F;
         _onKeyDown: function (ev) {
-            var ch = ev.charCode,
+            var self = this,
+                key = ev.keyCode,
                 iNode = this._focusedINode,
                 seq = this._visibleSequence,
                 index = this._visibleIndex,
-                fwNode;
+                fwNode,
+                fireKey = function (which) {
+                    fwNode = self._poolFetch(iNode);
+                    ev.container = ev.target;
+                    ev.target = Y.one(HASH + iNode.id);
+                    self.fire(which, {
+                        domEvent:ev,
+                        node: fwNode
+                    });
+                    fwNode.fire(which);
+                };
+            if(iNode) {
 
-            switch (ch) {
-                case 38: &#x2F;&#x2F; up
-                    if (!seq) {
-                        seq = this._rebuildSequence();
-                        index = seq.indexOf(iNode);
-                    }
-                    index -=1;
-                    if (index &gt;= 0) {
-                        iNode = seq[index];
-                        this._visibleIndex = index;
-                    } else {
-                        iNode = null;
-                    }
-                    break;
-                case 39: &#x2F;&#x2F; right
-                    if (iNode.expanded) {
-                        if (iNode.children &amp;&amp; iNode.children.length) {
-                            iNode = iNode.children[0];
+                switch (key) {
+                    case 38: &#x2F;&#x2F; up
+                        if (!seq) {
+                            seq = this._rebuildSequence();
+                            index = seq.indexOf(iNode);
+                        }
+                        index -=1;
+                        if (index &gt;= 0) {
+                            iNode = seq[index];
+                            self._visibleIndex = index;
                         } else {
                             iNode = null;
                         }
-                    } else {
-                        this._poolReturn(this._poolFetch(iNode).set(EXPANDED, true));
-                        iNode = null;
-                    }
-
-                    break;
-                case 40: &#x2F;&#x2F; down
-                    if (!seq) {
-                        seq = this._rebuildSequence();
-                        index = seq.indexOf(iNode);
-                    }
-                    index +=1;
-                    if (index &lt; seq.length) {
-                        iNode = seq[index];
-                        this._visibleIndex = index;
-                    } else {
-                        iNode = null;
-                    }
-                    break;
-                case 37: &#x2F;&#x2F; left
-                    if (iNode.expanded &amp;&amp; iNode.children) {
-                        this._poolReturn(this._poolFetch(iNode).set(EXPANDED, false));
-                        iNode = null;
-                    } else {
-                        iNode = iNode._parent;
-                        if (iNode === this._tree) {
+                        break;
+                    case 39: &#x2F;&#x2F; right
+                        fwNode = self._poolFetch(iNode);
+                        if (fwNode.get(EXPANDED)) {
+                            if (iNode.children &amp;&amp; iNode.children.length) {
+                                iNode = iNode.children[0];
+                            } else {
+                                iNode = null;
+                            }
+                        } else {
+                            fwNode.set(EXPANDED, true);
                             iNode = null;
                         }
-                    }
+                        break;
+                    case 40: &#x2F;&#x2F; down
+                        if (!seq) {
+                            seq = self._rebuildSequence();
+                            index = seq.indexOf(iNode);
+                        }
+                        index +=1;
+                        if (index &lt; seq.length) {
+                            iNode = seq[index];
+                            self._visibleIndex = index;
+                        } else {
+                            iNode = null;
+                        }
+                        break;
+                    case 37: &#x2F;&#x2F; left
+                        fwNode = self._poolFetch(iNode);
+                        if (fwNode.get(EXPANDED) &amp;&amp; iNode.children) {
+                            fwNode.set(EXPANDED, false);
+                            iNode = null;
+                        } else {
+                            iNode = iNode._parent;
+                            if (iNode === self._tree) {
+                                iNode = null;
+                            }
+                        }
 
-                    break;
-                case 36: &#x2F;&#x2F; home
-                    iNode = this._tree.children &amp;&amp; this._tree.children[0];
-                    break;
-                case 35: &#x2F;&#x2F; end
-                    index = this._tree.children &amp;&amp; this._tree.children.length;
-                    if (index) {
-                        iNode = this._tree.children[index -1];
-                    } else {
+                        break;
+                    case 36: &#x2F;&#x2F; home
+                        iNode = self._tree.children &amp;&amp; self._tree.children[0];
+                        break;
+                    case 35: &#x2F;&#x2F; end
+                        index = self._tree.children &amp;&amp; self._tree.children.length;
+                        if (index) {
+                            iNode = self._tree.children[index -1];
+                        } else {
+                            iNode = null;
+                        }
+                        break;
+                    case 13: &#x2F;&#x2F; enter
+                        fireKey(&#x27;enterkey&#x27;);
                         iNode = null;
-                    }
-                    break;
-                case 13: &#x2F;&#x2F; enter
-                    fwNode = this._poolFetch(iNode);
-                    this.fire(&#x27;enterkey&#x27;, {
-                        domEvent:ev,
-                        node: fwNode
-                    });
-                    fwNode.fire(&#x27;enterkey&#x27;, {
-                        domEvent:ev,
-                        node: fwNode
-                    });
-                    this._poolReturn(fwNode);
-                    iNode = null;
-                    break;
-                case 32: &#x2F;&#x2F; spacebar
-                    fwNode = this._poolFetch(iNode);
-                    this.fire(&#x27;spacebar&#x27;, {
-                        domEvent:ev,
-                        node: fwNode
-                    });
-                    fwNode.fire(&#x27;spacebar&#x27;, {
-                        domEvent:ev,
-                        node: fwNode
-                    });
-                    this._poolReturn(fwNode);
-                    iNode = null;
-                    break;
-                case 106: &#x2F;&#x2F; asterisk on the numeric keypad
-                    this.expandAll();
-                    break;
-                default: &#x2F;&#x2F; initial
-                    iNode = null;
-                    break;
-            }
-            if (iNode) {
-                this._focusOnINode(iNode);
-                ev.halt();
-                return false;
+                        break;
+                    case 32: &#x2F;&#x2F; spacebar
+                        fireKey(&#x27;spacebar&#x27;);
+                        iNode = null;
+                        break;
+                    case 106: &#x2F;&#x2F; asterisk on the numeric keypad
+                        self.expandAll();
+                        break;
+                    default: &#x2F;&#x2F; initial
+                        iNode = null;
+                        break;
+                }
+                if (fwNode) {
+                    self._poolReturn(fwNode);
+                }
+                if (iNode) {
+                    self._focusOnINode(iNode);
+                    ev.halt();
+                    return false;
+                }
             }
             return true;
         },
@@ -388,53 +397,52 @@ FWTV = Y.Base.create(
          *&#x2F;
         _rebuildSequence: function () {
             var seq = [],
-                loop = function(iNode) {
-                    YArray.each(iNode.children || [], function(childINode) {
-                        seq.push(childINode);
-                        if (childINode.expanded) {
-                            loop(childINode);
-                        }
-                    });
+                root = this.getRoot(),
+                forOneLevel = function (fwNode) {
+                    if (fwNode.get(EXPANDED)) {
+                        fwNode.forSomeChildren(function (fwNode) {
+                            seq.push(fwNode._iNode);
+                            forOneLevel(fwNode);
+                        });
+                    }
                 };
-            loop(this._tree);
+            forOneLevel(root);
+            root.release();
             return (this._visibleSequence = seq);
 
         },
-		&#x2F;**
-		 * Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div
-		 * @property CONTENT_TEMPLATE
-		 * @type String
-		 *&#x2F;
-		CONTENT_TEMPLATE: &#x27;&lt;ul&gt;&lt;&#x2F;ul&gt;&#x27;
+        &#x2F;**
+         * Overrides the default CONTENT_TEMPLATE to make it an unordered list instead of a div
+         * @property CONTENT_TEMPLATE
+         * @type String
+         *&#x2F;
+        CONTENT_TEMPLATE: &#x27;&lt;ul&gt;&lt;&#x2F;ul&gt;&#x27;
 
-	},
-	{
-		ATTRS: {
-			&#x2F;**
-			 * Override for the &#x60;defaultType&#x60; value of FlyweightTreeManager
-			 * so it creates FWTreeNode instances instead of the default.
-			 * @attribute defaultType
-			 * @type String
-			 * @default &#x27;FWTreeNode&#x27;
-			 *&#x2F;
-			defaultType: {
-				value: &#x27;FWTreeNode&#x27;
-			},
-			&#x2F;**
-			 * Enables toggling by clicking on the label item instead of just the toggle icon.
-			 * @attribute toggleOnLabelClick
-			 * @type Boolean
-			 * @value false
-			 *&#x2F;
-			toggleOnLabelClick: {
-				value:false,
-				validator:Lang.isBoolean
-			}
-
-
-		}
-
-	}
+    },
+    {
+        ATTRS: {
+            &#x2F;**
+             * Override for the &#x60;defaultType&#x60; value of FlyweightTreeManager
+             * so it creates FWTreeNode instances instead of the default.
+             * @attribute defaultType
+             * @type String
+             * @default &#x27;FWTreeNode&#x27;
+             *&#x2F;
+            defaultType: {
+                value: &#x27;FWTreeNode&#x27;
+            },
+            &#x2F;**
+             * Enables toggling by clicking on the label item instead of just the toggle icon.
+             * @attribute toggleOnLabelClick
+             * @type Boolean
+             * @default false
+             *&#x2F;
+            toggleOnLabelClick: {
+                value:false,
+                validator:Lang.isBoolean
+            }
+        }
+    }
 );
 
 &#x2F;**
@@ -445,7 +453,7 @@ FWTV = Y.Base.create(
  * This instance is pooled and will be discarded upon return from the listener.
  * If you need to hold on to this instance,
  * use the {{#crossLink &quot;TreeNode&#x2F;hold&quot;}}{{&#x2F;crossLink}} method to preserve it.
- * @event -any-
+ * @event -any DOM event-
  * @param type {String} The full name of the event fired
  * @param ev {EventFacade} Standard YUI event facade for DOM events plus:
  * @param ev.node {TreeNode} TreeNode instance that received the event
@@ -455,14 +463,16 @@ FWTV = Y.Base.create(
  * Used internally to toggle node selection.
  * @event spacebar
  * @param ev {EventFacade} YUI event facade for keyboard events, including:
- * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.domEvent {Object} The original event produced by the DOM, except:
+ * @param ev.domEvent.target {Node} The DOM element that had the focus when the key was pressed
  * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
  *&#x2F;
 &#x2F;**
  * Fires when the enter key is pressed.
  * @event enterkey
  * @param ev {EventFacade} YUI event facade for keyboard events, including:
- * @param ev.domEvent {Object} The original event produced by the DOM
+ * @param ev.domEvent {Object} The original event produced by the DOM, except:
+ * @param ev.domEvent.target {Node} The DOM element that had the focus when the key was pressed
  * @param ev.node {FWTreeNode} The node that had the focus when the key was pressed
  *&#x2F;
 Y.FWTreeView = FWTV;

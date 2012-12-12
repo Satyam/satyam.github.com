@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>FWTreeView - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -166,13 +166,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l26"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:26</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l1"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-fwt-treeview.html">gallery-fwt-treeview</a>
+            Module: <a href="../modules/gallery-flyweight-tree.html">gallery-flyweight-tree</a>
         
     
 
@@ -182,7 +182,8 @@
 
 
 <div class="box intro">
-    
+    <p>TreeView widget.
+It creates the tree based on an object passed as the <code>tree</code> attribute in the constructor.</p>
 </div>
 
 
@@ -230,7 +231,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l26"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:26</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l1"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:1</code></a>
         
         </p>
 
@@ -272,7 +273,8 @@
                                 
 
                                 <div class="param-description">
-                                    <p>Array of objects defining the first level of nodes.</p>
+                                    <p>Array of strings or objects defining the first level of nodes.
+If a string, it will be used as the label, if an object, it may contain:</p>
                                 </div>
 
                                 
@@ -365,6 +367,31 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
     
 
     
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>var tv = new Y.FWTreeView({tree: [
+       {
+           label:'label 0',
+           children: [
+               {
+                   label: 'label 0-0',
+                   children: [
+                       {label: 'label 0-0-0'},
+                       {label: 'label 0-0-1'}
+                   ]
+               },
+               {label: 'label 0-1'}
+           ]
+       },
+       {label: 'label 1'}</p>
+
+<p>]});
+   tv.render('#container');</p>
+            </div>
+        </div>
+    
 </div>
 
     </div>
@@ -454,13 +481,6 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                                 
                             </li>
                         
-                            <li class="index-item method protected inherited">
-                                <a href="#method__getHTML">_getHTML</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method private inherited">
                                 <a href="#method__getTypeString">_getTypeString</a>
 
@@ -468,7 +488,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                                 
                             </li>
                         
-                            <li class="index-item method private inherited">
+                            <li class="index-item method protected inherited">
                                 <a href="#method__initNodes">_initNodes</a>
 
                                 
@@ -524,6 +544,13 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                                 
                             </li>
                         
+                            <li class="index-item method inherited">
+                                <a href="#method_collapseAll">collapseAll</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method protected inherited">
                                 <a href="#method_destructor">destructor</a>
 
@@ -547,6 +574,13 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                         
                             <li class="index-item method inherited">
                                 <a href="#method_forSomeNodes">forSomeNodes</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getNodeBy">getNodeBy</a>
 
                                 
                                 
@@ -683,7 +717,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
                     <ul class="index-list events extends">
                         
                             <li class="index-item event">
-                                <a href="#event_-any-">-any-</a>
+                                <a href="#event_-any DOM event-">-any DOM event-</a>
 
                                 
                                 
@@ -757,7 +791,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l210"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:210</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l219"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:219</code></a>
         
         </p>
 
@@ -844,7 +878,7 @@ Updates the node receiving the focus when the widget gets the focus.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l229"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:229</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l277"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:277</code></a>
         
         </p>
 
@@ -935,7 +969,7 @@ slide a suitable instance on it and fire the same event on that node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l309"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:309</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l369"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:369</code></a>
         
         </p>
 
@@ -1040,7 +1074,7 @@ and slides it on top of the iNode provided.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l364"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:364</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l409"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:409</code></a>
         
         </p>
 
@@ -1133,7 +1167,7 @@ and slides it on top of the iNode provided.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l452"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:452</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l504"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:504</code></a>
         
         </p>
 
@@ -1213,7 +1247,7 @@ and slides it on top of the iNode provided.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l461"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:461</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l513"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:513</code></a>
         
         </p>
 
@@ -1312,7 +1346,7 @@ and slides it on top of the iNode provided.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l477"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:477</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l529"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:529</code></a>
         
         </p>
 
@@ -1408,7 +1442,7 @@ and slides it on top of the iNode provided.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l403"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:403</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l453"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:453</code></a>
         
         </p>
 
@@ -1523,77 +1557,6 @@ If the function returns true, the traversing will terminate.</p>
 </div>
 
                 
-                    <div id="method__getHTML" class="method item protected inherited">
-    <h3 class="name"><code>_getHTML</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag protected">protected</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="..&#x2F;classes&#x2F;FlyweightTreeManager.html#method__getHTML">FlyweightTreeManager</a>:
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l348"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:348</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a string with the markup for the whole tree.
-A subclass might opt to produce markup for those parts visible. (lazy rendering)</p>
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    
-                    HTML for this widget
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method__getTypeString" class="method item private inherited">
     <h3 class="name"><code>_getTypeString</code></h3>
 
@@ -1639,7 +1602,7 @@ A subclass might opt to produce markup for those parts visible. (lazy rendering)
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l242"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:242</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l290"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:290</code></a>
         
         </p>
 
@@ -1698,7 +1661,7 @@ or null if type was not a FlyweightNode instance.</p>
 </div>
 
                 
-                    <div id="method__initNodes" class="method item private inherited">
+                    <div id="method__initNodes" class="method item protected">
     <h3 class="name"><code>_initNodes</code></h3>
 
     
@@ -1720,7 +1683,7 @@ or null if type was not a FlyweightNode instance.</p>
     
 
     
-        <span class="flag private">private</span>
+        <span class="flag protected">protected</span>
     
 
     
@@ -1733,13 +1696,16 @@ or null if type was not a FlyweightNode instance.</p>
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;FlyweightTreeManager.html#method__initNodes">
+                FlyweightTreeManager
+            </a>
             
-                <p>Inherited from
-                <a href="..&#x2F;classes&#x2F;FlyweightTreeManager.html#method__initNodes">FlyweightTreeManager</a>:
+            but overwritten in
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l140"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:140</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l74"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:74</code></a>
         
         </p>
 
@@ -1750,7 +1716,7 @@ or null if type was not a FlyweightNode instance.</p>
     </div>
 
     <div class="description">
-        
+        <p>Overrides the same function to process the selected attribute</p>
     </div>
 
     
@@ -1825,7 +1791,7 @@ or null if type was not a FlyweightNode instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l111"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:111</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l110"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:110</code></a>
         
         </p>
 
@@ -2011,7 +1977,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l94"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:94</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l104"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:104</code></a>
         
         </p>
 
@@ -2101,7 +2067,7 @@ It can be a reference to an object or a name that can be resolved as <code>Y[nam
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l261"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:261</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l315"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:315</code></a>
         
         </p>
 
@@ -2207,7 +2173,7 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l389"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:389</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l439"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:439</code></a>
         
         </p>
 
@@ -2306,7 +2272,7 @@ If an instance is held (see: <a href="../classes/FlyweightTreeNode.html#method_h
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l290"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:290</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l346"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:346</code></a>
         
         </p>
 
@@ -2386,7 +2352,7 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l224"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:224</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l233"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:233</code></a>
         
         </p>
 
@@ -2442,7 +2408,7 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l84"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:84</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l94"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:94</code></a>
         
         </p>
 
@@ -2455,6 +2421,59 @@ Instances held (see: <a href="../classes/FlyweightTreeNode.html#method_hold" cla
     <div class="description">
         <p>Widget lifecyle method.
 Sets the keydown listener to handle keyboard navigation.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_collapseAll" class="method item inherited">
+    <h3 class="name"><code>collapseAll</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeManager.html#method_collapseAll">FlyweightTreeManager</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l228"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:228</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Collapses all the nodes of the tree.</p>
     </div>
 
     
@@ -2496,7 +2515,7 @@ Sets the keydown listener to handle keyboard navigation.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l95"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:95</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l90"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:90</code></a>
         
         </p>
 
@@ -2549,7 +2568,7 @@ Sets the keydown listener to handle keyboard navigation.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l213"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:213</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l215"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:215</code></a>
         
         </p>
 
@@ -2623,7 +2642,7 @@ it will not expand those since that might lead to extreme situations.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l188"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:188</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l188"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:188</code></a>
         
         </p>
 
@@ -2752,7 +2771,7 @@ the event facade.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l427"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:427</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l477"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:477</code></a>
         
         </p>
 
@@ -2827,19 +2846,6 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
                                 
                             </li>
                             
-                            <li class="param">
-                                
-                                    <code class="param-name">array</code>
-                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                
-
-                                <div class="param-description">
-                                    <p>array containing itself and its siblings</p>
-                                </div>
-
-                                
-                            </li>
-                            
                         </ul>
                     
                 </li>
@@ -2882,6 +2888,134 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
 </div>
 
                 
+                    <div id="method_getNodeBy" class="method item inherited">
+    <h3 class="name"><code>getNodeBy</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>attr</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">FWNode or null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;FlyweightTreeManager.html#method_getNodeBy">FlyweightTreeManager</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l239"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:239</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Finds a node by attribute value or by condition.
+If the first argument is a string, it must be the name of an attribute
+and the second argument the value sought.
+If the first argument is a function, it should return true on finding
+the node sought. The function will receive a node reference.
+It returns the node sought or null.
+The node is on hold and it must be released once used.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">attr</code>
+                        <span class="type">String or Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Either an attribute name or a matching function</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>if the first argument is a string, the second is the value to match</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">FWNode or null</span>:
+                    
+                    The node found or null
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_getRoot" class="method item inherited">
     <h3 class="name"><code>getRoot</code></h3>
 
@@ -2915,7 +3049,7 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l340"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:340</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l400"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:400</code></a>
         
         </p>
 
@@ -2926,7 +3060,8 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
     </div>
 
     <div class="description">
-        <p>Returns an instance of Flyweight node positioned over the root</p>
+        <p>Returns an instance of Flyweight node positioned over the root.
+The reference is placed on hold and should be released once used.</p>
     </div>
 
     
@@ -2991,7 +3126,7 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l64"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:64</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l64"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:64</code></a>
         
         </p>
 
@@ -3071,7 +3206,7 @@ If dynamic loading is enabled, it will not run over nodes not yet loaded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l74"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:74</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l84"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:84</code></a>
         
         </p>
 
@@ -3139,7 +3274,7 @@ Adds the <code>tree</code> role to the content box.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l501"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:501</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l564"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:564</code></a>
         
         </p>
 
@@ -3229,7 +3364,7 @@ since they can now be expanded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l54"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:54</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l49"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:49</code></a>
         
         </p>
 
@@ -3279,7 +3414,7 @@ as if they had been there all along.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l78"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:78</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l73"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:73</code></a>
         
         </p>
 
@@ -3322,7 +3457,7 @@ as if they had been there all along.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l67"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:67</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l62"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:62</code></a>
         
         </p>
 
@@ -3369,7 +3504,7 @@ Mostly used for WAI-ARIA support.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l45"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:45</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l40"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:40</code></a>
         
         </p>
 
@@ -3414,7 +3549,7 @@ Each array contains a series of FlyweightTreeNode subclasses of the correspondin
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l37"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:37</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l32"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:32</code></a>
         
         </p>
 
@@ -3461,7 +3596,7 @@ The FlyweightTreeNode instances will use the iNodes (internal nodes) in this tre
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l55"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:55</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l55"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:55</code></a>
         
         </p>
 
@@ -3510,7 +3645,7 @@ Used for keyboard navigation.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l45"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:45</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l45"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:45</code></a>
         
         </p>
 
@@ -3558,7 +3693,7 @@ Used to handle keyboard navigation.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l243"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:243</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l254"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:254</code></a>
         
         </p>
 
@@ -3617,7 +3752,7 @@ Used to handle keyboard navigation.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l253"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:253</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l264"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:264</code></a>
         
         </p>
 
@@ -3719,7 +3854,7 @@ so it creates FWTreeNode instances instead of the default.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l537"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:537</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l593"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:593</code></a>
         
         </p>
 
@@ -3838,7 +3973,7 @@ render differently when there is a dynamic loader than when there isn't.
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l563"><code>yui3-gallery&#x2F;src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:563</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-flyweight-tree_js_flyweight-tree-manager.js.html#l619"><code>src&#x2F;gallery-flyweight-tree&#x2F;js&#x2F;flyweight-tree-manager.js:619</code></a>
         
         </p>
 
@@ -3849,7 +3984,8 @@ render differently when there is a dynamic loader than when there isn't.
 
     <div class="description">
         <p>Points to the node that currently has the focus.
-If read, please make sure to release the node instance to the pool when done.</p>
+If read, the node returned is placed on hold.
+Please make sure to release the node instance to the pool when done.</p>
     </div>
 
     
@@ -3943,7 +4079,7 @@ If read, please make sure to release the node instance to the pool when done.</p
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l263"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:263</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l274"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:274</code></a>
         
         </p>
 
@@ -3956,6 +4092,8 @@ If read, please make sure to release the node instance to the pool when done.</p
         <p>Enables toggling by clicking on the label item instead of just the toggle icon.</p>
     </div>
 
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -4023,8 +4161,8 @@ If read, please make sure to release the node instance to the pool when done.</p
                 <h2 class="off-left">Events</h2>
 
                 
-                    <div id="event_-any-" class="events item">
-    <h3 class="name"><code>-any-</code></h3>
+                    <div id="event_-any DOM event-" class="events item">
+    <h3 class="name"><code>-any DOM event-</code></h3>
     <span class="type"></span>
 
     
@@ -4046,7 +4184,7 @@ If read, please make sure to release the node instance to the pool when done.</p
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l280"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:280</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l288"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:288</code></a>
         
         </p>
 
@@ -4150,7 +4288,7 @@ use the TreeNode/hold method to preserve it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l301"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:301</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l310"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:310</code></a>
         
         </p>
 
@@ -4191,9 +4329,22 @@ use the TreeNode/hold method to preserve it.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>The original event produced by the DOM</p>
+                                    <p>The original event produced by the DOM, except:</p>
                                 </div>
 
+                                
+                                    <ul class="params-list">
+                                        
+                                        <li class="param">
+                                            <code class="param-name">target</code>
+                                            <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+
+                                            <div class="param-description">
+                                                The DOM element that had the focus when the key was pressed
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
                                 
                             </li>
                             
@@ -4246,7 +4397,7 @@ use the TreeNode/hold method to preserve it.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;yui3-gallery_src_gallery-fwt-treeview_js_fw-treeview.js.html#l293"><code>yui3-gallery&#x2F;src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:293</code></a>
+        <a href="..&#x2F;files&#x2F;src_gallery-fwt-treeview_js_fw-treeview.js.html#l301"><code>src&#x2F;gallery-fwt-treeview&#x2F;js&#x2F;fw-treeview.js:301</code></a>
         
         </p>
 
@@ -4288,9 +4439,22 @@ Used internally to toggle node selection.</p>
                                 
 
                                 <div class="param-description">
-                                    <p>The original event produced by the DOM</p>
+                                    <p>The original event produced by the DOM, except:</p>
                                 </div>
 
+                                
+                                    <ul class="params-list">
+                                        
+                                        <li class="param">
+                                            <code class="param-name">target</code>
+                                            <span class="type"><a href="../classes/Node.html" class="crosslink">Node</a></span>
+
+                                            <div class="param-description">
+                                                The DOM element that had the focus when the key was pressed
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
                                 
                             </li>
                             

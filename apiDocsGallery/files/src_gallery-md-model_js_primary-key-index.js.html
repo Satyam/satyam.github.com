@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>yui3-gallery&#x2F;src&#x2F;gallery-md-button-group&#x2F;js&#x2F;gallery-md-button-group.js - Satyam&#x27;s Gallery Modules</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js - Satyam&#x27;s Gallery Modules</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,208 +154,129 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: yui3-gallery&#x2F;src&#x2F;gallery-md-button-group&#x2F;js&#x2F;gallery-md-button-group.js</h1>
+                        <h1 class="file-heading">File: src&#x2F;gallery-md-model&#x2F;js&#x2F;primary-key-index.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-* Provides a container to group buttons.
-* It can hold instances of Y.Button, Y.ButtonToggle or Y.ButtonSeparator.
-* @module gallery-md-button-group
-*&#x2F;
-
-&quot;use strict&quot;;
-
-var Lang = Y.Lang,
-	BBX = &#x27;boundingBox&#x27;,
-	EVENT_PRESS = &#x27;press&#x27;,
-	LABEL = &#x27;label&#x27;;
-
-&#x2F;**
- * The ButtonSeparator class provides a passive divider to use in between groups of buttons
- * @class ButtonSeparator
- * @extends Y.Widget
- * @constructor
+ * Extension to store the records in the GalleryModel using the field in the
+ * {{#crossLink &quot;GalleryModel&#x2F;primaryKeys:attribute&quot;}}{{&#x2F;crossLink}} attribute as its index.
+ * The primary key __must__ be a __single__ __unique__ __integer__ field.
+ * It should be used along {{#crossLink &quot;GalleryModelMultiRecord&quot;}}{{&#x2F;crossLink}}.
+ * It is incompatible with {{#crossLink &quot;GalleryModelSortedMultiRecord&quot;}}{{&#x2F;crossLink}}.
+ * @class GalleryModelPrimaryKeyIndex
  *&#x2F;
-Y.ButtonSeparator = Y.Base.create(
-	&#x27;buttonSeparator&#x27;,
-	Y.Widget,
-	[],
-	{
-		&#x2F;**
-		 * Overrides the standard bounding box template to produce a &amp;lt;span&amp;gt;
-		 * @property BOUNDING_TEMPLATE
-		 * @type String
-		 *&#x2F;
-		BOUNDING_TEMPLATE: &#x27;&lt;span &#x2F;&gt;&#x27;
-	},
-	{
-	}
-);
-	
-&#x2F;**
- * The ButtonGroup class provides a container for sets of Buttons.
- * All buttons added will be extended with Y.WidgetChild.
- * @class ButtonGroup
- * @extends Y.Widget
- * @uses Y.WidgetParent, Y.Makenode
- * @constructor
- * @param cfg {object} Configuration attributes
- *&#x2F;
+PKI = function () {};
+PKI.prototype = {
+    &#x2F;**
+     * Adds a new record at the index position given by its primary key.
+     * The new record becomes the current.
+     * @method add
+     * @param values {Object|Array} set of values to set.
+     * If it is an array, it will call itself for each of the items in it.
+     * @chainable
+     *&#x2F;
+    add: function(values) {
+        if (Lang.isArray(values)) {
+            YArray.each(values, this.add, this);
+            return this;
+        }
+        if (this.get(IS_MODIFIED) || !this.get(IS_NEW)) {
+            this._shelve();
+        }
+        this._currentIndex = values[this._primaryKeys[0]];
+        this._initNew();
+        this.setValues(values, ADD);
+        return this;
+    },
+    &#x2F;**
+     * Default action for the {{#crossLink &quot;GalleryModel&#x2F;loaded:event&quot;}}{{&#x2F;crossLink}} event,
+     * checks if the parsed response is an array
+     * and saves it into the shelves using the value of the primary key field for its index.
+     * The model will be left positioned at the item with the lowest key value.
+     * If the primary key field has not been declared, items will not be loaded.
+     * If the primary key field is not unique, the duplicate will overwrite the previous.
+     * @method _defDataLoaded
+     * @param ev {EventFacade} facade produced by the {{#crossLink &quot;GalleryModel&#x2F;loaded:event&quot;}}{{&#x2F;crossLink}} event,
+     * @private
+     *&#x2F;
+    _defDataLoaded: function (ev) {
+        var self = this,
+            shelves = self._shelves,
+            pk = self._primaryKeys[0];
 
+        if (Lang.isUndefined(pk)) {
+            return;
+        }
+        if (self.get(IS_MODIFIED) || !self.get(IS_NEW)) {
+            self._shelve();
+        }
+        YArray.each(new YArray(ev.parsed), function (values) {
+            shelves[values[pk]] = {
+                _values: values,
+                _loadedValues: Y.clone(values),
+                isNew: false,
+                isModified:false
+            };
+        });
+        YArray.some(shelves, function (shelf, index) {
+            self._fetch(index);
+            return true;
+        });
+        ev.callback.call(self,null, ev.response);
 
-Y.ButtonGroup = Y.Base.create(
-	&#x27;buttonGroup&#x27;, 
-	Y.Widget, 
-	[Y.WidgetParent,Y.MakeNode], 
-	{
-		&#x2F;**
-		 * Overrides the standard bounding box template to produce a &amp;lt;fieldset&amp;gt;
-		 * @property BOUNDING_TEMPLATE
-		 * @type String
-		 *&#x2F;
-		BOUNDING_TEMPLATE: &#x27;&lt;fieldset &#x2F;&gt;&#x27;,
-		&#x2F;**
-		 * Sets the listener for the addChild event to extend children with Y.WidgetChild.
-		 * Publishes the &lt;code&gt;press&lt;&#x2F;code&gt; event
-		 *&#x2F;
-		initializer: function () {
-			this.on(&#x27;addChild&#x27;, function (ev) {
-				var child = ev.child,
-					WC = Y.WidgetChild;
-				if (child) {
-					if (child instanceof Y.Button || child instanceof Y.ButtonSeparator) {
-						if (!child.ancestor) {
-						
-							Y.augment(child, WC);
-							
-							child.addAttrs(child._protectAttrs(WC.ATTRS));
-							
-							WC.constructor.apply(child);
-						}
-					} else {
-						ev.preventDefault();
-					}
-				}
-			});
-		},
-		
+    },
+    &#x2F;**
+     * Sugar method added because items might not be contiguous so
+     * adding one to the index does not always get you to the next item.
+     * If there is no next element, &#x60;null&#x60; will be returned and the
+     * collection will still point to the last item.
+     * @method next
+     * @return {integer} index of the next item or &#x60;null&#x60; if none found
+     *&#x2F;
+    next: function () {
+        if (this.get(IS_MODIFIED) || !this.get(IS_NEW)) {
+            this._shelve();
+        }
+        var shelves = this._shelves,
+            index = this._currentIndex + 1,
+            l = shelves.length;
+        while (index &lt; l &amp;&amp; !shelves.hasOwnProperty(index)) {
+            index +=1;
+        }
+        if (index === l) {
+            return null;
+        }
+        this._fetch(index);
+        return index;
+    },
+    &#x2F;**
+     * Sugar method added because items might not be contiguous so
+     * subtracting one to the index does not always get you to the previous item.
+     * If there is no next element, &#x60;null&#x60; will be returned and the
+     * collection will still point to the first item.
+     * @method previous
+     * @return {integer} index of the previous item or &#x60;null&#x60; if none found
+     *&#x2F;
+    previous: function () {
+        if (this.get(IS_MODIFIED) || !this.get(IS_NEW)) {
+            this._shelve();
+        }
+        var shelves = this._shelves,
+            index = this._currentIndex - 1;
+        while (index &gt;= 0 &amp;&amp; !shelves.hasOwnProperty(index)) {
+            index -=1;
+        }
+        if (index === -1) {
+            return null;
+        }
+        this._fetch(index);
+        return index;
+    }
 
-		&#x2F;**
-		 * Sets listeners for the press event of child buttons, see &lt;a href=&quot;#method__onButtonPress&quot;&gt;_onButtonPress&lt;&#x2F;a&gt;.
-		 * @method bindUI
-		 *&#x2F;
-		bindUI : function() {
+};
+Y.GalleryModelPrimaryKeyIndex = PKI;
 
-			this.on([&#x27;button:press&#x27;,&#x27;buttonToggle:press&#x27;], this._onButtonPress ,this);
-		},
-		&#x2F;**
-		 * Processes the press event of child Buttons to enforce the &lt;a href=&quot;#config__alwaysSelected&quot;&gt;_alwaysSelected&lt;&#x2F;a&gt; attribute,
-		 * and to propagate the press event
-		 * @method _onButtonPress
-		 * @param ev {EventFacade}
-		 * @private
-		 *&#x2F;
-		_onButtonPress: function(ev) {
-			if(this.get(&#x27;alwaysSelected&#x27;)) {
-				var selection = this.get(&#x27;selection&#x27;),
-					button = ev.target;
-
-				if(selection === button || &#x2F;&#x2F; selection is the button OR
-					( 
-						selection instanceof Y.ArrayList &amp;&amp;		&#x2F;&#x2F; selection is an array AND
-						selection.size() === 1 &amp;&amp;				&#x2F;&#x2F; there is only one item AND
-						selection.item(0) === button			&#x2F;&#x2F; that one item is the button
-					)
-				) {
-					ev.preventDefault();
-					return;
-				}
-			}
-			this.fire(EVENT_PRESS, {pressed: ev.target});
-		},
-		&#x2F;**
-		 * Sets the label of the container from the value of the &lt;a href=&quot;#config_label&quot;&gt;label&lt;&#x2F;a&gt; configuration attribute.
-		 * Creates the &amp;lt;legend&amp;gt; element to hold it if it does not exists.
-		 * @method _uiSetLabel
-		 * @param value {String} text to be shown
-		 * @private
-		 *&#x2F;
-		_uiSetLabel: function (value) {
-			if (!this._labelNode) {
-				this.get(BBX).prepend(this._makeNode());
-				this._locateNodes();
-			}
-			this._labelNode.setContent(value);
-		}
-
-	}, {
-		&#x2F;**
-		 * Template for the &amp;lt;legend&amp;gt; element to hold the label.  Used by MakeNode.
-		 * @property Y.ButtonGroup._TEMPLATE
-		 * @type String
-		 * @static
-		 * @protected
-		 *&#x2F;
-		_TEMPLATE: &#x27;&lt;legend class=&quot;{c label}&quot;&gt;{@ label}&lt;&#x2F;legend&gt;&#x27;,
-		&#x2F;**
-		 * Creates the label className key to be used in the template
-		 * @property Y.ButtonGroup._CLASS_NAMES
-		 * @type [Strings]
-		 * @static
-		 * @protected
-		 *&#x2F;
-		_CLASS_NAMES: [LABEL],
-		&#x2F;**
-		 * Hooks up &lt;a href=&quot;method__uiSetLabel&quot;&gt;_uiSetLabel&lt;&#x2F;a&gt; to respond to changes in the &lt;a href=&quot;#config_label&quot;&gt;label&lt;&#x2F;a&gt; attribute.
-		 * @property Y.ButtonGroup._ATTRS_2_UI
-		 * @type Object
-		 * @static
-		 * @protected
-		 *&#x2F;
-		_ATTRS_2_UI: {
-			BIND: LABEL,
-			SYNC: LABEL
-		},
-		_PUBLISH: {
-			press:null
-		},
-		ATTRS : {
-			&#x2F;**
-			 * Holds the label for this group of buttons
-			 * @attribute label
-			 * @type String
-			 * @default &quot;&quot;
-			 *&#x2F;
-			label : {
-				value:&#x27;&#x27;,
-				validator : Lang.isString
-			},
-
-			&#x2F;**
-			 * Defines the default type of child to be contained in this group.  
-			 * Used by WidgetParent to create the default children
-			 * @attribute defaultChildType
-			 * @type object
-			 * @default Y.Button
-			 *&#x2F;
-			defaultChildType : {
-				value : Y.Button
-			},
-
-			&#x2F;**
-			 * Forces this group to always have at least one toggle button selected
-			 * @attribute alwaysSelected
-			 * @type Boolean
-			 * @default false
-			 *&#x2F;
-			alwaysSelected : {
-				value : false,
-				validator: Lang.isBoolean
-			}
-		}
-	}
-);
 
     </pre>
 </div>
