@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=iso-8859-1">
+<title>Sumando un dígito</title>
+
+</head>
+
+<body>
+
+<h1 align="center">Sumando un dígito</h1>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="figure.htm">&lt; Previa</a></td>
+    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+    <td width="34%" align="right"><a href="restore.htm">Siguiente
+      &gt;</a></td>
+  </tr>
+</table>
+<hr>
+<p>En las animaciones que siguen, las diferentes partes fueron coloreadas para facilitar
+el referirse a ellas.&nbsp; Solamente se muestran las partes relevantes a cada etapa.</p>
+
+<p>El proceso completo de cálculo se realiza en sólo dos medios ciclos.&nbsp; Como se
+mencionara antes, hay ocho ejes cada uno con un número de 31 dígitos.&nbsp; Están
+divididos en dos grupos, pares e impares, que se alternan en su movimiento.&nbsp; Las
+ruedas numerales de la derecha son sólo dos de los dígitos de un eje impar, mientras que
+las ruedas a la izquierda y ligeramente más atrás están en un eje par. Las animaciones
+muestran sólo un medio ciclo, en este caso, la suma de un valor de un eje impar sobre
+aquel valor que ya se encuentra en un eje par.&nbsp; Lo que ocurre en esta animación
+también ocurre simultáneamente en otros cuatro ejes, y también ocurrirá en los cuatro
+restantes medio ciclo más tarde.</p>
+
+<p>Las animaciones son archivos bastante grandes así pues fueron producidas en una
+resolución de 160*120 píxeles para mantenerlas debajo de los 250kbytes.&nbsp; Una imagen
+estática, más grande como imagen pero más chica como archivo, se agrega para apreciar
+mejor el detalle.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td valign="top"><img src="../images/SumaFoto.gif" width="512" height="468" alt="SumaFoto.gif (48 kbytes)"></td>
+    <td valign="top">Las ruedas de bronce de la derecha están en un eje impar.&nbsp; La rueda
+    inferior corresponde al dígito menos significativo.&nbsp; En esta posición contiene el
+    número 35.&nbsp; Las ruedas hacia el fondo a la izquierda están en un eje par y
+    contienen un 48.&nbsp; Los medios engranajes en fucsia son los sectores de rueda.
+    &nbsp;Ambos tipos de engranajes tienen brazos de vuelta a cero, los de las ruedas
+    numerales se ven en celeste, los de los sectores de rueda en amarillo.&nbsp; El brazo de
+    vuelta a cero de la rueda numeral inferior apenas logra verse a través del espacio entre
+    las ruedas. &nbsp; Las ruedas numerales pares, al fondo a la izquierda, también tienen
+    brazos de vuelta a cero, pero no se muestran en esta imagen pues no participan en este
+    medio ciclo. &nbsp; Igualmente, hay sectores de rueda uniendo las ruedas numerales pares
+    con las ruedas impares que estarían más allá.<p>La imagen muestra el sector de rueda en
+    la posición inferior, acoplado con las ruedas numerales de ambos ejes. </td>
+  </tr>
+</table>
+
+<p><img src="../images/Suma.gif" alt="Suma.gif (301290 bytes)" WIDTH="160" HEIGHT="120"></p>
+
+<p>La animación de arriba muestra el proceso de sumar un dígito.&nbsp; A pesar de que la
+imagen cicla contínuamente, es fácil notar el inicio de cada ciclo por un salto súbito
+en la animación.</p>
+
+<p>El proceso comienza con los medios engranajes en fucsia, los sectores de rueda,
+moviéndose hacia abajo y acoplándose con las ruedas numerales.&nbsp; Los brazos de
+vuelta a cero de las ruedas numerales también descienden junto con los sectores de rueda.
+&nbsp; Una vez que llegan abajo, los brazos de vuelta a cero comienzan a girar.</p>
+
+<p>En algún punto, los brazos de vuelta a cero harán contacto con dos de los dientes
+interiores de la rueda numeral y la arrastrarán.&nbsp; Adviértase&nbsp; en la animación
+que, siendo que las ruedas numerales están en posiciones diferentes, esto es,
+representando diferentes números, éstas comienzan a moverse en momentos distintos.</p>
+
+<p>Los brazos de vuelta a cero siempre llevan las ruedas numerales a cero.&nbsp; Al
+hacerlo, cualquier valor que contuvieran es transferido mediante los sectores de rueda a
+las ruedas numerales que reciben la suma, atrás a la izquierda.&nbsp; Los brazos de
+vuelta a cero bajan en la posición que la rueda numeral tendría si contuviera un
+9.&nbsp; Si la rueda contuviera un nueve, el brazo de vuelta a cero harían contacto de
+inmediato y la arrastratían 9 unidades, transfiriéndolas al sector de rueda y de allí a
+la rueda numeral siguiente.&nbsp; Cuanto más bajo el número, más se tarda en que el
+brazo de vuelta a cero contacte el diente interior de la rueda numeral, y es menos lo que
+se transfiere a la rueda sector.</p>
+
+<p>Al final de este proceso, la rueda numeral del fondo contiene la suma, como
+buscábamos, mientras la rueda numeral al frente queda en cero.&nbsp; Eso no es bueno pues
+aún necesitamos que estas ruedas conserven su valor original, para usarlo en el próximo
+ciclo.&nbsp; Allí es donde intervienen los brazos de vuelta a cero de los sectores de
+rueda. &nbsp; Después de todo, los sectores de rueda contienen una copia de cualquiera
+que hubiera sido el valor que contenían las ruedas numerales del frente.</p>
+
+<hr>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="figure.htm">&lt; Previa</a></td>
+    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+    <td width="34%" align="right"><a href="restore.htm">Siguiente
+      &gt;</a></td>
+  </tr>
+</table>
+</body>
+</html>

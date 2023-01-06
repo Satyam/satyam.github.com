@@ -1,0 +1,24 @@
+BODY
+{
+    FONT-SIZE: smaller;
+    FONT-FAMILY: Verdana, Arial
+}
+H1
+{
+    TEXT-ALIGN: center
+}
+TABLE
+{
+}
+TD
+{
+    PADDING-RIGHT: 9px;
+    PADDING-LEFT: 9px;
+    FONT-SIZE: smaller;
+    PADDING-BOTTOM: 9px;
+    PADDING-TOP: 9px
+}
+.manito
+{
+    CURSOR: hand
+}

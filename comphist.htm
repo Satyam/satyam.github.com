@@ -1,0 +1,764 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="Author" content>
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>Old Stories about Old Computers</title>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000EE"
+vlink="#551A8B" alink="#FF0000">
+
+<h1>So I thought, why not!</h1>
+
+<p>I've been in this business of computers for quite a while.
+Actually, anything programmable that I could put my hands on, I
+tried it. Since I've seen my share of strange devices, I thought,
+why not write it down.</p>
+
+<p>I remember doing some heavy programming for both a TI-95 and
+HP-67 both programmable scientific calculators. The place I was
+working at had requested some financial calculations to their IT
+department, and they were schedulled to 'be listened to' in about
+five months, just 'listened to' nothing more. I had it working on
+the calculator in a couple of weeks, so they bought a bunch of
+them. </p>
+
+<h2>Mechanical word processor</h2>
+
+<p>Then, they showed me a mechanical word processor they had. It
+worked out of punched cards, but instead of loose ones, these
+cards were a single strip folded acordion-like along the smaller
+edge. So, the thing had two card stations, one for the 'program'
+which was the text to be written mixed with commands. This string
+of cards was glued as a loop, so when it was done with one letter
+it would start the next. The other station was for data cards.
+That's where you put the cards with the names and addresses of
+the people you wanted to send the letters to. This second station
+also had the card puncher and the bin with blank cards. The whole
+thing was designed to work along a card sorter, to pick the batch
+of cards you wanted to send letters to, or you could manage the
+cards yourself by hand. The machine was working quite Ok,
+considering how it had been neglected, but it needed some
+mechanical maintenance, mostly cleaning and oiling. As it was,
+some of the characters printed lighter than others, some almost
+invisible and others out of alignment. And it made lots of noise.
+So, I made program cards for some of the standard letters and
+some data cards for some of the suppliers. It was a part-time job
+I had while I was in college, and I left before it got any
+maintenance done. I never knew whether it went into production.</p>
+
+<p>Now, you might be wondering why didn't they use a word
+processor. Simple, there weren't any. Wordstar wasn't there yet,
+and I'm not talking about the PC version of it, not even the
+original 8 bit CP/M version existed yet, since CP/M wasn't there
+either.</p>
+
+<h2>IBM 360 microcode</h2>
+
+<p>Another job I had while at college got me to a place where
+they were discarding an IBM 360. I got a piece of microcode from
+it. I couldn't believe it, microcode was a set of mylar cards,
+just like cardboard punch-cards, but mylar and with metal strips.
+You just punched all the intersections you wanted to put 'ones'
+in. You could actually change the microcode of the whole CPU just
+by having a deck of those special cards punched at a regular data
+entry puncher and sliding them into the slots.</p>
+
+<h2>Memory with a twist</h2>
+
+<p>Now, if that sounds strange for microcode memory, how about
+some strange regular memory. I&nbsp;got my hands on a teletype,
+mostly electromechanical stuff with very little electronics. A
+single 'flip-flop' was a whole 3&quot; * 5&quot; single sided PCB
+with two transistors, probably germanium. You wouldn't make a
+memory out of such large devices so, they needed something to
+hold the incoming characters while the printing carriage went
+back to the left margin. The memory, what you would usually call
+a 'shift register', was a metal box, about 5 *&nbsp;5 inches and
+half an inch thick. Inside, a piano wire was held by four plastic
+posts so that it made four turns like a helix. Two of the corners
+held the twister and the sensor. Bits were shift into the wire by
+a solenoid that twisted the wire. It didn't bend it or pull it,
+it twisted it. At the other end, in another corner of the box,
+the sensor picked up the twists and fed them back to the twister.
+The device didn't hold just a single bit but several characters
+as a train of twists that carried over the wire. So, when the
+carriage was busy doing a carriage return, the stream of bits,
+just as it came from the serial line, were sent to the piano wire
+memory. When the carriage was ready to accept more characters, it
+took them from the piano wire memory and, since it was able to
+print faster than the stream of incoming characters, it was able
+to empty the buffer and take them straight from the serial input
+so, by the end of the line, the buffer would be empty and ready
+to accept characters. While it was hodling characters, they kept
+going round and round over the piano wire, out thru the sensor
+and fed back to the twister into the piano wire. It was
+interesting that you could shake the box and it wouldn't mess up.
+Since the bits were carried by twists, it didn't matter since by
+shaking you could bend or move the wire, but you couldn't twist
+it.</p>
+
+<h2>Sycor 445</h2>
+
+<p>After college I worked at a company that distributed computers
+made by a company called Sycor, from Ann Arbor, Michigan, that
+was later bought by Northern Telecom, now NorTel. The 445 was a
+beautiful machine.</p>
+
+<p>You see, nowadays, the intricacies of the CPU&nbsp;chip are
+completly hidden from the user. It's very difficult to grasp all
+that mess of cache memory, prefetches, pipelines, cascaded
+execution and all that. The 445 was a machine I could understand,
+and it was a fun machine.</p>
+
+<p>It could support up to 8 terminals with its Intel 8080 CPU, up
+to 256kb of RAM memory, and a 10MB&nbsp;disk in a single 14&quot;
+platter.</p>
+
+<p>For example, take the disk. You could actually fix it, I fixed
+several at the repair shop. It was so big that you could actually
+do something with your own hands and some delicate but not
+terribly sofisticated tools. If we had head crashes, we replaced
+the heads and the platter, and the disks we repaired didn't do
+any worst than the original ones.</p>
+
+<p>The CPU set was actually made of 3 cards, about 8 inches
+square each. Two of them held the 8080 processor, it's support
+chips, the prefetch and memory mapping unit, and the third was
+the memory card that could hold 1, 2, 3 or 4 rows of 64kb each
+for a total of 256 k, and I really mean kilobytes, not megabytes.</p>
+
+<p>The cards were inserted in a backplane that had about 20 slots
+which were wired for a different function each. Few slots were
+equivalent, the wiring on the backplane was specific for each
+slot to hold a specific card. The wiring was done by wire-wrap,
+it was not a PCB, and ocassionaly we had to upgrade a backplane
+to hold a new model of a certain card. So, the back of the
+backplane was a nice cushion of wires meshed in a bed of nails,
+that is, the posts over which you wrapped the wire-wrapping wire.</p>
+
+<p>So, yes, it already had an Intel microprocesor, the first 8
+bit microprocesor (there had been an 8008, but it wasn't general
+purpose but custom built for DataPoint, a terminal manufacturer,
+and the only reason to make it 8 bit was to handle
+ASCII&nbsp;characters, then Intel turned it into a general
+purpose chip, extending the instruction set). Now, the 8080
+wasn't really a single chip CPU, it needed a couple of other
+chips, a clock generator and an 8 bit latch, so, the whole thing
+was a 40 pin chip and a couple of 22 or 24 pin chips.</p>
+
+<p>The 8080 could address just 64kb of memory so this guys build
+a memory manager unit around it, that was able to map up to 512kb
+of main memory along with up to 16 2kB video memory pages and
+several 2kB ROM chips into those 64kb. It did, indeed, have a
+second slot for another 256kB memory card, that was never
+supported and it also had another slot for another CPU&nbsp;card,
+which was never added, and there was a good reason for that.
+CPU&nbsp;chips became so cheap that instead of having just two
+processors, one, the master doing the actual calculations, the
+other, the slave, taking care of all the input/output, they
+starting making intelligent cards that had an intel 8085 chip in
+each, so the slave processor never became to be. Also, just
+because of performance, only 8 terminals were supported, though
+the hardware could manage 16.</p>
+
+<p>The main CPU, the two cards around the 8080 microprocessor
+were wonderful. Memory was organized 16 bits wide though the
+processor was only 8 bit wide. The hardware around the 8 bit
+microprocessor always did the memory fetches two bytes at a time,
+and kept the additional byte in some sort of cache just in case
+it might be needed. It always did that with program memory which,
+unless you find a jump and take it, would always read
+sequentially. Moreover, based on the assumption (which is quite
+true) that program flow has a good chance of being linear (even
+conditional jumps might not be taken), the little thing went
+ahead and pre-fetched up to 16 bytes (or 8 16 bit words) of
+program. Since several microprocessors (the main CPU&nbsp;as well
+as those in the intelligent cards) were competing for access to
+main memory, all these tricks (16 bit access and instruction
+pre-fetch) allowed more time for I/O controllers to access main
+memory while keeping the main CPU working on its local cache of
+instructions.</p>
+
+<p>That's the beauty of these old designs. It had all the basic
+things that only years laters were introduced in microprocessors,
+and you could actually see the diagrams and understand how it
+worked. I remember when the 80386 came and they were talking
+about the independent bus unit, which did all those tricks that
+the 445 did so long before, and people thought it was a great
+invention. I admit, Intel never claimed to invent it, they just
+said they put them in, but a lot of people had never heard of
+them before and thought it was big news.</p>
+
+<p>The 445 didn't have any BIOS, it just had a power-on self-test
+(POST) ROM and a bootstrap loader ROM that got everything
+initialized and tested and then it built what they called a DCB
+(Device Control Block) in memory. DCBs were data structures
+containing a command, some flags and optionally an associated
+buffer. When you wanted an intelligent card to do something, you
+prepared the DCB, and signaled the card to pay attention to it.
+When the intelligent card was finished with the command, it wrote
+the results in the DCB&nbsp;and signalled the CPU&nbsp;via an
+interrupt. More of it later. All intelligent IO cards understood
+DCBs. Since the disk controller and the data cartridge controller
+cards were both intelligent cards, and those were the boot
+devices, that was enough to get something started easily. So, the
+bootstrap loader loaded the first 2kb of either the data
+cartridge (it there was one inserted) or of the disk. Then it
+jumped to the first instruction found there. That was the
+bootstrap that then loaded the actual operating system.</p>
+
+<p>The terminals were controlled by a controller for each two.
+The terminals were the most simple devices you could think of.
+They were connected via a shielded twisted pair cable, much like
+IBM Type 1 cable (the original Token Ring cable, thick as a
+finger) up to 2000 feet in length. Video memory was in the
+controller card, as well as the video controller chip. The cable
+actually carried the video signal, so the terminal was just an
+analog video monitor. Each card held 4kb of memory, 2kb for each
+terminal. Of those, 2000 bytes were actually mapped into the
+video screen (25 rows of 80 characters each for a total of 2000
+characters) and there were 48 bytes left for scratchpad memory.
+The keyboard was just as simple. The monitor had a counter that
+incremented once for each horizontal sync and was reset by each
+vertical sync. That count was fed into a 4 to 16 bit decoder and
+an 8 bit multiplexer which made a matrix of 128 possible
+intersections. The keys occupied some of those intersections, and
+the other pair of the cable carried the single bit representing
+the depressed key. A similar counter did the same counting on the
+controller card so both, the keyboard counter and the controller
+card counter were in sync so that when the bit representing the
+keystroke came through the wire, the count was latched into an 8
+bit latch. Now, the display cards were dumb, meaning, no 8085
+there to buffer the characters or do any other tricks. Each
+keystroke generated an interrupt to the main CPU&nbsp;and you had
+to drop whatever you were doing, since the latch only buffered
+one keystroke. Fortunately, the keyboard was de-bounced by
+hardware. De-bouncing as well as auto-repeat was handled by
+monostables. So, when you got the keyboard interrupt, you had to
+check each of the up to 4 display cards to see which card
+generated the interrupt, and which terminal within the card, read
+the character, put it into the right input buffer in main memory
+and signal the card that the latch was free. </p>
+
+<p>Now, of course, programmers didn't know all this since they
+just used either Cobol (Ryan McFarland)&nbsp;or a simple data
+entry macro language. </p>
+
+<p>But us guys at the repair shop, got our hands on a damaged
+chassis (the steel frame was damaged but the electronics worked
+fine) and got some spare cards together, and then we started
+having fun!</p>
+
+<p>The whole thing worked with a proprietary operating system.
+That wasn't fun enough. So, we put MP/M&nbsp;in it, which was the
+multi-user version of CP/M, the then popular 8 bit operating
+system. Just imagine, we had so much hardware and we were stuck
+with Cobol and that TAL2000 thing, no way! They had a BASIC but
+it was so pitiful nobody cared for it. Now, on CP/M&nbsp;you had
+cool things like Wordstar the word processor, (well, it was cool
+in those days), Supercalc a spreadsheet and games lilke PacMan
+(in a character display, the PacMan was represented by a letter C
+that alternated in between uppercase and lowercase so it looked
+like munching, and the ghosts were alternating Ms and Ws) and
+Space Wars and Zork (Zork ,just plain Zork, not Zork II&nbsp;or
+others).</p>
+
+<p>So, I had a CP/M machine at home and started playing. First of
+all was how to download the program to the 445. There was an
+asynch card that someone got wrong (they meant a synch card for
+BSC3780, but ordered the wrong number), and my machine had a
+serial port. Of course, there was no software to handle the
+serial card on the 445, not any we cared for anyway, but at least
+it was easier to enter by hand a program to handle input thru the
+serial card than entering the whole CP/M&nbsp;by hand. The
+executable file format was very simple, like the .COM file
+format, just a binary image of the running program, compiled for
+a specific memory address. I had the 8080 macro assembler in my
+CP/M machine and it created a .HEX file which was much like what
+you go into Debug and ask for a memory dump, with a checksum
+added on a row per row basis.</p>
+
+<p>So, I made the program for the 445 to read the HEX dump fed
+from my CP/M&nbsp;machine through the serial port and put it into
+disk. Since we couldn't download that into the 445, we had to
+enter it by hand, byte by byte with the disk editor. So, there we
+were, two of us, one reading the memory dump of the hex loader
+from my machine and the other typing it in the 445. Fortunately
+we were writing it right into disk, so it wasn't volatile and we
+weren't pressed by time. A couple of lunch hours did it and we
+could then load into disk any program we wished.</p>
+
+<p>So, next step, download our BIOS. The 445 didn't have any BIOS
+ROM, some devices were accessed directly, like the terminals,
+others, like the disk, were accessed by those DCB. We had to map
+that hardware/firmware into the entry points expected by CP/M.
+First, we used the asynch card as our console, since that would
+enable us to use my CP/M machine as the terminal and that would
+make it even easier to download programs to the 445. </p>
+
+<p>And the Bootstrap itself! Since the BIOS&nbsp;was in RAM,
+loaded from disk, we had to get the BIOS&nbsp;loaded. That was
+actually quite easy. The bootstrap loader, which was on a ROM
+loaded the first 2k sector of the disk into a specific memory
+location and blindly jumped right into it. The console part of
+the BIOS wasn't that long, so we put it there and a little
+program to try it. The thing worked nicely. Then we tried to use
+the actual 445 terminal. It seemed easy but, though the 2kb video
+memory of terminal 0 was already mapped into the 64kb of the 8080
+CPU, the location it was mapped into was incompatible with CP/M
+so we first had to relocate it. We were going to have to deal
+with the memory mapper sooner or later, for example to get the
+POST&nbsp;and bootstrap loader ROM out of the way, soit wasn't a
+waste of time to do it at that point.</p>
+
+<p>Disk access was even easier since we didn't need to deal with
+the disk controller details, it was all DCBs. Intelligent I/O
+cards didn't go through the memory mapper so they could only
+access the first 64kbytes of physical (not mapped) memory. That
+was fine, since CP/M&nbsp;accessed disk in 256 (or was it 512?)
+byte sectors, so we could use just physical page 0 for all our
+I/O. The DCBs had another feature that we didn't use. DCBs could
+be chained in a linked list. Each device had a preset memory
+location to look for the address of its first DCB. If that
+address was 0, then there was nothing pending. So, you first
+built your DCB anywhere in the first 64k of physical memory and
+then checked the preset location for the first DCB, if it was all
+zeros, you could put the address of your DCB right there. Now, if
+that location was not zero, it meant that there was already a DCB
+in the queue. A couple of bytes in the DCB were reserved for
+chaining DCBs so, if those were zero, you put the address of your
+DCB there, if not, then you followed that link to the next
+DCB&nbsp;in the chain until you found the last DCB&nbsp;in the
+chain. Then you wrote into the IO port of the disk controller
+just to tell it there was a new DCB&nbsp;to take care of. As soon
+as the disk controller was idle, it would follow the linked list
+to find any unprocessed command. A bit in the DCB signalled that
+it had already been taken care of by the disk controller, but it
+remained in memory so the main CPU&nbsp;could read the results.
+Then it was up to the CPU&nbsp;to take that element out of the
+list, patch the chain of addresses and free the memory. Of
+course, you better disabled interrupts while doing all this
+inserting and deleting from the chain of DCBs, or else ...
+Anyway, we didn't need to take care of the DCB chaining since
+CP/M was not reentrant, it only had one disk access active at any
+one time, but it was a nice mechanism and I thought it was worth
+mentioning.</p>
+
+<p>Then, we started doing nice things with the memory mapper.
+Since the programs didn't actually need to know the physical
+memory locations of either the video memory or where we were
+building the DCBs for the disk controller, we ended up mapping
+those in and out of the memory reserved for user programs.
+Moreover, since we could map as much memory as we wanted, the
+first thing our BIOS&nbsp;did was to change memory mapping and
+map most of itself in, leaving as much of mapped memory for user
+program execution.</p>
+
+<p>I forgot to mention transferring CP/M itself, but that was
+easy since you didn't do anything to it but just copy it over and
+get it loaded at a specific memory location after you got all the
+BIOS loaded and ready, and then jumped into it.</p>
+
+<p>Now, the second big step was loading MP/M which was the
+multiuser version of CP/M. MP/M required a working CP/M up and
+running on the target machine. It added some more BIOS functions,
+to handle context swapping, and you had to signal it with the
+timer click, so we had to add those. As far as I recall, MP/M
+still didn't do multiple disk requests, it took care of queueing
+them itself, so we didn't need to modify the disk thing. We only
+needed to deal with context swapping, that is, keeping an eye on
+which memory was asigned to which user, including video memory,
+and make sure to page it in and out. Also, we had to keep several
+keystroke buffers, but we used the 48 bytes of video memory that
+were beyond the 2000 visible ones, so they got mapped in along
+the video memory. We also had to add a little terminal emulation,
+since CP/M&nbsp;didn't know about things such as cursor
+positioning, so I think we used the escape sequences of a Lear
+Siegler terminal, which was a very popular one on those days.
+Thus, we just had to configure Pacman for an LSI&nbsp;terminal
+and we had it done.</p>
+
+<p>Well, the whole thing never went out as a product, since
+'industry standard operating system' wasn't a part of any
+salesperson sales pitch and I'm sure there would have been
+licensing problems (Northern Telecom probably wouldn't have liked
+to see its hardware running MP/M), but we made a warm boot
+program that allowed the 445 to boot with its standard operating
+system but, if you run a certain program, it would kill it and
+replace it by MP/M. We never managed to (or dreamt of) creating
+virtual CP/M machines within the original 445 OS, nor were we
+able to go back from MP/M to 445 OS without rebooting. Going into
+MP/M&nbsp;was a one way thing and, by the way, it killed without
+warning anything that might have been running at the time. </p>
+
+<p>Then came a tradeshow where several competitors had word
+processors (dedicated ones, like several Wang systems) or were
+starting to show CP/M machines. The 445 was designed for
+administrative data processing so it didn't have anything like
+that (and when it finally did, it was horrible!!!!). Anyway, this
+sales guy noticed we didn't have anything to attract the
+attention of the passerbies and he asked whether there was any
+word processing or spreadsheet we could show, which were the big
+hits of the show. I said, &quot;yes, we do, but we can't sell it,
+it is not supported&quot;. Now, just tell a salesperson that
+something can't be sold and he's going to take it as a challenge
+so guess what he said. We already had Wordstar and Supercalc
+loaded in it, (and Pacman, and SpaceWars, and Pong, and Zork and
+all the goodies I&nbsp;had in my CP/M machine). Suddenly our
+booth was full of guys. We couldn't really have more than one
+game at a time running, since, after all, there was just one main
+CPU&nbsp;for all of it, but that was fine, since the kids, who
+wanted the games, weren't going to buy the system. People goes
+were there is already people, so some kids were fine, too many
+were not good. Anyway, everytime the spreadsheet did a
+recalculation, the little Pacman froze for a couple of seconds.
+And, when one of the owners of the company came in and this sales
+guy proudly told them his decision to show the unsuported stuff,
+he told us to go back to the standard boring thing. </p>
+
+<h2>A TTL 16 bit processor</h2>
+
+<p>Now, there was this other machine that didn't even have a
+microprocessor but it's CPU&nbsp;was built upon 4 4-bit ALUs ....
+plain TTL chips, medium scale integration. Each CPU&nbsp;was a
+couple of square boards about two feet on a side, perhaps one and
+a half. And the PCB&nbsp;itself was about 6 layers. It was packed
+really dense. We couldn't do much with it, since it had a
+proprietary instruction set. We did some assembler programming on
+it, but it wasn't worth it to try to port some other OS. We
+learned a lot from it, though. At first the original manufacturer
+didn't want to give us the diagrams, after all, this was a large
+mini, almost a mainframe, and they had themselves very few
+certified repair shops since it was really sophisticated.</p>
+
+<p>Once, a CPU&nbsp;card broke. Those were the days when
+importing and exporting to or from Argentina was really
+difficult. Even though the card was about $5000, they were really
+thinking of dumping it before going through all the paperwork to
+send it and then bringing it back again without paying the 85%
+custom duty as if it was a new one. They normal process was to
+send a new one while they repaired the dead one. We had to make
+sure they shipped back the very same one (they had serial
+numbers), otherwise it would be charged duties. All this
+negotiating lasted for about a month. Suddenly, they heard
+nothing more of it. After a while they asked what about the dead
+CPU card. We told them we had fixed it. Indeed, we had and
+without any diagrams. I admit it, it wasn't hard, but the guys
+were impressed, and I wasn't going to admit how easy it had been
+so, finally, they accepted to send us the diagrams.</p>
+
+<p>The microcode was on PROMS on sockets on the corner of the
+board. Half the sockets were empty, but some products required a
+microcode upgrade so, they came with a set of PROMS to put into
+the empty sockets. Of course we toyed with the idea of burning
+our own PROMs with our own instruction set, but it was a
+monumental task. It would have taken us a couple of years to just
+get in the instruction set of an 8086 processor and, though at
+start time it would have provided us with a CPU&nbsp;four times
+as fast as any 8086 in existence, by the time we had finished,
+the 80386 would have been an everyday thing. </p>
+
+<p>Anyway, it was good learning to see how the CPU&nbsp;worked
+internally.</p>
+
+<h2>Assortment of processors</h2>
+
+<p>Another nice thing of those days was the variety of processors
+you had. The major families were the 8080 and Z80 which shared
+the same basic instruction set and both could run CP/M. Then you
+had the Motorola 68xx and the very similar 6502. The later was
+the one that run on the Apple IIs and Commodores. The 6502 came
+in several packages from 22 pin to full 40 pins. Each had
+differences in, for example, how much memory they could handle,
+since the smaller packages had the high address bits cut off. It
+also saved some pins if you didn't mind about a precise time base
+or interrupts. Thus, the same basic chip served, in the full 40
+pin package, for a complete computer, while the smaller packages
+were suitable for small microcontrollers where you wouldn't have
+lots of memory anyway.</p>
+
+<p>The 8080 architecture and its descendants (including current
+Pentiums) betray its origins. Since it was based on the 8008
+which was meant as a display terminal controller, it had a bunch
+of special purpose registers highly suitable for its then
+intended purpose. The 6800 family, since it was meant as a
+general purpose chip from the start, had a more regular
+architecture. While the followers to the 8080, including
+Pentiums, still follow the same basic architecture, the 6800
+descendants, the 68000 and above, are even more regular. The
+6502, on the other hand, was designed to be small and cheap. It
+had only one internal accumulator, but it had a fast address mode
+for the first 256 bytes of external memory, which somehow allowed
+them to act as an extension of the internal registers, and the
+stack was just 256 in depth, pointed at by a 8 bit stack pointer,
+with the higher 8 bits hardwired to 1. So, from 0 to 255 you had
+the fast memory, from 256 to 511 you had the stack. Not a lot of
+it, I admit, it was easy to make it overflow, but nobody
+complained, Apple II&nbsp;success proves it. And it was a true
+single chip microprocessor, unlike the 8080 which was actually a
+three chip set.</p>
+
+<p>Then you have things like the 8X300 which was not a
+microprocessor but a microcontroller, the difference being it was
+not a Von Neumann machine, that is, program and data memory were
+separate. It was a huge chip, about 64 pins. Anyone remembers the
+Irma cards, those used as 3270 terminal emulators? Remember they
+were blue instead of green? They had one of these huge chips in
+them. So, this thing had so many pins because it had a program
+address bus, a program data bus and a separate data bus. I think
+it had only one or two bits for data addressing, hardly what you
+would call an address bus, but you were supposed to send the
+address as data through the data bus and hold it into an external
+latch. Thus, your data address space could be as large or small
+as you wanted. Since it was a microcontroller, it wasn't supposed
+to address a lot of memory anyway. Now, why separate program and
+data memory? One thing was speed, that's why the Irma guys used
+it. You didn't have to share the same bus' bandwith amongst data
+and program. And why would you care for a Von Neumann
+architecture if the program was in ROM anyway. Von Neumann
+architecture allows you to treat a program as data and thus you
+can compile a program and later execute it. An Irma card only
+needed to execute the very same program endlessly fast enough to
+keep up with the 1.2 megabit per second serial stream of BSC or
+SDLC data coming through the coax.</p>
+
+<p>Another interesting design was that of the LSI-11. It was a
+microprocessor version of Digital's own PDP-11 minicomputer. The
+chips were made by Western Digital, a subsidiary of AT&amp;T. It
+wasn't single chip, it was in between 4 and 5 chips, I believe.
+One was the ALU, another the microsequencer, another one held the
+registers and a fourth the microcode. An optional fifth was a
+floating point unit or cache or memory management unit, I don't
+remember. I'm not sure of all this, but it's near enough. In
+those days, Borland was making Pascal very popular with its
+TurboPascal. Pascal had the concept of compiling into what is
+called p-code, which is a virtual machine code, and then
+executing that p-code under an interpreter. Now, if this sounds a
+lot like the concept of a Java Virtual Machine, you are
+absolutely right! So, the Western Digital guys designed a
+microcode chip that run p-code as native. Thus, they used the
+very same basic LSI-11 chipset, with just a different microcode
+and they had what they called the Pascal Micro Engine. I never
+saw one, but you could actually have an LSI-11 computer, change
+the microcode chip and have the fastest Pascal engine in those
+days. That was not a virtual machine but an actual p-code
+machine. Chips nowadays are so much faster than they were on
+those days that even if you managed to get a working LSI-11 and
+burn a Java microcode chip, it would be much slower than a
+software-based virtual machine.</p>
+
+<p>Once I got an MS-DOS&nbsp;program called Z80-EMU, it was an
+emulator of a Z80 and CP/M. I found a diskette with it years
+later and run in on a Pentium and it still worked. Then I run a
+Z80 benchmark in it. I think it gave the equivalent of a 25MHz
+Z80, something that never existed since the fastest ever was an
+8MHz chip. So, an emulated chip on a new processor was faster
+than the actual chip ever was.</p>
+
+<p>Talking about slow, you had the TI-9900 series. They were the
+first 16bit chips I know of, but they were so painfully slow that
+a regular 8 bit Z80 could outrun it jumping on one leg. It was
+used on the popular TI-99 home computer and in some TI
+minicomputers, but the slowness of it killed it, few remember
+that it existed long before the i8086 and MC68000</p>
+
+<p>Signetics also had an interesting 8 bit microprocessor, but I
+never saw it anywhere. What I saw from Signetics was its serial
+I/O chip, which was really good though the best of them all was
+the Z80-SIO. I wonder what happened with Zilog, they had a great
+set of chips, starting with the Z80 CPU and all the support
+chips. Most 8bit CP/M machines were built around those. They went
+into the 16bit processor business with the Z8000 but it never got
+any big customer. Apple took the 68000 from Motorola and IBM
+picked the 8088 from Intel. The Z8000, a nice chip with a good
+architecture and good support chips was left behind. Anyway, you
+can still see Z80-SIOs here and there, since it was the only
+serial chip that had two serial channels in a single chip, and
+you can program those for either Asynch, BSC or SDLC/HDLC. There
+was nothing as flexible as that one.</p>
+
+<h2>Emulation</h2>
+
+<p>When we got the first PCs we noticed they really weren't that
+much faster than the 8bit CP/M machines it replaced. So, I
+decided to do some benchmarking. I tried the same simple
+benchmark, the sieve of Erathostenes, with several languages.
+Only the assembler version of the sieve run faster on the IBM-PC
+since it had some more internal CPU registers so I could hold in
+it some more pointers and counters than in the 8 bit counterpart.
+We had several languages by different manufacturers, both for
+8bit CP/M and 16 bit MS-DOS; Digital Research's CB-80 and CB-86,
+Ryan McFarland RM-Cobol for both 8 and 16 bits, Microsoft's
+Cobol, Basic Compiler and Assembler for both. The very same
+program run much slower on the IBM-PC than on the CP/M machine,
+and it was the same source compiled with the same brand of
+compiler. The Cobol version was so, so! slow that I thought it
+got into an endless loop. I finally had to make it do 100 loops
+instead of a thousand, and it still was much slower than the
+rest.</p>
+
+<p>So, how come it is so slow? First of all, the original PC
+wasn't trully a 16bit machine. It had a processor with a 16bit
+CPU internally but its data bus was only 8 bits wide, so it had
+to multiplex those 16 bits into two halves every time it read
+from or wrote to memory. At 4.87..something MHz it was not much
+faster than regular 4MHz Z80 CP/M machine. </p>
+
+<p>Then, it was how the programs were ported. Intel had published
+a guide on how to easily convert from 8080 code into 8086 code.
+Moreover, there was a utility that made that conversion on
+binaries. Most companies had to rush their products to the market
+so most of them followed those guidelines and some just used the
+conversion utility. The conversion utility was not meant to
+create fast code but safe code. Thus, it had a lot of redundant
+code, like setting or reseting flags that behaved differently in
+each processor, even though those flags were not tested
+afterwards. Most companies came with newer versions of the
+products shortly after, when they really ported their software,
+but at first, they were quick and dirty conversions, thus, most
+8086 programs at first were actually 8080 code running as if they
+were on emulation.</p>
+
+<h2>No design software then</h2>
+
+<p>Protectionism made the Argentinian market quite peculiar. With
+an 85% duty on imports and a lot of restrictions, it made sense
+to design some things locally. One bank wanted to have terminals
+to validate credit cards. Nowadays they are a common things, not
+so then, since there weren't enough phone lines either. So, this
+bank wanted the terminal to have some local, independent
+authorization capability. The standard terminal didn't fit the
+bill. We had been building for them a lock activated by credit
+card to allow their customers access to the lobby with the ATMs
+so they asked us whether we could build it and we said yes. We
+build it around a Z80, with 8 sockets for memory that could carry
+either 2, 4 or 8kB ROM&nbsp;chips or 2kB static RAM chips, that
+was the most dense static RAM available. RAM memory could have
+battery backup, which was a requirement of the bank. Static RAM
+was much easier than Dynamic and allowed us to have the battery
+backup as well and, since it fitted the same socket as the ROM
+(each socket had a couple of jumpers to compensate for a few
+differences) it made the desing much simpler.</p>
+
+<p>It required a numerical and functions keyboard for the
+operator, an auxiliary keyboard on a cord for the customer to
+enter the PIN, a display on the operator side and a little one
+(optional) on the customer side. It needed a printer for the
+voucher, a modem to communicate with the bank, a magnetic card
+reader and a DES&nbsp;encription/decription chip. We added an
+extra serial port (we used the Z80-SIO&nbsp;chip, so the second
+port was for free)&nbsp;and a parallel printer port for a regular
+external printer.</p>
+
+<p>I still have my drafts and several of the drafts of the later
+refinements and fixes. The prototype was done with a prototyping
+board using wire-wrapping sockets. The electric wire-wrapping
+tool was impossibly expensive and, at first, we didn't really
+think there were that many wraps to do. Had we known! Anyway, by
+the time we found out, there weren't that many wraps left, or so
+we thought (or hoped).</p>
+
+<p>The card reader became a problem. We already had plenty of
+experience with reading magnetic cards, but here we meant to do a
+mechanical reader so that you would drop the card on a slot and
+it would get read. Very fancy, but it didn't work. Our algorithm
+already read the card at any speed you swiped it by the reader,
+and was even able to compensate for changing speed and it read in
+both directions. The change of speed was not a big problem when
+you swiped it manually, since the momentum of the hand an arm
+holding the card didn't allow for really much of a change. We
+didn't have much space inside the terminal so we planned for a
+very light mechanism. It was, indeed, so light that it caught the
+vibrations of the whole mechanism itself, and it changed speed
+quite abruptly if it caught, say, a really greasy fingerprint or
+marmalade spot. The card has clock and data bits on it, and the
+clock bits let you find out the speed and decode it properly, but
+fast changes in speed gets you out of synch, and that's what
+happened with our mechanical reader. Consider that we had an
+order for just 100 of them on a contract for up to 1000 so we
+couldn't develop a lot of sofisticated mechanics, which is much
+more expensive than electronics, so we tried to do that reader
+with off the shelf hardware, but it proved impossible, so we
+ended up with manual card reader</p>
+
+<p>I remember when we had the final drawing on the drawing table,
+the repair shop supervisor, who was also our top mechanical guy
+(the card reader was not his fault, he was really good) he asked
+if we didn't mind if he checked the drawing with his pendulum. It
+took us a little by surprise but everyone in the company (and
+that meant about 20 people) was very much involved in the
+project, emotionally if nothing else, and this guy was a nice guy
+and older than my Dad, so I wasn't going to say no. Actually, if
+someone brought a witch, I wouldn't have cared as long as it cast
+a good spell on it. So, we went to the drawing and the guy takes
+a pendulum, a nice quartz hanging form a golden chain and starts
+swinging it over the drawing. He said that while it went
+sideways, everything was fine, but if turned in circles, there
+was 'bad energy' there. So, he slowly went by all the drawing,
+and, indeed, at some point the pendulum started moving in circles
+and it was right on the place we most feared. We knew that part
+of the circuit was a little bit of a kludge. There were about
+five of us, the supervisor, the draftsman, my colleague and
+myself and some others perhaps. We were impressed on the
+accurracy of his diagnostics, but I couldn;t resists being a
+little critical abaout it and noticed that we were all very
+tense. He was still holding the pendulum over the trouble spot,
+and out of the 5 guys around, three of us knew of that trouble
+spot. The draftsman himself, though he didn't understand
+electronics, he had to redraw that section so many times and knew
+how things were going, so he was also tense. So, the whole
+experiment wasn't worth much since you could feel the tension in
+the air when the pendulum got to that point. Anyway, the pendulum
+guy was happy, he felt he added something to the project, some of
+the guys were impressed, even after I tried to talk a little
+sense into them, and we didn't learn anything that we didn't
+already know.</p>
+
+<p>What nobody had planned for is that the president of the bank
+along with several high officials would steal money from the bank
+and almost make it bankrupt, 10 days before we were supposed to
+deliver the 100 machines. So we had 100 machines that nobody else
+would want in the shelf, a lot of debt to pay, and a possibly
+endless legal process much worst than a regular bankruptcy since
+we didn't have an actual debt from the bank to us since we hadn't
+delivered yet. Just 10 days afterward, then it would have been a
+regular debt, but then we had all our capital on those machines
+and no way to get it back. A very messy situation in a very
+critical moment. Since it was a large bank and it was in all the
+news, we were able to renegotiate with all our suppliers who were
+very undertanding though it took all the revenue, which wasn't
+much anyway, since we meant to make the money with the following
+orders. If designing it hadn't been so much fun, and if we had
+charged all the R&amp;D costs to the project, we would have lost
+money, lots of it.</p>
+
+<p>We programmed it in assembler, but it was clear that it
+wouldn't be easy for other developers, if there was any chance
+anyone else would use it. So, I added BASIC, not to the machine
+itself, because it wasn't meant as a developmnet platform.
+Actually, what I did was to add a CP/M emulator that would take
+the CP/M function calls and map them to the terminal's ones.
+Since it didn't have any disk, whenever you asked for a file, it
+said &quot;File Not Found&quot;. If you asked anything about the
+disk, it would give non-fatal errors. Of course, it responded
+nicely to requests for keyboard input, display and printer
+output, which was basically all it could actually do. To develop
+a program you had to use a standard BASIC compiler from Microsoft
+and link the resulting object with some startup routines I built
+and then burn EPROMs with that. I guess that it would have worked
+more or less the same with any other CP/M compiler, as long as it
+didn't require overlays, since there was no disk to pull them
+from and no virtual memory. That ruled out COBOL since RM-Cobol
+was interpreted and the interpreter had several overlays, or
+Micro-Focus since it also needed some runtime libraries. There
+was no decent C compiler for CP/M and Turbo-Pascal didn't
+generate binaries but p-code so, indeed, there wasn't much but
+BASIC.</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

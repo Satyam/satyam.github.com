@@ -1,0 +1,99 @@
+<html>
+
+<head>
+<title>Adding a digit</title>
+
+</head>
+
+<body>
+
+<h1 align="center">Adding a digit</h1>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="figure.htm">&lt; Previous</a></td>
+    <td width="33%" align="center"><a href="index.html">Up</a>
+      ^</td>
+    <td width="34%" align="right"><a href="restore.htm">Next
+      &gt;</a></td>
+  </tr>
+</table>
+<hr>
+<p>In the following animations, the different parts have been color-coded to make it
+simple to refer them.&nbsp; Only the parts relevant to each stage are shown. </p>
+
+<p>The whole process of calculating a new value is divided in two half cycles.&nbsp; As
+mentioned before, there are eight axles carrying each a full 31 digit number.&nbsp; They
+are divided in two groups, even and odd, which alternate in their movements.&nbsp; The
+figure wheels to the right are just two digits of an odd axle, the ones in the left are on
+an even axle. The animations show just one half cycle, in this case, the addition of the
+value on the odd axle to the value already on the even axle.&nbsp; What is shown in the
+animation, also happens simultaneously in four other axles, and will happen on the
+remaining four just half a cycle afterward.</p>
+
+<p>The animations are quite large so they have been rendered in 160*120 pixels, so they
+remain under 250kbytes.&nbsp; A larger, static image has been included to help appreciate
+the detail, though in file size is actually small.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td valign="top"><img src="../images/SumaFoto.gif" width="512" height="468" alt="SumaFoto.gif (48 kbytes)"></td>
+    <td valign="top">The bronze figure wheels on the right are on an odd axle.&nbsp; The wheel
+    below is the least significant digit.&nbsp; As shown they hold the number 35.&nbsp; The
+    wheels in the background, at left, are on an even axle and they are showing a 48. &nbsp;
+    The half gears in magenta are called sector wheels.&nbsp; Both kinds of wheels have
+    restore arms, the ones for the figure wheels are shown in light blue, the ones for the
+    sector wheels in yellow. The restore arm for the bottom figure wheel is barely visible
+    through the gap in between the figure wheels. The even figure wheels, in the background,
+    to the left, also have restore arms, but they are not shown since they are idle in this
+    half cycle. Likewise, there are sector wheels linking the even figure wheels in the back
+    to the odd figure wheels further away.<p>The image shows the sector wheels already in the
+    down position, engaged with the figure wheels on the odd and even axles. </td>
+  </tr>
+</table>
+
+<p><img src="../images/Suma.gif" alt="Suma.gif (301290 bytes)" WIDTH="160" HEIGHT="120"></p>
+
+<p>The animation above shows the process of adding a digit.&nbsp; Though the image loops
+forever, it is easy to notice the start of the cycle because there is a sudden jump in the
+animation.</p>
+
+<p>The process starts with the half gears in magenta, the sector wheels, moving down and
+engaging the figure wheels. The figure wheel restore arms&nbsp; also goes down along the
+sector wheels.&nbsp; Once they both get to their lower position, the restore arms start to
+turn.&nbsp; </p>
+
+<p>At some point, the restore arms will hit two of the inner teeth of the figure wheel,
+and will carry it along.&nbsp; Notice in the animation that since the two figure wheels
+are at different positions, that is, representing different numbers, they start moving at
+different points in time.</p>
+
+<p>The restore arm always moves the figure wheels back to zero.&nbsp; In doing so,
+whatever value they carried is transferred via the sector wheels to the receiving figure
+wheels, shown at the back.&nbsp; The restore arms come down at the position that the wheel
+would occupy should it be holding a 9.&nbsp; If the figure wheel had a nine, the restore
+arm would engage it right away and carry it over 9 units, transferring those to the sector
+wheel and the next figure wheel.&nbsp; The lower the number, the longer it takes for the
+restore arm to engage the inner tooth of the figure wheel, so there is less left to
+transfer to the sector wheel.</p>
+
+<p>At the end of this process, the figure wheels in the background hold the addition, as
+we expected while the figure wheels in the foreground hold zero.&nbsp; This is not good,
+since we still need these wheels to hold their previous value so it can be used in the
+next cycle.&nbsp; That is where the sector wheel restore arm comes into play.&nbsp; After
+all, the sector wheels also got a copy of whatever value was held by the foreground figure
+wheels.</p>
+
+<hr>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="figure.htm">&lt; Previous</a></td>
+    <td width="33%" align="center"><a href="index.html">Up</a>
+      ^</td>
+    <td width="34%" align="right"><a href="restore.htm">Next
+      &gt;</a></td>
+  </tr>
+</table>
+</body>
+</html>
