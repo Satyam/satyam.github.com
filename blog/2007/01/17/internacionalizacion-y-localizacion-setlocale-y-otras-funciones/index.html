@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      Comentarios » Internacionalización y localización: función setlocale() y
+      afines
+    </title>
+
+    <link
+      type="text/css"
+      media="screen"
+      rel="stylesheet"
+      href="http://www.satyam.com.ar/blog/wp-content/themes/connections/style.css "
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS 2.0"
+      href="http://www.satyam.com.ar/blog/feed/"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="http://www.satyam.com.ar/blog/feed/atom/"
+    />
+
+    <style type="text/css">
+      img.wp-smiley,
+      img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 0.07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      id="wp-block-library-css"
+      href="http://www.satyam.com.ar/blog/wp-includes/css/dist/block-library/style.min.css?ver=5.1"
+      type="text/css"
+      media="all"
+    />
+
+    <link
+      rel="wlwmanifest"
+      type="application/wlwmanifest+xml"
+      href="http://www.satyam.com.ar/blog/wp-includes/wlwmanifest.xml"
+    />
+    <link
+      rel="prev"
+      title="Internacionalización y localización: índice"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+    />
+    <link
+      rel="next"
+      title="Internacionalización y localización: bases de datos"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-bases-de-datos/"
+    />
+
+    <link
+      rel="canonical"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-setlocale-y-otras-funciones/"
+    />
+  </head>
+  <body>
+    <div id="rap">
+      <div id="header">
+        <ul id="topnav">
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog"
+              id="navHome"
+              title="Posted Recently"
+              accesskey="h"
+              >Home |</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog/gallery"
+              id="navGallery"
+              title="Photo Gallery"
+              accesskey="g"
+              >Fotos |</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog#Buscar"
+              title="Buscar"
+              accesskey="b"
+              >Buscar</a
+            >
+          </li>
+          <!--li><a href="#" id="navContact" title="Contact the Author" accesskey="c">Contact </a></li-->
+        </ul>
+        <h1>
+          <a href="http://www.satyam.com.ar/blog" title="Comentarios"
+            >Comentarios</a
+          >
+        </h1>
+        <div id="desc">Comentarios, viajes e historias</div>
+      </div>
+      <div id="main">
+        <div id="content">
+          <div class="post">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="post-date">mié 17 Ene 2007</p>
+                  </td>
+                  <td>
+                    <div class="post-info">
+                      <h2 class="post-title">
+                        <a
+                          href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-setlocale-y-otras-funciones/"
+                          rel="bookmark"
+                          title="Permanent Link: Internacionalización y localización: función setlocale() y afines"
+                          >Internacionalización y localización: función
+                          setlocale() y afines</a
+                        >
+                      </h2>
+                      Posted by Satyam under
+                      <a
+                        href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                        rel="category tag"
+                        >Programación</a
+                      >
+                      <br />
+                      <span
+                        >Comentarios desactivados<span
+                          class="screen-reader-text"
+                        >
+                          en Internacionalización y localización: función
+                          setlocale() y afines</span
+                        ></span
+                      > 
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="post-content">
+              <p>
+                Una razón para llamar a este proceso localización y no
+                simplemente traducción es que hay muchas otras cosas que
+                dependen del idioma, por ejemplo, el formato de las fechas o el
+                signo monetario.<span id="more-69"></span>
+              </p>
+              <p>
+                PHP dispone de un buen surtido de funciones para manejar esto.
+                Todo comienza por la función
+                <a
+                  title="Manual de PHP: función setlocale()"
+                  href="http://www.php.net/manual/es/function.setlocale.php"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><code>setlocale()</code></a
+                >
+                que permite indicar el código de idioma/país que se desea usar.
+                Es importante notar que esta función no genera ningún error.
+                Usualmente devolverá el mismo código que se le ha indicado como
+                segundo argumento, pero si no lo encuentra, no devolverá nada, o
+                devolverá el más aproximado que encuentre.
+              </p>
+              <p>
+                Una vez establecido el <em>‘locale’</em>, hay una serie de
+                funciones que permiten manipular textos, cifras, importes
+                monetarios y fechas para distintos países e idiomas. El
+                <a
+                  title="Aplicaciones de la función setlocale()"
+                  href="http://www.satyam.com.ar/int/setlocale/index.php"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >ejemplo</a
+                >
+                muestra en una tabla el resultado de esas funciones para una
+                serie de códigos de localización y ofrece también la posibilidad
+                de ingresar un código adicional, que mostrará en la primera fila
+                si estuviera disponible.
+              </p>
+              <p>
+                Al pié de la tabla se muestra el código fuente que la genera.
+              </p>
+              <p>Las funciones usadas en el ejemplo son las siguientes:</p>
+              <ul>
+                <li>
+                  <a
+                    title="Manual de PHP: función setlocale()"
+                    href="http://www.php.net/manual/es/function.setlocale.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>setlocale()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función localeconv()"
+                    href="http://www.php.net/manual/es/function.localeconv.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>localeconv()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función strcoll()"
+                    href="http://www.php.net/manual/es/function.strcoll.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>strcoll()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función strtoupper()"
+                    href="http://www.php.net/manual/es/function.strtoupper.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>strtoupper()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función money_format()"
+                    href="http://www.php.net/manual/es/function.money-format.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>money_format()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función number_format()"
+                    href="http://www.php.net/manual/es/function.number-format.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>number_format()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función strftime()"
+                    href="http://www.php.net/manual/es/function.strftime.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>strftime()</code></a
+                  >
+                </li>
+                <li>
+                  <a
+                    title="Manual de PHP: función nl_langinfo()"
+                    href="http://www.php.net/manual/es/function.nl-langinfo.php"
+                    target="phpmanual"
+                    rel="noopener noreferrer"
+                    ><code>nl_langinfo()</code></a
+                  >
+                </li>
+              </ul>
+              <p>
+                La información de los nombres de los días de la semana y los
+                nombres de los meses que se obtuvieron mediante
+                <a
+                  title="Manual de PHP: función nl_langinfo()"
+                  href="http://www.php.net/manual/es/function.nl_langinfo.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>nl_langinfo()</code></a
+                >
+                también están disponibles mediante
+                <a
+                  title="Manual de PHP: función strftime()"
+                  href="http://www.php.net/manual/es/function.strftime.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>strftime()</code></a
+                >
+                indicando el formato que corresponda, pero mientras
+                <a
+                  title="Manual de PHP: función strftime()"
+                  href="http://www.php.net/manual/es/function.strftime.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>strftime()</code></a
+                >requiere una fecha válida, con
+                <a
+                  title="Manual de PHP: función nl_langinfo()"
+                  href="http://www.php.net/manual/es/function.nl_langinfo.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>nl_langinfo()</code></a
+                >
+                basta indicar (indirectamente, como se puede ver en el código)
+                el número de 1 a 7 para los días de la semana o del 1 al 12 para
+                los meses.
+              </p>
+              <p>
+                Las fechas, en la mayoría de los idiomas, se muestran en formato
+                <code>dd/mm/aaaa</code>, excepto para
+                <code>en_US</code> (<code>mm/dd/aaaa</code>) y japonés que,
+                aunque no se puede ver los símbolos que usa para indicar las
+                partes de la fecha (no son separadores simples, pues son
+                distintos entre cada parte de la fecha y hora) se ve que la
+                fecha está en formato <code>aaaa/mm/dd</code> y, al parecer, no
+                tienen nombres para los meses sino que simplemente dicen ‘Mes
+                1’, ‘Mes 2’, etc.
+              </p>
+              <p>
+                Es interesante que las tablas incluso contemplan costumbres
+                locales, como el caso del portugués (<code>pt</code>) de
+                Portugal y Brasil donde los nombres de los días de la semana y
+                los meses aún siendo los mismos, en un caso estilan escribirlos
+                con mayúsculas y en el otro no.
+              </p>
+              <p>
+                Según el idioma,
+                <a
+                  title="Manual de PHP: función strcoll()"
+                  href="http://www.php.net/manual/es/function.strcoll.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>strcoll()</code></a
+                >
+                puede o no saber qué hacer con la ‘ñ’, en la casilla se muestra
+                el resultado de comparar la ‘ñ’ con la ‘n’ que le antecede y la
+                ‘o’ que le sucede y el resultado no siempre es el correcto si la
+                ‘ñ’ no existe en ese idioma. Otro tanto ocurre con la muestra de
+                <a
+                  title="Manual de PHP: función strtoupper()"
+                  href="http://www.php.net/manual/es/function.strtoupper.php"
+                  target="phpmanual"
+                  rel="noopener noreferrer"
+                  ><code>strtoupper()</code></a
+                >, donde para algunos idiomas no encuentra la mayúscula pedida.
+              </p>
+              <p>
+                En idiomas como griego o japonés, que usan otros alfabetos, el
+                resultado para los textos no se puede mostrar directamente. Esto
+                requiere usar otras codificaciones para la página y que el
+                navegador los soporte. Eso no lo cubriré pues lo desconozco.
+              </p>
+              <p>
+                Viene de:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: recomendaciones"
+                  href="http://www.satyam.com.ar/blog/2007/01/04/internacionalizacion-y-localizacion-recomendaciones/"
+                  rel="bookmark"
+                  >Internacionalización y localización: recomendaciones</a
+                >
+              </p>
+              <p>
+                Continúa en:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: usando constantes"
+                  href="http://www.satyam.com.ar/blog/2007/01/12/internacionalizacion-y-localizacion-usando-constantes/"
+                  rel="bookmark"
+                  >Internacionalización y localización: usando constantes</a
+                >
+              </p>
+              <p>
+                Indice:
+                <a
+                  title="Enlace permanente: Internacionalización y Localización: índice"
+                  href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+                  rel="bookmark"
+                  >Internacionalización y Localización: índice</a
+                >
+              </p>
+              <p><!--862879d9809d2987ff60d7837ca7e01b--></p>
+              <div class="post-info"></div>
+              <div class="post-footer"> </div>
+            </div>
+            <!-- You can start editing here. -->
+
+            <!-- If comments are closed. -->
+            <p class="nocomments">Comments are closed.</p>
+          </div>
+          <p align="center"></p>
+        </div>
+        <div id="sidebar">
+          <h2>Archived Entry</h2>
+          <ul>
+            <li><strong>Post Date :</strong></li>
+            <li>miércoles, Ene 17th, 2007 at 18:43</li>
+            <li><strong>Categoría :</strong></li>
+            <li>
+              <a
+                href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                rel="category tag"
+                >Programación</a
+              >
+            </li>
+            <li><strong>Do More :</strong></li>
+            <li>Both comments and pings are currently closed.</li>
+          </ul>
+        </div>
+
+        <p id="footer">
+          Design Downloaded from
+          <a href="http://www.vanillamist.com" title="Vanilla Mist"
+            >www.vanillamist.com</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

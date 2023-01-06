@@ -1,0 +1,22 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es" xmlns:thr="http://purl.org/syndication/thread/1.0"><title type="text">
+	Comentarios en XML, ahora JSON, ¿por qué no LISP?	</title><subtitle type="text">Comentarios, viajes e historias</subtitle><updated>
+	2019-01-27T14:29:30Z	</updated><link rel="alternate" type="text/html" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comments"/><link rel="self" type="application/atom+xml" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/feed/atom/"/><id>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/feed/atom/</id><generator uri="https://wordpress.org/" version="5.1">WordPress</generator><entry><title>
+		Por: I done jsol			</title><link rel="alternate" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225509" type="text/html"/><author><name>I done jsol</name><uri>http://movil-eye.com/gomaax/JSON-JSOL.html</uri></author><id>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225509</id><updated>2008-04-22T12:35:32Z</updated><published>2008-04-22T12:35:32Z</published><content type="html" xml:base="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225509"><![CDATA[<p>encode decode object en string o array<br />
+namespace formato<br />
+por el momento solo siete niveles<br />
+a={b:{s:{v:{r:{y:{is:a}}}}}<br />
+ej:a.b.s.v.r.y.is=&#8217;a&#8217;;//retrive</p>
+<p> estoy expirementado con un iterador de objetos</p>
+<p>Mi idea es poder usar sentencias sql<br />
+en la busqueda  interna del objeto</p>
+<p>ya que este retorna en strings<br />
+a.f.t=1;a.ghj.u=function(){};a.s=1</p>
+<p>y estos forman un array</p>
+<p>si alguien tiene sugerncias agradecere.</p>
+]]></content><thr:in-reply-to ref="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" type="text/html"/></entry><entry><title>
+		Por: alan			</title><link rel="alternate" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225508" type="text/html"/><author><name>alan</name></author><id>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225508</id><updated>2008-03-18T16:44:19Z</updated><published>2008-03-18T16:44:19Z</published><content type="html" xml:base="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225508"><![CDATA[<p>Te doy la razon es un LIPS del nuevo milenio, actualmente estoy usando JSON para un Sistema en Php, recien lo empece a utilizar y sinquerer me he dado cuenta ke el orden lo hace amigable entendible&#8230;yo lleve IA hace 1 año, y es tan parecido..unas explicaciones y el orden te deja entenderlo rapidamente.</p>
+]]></content><thr:in-reply-to ref="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" type="text/html"/></entry><entry><title>
+		Por: Edder			</title><link rel="alternate" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225507" type="text/html"/><author><name>Edder</name></author><id>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225507</id><updated>2007-03-07T22:46:48Z</updated><published>2007-03-07T22:46:48Z</published><content type="html" xml:base="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225507"><![CDATA[<p>Hola Satyam. Es un enfoque interesante el que has dado de Lisp y de verdad pense que su única aplicación era para inteligencia artificial como competencia del prolog.<br />
+Gracias por ese post, esta muy buena tu página.<br />
+Saludos.</p>
+]]></content><thr:in-reply-to ref="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/" type="text/html"/></entry></feed>

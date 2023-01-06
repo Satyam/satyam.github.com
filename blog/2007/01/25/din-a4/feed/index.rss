@@ -1,0 +1,71 @@
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"><channel><title>
+	Comentarios en: DIN A4	</title><atom:link href="http://www.satyam.com.ar/blog/2007/01/25/din-a4/feed/" rel="self" type="application/rss+xml"/><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/</link><description>Comentarios, viajes e historias</description><lastBuildDate>
+	Sun, 27 Jan 2019 14:29:30 +0000	</lastBuildDate><sy:updatePeriod>
+	hourly	</sy:updatePeriod><sy:updateFrequency>
+	1	</sy:updateFrequency><generator>https://wordpress.org/?v=5.1</generator><item><title>
+				Por: MOISES				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225506</link><dc:creator>MOISES</dc:creator><pubDate>Wed, 03 Feb 2016 04:55:29 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225506</guid><description>esta regla matematica funciona para todos los formatos, osea A2, A3, a1, ETC</description><content:encoded><![CDATA[<p>esta regla matematica funciona para todos los formatos, osea A2, A3, a1, ETC</p>
+]]></content:encoded></item><item><title>
+				Por: alfonso				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225505</link><dc:creator>alfonso</dc:creator><pubDate>Wed, 03 Feb 2016 04:54:11 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225505</guid><description>esta regla matematica funciona para todos los formatos, osea A2, A3, a1, ETC</description><content:encoded><![CDATA[<p>esta regla matematica funciona para todos los formatos, osea A2, A3, a1, ETC</p>
+]]></content:encoded></item><item><title>
+				Por: alfonso				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225504</link><dc:creator>alfonso</dc:creator><pubDate>Wed, 03 Feb 2016 04:52:52 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225504</guid><description>la medida de 297 mm. se obtiene al medir la diagonal de un cuadrado de 210 mm. o tambien dicho de otra forma la diagonal del cuadrado es D=lxraiz de 2= 21 x 1.4142 = 29.7 cms.</description><content:encoded><![CDATA[<p>la medida de 297 mm. se obtiene al medir la diagonal de un cuadrado de 210 mm. o tambien dicho de otra forma la diagonal del cuadrado es D=lxraiz de 2= 21 x 1.4142 = 29.7 cms.</p>
+]]></content:encoded></item><item><title>
+				Por: efrain				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225503</link><dc:creator>efrain</dc:creator><pubDate>Mon, 26 Aug 2013 05:22:22 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225503</guid><description><![CDATA[se ha establecido un formato base, denominado formato A0, a partir del cual se obtienen las dimensiones de los restantes formatos. éste formato base, es una hoja rectangular, cuya área es 1m cuadrado. Dibujo un rectángulo cuya altura la llamo &quot;x&quot;, y en la base ubico la misma &quot;x&quot;. Calculo su diagonal &quot;d&quot;. Obtengo que d=x.SQR2. Ahora la base del rectángulo de mi problema, la llamo &quot;y&quot; que será igual a X por raíz de 2. Se me presenta entonces el problema elemental de calcular &quot;X&quot;, así:
+
+X*y = 1m2
+
+X*(X*sqr2)= 1. despejando X, obtengo que mi X = 1/raíz cuarta de 2.   x = 841  mm
+luego &quot;y&quot; = X*sqr2        Y = 1189 mm
+
+Estas son mis medidas de la primera forma ó formato A0, cuya área será 841*1189 = 1m2
+
+Para obtener la siguiente, divido la mayor dimensión anterior en dos mitades,1189/2 = 594. Este resultado lo multiplico por sqr2, para obtener 841.Entonces mi segunda forma, ó segundo formato será: A1 594 * 841.
+
+Continúo con esta secuencia para determinar las formas ó formatos siguientes:
+
+AO   841 * 1189 mm   Area 1m2
+A1   594 *  841 mm   Area 0.5 m2
+A2   420 *  594 mm   Area 0.24948 m2
+A3   297 *  420 mm   Area 0.12474 m2
+A4   210 *  297 mm   Area 0.06237 m2.
+
+NOTA: según la definición, se llamó &quot;X&quot; a la altura, y &quot;Y&quot; la base. Por tanto, las dimensiones de los formatos deben tener primero su altura y luego la base.]]></description><content:encoded><![CDATA[<p>se ha establecido un formato base, denominado formato A0, a partir del cual se obtienen las dimensiones de los restantes formatos. éste formato base, es una hoja rectangular, cuya área es 1m cuadrado. Dibujo un rectángulo cuya altura la llamo &#8220;x&#8221;, y en la base ubico la misma &#8220;x&#8221;. Calculo su diagonal &#8220;d&#8221;. Obtengo que d=x.SQR2. Ahora la base del rectángulo de mi problema, la llamo &#8220;y&#8221; que será igual a X por raíz de 2. Se me presenta entonces el problema elemental de calcular &#8220;X&#8221;, así:</p>
+<p>X*y = 1m2</p>
+<p>X*(X*sqr2)= 1. despejando X, obtengo que mi X = 1/raíz cuarta de 2.   x = 841  mm<br />
+luego &#8220;y&#8221; = X*sqr2        Y = 1189 mm</p>
+<p>Estas son mis medidas de la primera forma ó formato A0, cuya área será 841*1189 = 1m2</p>
+<p>Para obtener la siguiente, divido la mayor dimensión anterior en dos mitades,1189/2 = 594. Este resultado lo multiplico por sqr2, para obtener 841.Entonces mi segunda forma, ó segundo formato será: A1 594 * 841.</p>
+<p>Continúo con esta secuencia para determinar las formas ó formatos siguientes:</p>
+<p>AO   841 * 1189 mm   Area 1m2<br />
+A1   594 *  841 mm   Area 0.5 m2<br />
+A2   420 *  594 mm   Area 0.24948 m2<br />
+A3   297 *  420 mm   Area 0.12474 m2<br />
+A4   210 *  297 mm   Area 0.06237 m2.</p>
+<p>NOTA: según la definición, se llamó &#8220;X&#8221; a la altura, y &#8220;Y&#8221; la base. Por tanto, las dimensiones de los formatos deben tener primero su altura y luego la base.</p>
+]]></content:encoded></item><item><title>
+				Por: Satyam				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225502</link><dc:creator>Satyam</dc:creator><pubDate>Thu, 17 May 2012 19:13:19 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225502</guid><description>Eso parece un tamaño carta americano, 8.5 por 11 pulgadas.  No es exacto pero está bastante cerca.</description><content:encoded><![CDATA[<p>Eso parece un tamaño carta americano, 8.5 por 11 pulgadas.  No es exacto pero está bastante cerca.</p>
+]]></content:encoded></item><item><title>
+				Por: Ertuque				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225501</link><dc:creator>Ertuque</dc:creator><pubDate>Thu, 17 May 2012 18:34:10 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225501</guid><description><![CDATA[Gracias.
+
+Yo conservo algunos folios, con o sin comillas, de hace años, de distintas medidas. Hay unos de una medida que no encuentro en la Web. Lo pongo aquí para que conste:
+
+Estas hojas de papel miden:
+
+215 mm de ancho y 287,5 mm de alto.
+
+¿Cómo se llamarán estos &quot;folios&quot;? ¿Dónde los fabricarían y serían habituales? Si alguien sabe algo de su historia, que se explaye, por favor.
+
+Gracias]]></description><content:encoded><![CDATA[<p>Gracias.</p>
+<p>Yo conservo algunos folios, con o sin comillas, de hace años, de distintas medidas. Hay unos de una medida que no encuentro en la Web. Lo pongo aquí para que conste:</p>
+<p>Estas hojas de papel miden:</p>
+<p>215 mm de ancho y 287,5 mm de alto.</p>
+<p>¿Cómo se llamarán estos &#8220;folios&#8221;? ¿Dónde los fabricarían y serían habituales? Si alguien sabe algo de su historia, que se explaye, por favor.</p>
+<p>Gracias</p>
+]]></content:encoded></item><item><title>
+				Por: bartolo				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225500</link><dc:creator>bartolo</dc:creator><pubDate>Wed, 25 May 2011 01:27:09 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225500</guid><description>deberian ser mas esplicitos con la informacion que uno el estudiante vusca</description><content:encoded><![CDATA[<p>deberian ser mas esplicitos con la informacion que uno el estudiante vusca</p>
+]]></content:encoded></item><item><title>
+				Por: Satyam				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225499</link><dc:creator>Satyam</dc:creator><pubDate>Sun, 01 Aug 2010 08:08:34 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225499</guid><description><![CDATA[&lt;a href=&quot;http://en.wikipedia.org/wiki/A4_paper_size#History&quot; rel=&quot;nofollow&quot;&gt;Wikipedia &lt;/a&gt;lo cuenta en su version en inglés]]></description><content:encoded><![CDATA[<p><a href="http://en.wikipedia.org/wiki/A4_paper_size#History" rel="nofollow">Wikipedia </a>lo cuenta en su version en inglés</p>
+]]></content:encoded></item><item><title>
+				Por: cristian delvalle				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225498</link><dc:creator>cristian delvalle</dc:creator><pubDate>Sun, 01 Aug 2010 00:40:21 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225498</guid><description>quien las invento nombre y año??? esa es mi pregunta</description><content:encoded><![CDATA[<p>quien las invento nombre y año??? esa es mi pregunta</p>
+]]></content:encoded></item><item><title>
+				Por: pepita perez				</title><link>http://www.satyam.com.ar/blog/2007/01/25/din-a4/comment-page-1/#comment-225497</link><dc:creator>pepita perez</dc:creator><pubDate>Thu, 25 Mar 2010 19:43:08 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/25/din-a4/#comment-225497</guid><description>que malo</description><content:encoded><![CDATA[<p>que malo</p>
+]]></content:encoded></item></channel></rss>

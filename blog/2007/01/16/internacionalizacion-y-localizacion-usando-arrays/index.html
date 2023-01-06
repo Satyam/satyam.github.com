@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      Comentarios » Internacionalización y localización: usando arrays
+    </title>
+    <meta name="generator" content="WordPress 5.1.1" />
+    <link
+      type="text/css"
+      media="screen"
+      rel="stylesheet"
+      href="http://www.satyam.com.ar/blog/wp-content/themes/connections/style.css "
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS 2.0"
+      href="http://www.satyam.com.ar/blog/feed/"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="http://www.satyam.com.ar/blog/feed/atom/"
+    />
+
+    <style type="text/css">
+      img.wp-smiley,
+      img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 0.07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      id="wp-block-library-css"
+      href="http://www.satyam.com.ar/blog/wp-includes/css/dist/block-library/style.min.css?ver=845e834b3fc80791b38e8f084768285d"
+      type="text/css"
+      media="all"
+    />
+
+    <link
+      rel="wlwmanifest"
+      type="application/wlwmanifest+xml"
+      href="http://www.satyam.com.ar/blog/wp-includes/wlwmanifest.xml"
+    />
+    <link
+      rel="prev"
+      title="Internacionalización y Localización: usando variables"
+      href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-variables/"
+    />
+    <link
+      rel="next"
+      title="Internacionalización y localización: usando gettext()"
+      href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/"
+    />
+
+    <link
+      rel="canonical"
+      href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-arrays/"
+    />
+  </head>
+  <body>
+    <div id="rap">
+      <div id="header">
+        <ul id="topnav">
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog"
+              id="navHome"
+              title="Posted Recently"
+              accesskey="h"
+              >Home |</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog/gallery"
+              id="navGallery"
+              title="Photo Gallery"
+              accesskey="g"
+              >Fotos |</a
+            >
+          </li>
+          <li><a href="#Buscar" title="Buscar" accesskey="b">Buscar</a></li>
+          <!--li><a href="#" id="navContact" title="Contact the Author" accesskey="c">Contact </a></li-->
+        </ul>
+        <h1>
+          <a href="http://www.satyam.com.ar/blog" title="Comentarios"
+            >Comentarios</a
+          >
+        </h1>
+        <div id="desc">Comentarios, viajes e historias</div>
+      </div>
+      <div id="main">
+        <div id="content">
+          <div class="post">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="post-date">mar 16 Ene 2007</p>
+                  </td>
+                  <td>
+                    <div class="post-info">
+                      <h2 class="post-title">
+                        <a
+                          href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-arrays/"
+                          rel="bookmark"
+                          title="Permanent Link: Internacionalización y localización: usando arrays"
+                          >Internacionalización y localización: usando arrays</a
+                        >
+                      </h2>
+                      Posted by Satyam under
+                      <a
+                        href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                        rel="category tag"
+                        >Programación</a
+                      >
+                      <br />
+                      <span
+                        >Comentarios desactivados<span
+                          class="screen-reader-text"
+                        >
+                          en Internacionalización y localización: usando
+                          arrays</span
+                        ></span
+                      > 
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="post-content">
+              <p>
+                <a
+                  title="Usando arrays"
+                  href="http://www.satyam.com.ar/int/array/index.php?language=es"
+                  target="ejemplo"
+                  >Usar arrays</a
+                >
+                es apenas un poco mejor que usar
+                <a
+                  title="usando variables"
+                  href="http://www.satyam.com.ar/int/variables/index.php?language=es"
+                  target="ejemplo"
+                  >variables</a
+                >. Al menos no se ocupa mucho de la tabla de símbolos del
+                intérprete y difícilmente se pueda crear un conflicto de
+                nombres. Se puede incluir una instrucción
+                <code>global</code> con el nombre del único array de
+                traducciones en cada función que vaya a emitir una cadena
+                localizada, en lugar de tener que mencionar cada posible
+                variable de traducción individualmente. Es más lento que usar
+                las variables directamente y su expansión dentro de cadenas
+                encerradas en comillas dobles o cadenas ‘heredoc’ va a requerir
+                encerrar la expresión entre llaves para evitar la ambig�edad de
+                que el intérprete no pueda determinar dónde termina la
+                expresión:
+              </p>
+              <p>
+                <code
+                  ><span style="color: #007700">echo </span
+                  ><span style="color: #dd0000"
+                    >"debe usarse así:
+                    <span style="color: #0000bb">${textos['aceptar']}</span>, y
+                    no:
+                    <span style="color: #0000bb">$textos['aceptar']</span
+                    >"</span
+                  ><span style="color: #007700">;<br /> </span
+                ></code>
+              </p>
+              <p><span id="more-65"></span></p>
+              <p>
+                Una ventaja que tiene el usar arrays es organizar los strings en
+                distintos niveles de anidamiento, como se puede ver en el
+                ejemplo, donde se ha armado una lista desplegable a partir de un
+                array de traducciones que es a su vez un único elemento dentro
+                del array <code>$textos</code>. Es esta posibilidad de
+                organización lo que lo hace más atractivo. Nótese incluso el uso
+                de la función
+                <a
+                  title="Manual de PHP: función asort()"
+                  href="http://es2.php.net/manual/es/function.asort.php"
+                  target="_blank"
+                  ><code>asort()</code></a
+                >
+                para asegurarse que la lista desplegable esté siempre ordenada
+                alfabéticamente, según el texto traducido y no según el orden
+                original de la lista. Esto es imprescindible en listas largas,
+                pues es muy molesto, por ejemplo, en una lista de paises,
+                encontrar, por ejemplo: Somalía, Africa del Sur, España, Sudán
+                que se corresponde al orden alfabético en inglés: Somalia, South
+                Africa, Spain, Sudan, etc..
+              </p>
+              <p>
+                Un array, sin embargo, es la mejor manera de almacenar los
+                textos y, como se puede ver en los archivos de traducción, el
+                formato es fácil de interpretar por parte de un traductor,
+                incluso los arrays anidados le proveen un poco de contexto al
+                traductor para saber que todos los textos en ese grupo están
+                relacionados.
+              </p>
+              <p>
+                Usar una función para acceder a las traducciones puede salvar
+                dos de los defectos de usar arrays. Una función tiene
+                visibilidad global por lo que puede llamarse desde cualquier
+                lugar, dentro o fuera de una función, sin tener que usar la
+                instrucción <code>global</code>. Por otra parte, una función
+                puede salvar el problema de que no se muestre nada si falta una
+                traducción.
+              </p>
+              <p>Un ejemplo de tal función se muestra a continuación:</p>
+              <pre><span style="color: #007700">function </span><span style="color: #0000bb">traducir</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">) {
+         global </span><span style="color: #0000bb">$textos</span><span style="color: #007700">;
+
+         if (</span><span style="color: #0000bb">array_key_exists</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">,</span><span style="color: #0000bb">$textos</span><span style="color: #007700">)) return </span><span style="color: #0000bb">$textos</span><span style="color: #007700">[</span><span style="color: #0000bb">$texto</span><span style="color: #007700">];
+         else  return </span><span style="color: #0000bb">$texto</span><span style="color: #007700">;
+} </span></pre>
+              <p>
+                Si el texto cuya clave se indica no existe, al menos se muestra
+                la clave en sí.
+              </p>
+              <p>
+                Viene de:
+                <a
+                  title="Enlace permanente: Internacionalización y Localización: variables"
+                  href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-variables/"
+                  rel="bookmark"
+                  >Internacionalización y Localización: usando variables</a
+                >
+              </p>
+              <p>
+                Continúa en:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: usando gettext()"
+                  href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/"
+                  rel="bookmark"
+                  >Internacionalización y localización: usando gettext()</a
+                >
+              </p>
+              <p>
+                Indice:
+                <a
+                  title="Enlace permanente: Internacionalización y Localización: índice"
+                  href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+                  rel="bookmark"
+                  >Internacionalización y Localización: índice</a
+                >
+              </p>
+              <p><!--711761f1e3abdf7e972e7a912e92ceac--></p>
+              <p><!--b0203816ceedc5e42aa6cd849206c7c3--></p>
+              <p><!--00f6336c37d1771ec6e41a988257f00a--></p>
+              <div class="post-info"></div>
+              <div class="post-footer"> </div>
+            </div>
+            <!-- You can start editing here. -->
+
+            <!-- If comments are closed. -->
+            <p class="nocomments">Comments are closed.</p>
+          </div>
+          <p align="center"></p>
+        </div>
+        <div id="sidebar">
+          <h2>Archived Entry</h2>
+          <ul>
+            <li><strong>Post Date :</strong></li>
+            <li>martes, Ene 16th, 2007 at 17:41</li>
+            <li><strong>Categoría :</strong></li>
+            <li>
+              <a
+                href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                rel="category tag"
+                >Programación</a
+              >
+            </li>
+            <li><strong>Do More :</strong></li>
+            <li>Both comments and pings are currently closed.</li>
+          </ul>
+        </div>
+
+        <p id="footer">
+          Design Downloaded from
+          <a href="http://www.vanillamist.com" title="Vanilla Mist"
+            >www.vanillamist.com</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      Comentarios » Internacionalización y localización: bases de datos
+    </title>
+
+    <link
+      type="text/css"
+      media="screen"
+      rel="stylesheet"
+      href="http://www.satyam.com.ar/blog/wp-content/themes/connections/style.css "
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS 2.0"
+      href="http://www.satyam.com.ar/blog/feed/"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="http://www.satyam.com.ar/blog/feed/atom/"
+    />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Comentarios » Internacionalización y localización: bases de datos RSS de los comentarios"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-bases-de-datos/feed/"
+    />
+
+    <style type="text/css">
+      img.wp-smiley,
+      img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 0.07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      id="wp-block-library-css"
+      href="http://www.satyam.com.ar/blog/wp-includes/css/dist/block-library/style.min.css?ver=5.1"
+      type="text/css"
+      media="all"
+    />
+
+    <link
+      rel="wlwmanifest"
+      type="application/wlwmanifest+xml"
+      href="http://www.satyam.com.ar/blog/wp-includes/wlwmanifest.xml"
+    />
+    <link
+      rel="prev"
+      title="Internacionalización y localización: función setlocale() y afines"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-setlocale-y-otras-funciones/"
+    />
+    <link
+      rel="next"
+      title="Cómo evitar duplicar registros al hacer Refrescar (F5) en el navegador"
+      href="http://www.satyam.com.ar/blog/2007/01/18/como-evitar-duplicar-registros-al-hacer-refrescar-f5-en-el-navegador/"
+    />
+
+    <link
+      rel="canonical"
+      href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-bases-de-datos/"
+    />
+  </head>
+  <body>
+    <div id="rap">
+      <div id="header">
+        <ul id="topnav">
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog"
+              id="navHome"
+              title="Posted Recently"
+              accesskey="h"
+              >Home |</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog/gallery"
+              id="navGallery"
+              title="Photo Gallery"
+              accesskey="g"
+              >Fotos |</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog#Buscar"
+              title="Buscar"
+              accesskey="b"
+              >Buscar</a
+            >
+          </li>
+          <!--li><a href="#" id="navContact" title="Contact the Author" accesskey="c">Contact </a></li-->
+        </ul>
+        <h1>
+          <a href="http://www.satyam.com.ar/blog" title="Comentarios"
+            >Comentarios</a
+          >
+        </h1>
+        <div id="desc">Comentarios, viajes e historias</div>
+      </div>
+      <div id="main">
+        <div id="content">
+          <div class="post">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="post-date">mié 17 Ene 2007</p>
+                  </td>
+                  <td>
+                    <div class="post-info">
+                      <h2 class="post-title">
+                        <a
+                          href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-bases-de-datos/"
+                          rel="bookmark"
+                          title="Permanent Link: Internacionalización y localización: bases de datos"
+                          >Internacionalización y localización: bases de
+                          datos</a
+                        >
+                      </h2>
+                      Posted by Satyam under
+                      <a
+                        href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                        rel="category tag"
+                        >Programación</a
+                      >
+                      <br />
+                      <a
+                        href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-bases-de-datos/#comments"
+                        >[5] Comments</a
+                      > 
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="post-content">
+              <p>
+                Una posibilidad para la traducción de textos de las aplicaciones
+                es el uso de bases de datos. Hay aplicaciones que lo hacen así,
+                una que me viene a la mente es SAP, aunque no se si aún lo
+                hacen. Con los ejemplos ya mostrados, creo que no es necesario
+                que lo cubra. Basta una o más tablas con campos que correspondan
+                al texto original, el código de idioma y la traducción. Vale la
+                pena notar que el programa xgettext puede ser usado para extraer
+                los textos de los fuentes para luego, mediante un
+                <em>script</em> propio, dependiendo de la estructura de tablas
+                adoptada, se cargue la base de datos.<span id="more-70"></span>
+              </p>
+              <p>
+                Otra cuestión es la existencia de textos como datos dentro de
+                una tabla. Lo primero que viene a la mente es agregar un código
+                de idioma a las tablas que contienen estos textos, pero esto no
+                es tan simple, muchas veces, internacionalizar la base de datos
+                requerirá rediseñarla.
+              </p>
+              <p>
+                Por ejemplo, supongamos que tenemos una tabla de artículos muy
+                trivial:
+              </p>
+              <table cellspacing="1" cellpadding="0" width="50%" border="1">
+                <tbody>
+                  <tr>
+                    <th>id_art</th>
+                    <th>Descr</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>Tornillo</td>
+                    <td>1.00</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Tuerca</td>
+                    <td>2.00</td>
+                    <td>200</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Arandela</td>
+                    <td>0.50</td>
+                    <td>120</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>
+                Deseamos hacer que el campo <code>Descr</code> se pueda
+                localizar. Agregar un campo de idioma no se posible dado que por
+                cada nuevo idioma que agregáramos estaríamos también repitiendo
+                los campos <code>Precio</code> y de <code>Cantidad</code>, lo
+                cual no es aceptable.
+              </p>
+              <p>
+                Deberemos dividir las tablas según se muestra, una que contenga
+                la información que es independiente del idioma y otra que tenga
+                los textos en los distintos idiomas, según se muestra.
+              </p>
+              <table cellspacing="1" cellpadding="0" width="50%" border="1">
+                <tbody>
+                  <tr>
+                    <th>id_art</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>1.00</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>2.00</td>
+                    <td>200</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>0.50</td>
+                    <td>120</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table cellspacing="1" cellpadding="0" width="50%" border="1">
+                <tbody>
+                  <tr>
+                    <th>id_art</th>
+                    <th>idioma</th>
+                    <th>descr</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>es</td>
+                    <td>Tornillo</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>es</td>
+                    <td>Tuerca</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>es</td>
+                    <td>Arandela</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>
+                Estas tablas estarían asociadas por el código de artículo,
+                <code>id_art</code>.
+              </p>
+              <p>
+                Este replanteo de las tablas puede requerir actualizar muchos de
+                los programas que acceden a estas tablas, sin embargo, el uso de
+                ‘vistas’ nos puede ayudar. Si las nuevas tablas reciben nuevos
+                nombres, entonces nos es posible hacer una vista que nos provea
+                la información como estos programas la esperaban ver, de tal
+                manera de que nada deje de funcionar, aunque lo hará un poco más
+                lento mientras se reescriben los programas.
+              </p>
+              <p>
+                <code
+                  >CREATE VIEW articulos AS<br />
+                  SELECT<br />
+                  articulos_neutra.id_art AS id_art,<br />
+                  descr AS Descr,<br />
+                  Precio,<br />
+                  Cantidad<br />
+                  FROM articulos_neutra JOIN articulos_textos<br />
+                  ON articulos_neutra.id_art = articulos_textos.id_art<br />
+                  WHERE articulos_textos.idioma = 'es'</code
+                >
+              </p>
+              <p>
+                Una vez borrada la tabla original, esta vista la puede
+                reemplazar. Adviértase que el código de idioma en esta vista
+                está fijo en el código que corresponde a los textos originales
+                de la tabla pues aquellos programas que desconozcan la nueva
+                estructura, tampoco estarán internacionalizados y no sabrán que
+                hay más idiomas disponibles, por lo que no esperarán más que el
+                original.
+              </p>
+              <p>
+                Viene de:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: usando PHP-gettext"
+                  href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/"
+                  rel="bookmark"
+                  >Internacionalización y localización: usando PHP-gettext</a
+                >
+              </p>
+              <p>
+                Indice:
+                <a
+                  title="Enlace permanente: Internacionalización y Localización: índice"
+                  href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+                  rel="bookmark"
+                  >Internacionalización y Localización: índice</a
+                >
+              </p>
+              <p>Fin de la serie</p>
+              <p><!--5285bd622f652a53d74474166deb28e7--></p>
+              <p><!--08d274779a66b4ea9c5ee6da5e65e48b--></p>
+              <p><!--ee22d3fef14bd65c3b2af013b9b3646b--></p>
+              <div class="post-info"></div>
+              <div class="post-footer"> </div>
+            </div>
+            <!-- You can start editing here. -->
+
+            <h3 id="comments">
+              5 Responses to “Internacionalización y localización: bases de
+              datos”
+            </h3>
+
+            <ol class="commentlist">
+              <li class="alt" id="comment-225465">
+                <cite>joxelu</cite> Says:
+                <br />
+
+                <small class="commentmetadata"
+                  ><a href="#comment-225465" title=""
+                    >febrero 13th, 2007 at 18:38</a
+                  >
+                </small>
+
+                <p>
+                  Muy buen trabajo, interesante, didáctico y práctico. Gracias
+                </p>
+              </li>
+
+              <li class="" id="comment-225466">
+                <cite>Pere Picornell</cite> Says:
+                <br />
+
+                <small class="commentmetadata"
+                  ><a href="#comment-225466" title=""
+                    >junio 18th, 2007 at 11:53</a
+                  >
+                </small>
+
+                <p>Excelente, muy bien hecho, me ha sido realmente útil.</p>
+                <p>Muchas gracias!</p>
+              </li>
+
+              <li class="alt" id="comment-225467">
+                <cite>Unai</cite> Says:
+                <br />
+
+                <small class="commentmetadata"
+                  ><a href="#comment-225467" title=""
+                    >octubre 6th, 2008 at 3:19</a
+                  >
+                </small>
+
+                <p>Muchas gracias</p>
+              </li>
+
+              <li class="" id="comment-225468">
+                <cite
+                  ><a
+                    href="http://nuevacarpeta.wordpress.com"
+                    rel="external nofollow"
+                    class="url"
+                    >Victor</a
+                  ></cite
+                >
+                Says:
+                <br />
+
+                <small class="commentmetadata"
+                  ><a href="#comment-225468" title=""
+                    >septiembre 24th, 2009 at 3:21</a
+                  >
+                </small>
+
+                <p>Muchas gracias por el tutorial. Gracias.</p>
+              </li>
+
+              <li class="alt" id="comment-225469">
+                <cite
+                  ><a
+                    href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+                    rel="external nofollow"
+                    class="url"
+                    >Comentarios » Internacionalización y localización:
+                    índice</a
+                  ></cite
+                >
+                Says:
+                <br />
+
+                <small class="commentmetadata"
+                  ><a href="#comment-225469" title=""
+                    >febrero 20th, 2010 at 7:31</a
+                  >
+                </small>
+
+                <p>[…] Bases de datos […]</p>
+              </li>
+            </ol>
+          </div>
+          <p align="center"></p>
+        </div>
+        <div id="sidebar">
+          <h2>Archived Entry</h2>
+          <ul>
+            <li><strong>Post Date :</strong></li>
+            <li>miércoles, Ene 17th, 2007 at 20:02</li>
+            <li><strong>Categoría :</strong></li>
+            <li>
+              <a
+                href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                rel="category tag"
+                >Programación</a
+              >
+            </li>
+            <li><strong>Do More :</strong></li>
+            <li>Both comments and pings are currently closed.</li>
+          </ul>
+        </div>
+
+        <p id="footer">
+          Design Downloaded from
+          <a href="http://www.vanillamist.com" title="Vanilla Mist"
+            >www.vanillamist.com</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

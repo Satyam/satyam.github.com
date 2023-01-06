@@ -1,0 +1,33 @@
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"><channel><title>
+	Comentarios en: Internacionalización y localización: usando gettext()	</title><atom:link href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/feed/" rel="self" type="application/rss+xml"/><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/</link><description>Comentarios, viajes e historias</description><lastBuildDate>
+	Sun, 27 Jan 2019 14:29:30 +0000	</lastBuildDate><sy:updatePeriod>
+	hourly	</sy:updatePeriod><sy:updateFrequency>
+	1	</sy:updateFrequency><generator>https://wordpress.org/?v=5.1</generator><item><title>
+				Por: summ3r				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/comment-page-1/#comment-225449</link><dc:creator>summ3r</dc:creator><pubDate>Wed, 30 Oct 2013 14:53:35 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/#comment-225449</guid><description>¡Hola! Si estan interesados en localizar cualqier tipo de software, reccomendo con calor este rápido y intuitiva herramienta de localización: http://poeditor.com/.</description><content:encoded><![CDATA[<p>¡Hola! Si estan interesados en localizar cualqier tipo de software, reccomendo con calor este rápido y intuitiva herramienta de localización: <a href="http://poeditor.com/" rel="nofollow">http://poeditor.com/</a>.</p>
+]]></content:encoded></item><item><title>
+				Por: amenasha				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/comment-page-1/#comment-225448</link><dc:creator>amenasha</dc:creator><pubDate>Tue, 10 Jun 2008 02:47:03 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/#comment-225448</guid><description><![CDATA[un poco tarde la respuesta pero seguro le sirve a gente para hacer lo que dice @Satyam
+
+sprintf(_(&#039;Hola %s&#039;), $usuario));]]></description><content:encoded><![CDATA[<p>un poco tarde la respuesta pero seguro le sirve a gente para hacer lo que dice @Satyam</p>
+<p>sprintf(_(&#8216;Hola %s&#8217;), $usuario));</p>
+]]></content:encoded></item><item><title>
+				Por: Satyam				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/comment-page-1/#comment-225447</link><dc:creator>Satyam</dc:creator><pubDate>Mon, 18 Jun 2007 12:14:21 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/#comment-225447</guid><description><![CDATA[Pere Picornell me preguntaba cómo localizar una cadena como __(&quot;¡Hola $usuario!&quot;); con gettext.  
+
+El caso es que esto no funciona, pues la expansión de $usuario dentro de la cadena ocurre antes que la llamada a gettext(), por lo que la función __() recibiría la cadena &quot;¡Hola Pepe!&quot; para la cual no tiene traducción.]]></description><content:encoded><![CDATA[<p>Pere Picornell me preguntaba cómo localizar una cadena como __(&#8220;¡Hola $usuario!&#8221;); con gettext.  </p>
+<p>El caso es que esto no funciona, pues la expansión de $usuario dentro de la cadena ocurre antes que la llamada a gettext(), por lo que la función __() recibiría la cadena &#8220;¡Hola Pepe!&#8221; para la cual no tiene traducción.</p>
+]]></content:encoded></item><item><title>
+				Por: Aritz				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/comment-page-1/#comment-225446</link><dc:creator>Aritz</dc:creator><pubDate>Thu, 18 Jan 2007 08:01:48 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-gettext/#comment-225446</guid><description><![CDATA[El artículo está muy bien, pero comentar un error que me encontré y cual es la solución. 
+
+Cuando defines un idioma con setlocale, en principio en todos los entornos Linux el idioma queda definido, no así en los de Windows. En mi caso no funcionó en Linux...
+
+La solución es usar antes de setlocale() la función putenv de la siguiente manera:
+
+putenv(&quot;LANGUAGE=&quot;.$idioma);
+o sino:
+
+putenv(&quot;LANG=&quot;.$idioma);]]></description><content:encoded><![CDATA[<p>El artículo está muy bien, pero comentar un error que me encontré y cual es la solución. </p>
+<p>Cuando defines un idioma con setlocale, en principio en todos los entornos Linux el idioma queda definido, no así en los de Windows. En mi caso no funcionó en Linux&#8230;</p>
+<p>La solución es usar antes de setlocale() la función putenv de la siguiente manera:</p>
+<p>putenv(&#8220;LANGUAGE=&#8221;.$idioma);<br />
+o sino:</p>
+<p>putenv(&#8220;LANG=&#8221;.$idioma);</p>
+]]></content:encoded></item></channel></rss>

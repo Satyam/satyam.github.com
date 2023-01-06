@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      Comentarios » Internacionalización y Localización: usando variables
+    </title>
+    <meta name="generator" content="WordPress 5.1.1" />
+    <link
+      type="text/css"
+      media="screen"
+      rel="stylesheet"
+      href="http://www.satyam.com.ar/blog/wp-content/themes/connections/style.css "
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS 2.0"
+      href="http://www.satyam.com.ar/blog/feed/"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="http://www.satyam.com.ar/blog/feed/atom/"
+    />
+
+    <style type="text/css">
+      img.wp-smiley,
+      img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 0.07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      id="wp-block-library-css"
+      href="http://www.satyam.com.ar/blog/wp-includes/css/dist/block-library/style.min.css?ver=845e834b3fc80791b38e8f084768285d"
+      type="text/css"
+      media="all"
+    />
+
+    <link
+      rel="wlwmanifest"
+      type="application/wlwmanifest+xml"
+      href="http://www.satyam.com.ar/blog/wp-includes/wlwmanifest.xml"
+    />
+    <link
+      rel="prev"
+      title="Lecciones del transporte público de Madrid"
+      href="http://www.satyam.com.ar/blog/2007/01/12/lecciones-del-transporte-publico-de-madrid/"
+    />
+    <link
+      rel="next"
+      title="Internacionalización y localización: usando arrays"
+      href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-arrays/"
+    />
+
+    <link
+      rel="canonical"
+      href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-variables/"
+    />
+  </head>
+  <body>
+    <div id="rap">
+      <div id="header">
+        <ul id="topnav">
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog"
+              id="navHome"
+              title="Posted Recently"
+              accesskey="h"
+              >Home |</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="http://www.satyam.com.ar/blog/gallery"
+              id="navGallery"
+              title="Photo Gallery"
+              accesskey="g"
+              >Fotos |</a
+            >
+          </li>
+          <li><a href="#Buscar" title="Buscar" accesskey="b">Buscar</a></li>
+          <!--li><a href="#" id="navContact" title="Contact the Author" accesskey="c">Contact </a></li-->
+        </ul>
+        <h1>
+          <a href="http://www.satyam.com.ar/blog" title="Comentarios"
+            >Comentarios</a
+          >
+        </h1>
+        <div id="desc">Comentarios, viajes e historias</div>
+      </div>
+      <div id="main">
+        <div id="content">
+          <div class="post">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="post-date">mar 16 Ene 2007</p>
+                  </td>
+                  <td>
+                    <div class="post-info">
+                      <h2 class="post-title">
+                        <a
+                          href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-variables/"
+                          rel="bookmark"
+                          title="Permanent Link: Internacionalización y Localización: usando variables"
+                          >Internacionalización y Localización: usando
+                          variables</a
+                        >
+                      </h2>
+                      Posted by Satyam under
+                      <a
+                        href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                        rel="category tag"
+                        >Programación</a
+                      >
+                      <br />
+                      <span
+                        >Comentarios desactivados<span
+                          class="screen-reader-text"
+                        >
+                          en Internacionalización y Localización: usando
+                          variables</span
+                        ></span
+                      > 
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="post-content">
+              <p>
+                Usar variables en el archivo de traducciones es quizás la peor
+                de las opciones. Destinar un lugar dentro de la tabla de
+                símbolos para cada posible cadena es un abuso. El uso de un
+                prefijo reservado para traducciones, como se muestra en el
+                <a
+                  title="ejemplo"
+                  href="http://www.satyam.com.ar/int/variables/index.php?language=es"
+                  target="ejemplo"
+                  >ejemplo</a
+                >, al menos reduce la posibilidad de conflicto con otras
+                variables que se usen en la aplicación, sin embargo, no impide
+                que inadvertidamente se reutilice el mismo nombre para dos
+                cadenas distintas y el intérprete PHP no dará aviso de error,
+                como lo haría en el caso de querer redefinir una constante,
+                quedándose con el último valor asignado.<span
+                  id="more-64"
+                ></span>
+              </p>
+              <p>
+                Otro problema es que las variables no son visibles dentro de las
+                funciones, por lo que se deben acceder a través del array
+                <code
+                  ><a
+                    title="Manual de PHP: $GLOBALS"
+                    href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.globals"
+                    target="phpmanual"
+                    >$GLOBALS</a
+                  ></code
+                >
+                o declarar cada variable individualmente con la instrucción
+                <a
+                  title="Manual de PHP: global"
+                  href="http://es2.php.net/global#language.variables.scope.global"
+                  target="phpmanual"
+                  ><code>global</code></a
+                >
+                en cada función donde se utilice, como se muestra en la función
+                <code>mostrar_archivos()</code>.
+              </p>
+              <p>
+                Sobre las constantes, tiene la ventaja de ser más rápidas de
+                procesar y además pueden expandirse dentro de una cadena con
+                comillas dobles o un
+                <a
+                  title="Manual de PHP: heredoc"
+                  href="http://es2.php.net/manual/es/language.types.string.php#language.types.string.syntax.heredoc"
+                  target="phpmanual"
+                  ><code>heredoc</code></a
+                >.
+              </p>
+              <p>
+                Finalmente, otro problema es que, en caso de faltar una
+                traducción, no se muestra nada, como se puede ver en el
+                <a
+                  title="Ejemplo"
+                  href="http://www.satyam.com.ar/int/variables/index.php?language=es"
+                  target="ejemplo"
+                  >ejemplo</a
+                >
+                si se elije la última opción de idioma.
+              </p>
+              <p>
+                Viene de:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: usando constantes"
+                  href="http://www.satyam.com.ar/blog/2007/01/12/internacionalizacion-y-localizacion-usando-constantes/"
+                  rel="bookmark"
+                  >Internacionalización y localización: usando constantes</a
+                >
+              </p>
+              <p>
+                Continúa en:
+                <a
+                  title="Enlace permanente: Internacionalización y localización: usando arrays"
+                  href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-arrays/"
+                  rel="bookmark"
+                  >Internacionalización y localización: usando arrays</a
+                >
+              </p>
+              <p>
+                Indice:
+                <a
+                  title="Enlace permanente: Internacionalización y Localización: índice"
+                  href="http://www.satyam.com.ar/blog/2007/01/17/internacionalizacion-y-localizacion-indice/"
+                  rel="bookmark"
+                  >Internacionalización y Localización: índice</a
+                >
+              </p>
+              <div class="post-info"></div>
+              <div class="post-footer"> </div>
+            </div>
+            <!-- You can start editing here. -->
+
+            <!-- If comments are closed. -->
+            <p class="nocomments">Comments are closed.</p>
+          </div>
+          <p align="center"></p>
+        </div>
+        <div id="sidebar">
+          <h2>Archived Entry</h2>
+          <ul>
+            <li><strong>Post Date :</strong></li>
+            <li>martes, Ene 16th, 2007 at 11:16</li>
+            <li><strong>Categoría :</strong></li>
+            <li>
+              <a
+                href="http://www.satyam.com.ar/blog/category/tecnologia/programacion/"
+                rel="category tag"
+                >Programación</a
+              >
+            </li>
+            <li><strong>Do More :</strong></li>
+            <li>Both comments and pings are currently closed.</li>
+          </ul>
+        </div>
+
+        <p id="footer">
+          Design Downloaded from
+          <a href="http://www.vanillamist.com" title="Vanilla Mist"
+            >www.vanillamist.com</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

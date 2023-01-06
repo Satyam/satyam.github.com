@@ -1,0 +1,50 @@
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"><channel><title>
+	Comentarios en: Internacionalización y localización: usando PHP-gettext	</title><atom:link href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/feed/" rel="self" type="application/rss+xml"/><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/</link><description>Comentarios, viajes e historias</description><lastBuildDate>
+	Sun, 27 Jan 2019 14:29:30 +0000	</lastBuildDate><sy:updatePeriod>
+	hourly	</sy:updatePeriod><sy:updateFrequency>
+	1	</sy:updateFrequency><generator>https://wordpress.org/?v=5.1</generator><item><title>
+				Por: Jose Alberto				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225457</link><dc:creator>Jose Alberto</dc:creator><pubDate>Fri, 23 Dec 2011 13:27:09 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225457</guid><description>Muchas gracias por la información, me ha sido de gran ayuda.</description><content:encoded><![CDATA[<p>Muchas gracias por la información, me ha sido de gran ayuda.</p>
+]]></content:encoded></item><item><title>
+				Por: Janckos				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225456</link><dc:creator>Janckos</dc:creator><pubDate>Fri, 22 May 2009 13:19:17 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225456</guid><description>Muy buen articulo, gracias!.</description><content:encoded><![CDATA[<p>Muy buen articulo, gracias!.</p>
+]]></content:encoded></item><item><title>
+				Por: Satyam				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225455</link><dc:creator>Satyam</dc:creator><pubDate>Thu, 28 Aug 2008 15:59:43 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225455</guid><description>Gracias por la correción Joropo, ya está actualizado.</description><content:encoded><![CDATA[<p>Gracias por la correción Joropo, ya está actualizado.</p>
+]]></content:encoded></item><item><title>
+				Por: joropo				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225454</link><dc:creator>joropo</dc:creator><pubDate>Thu, 28 Aug 2008 15:35:20 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225454</guid><description>muchísimas gracias por la data.
+
+el enlace a poEdit tiene un error: es poedit.net y no .org</description><content:encoded><![CDATA[<p>muchísimas gracias por la data.</p>
+<p>el enlace a poEdit tiene un error: es poedit.net y no .org</p>
+]]></content:encoded></item><item><title>
+				Por: radt				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225453</link><dc:creator>radt</dc:creator><pubDate>Fri, 08 Aug 2008 09:46:56 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225453</guid><description>Hola,
+
+Por alguna razon que no podido identificar todavia, no me instancia el objeto.
+Con debug he verificado que entra en el if file exists, pero no lo instancia.
+
+Alguna idea de donde debo buscar?
+
+gracias</description><content:encoded><![CDATA[<p>Hola,</p>
+<p>Por alguna razon que no podido identificar todavia, no me instancia el objeto.<br />
+Con debug he verificado que entra en el if file exists, pero no lo instancia.</p>
+<p>Alguna idea de donde debo buscar?</p>
+<p>gracias</p>
+]]></content:encoded></item><item><title>
+				Por: Javier				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225452</link><dc:creator>Javier</dc:creator><pubDate>Thu, 01 May 2008 23:14:03 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225452</guid><description>Hola.
+
+Gracias por este mini tutorial, me ha quedado todo mucho más claro.
+
+Saludos.</description><content:encoded><![CDATA[<p>Hola.</p>
+<p>Gracias por este mini tutorial, me ha quedado todo mucho más claro.</p>
+<p>Saludos.</p>
+]]></content:encoded></item><item><title>
+				Por: Ana				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225451</link><dc:creator>Ana</dc:creator><pubDate>Tue, 22 Apr 2008 17:46:32 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225451</guid><description>Muchas gracias por tus explicaciones, :-))</description><content:encoded><![CDATA[<p>Muchas gracias por tus explicaciones, :-))</p>
+]]></content:encoded></item><item><title>
+				Por: Quasi				</title><link>http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/comment-page-1/#comment-225450</link><dc:creator>Quasi</dc:creator><pubDate>Wed, 08 Aug 2007 19:56:11 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext/#comment-225450</guid><description>Realmente increible.
+
+El tutorial que has hecho sobre internacionalización es sencillamente magnifico.
+
+Gracias por tu labor y Felicidades por el resultado.
+
+;)</description><content:encoded><![CDATA[<p>Realmente increible.</p>
+<p>El tutorial que has hecho sobre internacionalización es sencillamente magnifico.</p>
+<p>Gracias por tu labor y Felicidades por el resultado.</p>
+<p>😉</p>
+]]></content:encoded></item></channel></rss>

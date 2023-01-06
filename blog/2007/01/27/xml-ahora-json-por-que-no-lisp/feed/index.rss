@@ -1,0 +1,42 @@
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"><channel><title>
+	Comentarios en: XML, ahora JSON, ¿por qué no LISP?	</title><atom:link href="http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/feed/" rel="self" type="application/rss+xml"/><link>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/</link><description>Comentarios, viajes e historias</description><lastBuildDate>
+	Sun, 27 Jan 2019 14:29:30 +0000	</lastBuildDate><sy:updatePeriod>
+	hourly	</sy:updatePeriod><sy:updateFrequency>
+	1	</sy:updateFrequency><generator>https://wordpress.org/?v=5.1</generator><item><title>
+				Por: I done jsol				</title><link>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225509</link><dc:creator>I done jsol</dc:creator><pubDate>Tue, 22 Apr 2008 12:35:32 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225509</guid><description><![CDATA[encode decode object en string o array
+namespace formato
+por el momento solo siete niveles
+a={b:{s:{v:{r:{y:{is:a}}}}}
+ej:a.b.s.v.r.y.is=&#039;a&#039;;//retrive
+
+ estoy expirementado con un iterador de objetos
+
+Mi idea es poder usar sentencias sql
+en la busqueda  interna del objeto
+
+ya que este retorna en strings
+a.f.t=1;a.ghj.u=function(){};a.s=1
+
+y estos forman un array
+
+si alguien tiene sugerncias agradecere.]]></description><content:encoded><![CDATA[<p>encode decode object en string o array<br />
+namespace formato<br />
+por el momento solo siete niveles<br />
+a={b:{s:{v:{r:{y:{is:a}}}}}<br />
+ej:a.b.s.v.r.y.is=&#8217;a&#8217;;//retrive</p>
+<p> estoy expirementado con un iterador de objetos</p>
+<p>Mi idea es poder usar sentencias sql<br />
+en la busqueda  interna del objeto</p>
+<p>ya que este retorna en strings<br />
+a.f.t=1;a.ghj.u=function(){};a.s=1</p>
+<p>y estos forman un array</p>
+<p>si alguien tiene sugerncias agradecere.</p>
+]]></content:encoded></item><item><title>
+				Por: alan				</title><link>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225508</link><dc:creator>alan</dc:creator><pubDate>Tue, 18 Mar 2008 16:44:19 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225508</guid><description>Te doy la razon es un LIPS del nuevo milenio, actualmente estoy usando JSON para un Sistema en Php, recien lo empece a utilizar y sinquerer me he dado cuenta ke el orden lo hace amigable entendible...yo lleve IA hace 1 año, y es tan parecido..unas explicaciones y el orden te deja entenderlo rapidamente.</description><content:encoded><![CDATA[<p>Te doy la razon es un LIPS del nuevo milenio, actualmente estoy usando JSON para un Sistema en Php, recien lo empece a utilizar y sinquerer me he dado cuenta ke el orden lo hace amigable entendible&#8230;yo lleve IA hace 1 año, y es tan parecido..unas explicaciones y el orden te deja entenderlo rapidamente.</p>
+]]></content:encoded></item><item><title>
+				Por: Edder				</title><link>http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/comment-page-1/#comment-225507</link><dc:creator>Edder</dc:creator><pubDate>Wed, 07 Mar 2007 22:46:48 +0000</pubDate><guid isPermaLink="false">http://www.satyam.com.ar/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comment-225507</guid><description>Hola Satyam. Es un enfoque interesante el que has dado de Lisp y de verdad pense que su única aplicación era para inteligencia artificial como competencia del prolog.
+Gracias por ese post, esta muy buena tu página.
+Saludos.</description><content:encoded><![CDATA[<p>Hola Satyam. Es un enfoque interesante el que has dado de Lisp y de verdad pense que su única aplicación era para inteligencia artificial como competencia del prolog.<br />
+Gracias por ese post, esta muy buena tu página.<br />
+Saludos.</p>
+]]></content:encoded></item></channel></rss>
