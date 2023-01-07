@@ -1,114 +1,158 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
 
-<head>
-<title>Rueda Numeral</title>
+    <title>Rueda Numeral</title>
+  </head>
 
-</head>
+  <body>
+    <h1 align="center">Rueda Numeral</h1>
 
-<body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="overall.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="addinga.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <p>
+      La MÃ¡quina Diferencial contiene 248 ruedas numerales. Cada una de ellas
+      representa un dÃ­gito. Treintaiuna de ellas estÃ¡n apiladas sobre un eje
+      vertical para componer un nÃºmero con 31 dÃ­gitos si todos ellos fueran
+      positivos. El dÃ­gito menos significativo estÃ¡ abajo, el mÃ¡s significativo
+      arriba.
+    </p>
 
-<h1 align="center">Rueda Numeral</h1>
+    <p>
+      ParecerÃ­a que 31 dÃ­gitos decimales, el equivalente a un procesador digital
+      de 103 bits son demasiado. Sin embargo, siendo que todo el proceso se
+      efectÃºa por sumas sucesivas, y cada resultado se basa en el previo, los
+      errores tienden a acumularse. Las siguientes imÃ¡genes ilustran este tema:
+    </p>
 
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="overall.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="addinga.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-<hr>
-<p>La Máquina Diferencial contiene 248 ruedas numerales.&nbsp; Cada una de ellas
-representa un dígito.&nbsp; Treintaiuna de ellas están apiladas sobre un eje vertical
-para componer un número con 31 dígitos si todos ellos fueran positivos.&nbsp; El dígito
-menos significativo está abajo, el más significativo arriba.</p>
+    <table border="0" width="90%">
+      <tr>
+        <td width="50%">
+          <img src="../images/PocosDigitos.gif" width="359" height="312" />
+        </td>
+        <td width="50%">
+          <img src="../images/MuchosDigitos.gif" width="357" height="304" />
+        </td>
+      </tr>
+    </table>
 
-<p>Parecería que 31 dígitos decimales, el equivalente a un procesador digital de 103
-bits son demasiado.&nbsp; Sin embargo, siendo que todo el proceso se efectúa por sumas
-sucesivas, y cada resultado se basa en el previo, los errores tienden a acumularse. &nbsp;
-Las siguientes imágenes ilustran este tema:</p>
+    <p>
+      Ambas imÃ¡genes fueron producidas por el mismo programa. Calcula la funciÃ³n
+      seno sobre un giro completo. La curva en rojo representa la curva seno
+      real. Las lÃ­neas azules y negras representan el resultado del cÃ¡lculo tal
+      como lo habrÃ­a hecho la MÃ¡quina Diferencial. El grÃ¡fico de la izquierda se
+      hizo declarando las variables como nÃºmeros de punto flotante de precisiÃ³n
+      simple (32 bits) mientas que el de la derecha fue hecho con variables de
+      doble precisiÃ³n (64bits). El cÃ¡lculo se efectÃºa de izquierda a derecha.
+    </p>
 
-<table border="0" width="90%">
-  <tr>
-    <td width="50%"><img src="../images/PocosDigitos.gif" WIDTH="359" HEIGHT="312"></td>
-    <td width="50%"><img src="../images/MuchosDigitos.gif" WIDTH="357" HEIGHT="304"></td>
-  </tr>
-</table>
+    <p>
+      En la imagen de la izquierda, las lÃ­neas negras se alejan del valor real
+      antes de llegar a un cuarto de giro. Una forma de resolver esto es
+      recomenzar el cÃ¡lculo desde otro punto, tal como las lÃ­neas azules que
+      comienzan en el centro de la imagen y cubren otro segmento.
+    </p>
 
-<p>Ambas imágenes fueron producidas por el mismo programa. Calcula la función seno sobre
-un giro completo.&nbsp; La curva en rojo representa la curva seno real.&nbsp; Las líneas
-azules y negras representan el resultado del cálculo tal como lo habría hecho la
-Máquina Diferencial.&nbsp; El gráfico de la izquierda se hizo declarando las variables
-como números de punto flotante de precisión simple (32 bits) mientas que el de la
-derecha fue hecho con variables de doble precisión (64bits).&nbsp; El cálculo se
-efectúa de izquierda a derecha.</p>
+    <p>
+      Por otro lado, la imagen de la derecha fue calculada con variables que
+      tienen el doble de bits (64 en lugar de 32) de tal forma que los errores,
+      a pesar de que aÃºn existen, son aÃºn imperceptibles durante un giro
+      completo (las lÃ­neas negras en realidad hacen el giro completo, pero no se
+      las puede ver pues se le solapan las lÃ­neas azules).
+    </p>
 
-<p>En la imagen de la izquierda, las líneas negras se alejan del valor real antes de
-llegar a un cuarto de giro.&nbsp; Una forma de resolver esto es recomenzar el cálculo
-desde otro punto, tal como las líneas azules que comienzan en el centro de la imagen y
-cubren otro segmento.</p>
+    <p>
+      Existe un equilibrio muy delicado entre la cantidad de dÃ­gitos conque se
+      trabaja, el intervalo sobre el cual se desea calcular la funciÃ³n y la
+      separaciÃ³n entre puntos sucesivos. Como un Ãºltimo ejemplo, esto es lo que
+      ocurre cuando se duplica la cantidad de puntos intermedios:
+    </p>
 
-<p>Por otro lado, la imagen de la derecha fue calculada con variables que tienen el doble
-de bits (64 en lugar de 32) de tal forma que los errores, a pesar de que aún existen, son
-aún imperceptibles durante un giro completo (las líneas negras en realidad hacen el giro
-completo, pero no se las puede ver pues se le solapan las líneas azules).</p>
+    <p><img src="../images/MasPuntos.gif" width="359" height="348" /></p>
 
-<p>Existe un equilibrio muy delicado entre la cantidad de dígitos conque se trabaja, el
-intervalo sobre el cual se desea calcular la función y la separación entre puntos
-sucesivos.&nbsp; Como un último ejemplo, esto es lo que ocurre cuando se duplica la
-cantidad de puntos intermedios:</p>
+    <p>
+      Como se puede apreciar, cuando se calculan mÃ¡s puntos, aÃºn con varriables
+      de doble precisiÃ³n, la curva negra tambiÃ©n se aleja de la ideal. En los
+      primeros dos ejemplos, tuvimos 90 puntos individuales, en este ejeplo, se
+      usaron 180 pasos. AdviÃ©rtase que para un giro completo, o sea 360 grados,
+      180 puntos significa que habrÃ­amos tenido un valor para cada dos grados
+      mientras que aÃºn la tabla mÃ¡s simple, de una o dos pÃ¡ginas de longitud,
+      habrÃ­a mostrado valores para cada minuto de arco, con cuatro dÃ­gitos de
+      precisiÃ³n.
+    </p>
 
-<p><img src="../images/MasPuntos.gif" WIDTH="359" HEIGHT="348"> </p>
+    <p>
+      AsÃ­ pues, basta de hablar de por quÃ© tantas ruedas, Â¿cÃ³mo se ve una simple
+      rueda numeral?
+    </p>
 
-<p>Como se puede apreciar, cuando se calculan más puntos, aún con varriables de doble
-precisión, la curva negra también se aleja de la ideal.&nbsp; En los primeros dos
-ejemplos, tuvimos 90 puntos individuales, en este ejeplo, se usaron 180 pasos. &nbsp;
-Adviértase que para un giro completo, o sea 360 grados, 180 puntos significa que
-habríamos tenido un valor para cada dos grados mientras que aún la tabla más simple, de
-una o dos páginas de longitud, habría mostrado valores para cada minuto de arco, con
-cuatro dígitos de precisión.</p>
+    <table border="0">
+      <tr>
+        <td>
+          <img
+            src="../images/FigureWheel.jpg"
+            align="middle"
+            width="320"
+            height="240"
+          />
+        </td>
+        <td>
+          Nota: esta imagen no es una rueda numeral real ni estÃ¡ tomada de los
+          planos originales, sus medidas son aproximadas.
+        </td>
+      </tr>
+    </table>
 
-<p>Así pues, basta de hablar de por qué tantas ruedas, ¿cómo se ve una simple rueda
-numeral?</p>
+    <p>
+      La rueda numeral es un engranaje con 40 dientes. Representa un Ãºnico
+      dÃ­gito. La dÃ©cada estÃ¡ repetida cuatro veces alrededor por razones
+      prÃ¡cticas. La MÃ¡quina Diferencial No1 tenÃ­a una sÃ³la dÃ©cada alrededor y
+      las ruedas eran mucho mÃ¡s chicas. Para hacer lugar a otros dispositivos
+      dentro de la rueda, esta rueda es mÃ¡s grande pero hace movimientos mÃ¡s
+      chicos que de otra forma.
+    </p>
 
-<table border="0">
-  <tr>
-    <td><img src="../images/FigureWheel.jpg" align="middle" WIDTH="320" HEIGHT="240"></td>
-    <td>Nota: esta imagen no es una rueda numeral real ni está tomada de los planos
-    originales, sus medidas son aproximadas.</td>
-  </tr>
-</table>
+    <p>
+      La rueda gira libre alrededor de su eje. Todo el movimiento se realiza a
+      travÃ©s de los dientes, tanto aquellos en el exterior como asÃ­ tambiÃ©n los
+      cuatro dientes en el interior. Los nÃºmeros grabados en el exterior se usan
+      para cargar los valores iniciales en la MÃ¡quina, pues los resultados se
+      obtienen en el mecanismo de impresiÃ³n.
+    </p>
 
-<p>La rueda numeral es un engranaje con 40 dientes.&nbsp; Representa un único dígito.
-&nbsp; La década está repetida cuatro veces alrededor por razones prácticas.&nbsp; La
-Máquina Diferencial No1 tenía una sóla década alrededor y las ruedas eran mucho más
-chicas.&nbsp; Para hacer lugar a otros dispositivos dentro de la rueda, esta rueda es más
-grande pero hace movimientos más chicos que de otra forma.</p>
+    <p>
+      Las salientes exteriores, entre los nÃºmeros 6 y 7 se usan para detectar el
+      resto al pasar de 9 a 0. PodrÃ­a esperarse que esas salientes estuvieran
+      entre esos dos nÃºmeros pero, en realidad, realmente no importa que los
+      nÃºmeros no se correspondan con el cero real del mecanismo. Los nÃºmeros
+      estÃ¡n ubicados tal que se corresponden con el Ã­ndice para que el operador
+      los pueda ver, si se corre el Ã­ndice, se deberÃ­an correr los nÃºmeros
+      tambiÃ©n.
+    </p>
 
-<p>La rueda gira libre alrededor de su eje.&nbsp; Todo el movimiento se realiza a través
-de los dientes, tanto aquellos en el exterior como así también los cuatro dientes en el
-interior.&nbsp; Los números grabados en el exterior se usan para cargar los valores
-iniciales en la Máquina, pues los resultados se obtienen en el mecanismo de impresión.</p>
+    <p>
+      La rueda numeral ni siquiera estÃ¡ apoyada en el eje sino que descanza
+      sobre tres apoyos sobre los que se desliza.
+    </p>
 
-<p>Las salientes exteriores, entre los números 6 y 7 se usan para detectar el resto al
-pasar de 9 a 0.&nbsp; Podría esperarse que esas salientes estuvieran entre esos dos
-números pero, en realidad, realmente no importa que los números no se correspondan con
-el cero real del mecanismo.&nbsp; Los números están ubicados tal que se corresponden con
-el índice para que el operador los pueda ver, si se corre el índice, se deberían correr
-los números también.</p>
+    <hr />
 
-<p>La rueda numeral ni siquiera está apoyada en el eje sino que descanza sobre tres
-apoyos sobre los que se desliza.</p>
-
-<hr>
-
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="overall.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="addinga.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-</body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="overall.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="addinga.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

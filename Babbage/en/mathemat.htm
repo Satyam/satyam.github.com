@@ -1,241 +1,279 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
+    <title>Mathematical principle</title>
+  </head>
 
-<head>
-<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
-<title>Mathematical principle</title>
+  <body>
+    <h1 align="center">Mathematical principle</h1>
 
-<meta name="Microsoft Theme" content="none, default">
-</head>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="needfor.htm">&lt; Previous</a></td>
+        <td width="33%" align="center"><a href="index.html">Up ^</a></td>
+        <td width="34%" align="right"><a href="overall.htm">Next &gt;</a></td>
+      </tr>
+    </table>
+    <hr />
 
-<body>
+    <p>
+      It is a fact that all actual calculations contain errors. There are limits
+      to how much precision you can have in any measurement. If a captain takes
+      the elevation of a star with a sextant, he can't get infinite decimal
+      places, likewise, in most real world calculations you start from values
+      that contain errors. If you have a certain balance in your bank account
+      and get interests credited, the tenths of cents get rounded to full cents.
+      Thus, as long as a table is correct within the number of decimal places
+      shown, an approximation is fine.
+    </p>
 
-<h1 align="center">Mathematical principle</h1>
+    <p>Most formulas can be approximated via a polynomial series such as:</p>
 
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="needfor.htm">&lt; Previous</a></td>
-    <td width="33%" align="center"><a href="index.html">Up      ^</a></td>
-    <td width="34%" align="right"><a href="overall.htm">Next
-      &gt;</a></td>
-  </tr>
-</table>
-<hr>
+    <blockquote>
+      <pre>a<sub>n</sub> x<sup>n</sup> + a<sub>n-1</sub> x<sup>n-1</sup> + ... + a<sub>1</sub> x + a<sub>0</sub></pre>
+    </blockquote>
 
+    <p>
+      The more terms you have (the higher '<!--webbot bot="HTMLMarkup" startspan --><tt
+        ><!--webbot bot="HTMLMarkup" endspan --><tt>n</tt
+        ><!--webbot bot="HTMLMarkup" startspan --></tt
+      ><!--webbot bot="HTMLMarkup" endspan -->' is) the less the error you get.
+      Even functions that don't seem naturally given to a polynomial
+      approximation can be produced, within a limited range, with a good
+      selection of coefficients.
+    </p>
 
-<p>It is a fact that all actual calculations contain errors. There are limits to how much
-precision you can have in any measurement. If a captain takes the elevation of a star with
-a sextant, he can't get infinite decimal places, likewise, in most real world calculations
-you start from values that contain errors. If you have a certain balance in your bank
-account and get interests credited, the tenths of cents get rounded to full cents. Thus,
-as long as a table is correct within the number of decimal places shown, an approximation
-is fine.</p>
+    <table border="0">
+      <tr>
+        <td><img src="../images/PoliSin.gif" width="354" height="336" /></td>
+        <td>
+          The red line on the image at left represents the sine of an angle for
+          a full turn. The other curves represent successive approximations. For
+          each curve the degree of the polynomial ('<tt>n= ..</tt>') is shown in
+          the same color as its curve. The curve for <tt>n=9</tt> can't be seen
+          because the actual sine (the red curve) overlays it completely. Thus,
+          for the purpose of this graph a polynomial of n=9 is indistinguishable
+          from the actual function.
+          <p>
+            The coefficients '<tt>a</tt>' are zero for all even values of
+            '<tt>n</tt>' while the rest are <tt>1 / n!</tt> alternating positive
+            and negative. (positive for n=1, negative for n=3, positive for n=5
+            and so on)
+          </p>
+        </td>
+      </tr>
+    </table>
 
-<p>Most formulas can be approximated via a polynomial series such as:</p>
+    <p>Lets see the values for a certain polynomial,such as <tt>3x + 1</tt></p>
 
-<blockquote>
-  <pre>a<sub>n</sub> x<sup>n</sup> + a<sub>n-1</sub> x<sup>n-1</sup> + ... + a<sub>1</sub> x + a<sub>0</sub></pre>
-</blockquote>
+    <table border="1">
+      <tr>
+        <th align="right" width="33%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="33%"><em>f</em>(x)</th>
+        <th align="right" width="33%">diff</th>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="33%">4</td>
+        <td align="right" width="33%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="33%">7</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="33%">10</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">4</td>
+        <td align="right" width="33%">13</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+    </table>
 
-<p>The more terms you have (the higher '<!--webbot bot="HTMLMarkup" startspan --><tt><!--webbot bot="HTMLMarkup" endspan --><tt>n</tt><!--webbot bot="HTMLMarkup" startspan --></tt><!--webbot bot="HTMLMarkup" endspan -->' is) the less the error you get. Even functions that don't
-seem naturally given to a polynomial approximation can be produced, within a limited
-range,&nbsp; with a good selection of coefficients. </p>
+    <p>
+      The first column represents the values of X; the second, the result of
+      calculating that function. The last column is the difference in between
+      the values of the current row and the previous. For any polynomial of
+      degree <tt>n=1</tt>, the first difference is always a constant. Since this
+      polynomial represents a straight line, it is logical that it increments
+      regularly, thus the differences in between successive values are all
+      alike.
+    </p>
 
-<table border="0">
-  <tr>
-    <td><img src="../images/PoliSin.gif" WIDTH="354" HEIGHT="336"></td>
-    <td>The red line on the image at left represents the sine of an angle for a full turn. The
-    other curves represent successive approximations. For each curve the degree of the
-    polynomial ('<tt>n= ..</tt>') is shown in the same color as its curve. The curve for <tt>n=9</tt>
-    can't be seen because the actual sine (the red curve) overlays it completely. Thus, for
-    the purpose of this graph a polynomial of n=9 is indistinguishable from the actual
-    function.<p>The coefficients '<tt>a</tt>' are zero for all even values of '<tt>n</tt>'
-    while the rest are <tt>1 / n!</tt> alternating positive and negative. (positive for n=1,
-    negative for n=3, positive for n=5 and so on)</td>
-  </tr>
-</table>
+    <p>
+      For a polynomial of <tt>n=2</tt>, such as
+      <tt>2 x<sup>2</sup> + 3 x + 1</tt>, we would have:
+    </p>
 
-<p>Lets see the values for a certain polynomial,such as <tt>3x + 1</tt></p>
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">diff1</th>
+        <th align="right" width="25%">diff2</th>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">&nbsp;</td>
+        <td align="right" width="25%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%">15</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%">28</td>
+        <td align="right" width="25%">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">4</td>
+        <td align="right">45</td>
+        <td align="right">17</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">5</td>
+        <td align="right">66</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
+      </tr>
+    </table>
 
-<table border="1">
-  <tr>
-    <th align="right" width="33%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="33%"><em>f</em>(x)</th>
-    <th align="right" width="33%">diff</th>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="33%">4</td>
-    <td align="right" width="33%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="33%">7</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="33%">10</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">4</td>
-    <td align="right" width="33%">13</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-</table>
+    <p>
+      In this case, the first column of differences (<strong>diff1</strong>)
+      still changes, but if we calculate the difference in between successive
+      differences we get the values of column <strong>diff2 </strong>which are
+      all the same.
+    </p>
 
-<p>The first column represents the values of X; the second, the result of calculating that
-function. The last column is the difference in between the values of the current row and
-the previous. For any polynomial of degree <tt>n=1</tt>, the first difference is always a
-constant. Since this polynomial represents a straight line, it is logical that it
-increments regularly, thus the differences in between successive values are all alike.</p>
+    <p>
+      In fact, for any polynomial of degree '<tt>n</tt>', the '<tt>nth</tt>'
+      difference will always be a constant.
+    </p>
 
-<p>For a polynomial of <tt>n=2</tt>, such as <tt>2 x<sup>2</sup> + 3 x + 1</tt>, we would
-have:</p>
+    <p>
+      The Difference Engine works by the reverse of this, namely, once you have
+      the first row, you can work the rest out by additions. In this last
+      example, you only need to have the numbers 6, 9 and 4 to get the rest.
+    </p>
 
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">diff1</th>
-    <th align="right" width="25%">diff2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">&nbsp;</td>
-    <td align="right" width="25%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%">15</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%">28</td>
-    <td align="right" width="25%">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">17</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-</table>
+    <p>
+      The numbers in the following table have been produced by such a process
+    </p>
 
-<p>In this case, the first column of differences (<strong>diff1</strong>) still changes,
-but if we calculate the difference in between successive differences we get the values of
-column <strong>diff2 </strong>which are all the same. </p>
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">diff1</th>
+        <th align="right" width="25%">diff2</th>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%">15</td>
+        <td align="right" width="25%">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%">28</td>
+        <td align="right" width="25%">17</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">4</td>
+        <td align="right">45</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">5</td>
+        <td align="right">66</td>
+        <td align="right">25</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">6</td>
+        <td align="right">91</td>
+        <td align="right">29</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">7</td>
+        <td align="right">120</td>
+        <td align="right">33</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">8</td>
+        <td align="right">153</td>
+        <td align="right">37</td>
+        <td align="right">4</td>
+      </tr>
+    </table>
 
-<p>In fact, for any polynomial of degree '<tt>n</tt>', the '<tt>nth</tt>' difference will
-always be a constant. </p>
+    <p>
+      Given the first row, 6, 9, 4, you calculate each successive cell in each
+      row by adding the values on the cell immediately above and the one to the
+      right of that. So, in the second row, we have
+      <tt>6 + 9 ==&gt; 15, 9 + 4 ==&gt; 13 </tt>and, finally, since the last
+      column is always a constant we just repeat it (another way to look at it
+      is by saying that the third difference is always zero, thus
+      <tt>4 + 0 ==&gt; 4</tt>)
+    </p>
 
-<p>The Difference Engine works by the reverse of this, namely, once you have the first
-row, you can work the rest out by additions. In this last example, you only need to have
-the numbers 6, 9 and 4 to get the rest.</p>
+    <p>
+      Then, for the third row, we have
+      <tt>15 + 13 ==&gt; 28, 13 + 4 ==&gt; 17</tt>. The rest of the rows have
+      been produced by just such method, and you could verify it by calculating
+      the actual polynomial.
+    </p>
 
-<p>The numbers in the following table have been produced by such a process</p>
+    <p>
+      The procedure is so simple that it should be possible to do it 'by steam',
+      as Babbage wanted.
+    </p>
 
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">diff1</th>
-    <th align="right" width="25%">diff2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%">15</td>
-    <td align="right" width="25%">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%">28</td>
-    <td align="right" width="25%">17</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">25</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">6</td>
-    <td align="right">91</td>
-    <td align="right">29</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">7</td>
-    <td align="right">120</td>
-    <td align="right">33</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">8</td>
-    <td align="right">153</td>
-    <td align="right">37</td>
-    <td align="right">4</td>
-  </tr>
-</table>
+    <p>
+      Of course, the first problem to solve is calculating the first row, and
+      that is why the Difference Engine can't calculate a particular value, the
+      whole process depends on calculating successive values starting from a
+      known one, plus the first row of differences. For a simple polynomial such
+      as this, the task is easy, but for a complex polynomial it is much harder.
+      Moreover, you first have to find the polynomial that best approximates the
+      actual function you want to calculate, such as the sine curve above. All
+      these are well-known algebraic procedures, though not easy.
+    </p>
 
-<p>Given the first row, 6, 9, 4, you calculate each successive cell in each row by adding
-the values on the cell immediately above and the one to the right of that. So, in the
-second row, we have <tt>6 + 9 ==&gt; 15, 9 + 4 ==&gt; 13 </tt>and, finally, since the last
-column is always a constant we just repeat it (another way to look at it is by saying that
-the third difference is always zero, thus <tt>4 + 0 ==&gt; 4</tt>)</p>
+    <p>
+      This effort pays off once you start producing pages and pages with columns
+      full of values, which is the most tedious, time consuming and error prone
+      part of all.
+    </p>
 
-<p>Then, for the third row, we have <tt>15 + 13 ==&gt; 28, 13 + 4 ==&gt; 17</tt>. The rest
-of the rows have been produced by just such method, and you could verify it by calculating
-the actual polynomial.</p>
+    <hr />
 
-<p>The procedure is so simple that it should be possible to do it 'by steam', as Babbage
-wanted.</p>
-
-<p>Of course, the first problem to solve is calculating the first row, and that is why the
-Difference Engine can't calculate a particular value, the whole process depends on
-calculating successive values starting from a known one, plus the first row of
-differences. For a simple polynomial such as this, the task is easy, but for a complex
-polynomial it is much harder. Moreover, you first have to find the polynomial that best
-approximates the actual function you want to calculate, such as the sine curve above. All
-these are well-known algebraic procedures, though not easy.</p>
-
-<p>This effort pays off once you start producing pages and pages with columns full of
-values, which is the most tedious, time consuming and error prone part of all.</p>
-
-<hr>
-
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="needfor.htm">&lt; Previous</a></td>
-    <td width="33%" align="center"><a href="index.html">Up      ^</a></td>
-    <td width="34%" align="right"><a href="overall.htm">Next
-      &gt;</a></td>
-  </tr>
-</table>
-
-</body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="needfor.htm">&lt; Previous</a></td>
+        <td width="33%" align="center"><a href="index.html">Up ^</a></td>
+        <td width="34%" align="right"><a href="overall.htm">Next &gt;</a></td>
+      </tr>
+    </table>
+  </body>
 </html>

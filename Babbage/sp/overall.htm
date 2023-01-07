@@ -1,309 +1,375 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
 
-<head>
-<title>Diseño General</title>
+    <title>DiseÃ±o General</title>
+  </head>
 
-</head>
+  <body>
+    <h1 align="center">DiseÃ±o General</h1>
 
-<body>
-
-<h1 align="center">Diseño General</h1>
-
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="mathemat.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="figure.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-<hr>
-<p>La Máquina Diferencial está basada en engranajes llamados 'ruedas numerales', cada
-uno de los cuales representa un dígito del 0 al 9.&nbsp; Las ruedas numerales están
-apiladas en ocho columnas, cada una de las cuales representa un número completo.&nbsp; La
-Máquina Diferencial tiene 31 ruedas numerales en cada columna y 8 columnas en total, lo
-cual da un total de 248 ruedas numerales.</p>
-
-<table border="0" width="100%">
-  <caption><b>Vista frontal</b></caption>
-  <tr>
-    <td width="33%" align="right">Mecanismo de transferencia de resultados</td>
-    <td width="33%" align="center">Ejes de las ruedas numerales (8)</td>
-    <td width="34%">Ruedas numerales&nbsp; (8 * 31)</td>
-  </tr>
-  <tr>
-    <td width="33%" align="right">Ruedas para impresión y estampado</td>
-    <td width="33%" align="center"><img src="../images/Frente.gif" alt="Frente.gif (8093 bytes)" WIDTH="480" HEIGHT="360"></td>
-    <td width="34%">Manivela</td>
-  </tr>
-  <tr>
-    <td width="33%" align="right">Movimiento de la mesa de estereotipia</td>
-    <td width="33%" align="center">Palancas y cremalleras</td>
-    <td width="34%">Levas</td>
-  </tr>
-</table>
-
-<p>Esta es una vista frontal esquemática de la Máquna.&nbsp; La sección superior, en el
-medio, es donde se encuentan las ruedas numerales, 31 de ellas en cada uno de los 8 ejes.
-&nbsp; A la derecha, la manivela provee todo el movimiento de la Máquna a través de dos
-engranajes cónicos al eje vertical que sostiene las levas.&nbsp; El perfil de las levas
-provee el movimiento a la mayoría de las partes de la Máquina a través de barras
-horizontales que corren a lo ancho de la sección por debajo de las ruedas numerales.
-&nbsp; Allí varias levas y cremalleras transforman el movimiento de ida y vuelta (de
-izquierda a derecha, según muestra esta imagen) de las barras horizontales, al movimiento
-de arriba a abajo, o angular de las varias partes de la Máquina.</p>
-
-<p>A la izquiera, el mecanismo de estereotipia también recibe el movimiento de la
-manivela a través de un eje que corre a todo lo ancho de la Máquna, cerca de la base.
-Tiene tres secciones principales.&nbsp; La inferior mueve la mesa que sostiene las placas
-de estereotipiado de tal manera que los resultados se puedan imprimir en varias
-combinaciones de filas y columnas por página.&nbsp; La sección del medio contiene las
-ruedas con los tipos de impresión y estampado que reciben el resultado del mecanismo de
-transferencia en la parte superior.&nbsp; Entre las ruedas de impresión y la mesa se
-encuentran las placas de metal blando o bandejas con pasta maleable en que se estampa el
-resultado.</p>
-
-<table border="0" width="100%">
-  <tr>
-    <td><img src="../images/Planta.gif" alt="Planta.gif (3351 bytes)" WIDTH="480" HEIGHT="360"></td>
-    <td>Esta es una vista desde arriba.&nbsp; A la derecha, la manivela que provee el
-    movimiento, a través de los engranajes cónicosl que, en esta imagen, se encuentran bajo
-    el gran engranage de más a la derecha. En el centro está la sección principal de
-    cálculo, con sus ocho ejes sosteniendo las ruedas numerales.&nbsp; Hay varios otros
-    engranajes, palancas y brazos en esta sección, que no se muestran.&nbsp; A la izquierda,
-    el mecanismo de impresión y estampado.</td>
-  </tr>
-</table>
-
-<p>El mecanismo de impresión no fue construído aún por el Museo pues tiene una cantidad
-de partes similar a la sección de cálculo y menos piezas repetidas.&nbsp; En estas
-páginas no la cubriremos.</p>
-
-<p>Así pues, la Máquina Diferencial sólo almacena 8 números a un tiempo.&nbsp; ¿Cómo
-puede operar con tan poco?&nbsp;&nbsp; Echemos una mirada a la tabla que usamos
-previamente.</p>
-
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">dif1</th>
-    <th align="right" width="25%">dif2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">15</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">28</td>
-    <td align="right" width="25%">17</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">25</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">6</td>
-    <td align="right">91</td>
-    <td align="right">29</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">7</td>
-    <td align="right">120</td>
-    <td align="right">33</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">8</td>
-    <td align="right">153</td>
-    <td align="right">37</td>
-    <td align="right">4</td>
-  </tr>
-</table>
-
-<p>Adviértase que cada fila puede ser calculada a partir de la fila inmediatamente
-arriba.&nbsp; No se necesita recordar los valores de la fila previa a esa, basta con
-recordar una fila a la vez.&nbsp; Más aún, para calcular el 28 en la tercera fila (ver
-celdas en amarillo), se suma el 15 y el 13 en la fila de arriba, e inmediatamente se puede
-descartar el 15, pues no va a ser usado más.&nbsp; Aún se necesita retener el 13, pues
-será usado para obtener el 17 justo debajo, pero una vez que se haya hecho, también se
-puede descartar. En realidad, la Máquina hace la suma directamente sobre la columna que
-contiene el valor, no necesita de dispositivos auxiliares, las ruedas numerales no son
-sólo para almacenar los números sino que participan en todo el proceso.</p>
-
-<p>Más aún, no es necesario hacer las sumas de a una celda por vez, se puede calcular
-toda una fila en sólo dos pasos, una vez para las columnas pares, otra para las impares. </p>
-
-<table border="0" width="90%">
-  <tr>
-    <td width="50%"><table border="1">
+    <table border="0" width="100%">
       <tr>
-        <th align="right" width="16%" bgcolor="#C0C0C0">X</th>
-        <th align="right" width="16%">f(x)</th>
-        <th align="right" width="16%">dif1</th>
-        <th align="right" width="16%">dif2</th>
-        <th align="right" width="16%">dif3</th>
-        <th align="right" width="16%">dif4</th>
+        <td width="33%"><a href="mathemat.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="figure.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <p>
+      La MÃ¡quina Diferencial estÃ¡ basada en engranajes llamados 'ruedas
+      numerales', cada uno de los cuales representa un dÃ­gito del 0 al 9. Las
+      ruedas numerales estÃ¡n apiladas en ocho columnas, cada una de las cuales
+      representa un nÃºmero completo. La MÃ¡quina Diferencial tiene 31 ruedas
+      numerales en cada columna y 8 columnas en total, lo cual da un total de
+      248 ruedas numerales.
+    </p>
+
+    <table border="0" width="100%">
+      <caption>
+        <b>Vista frontal</b>
+      </caption>
+      <tr>
+        <td width="33%" align="right">
+          Mecanismo de transferencia de resultados
+        </td>
+        <td width="33%" align="center">Ejes de las ruedas numerales (8)</td>
+        <td width="34%">Ruedas numerales (8 * 31)</td>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">1</td>
-        <td align="right" width="16%">2</td>
-        <td align="right" width="16%">1</td>
-        <td align="right" width="16%">3</td>
-        <td align="right" width="16%">4</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">1</td>
+        <td width="33%" align="right">Ruedas para impresiÃ³n y estampado</td>
+        <td width="33%" align="center">
+          <img
+            src="../images/Frente.gif"
+            alt="Frente.gif (8093 bytes)"
+            width="480"
+            height="360"
+          />
+        </td>
+        <td width="34%">Manivela</td>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">2</td>
-        <td align="right" width="16%">3</td>
-        <td align="right" width="16%">4</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">7</td>
-        <td align="right" width="16%" bgcolor="#00FFFF">5</td>
-        <td align="right" width="16%" bgcolor="#00FF00">1</td>
+        <td width="33%" align="right">Movimiento de la mesa de estereotipia</td>
+        <td width="33%" align="center">Palancas y cremalleras</td>
+        <td width="34%">Levas</td>
+      </tr>
+    </table>
+
+    <p>
+      Esta es una vista frontal esquemÃ¡tica de la MÃ¡quna. La secciÃ³n superior,
+      en el medio, es donde se encuentan las ruedas numerales, 31 de ellas en
+      cada uno de los 8 ejes. A la derecha, la manivela provee todo el
+      movimiento de la MÃ¡quna a travÃ©s de dos engranajes cÃ³nicos al eje vertical
+      que sostiene las levas. El perfil de las levas provee el movimiento a la
+      mayorÃ­a de las partes de la MÃ¡quina a travÃ©s de barras horizontales que
+      corren a lo ancho de la secciÃ³n por debajo de las ruedas numerales. AllÃ­
+      varias levas y cremalleras transforman el movimiento de ida y vuelta (de
+      izquierda a derecha, segÃºn muestra esta imagen) de las barras
+      horizontales, al movimiento de arriba a abajo, o angular de las varias
+      partes de la MÃ¡quina.
+    </p>
+
+    <p>
+      A la izquiera, el mecanismo de estereotipia tambiÃ©n recibe el movimiento
+      de la manivela a travÃ©s de un eje que corre a todo lo ancho de la MÃ¡quna,
+      cerca de la base. Tiene tres secciones principales. La inferior mueve la
+      mesa que sostiene las placas de estereotipiado de tal manera que los
+      resultados se puedan imprimir en varias combinaciones de filas y columnas
+      por pÃ¡gina. La secciÃ³n del medio contiene las ruedas con los tipos de
+      impresiÃ³n y estampado que reciben el resultado del mecanismo de
+      transferencia en la parte superior. Entre las ruedas de impresiÃ³n y la
+      mesa se encuentran las placas de metal blando o bandejas con pasta
+      maleable en que se estampa el resultado.
+    </p>
+
+    <table border="0" width="100%">
+      <tr>
+        <td>
+          <img
+            src="../images/Planta.gif"
+            alt="Planta.gif (3351 bytes)"
+            width="480"
+            height="360"
+          />
+        </td>
+        <td>
+          Esta es una vista desde arriba. A la derecha, la manivela que provee
+          el movimiento, a travÃ©s de los engranajes cÃ³nicosl que, en esta
+          imagen, se encuentran bajo el gran engranage de mÃ¡s a la derecha. En
+          el centro estÃ¡ la secciÃ³n principal de cÃ¡lculo, con sus ocho ejes
+          sosteniendo las ruedas numerales. Hay varios otros engranajes,
+          palancas y brazos en esta secciÃ³n, que no se muestran. A la izquierda,
+          el mecanismo de impresiÃ³n y estampado.
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      El mecanismo de impresiÃ³n no fue construÃ­do aÃºn por el Museo pues tiene
+      una cantidad de partes similar a la secciÃ³n de cÃ¡lculo y menos piezas
+      repetidas. En estas pÃ¡ginas no la cubriremos.
+    </p>
+
+    <p>
+      AsÃ­ pues, la MÃ¡quina Diferencial sÃ³lo almacena 8 nÃºmeros a un tiempo.
+      Â¿CÃ³mo puede operar con tan poco? Echemos una mirada a la tabla que usamos
+      previamente.
+    </p>
+
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">dif1</th>
+        <th align="right" width="25%">dif2</th>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">3</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">7</td>
-        <td align="right" width="16%" bgcolor="#00FFFF">11</td>
-        <td align="right" width="16%" bgcolor="#00FF00">12</td>
-        <td align="right" width="16%" bgcolor="#FF00FF">6</td>
-        <td align="right" width="16%">1</td>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">15</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">28</td>
+        <td align="right" width="25%">17</td>
+        <td align="right" width="25%">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">4</td>
-        <td align="right" bgcolor="#00FF00">18</td>
-        <td align="right" bgcolor="#FF00FF">23</td>
-        <td align="right">18</td>
-        <td align="right">7</td>
-        <td align="right">1</td>
+        <td align="right">45</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">5</td>
-        <td align="right">41</td>
-        <td align="right">41</td>
+        <td align="right">66</td>
         <td align="right">25</td>
-        <td align="right">8</td>
-        <td align="right">1</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">6</td>
-        <td align="right">82</td>
-        <td align="right">66</td>
-        <td align="right">33</td>
-        <td align="right">9</td>
-        <td align="right">1</td>
+        <td align="right">91</td>
+        <td align="right">29</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">7</td>
-        <td align="right">144</td>
-        <td align="right">99</td>
-        <td align="right">42</td>
-        <td align="right">19</td>
-        <td align="right">1</td>
+        <td align="right">120</td>
+        <td align="right">33</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">8</td>
+        <td align="right">153</td>
+        <td align="right">37</td>
+        <td align="right">4</td>
       </tr>
     </table>
-    </td>
-    <td width="50%"><table border="1">
+
+    <p>
+      AdviÃ©rtase que cada fila puede ser calculada a partir de la fila
+      inmediatamente arriba. No se necesita recordar los valores de la fila
+      previa a esa, basta con recordar una fila a la vez. MÃ¡s aÃºn, para calcular
+      el 28 en la tercera fila (ver celdas en amarillo), se suma el 15 y el 13
+      en la fila de arriba, e inmediatamente se puede descartar el 15, pues no
+      va a ser usado mÃ¡s. AÃºn se necesita retener el 13, pues serÃ¡ usado para
+      obtener el 17 justo debajo, pero una vez que se haya hecho, tambiÃ©n se
+      puede descartar. En realidad, la MÃ¡quina hace la suma directamente sobre
+      la columna que contiene el valor, no necesita de dispositivos auxiliares,
+      las ruedas numerales no son sÃ³lo para almacenar los nÃºmeros sino que
+      participan en todo el proceso.
+    </p>
+
+    <p>
+      MÃ¡s aÃºn, no es necesario hacer las sumas de a una celda por vez, se puede
+      calcular toda una fila en sÃ³lo dos pasos, una vez para las columnas pares,
+      otra para las impares.
+    </p>
+
+    <table border="0" width="90%">
       <tr>
-        <td width="100%" bgcolor="#FFFF00">1 - Amarillo</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#00FFFF">2 - Celeste</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#00FF00">3 - Verde</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#FF00FF">4 - Fucsia</td>
+        <td width="50%">
+          <table border="1">
+            <tr>
+              <th align="right" width="16%" bgcolor="#C0C0C0">X</th>
+              <th align="right" width="16%">f(x)</th>
+              <th align="right" width="16%">dif1</th>
+              <th align="right" width="16%">dif2</th>
+              <th align="right" width="16%">dif3</th>
+              <th align="right" width="16%">dif4</th>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">1</td>
+              <td align="right" width="16%">2</td>
+              <td align="right" width="16%">1</td>
+              <td align="right" width="16%">3</td>
+              <td align="right" width="16%">4</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">1</td>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">2</td>
+              <td align="right" width="16%">3</td>
+              <td align="right" width="16%">4</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">7</td>
+              <td align="right" width="16%" bgcolor="#00FFFF">5</td>
+              <td align="right" width="16%" bgcolor="#00FF00">1</td>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">3</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">7</td>
+              <td align="right" width="16%" bgcolor="#00FFFF">11</td>
+              <td align="right" width="16%" bgcolor="#00FF00">12</td>
+              <td align="right" width="16%" bgcolor="#FF00FF">6</td>
+              <td align="right" width="16%">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">4</td>
+              <td align="right" bgcolor="#00FF00">18</td>
+              <td align="right" bgcolor="#FF00FF">23</td>
+              <td align="right">18</td>
+              <td align="right">7</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">5</td>
+              <td align="right">41</td>
+              <td align="right">41</td>
+              <td align="right">25</td>
+              <td align="right">8</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">6</td>
+              <td align="right">82</td>
+              <td align="right">66</td>
+              <td align="right">33</td>
+              <td align="right">9</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">7</td>
+              <td align="right">144</td>
+              <td align="right">99</td>
+              <td align="right">42</td>
+              <td align="right">19</td>
+              <td align="right">1</td>
+            </tr>
+          </table>
+        </td>
+        <td width="50%">
+          <table border="1">
+            <tr>
+              <td width="100%" bgcolor="#FFFF00">1 - Amarillo</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#00FFFF">2 - Celeste</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#00FF00">3 - Verde</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#FF00FF">4 - Fucsia</td>
+            </tr>
+          </table>
+          <p>Secuencia del cÃ¡lculo</p>
+        </td>
       </tr>
     </table>
-    <p>Secuencia del cálculo</td>
-  </tr>
-</table>
 
-<p>En esta tabla, las celdas se han coloreado para mostrar la secuencia en que son
-calculadas.&nbsp; Todas las celdas con el mismo color de fondo pueden calcularse al mismo
-tiempo.&nbsp; El orden de cálculo se muestra a la derecha.&nbsp; Esto significa que para
-calcular cada fila, en lugar de necesitar tantos pasos como columnas, todo puede hacerse
-en dos pasos.&nbsp; Esto también afecta la carga inicial de la Máquina, pues en lugar de
-cargar una fila completa (en este ejemplo, la fila para x=1:&nbsp; 2, 1, 3, 4, 1) se debe
-cargar la diagonal formada por las celdas amarillas y celestes (7, 11, 7, 5, 1).</p>
+    <p>
+      En esta tabla, las celdas se han coloreado para mostrar la secuencia en
+      que son calculadas. Todas las celdas con el mismo color de fondo pueden
+      calcularse al mismo tiempo. El orden de cÃ¡lculo se muestra a la derecha.
+      Esto significa que para calcular cada fila, en lugar de necesitar tantos
+      pasos como columnas, todo puede hacerse en dos pasos. Esto tambiÃ©n afecta
+      la carga inicial de la MÃ¡quina, pues en lugar de cargar una fila completa
+      (en este ejemplo, la fila para x=1: 2, 1, 3, 4, 1) se debe cargar la
+      diagonal formada por las celdas amarillas y celestes (7, 11, 7, 5, 1).
+    </p>
 
-<p>La operación es controlada por una serie de levas que acoplan y desacoplan, giran y
-fijan los varios engranajes y palancas de la Máquna.&nbsp; Hay sólo dos juegos de 7
-pares de levas conjugadas cada uno, a medio giro de separación un juego del otro, un
-juego para el ciclo par, otro para el ciclo impar (sin contar la sección de impresión).
-&nbsp; Si el proceso no hubiera podido ser resuelto en sólo dos ciclos, la complejidad de
-la Máquina habría sido tremendamente mayor.</p>
+    <p>
+      La operaciÃ³n es controlada por una serie de levas que acoplan y
+      desacoplan, giran y fijan los varios engranajes y palancas de la MÃ¡quna.
+      Hay sÃ³lo dos juegos de 7 pares de levas conjugadas cada uno, a medio giro
+      de separaciÃ³n un juego del otro, un juego para el ciclo par, otro para el
+      ciclo impar (sin contar la secciÃ³n de impresiÃ³n). Si el proceso no hubiera
+      podido ser resuelto en sÃ³lo dos ciclos, la complejidad de la MÃ¡quina
+      habrÃ­a sido tremendamente mayor.
+    </p>
 
-<p>Si todos los valores involucrados en la operación son positivos, se puede usar la
-totalidad de los 31 dígitos, sino, la rueda numeral superior se puede usar para
-representar medio dígito y el signo, llevando el rango de números a representar del
--5000 ... 000 al +4999 ... 999.&nbsp; Esto es similar a lo que se hace en los procesadores
-binarios actuales.</p>
+    <p>
+      Si todos los valores involucrados en la operaciÃ³n son positivos, se puede
+      usar la totalidad de los 31 dÃ­gitos, sino, la rueda numeral superior se
+      puede usar para representar medio dÃ­gito y el signo, llevando el rango de
+      nÃºmeros a representar del -5000 ... 000 al +4999 ... 999. Esto es similar
+      a lo que se hace en los procesadores binarios actuales.
+    </p>
 
-<p>Imagínese que sólo se tienen dos columnas (números) con sólo dos ruedas numerales
-(dígitos) cada una.&nbsp; La segunda columna contiene un <tt>01</tt>.&nbsp; ¿Cuál es el
-número que tendríamos que cargar en la primera columna para que al sumárselo a la
-segunda diera cero?&nbsp; Cualquiera que fuera ese número, debería considerárselo como <tt>-1</tt>,
-dado que 1 + (-1) da<tt> 0</tt>.&nbsp; Así pues, ¿cuál es ese número?&nbsp; ¡<tt>99</tt>!
-&nbsp; Si se le suma <tt>99</tt> al <tt>01</tt>, resultaría <tt>100</tt>, pero como sólo
-tenemos dos ruedas numerales, la centena se pierde y terminamos con un cero.&nbsp; Un
-proceso similar permite obtener todos los números negativos, simplemente se le resta el
-valor absoluto de un número al valor siguiente al máximo que se puede representar (en
-este caso podemos representar 99, así pues el número siguiente es 100). En algún lugar
-hay que poner el límite entre qué reconocemos como negativo y qué es positivo, lo que
-habitualmente se hace a medio camino, por ello, los número que comienzan con el dígito
-más significativo en el rango de 0 a 4 son positivos, y de 5 a 9 son negativos.&nbsp; No
-haremos más mención al uso de números negativos pues es una técnica de cálculo cuyo
-uso es independiente de la Máquina de Babbage</p>
+    <p>
+      ImagÃ­nese que sÃ³lo se tienen dos columnas (nÃºmeros) con sÃ³lo dos ruedas
+      numerales (dÃ­gitos) cada una. La segunda columna contiene un
+      <tt>01</tt>. Â¿CuÃ¡l es el nÃºmero que tendrÃ­amos que cargar en la primera
+      columna para que al sumÃ¡rselo a la segunda diera cero? Cualquiera que
+      fuera ese nÃºmero, deberÃ­a considerÃ¡rselo como <tt>-1</tt>, dado que 1 +
+      (-1) da<tt> 0</tt>. AsÃ­ pues, Â¿cuÃ¡l es ese nÃºmero? Â¡<tt>99</tt>! Si se le
+      suma <tt>99</tt> al <tt>01</tt>, resultarÃ­a <tt>100</tt>, pero como sÃ³lo
+      tenemos dos ruedas numerales, la centena se pierde y terminamos con un
+      cero. Un proceso similar permite obtener todos los nÃºmeros negativos,
+      simplemente se le resta el valor absoluto de un nÃºmero al valor siguiente
+      al mÃ¡ximo que se puede representar (en este caso podemos representar 99,
+      asÃ­ pues el nÃºmero siguiente es 100). En algÃºn lugar hay que poner el
+      lÃ­mite entre quÃ© reconocemos como negativo y quÃ© es positivo, lo que
+      habitualmente se hace a medio camino, por ello, los nÃºmero que comienzan
+      con el dÃ­gito mÃ¡s significativo en el rango de 0 a 4 son positivos, y de 5
+      a 9 son negativos. No haremos mÃ¡s menciÃ³n al uso de nÃºmeros negativos pues
+      es una tÃ©cnica de cÃ¡lculo cuyo uso es independiente de la MÃ¡quina de
+      Babbage
+    </p>
 
-<p>La Máquina opera sobre enteros, no hay fracciones decimales ni notación exponencial.
-&nbsp; Todos los cálculos deben ser escalados para caber dentro de enteros.&nbsp; Por
-ejemplo, la función seno tiene valores entre -1 y 1, en consecuencia, podemos usar los 31
-dígitos para representar 31 decimales y como la parte negativa es simétrica de la
-positiva, basta calcular una de las mitades (de hecho, con un cuarto basta).&nbsp; El
-escalado es una técnica que no es desconocida aún en las computadoras modernas.&nbsp; A
-pesar de que la velocidad de los procesadores digitales actuales lo compensa , operar con
-enteros sigue siendo más rápido que hacerlo en punto flotante y existe una gran cantidad
-de cálculos, tales como los usados en procesamiento de imágenes, donde es necesario
-repetir el mismo cálculo sobre cada píxel de la imagen, que siguen siend mucho más
-rápidos si se usa aritmética de enteros.</p>
+    <p>
+      La MÃ¡quina opera sobre enteros, no hay fracciones decimales ni notaciÃ³n
+      exponencial. Todos los cÃ¡lculos deben ser escalados para caber dentro de
+      enteros. Por ejemplo, la funciÃ³n seno tiene valores entre -1 y 1, en
+      consecuencia, podemos usar los 31 dÃ­gitos para representar 31 decimales y
+      como la parte negativa es simÃ©trica de la positiva, basta calcular una de
+      las mitades (de hecho, con un cuarto basta). El escalado es una tÃ©cnica
+      que no es desconocida aÃºn en las computadoras modernas. A pesar de que la
+      velocidad de los procesadores digitales actuales lo compensa , operar con
+      enteros sigue siendo mÃ¡s rÃ¡pido que hacerlo en punto flotante y existe una
+      gran cantidad de cÃ¡lculos, tales como los usados en procesamiento de
+      imÃ¡genes, donde es necesario repetir el mismo cÃ¡lculo sobre cada pÃ­xel de
+      la imagen, que siguen siend mucho mÃ¡s rÃ¡pidos si se usa aritmÃ©tica de
+      enteros.
+    </p>
 
-<p>La columna final de la Máquina, aquella que representa el valor buscado, está
-directamente acoplada al mecanismo de impresión.&nbsp; El modelo en el Museo de Ciencias
-no tiene el mecanismo de impresión y en su lugar ha sido provista de una computadora
-portable que puede leer la posición de las ruedas numerales de la última columna y
-verificar los resultados, graficarlos o procesarlo como mejor se requiriera. </p>
+    <p>
+      La columna final de la MÃ¡quina, aquella que representa el valor buscado,
+      estÃ¡ directamente acoplada al mecanismo de impresiÃ³n. El modelo en el
+      Museo de Ciencias no tiene el mecanismo de impresiÃ³n y en su lugar ha sido
+      provista de una computadora portable que puede leer la posiciÃ³n de las
+      ruedas numerales de la Ãºltima columna y verificar los resultados,
+      graficarlos o procesarlo como mejor se requiriera.
+    </p>
 
-<hr>
+    <hr />
 
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="mathemat.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="figure.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-</body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="mathemat.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="figure.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

@@ -1,240 +1,284 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
+    <title>Principio Matem√°tico</title>
+  </head>
 
-<head>
-<title>Principio Matem·tico</title>
+  <body>
+    <h1 align="center">Principio Matem√°tico</h1>
 
-</head>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="needfor.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="overall.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <p>
+      Es un hecho que todo c√°lculo real contiene errores. Existen l√≠mites sobre
+      cu√°nta precisi√≥n podemos lograr en cualquier medici√≥n. Si un capit√°n
+      obtiene la elevaci√≥n de una estrella con su sextante, no puede obtener
+      infinitos decimales, igualmente, en la mayor√≠a de los c√°lculos en la vida
+      real, partimos de valores que contienen errores. Si tenemos un saldo en el
+      banco, y nos acreditan intereses, las d√©cimas de centavo terminan
+      redondeadas a cetavos. As√≠ pues, en tanto una tabla sea correcta dentro de
+      las posiciones decimales que muestra, la aproximaci√≥n es aceptable.
+    </p>
 
-<body>
+    <p>
+      La mayor√≠a de las formulas pueden aproximarse mediante una serie
+      polin√≥mica tal como:
+    </p>
 
-<h1 align="center">Principio Matem·tico</h1>
+    <blockquote>
+      <pre>a<sub>n</sub> x<sup>n</sup> + a<sub>n-1</sub> x<sup>n-1</sup> + ... + a<sub>1</sub> x + a<sub>0</sub></pre>
+    </blockquote>
 
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="needfor.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="overall.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-<hr>
-<p>Es un hecho que todo c·lculo real contiene errores.&nbsp; Existen lÌmites sobre
-cu·nta precisiÛn podemos lograr en cualquier mediciÛn.&nbsp; Si un capit·n obtiene la
-elevaciÛn de una estrella con su sextante, no puede obtener infinitos decimales,
-igualmente, en la mayorÌa de los c·lculos en la vida real, partimos de valores que
-contienen errores.&nbsp; Si tenemos un saldo en el banco, y nos acreditan intereses, las
-dÈcimas de centavo terminan redondeadas a cetavos.&nbsp; AsÌ pues, en tanto una tabla
-sea correcta dentro de las posiciones decimales que muestra, la aproximaciÛn es
-aceptable.</p>
+    <p>
+      Cuanto m√°s t√©rminos se tienen (o sea, cuanto m√°s alto es '<tt>n</tt>')
+      tanto menor es el error que se obtiene. A√∫n funciones que no parecen darse
+      naturalmente a una aproximaci√≥n polin√≥mica pueden obtenerse, dentro de un
+      cierto rango, dada una buena selecci√≥n de coeficientes.
+    </p>
 
-<p>La mayorÌa de las formulas pueden aproximarse mediante una serie polinÛmica tal como:</p>
+    <table border="0">
+      <tr>
+        <td><img src="../images/PoliSin.gif" width="354" height="336" /></td>
+        <td>
+          La l√≠nea roja en la imagen de la izquierda representa la funci√≥n seno
+          de un √°ngulo para un giro completo. Las otras curvas representan
+          sucesivas aproximaciones. Se muestra el coeficiente ('<tt>n=..</tt>')
+          que corresponde a cada curva. La curva de
+          <tt>n=9</tt> no se puede ver pues la curva real (roja) la oculta por
+          completo. Consecuentemente, a los fines de este gr√°fico, un polinomio
+          de <tt>n=9</tt> es indistinguible de la funci√≥n real.
+          <p>
+            Los coeficientes ('<tt>a</tt>') son cero para todos los valores
+            pares de '<tt>n</tt>' mientras que el resto son <tt>(1/n!)</tt>,
+            altern√°ndose el signo (positivo para n=1, negativo para n=3,
+            positivo para n=5 y as√≠ sucesivamente)
+          </p>
+        </td>
+      </tr>
+    </table>
 
-<blockquote>
-  <pre>a<sub>n</sub> x<sup>n</sup> + a<sub>n-1</sub> x<sup>n-1</sup> + ... + a<sub>1</sub> x + a<sub>0</sub></pre>
-</blockquote>
+    <p>
+      Vamos a ver los valores para un cierto polinomio, tal como:
+      <tt>3x + 1</tt>
+    </p>
 
-<p>Cuanto m·s tÈrminos se tienen (o sea, cuanto m·s alto es '<tt>n</tt>') tanto menor
-es el error que se obtiene.&nbsp; A˙n funciones que no parecen darse naturalmente a una
-aproximaciÛn polinÛmica pueden obtenerse, dentro de un cierto rango, dada una buena
-selecciÛn de coeficientes.</p>
+    <table border="1">
+      <tr>
+        <th align="right" width="33%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="33%"><em>f</em>(x)</th>
+        <th align="right" width="33%">dif.</th>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="33%">4</td>
+        <td align="right" width="33%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="33%">7</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="33%">10</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+      <tr>
+        <td align="right" width="33%" bgcolor="#C0C0C0">4</td>
+        <td align="right" width="33%">13</td>
+        <td align="right" width="33%">3</td>
+      </tr>
+    </table>
 
-<table border="0">
-  <tr>
-    <td><img src="../images/PoliSin.gif" WIDTH="354" HEIGHT="336"></td>
-    <td>La lÌnea roja en la imagen de la izquierda representa la funciÛn seno de un ·ngulo
-    para un giro completo.&nbsp; Las otras curvas representan sucesivas aproximaciones. &nbsp;
-    Se muestra el coeficiente ('<tt>n=..</tt>') que corresponde a cada curva.&nbsp; La curva
-    de <tt>n=9</tt> no se puede ver pues la curva real (roja) la oculta por completo. &nbsp;
-    Consecuentemente, a los fines de este gr·fico, un polinomio de <tt>n=9</tt> es
-    indistinguible de la funciÛn real.<p>Los coeficientes ('<tt>a</tt>') son cero para todos
-    los valores pares de '<tt>n</tt>' mientras que el resto son <tt>(1/n!)</tt>, altern·ndose
-    el signo (positivo para n=1, negativo para n=3, positivo para n=5 y asÌ sucesivamente)</td>
-  </tr>
-</table>
+    <p>
+      La primera columna representa los valores de X; la segunda, el resultado
+      de calcular la funci√≥n para ese valor de X. La √∫ltima columna es la
+      diferencia entre los valores de la fila actual menos la anterior. Para un
+      polinomio de grado n=1, la primera diferencia es siempre una constante.
+      Siendo que este polinomio representa una l√≠nea recta, es l√≥gico que se
+      incremente regularmente, por ello las diferencias entre sucesivos valores
+      a intervalos regulares son siempre iguales.
+    </p>
 
-<p>Vamos a ver los valores para un cierto polinomio, tal como: <tt>3x + 1</tt></p>
+    <p>
+      Para un polinomio de <tt>n=2</tt>, tal como
+      <tt>2 x<sup>2</sup> + 3 x + 1</tt>, tendr√≠amos:
+    </p>
 
-<table border="1">
-  <tr>
-    <th align="right" width="33%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="33%"><em>f</em>(x)</th>
-    <th align="right" width="33%">dif.</th>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="33%">4</td>
-    <td align="right" width="33%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="33%">7</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="33%">10</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-  <tr>
-    <td align="right" width="33%" bgcolor="#C0C0C0">4</td>
-    <td align="right" width="33%">13</td>
-    <td align="right" width="33%">3</td>
-  </tr>
-</table>
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">dif1</th>
+        <th align="right" width="25%">dif2</th>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">&nbsp;</td>
+        <td align="right" width="25%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%">15</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%">28</td>
+        <td align="right" width="25%">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">4</td>
+        <td align="right">45</td>
+        <td align="right">17</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">5</td>
+        <td align="right">66</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
+      </tr>
+    </table>
 
-<p>La primera columna representa los valores de X; la segunda, el resultado de calcular la
-funciÛn para ese valor de X.&nbsp; La ˙ltima columna es la diferencia entre los valores
-de la fila actual menos la anterior.&nbsp; Para un polinomio de grado n=1, la primera
-diferencia es siempre una constante.&nbsp; Siendo que este polinomio representa una lÌnea
-recta, es lÛgico que se incremente regularmente, por ello las diferencias entre sucesivos
-valores a intervalos regulares son siempre iguales.</p>
+    <p>
+      En este caso, la primera columna de diferencias (<strong>dif1</strong>)
+      a√∫n var√≠a, pero si calculamos la diferencia entre diferencias sucesivas,
+      obtenemos los valores de la columna <strong>dif2 </strong>que son iguales
+      entre si.
+    </p>
 
-<p>Para un polinomio de&nbsp; <tt>n=2</tt>, tal como <tt>2 x<sup>2</sup> + 3 x + 1</tt>,
-tendrÌamos:</p>
+    <p>
+      De hecho, para cualquier polinomio de grado '<tt>n</tt>', la en√©sima
+      diferencia ser√° siempre una constante.
+    </p>
 
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">dif1</th>
-    <th align="right" width="25%">dif2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">&nbsp;</td>
-    <td align="right" width="25%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%">15</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%">28</td>
-    <td align="right" width="25%">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">17</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-</table>
+    <p>
+      La M√°quina diferencial opera al reverso, o sea, una vez que uno conoce los
+      valores de la primera fila, se puede obtener el resto. En este √∫ltimo
+      ejemplo, s√≥lo se necesitan los n√∫meros 6, 9 y 4 para obtener el resto.
+    </p>
 
-<p>En este caso, la primera columna de diferencias (<strong>dif1</strong>) a˙n varÌa,
-pero si calculamos la diferencia entre diferencias sucesivas, obtenemos los valores de la
-columna <strong>dif2 </strong>que son iguales entre si. </p>
+    <p>Los valores de la siguiente tabla se obtuvieron por tal proceso.</p>
 
-<p>De hecho, para cualquier polinomio de grado '<tt>n</tt>', la enÈsima diferencia ser·
-siempre una constante. </p>
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">dif1</th>
+        <th align="right" width="25%">dif2</th>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%">15</td>
+        <td align="right" width="25%">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%">28</td>
+        <td align="right" width="25%">17</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">4</td>
+        <td align="right">45</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">5</td>
+        <td align="right">66</td>
+        <td align="right">25</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">6</td>
+        <td align="right">91</td>
+        <td align="right">29</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">7</td>
+        <td align="right">120</td>
+        <td align="right">33</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">8</td>
+        <td align="right">153</td>
+        <td align="right">37</td>
+        <td align="right">4</td>
+      </tr>
+    </table>
 
-<p>La M·quina diferencial opera al reverso, o sea, una vez que uno conoce los valores de
-la primera fila, se puede obtener el resto.&nbsp; En este ˙ltimo ejemplo, sÛlo se
-necesitan los n˙meros 6, 9 y 4 para obtener el resto.</p>
+    <p>
+      Dada la primera fila, 6, 9 y 4 se calcula cada casilla de cada fila
+      sucesiva sumando los valores de la celda inmediatamente arriba y aquella a
+      su derecha. As√≠ pues, en la segunda fila tenemos
+      <tt>6 + 9 ==&gt; 15, 9 + 4 ==&gt; 13 </tt>y, finalmente, dado que la
+      √∫ltima columna es siempre una constante, simplemente la repetimos (otra
+      forma de verlo es que la tercer diferencia es siempre cero, de donde
+      resulta que <tt>4 + 0 ==&gt; 4</tt>).
+    </p>
 
-<p>Los valores de la siguiente tabla se obtuvieron por tal proceso.</p>
+    <p>
+      Entonces, para la tercer fila, tenemos
+      <tt>15 + 13 ==&gt; 28, 13 + 4 ==&gt; 17</tt>. El resto de las filas se
+      calcularon por ese m√©todo y se pueden verificar calculando el polinomio
+      real.
+    </p>
 
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">dif1</th>
-    <th align="right" width="25%">dif2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%">15</td>
-    <td align="right" width="25%">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%">28</td>
-    <td align="right" width="25%">17</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">25</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">6</td>
-    <td align="right">91</td>
-    <td align="right">29</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">7</td>
-    <td align="right">120</td>
-    <td align="right">33</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">8</td>
-    <td align="right">153</td>
-    <td align="right">37</td>
-    <td align="right">4</td>
-  </tr>
-</table>
+    <p>
+      El proceso es tan simple que deber√≠a poder efectuarse 'mediante vapor',
+      como Babbage quer√≠a.
+    </p>
 
-<p>Dada la primera fila, 6, 9 y 4 se calcula cada casilla de cada fila sucesiva sumando
-los valores de la celda inmediatamente arriba y aquella a su derecha.&nbsp; AsÌ pues, en
-la segunda fila tenemos <tt>6 + 9 ==&gt; 15, 9 + 4 ==&gt; 13 </tt>y, finalmente, dado que
-la ˙ltima columna es siempre una constante, simplemente la repetimos (otra forma de verlo
-es que la tercer diferencia es siempre cero, de donde resulta que <tt>4 + 0 ==&gt; 4</tt>).</p>
+    <p>
+      Por supuesto, el primer problema es calcular la primera fila, y es por
+      ello que la M√°quina Diferencial no puede calcular cualquier valor, el
+      proceso depende de ir calculando valores sucesivos partiendo de uno
+      conocido, m√°s la primera fila de diferencias. Para un polinomio simple
+      como este, la tarea es f√°cil, pero para un polinomio complejo, es mucho
+      m√°s dif√≠cil. M√°s a√∫n, primero se debe obtener aquel polinomio que mejor se
+      aproxime a la curva real que se desea calcular, tal como la funci√≥n seno
+      de m√°s arriba. Todos ellos son procesos algrebraicos bien conocidos,
+      aunque no f√°ciles.
+    </p>
 
-<p>Entonces, para la tercer fila, tenemos <tt>15 + 13 ==&gt; 28, 13 + 4 ==&gt; 17</tt>. El
-resto de las filas se calcularon por ese mÈtodo y se pueden verificar calculando el
-polinomio real.</p>
+    <p>
+      Este esfuerzo comienza a redituar en cuanto se comienzan a obtener p√°ginas
+      y p√°ginas con columnas llenas de valores, que es lo m√°s tedioso, lento y
+      proclive a error.
+    </p>
 
-<p>El proceso es tan simple que deberÌa poder efectuarse 'mediante vapor', como Babbage
-querÌa.</p>
+    <hr />
 
-<p>Por supuesto, el primer problema es calcular la primera fila, y es por ello que la
-M·quina Diferencial no puede calcular cualquier valor, el proceso depende de ir
-calculando valores sucesivos partiendo de uno conocido, m·s la primera fila de
-diferencias.&nbsp; Para un polinomio simple como este, la tarea es f·cil, pero para un
-polinomio complejo, es mucho m·s difÌcil.&nbsp; M·s a˙n, primero se debe obtener aquel
-polinomio que mejor se aproxime a la curva real que se desea calcular, tal como la
-funciÛn seno de m·s arriba.&nbsp; Todos ellos son procesos algrebraicos bien conocidos,
-aunque no f·ciles.</p>
-
-<p>Este esfuerzo comienza a redituar en cuanto se comienzan a obtener p·ginas y p·ginas
-con columnas llenas de valores, que es lo m·s tedioso, lento y proclive a error.</p>
-
-<hr>
-
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="needfor.htm">&lt; Previa</a></td>
-    <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
-    <td width="34%" align="right"><a href="overall.htm">Siguiente
-      &gt;</a></td>
-  </tr>
-</table>
-</body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="needfor.htm">&lt; Previa</a></td>
+        <td width="33%" align="center"><a href="index.html">Arriba ^</a></td>
+        <td width="34%" align="right">
+          <a href="overall.htm">Siguiente &gt;</a>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

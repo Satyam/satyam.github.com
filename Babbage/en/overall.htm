@@ -1,298 +1,359 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
+    <title>Overall design</title>
+  </head>
 
-<head>
-<title>Overall design</title>
+  <body>
+    <h1 align="center">Overall design</h1>
 
-</head>
-
-<body>
-
-<h1 align="center">Overall design</h1>
-
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="mathemat.htm">&lt; Previous</a></td>
-    <td width="33%" align="center"><a href="index.html">Up      ^</a></td>
-    <td width="34%" align="right"><a href="figure.htm">Next
-      &gt;</a></td>
-  </tr>
-</table>
-<hr>
-
-<p>The Difference Engine is based on gears called 'figure wheels', each representing a
-digit (or figure) from 0 to 9. The figure wheels are stacked in eight columns, each column
-representing a complete number. The Difference Engine has 31 figure wheels in each column
-and 8 columns in all for a total of 248 figure wheels.</p>
-
-<table border="0" width="100%">
-  <caption><b>Front View</b></caption>
-  <tr>
-    <td width="33%" align="right">Results transfer mechanism</td>
-    <td width="33%" align="center">Figure wheel axles (8)</td>
-    <td width="34%">Figure wheels&nbsp; (8 * 31)</td>
-  </tr>
-  <tr>
-    <td width="33%" align="right">Printing and stamping wheels</td>
-    <td width="33%" align="center"><img src="../images/Frente.gif" alt="Frente.gif (8093 bytes)" WIDTH="480" HEIGHT="360"></td>
-    <td width="34%">Hand crank</td>
-  </tr>
-  <tr>
-    <td width="33%" align="right">Stereotyping table movement</td>
-    <td width="33%" align="center">Levers and racks</td>
-    <td width="34%">Cams</td>
-  </tr>
-</table>
-
-<p>This is a front view of the Engine.&nbsp; The top part in the middle is where the
-figure wheels are, 31 of them in each of the 8 axles.&nbsp; To the right, the hand crank
-provides all power to the Engine through bevel pinions to the vertical axle that holds the
-cams.&nbsp; The profile of the cams provide the movement to most of the parts of the
-Engine through horizontal bars that run across the section below the figure wheels. &nbsp;
-There, several levers and racks turn the back and forth movement (left to right, as seen
-on this image) of the the bars to the up and down or angular movement for the different
-parts of the Engine.</p>
-
-<p>To the left, the stereotyping mechanism also receives movement from the hand crank
-through an axle that runs all the length of the Engine, near the base.&nbsp; It has three
-main sections.&nbsp; The lower one moves the table that holds the stereotyping plates so
-the results can be printed in several combinations of columns and rows per page.&nbsp; The
-middle section contains the print and stamping wheels which receive the results from the
-transfer mechanism on top.&nbsp; In between the printing wheels and the printing table
-lies the actual pans that hold the soft material on which the stamping is done.</p>
-
-<table border="0" width="100%">
-  <tr>
-    <td><img src="../images/Planta.gif" alt="Planta.gif (3351 bytes)" WIDTH="480" HEIGHT="360"></td>
-    <td>This is a view from the top.&nbsp; To the right is the hand crank which moves, through
-    a couple of bevel pinions, the stack of cams which in this image, lie under the big gear
-    to the right. &nbsp; In the middle there is the main calculating section, with the eight
-    axles holding the figure wheels.&nbsp; There are several other gears, levers and arms in
-    this section, which are not shown here.&nbsp; To the left, the printing and stereotyping
-    mechanism</td>
-  </tr>
-</table>
-
-<p>The stereotyping mechanism was not built by the Museum since it has a similar number of
-parts as the calculating section with less repetition of parts. It won't be covered in
-this pages.</p>
-
-<p>So, the Difference Engine can only store 8 numbers at a time. How can it work with so
-little? Lets look at the table we used previously.</p>
-
-<table border="1">
-  <tr>
-    <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
-    <th align="right" width="25%"><em>f</em>(x)</th>
-    <th align="right" width="25%">diff1</th>
-    <th align="right" width="25%">diff2</th>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
-    <td align="right" width="25%">6</td>
-    <td align="right" width="25%">9</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">15</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">13</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
-    <td align="right" width="25%" bgcolor="#FFFF00">28</td>
-    <td align="right" width="25%">17</td>
-    <td align="right" width="25%">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">4</td>
-    <td align="right">45</td>
-    <td align="right">21</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">5</td>
-    <td align="right">66</td>
-    <td align="right">25</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">6</td>
-    <td align="right">91</td>
-    <td align="right">29</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">7</td>
-    <td align="right">120</td>
-    <td align="right">33</td>
-    <td align="right">4</td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#C0C0C0">8</td>
-    <td align="right">153</td>
-    <td align="right">37</td>
-    <td align="right">4</td>
-  </tr>
-</table>
-
-<p>Notice that each row can be calculated from the row immediately before. You don't need
-to remember the values on the row before that one, you only need to remember one row at a
-time. Moreover, to calculate the 28 in the 3rd row (see cells in yellow), you add the 15
-and the 13 in the row above and then you can discard the 15 since it is not going to be
-used any further. You still need to hold the 13, since it is used to make the 17 just
-below it, but once that is done, it can also be discarded. The Engine actually makes the
-addition right on the number column, it doesn't use any auxiliary device, the figure
-wheels are not just for storage but they are used to do the process.</p>
-
-<p>Furthermore, you don't need to do the calculations on one cell at a time, you can do a
-whole row in two steps, once for the even columns, one for the odd columns.</p>
-
-<table border="0" width="90%">
-  <tr>
-    <td width="50%"><table border="1">
+    <table border="0" width="100%">
       <tr>
-        <th align="right" width="16%" bgcolor="#C0C0C0">X</th>
-        <th align="right" width="16%">f(x)</th>
-        <th align="right" width="16%">diff1</th>
-        <th align="right" width="16%">diff2</th>
-        <th align="right" width="16%">diff3</th>
-        <th align="right" width="16%">diff4</th>
+        <td width="33%"><a href="mathemat.htm">&lt; Previous</a></td>
+        <td width="33%" align="center"><a href="index.html">Up ^</a></td>
+        <td width="34%" align="right"><a href="figure.htm">Next &gt;</a></td>
+      </tr>
+    </table>
+    <hr />
+
+    <p>
+      The Difference Engine is based on gears called 'figure wheels', each
+      representing a digit (or figure) from 0 to 9. The figure wheels are
+      stacked in eight columns, each column representing a complete number. The
+      Difference Engine has 31 figure wheels in each column and 8 columns in all
+      for a total of 248 figure wheels.
+    </p>
+
+    <table border="0" width="100%">
+      <caption>
+        <b>Front View</b>
+      </caption>
+      <tr>
+        <td width="33%" align="right">Results transfer mechanism</td>
+        <td width="33%" align="center">Figure wheel axles (8)</td>
+        <td width="34%">Figure wheels (8 * 31)</td>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">1</td>
-        <td align="right" width="16%">2</td>
-        <td align="right" width="16%">1</td>
-        <td align="right" width="16%">3</td>
-        <td align="right" width="16%">4</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">1</td>
+        <td width="33%" align="right">Printing and stamping wheels</td>
+        <td width="33%" align="center">
+          <img
+            src="../images/Frente.gif"
+            alt="Frente.gif (8093 bytes)"
+            width="480"
+            height="360"
+          />
+        </td>
+        <td width="34%">Hand crank</td>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">2</td>
-        <td align="right" width="16%">3</td>
-        <td align="right" width="16%">4</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">7</td>
-        <td align="right" width="16%" bgcolor="#00FFFF">5</td>
-        <td align="right" width="16%" bgcolor="#00FF00">1</td>
+        <td width="33%" align="right">Stereotyping table movement</td>
+        <td width="33%" align="center">Levers and racks</td>
+        <td width="34%">Cams</td>
+      </tr>
+    </table>
+
+    <p>
+      This is a front view of the Engine. The top part in the middle is where
+      the figure wheels are, 31 of them in each of the 8 axles. To the right,
+      the hand crank provides all power to the Engine through bevel pinions to
+      the vertical axle that holds the cams. The profile of the cams provide the
+      movement to most of the parts of the Engine through horizontal bars that
+      run across the section below the figure wheels. There, several levers and
+      racks turn the back and forth movement (left to right, as seen on this
+      image) of the the bars to the up and down or angular movement for the
+      different parts of the Engine.
+    </p>
+
+    <p>
+      To the left, the stereotyping mechanism also receives movement from the
+      hand crank through an axle that runs all the length of the Engine, near
+      the base. It has three main sections. The lower one moves the table that
+      holds the stereotyping plates so the results can be printed in several
+      combinations of columns and rows per page. The middle section contains the
+      print and stamping wheels which receive the results from the transfer
+      mechanism on top. In between the printing wheels and the printing table
+      lies the actual pans that hold the soft material on which the stamping is
+      done.
+    </p>
+
+    <table border="0" width="100%">
+      <tr>
+        <td>
+          <img
+            src="../images/Planta.gif"
+            alt="Planta.gif (3351 bytes)"
+            width="480"
+            height="360"
+          />
+        </td>
+        <td>
+          This is a view from the top. To the right is the hand crank which
+          moves, through a couple of bevel pinions, the stack of cams which in
+          this image, lie under the big gear to the right. In the middle there
+          is the main calculating section, with the eight axles holding the
+          figure wheels. There are several other gears, levers and arms in this
+          section, which are not shown here. To the left, the printing and
+          stereotyping mechanism
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      The stereotyping mechanism was not built by the Museum since it has a
+      similar number of parts as the calculating section with less repetition of
+      parts. It won't be covered in this pages.
+    </p>
+
+    <p>
+      So, the Difference Engine can only store 8 numbers at a time. How can it
+      work with so little? Lets look at the table we used previously.
+    </p>
+
+    <table border="1">
+      <tr>
+        <th align="right" width="25%" bgcolor="#C0C0C0">X</th>
+        <th align="right" width="25%"><em>f</em>(x)</th>
+        <th align="right" width="25%">diff1</th>
+        <th align="right" width="25%">diff2</th>
       </tr>
       <tr>
-        <td align="right" width="16%" bgcolor="#C0C0C0">3</td>
-        <td align="right" width="16%" bgcolor="#FFFF00">7</td>
-        <td align="right" width="16%" bgcolor="#00FFFF">11</td>
-        <td align="right" width="16%" bgcolor="#00FF00">12</td>
-        <td align="right" width="16%" bgcolor="#FF00FF">6</td>
-        <td align="right" width="16%">1</td>
+        <td align="right" width="25%" bgcolor="#C0C0C0">1</td>
+        <td align="right" width="25%">6</td>
+        <td align="right" width="25%">9</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">2</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">15</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">13</td>
+        <td align="right" width="25%">4</td>
+      </tr>
+      <tr>
+        <td align="right" width="25%" bgcolor="#C0C0C0">3</td>
+        <td align="right" width="25%" bgcolor="#FFFF00">28</td>
+        <td align="right" width="25%">17</td>
+        <td align="right" width="25%">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">4</td>
-        <td align="right" bgcolor="#00FF00">18</td>
-        <td align="right" bgcolor="#FF00FF">23</td>
-        <td align="right">18</td>
-        <td align="right">7</td>
-        <td align="right">1</td>
+        <td align="right">45</td>
+        <td align="right">21</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">5</td>
-        <td align="right">41</td>
-        <td align="right">41</td>
+        <td align="right">66</td>
         <td align="right">25</td>
-        <td align="right">8</td>
-        <td align="right">1</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">6</td>
-        <td align="right">82</td>
-        <td align="right">66</td>
-        <td align="right">33</td>
-        <td align="right">9</td>
-        <td align="right">1</td>
+        <td align="right">91</td>
+        <td align="right">29</td>
+        <td align="right">4</td>
       </tr>
       <tr>
         <td align="right" bgcolor="#C0C0C0">7</td>
-        <td align="right">144</td>
-        <td align="right">99</td>
-        <td align="right">42</td>
-        <td align="right">19</td>
-        <td align="right">1</td>
+        <td align="right">120</td>
+        <td align="right">33</td>
+        <td align="right">4</td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#C0C0C0">8</td>
+        <td align="right">153</td>
+        <td align="right">37</td>
+        <td align="right">4</td>
       </tr>
     </table>
-    </td>
-    <td width="50%"><table border="1">
+
+    <p>
+      Notice that each row can be calculated from the row immediately before.
+      You don't need to remember the values on the row before that one, you only
+      need to remember one row at a time. Moreover, to calculate the 28 in the
+      3rd row (see cells in yellow), you add the 15 and the 13 in the row above
+      and then you can discard the 15 since it is not going to be used any
+      further. You still need to hold the 13, since it is used to make the 17
+      just below it, but once that is done, it can also be discarded. The Engine
+      actually makes the addition right on the number column, it doesn't use any
+      auxiliary device, the figure wheels are not just for storage but they are
+      used to do the process.
+    </p>
+
+    <p>
+      Furthermore, you don't need to do the calculations on one cell at a time,
+      you can do a whole row in two steps, once for the even columns, one for
+      the odd columns.
+    </p>
+
+    <table border="0" width="90%">
       <tr>
-        <td width="100%" bgcolor="#FFFF00">1 - Yellow</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#00FFFF">2 - Light Blue</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#00FF00">3 - Green</td>
-      </tr>
-      <tr>
-        <td width="100%" bgcolor="#FF00FF">4 - Magenta</td>
+        <td width="50%">
+          <table border="1">
+            <tr>
+              <th align="right" width="16%" bgcolor="#C0C0C0">X</th>
+              <th align="right" width="16%">f(x)</th>
+              <th align="right" width="16%">diff1</th>
+              <th align="right" width="16%">diff2</th>
+              <th align="right" width="16%">diff3</th>
+              <th align="right" width="16%">diff4</th>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">1</td>
+              <td align="right" width="16%">2</td>
+              <td align="right" width="16%">1</td>
+              <td align="right" width="16%">3</td>
+              <td align="right" width="16%">4</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">1</td>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">2</td>
+              <td align="right" width="16%">3</td>
+              <td align="right" width="16%">4</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">7</td>
+              <td align="right" width="16%" bgcolor="#00FFFF">5</td>
+              <td align="right" width="16%" bgcolor="#00FF00">1</td>
+            </tr>
+            <tr>
+              <td align="right" width="16%" bgcolor="#C0C0C0">3</td>
+              <td align="right" width="16%" bgcolor="#FFFF00">7</td>
+              <td align="right" width="16%" bgcolor="#00FFFF">11</td>
+              <td align="right" width="16%" bgcolor="#00FF00">12</td>
+              <td align="right" width="16%" bgcolor="#FF00FF">6</td>
+              <td align="right" width="16%">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">4</td>
+              <td align="right" bgcolor="#00FF00">18</td>
+              <td align="right" bgcolor="#FF00FF">23</td>
+              <td align="right">18</td>
+              <td align="right">7</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">5</td>
+              <td align="right">41</td>
+              <td align="right">41</td>
+              <td align="right">25</td>
+              <td align="right">8</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">6</td>
+              <td align="right">82</td>
+              <td align="right">66</td>
+              <td align="right">33</td>
+              <td align="right">9</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+              <td align="right" bgcolor="#C0C0C0">7</td>
+              <td align="right">144</td>
+              <td align="right">99</td>
+              <td align="right">42</td>
+              <td align="right">19</td>
+              <td align="right">1</td>
+            </tr>
+          </table>
+        </td>
+        <td width="50%">
+          <table border="1">
+            <tr>
+              <td width="100%" bgcolor="#FFFF00">1 - Yellow</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#00FFFF">2 - Light Blue</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#00FF00">3 - Green</td>
+            </tr>
+            <tr>
+              <td width="100%" bgcolor="#FF00FF">4 - Magenta</td>
+            </tr>
+          </table>
+          <p>Order of calculation</p>
+        </td>
       </tr>
     </table>
-    <p>Order of calculation </td>
-  </tr>
-</table>
 
-<p>In this table, the cells have been colored to show the sequence in which they are
-calculated. All cells with the same background color can be calculated at the same time.
-The order&nbsp; of calculation is shown at right, from top to bottom. This means that to
-calculate a full row, instead of requiring as many steps as columns, all can be done in
-two steps.&nbsp; This also affects the setup of the Engine, since instead of loading it
-with a full row to start from, (in this example, the row for x=1:&nbsp; 2, 1, 3, 4,
-1)&nbsp; you would set it up with the yellow and light blue diagonal (7, 11, 7, 5, 1).</p>
+    <p>
+      In this table, the cells have been colored to show the sequence in which
+      they are calculated. All cells with the same background color can be
+      calculated at the same time. The order of calculation is shown at right,
+      from top to bottom. This means that to calculate a full row, instead of
+      requiring as many steps as columns, all can be done in two steps. This
+      also affects the setup of the Engine, since instead of loading it with a
+      full row to start from, (in this example, the row for x=1: 2, 1, 3, 4, 1)
+      you would set it up with the yellow and light blue diagonal (7, 11, 7, 5,
+      1).
+    </p>
 
-<p>All the operation is controlled by a series of cams that engage and disengage, turn and
-hold the various gears and levers in the Engine. There are just two sets of 7 pairs of
-conjugate cams each, half a turn apart from one another, one for the odd cycle, one for
-the even cycle. If the process could not be broken into two cycles, the design of the
-Engine would have been far more complicated.</p>
+    <p>
+      All the operation is controlled by a series of cams that engage and
+      disengage, turn and hold the various gears and levers in the Engine. There
+      are just two sets of 7 pairs of conjugate cams each, half a turn apart
+      from one another, one for the odd cycle, one for the even cycle. If the
+      process could not be broken into two cycles, the design of the Engine
+      would have been far more complicated.
+    </p>
 
-<p>If all the numbers involved in the calculation are positive, the full 31 digits can be
-used, otherwise, the most significant figure wheel can be used to represent the sign and
-half a digit, for a range from -5000 ... 000 to + 4999 ... 999. This is similar to what is
-done in binary processors. </p>
+    <p>
+      If all the numbers involved in the calculation are positive, the full 31
+      digits can be used, otherwise, the most significant figure wheel can be
+      used to represent the sign and half a digit, for a range from -5000 ...
+      000 to + 4999 ... 999. This is similar to what is done in binary
+      processors.
+    </p>
 
-<p>Imagine you have just two columns (numbers) with two figure wheels (digits) each. The
-second column is set at <tt>01</tt>. What is the number you have to set at the first
-column so that when added to the second column gives zero? Any such number could be
-considered -1, since <tt>1 + (-1)</tt> equals 0. So, what is that number? 99!. If you add
-99 to 01 it results in 100, but since you only have two figure wheels, the hundred gets
-dropped and you end up with 0. A similar process produces all negative numbers, you just
-have to subtract the absolute value of a number from the number one higher than the
-maximum you can represent (in this example you can represent 99, so one more is 100).
-&nbsp; Usually you have to establish a limit on what you consider positive an what
-negative, and that is usually set at half way.&nbsp; Thus, numbers with the most
-significant digit in the range 0 through 4 are positive, those in the range 5 through 9
-are negative.&nbsp; No further mention of this technique for negative numbers will be
-done, since it is a well known numerical trick and is not particular to the Engine.</p>
+    <p>
+      Imagine you have just two columns (numbers) with two figure wheels
+      (digits) each. The second column is set at <tt>01</tt>. What is the number
+      you have to set at the first column so that when added to the second
+      column gives zero? Any such number could be considered -1, since
+      <tt>1 + (-1)</tt> equals 0. So, what is that number? 99!. If you add 99 to
+      01 it results in 100, but since you only have two figure wheels, the
+      hundred gets dropped and you end up with 0. A similar process produces all
+      negative numbers, you just have to subtract the absolute value of a number
+      from the number one higher than the maximum you can represent (in this
+      example you can represent 99, so one more is 100). Usually you have to
+      establish a limit on what you consider positive an what negative, and that
+      is usually set at half way. Thus, numbers with the most significant digit
+      in the range 0 through 4 are positive, those in the range 5 through 9 are
+      negative. No further mention of this technique for negative numbers will
+      be done, since it is a well known numerical trick and is not particular to
+      the Engine.
+    </p>
 
-<p>The Engine operates all on integers, there is no decimal part or exponential notation.
-Calculations are scaled to fit within integers. For example, the sine function has values
-in between -1 and 1, with one half simetrical to the other, thus, you can use the 31
-digits to represent that many decimal digits for the positive part of it. This is a
-technique not unknown to modern computers. Though the speed of current digital processors
-compensates for it, integers are still much faster to process than floating point numbers
-and if there is a large number of calculations to be made, such as in image processing,
-where you have to repeat the same calculation for each image pixel, it is much faster if
-the program does it in integer arithmetic.</p>
+    <p>
+      The Engine operates all on integers, there is no decimal part or
+      exponential notation. Calculations are scaled to fit within integers. For
+      example, the sine function has values in between -1 and 1, with one half
+      simetrical to the other, thus, you can use the 31 digits to represent that
+      many decimal digits for the positive part of it. This is a technique not
+      unknown to modern computers. Though the speed of current digital
+      processors compensates for it, integers are still much faster to process
+      than floating point numbers and if there is a large number of calculations
+      to be made, such as in image processing, where you have to repeat the same
+      calculation for each image pixel, it is much faster if the program does it
+      in integer arithmetic.
+    </p>
 
-<p>The final column of the Engine, that represents the desired output, is directly coupled
-to the printing mechanism. The model at the Science Museum does not have the printing
-mechanism. It has been furnished with a portable computer that reads the position of the
-figure wheels on that column and can verify the results, display them as a graph or
-process them in various ways.</p>
+    <p>
+      The final column of the Engine, that represents the desired output, is
+      directly coupled to the printing mechanism. The model at the Science
+      Museum does not have the printing mechanism. It has been furnished with a
+      portable computer that reads the position of the figure wheels on that
+      column and can verify the results, display them as a graph or process them
+      in various ways.
+    </p>
 
-<hr>
+    <hr />
 
-<table border="0" width="100%">
-  <tr>
-    <td width="33%"><a href="mathemat.htm">&lt; Previous</a></td>
-    <td width="33%" align="center"><a href="index.html">Up      ^</a></td>
-    <td width="34%" align="right"><a href="figure.htm">Next
-      &gt;</a></td>
-  </tr>
-</table>
-</body>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%"><a href="mathemat.htm">&lt; Previous</a></td>
+        <td width="33%" align="center"><a href="index.html">Up ^</a></td>
+        <td width="34%" align="right"><a href="figure.htm">Next &gt;</a></td>
+      </tr>
+    </table>
+  </body>
 </html>
