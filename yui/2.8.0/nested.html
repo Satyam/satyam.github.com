@@ -1,0 +1,410 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Nested DataTables</title>
+		<!-- Individual YUI CSS files -->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/autocomplete/assets/skins/sam/autocomplete.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/datatable/assets/skins/sam/datatable.css">
+		<!-- Individual YUI JS files -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yuiloader-dom-event/yuiloader-dom-event.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datasource/datasource-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/autocomplete/autocomplete-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datatable/datatable-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/json/json-min.js"></script>
+		<!-- This is my YQLDataSource DataSource, it takes as its argument a YQL query 
+		     and reads any reply that might come  -->
+		<script type="text/javascript" src="YQLDataSource.js"></script>
+
+
+ 
+
+    <style type="text/css">
+        h1 {
+            text-align:center;
+        }
+        #ft {
+            margin:1em;
+            padding:1em;
+            border-top: thin solid silver;
+        }
+		#autocomplete {
+			height:2em;
+			width:30em;
+		}
+
+		.yui-skin-sam .yui-dt td.__NESTED__ a {
+			text-decoration:none;
+			color:white;
+		}
+		
+        .yui-skin-sam .yui-dt td.__NESTED__ div {
+            width:14px;
+			padding:0;
+			margin:5px 3px;
+        }
+        .yui-skin-sam .yui-dt td.__NESTED__ div.expand {
+			background:transparent url(http://yui.yahooapis.com/2.8.0r4/build/assets/skins/sam/sprite.png) no-repeat 0 -350px;
+        }
+        .yui-skin-sam .yui-dt td.__NESTED__ div.collapse {
+			background:transparent url(http://yui.yahooapis.com/2.8.0r4/build/assets/skins/sam/sprite.png) no-repeat 0 -400px;
+        }
+
+		.yui-skin-sam .yui-dt tr {
+			vertical-align:top;
+		}
+		.nestedTable {
+			position:absolute;
+		}
+		.nestedTable table {
+			width:100%;
+		}
+		.yui-skin-sam .yui-dt td.right .yui-dt-liner {
+			text-align:right;
+		}
+		.important {
+			font-weight: bold;
+			font-size:large;
+			color:grey;
+		}
+    </style>    
+  </head>
+  <body id="doc"  class="yui-skin-sam">
+  <p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+    <div id="hd">
+        <h1>Nested DataTables</h1>
+    </div>
+    <div id="bd">
+        <div id="autocomplete">
+            <input id="acInput" type="text">
+            <div id="acDropDown"></div>
+        </div>
+        <div id="table"></div>
+
+    </div>
+
+    <div id="ft">
+		<p><span class="important">Note:</span> A new version of this same application is available <a href="nested1.html">here</a>.</p>
+		<hr />
+        <p>Start typing the name of a recording artist in the box above, suggestions should show up right underneath, 
+		ordered in decreasing number of published tracks (most popular at the top).
+        You can use the down arrow to go and select any of them and hit Enter when found.</p>
+		<p>Released albums by that artist will be shown in a table, the latest at the top.   
+		Clicking in the [+] sign will expand any of those albums to show its track list.
+		Clicking on the title itself will open up the album description page in a separate tab.
+		More than one album can be expanded at once.</p>
+		<hr/>
+		<p>This program uses YQL to fetch the data and also show how to nest several DataTables within a master DataTable.</p>
+		<p>The artist search only finds complete words, which makes the AutoComplete box seem erratic.  
+		This is a limitation in the service that provides the information.  
+		Neither YQL, which intermediates the queries, nor this application can improve on the base service.</p>
+		
+    </div>
+	<script type="text/javascript">
+		var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event, 
+			Lang = YAHOO.lang, 
+			YQLDS = YAHOO.util.YQLDataSource, DT = YAHOO.widget.DataTable;
+	
+		// This is my requery method.  See: http://www.satyam.com.ar/yui/2.8.0/requery.html
+		// Warning:  there is a good reason why this method is not part of the YUI Library: it does not always work
+		// It works in many cases, such as this, but there are many where it doesn't.  Please read the page at the URL above
+		DT.prototype.requery = function(newRequest) {
+			var ds = this.getDataSource(), 
+				req;
+			if (this.get('dynamicData')) {
+				// For dynamic data, newRequest is ignored since the request is built by function generateRequest.
+				var paginator = this.get('paginator');
+				this.onPaginatorChangeRequest(paginator.getState({'page':paginator.getCurrentPage()}));
+			} else {
+				// The LocalDataSource needs to be treated different
+				if (ds instanceof YAHOO.util.LocalDataSource) {
+					ds.liveData = newRequest;
+					req = "";
+				} else {
+					req = (newRequest === undefined?this.get('initialRequest'):newRequest);
+				}
+				ds.sendRequest(req, 
+					{
+						success: this.onDataReturnInitializeTable, 
+						failure: this.onDataReturnInitializeTable, 
+						scope: this, 
+						argument: this.getState() 
+					}
+				);
+			}
+		};
+		
+		// Link formatter uses the same field both for the URL and the value shown.  
+		// This redefinition is backward compatible and allows for a linkOptions property to define where the URL comes from.
+		// See: http://yuilibrary.com/projects/yui2/ticket/2528778
+		
+		DT.Formatter.link = DT.prototype.formatLink = function(el, oRecord, oColumn, oData) {
+			var url = oData,
+				options = oColumn.linkOptions,
+				target;
+			if (options) {
+				if (options.urlSource) {
+					url = oRecord.getData(options.urlSource);
+				}
+				target = (options.target && (' target="' + options.target + '"')) || '';
+			}
+			if(Lang.isString(url)) {
+				el.innerHTML = '<a href="' + url + '"' + target + '>' + oData + '</a>';
+			}
+			else {
+				el.innerHTML = Lang.isValue(oData) ? oData : "";
+			}
+		};
+
+        YAHOO.util.Event.onDOMReady(function () {
+
+			// These are the templates for all the YQL queries used in this example	
+			var YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+				YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+				YQL_QUERY_TRACKS = 'select Track.discNumber, Track.trackNumber, Track.duration, Track.title, Track.popularity from music.release.id where ids="{query}" and response="tracks"', 
+				// plus a name for an extra field in the Record to store child table information
+				NESTED = '__NESTED__';
+
+			// The Main DataTable containing album information
+			var albumDt = null;
+
+			// Checks the vertical positions of all the child tables
+			// whenever the master table has been re-arranged
+			var checkPositions = function () {
+				var rs = albumDt.getRecordSet(), rsl = rs.getLength(), 
+					detail;
+				
+				for (var i = 0; i < rsl; i++) {
+					detail = rs.getRecord(i).getData(NESTED);
+					// I only care for records that have a NESTED field, 
+					// that means the record has a child table
+					// and that detail is expanded at this point
+					if (detail && detail.expanded) {
+						// Move it down from the top corner for as much as the original height of that row
+						Dom.setY(detail.div, Dom.getY(detail.td) + detail.tdOrigHeight);
+					}
+				}
+			};
+
+			// We'll be using the same DataSource for all the track queries since they all have the same format
+			var tracksDS = null;
+			
+			// Makes each of the child tables
+			var	makeTrackTable = function (id, record) {
+				var detail = record.getData(NESTED);
+				
+				if (!tracksDS) {
+					// creates the shared DataSource.  
+					tracksDS = new YQLDS('', {
+						responseSchema: {
+							// The YQL DataSource reads all fields that come, 
+							// we only need to list the fields that have any extra processing, 
+							// like numbers or dates.  
+							// The other fields (usually strings) will be there even if not listed here
+							fields:[
+								{key:'Track.discNumber', parser:'number'}, 
+								{key:'Track.trackNumber', parser:'number'}, 
+								{key:'Track.popularity', parser:'number'}
+							]
+						}
+					});
+				}
+				// Create the container for the child DataTable that will float
+				var div = document.body.appendChild(document.createElement('div'));
+				Dom.addClass(div, 'nestedTable');
+				var dt = new DT(
+					div, 
+					[
+						{key:'Track.discNumber', label:'Disc', className:'right'}, 
+						{key:'Track.trackNumber', label:'Track', className:'right'}, 
+						{key:'Track.title', label:'Title'}, 
+						{key:'Track.duration', label:'Duration', className:'right'}, 
+						{key:'Track.popularity', label:'Popularity', className:'right'}
+					], 
+					tracksDS, 
+					{
+						// The whole query string goes as an initialRequest
+						// Can't do it in the constructor for the DataSource since it is shared for all requests
+						initialRequest:Lang.substitute(YQL_QUERY_TRACKS, {query:id})
+					}
+				);
+				
+				// Since we need to measure the size of the child table to make it space under the master one
+				// we have to wait until the table is initialized to find out how tall and wide it is
+				
+				dt.on('initEvent', function() {
+					var td = detail.td;
+
+					var tdRegion = Dom.getRegion(td), 
+						tdHeight = tdRegion.height, 
+						tdWidth = tdRegion.width, 
+						tableWidth = Dom.getRegion(td.parentNode).width;  // that should be the row
+					
+					// We keep the original height of the row so we can collapse it to its original size					
+					detail.tdOrigHeight = tdHeight;
+					// We need first to set the width and then to measure the height of the table
+					// because if a long title gets in a narrow cell, it will get wrapped to the next
+					// line and make the table taller
+					Dom.setStyle(div, 'width', (tableWidth - tdWidth + 2) + 'px');
+					detail.tdNewHeight = tdHeight + Dom.getRegion(div).height;
+					Dom.setStyle(td, 'height', detail.tdNewHeight + 'px');
+					// I offset the child table to the right of the expand icon
+					Dom.setX(div, Dom.getX(td) + tdWidth); 
+					checkPositions();
+				});
+				// We store both the container and the reference to this child table in the record
+				detail.div = div;
+				detail.dt = dt;
+			};
+							
+			// function to show the main table
+			var showArtistAlbums = function (id, name) {
+				// If there is an existing table (meaning, this is a request for a different artist)
+				// we need to get rid of all the child tables
+				if (albumDt) {
+					var rs = albumDt.getRecordSet(), rsl = rs.getLength(), 
+						detail;
+					
+					for (var i = 0; i < rsl; i++) {
+						detail = rs.getRecord(i).getData(NESTED);
+						if (detail) {
+							// we destroy the DataTable itself and then the container
+							detail.dt.destroy();
+							detail.div.parentNode.removeChild(detail.div);
+						}
+					}
+				} else {
+					albumDt = new DT(
+						'table', 
+						[
+							{key:NESTED, label:' ', className:NESTED , formatter: function(el, oRecord, oColumn, oData) {
+								var expanded = oData && oData.expanded;
+								if (expanded) {
+									Dom.replaceClass(el, 'expand', 'collapse');
+								} else {
+									Dom.replaceClass(el, 'collapse', 'expand');
+								}
+								el.innerHTML = '<a href="#" aria-role="button" aria-pressed="' + (expanded?'true':'false') + '"> &nbsp; </a>';
+								
+							}}, 
+							{key:'title', label:'Title', sortable:true, formatter:'link',linkOptions:{urlSource:'url', target:'Album Page'}}, 
+							{key:'releaseYear', label:'Release Year', sortable:true, className:'right'}, 
+							{key:'label', label:'Label', sortable:true}
+						], 
+						new YQLDS('', {
+							responseSchema: {
+								// once again, we only list those fields that require special processing
+								// the others will be there anyway
+								fields:[
+									{key:'id', parser:'number'}, 
+									{key:'releaseYear', parser:'number'}
+								]
+							}
+						}), 
+						{
+							// we'll leave the actual loading for later
+							initialLoad:false, 
+							sortedBy: {
+								key:'releaseYear', 
+								dir:DT.CLASS_DESC
+							}
+						}
+					);
+					
+					albumDt.on('cellClickEvent', function (oArgs) {
+						var target = oArgs.target, event = oArgs.event, 
+							record = this.getRecord(target), 
+							column = this.getColumn(target);
+						
+						// We care about clicks on columns 'expand' and 'title' 						
+						switch (column.key) {
+						case NESTED:
+							Event.stopEvent(event);
+							var td = this.getFirstTdEl(record), 
+								detail = record.getData(NESTED);
+							if (!detail) {
+								// if there is no child details, we make a new child table 
+								// and create the field to store the information about it
+								record.setData(NESTED, {td:td, expanded:true});
+								makeTrackTable(record.getData('id'), record);
+							} else {
+								if (detail.expanded) {
+									detail.expanded = false;
+									Dom.setStyle(td, 'height', null);
+									Dom.setStyle(detail.div, 'display', 'none');
+								} else {
+									detail.expanded = true;
+									Dom.setStyle(td, 'height', detail.tdNewHeight + 'px');
+									Dom.setStyle(detail.div, 'display', '');
+								}
+								// whether we are collapsing or expanding the detail table
+								// we need to adjust the position of all the tables since they won't
+								// move along their master records
+								checkPositions();
+							}
+							this.formatCell(this.getTdLinerEl(target), record, column);
+								
+							break;
+						// Other cases (column keys) might go here
+						}
+					});
+					
+					// Whenever the master table is re-rendered, for example, in a sort, 
+					// we need to adjust the position of the child tables
+					// Since the td elements are now new, we need get a reference to them and
+					// expand those that were expanded
+					albumDt.on('renderEvent', function () {
+						var rs = this.getRecordSet(), rsl = rs.getLength(), 
+							r, detail;
+						
+						for (var i = 0; i < rsl; i++) {
+							r = rs.getRecord(i);
+							detail = r.getData(NESTED);
+							if (detail) {
+								detail.td = this.getFirstTdEl(r);
+								if (detail.expanded) {
+									Dom.setStyle(detail.td, 'height', detail.tdNewHeight + 'px');
+								}
+							}
+						}
+						checkPositions();
+					});
+				}
+				// Here we do the actual query for the artist's albums
+				albumDt.requery(Lang.substitute(YQL_QUERY_ALBUMS, {query:id}));
+			};
+
+			// We set the autocomplete box				
+			var myAC = new YAHOO.widget.AutoComplete("acInput", "acDropDown", new YQLDS());
+
+			// here we build the YQL request
+			myAC.generateRequest = function(sQuery) {
+				return Lang.substitute(YQL_QUERY_ARTIST, {query: sQuery});
+			};
+
+			// Autocomplete will usually show the first field that comes along, if more than one
+			// We have no control over the order of the fields that YQL sends so we have to
+			// force AutoComplete to show the field we want, which is not the first
+			myAC.resultTypeList = false;
+			myAC.formatResult = function(oResultData, sQuery, sResultMatch) {
+				return oResultData.name;
+			};
+
+			// Once again, AutoComplete takes the first field in the record to be the reply and
+			// we cannot convince YQL to send the fields in the order we want so we have to prevent it
+			// from updating the input box on its own
+			myAC.suppressInputUpdate = true;
+			myAC.itemSelectEvent.subscribe(function(sType, aArgs) {
+				var result = aArgs[2];
+				// here we update the input box
+				Dom.get('acInput').value = result.name;
+				// and show this artist albums.
+				showArtistAlbums(result.id, result.name);
+			});
+		});
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Data Grid</title>
+		<script src="http://yui.yahooapis.com/2.5.2/build/yuiloader/yuiloader-beta-min.js"></script>
+
+		<script type="text/javascript">
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","datatable","calendar");
+	loader.insert({ 
+		onSuccess: function() {
+
+			var formatterDispatcher = function (elCell, oRecord, oColumn,oData) {
+				var meta = oRecord.getData('meta_' + oColumn.key);
+				oColumn.editorOptions = meta.editorOptions;
+				switch (YAHOO.lang.isObject(meta)?meta.type:meta) {
+					case 'Number':
+						YAHOO.widget.DataTable.formatNumber.call(this,elCell, oRecord, oColumn,oData);
+						break;
+					case 'Date':
+						YAHOO.widget.DataTable.formatDate.call(this,elCell, oRecord, oColumn,oData);
+						break;
+					case 'Text':
+						YAHOO.widget.DataTable.formatText.call(this,elCell, oRecord, oColumn,oData);
+						break;
+					case 'Radio':
+						elCell.innerHTML = oData;
+						break;
+				}
+			};
+			
+			var editorDispatcher = function (oEditor, oSelf) {
+				var meta = oEditor.record.getData('meta_' + oEditor.column.key);
+				oEditor.column.editorOptions = meta.editorOptions;
+				switch (YAHOO.lang.isObject(meta)?meta.type:meta) {
+					case 'Number':
+						YAHOO.widget.DataTable.editTextbox.call(oSelf,oEditor, oSelf);
+						break;
+					case 'Date':
+						YAHOO.widget.DataTable.editDate.call(oSelf,oEditor, oSelf);
+						break;
+					case 'Text':
+						YAHOO.widget.DataTable.editTextbox.call(oSelf,oEditor, oSelf);
+						break;
+					case 'Radio':
+						YAHOO.widget.DataTable.editRadio.call(oSelf,oEditor, oSelf);
+						break;
+				}
+			};
+				
+
+						
+
+			var myColumnDefs = [
+				{key:"Rows",label:'&nbsp;',className:'th'},
+				{key:"A",formatter:formatterDispatcher,editor:editorDispatcher},
+				{key:"B",formatter:formatterDispatcher,editor:editorDispatcher},
+				{key:"C",formatter:formatterDispatcher,editor:editorDispatcher}
+
+			];
+
+			var ds = new YAHOO.util.DataSource([
+				{Rows:1,A:1,meta_A:'Number',B:new Date(),meta_B:'Date',C:'hello world!',meta_C:'Text'},
+				{Rows:2,B:42,meta_B:'Number',A:new Date(2005,10,2),meta_A:'Date',C:'long time no see',meta_C:'Text'},
+				{Rows:3,C:1,meta_C:'Number',B:new Date(),meta_B:'Date',A:'hello world!',meta_A:'Text'},
+				{Rows:4,C:'yes',meta_C:{type:'Radio',editorOptions:{radioOptions:["yes","no","maybe"]}},
+					B:new Date(),meta_B:'Date',A:'hello world!',meta_A:'Text'}
+			]);
+			ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			ds.responseSchema = {
+				fields: ['Rows','A','meta_A','B','meta_B','C','meta_C']
+			};
+
+			var dt = new YAHOO.widget.DataTable("tableContainer", myColumnDefs,ds);
+			dt.subscribe("cellClickEvent", dt.onEventShowCellEditor);  
+		}
+	});
+})();
+		</script>
+		<style>
+			.th {
+				background: url(http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/sprite.png)  repeat-x 0 0;
+			}
+		</style>
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc"> 
+				<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+			<div id="hd">
+				<h1>Data Grid</h1>
+			</div>
+			<div id="bd" style="margin:2em">
+				<div id="tableContainer"></div>
+			</div>
+			<div id="ft">
+				<p>Each cell in this DataTable contains a different data type.  The type is not set by the column definition
+				but by meta-data sent along each column of actual data.</p>
+				<p>The trick is done with a couple of dispatcher functions that are used as custom formatters and editors for all of the visible
+				columns and which read the meta-data corresponding to the cell being formatted or edited and switch to the actual
+				formatter or editor.</p>
+				<p>All cells are editable, you can click on anyone and change it.  Date cells use the YUI calendar component. 
+				The bottom right cell is a radio options, try clicking on it.</p>
+			</div>
+		</div>
+	</body>
+</html>
+

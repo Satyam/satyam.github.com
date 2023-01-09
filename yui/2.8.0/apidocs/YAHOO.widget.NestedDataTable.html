@@ -1,0 +1,1466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: nesteddatatable  YAHOO.widget.NestedDataTable   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1269283871.7" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1269283871.7" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1269283871.7"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1269283871.7"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>NestedDataTable Widget&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_nesteddatatable.html" title="nesteddatatable">nesteddatatable</a>
+                 &gt; YAHOO.widget.NestedDataTable 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">YAHOO.widget.NestedDataTable</b>
+                        <span class="extends">
+                           - extends <a href="YAHOO.widget.DataTable.html" title="YAHOO.widget.DataTable">YAHOO.widget.DataTable</a>
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        NestedDataTable class for Satyam's NestedDataTable widget.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">YAHOO.widget.NestedDataTable</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                elContainer
+
+                                                , 
+                                                masterColDefs
+
+                                                , 
+                                                masterDataSource
+
+                                                , 
+                                                nestedColDefs
+
+                                                , 
+                                                nestedDataSource
+
+                                                , 
+                                                masterOptions
+
+                                                , 
+                                                nestedOptions
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">elContainer</span>
+                                                    &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Container element for the TABLE.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">masterColDefs</span>
+                                                    &lt;<span property="yui:type">Object[]</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Array of object literal Column definitions for the master table.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">masterDataSource</span>
+                                                    &lt;<span property="yui:type">YAHOO.util.DataSource</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  DataSource instance for the master table.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">nestedColDefs</span>
+                                                    &lt;<span property="yui:type">Object[]</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Array of object literal Column definitions for the nested tables.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">nestedDataSource</span>
+                                                    &lt;<span property="yui:type">YAHOO.util.DataSource</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  DataSource instance for the nested tables.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">masterOptions</span>
+                                                    &lt;<span property="yui:type">object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  (optional) Object literal of configuration values for the master table.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">nestedOptions</span>
+                                                    &lt;<span property="yui:type">object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  (optional) Object literal of configuration values for the nested tables.</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:method" resource="#method__checkPositions">
+                                    <h4>
+                                        <a name="method__checkPositions">_checkPositions</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_checkPositions</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Checks the vertical positions of all the expanded nested tables
+whenever the master table has been re-arranged
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__destroyNested">
+                                    <h4>
+                                        <a name="method__destroyNested">_destroyNested</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_destroyNested</strong>
+                                           (
+                                                
+                                                        
+                                                         detail.div
+                                                    
+                                                
+                                                        , 
+                                                         detail.dt
+                                                    
+                                                
+                                                        , 
+                                                         detail.expanded
+                                                    
+                                                
+                                                        , 
+                                                         detail.td
+                                                    
+                                                
+                                                        , 
+                                                         detail.tdNewHeight
+                                                    
+                                                
+                                                        , 
+                                                         detail.tdOldHeight
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Destroys a nested table
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.div</span>
+                                                        &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The DIV element containing the nested table instance.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.dt</span>
+                                                        &lt;<span property="yui:type">YAHOO.widget.DataTable</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The nested DataTable instance.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.expanded</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Whether the master record is expanded and the nested table visible</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.td</span>
+                                                        &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The toggle cell in the row of the master table</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.tdNewHeight</span>
+                                                        &lt;<span property="yui:type">Integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">detail.tdOldHeight</span>
+                                                        &lt;<span property="yui:type">Integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The original height, in pixels, of the row in the master record before it was expanded.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__forAllNested">
+                                    <h4>
+                                        <a name="method__forAllNested">_forAllNested</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_forAllNested</strong>
+                                           (
+                                                
+                                                        
+                                                         fn
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Loops through all the records and calls the given function on all those
+that have nested tables.
+The function will receive:
+<ul>
+<li><code>detail</code>: details of the nested table (same as provided for all events)</li>
+<li><code>record</code>: reference to the Record object in the master table</li>
+</ul>
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fn</span>
+                                                        &lt;<span property="yui:type">function</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The function to be called on each nested tableelement to format with markup.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__makeNestedTable">
+                                    <h4>
+                                        <a name="method__makeNestedTable">_makeNestedTable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_makeNestedTable</strong>
+                                           (
+                                                
+                                                        
+                                                         record
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Makes each of the nested tables
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">record</span>
+                                                        &lt;<span property="yui:type">YAHOO.widget.Record</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  the Record instance of the master table</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onEventToggleNested">
+                                    <h4>
+                                        <a name="method__onEventToggleNested">_onEventToggleNested</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onEventToggleNested</strong>
+                                           (
+                                                
+                                                        
+                                                         oArgs.event
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.target
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Expands or collapses the nested table.  
+It is preset as the event listener for the cellClickEvent
+and responds only on the toggle column
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.event</span>
+                                                        &lt;<span property="yui:type">HTMLEvent</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Event object.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.target</span>
+                                                        &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Target element.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onMasterRendered">
+                                    <h4>
+                                        <a name="method__onMasterRendered">_onMasterRendered</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onMasterRendered</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Event listener for the renderEvent on the master table.
+When the master is rendered, the nested tables have to be repositioned
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onRowDeleteDestroyNested">
+                                    <h4>
+                                        <a name="method__onRowDeleteDestroyNested">_onRowDeleteDestroyNested</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onRowDeleteDestroyNested</strong>
+                                           (
+                                                
+                                                        
+                                                         oArgs.oldData
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.recordIndex
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.trElIndex
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Event listener for the <code>rowDeleteEvent</code> event.
+Destroys the nested table, if any.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.oldData</span>
+                                                        &lt;<span property="yui:type">Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Object literal of the deleted data.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.recordIndex</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Index of the deleted Record.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.trElIndex</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Index of the deleted TR element, if on current page.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onRowsDeleteDestroyNested">
+                                    <h4>
+                                        <a name="method__onRowsDeleteDestroyNested">_onRowsDeleteDestroyNested</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onRowsDeleteDestroyNested</strong>
+                                           (
+                                                
+                                                        
+                                                         oArgs.oldData
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.recordIndex
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.count
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Event listener for the <code>rowsDeleteEvent</code> event.
+Destroys the nested tables, if any.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.oldData</span>
+                                                        &lt;<span property="yui:type">Object[]</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Array of object literals of the deleted data.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.recordIndex</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Index of the first deleted Record.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs.count</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Number of deleted Records.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__onWindowResized">
+                                    <h4>
+                                        <a name="method__onWindowResized">_onWindowResized</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onWindowResized</strong>
+                                           (
+                                                
+                                                        
+                                                         ev
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Event listener for the <code>window.resize</code> event.
+Repositions the nested tables since the master table might have been moved around
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ev</span>
+                                                        &lt;<span property="yui:type">DOMEvent</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  the Event object from the DOM</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__toggleFormatter">
+                                    <h4>
+                                        <a name="method__toggleFormatter">_toggleFormatter</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_toggleFormatter</strong>
+                                           (
+                                                
+                                                        
+                                                         el
+                                                    
+                                                
+                                                        , 
+                                                         oRecord
+                                                    
+                                                
+                                                        , 
+                                                         oColumn
+                                                    
+                                                
+                                                        , 
+                                                         oData
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Formats the toggle cell.  
+It is a standard cell formatter but is not made public since it is tied to the toggle column
+and is useless in any other context
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">el</span>
+                                                        &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  The element to format with markup.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oRecord</span>
+                                                        &lt;<span property="yui:type">YAHOO.widget.Record</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Record instance.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oColumn</span>
+                                                        &lt;<span property="yui:type">YAHOO.widget.Column</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Column instance.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oData</span>
+                                                        &lt;<span property="yui:type">Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (Optional) Data value for the cell.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_initializeTable">
+                                    <h4>
+                                        <a name="method_initializeTable">initializeTable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">initializeTable</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>initializeTable</code>
+which it calls after it destroys all nested tables.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_onDataReturnSetRows">
+                                    <h4>
+                                        <a name="method_onDataReturnSetRows">onDataReturnSetRows</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">onDataReturnSetRows</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>onDataReturnSetRows</code>
+which it calls after it destroys all nested tables since
+with server-side pagination, with every new page it ignores the previous records
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_beforeGenerateNestedRequestChange">
+                                    <h4>
+                                        <a name="event_beforeGenerateNestedRequestChange">beforeGenerateNestedRequestChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeGenerateNestedRequestChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'generateNestedRequest' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_generateNestedRequestChange">
+                                    <h4>
+                                        <a name="event_generateNestedRequestChange">generateNestedRequestChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">generateNestedRequestChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'generateNestedRequest' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nestedCreateEvent">
+                                    <h4>
+                                        <a name="event_nestedCreateEvent">nestedCreateEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nestedCreateEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         oArgs.div
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.dt
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.expanded
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.td
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdNewHeight
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdOldHeight
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fired when a nested table has been created.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.div</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The DIV element containing the nested table instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.dt</span>
+                                                                &lt;<span property="yui:type">YAHOO.widget.DataTable</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The nested DataTable instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.expanded</span>
+                                                                &lt;<span property="yui:type">Boolean</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  Whether the master record is expanded and the nested table visible</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.td</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The toggle cell in the row of the master table</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdNewHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdOldHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The original height, in pixels, of the row in the master record before it was expanded.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nestedDestroyEvent">
+                                    <h4>
+                                        <a name="event_nestedDestroyEvent">nestedDestroyEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nestedDestroyEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         oArgs.div
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.dt
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.expanded
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.td
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdNewHeight
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdOldHeight
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fired when a nested table is about to be destroyed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.div</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The DIV element containing the nested table instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.dt</span>
+                                                                &lt;<span property="yui:type">YAHOO.widget.DataTable</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The nested DataTable instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.expanded</span>
+                                                                &lt;<span property="yui:type">Boolean</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  Whether the master record is expanded and the nested table visible</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.td</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The toggle cell in the row of the master table</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdNewHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdOldHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The original height, in pixels, of the row in the master record before it was expanded.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nestedMovedEvent">
+                                    <h4>
+                                        <a name="event_nestedMovedEvent">nestedMovedEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nestedMovedEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         oArgs.div
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.dt
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.expanded
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.td
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdNewHeight
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdOldHeight
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fired when a nested table has been moved.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.div</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The DIV element containing the nested table instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.dt</span>
+                                                                &lt;<span property="yui:type">YAHOO.widget.DataTable</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The nested DataTable instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.expanded</span>
+                                                                &lt;<span property="yui:type">Boolean</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  Whether the master record is expanded and the nested table visible</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.td</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The toggle cell in the row of the master table</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdNewHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdOldHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The original height, in pixels, of the row in the master record before it was expanded.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nestedToggleEvent">
+                                    <h4>
+                                        <a name="event_nestedToggleEvent">nestedToggleEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nestedToggleEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         oArgs.div
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.dt
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.expanded
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.td
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdNewHeight
+                                                    
+                                                
+                                                        , 
+                                                         oArgs.tdOldHeight
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fired when the row in the master table has been expanded or collapsed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.div</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The DIV element containing the nested table instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.dt</span>
+                                                                &lt;<span property="yui:type">YAHOO.widget.DataTable</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The nested DataTable instance.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.expanded</span>
+                                                                &lt;<span property="yui:type">Boolean</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  Whether the master record is expanded and the nested table visible</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.td</span>
+                                                                &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The toggle cell in the row of the master table</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdNewHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+                                                        </dd>
+                                                        
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">oArgs.tdOldHeight</span>
+                                                                &lt;<span property="yui:type">Integer</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  The original height, in pixels, of the row in the master record before it was expanded.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_generateNestedRequest">
+                                    <h4><a name="config_generateNestedRequest">generateNestedRequest</a>
+                                        <code>- <span property="yui:type">function</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            A function that receives a reference to the record in the master table being expanded 
+and should return a value that will be used as the initialRequest configuration attribute for the nested
+DataTable for this record.  The value returned varies depending on the type of DataSource used.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_nesteddatatable.html" title="nesteddatatable">nesteddatatable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="YAHOO.widget.NestedDataTable.html" title="YAHOO.widget.NestedDataTable">YAHOO.widget.NestedDataTable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="nesteddatatable.js.html" title="nesteddatatable.js">nesteddatatable.js</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#method__checkPositions" title="_checkPositions">_checkPositions</a></li>
+                                <li class="private"><a href="#method__destroyNested" title="_destroyNested">_destroyNested</a></li>
+                                <li class="private"><a href="#method__forAllNested" title="_forAllNested">_forAllNested</a></li>
+                                <li class="private"><a href="#method__makeNestedTable" title="_makeNestedTable">_makeNestedTable</a></li>
+                                <li class="private"><a href="#method__onEventToggleNested" title="_onEventToggleNested">_onEventToggleNested</a></li>
+                                <li class="private"><a href="#method__onMasterRendered" title="_onMasterRendered">_onMasterRendered</a></li>
+                                <li class="private"><a href="#method__onRowDeleteDestroyNested" title="_onRowDeleteDestroyNested">_onRowDeleteDestroyNested</a></li>
+                                <li class="private"><a href="#method__onRowsDeleteDestroyNested" title="_onRowsDeleteDestroyNested">_onRowsDeleteDestroyNested</a></li>
+                                <li class="private"><a href="#method__onWindowResized" title="_onWindowResized">_onWindowResized</a></li>
+                                <li class="private"><a href="#method__toggleFormatter" title="_toggleFormatter">_toggleFormatter</a></li>
+                                <li class=""><a href="#method_initializeTable" title="initializeTable">initializeTable</a></li>
+                                <li class=""><a href="#method_onDataReturnSetRows" title="onDataReturnSetRows">onDataReturnSetRows</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_beforeGenerateNestedRequestChange" title="beforeGenerateNestedRequestChange">beforeGenerateNestedRequestChange</a></li>
+                                <li class=""><a href="#event_generateNestedRequestChange" title="generateNestedRequestChange">generateNestedRequestChange</a></li>
+                                <li class=""><a href="#event_nestedCreateEvent" title="nestedCreateEvent">nestedCreateEvent</a></li>
+                                <li class=""><a href="#event_nestedDestroyEvent" title="nestedDestroyEvent">nestedDestroyEvent</a></li>
+                                <li class=""><a href="#event_nestedMovedEvent" title="nestedMovedEvent">nestedMovedEvent</a></li>
+                                <li class=""><a href="#event_nestedToggleEvent" title="nestedToggleEvent">nestedToggleEvent</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_generateNestedRequest" title="generateNestedRequest">generateNestedRequest</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.NestedDataTable.html#event_beforeGenerateNestedRequestChange", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "beforeGenerateNestedRequestChange"}, {"url": "YAHOO.widget.NestedDataTable.html#method__checkPositions", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_checkPositions"}, {"url": "YAHOO.widget.NestedDataTable.html#method__destroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_destroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__forAllNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_forAllNested"}, {"url": "YAHOO.widget.NestedDataTable.html#config_generateNestedRequest", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "config", "name": "generateNestedRequest"}, {"url": "YAHOO.widget.NestedDataTable.html#event_generateNestedRequestChange", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "generateNestedRequestChange"}, {"url": "YAHOO.widget.NestedDataTable.html#method_initializeTable", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "initializeTable"}, {"url": "YAHOO.widget.NestedDataTable.html#method__makeNestedTable", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_makeNestedTable"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedCreateEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedCreateEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedDestroyEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedDestroyEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedMovedEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedMovedEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedToggleEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedToggleEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#method_onDataReturnSetRows", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "onDataReturnSetRows"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onEventToggleNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onEventToggleNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onMasterRendered", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onMasterRendered"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onRowDeleteDestroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onRowDeleteDestroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onRowsDeleteDestroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onRowsDeleteDestroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onWindowResized", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onWindowResized"}, {"url": "YAHOO.widget.NestedDataTable.html#method__toggleFormatter", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_toggleFormatter"}];
+</script>
+</body>
+</html>

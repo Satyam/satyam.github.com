@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Inline Cell Editing</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/datatable/assets/skins/sam/datatable.css" />
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/calendar/calendar-min.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/datatable/datatable-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* custom styles for this example */
+.yui-skin-sam .yui-dt-col-address pre { font-family:arial;font-size:100%; } /* Use PRE in first col to preserve linebreaks*/
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body  id="doc" class="yui-skin-sam">
+
+<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+<h1>Inline Cell Editing</h1>
+
+<div class="exampleIntro">
+	<p>This example demonstrates basic inline cell editing features, as well as
+more complex customizations, such as input validation and click-to-save interactions.</p>
+
+<p>It has been modified to show how to handle keyboard navigation in between cell editors</p>
+<p>It responds to the tab key and shift-tab.  
+It will also respond to arrow keys, except in the textarea editor and to left and right arrows in the textbox editor.</p>
+<p>It will keep the full editor window visible, scrolling it into view as needed.</p>
+<p>Work in progress, suggestions are welcome.</p>
+<h2>A very welcome suggestion:</h2>
+			<p><img src="../new.png"/>Matt Parker has improved on this idea by adding a method <code>allowMoveCellWhileEdit</code> to
+			the cell editors that tell whether a particular keystroke should allow moving to other cell editor. In my example,
+			I allowed it for all editors but Textareas.  Matt's code allows a far better control on what is allowed for each cell editor.
+			It is all in one package with his Column Chooser, which can be enabled separately.</p>	
+<p><a href="http://github.com/mattparker">Matt Parker's code at GitHub</a></p>			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="cellediting"></div>
+
+<script type="text/javascript" src="http://developer.yahoo.com/yui/examples/datatable/assets/js/data.js"></script>
+<script type="text/javascript">
+YAHOO.util.Event.addListener(window, "load", function() {
+
+
+    YAHOO.example.InlineCellEditing = function() {
+        // Custom formatter for "address" column to preserve line breaks
+        var formatAddress = function(elCell, oRecord, oColumn, oData) {
+            elCell.innerHTML = "<pre class=\"address\">" + oData + "</pre>";
+        };
+
+        var myColumnDefs = [
+            {key:"uneditable"},
+            {key:"address", formatter:formatAddress, editor: new YAHOO.widget.TextareaCellEditor()},
+            {key:"city", editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+            {key:"state", editor: new YAHOO.widget.DropdownCellEditor({dropdownOptions:YAHOO.example.Data.stateAbbrs,disableBtns:true})},
+            {key:"amount", editor: new YAHOO.widget.TextboxCellEditor({validator:YAHOO.widget.DataTable.validateNumber})},
+            {key:"active", editor: new YAHOO.widget.RadioCellEditor({radioOptions:["yes","no","maybe"],disableBtns:true})},
+            {key:"colors", editor: new YAHOO.widget.CheckboxCellEditor({checkboxOptions:["red","yellow","blue"]})},
+            {key:"fruit", editor: new YAHOO.widget.DropdownCellEditor({multiple:true,dropdownOptions:["apple","banana","cherry"]})},
+            {key:"last_login", formatter:YAHOO.widget.DataTable.formatDate, editor: new YAHOO.widget.DateCellEditor()}
+        ];
+
+        var myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.addresses);
+        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        myDataSource.responseSchema = {
+            fields: ["address","city","state","amount","active","colors","fruit",{key:"last_login",parser:"date"}]
+        };
+
+        var myDataTable = new YAHOO.widget.DataTable("cellediting", myColumnDefs, myDataSource, {});
+
+        // Set up editing flow
+        var highlightEditableCell = function(oArgs) {
+            var elCell = oArgs.target;
+            if(YAHOO.util.Dom.hasClass(elCell, "yui-dt-editable")) {
+                this.highlightCell(elCell);
+            }
+        };
+        myDataTable.subscribe("cellMouseoverEvent", highlightEditableCell);
+        myDataTable.subscribe("cellMouseoutEvent", myDataTable.onEventUnhighlightCell);
+        myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
+
+/* Start of change by Satyam to allow for keyboard navigation */
+
+		myDataTable.subscribe("editorKeydownEvent",function(oArgs) {
+			var self = this,
+				ed = this._oCellEditor,  // Should be: oArgs.editor, see: http://yuilibrary.com/projects/yui2/ticket/2513909
+				ev = oArgs.event,
+				KEY = YAHOO.util.KeyListener.KEY,
+				Textbox = YAHOO.widget.TextboxCellEditor,
+				Textarea = YAHOO.widget.TextareaCellEditor,
+				cell = ed.getTdEl(),
+				col = ed.getColumn(),
+				row,rec,
+				
+				editNext = function(cell) {
+					cell = self.getNextTdEl(cell);
+					while (cell && !self.getColumn(cell).editor) {
+						cell = self.getNextTdEl(cell);
+					}
+					if (cell) {
+						self.showCellEditor(cell);
+					}
+				},
+				editPrevious = function(cell) {
+					cell = self.getPreviousTdEl(cell);
+					while (cell && !self.getColumn(cell).editor) {
+						cell = self.getPreviousTdEl(cell);
+					}
+					if (cell) {
+						self.showCellEditor(cell);
+					}
+				};
+				
+			switch (ev.keyCode) {
+				case KEY.UP:
+					if (ed instanceof Textarea) { return; }
+					YAHOO.util.Event.stopEvent(ev);
+					ed.save();
+					row = this.getPreviousTrEl(cell);
+					if (row) {
+						rec = this.getRecord(row);
+						this.showCellEditor({record:rec,column:col});
+					}
+					break;
+				case KEY.DOWN:
+					if (ed instanceof Textarea) { return; }
+					YAHOO.util.Event.stopEvent(ev);
+					ed.save();
+					row = this.getNextTrEl(cell);
+					if (row) {
+						rec = this.getRecord(row);
+						this.showCellEditor({record:rec,column:col});
+					}
+					break;
+				case KEY.LEFT:
+					if (ed instanceof Textbox || ed instanceof Textarea) { return; }
+					YAHOO.util.Event.stopEvent(ev);
+					ed.save();
+					editPrevious(cell);
+					break;
+				case KEY.RIGHT:
+					if (ed instanceof Textbox || ed instanceof Textarea) { return; }
+					YAHOO.util.Event.stopEvent(ev);
+					ed.save();
+					editNext(cell);
+					break;
+				case KEY.TAB:
+					YAHOO.util.Event.stopEvent(ev);
+					ed.save();
+					if (ev.shiftKey) {
+						editPrevious(cell);
+					} else {
+						editNext(cell);
+					}
+					break;
+			}
+		});
+		
+		// End of key handling
+		
+		// The following code tries to keep the cell editor visible at all times.
+		
+		myDataTable.on('editorShowEvent', function (oArgs) {
+			var Dom = YAHOO.util.Dom;
+			var el = oArgs.editor.getContainerEl();
+			var reg = Dom.getRegion(el);
+			var topScreen = Dom.getDocumentScrollTop(),
+				bottomScreen = topScreen + Dom.getViewportHeight();
+			if (reg.top < topScreen) {
+				el.scrollIntoView();
+			}
+			if (reg.bottom > bottomScreen) {
+				el.scrollIntoView(false);
+			}
+		});
+		
+		// End of patch.
+
+
+        
+        return {
+            oDS: myDataSource,
+            oDT: myDataTable
+        };
+    }();
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

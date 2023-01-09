@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Customizing YUI Library's DataTable</title>
+			<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css">
+			<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base.css">
+			<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css" />
+			<style type="text/css">
+				.hide {
+					display:none;
+				}
+				.my-highlight-row {
+					font-weight:bold;
+				}
+				.delete-button {
+					cursor:pointer;
+					background: transparent url(delete.png) no-repeat center center;
+					width:16px;height:16px;
+				}
+				.insert-button {
+					cursor:pointer;
+					background: transparent url(add.png) no-repeat center center;
+					width:16px;height:16px;
+				}
+				.yui-skin-sam .yui-dt td.align-right {
+					text-align:right;
+				}
+				#ft {
+					margin-top:2em;
+				}
+				dt {
+					font-weight:bold;
+					margin-top:5px;
+				}
+				
+			</style>
+			<script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+			<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.addModule({
+		name:'SATYAM.DataTable',
+		type:'js',
+		fullpath:'myDataTable.js',
+		requires:['yahoo','connection','json','datatable']
+	});
+	loader.filter = "raw";
+	loader.require("datatable","json", 'SATYAM.DataTable');
+	loader.insert({ 
+		onSuccess: function() {
+				
+				var dt = new SATYAM.DataTable(
+				'bd',
+				[
+					{key:"id",     label:"ID",						className:'align-right',									isPrimaryKey:true},
+					{key:"name",   label:"Name", 												edit:true,		defaultValue:''},
+					{key:"date",   label:"Date",	type:'date',	className:'align-right', 	edit:true,		defaultValue:new Date()},
+					{key:"price",  label:"Price", 	type:'currency',className:'align-right', 	edit:true,		defaultValue:0},
+					{key:"number", label:"Number",	type:'number',	className:'align-right', 	edit:true,		defaultValue:0},
+					{key:"address",label:"Address", 															defaultValue:'', noShow:true},
+					
+					// action icons:
+					{key:'delete', label:' ', className: 'delete-button', action:'delete', madeUp:true},
+					{key:'insert', label:' ', className: 'insert-button', action:'insert', madeUp:true}
+				],
+				{
+					serverURL:'myServer.php',
+					serverObject: 'TEST'
+				}
+			);
+
+
+
+		}
+		
+	},'js');
+})();
+		</script>
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc"> 
+			<p align="right"><a href="../../index.html">Back to the index of articles and examples</a></p>
+			<div id="hd">
+				<h1>Customizing YUI Library's DataTable</h1>
+			</div>
+			<div id="bd">
+			</div>
+			<div id="ft">
+				<p>This is an example on how you can customize a DataTable and the DataSource to work your way. 
+				Both have not only existing properties customized but I have also added methods to both.</p>
+				<p>Ut is meant as sample file for my articles on the YUI blog on the using the DataTable, <a href="http://yuiblog.com/blog/2008/10/15/datatable-260-part-one/">Part 1</a> and <a href="http://yuiblog.com/blog/2008/10/27/datatable-260-part-two/">Part 2</a>.</p>
+				<p>The example is made of this file plus <code>myDataTable.js</code> containing the modified DataTable, <code>myServer.php</code> 
+				which handles the back end and <code>ajaxServices.php</code> which handles the back and forth ajax messages
+				plus a few icons.  The whole is zipped into <a href="satyamdatatable.zip">satyamdatatable.zip</a> file</p>
+				<p>New records can be added by clicking on the <img src="add.png" /> icon, deleted by clicking on the <img src="delete.png" /> icon
+				and edited with several in-line editors which pops when clicking on a cell. </p>
+				<p>All changes are transmitted to the server and reflected on the DataTable
+				only when the server approves.  For example, the server won't accept deleting records which have an even numbered <code>Id</code>. 
+				The record insertion combines defaults from the client and some, such as the database table primary key which the
+				server sends back to the client.</p>
+				<p>Cell editing is possible on most fields with different editors.  All edits are sent and have to be accepted by the server.
+				Just to show that the server can say something about such edits, it will turn into uppercase all strings and will always change the 
+				<code>Date</code> field to the current date except when the <code>date</code> is the one being edited.</p>
+				<p>If you have any tools to monitor the traffic in between the client and the server (in Firebug, the Net tab)
+				you will see the exchange of messages in between them. All messages to the server go as POST with the data URL-encoded,
+				all replies come within a fixed envelope and can be any of the following:
+				    <pre>
+// Plain Ok response
+{   "replyCode":200, "replyText":"Ok" }
+
+// Ok with extra data
+{
+    "replyCode":201, "replyText":"Data Follows", 
+    "data":[{ ..., ..  } , ... ] 
+    // or  "data":{ ..., ... } if only a single record.
+
+}
+
+// Something went wrong
+{ "replyCode":500, "replyText":"Something really bad happened" }
+</pre>
+</p>
+				<p>Perhaps the most noticeable effect of this customizing  in the source code in this very page 
+					is how short it is.  It is basically an instantiation of my own customized DataTable, 
+				called SATYAM.DataTable.  The only arguments provided are the container that will hold it, 
+				the columns definition and the optional configuration attributes.  The DataSource is missing but, no worries, 
+				it will be there.</p>
+				<p>  The columns definitions also have some extra properties:</p>
+				<dl>
+					<dt>type</dt>
+						<dd>It specifies the data type of a column.  This value is the key to a table which defines information about:
+						<dl>
+							<dt>formatter</dt>
+								<dd>It will set the <code>formatter</code> of the column</dd>
+							<dt>parser</dt>
+								<dd>It will set the <code>parser</code> for this field in the <code>DataSource.responseSchema.fields</code> entry</dd>
+							<dt>editor</dt>
+								<dd>It will set the <code>editor</code> to the corresponding editor taken from <code>YAHOO.widget.DataTable.Editors</code></dd>
+							<dt>editorOptions</dt>
+								<dd>Options to be used as arguments in the instantiation of the editor above</dd>
+							<dt>stringer</dt>
+								<dd>A function to be called to convert the value when concatenating it into the url-encoded message to the server.  
+									The value returned will be further url-escaped</dd>
+							<dt>cellEditorFormatter</dt>
+								<dd>A formatter to be used when showing the value in the cell editor.  For example, the <code>Price</code> column
+								which is shown in European style with comma as a decimal separator, needs this to show it with the same decimal
+								separator in the textbox editor.  You can also enter the value either with comma or dot as a decimal separator
+								but don't use thousands separator, otherwise it will get messed up.</dd>
+						</dl>
+						The following types are defined:
+						<ul>
+							<li>number</li>
+							<li>currency</li>
+							<li>date</li>
+							<li>string</li>
+						</ul>
+						The <code>string</code> value is a catch-all for non-typed columns.
+						You can add further type definitions in the <code>SATYAM.DataTable.types</code> hash table.  
+						For example, the <code>currency</code> definition uses some of the same properties as <code>number</code>
+						except that it uses a formatter with two decimals, thousands separator and a currency sign.
+						You can freely add your own field types
+						</dd>
+					<dt>edit</dt>
+						<dd>Since the type of editor comes out of the <code>type</code> above you only need to say whether the column is editable or not</dd>
+					<dt>isPrimaryKey</dt>
+						<dd>When the client needs to send the data to the server, it has to identify the record it belongs to.  
+						The columns (one or more) that contain the values that make the Primary Key of the database table to be identified
+						so the client can always send them along any other field that is being modified</dd>
+					<dt>noShow</dt>
+						<dd>Some fields are not relevant to the user.  By setting <code>noShow</code> the column won't be displayed. 
+						The values for this column will still be available in the <code>Record</code> object</dd>
+					<dt>defaultValue</dt>
+						<dd>When the user inserts a new record into the DataTable, this values will be inserted plus any that the server
+						might send.  In this case, the server will always provide the <code>id</code> value since it is the primary key
+						of the new record, produced from an auto-increment field, which the client cannot guess in advance</dd>
+					<dt>MadeUp</dt>
+						<dd>The column is made up in the client side, no data comes from the server, no data is sent to the server
+						for these columns</dd>
+					<dt>action</dt>
+						<dd>Some of the made up columns are intended for the DataTable to execute some actions.  Currently my
+						custom DataTable accepts only two actions, <code>insert</code> and <code>delete</code></dd>
+				</dl>
+				<p>
+				The file <code>myDataTable.js</code> contains further comments.  
+				The article <a href="http://www.satyam.com.ar/yui/PhpJson.htm">A PHP back end to YUI</a> explains how the
+				file <code>ajaxServices.php</code> works and how it is used in <code>myServer.php</code>.  
+				This last one lacks access to any database so the database access functions won't work.  All the data is
+				generated at random.
+				</p>
+						
+			</div>
+		</div>
+	</body>
+</html>

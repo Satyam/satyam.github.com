@@ -1,0 +1,216 @@
+---- Extend ----
+[
+	{Anim:{component:'animation',subclasses:[
+		{ColorAnim:{component:'animation',subclasses:[
+			{Motion:{component:'animation'}},
+			{Scroll:{component:'animation'}}
+		]}}
+	]}},
+	
+	{Element:{component:'element',subclasses:[
+		{Button:{component:'button'}},
+		{ButtonGroup:{component:'button'}},
+		{ColorPicker:{component:'colorpicker'}},
+		{DataTable:{component:'datatable'}},
+		{ToobarButton:{component:'editor'}},
+		{Toolbar:{component:'editor'}},
+		{SimpleEditor:{component:'editor', extends:[
+			{Editor:{component:'editor'}}
+		]}},
+		{Crop:{component:'imagecropper'}},
+		{Layout:{component:'layout'}},
+		{LayoutUnit:{component:'layout'}},
+		{Resize:{component:'resize'}},
+		{TabView:{component:'tabview'}},
+		{Tab:{component:'tabview'}}
+	],augmented:['AttributeProvider','EventProvider']}},
+	{CalendarGroup:{component:'calendar',subclasses:[
+		{Calendar2up:{component:'calendar'}}
+	],augmented:['Calendar']}},
+	{AttributeProvider:{component:'element',subclasses:[
+		{FlashAdapter:{component:'Calendar',subclasses:[
+			{Chart:{component:'charts', subclasses:[
+				{PieChart:{component:'charts'}},
+				{CartensianChart:{component:'charts'}},
+				{LineChart:{component:'charts'}},
+				{ColumnChart:{component:'charts'}},
+				{BarChart:{component:'charts'}}
+			]}},
+			{Uploader:{component:'uploader'}}
+		]}}
+	],augmented:['EventProvider']}},
+	{Axis:{component:'charts',subclasses:[
+		{NumericAxis:{component:'charts'}},
+		{TimeAxis:{component:'charts'}},
+		{CategoryAxis:{component:'charts'}}
+	]}},
+	{Series:{component:'charts',subclasses:[
+		{PieSeries:{component:'charts'}},
+		{CartesianSeries:{component:'charts',subclasses:[
+			{ColumnSeries:{component:'charts'}},
+			{LineSeries:{component:'charts'}},
+			{BarSeries:{component:'charts'}}
+		]}}
+	]}},
+	{Module:{component:'container',subclasses:[
+		{Overlay:{component:'container',subclasses:[
+			{Tooltip:{component:'container'}},
+			{Panel:{component:'container',subclasses:[
+				{Dialog:{component:'container',subclasses:[
+					{SimpleDialog:{component:'container'}},
+				]}}
+			]}},
+			{Menu:{component:'menu',subclasses:[
+				{ContextMenu:{component:'menu'}},
+				{MenuBar:{component:'menu'}}
+			]}}
+		]}}
+	],augmented:['EventProvider']}},
+	{MenuItem:{component:'menu',subclasses:[
+		{MenuBarItem:{component:'menu'}}
+	],augmented:['EventProvider']}},
+	{DragDrop:{component:'dragdrop',subclasses:[
+		{DDTarget:{component:'dragdrop'}},
+		{DD:{component:'dragdrop',subclasses:[
+			{DDProxy:{component:'dragdrop',subclasses:[
+				{ColumnDD:{component:'datatable'}},
+				{ColumnResizer:{component:'datatable'}}
+			]}},
+			{SliderThumb:{component:'slider'}}
+		]}},
+		{Slider:{component:'slider',augmented:['EventProvider']}}
+	],augmented:['EventProvider']}},
+	{"ImageLoader.imgObj":{component:'imageloader',subclasses:[
+		{bgImgObj:{component:'imageloader'}},
+		{srcImgObj:{component:'imageloader'}},
+		{pngImgObj:{component:'imageloader'}}
+	]}},
+	{Node:{component:'treeview',subclasses:[
+		{TextNode:{component:'treeview',subclasses:[
+			{MenuNode:{component:'treeview'}}
+		]}},
+		{RootNode:{component:'treeview'}},
+		{HTMLNode:{component:'treeview'}}
+	],augmented:['EventProvider']}},
+	{DataSource:{component:'datasource',augmented:['EventProvider']}},
+	{RecordSet:{component:'datatable',augmented:['EventProvider']}},
+	{DualSlider:{component:'slider',augmented:['EventProvider']}},
+	{TreeView:{component:'treeview',augmented:['EventProvider']}},
+	{Config:{component:'container',augmented:['EventProvider']}},
+	{ContainerEffect:{component:'container',augmented:['EventProvider']}},
+	{Paginator:{component:'datatable',augmented:['AttributeProvider']}}
+	
+	
+	
+]
+	
+		
+	
+	
+
+	
+	-- Animation
+Anim
+	ColorAnim
+		Motion
+		Scroll
+
+Element
+	Button --Button
+	ButtonGroup --Button
+	ColorPicker -- ColorPicker
+	DataTable
+	ToolbarButton -- RTE
+	Toolbar -- RTE
+	SimpleEditor -RTE
+		Editor
+	Crop -- imageCropper
+	Layout
+	LayoutUnit
+	Resize
+	TabView
+	Tab
+	
+--Calendar
+CalendarGroup
+	Calendar2up
+	
+--Chart
+AttributeProvider
+	FlahsAdapter
+		Chart
+			PieChar
+			CartensianChart
+			LineChart
+			ColumnChart
+			BarChar
+		Uploader
+			
+Axis
+	NumericAxis
+	TimeAxis
+	CategoryAxis
+Series
+	PieSeries
+	CartesianSeries
+		ColumnSeries
+		LineSeries
+		BarSeries
+		
+Module
+	Overlay
+		Tooltip
+		Panel
+			Dialog
+				SimpleDialog
+		Menu
+			ContextMenu
+			MenuBar
+
+MenuItem
+	MenuBarItem
+
+DragDrop
+	DDTarget
+	DD
+		DDProxy
+			ColumnDD --DataTable
+			ColumnResizer --DataTable
+		SliderThumb
+	Slider
+
+ImageLoader.imgObj
+	bgImgObj
+	srcImgObj
+	pngImgObj
+	
+Node --treeview
+	TextNode
+		MenuNode
+	RootNode
+	HTMLNode
+	
+---- Augment
+
+EventProvider
+	DataSource
+	RecordSet
+	DragDrop
+	AttributeProvider
+		Element
+	Slider
+	DualSlider
+	TreeView
+	Node  -- treeview
+	Config -- Calendar
+	Config -- Container
+	Module -- Container
+	ContainerEffect -- Container
+	RecordSet
+	MenuItem
+	
+Calendar
+	CalendarGroup
+	
+AttributeProvider
+	Paginator

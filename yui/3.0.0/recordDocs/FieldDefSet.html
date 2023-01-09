@@ -1,0 +1,919 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: recordset  FieldDefSet   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1285452587.44" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1285452587.44" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1285452587.44"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1285452587.44"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>recordset&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_recordset.html" title="recordset">recordset</a>
+                 &gt; FieldDefSet 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">FieldDefSet</b>
+                        <span class="extends">
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Collection of FieldDef instances
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">FieldDefSet</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                defs
+
+                                                , 
+                                                _parent
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">defs</span>
+                                                    &lt;<span property="yui:type">FieldDef or object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Initial set of definitions</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">_parent</span>
+                                                    &lt;<span property="yui:type">FieldDef</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  (private) Reference to the parent definition of this collection</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:property" resource="#property__items">
+                                    <h4><a name="property__items" property="yui:name">_items</a>
+                                        - <code>private <span property="yui:type">[strings]</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Array containing the names of the fields in this level. 
+It is this array that gives the order of the fields when traversing them
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: []
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__keys">
+                                    <h4><a name="property__keys" property="yui:name">_keys</a>
+                                        - <code>private <span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Collection of FieldDef indexed by name.  Valid only on the root FieldDefSet.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: {}
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__parent">
+                                    <h4><a name="property__parent" property="yui:name">_parent</a>
+                                        - <code>private <span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the FieldDef instance this set is a child of
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: null
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__root">
+                                    <h4><a name="property__root" property="yui:name">_root</a>
+                                        - <code>private <span property="yui:type">FieldDefs</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the top-most FieldDefSet instance
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: null
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__totalDepth">
+                                    <h4><a name="property__totalDepth" property="yui:name">_totalDepth</a>
+                                        - <code>private <span property="yui:type">integer</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Number of levels of nesting. Valid only on the root FieldDefSet.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: 0
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_FieldDefSet.TRAVERSE_DEEP">
+                                    <h4><a name="property_FieldDefSet.TRAVERSE_DEEP" property="yui:name">FieldDefSet.TRAVERSE_DEEP</a>
+                                        - <code>static <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Constant to indicate <a href="#method_traverse">traversal</a> method
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_FieldDefSet.TRAVERSE_LEAVES">
+                                    <h4><a name="property_FieldDefSet.TRAVERSE_LEAVES" property="yui:name">FieldDefSet.TRAVERSE_LEAVES</a>
+                                        - <code>static <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Constant to indicate <a href="#method_traverse">traversal</a> method
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_FieldDefSet.TRAVERSE_SHALLOW">
+                                    <h4><a name="property_FieldDefSet.TRAVERSE_SHALLOW" property="yui:name">FieldDefSet.TRAVERSE_SHALLOW</a>
+                                        - <code>static <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Constant to indicate <a href="#method_traverse">traversal</a> method
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method__init">
+                                    <h4>
+                                        <a name="method__init">_init</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_init</strong>
+                                           (
+                                                
+                                                        
+                                                         defs
+                                                    
+                                                
+                                                        , 
+                                                         _parent
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Initialization method (called by constructor)
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">defs</span>
+                                                        &lt;<span property="yui:type">FieldDef or object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Initial set of definitions</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">_parent</span>
+                                                        &lt;<span property="yui:type">FieldDef</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (private) Reference to the parent definition of this collection</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_add">
+                                    <h4>
+                                        <a name="method_add">add</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">add</strong>
+                                           (
+                                                
+                                                        
+                                                         item
+                                                    
+                                                
+                                                        , 
+                                                         index
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Adds a field definition at a given position, if provided
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">item</span>
+                                                        &lt;<span property="yui:type">object or FieldDef</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  FieldDef to add or object literal to convert to a FieldDef and add</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">index</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Position to add this item at (at the end if missing)</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_each">
+                                    <h4>
+                                        <a name="method_each">each</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">each</strong>
+                                           (
+                                                
+                                                        
+                                                         fn
+                                                    
+                                                
+                                                        , 
+                                                         context
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Shortcut to traverse leaves, that is, definitions for fields containing data.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fn</span>
+                                                        &lt;<span property="yui:type">function</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Function to be called for each field definition.
+It will receive: <ul>
+<li><code>fieldDef</code> Definition for each field</li>
+<li><code>depth</code> Level of nesting of this definition</li>
+</ul></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">context</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) Context to execute the function in (defaults to this FieldDefSet instance)</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_get">
+                                    <h4>
+                                        <a name="method_get">get</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        any
+                                            <strong property="yui:name">get</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                                        , 
+                                                         key
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the value of a definition for a given field
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the field</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">key</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the definition</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        any
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">value for that definition or Y.Attribute.INVALID_VALUE if no such field is found.</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getDepth">
+                                    <h4>
+                                        <a name="method_getDepth">getDepth</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        integer
+                                            <strong property="yui:name">getDepth</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the total nesting level of the whole tree.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        integer
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">Total depth of the whole tree</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_isEmpty">
+                                    <h4>
+                                        <a name="method_isEmpty">isEmpty</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Boolean
+                                            <strong property="yui:name">isEmpty</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            True if this set has no definitions
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Boolean
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_item">
+                                    <h4>
+                                        <a name="method_item">item</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        FieldDef
+                                            <strong property="yui:name">item</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the FieldDef with the given name
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the field definition sought</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        FieldDef
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">Definition for that field</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_set">
+                                    <h4>
+                                        <a name="method_set">set</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">set</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                                        , 
+                                                         key
+                                                    
+                                                
+                                                        , 
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Adds or create a field definition and sets the value for a particular key.
+FieldDefs are sought by name at any depth in the definitions tree, but if it doesn't exist, 
+it will be created in this set.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  name of the field whose definition is to be set</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">key</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  name of the definition to be set</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">any</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value to be set</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_size">
+                                    <h4>
+                                        <a name="method_size">size</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        integer
+                                            <strong property="yui:name">size</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the number of definitions contained in this set at this level
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        integer
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">number of definitions</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_traverse">
+                                    <h4>
+                                        <a name="method_traverse">traverse</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">traverse</strong>
+                                           (
+                                                
+                                                        
+                                                         method
+                                                    
+                                                
+                                                        , 
+                                                         fn
+                                                    
+                                                
+                                                        , 
+                                                         context
+                                                    
+                                                
+                                                        , 
+                                                         _depth
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Traverses the field definitions tree in several ways, calling the provided function for each field definition.
+Traversing is done in the order in which the definitions were added, unless added with explicit indices.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">method</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Any of the following constants: <ul>
+<li><code>FieldDefSet.TRAVERSE_SHALLOW</code> fieldDefs are traversed by level, useful for building HTML table headers</li>
+<li><code>FieldDefSet.TRAVERSE_DEEP</code> fieldDefs are traversed going deep into each branch before going to the next, 
+useful for building HTML forms with nested fieldSets.</li>
+<li><code>FieldDefSet.TRAVERSE_LEAVES</code> only fieldDefs which have no children, lists only the ones that store data</li>
+</ul></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fn</span>
+                                                        &lt;<span property="yui:type">function</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Function to be called for each field definition.
+It will receive: <ul>
+<li><code>fieldDef</code> Definition for each field</li>
+<li><code>depth</code> Level of nesting of this definition</li>
+</ul></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">context</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) Context to execute the function in (defaults to this FieldDefSet instance)</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">_depth</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (private) Used to keep track of the depth in recursive calling.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_recordset.html" title="recordset">recordset</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="DataType.Converters.html" title="DataType.Converters">DataType.Converters</a></li>
+                                <li class=""><a href="DataType.Types.html" title="DataType.Types">DataType.Types</a></li>
+                                <li class=""><a href="FieldDef.html" title="FieldDef">FieldDef</a></li>
+                                <li class="selected"><a href="FieldDefSet.html" title="FieldDefSet">FieldDefSet</a></li>
+                                <li class=""><a href="Form.html" title="Form">Form</a></li>
+                                <li class=""><a href="Form.BaseField.html" title="Form.BaseField">Form.BaseField</a></li>
+                                <li class=""><a href="Record.html" title="Record">Record</a></li>
+                                <li class=""><a href="Record.Field.html" title="Record.Field">Record.Field</a></li>
+                                <li class=""><a href="RecordSet.html" title="RecordSet">RecordSet</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="record.js.html" title="record.js">record.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#property__items" title="_items">_items</a></li>
+                                <li class="private"><a href="#property__keys" title="_keys">_keys</a></li>
+                                <li class="private"><a href="#property__parent" title="_parent">_parent</a></li>
+                                <li class="private"><a href="#property__root" title="_root">_root</a></li>
+                                <li class="private"><a href="#property__totalDepth" title="_totalDepth">_totalDepth</a></li>
+                                <li class=""><a href="#property_FieldDefSet.TRAVERSE_DEEP" title="FieldDefSet.TRAVERSE_DEEP">FieldDefSet.TRAVERSE_DEEP</a></li>
+                                <li class=""><a href="#property_FieldDefSet.TRAVERSE_LEAVES" title="FieldDefSet.TRAVERSE_LEAVES">FieldDefSet.TRAVERSE_LEAVES</a></li>
+                                <li class=""><a href="#property_FieldDefSet.TRAVERSE_SHALLOW" title="FieldDefSet.TRAVERSE_SHALLOW">FieldDefSet.TRAVERSE_SHALLOW</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method__init" title="_init">_init</a></li>
+                                <li class=""><a href="#method_add" title="add">add</a></li>
+                                <li class=""><a href="#method_each" title="each">each</a></li>
+                                <li class=""><a href="#method_get" title="get">get</a></li>
+                                <li class=""><a href="#method_getDepth" title="getDepth">getDepth</a></li>
+                                <li class=""><a href="#method_isEmpty" title="isEmpty">isEmpty</a></li>
+                                <li class=""><a href="#method_item" title="item">item</a></li>
+                                <li class=""><a href="#method_set" title="set">set</a></li>
+                                <li class=""><a href="#method_size" title="size">size</a></li>
+                                <li class=""><a href="#method_traverse" title="traverse">traverse</a></li>
+                        </ul>
+                    </div>
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "FieldDef.html#method_add", "access": "", "host": "FieldDef", "type": "method", "name": "add"}, {"url": "FieldDefSet.html#method_add", "access": "", "host": "FieldDefSet", "type": "method", "name": "add"}, {"url": "FieldDef.html#event_beforeChildrenChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeChildrenChange"}, {"url": "FieldDef.html#event_beforeInitialValueChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeInitialValueChange"}, {"url": "FieldDef.html#event_beforeLabelChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeLabelChange"}, {"url": "FieldDef.html#event_beforeNameChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeNameChange"}, {"url": "FieldDef.html#event_before_parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "before_parentChange"}, {"url": "FieldDef.html#event_beforeParentChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeParentChange"}, {"url": "FieldDef.html#event_beforePrimaryKeyChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforePrimaryKeyChange"}, {"url": "FieldDef.html#event_beforeRootChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeRootChange"}, {"url": "FieldDef.html#event_beforeServerChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServerChange"}, {"url": "FieldDef.html#event_beforeServer.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServer.formatterChange"}, {"url": "FieldDef.html#event_beforeServer.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServer.parserChange"}, {"url": "FieldDef.html#event_beforeSortCompareFunctionChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeSortCompareFunctionChange"}, {"url": "FieldDef.html#event_beforeTypeChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeTypeChange"}, {"url": "FieldDef.html#event_beforeUiChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUiChange"}, {"url": "FieldDef.html#event_beforeUi.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUi.formatterChange"}, {"url": "FieldDef.html#event_beforeUi.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUi.parserChange"}, {"url": "FieldDef.html#config_children", "access": "", "host": "FieldDef", "type": "config", "name": "children"}, {"url": "FieldDef.html#event_childrenChange", "access": "", "host": "FieldDef", "type": "event", "name": "childrenChange"}, {"url": "FieldDefSet.html#method_each", "access": "", "host": "FieldDefSet", "type": "method", "name": "each"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_DEEP", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_DEEP"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_LEAVES", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_LEAVES"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_SHALLOW", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_SHALLOW"}, {"url": "FieldDefSet.html#method_get", "access": "", "host": "FieldDefSet", "type": "method", "name": "get"}, {"url": "FieldDef.html#method_getChildCount", "access": "", "host": "FieldDef", "type": "method", "name": "getChildCount"}, {"url": "FieldDefSet.html#method_getDepth", "access": "", "host": "FieldDefSet", "type": "method", "name": "getDepth"}, {"url": "FieldDefSet.html#method__init", "access": "", "host": "FieldDefSet", "type": "method", "name": "_init"}, {"url": "FieldDef.html#config_initialValue", "access": "", "host": "FieldDef", "type": "config", "name": "initialValue"}, {"url": "FieldDef.html#event_initialValueChange", "access": "", "host": "FieldDef", "type": "event", "name": "initialValueChange"}, {"url": "FieldDefSet.html#method_isEmpty", "access": "", "host": "FieldDefSet", "type": "method", "name": "isEmpty"}, {"url": "FieldDefSet.html#method_item", "access": "", "host": "FieldDefSet", "type": "method", "name": "item"}, {"url": "FieldDefSet.html#property__items", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_items"}, {"url": "FieldDefSet.html#property__keys", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_keys"}, {"url": "FieldDef.html#config_label", "access": "", "host": "FieldDef", "type": "config", "name": "label"}, {"url": "FieldDef.html#event_labelChange", "access": "", "host": "FieldDef", "type": "event", "name": "labelChange"}, {"url": "FieldDef.html#config_name", "access": "", "host": "FieldDef", "type": "config", "name": "name"}, {"url": "FieldDef.html#event_nameChange", "access": "", "host": "FieldDef", "type": "event", "name": "nameChange"}, {"url": "FieldDef.html#property__parent", "access": "private", "host": "FieldDef", "type": "property", "name": "_parent"}, {"url": "FieldDef.html#config__parent", "access": "private", "host": "FieldDef", "type": "config", "name": "_parent"}, {"url": "FieldDef.html#config_parent", "access": "", "host": "FieldDef", "type": "config", "name": "parent"}, {"url": "FieldDefSet.html#property__parent", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_parent"}, {"url": "FieldDef.html#event__parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "_parentChange"}, {"url": "FieldDef.html#event_parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "parentChange"}, {"url": "FieldDef.html#config_primaryKey", "access": "", "host": "FieldDef", "type": "config", "name": "primaryKey"}, {"url": "FieldDef.html#event_primaryKeyChange", "access": "", "host": "FieldDef", "type": "event", "name": "primaryKeyChange"}, {"url": "FieldDef.html#property__root", "access": "private", "host": "FieldDef", "type": "property", "name": "_root"}, {"url": "FieldDef.html#config_root", "access": "", "host": "FieldDef", "type": "config", "name": "root"}, {"url": "FieldDefSet.html#property__root", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_root"}, {"url": "FieldDef.html#event_rootChange", "access": "", "host": "FieldDef", "type": "event", "name": "rootChange"}, {"url": "FieldDef.html#config_server", "access": "", "host": "FieldDef", "type": "config", "name": "server"}, {"url": "FieldDef.html#event_serverChange", "access": "", "host": "FieldDef", "type": "event", "name": "serverChange"}, {"url": "FieldDef.html#config_server.formatter", "access": "", "host": "FieldDef", "type": "config", "name": "server.formatter"}, {"url": "FieldDef.html#event_server.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "server.formatterChange"}, {"url": "FieldDef.html#config_server.parser", "access": "", "host": "FieldDef", "type": "config", "name": "server.parser"}, {"url": "FieldDef.html#event_server.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "server.parserChange"}, {"url": "FieldDefSet.html#method_set", "access": "", "host": "FieldDefSet", "type": "method", "name": "set"}, {"url": "FieldDefSet.html#method_size", "access": "", "host": "FieldDefSet", "type": "method", "name": "size"}, {"url": "FieldDef.html#config_sortCompareFunction", "access": "", "host": "FieldDef", "type": "config", "name": "sortCompareFunction"}, {"url": "FieldDef.html#event_sortCompareFunctionChange", "access": "", "host": "FieldDef", "type": "event", "name": "sortCompareFunctionChange"}, {"url": "FieldDefSet.html#property__totalDepth", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_totalDepth"}, {"url": "FieldDefSet.html#method_traverse", "access": "", "host": "FieldDefSet", "type": "method", "name": "traverse"}, {"url": "FieldDef.html#config_type", "access": "", "host": "FieldDef", "type": "config", "name": "type"}, {"url": "FieldDef.html#event_typeChange", "access": "", "host": "FieldDef", "type": "event", "name": "typeChange"}, {"url": "FieldDef.html#config_ui", "access": "", "host": "FieldDef", "type": "config", "name": "ui"}, {"url": "FieldDef.html#event_uiChange", "access": "", "host": "FieldDef", "type": "event", "name": "uiChange"}, {"url": "FieldDef.html#config_ui.formatter", "access": "", "host": "FieldDef", "type": "config", "name": "ui.formatter"}, {"url": "FieldDef.html#event_ui.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "ui.formatterChange"}, {"url": "FieldDef.html#config_ui.parser", "access": "", "host": "FieldDef", "type": "config", "name": "ui.parser"}, {"url": "FieldDef.html#event_ui.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "ui.parserChange"}];
+</script>
+</body>
+</html>

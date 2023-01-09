@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0/build/assets/skins/sam/skin.css">
+    <title>Dynamic dropdownOptions</title>
+	<style type="text/css">
+		.ft {
+			margin-top:2em;
+		}
+	</style>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Dynamic dropdownOptions</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+			</div>
+		<div class="ft">
+			<p>It the values for a dropdownCellEditor are not known at the time the DataTable is created, they can be easily set afterwards.
+			In this example, both the DataTable and the options for the dropdown are already present in the source as plain arrays but it really
+			doesn't matter how or when the option values arrive, as long as they are there by the time the cell editor is shown.</p>
+			<p>Click on any cell in the right-most column to show the cell editor.</p>
+		</div>
+	</div>
+
+    <script src="http://yui.yahooapis.com/2.8.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript" >
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("datatable");
+
+
+	loader.insert({ 
+//		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+		
+			
+			var ddEditor = new YAHOO.widget.DropdownCellEditor();
+				
+	        var dt = new YAHOO.widget.DataTable(
+				"container", 
+				[
+		            {key:"Numbers", children:[
+		                {key:"SKU", sortable:true},
+		                {key:"Quantity", sortable:true}
+		            ]},
+		            {key:"Text", children:[
+		                {key:"Item", sortable:true},
+		                {key:"Description", sortable:true}
+		            ]},
+					{key:'choices',editor:ddEditor}
+		        ],
+                new YAHOO.util.DataSource(
+					[
+						// Unfortunately, due to a current bug:
+						// http://yuilibrary.com/projects/yui2/ticket/2527749
+						// dropdown values have to be strings
+						{SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large.",choices:"1"},
+						{SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football.",choices:"3"},
+						{SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles",choices:"2"},
+						{SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies.",choices:"1"},
+						{SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls.",choices:"2"},
+						{SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:"",choices:"3"},
+						{SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10.",choices:"3"},
+						{SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:"",choices:"2"},
+						{SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium.",choices:"1"},
+						{SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag.",choices:"2"},
+						{SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small.",choices:"1"},
+						{SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry.",choices:"3"},
+						{SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:"",choices:"2"},
+						{SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck.",choices:"1"}
+					],
+					{
+						responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+						responseSchema: {
+							fields: ["SKU","Quantity","Item","Description","choices"]
+						}
+					}
+				)
+			);
+			dt.on('cellClickEvent',function() {
+				this.onEventShowCellEditor.apply(this,arguments);
+			});
+			ddEditor.dropdownOptions = [
+				{value:0,label:'unknown'},
+				{value:1,label:'one'},
+				{value:2,label:'two'},
+				{value:3,label:'three'}
+			];
+			ddEditor.render();
+			
+		}
+	}, 'js');
+})();
+
+</script>
+</body>
+</html>

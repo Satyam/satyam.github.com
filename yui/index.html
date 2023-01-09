@@ -1,0 +1,969 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+    <meta http-equiv="Content-Language" content="en-us">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css">
+    <style type="text/css">
+		.menu {
+			border: 1px solid #e0e0e0;
+		}
+		.menu h3 {
+			padding-left:3px;
+		}
+	    .menu a {
+				text-decoration:none;
+				color:black;
+				font-size:93%;
+				line-height:1.5;
+				display:block;
+		}
+		.menu a:hover {
+				background: #B3D4FF;
+		}
+		h1 {
+			text-align:center;
+			font-size:2em;
+		}
+		#yui-main h3 {
+			border-top: thin dashed silver;
+			padding-top:1em;
+		}
+		#yui-main h2 {
+			border-top: double silver;
+			padding-top:2em;
+		}
+    </style>
+    <title>
+      Yahoo User Interface library (YUI)
+    </title>
+  </head>
+  <body class="yui-skin-sam">
+    <div id="doc" class="yui-t1">
+      <div id="hd">
+        <h1>
+          Yahoo User Interface library (YUI)
+        </h1>
+      </div>
+      <div id="bd">
+        <div class="yui-b">
+          <div class="menu">
+			<h3>Book</h3>
+			<ul>
+				<li><a href="#book">YUI 2.8: Learning the Library</a></li>
+			</ul>
+            <h3>
+              Examples
+            </h3>
+            <ul>
+              <li>
+                <a href="#ServerDriven">Server driven</a>
+              </li>
+              <li>
+                <a href="#DataGrid">Data Grid</a>
+              </li>
+              <li>
+                <a href="#TableWithDetails">Record details in<br>
+                pop-up panel</a>
+              </li>
+			  <li>
+				<a href="#invoice">Invoice</a>
+			   </li>
+			   <li>
+				<a href="#showHide">Show/hide columns</a>
+				</li>
+			   <li>
+				<a href="#assortedControls">Assorted Controls</a>
+				</li>
+			   <li>
+				<a href="#deleteRowsBy">Delete Rows By</a>
+				</li>
+			   <li>
+				<a href="#TreeAndTable">TreeView with DataTables as leafs</a>
+				</li>
+			   <li>
+				<a href="#postJSON">Send JSON data as POST to PHP</a>
+				</li>
+			   <li>
+				<a href="#DataTable-2.6">Using DataTable 2.6</a>
+				</li>
+			   <li>
+				<a href="#tooltips">Showing Tooltips over the DataTable</a>
+				</li>
+			   <li>
+				<a href="#grouping">Grouping repeated column values</a>
+				</li>
+				<li>
+				<a href="#rowEditor">Row editor</a>
+				</li>
+				<li>
+				<a href="#requery">DataTable requery method</a>
+				</li>
+				<li>
+				<a href="#tasklist">Highlighting tree nodes</a>
+				</li>
+				<li>
+				<a href="#markup">Building trees from HTML markup</a>
+				</li>
+				<li>
+				<a href="#YQLDataSource">YQL DataSource</a>
+				</li>
+				<li>
+				<a href="#keynav">Key Navigation in DataTable cell editor</a>
+				</li>
+				<li>
+				<a href="#pb-popup">ProgressBar in a pop up panel</a>
+				</li>
+				<li>
+				<a href="#dynamicDropdown">Dynamic dropdownOptions</a>
+				</li>
+				<li>
+				<a href="#TreeViewFromDataSource">Build Tree from DataSource</a>
+				</li>
+				<li><a href="#NestedDataTables">Nested DataTables</a></li>
+
+				<li><a href="#FilteringRecords">Filtering by hiding rows</a></li>
+
+				<li><a href="#Infinite">Infinite Scrolling DataTable</a></li>
+				<li><a href="#DDTreeView">Drag and Drop within a TreeView</a></li>
+				<li><a href="#DTContextMenu">DataTable with Dynamic Context Menu</a></li>
+
+				</ul>
+            <h3>
+              Widgets
+            </h3>
+            <ul>
+              <li>
+                <a href="#progressbar">Progress Bar Widget</a>
+              </li>
+              <li>
+                <a href="#makenode">MakeNode Extension</a>
+              </li>
+              <li>
+                <a href="#spinner">Spinner Widget</a>
+              </li>
+              <li>
+                <a href="#button">Button family of Widgets</a>
+              </li>
+              <li>
+                <a href="#accordion">Accordion Widget</a>
+              </li>
+            </ul>
+            <h3>
+              Documentation
+            </h3>
+            <ul>
+              <li>
+                <a href="#yuiblog">At the YuiBlog</a>
+              </li>
+              <li>
+                <a href="#phpjson">A PHP back end to YUI</a>
+              </li>
+              <li>
+                <a href="#making_your_own_datatable">Making your own DataTable</a>
+              </li>
+              <li>
+			      <a href="#buildingwidgets">Building Your Own Widget Library with YUI</a>
+              </li>
+              <li>
+			      <a href="#insideria">Inside RIA</a>
+              </li>
+              <li>
+			      <a href="#widgetstyle">Changing the style of an element in a YUI widget</a>
+              </li>
+  
+			  
+            </ul>
+			<h3>External links</h3>
+			<ul>
+				<li><a href="#external">Related material</a></li>
+			</ul>
+			<h3>Utilities</h3>
+			<ul>
+				<li><a href="#dependencies">Component dependencies</a></li>
+			</ul>
+			
+          </div>
+        </div>
+        <div id="yui-main">
+          <div class="yui-b">
+            <h2><a name="Books"></a>Books</h2>
+			<h3><a name="book"></a>YUI 2.8: Learning the Library</h3>
+			<p>My first published book.  Something I didn't expect.  The guys at Packt Books sent me an email around December 2009 asking if I cared
+			to do an update to their existing book on YUI.  The original author was busy at the time and could not do it.  My first question was if
+			they weren't a little late.  More and more of YUI3 was coming out of beta at the time, why YUI2?  Anyway, I had the time and the knowledge
+			and they were willing to pay a modest advance so they were serious about it, so I did it. It wasn't such a bad idea after all, YUI3 added the ability 
+			to load YUI2 components into its sandbox, which means YUI2 widgets have a long way to go.</p>
+			<p>It gave me a big oportunity to really learn the whole library, not just the components I am most used to.  It also allowed me to work with
+			very nice people whom I never met face to face and, funny enough, for a book published in English, many of them weren't native English speakers, 
+			starting with me.</p>
+			<p>Anyway, it is finally out there: <a href="https://www.packtpub.com/yahoo-user-interface-yui-2-8-learning-library/book">YUI 2.8: Learning the Library</a>
+			</p>
+            <h2><a name="DataTable"></a>Examples</h2>
+			  <a name="ServerDriven"></a>
+            <h3>
+              Server driven DataTable with pagination and sorting.
+            </h3>
+            <p>
+              This example builds a DataTable based on the columns information
+              taken from the server. Instead of building a statically defined
+              DataTable it will build it based on what the server says.
+            </p>
+            <p>
+              It has been based on the <a href=
+              "http://developer.yahoo.com/yui/examples/datatable/dt_serverpagination.html">
+              server-side pagination</a> and <a href=
+              "http://developer.yahoo.com/yui/examples/datatable/dt_serversorting.html">
+              server-side sorting</a> examples. They have both been changed in
+              that they do not use the DataSource to communicate with the
+              server but use a plain Connection Manager request to fetch the
+              information and then pass it as a local source to the DataSource.
+              This allows full access to all the information received from the
+              server before it gets sent to the DataTable. Reported bugs on
+              both examples have been fixed as well.
+            </p>
+            <p>
+              The source files for this sample are available for download in a
+              <a href="dt_server_driven.zip">zip file</a>. The PHP server
+              script requires an active PHP interpreter. The YUI compoments are
+              fetched from the YUI site.
+            </p>
+            <ul>
+              <li>
+                <a href="dt_serverdriven.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="dt_server_driven.zip">zip file (2.4.1)</a>
+              </li>
+            </ul>
+			<!--h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>The examples have been completely redone for this release.  
+			Server-side paging has been fully revamped.  
+			All the extra code required to do server-side paging around
+			the DataTable is now completely gone since most is handled
+			directly from within the DataTable.
+			Now it only requires a few settings, some function overrides and little more.</p>
+            <p>The most noticeable change for the user is the page links, which are now
+			provided by the DataTable itself, with the same features as for 
+			client-side paging and can be customized just as well.</p>
+            <p>Server-side sorting, though, is not really well integrated
+			into the DataTable yet so that part is not so clean.</p>
+            <ul>
+              <li>
+                <a href="2.5.0/dt_serverdriven.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/dt_server_driven.zip">zip file (2.5.1)</a>
+              </li>
+            </ul-->
+            
+            <a name="DataGrid"></a>
+            <h3>
+              Data Grid
+            </h3>
+            <p>
+              The DataTable is basically meant to represent data structured as
+              in a regular database table. As such, it has a definition for
+              each of the columns which applies to all rows in the table.
+              Unless the designer provides customized code, every cell in the
+              same column will behave the same.
+            </p>
+            <p>
+              This example uses an extra invisible column to provide data type
+              definitions for each individual cell so that instead of a single
+              definition applicable to all the cells in a column, each cell has
+              its own definition. For the purpose of the example, this
+              definition is only a string indicating whether the cell contains
+              a number, text or date, nevertheless, in a real case there is no
+              reason why it cannot be a complex object describing several
+              attributes.
+            </p>
+            <p>
+              All columns have a custom formatter and editor function. These do
+              not actually do any formatting or editing but they check the
+              corresponding data type information stored in the extra column
+              paired to the one being actually formatted or edited and then
+              calls the standard formatters and editors provided for along the
+              DataTable component
+            </p>
+            <p>
+              The example is fully contained in the HTML file, its only
+              external resources are the YUI component files which are
+              downloaded from the YUI download site.
+            </p>
+			<h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>No changes where required for this version</p>
+			<h4><img src="new.png"/> New for 2.6.0</h4>
+			<p>Editors are now separate classes and their interface to the DataTable has changed
+			so the example had to be redone to handle this separate editor classes. 
+			A pool of an assortment of already instanced editors is placed in an object and used as requested</p>
+            <ul>
+              <li>
+                <a href="DataGrid.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/DataGrid.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/DataGrid.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+            
+            <a name="TableWithDetails"></a>
+            <h3>
+              DataTable with extra details in tabbed pop-up
+            </h3>
+            <p>
+              This example draws a very basic DataTable and on clicking on any cell, 
+			  a YUI Panel will pop-up containing a YUI TabView with four tabs.  
+			  Each tab has a child DataTable with different contents, 
+			  all related to the clicked record. 
+			  The contents in the cells of these child tables is generated dynamically
+			  and it reflects the base table row number and tab numbers active plus the row
+			  and column position of the cell.
+            </p>
+			<p>In order to make the example totally self-contained, the data on all the tables
+			is created locally.  In an actual application the data would come from data servers.
+			Besides changing the columns and field definitions to match the actual data,
+			to make this example work
+			in client-server environments the single argument to the constructors of all the new DataSources
+			would need to be changed to the URL of the servers providing the data.</p>
+			<h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>This example uses method 
+			<a href="http://developer.yahoo.com/yui/docs/YAHOO.util.DataSource.html#sendRequest"><code>sendRequest</code></a>
+			of the DataSource to retrieve new data for the child tables.  It has been modified to accept the arguments in the new format.
+			The new version has provided backward-compatibility so it would have worked just the same the way it was.</p>
+            <ul>
+              <li>
+                <a href="TableWithDetails.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/TableWithDetails.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/TableWithDetails.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+			<a name="invoice"></a>
+            <h3>
+              Invoice: drag and drop, summary row and field validation
+            </h3>
+            <p>
+              This example allows you to do an invoice by dragging items out of a DataTable with 
+			  a list of items into another DataTable.  It has in-line cell editing with an editor with
+			  a regular expression validator.  The invoice uses the TFOOT element of the table
+			  to do the totals
+            </p>
+			<h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>There are only two changes for this version.  
+			Method <code>getTableEl</code> does not exist anymore so it has been replaced by a way around.  
+			Also, the inline style definition for className number had to be replaced due to the new
+			'liner' element in between the HTML cell and the actual content.</p>
+			<p>Since now the headers are a separate table from the body of the DataTable
+			the column widths are now calculated by the DataTable on each refresh. 
+			The footer is not included in this calculation since the DataTable ignores
+			it exists. When first loaded, the right-hand table is empty and the footer
+			with the totals does not match the headers 
+			(the titles in grey to the left don't end where they should). 
+			As soon as an item is dropped into the invoice, the borders align fine.</p>
+			<p><img src="new.png"/> <img src="new.png"/> Fixed: <strike>Also, if you enter a large quantity on any of the items so that the totals
+			grow wide, the headers and the table won't match any longer.
+			Finally, there must be some padding or margin in the 'liner' element so that
+			the totals are not aligned with the item prices. This I should be able to fix ASAP.</strike>
+			The overflowing totals with large quantities was fixed by calling method <code>_syncColWidths</code>
+			after the values are recalculated.  Though the DataTable does not know about the tfoot element,
+			the tbody of the table does adjust its width to it so <code>_syncColWidths</code> is able to adjust 
+			the headers to it.  This was a tip by Jenny Han Donnelly, thanks.  
+			I often discourage the use of private methods and properties (those signaled by a leading underscore)
+			since they are unsupported.  In this case, tfoot elements are also unsupported so this whole example
+			may break at any moment.
+			Also, the alignment issue was solved by adding the same padding to the extra cells 
+			as the liner element has in the body of the table.</p>
+			<h4><img src="new.png"/> New for 2.6.0</h4>
+			<p>The example was updated to use the new cell editors.</p>
+			<p>One of the purposes of this example was to show how to create your own cell editor.  
+			Since the whole way the cell editors work has changed, my sample text editor has changed as well.
+			I also used the cell editor to edit a cell which is not actually part of the editor.  
+			Once again, that has been changed to use the new-style cell editors.</p>
+			
+            <ul>
+              <li>
+                <a href="invoice.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/invoice.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/invoice.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+			
+			
+			<a name="showHide"></a>
+            <h3>
+              Show and hide columns in a DataTable
+            </h3>
+            <p>
+              This example uses the new <a href="http://developer.yahoo.com/yui/selector/">Selector</a> component to hide and show
+			  columns in a DataTable with only two lines of code.
+            </p>
+			<p>It uses the same server script as the  <a href="#ServerDriven">Server driven DataTable</a> example above.
+			<h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>Showing and hiding columns is now a feature of the DataTable itself so there is no need
+			to do any tricks with CSS styls and the Selector component.</p>
+			<ul>
+              <li>
+                <a href="HidingColumns.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/HidingColumns.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/HidingColumns.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+
+			<a name="assortedControls"></a>
+            <h3>
+              Handling of active cell content
+            </h3>
+            <p>
+              This example show an assortment of HTML controls: radio buttons, checkboxes, dropdowns, 
+			  regular and image buttons and an in-line textbox and how to handle them.
+            </p>
+			<h4><img src="new.png"/> New for 2.5.1</h4>
+			<p>Not much new, simply using the getTdLinerEl method to reach the cell value container.</p>
+			<h4><img src="new.png"/> New for 2.6.0</h4>
+			<p>Nothing really, I simply changed the names of the shortcuts to those I finally adopted.</p>
+            <ul>
+              <li>
+                <a href="assortedControls.html">Example (2.4.1)</a>
+              </li>
+              <li>
+                <a href="2.5.0/assortedControls.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/assortedControls.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+
+			<a name="deleteRowsBy"></a>
+            <h3>
+              Delete Rows By
+            </h3>
+            <p>
+             Here, the DataTable is extended with a function <code>deleteRowsBy</code> analogous to 
+			 function <code>getChildrenBy</code> in YAHOO.util.Dom, where you provide a function
+			 that will return a Boolean indicating whether the record is to be deleted or not.  
+			 This function receives an object with all the values of each record to decide.
+            </p>
+			<ul>
+              <li>
+                <a href="2.5.0/deleteRowsBy.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/deleteRowsBy.html">Example (2.6.0)</a>
+              </li>
+              <li>
+                <a href="2.8.0/deleteRowsBy.html">Example (2.8.0)</a>
+              </li>
+            </ul>
+
+			<a name="TreeAndTable"></a>
+            <h3>
+              TreeView with DataTables as leafs
+            </h3>
+            <p>
+             The example builds a couple of random trees.  It will show a DataTable at the end of each branch.</p>
+			 
+			 <p>In the first tree, several branches can be open at the same time so it builds a DataTable for each.</p>
+			 
+			 <p>In the second tree, only one branch will be open at a time so it uses just one DataTable for all of them 
+			 and just moves it around.
+			 It also uses a single DataSource with caching enabled so that if a node is visited again
+			 the data can be read from the cache.
+            </p>
+			<h4><img src="new.png"/> New for 2.6.0</h4>
+			<p>I learned to use the TreeView much better so I changed my initial use of TextNodes to HTMLNodes
+			which provide a much more natural generic container for the table. Since 2.6 provides keyboard
+			navigation, I also made the example respond to the Enter key as well as clicks. 
+			Finally, I just cleaned it up a bit, providing more standard shortcut names and reordering things around.</p>
+			<ul>
+              <li>
+                <a href="2.5.0/TreeAndTable.html">Example (2.5.1)</a>
+              </li>
+              <li>
+                <a href="2.6.0/TreeAndTable.html">Example (2.6.0)</a>
+              </li>
+            </ul>
+			<a name="postJSON"></a>
+            <h3>
+              Send JSON data as POST to PHP
+            </h3>
+            <p>This is a working example of how you can send JSON data via a POST request with 
+			Connection Manager's <a href="http://developer.yahoo.com/yui/docs/YAHOO.util.Connect.html#method_asyncRequest">asyncRequest</a>
+			method, and how to read it on the PHP side.</p>
+			<ul>
+              <li>
+                <a href="2.5.0/JSONsend.php">Example</a>
+              </li>
+            </ul>
+
+			
+			<a name="DataTable-2.6"></a>
+			<h3>Using DataTable 2.6</h3>
+			<p>This example is for the features shown in the articles in the <a href="#yuiblog">YUI blog</a>.  More information can be found in them. </p>
+			<ul>
+              <li>
+                <a href="2.6.0/myDataTable/myClient.html">Example</a>
+			</li>
+              <li>
+                <a href="2.6.0/myDataTable/satyamdatatable.zip">Download</a>
+			</li>
+            </ul>
+				<a href="#tooltips">Showing Tooltips over the DataTable</a>
+			<a name="tooltips"></a>
+			<h3>Showing Tooltips over the DataTable</h3>
+			<p>The example shows how you can show ToolTips over DataTable cells.  
+			It uses just one ToolTip for the whole of the DataTable	which is filled and positioned each time.  
+			It uses events cellMouseoverEvent and cellMouseoutEvent to detect when the cursor is over the table cells we care about.  
+			A couple of timers handle the delay until the tooltip is shown and how long it shows.
+			The text for the tooltip is taken from an extra field in the table which is not shown.</p>
+			<ul>
+              <li>
+                <a href="2.6.0/tooltips.html">Example</a>
+			</li>
+            </ul>
+			
+			<a name="grouping"></a>
+			<h3>Grouping repeated column values</h3>
+			<p>The example shows how you can group cells in the same column where values are the same.</p>
+			<p>It is like using the <code>rowspan</code> HTML attribute but without really doing so.</p>
+			<ul>
+              <li>
+                <a href="2.6.0/Grouping.html">Example</a>
+			</li>
+            </ul>
+			<p>For a much better way of doing it, take a look at 
+			<a href="http://antscode.blogspot.com/2009/08/row-grouping-for-yui-data-table.html">Anthony Super's blog article</a></p>
+			<a name="rowEditor"></a>
+			<h3>Row Editor</h3>
+			<p>A possible extension to allow row editing in the Datatable.</p>
+			<ul>
+              <li>
+                <a href="2.6.0/rowedit.html">Example</a>
+			</li>
+            </ul>
+			
+			<a name="requery"></a>
+			<h3>DataTable requery method</h3>
+			<p>A custom method added to the DataTable to allow for easy refreshing of the DataTable with new data.</p>
+			<h4><img src="new.png"/> New for 2.8.0</h4>
+			<p>I improved the requery method to support client and server-side paging and sorting, with some limitations.
+			It is not a universal solution, some of the functionality will require support of the server or added code
+			on the client.  Please do read the notes, don't just copy the code and expect it to work because it might not
+			work in all circumstances.</p>
+
+			<ul>
+              <li><a href="2.6.0/requery.html">Example 2.6</a></li>
+              <li><a href="2.8.0/requery.html">Example 2.8</a> <img src="new.png"/></li>
+            </ul>
+
+			<a  name="tasklist"></a>
+			<h3>Highlighting tree nodes</h3>
+			<p>The TreeView control now supports highlighting of nodes.  
+			The visual element showing the highlight can be checkboxes, as in the TaskNode example.
+			However, this facility is now supported in all node types, including TextNodes.</p>
+			<p>This is an example that due to administrative issues, didn't make it into the 
+			examples at the YUI site. <h4><img src="new.png"/> The example is now available at the YUI site</h4></p>
+			<ul>
+              <li><a href="2.7.0/tasklist.html">Example (2.7.0)</a></li>
+              <li><a href="http://developer.yahoo.com/yui/examples/treeview/tv_highlight.html">Example at YUI site</a></li>
+            </ul>
+
+
+			<a  name="markup"></a>
+			<h3>Building trees from HTML markup or from previous definitions</h3>
+			<p>The TreeView control can read existing markup, 
+			can build a tree from the definition of an existing TreeView
+			or of any branch of it and can also build a tree from a literal object definition.
+			This example shows some extra features of these capabilities.</p>
+			<p>This is an example that due to administrative issues, didn't make it into the 
+			examples at the YUI site.</p>
+			<ul>
+              <li>
+                <a href="2.7.0/markup.html">Example</a>
+			</li>
+			</ul>
+
+				
+			<a  name="YQLDataSource"></a>
+			<h3>YQL DataSource</h3>
+			<p><a href="http://developer.yahoo.com/yql/">YQL</a> (YAHOO! Query Language) provides a 
+			simple mechanism to access information stored in YAHOO servers from all its services, 
+			not only its search engine but Flickr, contacts, weather, places and such. 
+			To use that information from YUI widgets such as DataTable, Charts or AutoComplete
+			you need to use a <a href="http://developer.yahoo.com/yui/docs/YAHOO.util.ScriptNodeDataSource.html">ScriptNodeDataSource</a>.  
+			Since most of the settings for it would be
+			fixed when using YQL and others can be deduced from the query results, it makes sense
+			to subclass ScriptNodeDataSource to handle as many defaults as possible.</p>
+			<p>The example code contains the definition of YQLDataSource and a simple example
+			of how to use it on a DataTable.  The idea came via this <a href="http://www.yuiblog.com/blog/2009/06/17/yui-and-yql/">article</a>
+			on the YUI Blog	</p>
+			<ul>
+              <li><a href="2.7.0/yql.html">2.7.0 Example</a></li>
+              <li><a href="2.8.0/YQLDataSource.html">2.8.0 Example with improved YQLDataSource in separate .js file</a></li>
+              <li><a href="3.0.0/YQLSubstitute.html">3.1.1 Example using the YQLQuery Gallery Module</a></li>
+            </ul>
+
+			<a  name="keynav"></a>
+			<h3>Key Navigation in DataTable cell editor</h3>
+			<p>Surrendering to <a href="http://tech.groups.yahoo.com/group/ydn-javascript/message/51964">popular demand</a>, once again.  
+			Many people asked to navigate in between cell editors by using the TAB key, so I gave it a try.  I threw in arrow keys as well.
+			It works a little funny when getting to the edges and doesn't pop up all editors, don't know why.</p>
+			<p>Suggestions welcome</p>
+			<p><img src="new.png"/>Matt Parker has improved on this idea by adding a method <code>allowMoveCellWhileEdit</code> to
+			the cell editors that tell whether a particular keystroke should allow moving to other cell editor. In my example,
+			I allowed it for all editors but Textareas.  Matt's code allows a far better control on what is allowed for each cell editor.
+			It is all in one package with his Column Chooser, which can be enabled separately.</p>
+			<ul>
+              <li>
+                <a href="2.7.0/keynav.html">Example</a>
+			</li>
+              <li>
+                <a href="http://github.com/mattparker">Matt Parker's code at GitHub</a>
+			</li>
+            </ul>
+			
+			<a  name="pb-popup"></a>
+			<h3>ProgressBar in a pop up panel</h3>
+			<p>This example shows a ProgressBar in a pop up window.</p>
+			<ul>
+              <li>
+                <a href="2.7.0/pb-popup.html">Example</a>
+			</li>
+            </ul>			
+
+			<a  name="dynamicDropdown"></a>
+			<h3>Dynamic dropdownOptions</h3>
+			<p>This example shows how the dropdown options for a dropdownCellEditor can be set after the cell editor instance has been created.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/DynamicDropdown.html">Example</a>
+			</li>
+            </ul>	
+	
+			<a  name="TreeViewFromDataSource"></a>
+			<h3>Build Tree from DataSource</h3>
+			<p>A function that can read a table representing a tree from a DataSource and turn it into a tree.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/TreeViewFromDataSource.html">Example</a>
+			</li>
+            </ul>	
+			<a  name="NestedDataTables"></a>
+			<h3>Nested DataTables</h3>
+			<p>A complex example that shows how to nest a series of child tables in a master DataTable.
+			This example uses my <a href="#requery">requery</a> method for DataTable and my <a href="#YQLDataSource">YQLDataSource</a>
+			to fetch the data from Yahoo!'s own music API via YQL.  </p>
+			<p>A new subclass of DataTable: NestedDataTable was created so the application and the nesting are separate.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/nested.html">Example</a>
+			</li>
+              <li>
+                <a href="2.8.0/nested1.html">Example with NestedDataTable object</a>
+			</li>
+              <li>
+				<a href="2.8.0/apidocs/YAHOO.widget.NestedDataTable.html">API Documentation for NestedDataTable</a>
+			</li>
+            </ul>	
+			<h4><img src="new.png"/> New </h4>
+			<p>Featured in the <a href="http://www.yuiblog.com/blog/2010/03/17/using-nested-datatables-for-row-expansion/">YUI Blog</a>:
+			
+			
+			<ul>
+              <li><a href="2.8.0/nestedRowExpansion.html">Example</a></li>
+              <li><a href="2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html">API Docs</a></li>
+			  
+			  
+            </ul>	
+			<a  name="FilteringRecords"></a>
+			<h3>Filtering by hiding rows</h3>
+			<p>In this example I show how to selectively hide rows to filter out rows with values I don't want shown.
+			I guess that the most important point is the redoing of the stripes once some of the rows are gone.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/filtering.html">Example</a>
+			</li>
+            </ul>
+
+			<a  name="Infinite"></a>
+			<h3>Infinite Scrolling DataTable</h3>
+			<p>How to create a DataTable that keeps filling up with new records the further you scroll.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/infinite.html">Example</a>
+			</li>
+            </ul>				
+
+			<a  name="DDTreeView"></a>
+			<h3>Drag and Drop within a TreeView</h3>
+			<p>Dragging and Dropping tree nodes in a TreeView.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/TreeViewDD.html">Example</a>
+			</li>
+            </ul>	
+
+			<a  name="DTContextMenu"></a>
+			<h3>DataTable with Dynamic Context Menu</h3>
+			<p>Showing how to dynamically change the options in a ContextMenu based on the DataTable cell being clicked.</p>
+			<ul>
+              <li>
+                <a href="2.8.0/DTContextMenu.html">Example</a>
+			</li>
+            </ul>	
+
+
+
+
+
+
+			<h2>Widgets</h2>
+			<a name="progressbar"></a>
+			<h3>Progress Bar widget</h3>
+			<p>After a <a href="http://tech.groups.yahoo.com/group/ydn-javascript/message/35811">message</a> in the YUI discussion forum
+			and after writting the <a href="#buildingwidgets">article</a> about how to do widgets, I did my own Progress Bar component.</p>
+			<p>There is a 3.0 version of the ProgressBar which inherits from Y.Widget and follows the guidelines for
+			3.0.0 widgets as per the Preview Release 2</p>
+			<h4><img src="new.png"/> New for 2.8.0</h4>
+			<p>The ProgressBar is now an official component of the YUI library.</p>
+			<ul>
+				<li><a href="2.5.0/progressbar">Example (2.6.0)</a></li>
+				<li><a href="2.5.0/progressbar/example.zip">Zip file (2.6.0)</a> including all files required (library code, images and stylesheet)</li>
+				<li><a href="3.0.0/progressbar">Example (3.0.0PR2)</a></li>
+				<li><a href="3.0.0/progressbar/example.zip">Zip file (3.0.0PR2)</a> including all files required (library code, images and stylesheet)</li>
+				<li><a href="http://developer.yahoo.com/yui/progressbar/">ProgressBar Widget</a></li>
+			</ul>
+			<h3><img src="new.png"/> New for 3.4.0</h3>
+			
+			<a name="makenode"></a>
+			<h3>MakeNode Extension</h3>
+			<p>An extension for Y.Widget that makes it easier to write Widgets in a more declarative way,
+			encapsulating some of the best practices for developing widgets in a few declarations and saving
+			tons of code.</p>
+			<p>This extension was described in an article in the YUI Blog,
+			<a href="http://www.yuiblog.com/blog/2011/07/08/the-makenode-widget-extension/">The "MakeNode" Widget Extension</a></p>
+			<ul>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/makenode/makenode.js">Source Code</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/apidocs/module_makenode.html">API docs</a></li>
+			</ul>
+			<a name="spinner"></a>
+			<h3>Spinner Widget</h3>
+			
+			<p>I used the Spinner from the example of using Widgets as an example for using MakeNode as well.
+			Just as the original Widget example, this one is fully functional but much smaller since some 
+			of the functionality is provided by MakeNode and much cleaner.</p>
+			<p>This widget requires <a href="#makenode">MakeNode</a></p>
+			<ul>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/spinner/spinner.js">Source Code</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/apidocs/module_spinner.html">API docs</a></li>
+			</ul>
+			
+			<a name="button"></a>
+			<h3>Button family of Widgets</h3>
+			<p>I also needed some buttons for an app I was doing and instead of using Anthony Pipkin's gallery button
+			I changed it to use MakeNode.  Once again, the code is smaller and quite cleaner (the roles of each piece
+			of code is better defined.</p>
+			<p>There is a plain button, a two position button and a button group with a button separator, to build toolbars.</p>
+			<p>This widget requires <a href="#makenode">MakeNode</a>.  At this point, most of my widgets have MakeNode so it is a kByte weight shared.</p>
+			<ul>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button/button.js">Source Code for Button and ButtonToggle</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button/assets/skins/sam/button.css">Their styleSheet</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button-group/button-group.js">Source Code for ButtonGroup and ButtonSeparator</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button-group/assets/skins/sam/button-group.css">Their styleSheet</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button/assets/skins/sam/background.png">Backgrounds for buttons in normal state</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button/assets/skins/sam/background-active.png">Backgrounds for buttons in active state</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/button/assets/skins/sam/icon-sprite.gif">Sprites for images on the buttons</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/apidocs/module_button.html">API docs</a></li>
+			</ul>
+			<a name="accordion"></a>
+			<h3>Accordion Widget</h3>
+			<p>Of course, when I needed an accordion, I also tried adapting something out there to use (and test) MakeNode itself.
+			This is based on Iliyan Peychev's accordion from the gallery.  The code is mostly mine, the images are his.
+			It has most of his functionality plus it allows resizing.  I still have to do the progressive enhancement for this one. 
+			<p>This widget requires <a href="#makenode">MakeNode</a>.</p>
+			<ul>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/accordion/accordion.js">Source Code for Accordion</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/accordion/assets/skins/sam/accordion.css">Its styleSheet</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/accordion/assets/skins/sam/sprite.png">Sprites used in the styleSheet</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/accordion/assets/skins/sam/wait_collapse.gif">Animated indicator used when the panel is closing</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/accordion/assets/skins/sam/wait_expand.gif">Animated indicator used when the panel is expanding</a></li>
+			<li><a href="http://satyam.com.ar/yui/3.0.0/apidocs/module_accordion.html">API docs</a></li>
+			</ul>
+			
+			
+			<h2>Articles</h2>
+            
+            <a name="yuiblog"></a>
+            <h3>
+
+			Working with the YUI DataTable Control
+            </h3>
+			<p>After using the DataTable for a while and answering questions from fellow users 
+			about it I realized I could help a little bit by putting together all I had learned in the process
+			so I wrote a big article which Eric Miraglia very kindly refused, and right he was on doing so!
+			After clearing up my ideas I realized there were about four separate articles that could
+			be written.  The first two were then accepted for publication by Eric at the YUI blog site
+			after some editing which he very kindly handled.</p>
+			<h4><img src="new.png"/> New for 2.6.0</h4>
+			<p>The articles were written in the last days of 2.3 so they got outdated.  I re-wrote them for 2.6.0</p>
+            <ul>
+              <li>
+                <a href="http://yuiblog.com/blog/2007/09/12/satyam-datatable">Part 1:
+                Getting Started</a> (pre-2.6)
+              </li>
+              <li>
+                <a href="http://yuiblog.com/blog/2007/09/26/satyam-datatable-2/">Part
+                2: Changing the Contents of the DataTable</a> (pre-2.6)
+              </li>
+			  <li>
+                <a href="http://yuiblog.com/blog/2008/10/15/datatable-260-part-one/">Part 1:
+                Getting Started</a> (2.6.0)
+              </li>
+              <li>
+                <a href="http://yuiblog.com/blog/2008/10/27/datatable-260-part-two/">Part
+                2: Changing the Contents of the DataTable</a> (2.6.0)
+              </li>
+            </ul>
+			<h4><img src="new.png"/> New for 3.x</h4>
+			<p>Some articles for YUI3:</p>
+            <ul>
+              <li>
+                <a href="http://www.yuiblog.com/blog/2011/04/01/a-recipe-for-a-yui-3-application">A Recipe for a YUI 3 Application</a>
+              </li>
+              <li>
+                <a href="http://www.yuiblog.com/blog/2011/07/08/the-makenode-widget-extension/">The "MakeNode" Widget Extension</a>
+              </li>
+            </ul>
+            <a name="phpjson"></a>
+            <h3>
+              A PHP back end to YUI
+            </h3>
+			<p>Some of the material in the article I originally prepared for publication at
+			the YUI blog had no JavaScript at all, it was pure PHP so here it is with 
+			some extra PHP thrown in.
+			</p>
+			<p>This article contains the code that would be the back-end to the code in the other
+			two articles or, for that matter, in any AJAX application or, perhaps, it should be
+			AJAJ since it uses JSON and not XML.
+			</p>
+			<p>It also contains the code for my BuildSql function which is a sort of sprintf
+			oriented towards SQL so that you write your SQL statement with placeholders and then
+			the function takes care of inserting the rest of the arguments into the template with 
+			the proper format, quoting and escaping.
+			</p>
+            <ul>
+              <li>
+                <a href="PhpJson.htm">Article</a>
+              </li>
+            </ul>
+            
+            <a name="making_your_own_datatable"></a>
+            <h3>
+             Making your own DataTable
+            </h3>
+			<p>YUI's DataTable component has many options so that it can be used in all
+sorts of applications and environments. Any single user, though, uses just a few of them. It is a
+good idea to encapsulate those few options in a single place so that even if at
+some point you decide to make a change, it will be propagated to all places at
+once.</p>
+<p>Whatever options the server provides will probably determine how we communicate with it. 
+The nature of our application will define the types of data we handle.  
+The looks and behavior of our site will fix some more options.
+Finally, we may desperately need some patch and can't wait for the next release.
+These are options that we may cast into our own DataTable, inherited from YUI DataTable</p>
+<h4><img src="new.png"/> New for 2.6.0</h4>
+<p>Most of this article became obsolete with later versions of the DataTable.  Many of the features I showed here are now part of the DataTable, 
+others have to be done in different ways. The <a href="#DataTable-2.6">example</a> for the new articles for the DataTable in the <a href="#yuiblog">YUI blog</a> now cover
+mostly all this article has so if you are using 2.6, this is not for you.</p>
+
+            <ul>
+              <li>
+                <a href="making_your_own_datatable.html">Article</a>
+              </li>
+            </ul>
+
+			      <a name="buildingwidgets"></a>
+				  <h3>Building Your Own Widget Library with YUI</h3>
+				  <p>At one point, the YUI discussion forum got several messages about people developing their own widgets.  
+				  The YUI blog also reported a few.  All of them failed to conform to the current YUI standards, with good reason,
+				  those <i>standards</i> are not available anywhere.</p>
+				  
+				  <p>There is a good reason for that, the YUI library has been continuously growing and perfecting itself,
+				  but nobody had time to get all that experience gained by the YUI team anywhere.  
+				  Moreover, the YUI library itself is not a good means of learning those standards since many of the components
+				  follow different conventions.  Adapting those components to the ever improving standards would have meant making
+				  them incompatible with earlier versions.  This means that each component is frozen at its historical moment, and 
+				  if you don't know the history of the library, you don't know why each one is as it is.</p>
+				  
+				  <p>So, in the end, I went to the newest components and started learning from them and compiled a list of guidelines
+				  which I later put together into this article.  Eric Miraglia was very kind to check that I wasn't saying anything stupid 
+				  (both in my use of English and in describing the library) and also asked me to explore some features I had overlooked.</p>
+				  
+
+            <ul>
+              <li>
+                <a href="http://yuiblog.com/blog/2008/06/24/buildingwidgets/">Article</a>
+              </li>
+            </ul>
+			
+			
+			<a name="insideria"></a>
+			<h3>Inside RIA, a couple of articles</h3>
+			<p>I've got to write a couple of articles for O'Reilly's Inside RIA web site.</p>  
+			<p>Nothing new on them.  I hope they finally get their act together, it is a hassle to work with them
+			and I don't intend to publish anything else with them, but there they are:</p>
+			
+			<ul>
+				<li><a href="http://www.insideria.com/2008/06/the-yahoo-user-interface-libra-1.html">The YAHOO! User Interface Library - YUI</a></li>
+				<li><a href="http://www.insideria.com/2008/06/yui-datatable-component-1.html">YUI DataTable Component</a></li>
+			</ul>
+
+			<a name="widgetstyle"></a>
+			<h3>Changing the style of an element in a YUI widget</h3>
+			<p>This question has come up quite often in the YUI forum: How can I change the color / background color / whatever of 
+			an element in a YUI component.  To avoid explaining that once again, I've put it all here.</p>
+			<ul><li><a href="widgetstyles.html">Article</a></li></ul>
+			
+            <a name="external"></a>
+            <h3>
+             External links
+            </h3>
+			<p>A brief list of places that have good examples on the use of DataTables or similar components.</p>
+			<ul>
+				<li><a href="http://blog.davglass.com/files/yui/datatable4/">Drag and drop in a YUI DataTable</a></li>
+				<li><a href="http://extjs.com/deploy/dev/examples/tree/column-tree.html">A non-YUI table with tree-like expansion of records</a></li>
+				<li><a href="http://extjs.com/deploy/dev/examples/#sample-1">Other non-YUI controls for tabular data or grids</a></li>
+			</ul>
+            <a name="dependencies"></a>
+            <h3>
+             Component Dependencies Calculator (2.6.0)
+            </h3>
+			<p>A utility to figure out what needs to be included when you are loading several components at once.</p>
+			<p>It uses the YUI Loader to find out what you need and in which order.</p>
+			<p>It is now obsolete, it has been superseeded by YUI's own <a href="http://developer.yahoo.com/yui/articles/hosting/">dependency configurator</a></p>
+            <ul>
+              <li>
+                <a href="dependencies.html">Utility (2.6.0)</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta name="generator" content=
+    "HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+    <meta http-equiv="Content-Language" content="en-us">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/base/base-min.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/assets/skins/sam/skin.css">
+    <style type="text/css">
+		.menu {
+			border: 1px solid #e0e0e0;
+		}
+		.menu h3 {
+			padding-left:3px;
+		}
+	    .menu a {
+				text-decoration:none;
+				color:black;
+				font-size:93%;
+				line-height:1.5;
+				display:block;
+		}
+		.menu a:hover {
+				background: #B3D4FF;
+		}
+		h1 {
+			text-align:center;
+			font-size:2em;
+		}
+		#yui-main h3 {
+			border-top: thin dashed silver;
+			padding-top:1em;
+		}
+		#yui-main h2 {
+			border-top: double silver;
+			padding-top:2em;
+		}
+    </style>
+    <title>
+      Examples using the YUI
+    </title>
+  </head>
+  <body class="yui-skin-sam">
+    <div id="doc" class="yui-t1">
+      <div id="hd">
+        <h1>
+          Examples using the Yahoo User Interface components (YUI)
+        </h1>
+      </div>
+      <div id="bd">
+        <div class="yui-b">
+          <div class="menu">
+            <h3>
+              DataTable
+            </h3>
+            <ul>
+              <li>
+                <a href="#ServerDriven">Server driven</a>
+              </li>
+              <li>
+                <a href="#DataGrid">Data Grid</a>
+              </li>
+              <li>
+                <a href="#TableWithDetails">Record details in<br>
+                pop-up panel</a>
+              </li>
+			  <li>
+				<a href="#invoice">Invoice</a>
+			   </li>
+			   <li>
+				<a href="#showHide">Show/hide columns</a>
+				</li>
+			   <li>
+				<a href="#assortedControls">Assorted Controls</a>
+				</li>
+            </ul>
+            <h3>
+              Documentation
+            </h3>
+            <ul>
+              <li>
+                <a href="#yuiblog">At the YuiBlog</a>
+              </li>
+              <li>
+                <a href="#phpjson">A PHP back end to YUI</a>
+              </li>
+              <li>
+                <a href="#making_your_own_datatable">Making your own DataTable</a>
+              </li>
+  
+			  
+            </ul>
+			<h3>External links</h3>
+			<ul>
+				<li><a href="#external">Related material</a></li>
+			</ul>
+          </div>
+        </div>
+        <div id="yui-main">
+          <div class="yui-b">
+            <h2>
+              <a name="DataTable"></a>DataTable
+            </h2><a name="ServerDriven"></a>
+            <h3>
+              Server driven DataTable with pagination and sorting.
+            </h3>
+            <p>
+              This example builds a DataTable based on the columns information
+              taken from the server. Instead of building a statically defined
+              DataTable it will build it based on what the server says.
+            </p>
+            <p>
+              It has been based on the <a href=
+              "http://developer.yahoo.com/yui/examples/datatable/dt_serverpagination.html">
+              server-side pagination</a> and <a href=
+              "http://developer.yahoo.com/yui/examples/datatable/dt_serversorting.html">
+              server-side sorting</a> examples. They have both been changed in
+              that they do not use the DataSource to communicate with the
+              server but use a plain Connection Manager request to fetch the
+              information and then pass it as a local source to the DataSource.
+              This allows full access to all the information received from the
+              server before it gets sent to the DataTable. Reported bugs on
+              both examples have been fixed as well.
+            </p>
+            <p>
+              The source files for this sample are available for download in a
+              <a href="dt_server_driven.zip">zip file</a>. The PHP server
+              script requires an active PHP interpreter. The YUI compoments are
+              fetched from the YUI site.
+            </p>
+            <ul>
+              <li>
+                <a href="dt_serverdriven.html">Example</a>
+              </li>
+              <li>
+                <a href="dt_serverdriven.html"></a><a href=
+                "dt_serverdriven.html"></a><a href="dt_server_driven.zip">zip
+                file</a>
+              </li>
+            </ul>
+            
+            <a name="DataGrid"></a>
+            <h3>
+              Data Grid
+            </h3>
+            <p>
+              The DataTable is basically meant to represent data structured as
+              in a regular database table. As such, it has a definition for
+              each of the columns which applies to all rows in the table.
+              Unless the designer provides customized code, every cell in the
+              same column will behave the same.
+            </p>
+            <p>
+              This example uses an extra invisible column to provide data type
+              definitions for each individual cell so that instead of a single
+              definition applicable to all the cells in a column, each cell has
+              its own definition. For the purpose of the example, this
+              definition is only a string indicating whether the cell contains
+              a number, text or date, nevertheless, in a real case there is no
+              reason why it cannot be a complex object describing several
+              attributes.
+            </p>
+            <p>
+              All columns have a custom formatter and editor function. These do
+              not actually do any formatting or editing but they check the
+              corresponding data type information stored in the extra column
+              paired to the one being actually formatted or edited and then
+              calls the standard formatters and editors provided for along the
+              DataTable component
+            </p>
+            <p>
+              The example is fully contained in the HTML file, its only
+              external resources are the YUI component files which are
+              downloaded from the YUI download site.
+            </p>
+            <ul>
+              <li>
+                <a href="DataGrid.html">Example</a>
+              </li>
+            </ul>
+            
+            <a name="TableWithDetails"></a>
+            <h3>
+              DataTable with extra details in tabbed pop-up
+            </h3>
+            <p>
+              This example draws a very basic DataTable and on clicking on any cell, 
+			  a YUI Panel will pop-up containing a YUI TabView with four tabs.  
+			  Each tab has a child DataTable with different contents, 
+			  all related to the clicked record. 
+			  The contents in the cells of these child tables is generated dynamically
+			  and it reflects the base table row number and tab numbers active plus the row
+			  and column position of the cell.
+            </p>
+			<p>In order to make the example totally self-contained, the data on all the tables
+			is created locally.  In an actual application the data would come from data servers.
+			Besides changing the columns and field definitions to match the actual data,
+			to make this example work
+			in client-server environments the single argument to the constructors of all the new DataSources
+			would need to be changed to the URL of the servers providing the data.</p>
+            <ul>
+              <li>
+                <a href="TableWithDetails.html">Example</a>
+              </li>
+            </ul>
+			<a name="invoice"></a>
+            <h3>
+              Invoice: drag and drop, summary row and field validation
+            </h3>
+            <p>
+              This example allows you to do an invoice by dragging items out of a DataTable with 
+			  a list of items into another DataTable.  It has in-line cell editing with an editor with
+			  a regular expression validator.  The invoice uses the TFOOT element of the table
+			  to do the totals
+            </p>
+            <ul>
+              <li>
+                <a href="invoice.html">Example</a>
+              </li>
+            </ul>
+			
+			
+			<a name="showHide"></a>
+            <h3>
+              Show and hide columns in a DataTable
+            </h3>
+            <p>
+              This example uses the new <a href="http://developer.yahoo.com/yui/selector/">Selector</a> component to hide and show
+			  columns in a DataTable with only two lines of code.
+            </p>
+			<p>It uses the same server script as the  <a href="#ServerDriven">Server driven DataTable</a> example above.
+              <li>
+                <a href="HidingColumns.html">Example</a>
+              </li>
+            </ul>
+
+			<a name="assortedControls"></a>
+            <h3>
+              Handling of active cell content
+            </h3>
+            <p>
+              This example show an assortment of HTML controls: radio buttons, checkboxes, dropdowns, 
+			  regular and image buttons and an in-line textbox and how to handle them.
+            </p>
+            <ul>
+              <li>
+                <a href="assortedControls.html">Example</a>
+              </li>
+            </ul>
+			
+			<h2>Articles</h2>
+            
+            <a name="yuiblog"></a>
+            <h3>
+              Working with the YUI DataTable Control
+            </h3>
+			<p>After using the DataTable for a while and answering questions from fellow users 
+			about it I realized I could help a little bit by putting together all I had learned in the process
+			so I wrote a big article which Eric Miraglia very kindly refused, and right he was on doing so!
+			After clearing up my ideas I realized there were about four separate articles that could
+			be written.  The first two were then accepted for publication by Eric at the YUI blog site
+			after some editing which he very kindly handled.</p>
+            <ul>
+              <li>
+                <a href=
+                "http://yuiblog.com/blog/2007/09/12/satyam-datatable">Part 1:
+                Getting Started</a>
+              </li>
+              <li>
+                <a href=
+                "http://yuiblog.com/blog/2007/09/26/satyam-datatable-2/">Part
+                2: Changing the Contents of the DataTable</a>
+              </li>
+            </ul>
+            
+            <a name="phpjson"></a>
+            <h3>
+              A PHP back end to YUI
+            </h3>
+			<p>Some of the material in the article I originally prepared for publication at
+			the YUI blog had no JavaScript at all, it was pure PHP so here it is with 
+			some extra PHP thrown in.
+			</p>
+			<p>This article contains the code that would be the back-end to the code in the other
+			two articles or, for that matter, in any AJAX application or, perhaps, it should be
+			AJAJ since it uses JSON and not XML.
+			</p>
+			<p>It also contains the code for my BuildSql function which is a sort of sprintf
+			oriented towards SQL so that you write your SQL statement with placeholders and then
+			the function takes care of inserting the rest of the arguments into the template with 
+			the proper format, quoting and escaping.
+			</p>
+            <ul>
+              <li>
+                <a href="PhpJson.htm">Article</a>
+              </li>
+            </ul>
+            
+            <a name="making_your_own_datatable"></a>
+            <h3>
+             Making your own DataTable
+            </h3>
+			<p>YUI's DataTable component has many options so that it can be used in all
+sorts of applications and environments. Any single user, though, uses just a few of them. It is a
+good idea to encapsulate those few options in a single place so that even if at
+some point you decide to make a change, it will be propagated to all places at
+once.</p>
+<p>Whatever options the server provides will probably determine how we communicate with it. 
+The nature of our application will define the types of data we handle.  
+The looks and behavior of our site will fix some more options.
+Finally, we may desperately need some patch and can't wait for the next release.
+These are options that we may cast into our own DataTable, inherited from YUI DataTable</p>
+            <ul>
+              <li>
+                <a href="making_your_own_datatable.html">Article</a>
+              </li>
+            </ul>
+            
+            <a name="external"></a>
+            <h3>
+             External links
+            </h3>
+			<p>A brief list of places that have good examples on the use of DataTables or similar components.</p>
+			<ul>
+				<li><a href="http://blog.davglass.com/files/yui/datatable4/">Drag and drop in a YUI DataTable</a></li>
+				<li><a href="http://extjs.com/deploy/dev/examples/tree/column-tree.html">A non-YUI table with tree-like expansion of records</a></li>
+				<li><a href="http://extjs.com/deploy/dev/examples/#sample-1">Other non-YUI controls for tabular data or grids</a></li>
+			</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

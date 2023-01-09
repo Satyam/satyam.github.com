@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Show and hide columns</title>
+<script src="http://yui.yahooapis.com/2.4.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","datatable","dragdrop","selector","button");
+	loader.insert({ 
+		onSuccess: function() {
+			//shortcuts
+			var $C = YAHOO.util.Connect,
+				$E = YAHOO.util.Event,
+				$D = YAHOO.util.Dom,
+				$L = YAHOO.lang,
+				$ = $D.get,
+				$DT = YAHOO.widget.DataTable;
+				
+			var dt = new $DT(
+				'Container',
+				[
+					{key:"id",label:"ID"},
+					{key:"name",label:"Name"},
+					{key:"date",label:"Date"},
+					{key:"price",label:"Price","type":"number"},
+					{key:"number",label:"Number"},
+					{key:"address",label:"Address"},
+					{key:"company",label:"Company"},
+					{key:"desc",label:"Description"},
+					{key:"age",label:"Age"},
+					{key:"title",label:"Title"},
+					{key:"phone",label:"Phone"},
+					{key:"email",label:"Email"},
+					{key:"zip",label:"Zip"},
+					{key:"country",label:"Country"}
+				],
+				new YAHOO.util.DataSource(
+					'json_meta_proxy.php?',
+					{
+						responseType:YAHOO.util.DataSource.TYPE_JSON,
+						responseSchema: {
+							resultsList:'records',
+							fields:['id','name','date','price','number','address','company','desc','age','title','phone','email','zip','country']
+						}
+					}
+				),
+				{
+					initialRequest:'startIndex=0&results=25',
+					paginated:true, // Enables built-in client-side pagination
+			        paginator:{ // Configurable options
+			            containers: null, // Create container DIVs dynamically
+			            currentPage: 1, // Show page 1
+			            dropdownOptions: [10,25,50], // Show these in the rows-per-page dropdown
+			            pageLinks: 0, // Show links to all pages
+			            rowsPerPage: 10 // Show up to 500 rows per page
+			        }
+				}
+			);
+
+			var menu = new YAHOO.widget.Menu('nowhere');
+
+
+			var showColumns = new YAHOO.widget.Button(
+				{
+					type: "split",  
+					label: "Show Columns", 
+					name: "showColumnsButton", 
+					menu: menu, 
+                    container: "splitButtonContainer",
+					disabled:true
+				}
+			);   
+			
+			dt.subscribe('headerCellClickEvent' ,function(ev) {
+				var target = YAHOO.util.Event.getTarget(ev);
+				var column = this.getColumn(target);
+				var cells = YAHOO.util.Selector.query('.yui-dt-col-' + column.key,this.getTableEl());
+				YAHOO.util.Dom.addClass(cells,'hide');
+				menu.addItem({text: column.label || column.key,value:column.key});
+				refreshButton();
+			});
+
+			var refreshButton = function() {
+		        if ($D.inDocument('nowhere')) {
+					menu.render();
+				} else {
+					menu.render(document.body);
+				}
+				showColumns.set('disabled', menu.getItems().length == 0);
+			};
+	
+			showColumns.on("click", function () {
+				var m = menu.getItems();
+				for (var i = 0; i < m.length; i++) {
+					var cells = YAHOO.util.Selector.query('.yui-dt-col-' + m[i].value, dt.getTableEl());
+					YAHOO.util.Dom.removeClass(cells, 'hide');
+				}
+				menu.clearContent();
+				refreshButton();
+			});
+
+			showColumns.on("appendTo", function () {
+				menu = this.getMenu();
+				menu.subscribe("click", function onMenuClick(sType, oArgs) {
+				
+					var oMenuItem = oArgs[1]; 
+				
+					if (oMenuItem) {
+						var cells = YAHOO.util.Selector.query('.yui-dt-col-' + oMenuItem.value, dt.getTableEl());
+						YAHOO.util.Dom.removeClass(cells,'hide');
+						menu.removeItem(oMenuItem.index);
+						refreshButton();
+					}
+				});
+			});
+			
+			dt.on('refreshEvent',function() {
+				var m = menu.getItems();
+				for (var i = 0; i < m.length; i++) {
+					var cells = YAHOO.util.Selector.query('.yui-dt-col-' + m[i].value, dt.getTableEl());
+					YAHOO.util.Dom.addClass(cells, 'hide');
+				}
+			});
+			
+		}
+	});
+})();
+		</script>
+<style type="text/css">
+.hide {
+	display:none;
+}
+</style>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	<div id="doc3"> 
+		<div style="float:right" id="splitButtonContainer"></div>
+		<h1>Show and hide columns</h1>
+		<p>Click on any column header to hide a column.  Click on the button at right to show all columns or use the drop-down to select which one to show. See comments below.</p>
+		<div id="Container"></div>
+		<h2>Comments</h2>
+		<p>This example shows an easy way to hide and show columns in a DataTable.  
+		When you click the header of any column, that column will hide. 
+		The DOM elements for the column are still there, but its <code>style</code> is changed to <code>display:none</code>.</p>
+		<p>It uses a split button to show the hidden columns.  If you click the body of the button, all columns hidden will be shown again.
+		You can also use the dropdown of the split button to show individual columns.   
+		Columns will reappear in the same order as initially shown, after all, they never actually moved anywhere.
+		The dropdown of the split button is updated with the headings of the hidden columns and the button itself gets disabled when all columns are shown.</p>
+		<p>I used the YUI <a href="http://developer.yahoo.com/yui/selector/">Selector</a> component to fetch the cells to be hidden.  Each cell in a DataTable gets, amongst many other classNames, one that
+		is composed of the prefix <code>yui-dt-col-</code> and then the value of the <code>key</code> property for the column.  
+		This makes it easy to locate all the cells to be hidden.  Then, Dom's <code>addClass</code> or <code>removeClass</code> methods take an
+		array just like the one that the Selector produces, so these two lines are enough to show/hide columns:</p>
+<pre>var cells = YAHOO.util.Selector.query('.yui-dt-col-' + column.key, this.getTableEl());
+YAHOO.util.Dom.addClass(cells,'hide');
+</pre>
+		<p>This is the code used to hide each column.  The second argument to the Selector <code>query</code> method is where to start the search, 
+		in this case, in the DataTable <code>&lt;table&gt;</code> element.  The rest of the code is just for managing the split button menu.</p>
+		<p>It will not work with nested headers.</p>
+		<p>Thanks to <a href="http://tech.groups.yahoo.com/group/ydn-javascript/message/22701">merahul94538</a> who pointed out that with
+		pagination enabled this example didn't work so I just added a listener for <code>refreshEvent</code> to ensure columns are hidden 
+		when rewritten.  In fact, the same problem would have happened in many other scenarios where <code>refreshView</code> is
+		called, since it can add new rows to the table, which do not have the className to hide columns.  
+		The same issue would happen if the <code>addRow</code> method is called, the new added row would not have the className set.
+		You would have to listen to <code>rowAddEvent</code>.  There might be other cases which should be solved in a similar way.</p>
+		<p>It uses the same PHP server script as the <a href="index.html#ServerDriven">Server driven DataTable</a> example.</p>
+
+	</div>
+	</body>
+</html>
+				

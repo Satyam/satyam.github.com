@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Server-driven table definition, pagination and sorting</title>
+		<script src="http://yui.yahooapis.com/2.5.2/build/yuiloader/yuiloader-beta-min.js"></script>
+
+
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc3"> 
+			<div id="hd">
+				<h1>Server-driven table definition, pagination and sorting</h1>
+			</div>
+			<div id="bd" style="margin:2em">
+				<div id="tableContainer"></div>
+			</div>
+			<div id="ft">
+				<p>This example builds a DataTable based on the columns information taken from the server.  
+				Instead of building a statically defined DataTable it will build it on what the server says.
+				It also does server-side paging and sorting.</p>
+				
+				<p>The information about the nature of the data comes along the data itself when requested
+				by adding the URL attribute <code>meta=true</code>.  The server will then add a <code>meta</code>
+				property to the reply with the requested information.</p>
+				
+				<p>We override the method <code>doBeforeParseData</code> to extract that information,
+				since we need it for parsing.  Up to that point, the reply is converted to a JavaScript object
+				but the fields have not been parsed yet.  
+				We also extract column definitions to set up the DataTable.</p>
+				
+				<p>We also override the method <code>doBeforeCallback</code> because we also need to tell
+				the DataTable the total number of records in the database, not those in the reply, 
+				which is only a page long</p>
+				
+				<p>Server-side Paging is greatly simplified in 2.5.  There is a configuration attribute
+				called <code>paginationEventHandler</code> which is usually set to the function that
+				does client-side paging.  If you want to do server-side paging, you just set it to
+				<code>YAHOO.widget.DataTable.handleDataSourcePagination</code>.  
+				This handler will check if the page requested has been loaded and, if not, it will
+				reuse the DataSource to request the required page, which it will place in the RecordSet
+				in its correct position.  The Recordset thus acts as a cache. 
+				If you skip over pages, the RecordSet will have gaps
+				but JavaScript does not waste space on non-existing array elements.</p>
+				
+				<p>The server-side pagination handler uses a default method to assemble the URL arguments.
+				If you want to change the name of the arguments or add extra information you override it
+				by setting the <code>generateRequest</code> configuration attribute.  
+				This function should return the string of URL arguments to be appended to the base URL 
+				set up in the DataSource.  Since we are doing sorting besides paging, we need to add
+				the information contained in the <code>sortedBy</code> configuration attribute.</p>
+				
+				<p>Finally, we override the <code>sortColumn</code> method so that instead of
+				doing sorting on the client side, we do it on the server side.  We could not
+				possibly do sorting on the client since we don't have all the records there,
+				the RecordSet is full of gaps so, instead of actually sorting the RecordSet
+				we flush it and make the paging handler request a new page one, 
+				this time sorted as requested.</p>
+				
+				<p>The source files for this sample are available for download in a 
+				<a href="dt_server_driven.zip">zip file</a>.  
+				The PHP server script requires an active PHP interpreter.  The YUI compoments are
+				fetched from the YUI site.</p>				
+				<p><a href="dt_server_driven.zip">Source files (zipped)</a></p>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","datatable","json");
+	loader.insert({ 
+		filter:'raw',
+		onSuccess: function() {
+
+			var myDataTable;
+				
+			// DataSource instance
+			// Notice we do not define anything of the data besides saying it is in JSON format.
+			// We do not define fields or where to find the data to extract.
+			var myDataSource = new YAHOO.util.DataSource('json_meta_proxy.php?',{
+				responseType:YAHOO.util.DataSource.TYPE_JSON
+			});
+
+			/*	We are assuming the information regarding the data (columns, datatypes and all)
+				comes along the information itself in the first request.
+				If the reply containes a property called 'meta', then it means it is the first
+				request and we extract that information
+				Since this method is called before the field values are extracted
+				we can still set the 'responseSchema' of the DataSource.
+				The meta array already has the information the way you need it for a column definition,
+				nevertheless, had it not been that the case, we could have converted it,
+				just as we do with the 'type' property upon which we decide which parser to use.
+				Likewise, we could have set the resultsList from a property in the meta-data,
+				though we assume it to be a constant.
+				By the time this method is called, the DataTable has been set up and since it
+				requires at least one column, we gave it one, just to keep it happy.  
+				We insert the actual columns as defined in 'meta' and finally we delete
+				the original one so at no time is the DataTable left with no columns.
+			*/
+			myDataSource.doBeforeParseData = function  (oRequest, oFullResponse) {
+				if (oFullResponse.meta) {
+					var f = [];
+					var len = oFullResponse.meta.length;
+					for(var i = 0; i < len; i++) {
+						var c = oFullResponse.meta[i];
+						
+						//  add actual colum,n definition
+						myDataTable.insertColumn(c,i);
+						
+						// depending on the 'type' property, we set up the fieds definition for the DataSource.
+						switch (c.type) {
+							case 'number':
+								f.push({key:c.key,parser:YAHOO.util.DataSource.parseNumber});
+								break;
+							// You could process any other datatype in a similar manner
+							default:
+								f.push(c.key);
+						}
+					}
+					this.responseSchema = {
+						fields: f,
+						resultsList: 'records',
+						metaFields: {
+							totalRecords:'totalRecords',
+							recordStartIndex:'startIndex',
+							sortKey:'sort',
+							sortDir:'dir'
+						}
+					};
+					
+					// Delete the extra column
+					myDataTable.removeColumn(myDataTable.getColumn(len));
+				}
+
+				return oFullResponse;
+			};
+			
+			/*	The DataTable will usually read the total number of records from the actual number of records it received,
+				nevertheless, when you are doing server-side paging, the DataTable receives just one piece at a time
+				and counting those records (just one page) does not work.
+				If, along the records, it finds a property called 'totalRecords' it will accept that one, so it can
+				draw the page navigators appropriately.
+					
+			* /
+			myDataSource.doBeforeCallback = function(oRequest, oFullResponse, oParsedResponse) {
+				oParsedResponse.meta.totalRecords = parseInt(oFullResponse.totalRecords,10);
+				return oParsedResponse;
+			};
+			*/ 
+
+			/*	The Datatable is created with a single fake column since we won't know the actual
+				number or type of the columns until we receive the first data.
+				We set up a lot of configuration attributes, explained below.
+			*/
+			myDataTable = new YAHOO.widget.DataTable(
+				'tableContainer', 
+				[{key:'this_is_just_a_fake_column_key_to_keep_the_system_happy',label:' '}], 
+				myDataSource,
+				{
+					// We request a first batch of 25 records, starting at zero, 
+					// and we also request meta information which describes the data
+					initialRequest: 'startIndex=0&results=25&meta=true',
+					
+					// We set pagination with 25 records per page
+					paginated: true,
+					paginator: new YAHOO.widget.Paginator({
+						rowsPerPage:25
+					}),
+					
+					// We change the default function that does the normal client-side pagination
+					// to the one that does server-side pagination, which is provided in the component.
+					paginationEventHandler: YAHOO.widget.DataTable.handleDataSourcePagination,
+					
+					// The handler above uses a configurable function to set up the URL arguments
+					// sent to the server.  The default method is fine for plain paging
+					// but does not include information regarding sorting so we define our own
+					generateRequest: function (oData, oDataTable) {
+						var newRequest = 'startIndex=' + oData.pagination.recordOffset + '&results=' + oData.pagination.rowsPerPage;
+						var sortedBy = oDataTable.get('sortedBy');
+						if (sortedBy) {
+							newRequest += '&sort=' + sortedBy.key + '&dir=' + ((sortedBy.dir == 'yui-dt-asc')?'desc':'asc'); 
+						}
+						return newRequest;
+					}
+				}
+			);
+			
+			/*	Setting up server-side sorting is not as easy as paging
+				We have to override the sortColumn method so that instead of
+				performing an actual sort on the records it has (seldom the whole of them)
+				it asks the server to do it.
+				When the server-side pager reads a page of records, it places them
+				in their correct positions within the RecordSet.  
+				Upon sorting, those positions would not be valid and we cannot know where to put them
+				according to the new sort since we don't have the whole of them,
+				so we treat the RecordSet as a cache (which it is, sort of) and flush it.
+			*/
+			myDataTable.sortColumn = function(oColumn, sDir) {
+				// The first section is taken straight from the original method
+			    if(oColumn && (oColumn instanceof YAHOO.widget.Column)) {
+			        if(!oColumn.sortable) {
+			            YAHOO.util.Dom.addClass(this.getThEl(oColumn), YAHOO.widget.DataTable.CLASS_SORTABLE);
+			        }
+			        
+			        if(sDir && (sDir !== YAHOO.widget.DataTable.CLASS_ASC) && (sDir !== YAHOO.widget.DataTable.CLASS_DESC)) {
+			            sDir = null;
+			        }
+			        
+			        var sortDir = sDir || this.getColumnSortDir(oColumn);
+
+			        var oSortedBy = this.get("sortedBy") || {};
+					
+					// From here on is new
+					// We first check to see if there is anything to do
+					if (!(oSortedBy.key === oColumn.key && oSortedBy.dir === sortDir)) {
+					
+						// Clear the recordset which is acting as a cache of loaded pages.  
+						// Sort will scramble the records so they will no longer match the row positions.
+						// Recordset cannot be sorted since many positions will be empty and cannot be compared against existing ones.
+						this.initializeTable();
+						
+				        // Update sortedBy tracker
+				        this.set("sortedBy", {key:oColumn.key, dir:sortDir, column:oColumn});
+
+
+						// Cannot use setPage since it will refuse to trigger the changeRequest event 
+						// when the page requested is the same as the current one.  
+						// So, when you clicked the column header a second time to reverse the sort order
+						// since the page requested was the same (though in a different order) 
+						// the paginationEventHandler is not called.
+				        var oPaginator = this.get('paginator');
+						oPaginator.fireEvent('changeRequest',oPaginator.getState({'page':1}));
+
+						// show what we have and fire the event as the original method does.
+				        this.render();
+
+				        this.fireEvent("columnSortEvent",{column:oColumn,dir:sortDir});
+					}
+			    }
+			    else {
+			    }
+			};
+		}
+	});
+})();
+		</script>
+	</body>
+</html>

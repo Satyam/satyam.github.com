@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Parse XML data with Selector utility</title>
+
+<style type="text/css">
+</style>
+
+<!-- Combo-handled YUI CSS files: -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.6.0/build/reset-fonts-grids/reset-fonts-grids.css&2.6.0/build/base/base-min.css&2.6.0/build/datatable/assets/skins/sam/datatable.css">
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.6.0/build/utilities/utilities.js&2.6.0/build/datasource/datasource-min.js&2.6.0/build/datatable/datatable-min.js&2.6.0/build/selector/selector-beta.js"></script>
+
+
+
+<!--there is no custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+<div id="doc">
+
+
+<h1>Parse XML data with Selector utility</h1>
+
+<p>This DataTable is populated with XML data, which I copied from the from the 
+<a href="http://developer.yahoo.com/yui/examples/datatable/dt_xhrlocalxml.html">Local XML example</a></p>
+<p>I redefined DataSource method parseXMLResult so that it would use the Selector Utility.
+Unfortunately the Selector utility assumes it always search HTML docs and converts all tags to uppercase.
+I finally made it work when I changed all tags in the XML doc to uppercase.</p>
+			
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+<div id="localxml"></div>
+
+<script type="text/javascript">
+(function () {
+	var DS = YAHOO.util.DataSourceBase,
+	lang = YAHOO.lang;
+	YAHOO.util.DataSourceBase.prototype.parseXMLResult = function(result) {
+	    var oResult = {},
+	        schema = this.responseSchema,
+			q = YAHOO.util.Selector.query;
+	        
+	    try {
+	        // Loop through each data field in each result using the schema
+	        for(var m = schema.fields.length-1; m >= 0 ; m--) {
+	            var field = schema.fields[m];
+	            var key = (lang.isValue(field.key)) ? field.key : field;
+	            var data = null;
+				var xmlNode = q(key,result,true);
+				if(xmlNode && xmlNode.firstChild) {
+					var item = xmlNode;
+					// For IE, then DOM...
+					data = (item.text) ? item.text : (item.textContent) ? item.textContent : null;
+					// ...then fallback, but check for multiple child nodes
+					if(!data) {
+						var datapieces = [];
+						for(var j=0, len=item.childNodes.length; j<len; j++) {
+							if(item.childNodes[j].nodeValue) {
+								datapieces[datapieces.length] = item.childNodes[j].nodeValue;
+							}
+						}
+						if(datapieces.length > 0) {
+							data = datapieces.join("");
+						}
+					}
+				}
+	            // Safety net
+	            if(data === null) {
+	                   data = "";
+	            }
+	            // Backward compatibility
+	            if(!field.parser && field.converter) {
+	                field.parser = field.converter;
+	            }
+	            var parser = (typeof field.parser === 'function') ?
+	                field.parser :
+	                DS.Parser[field.parser+''];
+	            if(parser) {
+	                data = parser.call(this, data);
+	            }
+	            // Safety measure
+	            if(data === undefined) {
+	                data = null;
+	            }
+	            oResult[key] = data;
+	        }
+	    }
+	    catch(e) {
+	    }
+
+	    return oResult;
+	};
+
+	YAHOO.util.Event.addListener(window, "load", function() {
+		var  myDataSource = new YAHOO.util.DataSource('data1.xml');
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_XML;
+		myDataSource.responseSchema = {
+			resultNode: "Result",
+			fields: ["Title","Phone","City",{key:"Rating AverageRating",parser:"number"},"ClickUrl"]
+		};
+		var myDataTable = new YAHOO.widget.DataTable(
+			"localxml", 
+			[
+				{key:"Title", label:"Name", sortable:true, formatter:"link"},
+				{key:"Phone"},
+				{key:"City"},
+				{key:"Rating AverageRating", label:"Rating",formatter:YAHOO.widget.DataTable.formatNumber, sortable:true}
+			], 
+			myDataSource
+		);
+	});
+})();
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+</div>
+</body>
+</html>

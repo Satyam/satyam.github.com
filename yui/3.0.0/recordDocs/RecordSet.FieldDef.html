@@ -1,0 +1,2044 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: recordset  RecordSet.FieldDef   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1284310309.7" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1284310309.7" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1284310309.7"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1284310309.7"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>recordset&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_recordset.html" title="recordset">recordset</a>
+                 &gt; RecordSet.FieldDef 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">RecordSet.FieldDef</b>
+                        <span class="extends">
+                        </span>
+
+                            <span class="extends" rel="yui:extends">
+                          - uses 
+                            
+                                <span rel="extend" resource="Y.Attribute.html">
+                                <a href="Y.Attribute.html" property="yui:name" title="Y.Attribute">Y.Attribute</a>
+                                </span>
+                            
+                            
+                        </span>
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Stores definitions for the fields in the RecordSet
+                    </div>
+
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:property" resource="#property__parent">
+                                    <h4><a name="property__parent" property="yui:name">_parent</a>
+                                        - <code><span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the parent of this definition or null if none
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: null
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property__root">
+                                    <h4><a name="property__root" property="yui:name">_root</a>
+                                        - <code><span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the top-most field definition or to itself if at the top
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: null
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method_add">
+                                    <h4>
+                                        <a name="method_add">add</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">add</strong>
+                                           (
+                                                
+                                                        
+                                                         item
+                                                    
+                                                
+                                                        , 
+                                                         index
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Adds a child item to the array of children at the given index or at the end of none
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">item</span>
+                                                        &lt;<span property="yui:type">FieldDef or object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Definition to be added</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">index</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) Position to add the definition</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getChildCount">
+                                    <h4>
+                                        <a name="method_getChildCount">getChildCount</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        integer
+                                            <strong property="yui:name">getChildCount</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the number of children under this defition
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        integer
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">Number of children</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event__parentChange">
+                                    <h4>
+                                        <a name="event__parentChange">_parentChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">_parentChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute '_parent' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_before_parentChange">
+                                    <h4>
+                                        <a name="event_before_parentChange">before_parentChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">before_parentChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute '_parent' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeChildrenChange">
+                                    <h4>
+                                        <a name="event_beforeChildrenChange">beforeChildrenChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeChildrenChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'children' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeInitialValueChange">
+                                    <h4>
+                                        <a name="event_beforeInitialValueChange">beforeInitialValueChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeInitialValueChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'initialValue' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeLabelChange">
+                                    <h4>
+                                        <a name="event_beforeLabelChange">beforeLabelChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeLabelChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'label' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeNameChange">
+                                    <h4>
+                                        <a name="event_beforeNameChange">beforeNameChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeNameChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'name' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeParentChange">
+                                    <h4>
+                                        <a name="event_beforeParentChange">beforeParentChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeParentChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'parent' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforePrimaryKeyChange">
+                                    <h4>
+                                        <a name="event_beforePrimaryKeyChange">beforePrimaryKeyChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforePrimaryKeyChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'primaryKey' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeRootChange">
+                                    <h4>
+                                        <a name="event_beforeRootChange">beforeRootChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeRootChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'root' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeServer.formatterChange">
+                                    <h4>
+                                        <a name="event_beforeServer.formatterChange">beforeServer.formatterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeServer.formatterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'server.formatter' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeServer.parserChange">
+                                    <h4>
+                                        <a name="event_beforeServer.parserChange">beforeServer.parserChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeServer.parserChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'server.parser' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeServerChange">
+                                    <h4>
+                                        <a name="event_beforeServerChange">beforeServerChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeServerChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'server' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeSortCompareFunctionChange">
+                                    <h4>
+                                        <a name="event_beforeSortCompareFunctionChange">beforeSortCompareFunctionChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeSortCompareFunctionChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'sortCompareFunction' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeTypeChange">
+                                    <h4>
+                                        <a name="event_beforeTypeChange">beforeTypeChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeTypeChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'type' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeUi.formatterChange">
+                                    <h4>
+                                        <a name="event_beforeUi.formatterChange">beforeUi.formatterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeUi.formatterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'ui.formatter' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeUi.parserChange">
+                                    <h4>
+                                        <a name="event_beforeUi.parserChange">beforeUi.parserChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeUi.parserChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'ui.parser' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeUiChange">
+                                    <h4>
+                                        <a name="event_beforeUiChange">beforeUiChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeUiChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'ui' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_childrenChange">
+                                    <h4>
+                                        <a name="event_childrenChange">childrenChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">childrenChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'children' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_initialValueChange">
+                                    <h4>
+                                        <a name="event_initialValueChange">initialValueChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">initialValueChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'initialValue' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_labelChange">
+                                    <h4>
+                                        <a name="event_labelChange">labelChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">labelChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'label' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nameChange">
+                                    <h4>
+                                        <a name="event_nameChange">nameChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nameChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'name' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_parentChange">
+                                    <h4>
+                                        <a name="event_parentChange">parentChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">parentChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'parent' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_primaryKeyChange">
+                                    <h4>
+                                        <a name="event_primaryKeyChange">primaryKeyChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">primaryKeyChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'primaryKey' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_rootChange">
+                                    <h4>
+                                        <a name="event_rootChange">rootChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">rootChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'root' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_server.formatterChange">
+                                    <h4>
+                                        <a name="event_server.formatterChange">server.formatterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">server.formatterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'server.formatter' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_server.parserChange">
+                                    <h4>
+                                        <a name="event_server.parserChange">server.parserChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">server.parserChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'server.parser' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_serverChange">
+                                    <h4>
+                                        <a name="event_serverChange">serverChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">serverChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'server' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_sortCompareFunctionChange">
+                                    <h4>
+                                        <a name="event_sortCompareFunctionChange">sortCompareFunctionChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">sortCompareFunctionChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'sortCompareFunction' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_typeChange">
+                                    <h4>
+                                        <a name="event_typeChange">typeChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">typeChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'type' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_ui.formatterChange">
+                                    <h4>
+                                        <a name="event_ui.formatterChange">ui.formatterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">ui.formatterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'ui.formatter' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_ui.parserChange">
+                                    <h4>
+                                        <a name="event_ui.parserChange">ui.parserChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">ui.parserChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'ui.parser' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_uiChange">
+                                    <h4>
+                                        <a name="event_uiChange">uiChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">uiChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'ui' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:attribute" resource="#config__parent">
+                                    <h4><a name="config__parent">_parent</a>
+                                        <code>- private <span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Provided as an internal-use setting to read the parent of this node
+even before the initializer method gets called.
+The parent is required to find out the root, which is used in setting some of the other attributes
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_children">
+                                    <h4><a name="config_children">children</a>
+                                        <code>- <span property="yui:type">FieldDefs</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Definitions of fields group under this field
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_initialValue">
+                                    <h4><a name="config_initialValue">initialValue</a>
+                                        <code>- <span property="yui:type">any</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Initial value for a field when no value is provided.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_label">
+                                    <h4><a name="config_label">label</a>
+                                        <code>- <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Label to be shown for this field (defaults to field name)
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_name">
+                                    <h4><a name="config_name">name</a>
+                                        <code>- <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Name of the field for this definition.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_parent">
+                                    <h4><a name="config_parent">parent</a>
+                                        <code>- <span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the parent of this definition
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_primaryKey">
+                                    <h4><a name="config_primaryKey">primaryKey</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Signals that the field is a primary key.
+Fields marked as being a primaryKey will be indexed and can be used to <a href="RecordSet.html#method_search"><code>search</code></a> for Records
+They will also be included in any serialized output even when not dirty
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: false
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_root">
+                                    <h4><a name="config_root">root</a>
+                                        <code>- <span property="yui:type">FieldDef</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Reference to the top-most definition containing this definition
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_server">
+                                    <h4><a name="config_server">server</a>
+                                        <code>- <span property="yui:type">{object}</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Formatting and parsing functions for exchanging data with the server
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_server.formatter">
+                                    <h4><a name="config_server.formatter">server.formatter</a>
+                                        <code>- <span property="yui:type">function or null</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to be used for formatting the field value when it is sent to the server
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_server.parser">
+                                    <h4><a name="config_server.parser">server.parser</a>
+                                        <code>- <span property="yui:type">function or null</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to be used for parsing the field when it is received from the server
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_sortCompareFunction">
+                                    <h4><a name="config_sortCompareFunction">sortCompareFunction</a>
+                                        <code>- <span property="yui:type">function or null</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to sort records by when sorted by this field.  
+If none provided (the default) the sortCompareFunction attribute 
+for the whole RecordSet will be used and finally the regular lexical comparison.
+The function will receive:</ol>
+<li><code>a</code>: first record to compare</li>
+<li><code>b</code>: second record to compare</li>
+<li><code>desc</code>: Boolean indicating the sort should be in descending order
+<li><code>fieldName</code>: Name of the field to sort by
+</ol>
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null.
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_type">
+                                    <h4><a name="config_type">type</a>
+                                        <code>- <span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            DataType information.  It should be a reference to any of the types stored in DataType.Types
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_ui">
+                                    <h4><a name="config_ui">ui</a>
+                                        <code>- <span property="yui:type">{object}</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Formatting and parsing functions for exchanging data with the user
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_ui.formatter">
+                                    <h4><a name="config_ui.formatter">ui.formatter</a>
+                                        <code>- <span property="yui:type">function or null</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to be used for formatting the field value when it is presented to the user
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_ui.parser">
+                                    <h4><a name="config_ui.parser">ui.parser</a>
+                                        <code>- <span property="yui:type">function or null</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Function to be used for parsing the field when it is received from some user input component
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_recordset.html" title="recordset">recordset</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="DataType.Converters.html" title="DataType.Converters">DataType.Converters</a></li>
+                                <li class=""><a href="DataType.Types.html" title="DataType.Types">DataType.Types</a></li>
+                                <li class=""><a href="FieldDefSet.html" title="FieldDefSet">FieldDefSet</a></li>
+                                <li class=""><a href="Record.html" title="Record">Record</a></li>
+                                <li class=""><a href="Record.Field.html" title="Record.Field">Record.Field</a></li>
+                                <li class=""><a href="RecordSet.html" title="RecordSet">RecordSet</a></li>
+                                <li class="selected"><a href="RecordSet.FieldDef.html" title="RecordSet.FieldDef">RecordSet.FieldDef</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="record.js.html" title="record.js">record.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#property__parent" title="_parent">_parent</a></li>
+                                <li class=""><a href="#property__root" title="_root">_root</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method_add" title="add">add</a></li>
+                                <li class=""><a href="#method_getChildCount" title="getChildCount">getChildCount</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event__parentChange" title="_parentChange">_parentChange</a></li>
+                                <li class=""><a href="#event_before_parentChange" title="before_parentChange">before_parentChange</a></li>
+                                <li class=""><a href="#event_beforeChildrenChange" title="beforeChildrenChange">beforeChildrenChange</a></li>
+                                <li class=""><a href="#event_beforeInitialValueChange" title="beforeInitialValueChange">beforeInitialValueChange</a></li>
+                                <li class=""><a href="#event_beforeLabelChange" title="beforeLabelChange">beforeLabelChange</a></li>
+                                <li class=""><a href="#event_beforeNameChange" title="beforeNameChange">beforeNameChange</a></li>
+                                <li class=""><a href="#event_beforeParentChange" title="beforeParentChange">beforeParentChange</a></li>
+                                <li class=""><a href="#event_beforePrimaryKeyChange" title="beforePrimaryKeyChange">beforePrimaryKeyChange</a></li>
+                                <li class=""><a href="#event_beforeRootChange" title="beforeRootChange">beforeRootChange</a></li>
+                                <li class=""><a href="#event_beforeServer.formatterChange" title="beforeServer.formatterChange">beforeServer.formatterChange</a></li>
+                                <li class=""><a href="#event_beforeServer.parserChange" title="beforeServer.parserChange">beforeServer.parserChange</a></li>
+                                <li class=""><a href="#event_beforeServerChange" title="beforeServerChange">beforeServerChange</a></li>
+                                <li class=""><a href="#event_beforeSortCompareFunctionChange" title="beforeSortCompareFunctionChange">beforeSortCompareFunctionChange</a></li>
+                                <li class=""><a href="#event_beforeTypeChange" title="beforeTypeChange">beforeTypeChange</a></li>
+                                <li class=""><a href="#event_beforeUi.formatterChange" title="beforeUi.formatterChange">beforeUi.formatterChange</a></li>
+                                <li class=""><a href="#event_beforeUi.parserChange" title="beforeUi.parserChange">beforeUi.parserChange</a></li>
+                                <li class=""><a href="#event_beforeUiChange" title="beforeUiChange">beforeUiChange</a></li>
+                                <li class=""><a href="#event_childrenChange" title="childrenChange">childrenChange</a></li>
+                                <li class=""><a href="#event_initialValueChange" title="initialValueChange">initialValueChange</a></li>
+                                <li class=""><a href="#event_labelChange" title="labelChange">labelChange</a></li>
+                                <li class=""><a href="#event_nameChange" title="nameChange">nameChange</a></li>
+                                <li class=""><a href="#event_parentChange" title="parentChange">parentChange</a></li>
+                                <li class=""><a href="#event_primaryKeyChange" title="primaryKeyChange">primaryKeyChange</a></li>
+                                <li class=""><a href="#event_rootChange" title="rootChange">rootChange</a></li>
+                                <li class=""><a href="#event_server.formatterChange" title="server.formatterChange">server.formatterChange</a></li>
+                                <li class=""><a href="#event_server.parserChange" title="server.parserChange">server.parserChange</a></li>
+                                <li class=""><a href="#event_serverChange" title="serverChange">serverChange</a></li>
+                                <li class=""><a href="#event_sortCompareFunctionChange" title="sortCompareFunctionChange">sortCompareFunctionChange</a></li>
+                                <li class=""><a href="#event_typeChange" title="typeChange">typeChange</a></li>
+                                <li class=""><a href="#event_ui.formatterChange" title="ui.formatterChange">ui.formatterChange</a></li>
+                                <li class=""><a href="#event_ui.parserChange" title="ui.parserChange">ui.parserChange</a></li>
+                                <li class=""><a href="#event_uiChange" title="uiChange">uiChange</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#config__parent" title="_parent">_parent</a></li>
+                                <li class=""><a href="#config_children" title="children">children</a></li>
+                                <li class=""><a href="#config_initialValue" title="initialValue">initialValue</a></li>
+                                <li class=""><a href="#config_label" title="label">label</a></li>
+                                <li class=""><a href="#config_name" title="name">name</a></li>
+                                <li class=""><a href="#config_parent" title="parent">parent</a></li>
+                                <li class=""><a href="#config_primaryKey" title="primaryKey">primaryKey</a></li>
+                                <li class=""><a href="#config_root" title="root">root</a></li>
+                                <li class=""><a href="#config_server" title="server">server</a></li>
+                                <li class=""><a href="#config_server.formatter" title="server.formatter">server.formatter</a></li>
+                                <li class=""><a href="#config_server.parser" title="server.parser">server.parser</a></li>
+                                <li class=""><a href="#config_sortCompareFunction" title="sortCompareFunction">sortCompareFunction</a></li>
+                                <li class=""><a href="#config_type" title="type">type</a></li>
+                                <li class=""><a href="#config_ui" title="ui">ui</a></li>
+                                <li class=""><a href="#config_ui.formatter" title="ui.formatter">ui.formatter</a></li>
+                                <li class=""><a href="#config_ui.parser" title="ui.parser">ui.parser</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "RecordSet.FieldDef.html#method_add", "access": "", "host": "RecordSet.FieldDef", "type": "method", "name": "add"}, {"url": "RecordSet.FieldDef.html#event_beforeChildrenChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeChildrenChange"}, {"url": "RecordSet.FieldDef.html#event_beforeInitialValueChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeInitialValueChange"}, {"url": "RecordSet.FieldDef.html#event_beforeLabelChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeLabelChange"}, {"url": "RecordSet.FieldDef.html#event_beforeNameChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeNameChange"}, {"url": "RecordSet.FieldDef.html#event_before_parentChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "before_parentChange"}, {"url": "RecordSet.FieldDef.html#event_beforeParentChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeParentChange"}, {"url": "RecordSet.FieldDef.html#event_beforePrimaryKeyChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforePrimaryKeyChange"}, {"url": "RecordSet.FieldDef.html#event_beforeRootChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeRootChange"}, {"url": "RecordSet.FieldDef.html#event_beforeServerChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeServerChange"}, {"url": "RecordSet.FieldDef.html#event_beforeServer.formatterChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeServer.formatterChange"}, {"url": "RecordSet.FieldDef.html#event_beforeServer.parserChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeServer.parserChange"}, {"url": "RecordSet.FieldDef.html#event_beforeSortCompareFunctionChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeSortCompareFunctionChange"}, {"url": "RecordSet.FieldDef.html#event_beforeTypeChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeTypeChange"}, {"url": "RecordSet.FieldDef.html#event_beforeUiChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeUiChange"}, {"url": "RecordSet.FieldDef.html#event_beforeUi.formatterChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeUi.formatterChange"}, {"url": "RecordSet.FieldDef.html#event_beforeUi.parserChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "beforeUi.parserChange"}, {"url": "RecordSet.FieldDef.html#config_children", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "children"}, {"url": "RecordSet.FieldDef.html#event_childrenChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "childrenChange"}, {"url": "RecordSet.FieldDef.html#method_getChildCount", "access": "", "host": "RecordSet.FieldDef", "type": "method", "name": "getChildCount"}, {"url": "RecordSet.FieldDef.html#config_initialValue", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "initialValue"}, {"url": "RecordSet.FieldDef.html#event_initialValueChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "initialValueChange"}, {"url": "RecordSet.FieldDef.html#config_label", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "label"}, {"url": "RecordSet.FieldDef.html#event_labelChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "labelChange"}, {"url": "RecordSet.FieldDef.html#config_name", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "name"}, {"url": "RecordSet.FieldDef.html#event_nameChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "nameChange"}, {"url": "RecordSet.FieldDef.html#property__parent", "access": "", "host": "RecordSet.FieldDef", "type": "property", "name": "_parent"}, {"url": "RecordSet.FieldDef.html#config__parent", "access": "private", "host": "RecordSet.FieldDef", "type": "config", "name": "_parent"}, {"url": "RecordSet.FieldDef.html#config_parent", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "parent"}, {"url": "RecordSet.FieldDef.html#event__parentChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "_parentChange"}, {"url": "RecordSet.FieldDef.html#event_parentChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "parentChange"}, {"url": "RecordSet.FieldDef.html#config_primaryKey", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "primaryKey"}, {"url": "RecordSet.FieldDef.html#event_primaryKeyChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "primaryKeyChange"}, {"url": "RecordSet.FieldDef.html#property__root", "access": "", "host": "RecordSet.FieldDef", "type": "property", "name": "_root"}, {"url": "RecordSet.FieldDef.html#config_root", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "root"}, {"url": "RecordSet.FieldDef.html#event_rootChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "rootChange"}, {"url": "RecordSet.FieldDef.html#config_server", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "server"}, {"url": "RecordSet.FieldDef.html#event_serverChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "serverChange"}, {"url": "RecordSet.FieldDef.html#config_server.formatter", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "server.formatter"}, {"url": "RecordSet.FieldDef.html#event_server.formatterChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "server.formatterChange"}, {"url": "RecordSet.FieldDef.html#config_server.parser", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "server.parser"}, {"url": "RecordSet.FieldDef.html#event_server.parserChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "server.parserChange"}, {"url": "RecordSet.FieldDef.html#config_sortCompareFunction", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "sortCompareFunction"}, {"url": "RecordSet.FieldDef.html#event_sortCompareFunctionChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "sortCompareFunctionChange"}, {"url": "RecordSet.FieldDef.html#config_type", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "type"}, {"url": "RecordSet.FieldDef.html#event_typeChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "typeChange"}, {"url": "RecordSet.FieldDef.html#config_ui", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "ui"}, {"url": "RecordSet.FieldDef.html#event_uiChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "uiChange"}, {"url": "RecordSet.FieldDef.html#config_ui.formatter", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "ui.formatter"}, {"url": "RecordSet.FieldDef.html#event_ui.formatterChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "ui.formatterChange"}, {"url": "RecordSet.FieldDef.html#config_ui.parser", "access": "", "host": "RecordSet.FieldDef", "type": "config", "name": "ui.parser"}, {"url": "RecordSet.FieldDef.html#event_ui.parserChange", "access": "", "host": "RecordSet.FieldDef", "type": "event", "name": "ui.parserChange"}];
+</script>
+</body>
+</html>

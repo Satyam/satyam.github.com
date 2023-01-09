@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Make Node Test</title>
+		<style>
+			td, th {
+				border: thin solid black;
+			}
+		</style>
+
+
+    </head>
+    <body class="yui3-skin-sam yui-skin-sam">
+
+		<div class="yui3-d0">					
+			<h1 id="hd">Make Node Test</h1>
+			<p>This page was build using the <a href="makenode.js">makenode extension</a>.  Each example is an instance of a component
+			which inherits from <code>Y.Widget</code> and is extended with <code>Y.MakeNode</code>, the second inheriting from the first.  
+			The components do nothing but render the result of processing the same template. The <code>renderUI()</code> method is this:</p>
+			<pre>
+	renderUI: function() {
+		this.get('contentBox').append(this.makeNode(TEMPLATE,{
+			whatever:'whatever',
+			p:'works'
+		}));
+		this.locateNodes();
+	},
+			</pre>
+			<p>Method <code>makeNode</code> and <code>locateNodes</code> come from extending the component with the <code>Y.MakeNode</code> class, like this:</p>
+			<pre>
+	var MakeNodeTest = Y.Base.create(
+		'MakeNodeTest',
+		Y.Widget,
+		// here I add the extension
+		[Y.MakeNode],
+		{
+			....
+			</pre>
+			<p><code>makeNode</code> behaves pretty much like <code>Y.substitute</code> (in fact, it uses substitute) accepting a template and an 
+			optional object containing replacement strings.  The difference lies in that it takes a whole bunch of special placeholders
+			to read replacement values from the object itself so the second argument might not be required.  All the special placeholders 
+			use a single character, a space and one or more arguments.  The special placeholders are:</p><ul>
+				<li><code>{@ attributeName}</code> for attribute values</li>
+				<li><code>{p propertyName}</code> instance property values</li>
+				<li><code>{m methodName arg1 arg2 ....}</code> instance method followed by the method name and any number of arguments separated by whitespace.  
+											  The placeholder is replaced by the return value. 
+											  Strings must be enclosed in double quotation marks.
+											  Numbers, booleans and <code>null</code> will be converted from string to their proper data types.</li>
+				<li><code>{c className}</code> CSS className generated from the <code>NAME</code> static property of the <code>Base</code> class 
+							  and the names from the <code>CLASS_NAME</code> static property  (see below)</li>
+				<li><code>{_ module key lang}</code> Calls <code>Y.Intl.get</code> with the given arguments and uses its value.  The <code>lang</code> argument is optional.</li>
+				<li><code>{s key}</code> string from the strings attribute, using <code>key</code> as the sub-attribute.  
+						This is handy for a single level of strings.  
+						If a deeper structure exists, then use <code>{@ strings.key1.key2. ..}</code> which allows any number of keys</li>
+				<li><code>{? <i>other placeholder</i>}</code> Produces the string <code>checked</code> when the result of processing the 
+					rest of the placeholder is true, i.e.: <code>{? p length}</code> produces <code>checked</code> it <code>this.length</code> is not zero.
+						It is meant to set the state of &lt;input&gt; elements of type radio or checkbox.</li>
+				<li><code>{}</code> any other value will be handled just like <code>Y.substitute</code> does, even if it matches a prefix as long
+				   as it doesn't have any extra placeholder arguments.</li>
+			</ul>
+			<p>The keys for the <code>{c}</code> placeholder come from the keys listed in the static <code>CLASS_NAMES</code> array.  The class producing the
+			first table has <code>CLASS_NAMES: [FORM]</code> and so it fails to do the replacement for <code>{c input}</code>.  
+			The second class, a descendant from the first has <code>CLASS_NAMES: [INPUT]</code>.  The classNames defined in this way
+			add up so the second class has both the classNames in the first and those it added and each set with the <code>cssPrefix</code> of the
+			class it was defined on.</p>
+			<p>The names listed in the <code>CLASS_NAMES</code> array produce classNames using the <code>yui3-</code> prefix, then the value of each class <code>NAME</code>
+			property, turned lowercase, and then the value of the key.  Thus, for <code>FORM</code>, it will create <code>"yui3-makenodetext-form"</code>.
+			It will store these classNames in the <code>_classNames</code> property, indexed by the key, in other words, this will result in:</p>
+			<pre>this._classNames = {form:"yui3-makenodetest-form"}</pre>
+			<p>That is how those classNames become available to <code>makeNode</code> to replace <code>{c form}</code> with.</p>
+			<p>In the second table, the replacement for each <code>{c}</code> placeholder uses the <code>NAME</code> property of the class it was defined in.  
+			Though <code>MakeNode</code> adds all the classNames defined in each class, it will preserve the <code>cssPrefix</code> of each class in the inheritance chain.</p>
+			<p>The following tables have been created out of a single template that contains an assortment of placeholders
+			to show the effects of each.  The columns show the placeholder, what it should produce and the actual value produced.
+			In normal use these placeholders would produce HTML markup, not strings to be seen by the user, except for the <code>{s}</code> and <code>{_}</code>
+			placeholders.</p>
+			<p>The <code>locateNodes</code> method uses <code>Y.one</code> to locate each of the elements given the classNames declared in <code>CLASS_NAMES</code>.
+			It can take as arguments any number of classNames to locate but, if none given, it will try all those available in <code>CLASS_NAMES</code>.  
+			For each one found it will create a private property of the form <code>_<i>xxxx</i>Node</code>.  
+			Thus, for  <code>CLASS_NAMES: [INPUT]</code>, it will produce <code>this._inputNode</code></p>
+			<p>The examples also show how easy it can be to internationalize an application with these templates.  
+			The first component has all its strings defined as sub-attributes under the strings configuration attribute, which Widget defines
+			though it is empty.  Those are the default strings and they are shown in the first table.  
+			For the second table, I loaded the Intl module and also defined translated strings for it. 
+			I created the instance of the second component like this: </p>
+			<pre>
+	var childMakeNodeTest = new ChildMakeNodeTest({
+		strings: Y.Intl.get('someModule')
+	});
+			</pre>
+			<p>This is all that is required to have the component translated, as long as all the UI strings are defined in the <code>strings</code> attribute.</p>
+			<p>There is also the <code>{_}</code> placeholder (named like the function in the getText C library) which explicitly class <code>Y.Intl.get</code>.  The problem with this
+			is that the Intl module needs to be loaded and requires the component designer to build thecomponent with internationalization in mind. 
+			Using the <code>strings</code> configuration attribute and the <code>{s}</code> placeholder places no such requirement on the component designer</p>
+			
+			<h2>Example 1</h2>
+			<p>For this table I am using a class subclassed out of Widget and it does not have an <code>input</code> className
+			so the row called 'Child ClassName' fails and the placeholder shows unchanged.</p>
+			<p>For this one I also don't have the Intl module loaded so the <code>{_}</code> placeholders asking for internationalized strings
+			fail and the <code>{s}</code> placeholders come from the untraslated <code>strings</code> attribute</p>
+			<div id="bd1"></div>
+			<hr />
+			<h2>Example 2</h2>
+			<p>This is the same template using a component inheriting from the one used in the first table 
+			which adds an <code>input</code> className defined so it is filled in,
+			however, note that the className of the original element remains the same.</p>
+			<p>The Intl module has been loaded for this table so all strings are correctly filled in.</p>
+			<p>In both cases I have used the element references created from the classNames to locate and color the backgrounds,
+			the first one, not having an <code>input</code> element, it doesn't get colored.</p>
+			<div id="bd2"></div>
+        
+		</div>        
+
+		<!-- YUI Seed -->
+		<script src="http://yui.yahooapis.com/3.4.0pr1/build/yui/yui.js"></script>
+		<script src="makenode.js"></script>
+		
+
+		<script>
+/*jslint browser: true, nomen: true, maxerr: 50, indent: 4 , vars:true*/
+/*global YUI*/
+
+			YUI({
+				filter:'raw'
+			}).use(
+				'node','substitute','base', 'widget', 'makenode',
+				function(Y) {
+					"use strict";
+					/*
+						The template has the following type of placeholders:
+						{@ attributeName} for attribute values
+						{p propertyName} instance property values
+						{m methodName arg1 arg2 ....} instance method followed by the method name and any number of arguments passed on as strings.  
+						                              the placeholder is replaced by the return value
+						{c className} CSS className generated from the NAME static property of the Base class 
+						              and the names from the CLASS_NAME static property  (see below)
+						{_ module key lang} Calls Y.Intl.get with the given arguments and uses its value.  The lang argument is optional.
+						{s key} string from the strings attribute, using key as the sub-attribute.  
+								This is handy for a single level of strings.  
+								If a deeper structure exists, then use {@ strings.key1.key2. ..} which allows any number of keys
+						{} any other value will be handled just like Y.substitute does, even if it matches a prefix as long
+						   as it doesn't have any extra placeholder arguments.
+						*/
+					var TEMPLATE = [
+						'<table>',
+						'<tr><th>Source of<br/>data<\/th><th>Placeholder</th><th>Should be<\/th><th>returns<\/th><\/tr>',
+						'<tr><th>Attribute<\/th><td>&#123;@ someAttr&#125;</td><td>42<\/td><td>{@ someAttr}<\/td><\/tr>',
+						'<tr><th>Property<\/th><td>&#123;p someProp&#125;</td><td>123<\/td><td>{p someProp}<\/td><\/tr>',
+						'<tr><th>Method<\/th><td>&#123;m someMethod 123 false "has spaces"&#125;</td><td>1:123 2:false 3:has spaces<\/td><td>{m someMethod 123  false "has spaces"}<\/td><\/tr>',
+						'<tr><th>ClassName<\/th><td>&#123;c form&#125;</td><td>yui3-makenodetest-form<\/td><td class="{c form}">{c form}<\/td><\/tr>',
+						'<tr><th>Child ClassName<\/th><td>&#123;c input&#125;</td><td>yui3-childmakenodetest-input<\/td><td class="{c input}">{c input}<\/td><\/tr>',
+						'<tr><th>Intl<\/th><td>&#123;_ someModule someText1&#125;</td><td>algún texto 1<\/td><td>{_ someModule someText1}<\/td><\/tr>',
+						'<tr><th>String<\/th><td>&#123;s someText2&#125;</td><td>algún texto 2<\/td><td>{s someText2}<\/td><\/tr>',
+						'<tr><th>extra object<\/th><td>&#123;whatever&#125;</td><td>whatever<\/td><td>{whatever}<\/td><\/tr>',
+						'<tr><th>extra object<br />matching prefix<\/th><td>&#123;p&#125;</td><td>works<\/td><td>{p}<\/td><\/tr>',
+						'<tr>',
+							'<th>checked HTMLAttribute<\/th><td>&#123;? followed by any of the previous placeholders&#125;</td>',
+							'<td><input type="checkbox"/><br/><input type="checkbox" checked/><\/td>',
+							'<td><input type="checkbox" {? p falsy}/><br/><input type="checkbox" {? p truthy}/><\/td>',
+						'<\/tr>',
+						'<\/table>'
+					].join('\n');
+					
+					var SOME_ATTR = 'someAttr',
+						FORM = 'form',
+						INPUT = 'input';
+						
+						
+					var MakeNodeTest = Y.Base.create(
+						'MakeNodeTest',
+						Y.Widget,
+						// here I add the extension
+						[Y.MakeNode],
+						{
+							initializer: function () {
+								this._UI_ATTRS = {
+									BIND: this._UI_ATTRS.BIND.concat(SOME_ATTR),
+									SYNC: this._UI_ATTRS.SYNC.concat(SOME_ATTR)
+								};
+							},
+
+							someProp: 123,
+							truthy: true,
+							falsy:false,
+							someMethod: function (one, two, three) {
+								// make some random formatting to tell the arguments appart
+								return '1:' + one + ' 2:' + two + ' 3:' + three;
+							},
+							
+							// To render, simply call the makeNode method passing the template and, if need, 
+							// an object with extra properties
+							renderUI: function() {
+								this.get('contentBox').append(this.makeNode(TEMPLATE,{
+									whatever:'whatever',
+									p:'works'
+								}));
+								this.locateNodes();
+							},
+							_uiSetSomeAttr: function () {
+							}
+						},
+						{
+							// This are the classnames to be used for this template.
+							// MakeNode will use ClassNameManager.getClassName to create CSS classNames
+							// and it will store them in the _classNames instance property.
+							// The items on this array can be used as the keys for the {c} placeholder key.
+							// This entry will make locateNodes create the this._formNode property pointing to 
+							// whichever element got the class="{c form}" HTML attribute. 
+							// It will also set this._classNames loaded with  {form:'yui3-makenodetest-form'}
+							
+							CLASS_NAMES: [FORM],
+							ATTRS: {
+								someAttr: {
+									value: '42'
+								},
+								// default UI strings 
+								strings: {
+									value: {
+										someText1: 'some text 1',
+										someText2: 'some text 2'
+									}
+								}
+							}
+						}
+					);
+					var ChildMakeNodeTest = Y.Base.create(
+						'ChildMakeNodeTest',
+						MakeNodeTest,
+						[],
+						{
+						},
+						{
+							CLASS_NAMES: [INPUT]
+						}
+					);
+					var makeNodeTest = new MakeNodeTest();
+					makeNodeTest.render('#bd1');
+					makeNodeTest._formNode.setStyle('backgroundColor','red');
+					
+					// For the second test I load the 'intl' module and create a few translated strings
+					Y.use('intl', function (Y) {
+						if (Y.Intl.add) {
+							Y.Intl.add('someModule','es_ES',{
+								someText1:'algún texto 1',
+								someText2:'algún texto 2'
+							});
+							Y.Intl.setLang('someModule','es_ES');
+						}
+
+						// see how the original strings are replaced by the translations
+						var childMakeNodeTest = new ChildMakeNodeTest({
+							strings: Y.Intl.get('someModule')
+						});
+						childMakeNodeTest.render('#bd2');
+						childMakeNodeTest._inputNode.setStyle('backgroundColor','green');
+						childMakeNodeTest._formNode.setStyle('backgroundColor','red');
+					});
+
+				}
+			);
+		
+		</script>
+        
+    </body>
+</html>
+
+
+

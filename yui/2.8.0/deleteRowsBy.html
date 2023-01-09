@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yahoo-dom-event/yahoo-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+	<style type="text/css">
+		.dp-highlighter th, .dp-highlighter td {
+			border:0;
+			padding:0;
+		}
+		.dp-highlighter .line1, .dp-highlighter  .line2 {
+			padding-left:10px;
+			white-space:nowrap;
+		}
+		.ft {
+			margin-top:1em;
+		}
+	</style>
+    <title>Delete Rows By</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Delete Rows By</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+			<button id="delete">Delete Selected</button>
+		</div>
+		<div class="ft">
+			<p>It has to be remembered that the main repository for data in the DataTable is the RecordSet, not the screen.
+			If we put interactive controls on the screen such as checkboxes, it is important that their state is stored 
+			in the RecordSet immediately as any information stored in the screen is volatile.  Any screen refresh,
+			such as a column sort or when moving to another page in a paged DataTable, will wipe out whatever was
+			stored on the screen, not so with the RecordSet.</p>
+			<p>The checkbox in the header is added via the <code>label</code> property of the column defs, while those on
+			each of the rows are provided by the 'checkbox' formatter.  There is no <code>"Select"</code> field in the 
+			incoming data, a call to <code>getData('Select')</code> will return <code>undefined</code> which the 
+			checkbox formatter considers false and the checkbox will be unchecked.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+		            {key:"Select", label:"<input type='checkbox' id='SelectAll'> Select All",  formatter:"checkbox"},
+			</textarea>
+			<p>When clicking each checkbox, the following code updates the underlying record:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			dt.subscribe('checkboxClickEvent', function(oArgs) {
+				var elCheckbox = oArgs.target;
+				var newValue = elCheckbox.checked;
+				var record = this.getRecord(elCheckbox);
+				var column = this.getColumn(elCheckbox);
+				record.setData(column.key,newValue);
+				
+				if (column.key == 'Select') {
+					var allChecked = true;
+					this.forAllRecords(function (r) {
+						if (!r.getData('Select')) {
+							allChecked = false;
+							return false;
+						}
+					});
+					Dom.get('SelectAll').checked = allChecked;
+				}
+			});
+			</textarea>
+			<p>The second half of the above code makes sure the 'Select All' checkbox always reflects the state of the buttons. 
+			If all of them are checked, the Select All checkbox will be selected. This second half is surrounded by a condition asking
+			whether the checkbox clicked is in the <code>Select</code> column.  While the first part of the code is completely generic and it would
+			work for any checkbox on any of the several columns, after all, any checkbox change has to be recorded on its Record, 
+			the second only applies to the checkboxes on the <code>Select</code></p>
+			<p>The <code>forAllRecords</code> method, a handy addition to DataTable, is defined like this:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			YAHOO.widget.DataTable.prototype.forAllRecords = function (fn,scope) {
+				if (!Lang.isFunction(fn)) {return;}
+				scope || (scope = this);
+				for (var rs = this.getRecordSet(), l = rs.getLength(), i = 0; i < l; i++) {
+					if (fn.call(scope, rs.getRecord(i), i) === false) return;
+				}
+			};
+			</textarea>
+			<p>If will execute the function received as the first argument for every Record in the RecordSet,
+			providing it with a reference to each Record and the index.  The function can return false to stop looping.</p>
+			<p>The following code listens to a click on the 'Select All' button:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			dt.on('theadCellClickEvent', function (oArgs) {
+				var target = oArgs.target,
+					column = this.getColumn(target),
+					actualTarget = Event.getTarget(oArgs.event),
+					check = actualTarget.checked;
+					
+				if (column.key == 'Select') {
+					this.forAllRecords(function (r) {
+						r.setData('Select',check);
+					});
+					this.render();
+				}
+			});			</textarea>
+			<p>We read the value of the actual target of the click on the header cell (that is, the checkbox) and we copy that value 
+			into every record on the RecordSet.  This does not refresh the UI at once, we need to call method <code>render</code> when
+			all values have been set.</p>
+			<p>We listen for the <code>Delete Selected</code> button to be clicked:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			Event.on('delete','click', function() {
+				dt.deleteRowsBy(function (data) {
+					return data.Select;
+				});
+			});
+			</textarea>
+			<p>The listener calls method <code>deleteRowsBy</code> that I added to the DataTable, which receives a function that 
+			should return true or false depending on whether you want the record deleted or not. 
+			The function receives an object (<code>data</code>) which contains the values for each record as a simple object with the field
+			names as its keys. <code>data</code> is not a Record instance but a plain object.</p>
+			<h3>deleteRowsBy</h3>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			YAHOO.widget.DataTable.prototype.deleteRowsBy = function (condition) {
+				var start = 0, count = 0, current = 0, 
+					recs = this.getRecordSet().getRecords();
+									
+				while (current < recs.length) {
+					if (recs[current] && condition(recs[current].getData())) {
+						if (count === 0) {
+							start = current;
+							//console.log('got one to delete at ' + start);
+						} else {
+							//console.log('got 1 more to delete');
+						}
+						count++;
+						current++;
+					} else {
+						if (count) {
+							this.deleteRows(start,count);
+							count = 0;
+							current = start;
+						} else {
+							current++;
+						}
+					}
+				}
+				if (count) {
+					this.deleteRows(start,count);
+				}
+			};
+			</textarea>
+			<p>The <code>deleteRowsBy</code> method uses DataTable's own <code>deleteRows</code> method to delete records in batches.  
+			It tries to collect as many contiguous records in each batch.
+			It does not fire any events by itself, but <code>deleteRows</code> will fire <code>rowsDeleteEvent</code>.
+			A single operation may fire several of these events, one for each batch.</p>
+		</div>
+	</div>
+
+<script type="text/javascript" >
+
+YAHOO.util.Event.onDOMReady(function() {
+		
+	var Dom = YAHOO.util.Dom,
+		Event = YAHOO.util.Event,
+		Lang = YAHOO.lang;
+	
+
+	
+	YAHOO.widget.DataTable.prototype.deleteRowsBy = function (condition) {
+		var start = 0, count = 0, current = 0, 
+			recs = this.getRecordSet().getRecords();
+							
+		while (current < recs.length) {
+			if (recs[current] && condition(recs[current].getData())) {
+				if (count === 0) {
+					start = current;
+					//console.log('got one to delete at ', start);
+				} else {
+					//console.log('got 1 more to delete');
+				}
+				count++;
+				current++;
+			} else {
+				if (count) {
+					this.deleteRows(start,count);
+					count = 0;
+					current = start;
+				} else {
+					current++;
+				}
+			}
+		}
+		if (count) {
+			this.deleteRows(start,count);
+		}
+	};
+	
+	YAHOO.widget.DataTable.prototype.forAllRecords = function (fn,scope) {
+		if (!Lang.isFunction(fn)) {return;}
+		scope || (scope = this);
+		for (var rs = this.getRecordSet(), l = rs.getLength(), i = 0; i < l; i++) {
+			if (fn.call(scope, rs.getRecord(i), i) === false) {return;}
+		}
+	};
+	
+	var dt = new YAHOO.widget.DataTable(
+		"container", 
+		[
+			{key:"Select", label:"<input type='checkbox' id='SelectAll'> Select<br/>All",  formatter:"checkbox"},
+			{key:"Numbers", children:[
+				{key:"SKU", label:"SKU", sortable:true},
+				{key:"Quantity", sortable:true}
+			]},
+			{key:"Text", children:[
+				{key:"Item", sortable:true, className:"myClass"},
+				{key:"Description", sortable:true, width:200}
+			]}
+		],
+		new YAHOO.util.DataSource(
+			[
+				{SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+				{SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football."},
+				{SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles"},
+				{SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+				{SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+				{SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:""},
+				{SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+				{SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:""},
+				{SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+				{SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+				{SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+				{SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+				{SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:""},
+				{SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+			],
+			{
+				responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+				responseSchema: {
+					fields: ["SKU","Quantity","Item","Description"]
+				}
+			}
+		)
+	);
+	
+	dt.subscribe('checkboxClickEvent', function(oArgs) {
+		var elCheckbox = oArgs.target;
+		var newValue = elCheckbox.checked;
+		var record = this.getRecord(elCheckbox);
+		var column = this.getColumn(elCheckbox);
+		record.setData(column.key,newValue);
+		
+		var allChecked = true;
+		this.forAllRecords(function (r) {
+			if (!r.getData('Select')) {
+				allChecked = false;
+				return false;
+			}
+		});
+		Dom.get('SelectAll').checked = allChecked;
+	});
+	
+	dt.on('theadCellClickEvent', function (oArgs) {
+		var target = oArgs.target,
+			column = this.getColumn(target),
+			actualTarget = Event.getTarget(oArgs.event),
+			check = actualTarget.checked;
+			
+		if (column.key == 'Select') {
+			this.forAllRecords(function (r) {
+				r.setData('Select',check);
+			});
+			this.render();
+		}
+	});
+		
+	
+	Event.on('delete','click', function() {
+		dt.deleteRowsBy(function (data) {
+			return data.Select;
+		});
+	});
+});
+</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+</body>
+</html>

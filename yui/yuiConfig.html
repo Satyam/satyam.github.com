@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Using the yuiConfig markup attribute</title> 
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.6.0/build/reset-fonts-grids/reset-fonts-grids.css&2.6.0/build/base/base.css&2.6.0/build/assets/skins/sam/skin.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.6.0/build/yahoo-dom-event/yahoo-dom-event.js&2.6.0/build/calendar/calendar-min.js&2.6.0/build/json/json-min.js&2.6.0/build/treeview/treeview-min.js"></script>
+
+<script type="text/javascript">
+	var Dom = YAHOO.util.Dom,
+		Lang = YAHOO.lang;
+	YAHOO.widget.TreeView.prototype.buildTreeFromMarkup = function (id) {
+		//this.logger.log('Building tree from existing markup');
+		var build = function (markup) {
+			var el, child, branch = [], config = {}, label, yuiConfig;
+			// Dom's getFirstChild and getNextSibling skip over text elements
+			for (el = Dom.getFirstChild(markup); el; el = Dom.getNextSibling(el)) {
+				switch (el.tagName.toUpperCase()) {
+					case 'LI':
+						config = {
+							expanded: Dom.hasClass(el,'expanded'),
+							title: el.title || el.alt || undefined
+						};
+						// I cannot skip over text elements here because I want them for labels
+						child = el.firstChild;
+						if (child.nodeType == 3) {
+							// nodes with only whitespace, tabs and new lines don't count, they are probably just formatting.
+							label = Lang.trim(child.nodeValue.replace(/[\n\t\r]*/g,''));
+							if (label) {
+								config.type = 'text';
+								config.label = label;
+							} else {
+								child = Dom.getNextSibling(child);
+							}
+						}
+						if (!label) {
+							if (child.tagName.toUpperCase() == 'A') {
+								config.type = 'text';
+								config.label = child.innerHTML;
+								config.href = child.href;
+								config.target = child.target;
+								config.title = child.title || child.alt || config.title;
+							} else {
+								config.type = 'html';
+								var d = document.createElement('div');
+								d.appendChild(child.cloneNode(true));
+								config.html = d.innerHTML;
+								config.hasIcon = true;
+							}
+						}
+						// see if after the label it has a further list which will become children of this node.
+						child = Dom.getNextSibling(child);
+						switch (child && child.tagName.toUpperCase()) {
+							case 'UL':
+							case 'OL':
+								config.children = build(child);
+								break;
+						}
+						// if there are further elements or text, it will be ignored.
+						
+						if (YAHOO.lang.JSON) {
+							yuiConfig = el.getAttribute('yuiConfig');
+							if (yuiConfig) {
+								yuiConfig = YAHOO.lang.JSON.parse(yuiConfig);
+								config = YAHOO.lang.merge(config,yuiConfig);
+							}
+						}
+						
+						branch.push(config);
+						break;
+					case 'UL':
+					case 'OL':
+//						this.logger.log('ULs or OLs can only contain LI elements, not other UL or OL.  This will not work in some browsers','error');
+						config = {
+							type: 'text',
+							label: '',
+							children: build(child)
+						};
+						branch.push(config);
+						break;
+				}
+			}
+			return branch;
+		};
+
+		var markup = Dom.getChildrenBy(Dom.get(id),function (el) { 
+			var tag = el.tagName.toUpperCase();
+			return  tag == 'UL' || tag == 'OL';
+		});
+		if (markup.length) {
+			this.buildTreeFromObject(build(markup[0]));
+		} else {
+			//this.logger.log('Markup contains no UL or OL elements','warn');
+		}
+	};
+
+	YAHOO.util.Event.onDOMReady(function () {
+		
+		var tree = new YAHOO.widget.TreeView('bd');
+		tree.draw();
+		tree.subscribe('dblClickEvent',tree.onEventEditNode);
+	});
+</script>
+	</head>
+	<body class="yui-skin-sam">
+		<div id="doc">
+			<div id="hd">
+				<h1>Using the <code>yuiConfig</code> markup attribute</h1>
+				<p>This example uses the regular 2.6.0 TreeView but has method <code>buildTreeFromMarkup</code> redefined so it will take 
+				an extra attribute on &lt;LI&gt; markup elements called <code>yuiConfig</code></p>
+				<p>This attribute should contain a JSON-encoded string with any Node properties you wish to override.  
+				There is not much detail nor many options you can place on an HTML element to control what the enhanced widget will do.  
+				TreeView already accepts a className of <code>expanded</code> to indicate that the node should be expanded at creation.  
+				This mechanism could be extended to other properties, but it will soon become messy. 
+				The <code>yuiConfig</code> attribute provides all the flexibility you might want concentrating all the details in a single place 
+				without using any further ways to sneak in other node properties.</p>  
+				<p>The example below enhances the following markup:</p>
+				<pre>
+&lt;ul&gt;
+    &lt;li class="expanded"&gt;
+        List 0
+        &lt;ul&gt;
+            &lt;li&gt;
+                List 0-0
+                &lt;ul&gt;
+                    &lt;li&gt;item 0-0-0&lt;/li&gt;
+                    &lt;li&gt;item 0-0-1&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li yuiConfig='{"type":"menu"}'&gt;
+        List 1
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a target="other" href="#nowhere"&gt;list 1-0 with link&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li yuiConfig='{"type":"DateNode","editable":true}'&gt;1/2/08&lt;/li&gt;
+                    &lt;li&gt;item 1-0-1&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</pre>
+				<p>The first list item uses the 'traditional' way by adding the attribute <code>class="expanded"</code>
+				to the original markup.  
+				The second list item has its <code>yuiConfig</code> attribute set, which will force the parser to build a MenuNode
+				instead of the TextNode it would have created otherwise.  You can test it below by expanding it, MenuNodes
+				force other nodes at the same level to collapse. 
+				The first node is a regular TextNode, expanding it won't affect other nodes, the second is a MenuNode
+				and forces others to collapse.</p>
+				<p>The first child of the second node is built from an anchor element.  
+				It will produce a TextNode with its <code>href</code> and <code>target</code> properties set accordingly.  
+				This, once again, goes in line with the traditional way of parsing existing markup.  
+				The original un-enhanced markup has equivalent functionality as the enhanced code, which only makes sense.</p>
+				<p>Going further down, there is a date.  Since it is a string, it would normally produce a TextNode.  
+				However, we want this to be editable and normal TextNodes use a plain textbox for editing and we want to use a calendar.
+				The <code>yuiConfig</code> lets me specify in one go both that the node should be built as a DateNode and that the node should
+				be editable.  You can check it by double-clicking on it, the calendar will show up.</p>
+				<p>The tree below is created from the above markup with the following code:</p>
+<pre>YAHOO.util.Event.onDOMReady(function () {		
+   var tree = new YAHOO.widget.TreeView('bd');
+   tree.draw();
+   tree.subscribe('dblClickEvent',tree.onEventEditNode);
+});</pre>
+				
+			</div>
+			<div id="bd">
+				<ul>
+					<li class="expanded">
+						List 0
+						<ul>
+							<li>
+								List 0-0
+								<ul>
+									<li>item 0-0-0</li>
+									<li>item 0-0-1</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li yuiConfig='{"type":"menu"}'>
+						List 1
+						<ul>
+							<li>
+								<a target="other" href="#nowhere">list 1-0 with link</a>
+								<ul>
+									<li yuiConfig='{"type":"DateNode","editable":true}'>1/2/08</li>
+									<li>item 1-0-1</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+  

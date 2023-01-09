@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/assets/skins/sam/skin.css">
+	<style>
+		.yui-skin-sam .yui-module.yui-dt-editor {
+			padding:0;
+			text-align:left;
+		}
+		.yui-skin-sam .yui-panel .ft {
+			font-size:inherit;
+		}
+		fieldset.yui-dt-re-group {
+			border:thin solid silver;
+			padding:5px
+		}
+		.yui-dt-re-group legend {
+			padding:0 5px;
+			font-weight:bold;
+		}
+		.yui-dt-re-group label {
+			float:left;
+			font-weight:bold;
+			width:30%;
+		}
+		.yui-dt-re-field label {
+			float:none;
+			font-weight:normal;
+		}
+		td.row-edit .yui-dt-liner{
+			background: transparent url(edit-blue.gif) no-repeat;
+			width:14px;
+			padding:3px;
+		}
+		.ft {
+			padding:20px 0 0 0;
+		}
+	</style>
+    <title>Row Edit</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Row Edit</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p><i>This is purely experimental and unsupported.</i></p>
+			<p>In the table above editing has been enabled both at the cell level and row level.
+			Any cell can be clicked to pop up the cell editor.
+			Clicking the right-most cell allows for row editing.</p>
+			<p>The row editor uses the same content editors the cell editor uses, in fact,
+			it moves the DOM elements from the cell editor to the row editor and back.
+			There is no need to set a separate definition on how to build the form.
+			It will put all the fields that have a cell editor defined.
+			It will also follow the column header nesting and group the entry fields in the same way.</p>
+			<p>The format of the row editor panel is given by several templates:
+			<pre>rowEditorHead:                'Edit Row'
+
+rowEditorFieldTemplate:       '&lt;label for="{id}"&gt;{label}&lt;/label&gt;&lt;div class="'
+                              + YAHOO.widget.DataTable.ROW_EDITOR_FIELD_CLASS
+                              + '" id="{id}"&gt;&lt;/div&gt;'
+
+rowEditorGroupStartTemplate': '&lt;fieldset class="'
+                              + YAHOO.widget.DataTable.ROW_EDITOR_GROUP_CLASS
+                              + '"&gt;&lt;legend&gt;{label}&lt;/legend&gt;'
+
+rowEditorGroupEndTemplate:    '&lt;/fieldset&gt;'
+</pre>
+The identifiers enclosed in curly braces are placeholders handled with YAHOO.lang.substitute.
+Values for label and key, along an id made of the prefix YAHOO.widget.DataTable.ROW_EDITOR_ID ('yui-dt-re-') and the column key.
+The field and group templates, along with the global constants defining the classNames
+and the corresponding style definitions give plenty of flexibility.
+Element ids are also generated so they can be further used to tailor any particular section.
+</p>
+		</div>
+	</div>
+
+    <script src="http://yui.yahooapis.com/2.7.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript" >
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("datatable","container");
+
+	if (location.search.indexOf('logger') !== -1) {
+		loader.require('logger');
+	}
+	loader.insert({
+		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+
+			if (location.search.indexOf('logger') !== -1) {
+				var myLogReader = new YAHOO.widget.LogReader();
+			}
+			YAHOO.log('hello, I\'m the logger');
+
+			var Dom = YAHOO.util.Dom,
+				Event = YAHOO.util.Event,
+				Lang = YAHOO.lang,
+				DT = YAHOO.widget.DataTable,
+				log = function (msg) {
+					YAHOO.log(msg,'info','deleteRowsBy demo');
+				};
+
+
+			var myDataTable = function() {
+				myDataTable.superclass.constructor.apply(this,arguments);
+			};
+
+			DT.LABEL_SAVE = 'Save';
+			DT.LABEL_CANCEL = 'Cancel';
+			DT.ROW_EDITOR_ID = 'yui-dt-re-';
+			DT.ROW_EDITOR_GROUP_CLASS = 'yui-dt-re-group';
+			DT.ROW_EDITOR_FIELD_CLASS = 'yui-dt-re-field';
+
+			YAHOO.lang.extend(myDataTable,YAHOO.widget.DataTable, {
+				initAttributes: function (oConfigs) {
+					myDataTable.superclass.initAttributes.call(this,oConfigs);
+					this.setAttributeConfig('rowEditorHead', {
+						value:'Edit Row'
+					});
+					this.setAttributeConfig('rowEditorFieldTemplate', {
+						value:'<label for="{id}">{label}</label><div class="' + DT.ROW_EDITOR_FIELD_CLASS + '" id="{id}"></div>'
+					});
+					this.setAttributeConfig('rowEditorGroupStartTemplate', {
+						value:'<fieldset class="' + DT.ROW_EDITOR_GROUP_CLASS + '"><legend>{label}</legend>'
+					});
+					this.setAttributeConfig('rowEditorGroupEndTemplate', {
+						value:'</fieldset>'
+					});
+				},
+				_rowEditorContainer: null,
+				_rowEditorPanel: null,
+				_rowEditorOldContainers: null,
+				_rowEditorRecord: null,
+				LABEL_SAVE:null,
+				LABEL_CANCEL:null,
+				rowEditorSave: function() {
+					var	i, col, cols = this.getColumnSet().keys;
+					var values = {};
+					for (i = 0; i < cols.length;i++) {
+						col = cols[i];
+						if (col.editor) {
+							values[col.key] = col.editor.getInputValue();
+						}
+					}
+					var validator = this.get('rowValidator');
+					if (validator) {
+						values = validator(values);
+						if (values === undefined) {
+							this._rowEditorPanel.hide();
+						}
+					}
+					var oSelf = this;
+					var finishSave = function (ok,values) {
+						if (ok) {
+							oSelf.updateRow(oSelf._rowEditorRecord,Lang.merge(oSelf._rowEditorRecord.getData(),values));
+						}
+						oSelf.undisable();
+						oSelf._rowEditorPanel.hide();
+					};
+
+					var asyncSubmitter = this.get('asyncSubmitter');
+					this.disable();
+					if (Lang.isFunction(asyncSubmitter)) {
+						asyncSubmitter.call(this,finishSave,values);
+					} else {
+						finishSave(true,values);
+					}
+				},
+				rowEditorClose: function() {
+					var	i, col, cols = this.getColumnSet().keys,next;
+					for (i = 0; i < cols.length;i++) {
+						col = cols[i];
+						if (col.editor) {
+							var container = this._rowEditorOldContainers[col.key];
+							var el = Dom.get(DT.ROW_EDITOR_ID + col.key).firstChild;
+							while (el) {
+								next = el.nextSibling;
+								container.insertBefore(el,container.firstChild);
+								el = next;
+							}
+							col.editor._elContainer = container;
+						}
+					}
+
+				},
+				onEventEditRow: function (oArgs) {
+					var panel = this._rowEditorPanel,
+						record = this.getRecord(oArgs.target);
+					this._rowEditorRecord = record;
+					if (this._rowEditorOldContainers === null) {this._rowEditorOldContainers = {};}
+					if (panel === null) {
+						this._rowEditorContainer = document.body.appendChild(document.createElement('div'));
+						this._rowEditorContainer.className = DT.CLASS_EDITOR;
+						panel = new YAHOO.widget.Panel(this._rowEditorContainer,{width:Dom.getStyle(this.getTableEl(),'width')});
+						this._rowEditorPanel = panel;
+						panel.setHeader(this.get('rowEditorHead'));
+
+						var body = [], self = this;
+						var build = function (cols) {
+							var found = false;
+							for (var i = 0; i < cols.length;i++) {
+								var col = self.getColumn(cols[i].key);
+								var fillIn = {
+									label:col.label || col.key,
+									id:DT.ROW_EDITOR_ID + col.key,
+									key:col.key,
+									i:i
+								};
+								if (col.children) {
+									body.push(Lang.substitute(self.get('rowEditorGroupStartTemplate'), fillIn));
+									if (build(col.children)) {;
+										body.push(Lang.substitute(self.get('rowEditorGroupEndTemplate'), fillIn));
+										found = true;
+									} else {
+										body.pop();
+									}
+								} else {
+									if (col.editor) {
+										body.push(Lang.substitute(self.get('rowEditorFieldTemplate'),fillIn));
+										found = true;
+									}
+								}
+							}
+							return found;
+						};
+						build(this.getColumnSet().tree[0]);
+						panel.setBody(body.join(''));
+
+						var footer = document.createElement('div');
+						footer.className = DT.CLASS_BUTTON;
+
+						// Save button
+						var elSaveBtn = footer.appendChild(document.createElement("button"));
+						elSaveBtn.className = DT.CLASS_DEFAULT;
+						elSaveBtn.innerHTML = this.LABEL_SAVE || DT.LABEL_SAVE;
+						Event.addListener(elSaveBtn, "click", function(oArgs) {
+							this.rowEditorSave();
+						}, this, true);
+
+						// Cancel button
+						var elCancelBtn = footer.appendChild(document.createElement("button"));
+						elCancelBtn.innerHTML = this.LABEL_CANCEL || DT.LABEL_CANCEL;
+						Event.addListener(elCancelBtn, "click", this._rowEditorPanel.hide,this._rowEditorPanel,true);
+						panel.setFooter(footer);
+						panel.hideEvent.subscribe(this.rowEditorClose,this,true);
+					}
+					panel.cfg.queueProperty('context',[this.getNextTrEl(oArgs.target),'tl','tl']);
+					panel.render();
+					panel.show();
+					var i, cols = this.getColumnSet().keys, col;
+					for (i = 0; i < cols.length;i++) {
+						col = cols[i];
+						if (col.editor) {
+							col.editor.attach.call(col.editor,this,this.getTdEl({record:record,column:col}));
+                            if (!col.editor._elContainer) {
+                                col.editor.render();
+                            }
+							var el = col.editor._elContainer.firstChild,
+								container = Dom.get(DT.ROW_EDITOR_ID + col.key),
+								next;
+							while (el && !Dom.hasClass(el,DT.CLASS_BUTTON)) {
+								next = el.nextSibling;
+								container.appendChild(el);
+								el = next;
+							}
+							this._rowEditorOldContainers[col.key] = col.editor._elContainer;
+							col.editor._elContainer = container;
+							col.editor.show.call(col.editor);
+						}
+					}
+				}
+			});
+
+
+	        var dt = new myDataTable(
+				"container",
+				[
+		            {key:"Assorted", children:[
+		                {key:"Checkbox", sortable:true, resizeable:true,editor: new YAHOO.widget.CheckboxCellEditor({checkboxOptions:["red","green","blue"]})},
+		                {key:"Radio", sortable:true, resizeable:true,editor: new YAHOO.widget.RadioCellEditor({radioOptions:['yes','no','maybe']})},
+		                {key:"Dropdown", sortable:true, resizeable:true,editor: new YAHOO.widget.DropdownCellEditor({dropdownOptions:['yes','no','maybe']})},
+		                {key:"Today", formatter:'date',sortable:true, resizeable:true,editor: new YAHOO.widget.DateCellEditor()}
+		            ]},
+		            {key:"Text", children:[
+		                {key:"Item", sortable:true, className:"myClass",resizeable:true,editor: new YAHOO.widget.TextboxCellEditor()},
+		                {key:"Description", sortable:true, width:200, minWidth:200, resizeable:true,editor: new YAHOO.widget.TextareaCellEditor()}
+		            ]},
+					{key:"rowEditor",label:" ",className:'row-edit'}
+		        ],
+                new YAHOO.util.DataSource(
+					[
+						{Checkbox:"blue",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+						{Checkbox:"red",Radio:'yes',Dropdown:'yes',Today:new Date(), Item:"Football", Description:"Leather football."},
+						{Checkbox:"green",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Goggles", Description:"Light blue swim goggles"},
+						{Checkbox:"red",Radio:'no',Dropdown:'yes',Today:new Date(), Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+						{Checkbox:"blue",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+						{Checkbox:"blue",Radio:'no',Dropdown:'no',Today:new Date(), Item:"Snowboard", Description:""},
+						{Checkbox:"red",Radio:'yes',Dropdown:'yes',Today:new Date(), Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+						{Checkbox:"green",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Volleyball", Description:""},
+						{Checkbox:"red",Radio:'no',Dropdown:'no',Today:new Date(), Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+						{Checkbox:"blue",Radio:'yes',Dropdown:'yes',Today:new Date(), Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+						{Checkbox:"green",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+						{Checkbox:"green",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+						{Checkbox:"red",Radio:'no',Dropdown:'yes',Today:new Date(), Item:"Ping Pong Ball", Description:""},
+						{Checkbox:"red",Radio:'yes',Dropdown:'no',Today:new Date(), Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+					],
+					{
+						responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+						responseSchema: {
+							fields: ["Checkbox","Radio","Dropdown","Today","Item","Description"]
+						}
+					}
+				),
+				{
+					dateOptions:"%D"
+				}
+			);
+
+			dt.on('cellClickEvent',function(oArgs) {
+				var col = this.getColumn(oArgs.target);
+				if (col.key == "rowEditor") {
+					this.onEventEditRow.apply(this,arguments);
+				} else {
+					this.onEventEditCell.apply(this,arguments);
+				}
+			});
+		}
+	}, 'js');
+})();
+
+</script>
+</body>
+</html>

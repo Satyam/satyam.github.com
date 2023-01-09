@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>js&#x2F;celleditor-base.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Base.html">DataTable.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.html">DataTable.BaseCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.KeyFiltering.html">DataTable.BaseCellEditor.KeyFiltering</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellInlineEditor.html">DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellPopupEditor.html">DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.html">DataTable.BodyView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.InputFormatters.html">DataTable.BodyView.InputFormatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.ColumnWidths.html">DataTable.ColumnWidths</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Core.html">DataTable.Core</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editable.html">DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editors.html">DataTable.Editors</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.HeaderView.html">DataTable.HeaderView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Message.html">DataTable.Message</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Mutable.html">DataTable.Mutable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Scrollable.html">DataTable.Scrollable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Sortable.html">DataTable.Sortable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.TableView.html">DataTable.TableView</a></li>
+            
+                <li><a href="..&#x2F;classes/Plugin.DataTableDataSource.html">Plugin.DataTableDataSource</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-base.html">datatable-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-body.html">datatable-body</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-base.html">datatable-celleditor-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-inline.html">datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-keyfiltering.html">datatable-celleditor-keyfiltering</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-column-widths.html">datatable-column-widths</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-core.html">datatable-core</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-datasource.html">datatable-datasource</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-editable.html">datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-formatters.html">datatable-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-head.html">datatable-head</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-input-formatters.html">datatable-input-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-message.html">datatable-message</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-mutable.html">datatable-mutable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-scroll.html">datatable-scroll</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-sort.html">datatable-sort</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-table.html">datatable-table</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js&#x2F;celleditor-base.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+Provides the base services for cell editors. This class is meant to be subclassed
+by actual implementations of cell editors
+@module datatable
+@submodule datatable-celleditor-base
+*&#x2F;
+
+&#x2F;*jshint onevar:false*&#x2F;
+var returnUnchanged = function (value) {
+        Y.log(&#x27;(private) returnUnchanged: &#x27; + value);
+        return value;
+    },
+    KEYC_ESC = 27,
+    KEYC_ENTER = 13,
+    KEYC_TAB = 9,
+    KEYC_UP  = 38,
+    KEYC_DOWN  = 40,
+    KEYC_RIGHT  = 39,
+    KEYC_LEFT  = 37,
+&#x2F;**
+@class DataTable.BaseCellEditor
+@extends Y.View
+@author Todd Smith
+@since 3.8.0
+*&#x2F;
+
+BCE =  Y.Base.create(&#x27;celleditor&#x27;, Y.View, [], {
+
+&#x2F;*jshint onevar:true*&#x2F;
+    &#x2F;**
+    Defines the INPUT HTML content &quot;template&quot; for the editor&#x27;s View container.
+
+    To be defined by the subclass.
+
+    @property template
+    @type String
+    @default &#x27;&#x27;
+    *&#x2F;
+    template: &#x27;&#x27;,
+
+    &#x2F;**
+    Placeholder for the input or textarea Node created within the View container.
+    For input widgets that don&#x27;t have any, such as Calendar, this can be left null.
+    In such cases, code must be provided for navigation and to display and update
+    the [value](#attr_value) attribute with the entered value.
+
+    @property _inputNode
+    @type Node
+    @default null
+    @protected
+    *&#x2F;
+    _inputNode: null,
+
+    &#x2F;**
+    Array of generic event listener handles created by this class to be
+    detached on destruction.
+
+    @property _subscr
+    @type [EventHandles]
+    @default null
+    @protected
+    *&#x2F;
+    _subscr:        null,
+
+
+
+    &#x2F;**
+    Copy of the [formatter](#attr_formatter) attribute for internal use.
+    @method _formatter
+    @type Function
+    @default (returns value unchanged)
+    @private
+    *&#x2F;
+   _formatter: returnUnchanged,
+
+    &#x2F;**
+    Copy of the [parser](#attr_parser) attribute for internal use.
+    @method _parser
+    @type Function
+    @default (returns value unchanged)
+    @private
+    *&#x2F;
+   _parser: returnUnchanged,
+
+   &#x2F;**
+    Collection of information related to the cell being edited.
+    It is used mostly to provide context information when firing events.
+    @property _cellInfo
+    @type Object
+    @default null
+    @private
+    *&#x2F;
+   _cellInfo: null,
+
+   &#x2F;**
+   CSS class name to add to an input box when it fails validation.
+   @property _classError
+   @type String
+   @default &quot;yui3-datatable-celleditor-error&quot;
+   @private
+   *&#x2F;
+   _classError: &#x27;yui3-datatable-celleditor-error&#x27;,
+
+
+    &#x2F;**
+    Creates the View instance and sets the container and bindings
+
+    @method initializer
+    @protected
+    *&#x2F;
+    initializer: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor.initializer&#x27;);
+        this._subscr = [];
+        this.publish({
+            &#x2F;**
+            Event fired when the inline editor has been initialized and is ready for use.
+
+            @event render
+            *&#x2F;
+            render: {
+                defaultFn: this._defRenderFn
+            },
+
+            &#x2F;**
+            Event fired when the cell editor is displayed and becomes visible.
+            @event show
+            @param ev {EventFacade} Event Facade including:
+            @param ev.td {Node} The TD Node that was edited
+            @param ev.record {Model} Model instance of the record data for the edited cell
+            @param ev.colKey {String} Column key (or name) of the edited cell
+            @param ev.initialValue {Any} The original value of the underlying data for the cell
+            @param ev.inputNode {Node} The editor&#x27;s INPUT &#x2F; TEXTAREA Node
+            @param ev.formattedValue {String} The value as shown to the user.
+            *&#x2F;
+
+            show: {
+                defaultFn: this._defShowFn
+            },
+
+            &#x2F;**
+            Event that is fired when the user has finished editing the View&#x27;s cell contents
+
+            @event save
+            @param ev {Object} Event facade, including:
+            @param ev.td {Node} The TD Node that was edited
+            @param ev.record {Model} Model instance of the record data for the edited cell
+            @param ev.colKey {String} Column key (or name) of the edited cell
+            @param ev.initialValue {Any} The original value of the underlying data for the cell
+            @param ev.formattedValue {Any} Data value as entered by the user
+            @param ev.newValue {Any} Parsed value ready to be saved
+            *&#x2F;
+            save: {
+                defaultFn: this._defSaveFn
+            },
+
+            &#x2F;**
+            Fired when editing is cancelled (without saving) on this cell editor.
+
+            @event cancel
+            @param ev {Object}  Event facade, including:
+            @param ev.td {Node} The TD Node that was edited
+            @param ev.record {Model} Model instance of the record data for the edited cell
+            @param ev.colKey {String} Column key (or name) of the edited cell
+            @param ev.initialValue {Any} The original value of the underlying data for the cell
+            *&#x2F;
+            cancel: {
+                defaultFn: this._defCancelFn
+            }
+        });
+
+    },
+
+    &#x2F;**
+    @method destructor
+    @protected
+    *&#x2F;
+    destructor: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor.destructor&#x27;);
+        if (this.get(&#x27;active&#x27;)) {
+            this.cancelEditor();
+        }
+        this._unbindUI();
+        this._destroyContainer();
+    },
+
+    &#x2F;**
+    Renders the editor and binds several event listeners.
+    Developers writing specific cell editors should not override this method
+    but [_defRenderFn](#method__defRenderFn) instead.
+
+    @method render
+    @chainable
+    *&#x2F;
+    render: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor.render&#x27;);
+        this.fire(&#x27;render&#x27;);
+        this._bindUI();
+        return this;
+    },
+
+    &#x2F;**
+    It should insert the HTML for this editor into the container.
+    The default implementation does nothing.
+
+    It must be defined by the subclass.
+
+    If a particular cell editor has an input or textarea control,
+    a reference to it should be stored in the [_inputNode](#property__inputNode)
+    property to enable keyboard navigation, setting and updating the value and
+    a few other actions.
+
+    @method _defRenderFn
+    @protected
+    *&#x2F;
+    _defRenderFn: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor._defRenderFn&#x27;);
+
+    },
+
+    &#x2F;**
+    Sets the event listeners.
+    If [_inputNode](#property__inputNode) is set it will also set listeners for it.
+
+    @method _bindUI
+    @private
+    *&#x2F;
+    _bindUI: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor._bindUI&#x27;);
+
+        var input = this._inputNode,
+            subscr;
+
+        subscr = [
+            &#x2F;&#x2F; This is here to support &quot;scrolling&quot; of the underlying DT ...
+            this.after(&#x27;xyChange&#x27;,this._afterXYChange),
+            this.after(&#x27;visibleChange&#x27;, this._afterVisibleChange)
+        ];
+
+        if (input) {
+            subscr.push(
+
+                input.on(&#x27;keydown&#x27;,    this._onKeyDown, this),
+                input.on(&#x27;click&#x27;,      this._onClick, this)
+            );
+        }
+        this._subscr.push(subscr);
+    },
+
+    &#x2F;**
+    Detaches all event listeners.
+
+    @method _unbindUI
+    @private
+    *&#x2F;
+    _unbindUI: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor._unbindUI&#x27;);
+        arrEach(this._subscr, function(e){
+            if(e &amp;&amp; e.detach) {
+                e.detach();
+            }
+        });
+        this._subscr = null;
+    },
+
+    &#x2F;**
+    The default action for the [save](#event_save) event.
+
+    @method _defSaveFn
+    @param e {EventFacade} For [save](#event_save) event
+    @private
+    *&#x2F;
+    _defSaveFn: function (e) {
+        Y.log(&#x27;DataTable.BaseCellEditor._defSaveFn&#x27;);
+        this.set(&#x27;value&#x27;, e.newValue);
+        this.hideEditor();
+    },
+
+    &#x2F;**
+    The default action for the [cancel](#event_cancel) event.
+
+    @method _defCancelFn
+    @private
+    *&#x2F;
+    _defCancelFn: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor._defCancelFn&#x27;);
+        this.hideEditor();
+    },
+
+    &#x2F;**
+    The default action for the [show](#event_show) event which should make the editor visible.
+
+    The default implementation expects [_inputNode](#property__inputNode) to be
+    a reference to an input or textarea with a &#x60;focus&#x60; method and a &#x60;value&#x60; attribute.
+
+    @method _defShowFn
+    @param e {EventFacade} for the [show](#event_show) event.
+    @protected
+    *&#x2F;
+    _defShowFn: function (e) {
+        Y.log(&#x27;DataTable.BaseCellEditor._defShowFn&#x27;);
+        var value = e.formattedValue,
+            input = this._inputNode;
+
+        if (input) {
+            input.focus();
+            input.set(&#x27;value&#x27;,value);
+        }
+
+        this._set(&#x27;active&#x27;, true);
+    },
+
+
+    &#x2F;**
+    Displays, positions and resizes the cell editor over the edited TD element.
+
+    Sets the initial value after formatting.
+
+    @method showEditor
+    @param cellInfo {Object} Information about the cell that is to be edited, including:
+    @param cellInfo.td {Node} Reference to the table cell
+    @param cellInfo.record {Model} Reference to the model containing the underlying data
+    @param cellInfo.colKey {String} Key of the column for the cell to be edited
+    @param cellInfo.initialValue {Any} The underlying value of the cell to be edited
+    @public
+    *&#x2F;
+    showEditor: function (cellInfo) {
+        Y.log(&#x27;DataTable.BaseCellEditor.showEditor&#x27;);
+
+        this._cellInfo = cellInfo;
+
+        var value  = cellInfo.initialValue;
+
+        this.set(&#x27;value&#x27;, value);
+
+        value = this._formatter(value);
+
+        this.fire(&#x27;show&#x27;, Y.merge(cellInfo, {
+            inputNode:  this._inputNode,
+            formattedValue: value
+        }));
+
+    },
+    &#x2F;**
+    Saves the value provided after validating and parsing it.
+
+    @method saveEditor
+    @param value {Any} Raw value (not yet parsed) to be saved.
+    @public
+    *&#x2F;
+    saveEditor: function (value) {
+        Y.log(&#x27;DataTable.BaseCellEditor.saveEditor: &#x27; + value);
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F;  Only save the edited data if it is valid ...
+        &#x2F;&#x2F;
+        var validator = this.get(&#x27;validator&#x27;), parsedValue;
+        if(validator instanceof RegExp ? validator.test(value) : true) {
+
+            &#x2F;&#x2F; If a &quot;save&quot; function was defined, run thru it and update the &quot;value&quot; setting
+            parsedValue = this._parser(value);
+
+            &#x2F;&#x2F; So value was initially okay, but didn&#x27;t pass _parser validation call ...
+            if (parsedValue === Y.Attribute.INVALID_VALUE) {
+                this.cancelEditor();
+                return;
+            }
+
+            this.fire(&quot;save&quot;, Y.merge(this._cellInfo, {
+                formattedValue:   value,
+                newValue:   parsedValue
+            }));
+        } else {
+            this.get(&#x27;container&#x27;).addClass(this._classError);
+        }
+    },
+
+    &#x2F;**
+    Hides the current editor View instance.
+    @method hideEditor
+    @public
+    *&#x2F;
+    hideEditor: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor.hideEditor&#x27;);
+        var cont  = this.get(&#x27;container&#x27;);
+        if(cont &amp;&amp; cont.hide) {
+            cont.hide();
+        }
+        cont.removeClass(this._classError);
+
+        this._cellInfo = null;
+        this._set(&#x27;active&#x27;, false);
+    },
+
+
+    &#x2F;**
+    Called when the user has requested to cancel and abort any changes to the DT cell,
+    usually signified by a keyboard ESC or &quot;Cancel&quot; button, etc..
+
+    @method cancelEditor
+    @public
+    *&#x2F;
+    cancelEditor: function () {
+        Y.log(&#x27;DataTable.BaseCellEditor.cancelEditor&#x27;);
+
+        this.fire(&quot;cancel&quot;, this._cellInfo);
+    },
+
+
+    &#x2F;**
+    Key listener for the input element &#x60;keydown&#x60; event.
+    It handles navigation, Enter or Esc.
+    It is automatically attached if [_inputNode](#property__inputNode) is set.
+
+    @method _onKeyDown
+    @param e {EventFacade} Keydown event facade
+    @protected
+    *&#x2F;
+    &#x2F;**
+    Fires when the navigation keys are pressed to move to another cell.
+    @event keyNav
+    @param e {EventFacade} event facade including:
+    @param e.dx {Integer} number of cells to move in the x direction. (usually -1: left, 0 or 1: right)
+    @param e.dy {Integer} number of cells to move in the y direction. (usually -1: up, 0 or 1: down)
+    *&#x2F;
+    _onKeyDown : function (e) {
+        Y.log(&#x27;DataTable.BaseCellEditor._onKeyDown&#x27;);
+        var keyc = e.keyCode,
+            dx = 0, dy = 0;
+
+        switch(keyc) {
+            case KEYC_ENTER:
+                if (this.get(&#x27;saveOnEnterKey&#x27;)) {
+                    e.preventDefault();
+                    this.saveEditor(e.target.get(&#x27;value&#x27;));
+                    return;
+                }
+                break;
+            case KEYC_ESC:
+                e.preventDefault();
+                this.cancelEditor();
+                return;
+        }
+        if(this.get(&#x27;navigationEnabled&#x27;)) {
+            switch(keyc) {
+                case KEYC_UP:
+                    dy = (e.ctrlKey) ? -1 : 0;
+                    break;
+
+                case KEYC_DOWN:
+                    dy = (e.ctrlKey) ? 1 : 0;
+                    break;
+
+                case KEYC_LEFT:
+                    dx = (e.ctrlKey) ? -1 : 0;
+                    break;
+
+                case KEYC_RIGHT:
+                    dx = (e.ctrlKey) ? 1 : 0;
+                    break;
+
+                case KEYC_TAB: &#x2F;&#x2F; tab
+                    dx = (e.shiftKey) ? -1 : 1;
+                    break;
+            }
+
+            if(dx || dy) {
+                this.fire(&#x27;keyNav&#x27;, {dx:dx, dy:dy});
+                e.preventDefault();
+            }
+        }
+    },
+
+
+
+    &#x2F;**
+    Listener to INPUT &quot;click&quot; events that will stop bubbling to the DT TD listener,
+    to prevent closing editing while clicking within an INPUT.
+
+    @method _onClick
+    @param e {EventFacade}
+    @private
+    *&#x2F;
+    _onClick: function(e) {
+        Y.log(&#x27;DataTable.BaseCellEditor._onClick&#x27;);
+        e.stopPropagation();
+    },
+
+    &#x2F;**
+    Event listener for the [xy](#attr_xy) change event.
+    It can be used to quickly reset the cell editor&#x27;s position,
+    used for scrollable DataTables.
+
+    To be implemented by the subclasses.
+
+    @method _afterXYChange
+    @param e {EventFacade} Standard attribute change event facade
+    @protected
+    *&#x2F;
+    _afterXYChange: function() {
+        Y.log(&#x27;DataTable.BaseCellEditor._afterXYChange&#x27;);
+    },
+
+    &#x2F;**
+    Responds to changes in the [visible](#attr_visible) attribute by showing&#x2F;hiding the
+    cell editor
+    @method _afterVisibleChange
+    @param e {EventFacade} Standard Attribute change event facade
+    @private
+    *&#x2F;
+   _afterVisibleChange: function (e) {
+        var container  = this.get(&#x27;container&#x27;);
+        if(container) {
+            if (e.newVal) {
+                container.show();
+            } else {
+                container.hide();
+            }
+        }
+   }
+},{
+    ATTRS:{
+
+
+
+        &#x2F;**
+        Value being edited.  It should be a copy of the value stored in the record.
+
+        @attribute value
+        @type Any
+        @default null
+        *&#x2F;
+        value: {
+            value:  null
+        },
+
+
+        &#x2F;**
+        Function to execute on the [value](#attr_value) just prior to displaying in the
+        editor&#x27;s input element.
+        (i.e. typically used for pre-formatting Date information from JS to mm&#x2F;dd&#x2F;YYYY format)
+
+        This function will receive the value from the record as its only argument
+        and should return the formatted version to be shown to the user.
+
+        @attribute formatter
+        @type Function || null
+        @default null
+        *&#x2F;
+        formatter: {
+            value: returnUnchanged,
+            lazyAdd: false,
+            setter: function (formatter) {
+                this._formatter =  (typeof formatter === &#x27;function&#x27;) ? formatter : returnUnchanged;
+                return formatter;
+            }
+        },
+
+        &#x2F;**
+        Function to execute prior to saving the data to the record (Model).
+
+        This function will receive the raw value from the INPUT element as
+        its only argument and should return the value to be stored in the record.
+
+        This method can also be used for input validation prior to saving.
+        If the returned value is &#x60;Y.Attribute.INVALID_VALUE&#x60; saving will be prevented.
+
+        @attribute parser
+        @type Function
+        @default null
+        *&#x2F;
+        parser:{
+            value: returnUnchanged,
+            lazyAdd: false,
+            setter: function (parser) {
+                this._parser =  (typeof parser === &#x27;function&#x27;) ? parser : returnUnchanged;
+                return parser;
+            }
+        },
+
+
+        &#x2F;**
+        Signals whether the editor is open and active.
+
+        @attribute active
+        @type Boolean
+        @default false
+        @readOnly
+        *&#x2F;
+        active: {
+            value:      false,
+            readOnly:   true,
+            validator:  Lang.isBoolean
+        },
+
+        &#x2F;**
+        Determines whether the cell editor is visible.
+
+        The cell editor might be [active](#attr_active) but it might have scrolled off the
+        visible area of an scrolling datatable hence turning invisible.
+
+        @attribute visible
+        @type Boolean
+        @default false
+        *&#x2F;
+        visible: {
+            value: false,
+            validator: Lang.isBoolean
+        },
+
+
+        &#x2F;**
+        XY coordinate position of the editor View container (INPUT).
+
+        @attribute xy
+        @type Array
+        @default null
+        *&#x2F;
+        xy : {
+            value:      null,
+            validator:  Lang.isArray
+        },
+
+
+        &#x2F;**
+        Provides the capability to validate the final value to be saved after editing is finished.
+        This attribute can be a RegEx that operates on the entire
+        &#x60;value&#x60; setting of the editor input element.
+
+        Further validation can be provided by the method set in the [parser](#attr_parser)
+        attribute.
+        &#x2F;&#x2F;TODO: shouldn&#x27;t they be enclosed in between $ and ^ ?
+
+        @example
+             &#x2F;\d&#x2F;            &#x2F;&#x2F; for numeric digit-only input
+             &#x2F;\d|\-|\.|\+&#x2F;   &#x2F;&#x2F; for floating point numeric input
+             &#x2F;\d|\&#x2F;&#x2F;         &#x2F;&#x2F; for Date field entry in MM&#x2F;DD&#x2F;YYYY format
+
+        @attribute validator
+        @type RegExp
+        @default null
+        *&#x2F;
+        validator: {
+            value:      null
+        },
+
+        &#x2F;**
+        A flag to signify whether the editor View should be &quot;saved&quot; upon detecting the Enter keystroke
+        within the INPUT area.
+
+        For example, textarea typically will not, to allow a newline to be added.
+
+        @attribute saveOnEnterKey
+        @type boolean
+        @default true
+        *&#x2F;
+        saveOnEnterKey: {
+            value:      true,
+            validator:  Lang.isBoolean
+        },
+        &#x2F;**
+        A flag to indicate if cell-to-cell navigation should be implemented (currently setup for CTRL-arrow
+        key, TAB and Shift-TAB) capability
+        @attribute navigationEnabled
+        @type Boolean
+        @default true
+        *&#x2F;
+        navigationEnabled:{
+            value:      true,
+            validator:  Lang.isBoolean
+        }
+
+
+    }
+
+
+
+});
+Y.DataTable.BaseCellEditor = BCE;
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

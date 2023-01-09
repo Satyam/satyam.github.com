@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Button test</title>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.5.0pr1/build/yui/yui.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0pr1/build/cssreset/reset-min.css&3.5.0pr1/build/cssfonts/fonts-min.css&3.5.0pr1/build/cssbase/base-min.css&3.5.0pr1/build/cssgrids/grids-min.css" />
+        <link rel="stylesheet" type="text/css" href="cssbutton.css" />
+
+
+    </head>
+    <body class="yui3-skin-sam">
+        <div id="toolbar">
+            <button id="toggle0" class="yui3-button yui3-button-toggle">toggle</button> |
+            <button id="regular" class="yui3-button">normal button</button> |
+            <span id="group" class="yui3-button-group-exclusive">
+                <button id="toggle1" class="yui3-button yui3-button-toggle">1</button>
+                <button id="toggle2" class="yui3-button yui3-button-toggle">2</button>
+                <button id="toggle3" class="yui3-button yui3-button-toggle">3</button>
+
+            </span> |
+			<select id="select">
+				<option>one</option>
+				<option>two</option>
+				<option>three</option>
+				<option>four</option>
+			</select>
+        </div>
+        <script type="text/javascript" >
+            YUI({
+                filter:'raw'
+            }).use('node','event','console', function (Y) {
+                "use strict";
+                
+				
+				new Y.Console().render();
+                var C_BUTTON = 'yui3-button',
+                C_TOGGLE = C_BUTTON + '-toggle',
+                C_SELECTED = C_BUTTON + '-selected',
+                C_EXCLUSIVE = C_BUTTON + '-group-exclusive',
+                SELECTED = 'selected',
+                CLICK = 'click',
+                TOGGLE_BUTTON_SELECTOR = 'button.' + C_TOGGLE,
+                ARIA_PRESSED = 'aria-pressed';
+                    
+                /*
+                 * This is a patch for Node.  It is analogous to what get has.
+				 * There is get and then there is _get.  Here I'm doing the same for set.
+                 * If it has a custom _setAttr, it calls it, otherwise does the standard thing.
+                 * Method get does exactly this. This patch is modeled after that one.
+                 * 
+                 */    
+                Y.Node.prototype.set =  function(attr, val) {
+
+                    if (this._setAttr) { // use Attribute imple
+                        this._setAttr.apply(this, arguments);
+                    } else { // use setters inline
+                        this._set(attr, val);
+                    }
+
+                    return this;
+                };
+                
+                Y.Node.prototype._set = function (attr, val) {
+                    var attrConfig = Y.Node.ATTRS[attr];
+                    if (attrConfig && attrConfig.setter) {
+                        attrConfig.setter.call(this, val, attr);
+                    } else if (Y.Node.re_aria.test(attr)) { // special case Aria
+                        this._node.setAttribute(attr, val);
+                    } else {
+                        Y.Node.DEFAULT_SETTER.apply(this, arguments);
+                    }
+                    
+                };
+                
+                /* End of patch */
+     
+    
+                /*
+                 * This is the code for my suggested button.  
+                 * It adds a 'selected' property to both a toggle button and to an exclusive button group.
+                 * The 'selected' property makes no sense on a button group which either has no exclusivity amongst its buttons
+                 * since more than one can be selected at once not if it has no toggle buttons.
+                 * 
+                 * A toggle button is recognized as any button having the 'yui3-button-toggle' className.
+                 * An exclusive button group is recognized as any HTML element having the 'yui3-button-group-exclusive' className.
+                 * 
+                 * For a toggle button, the selected property is boolean indicating whether the button is pressed.
+                 * For a button group, it sets/gets the button currently selected.   When setting a selected button
+                 * you can provide a reference to a button or a selector.  Passing null means none is selected.
+                 * I have not dealt with button groups with a mandatory selected button.  
+                 * An extra className set on the container for the button group would be enough to signal such a button group.
+                 * 
+                 * The only public method is the static addToggles which takes a container and it will search within it
+                 * for all elements with suitable classNames.
+                 */
+                var btn = function() {
+                };
+
+
+
+                btn._addToggle = function (node) {
+                    var oldGetAttr = node._getAttr,
+                        oldSetAttr = node._setAttr;
+
+                    node._toggleSelected = false;
+                    node.set(ARIA_PRESSED, false);
+                    node._getAttr = function (attr) {
+                        if (attr === SELECTED) {
+                            return node._toggleSelected;
+                        } else  if (oldGetAttr) {
+                            return oldGetAttr.apply(node, arguments);
+                        } else {
+                            return node._get(attr);
+                        }
+                    };
+                    node._setAttr = function (attr, value) {
+                        if (attr === SELECTED) {
+                            node._toggleSelected = value;
+                            node.set(ARIA_PRESSED, value);
+                            if(value) {
+                                node.addClass(C_SELECTED);
+                            } else {
+                                node.removeClass(C_SELECTED);
+                            }
+                        } else  if (oldSetAttr) {
+                            return oldSetAttr.apply(node, arguments);
+                        } else {
+                            return node._set(attr, value);
+                        }
+                    };
+                    node.on(CLICK, function () {
+                        this.set(SELECTED, !this.get(SELECTED));
+                    });
+
+                };
+                btn._addButtonGroup = function (node) {
+                    var oldGetAttr = node._getAttr,
+                        oldSetAttr = node._setAttr;
+
+                    node._selectedToggle = false;
+                    
+                    node._getAttr = function (attr) {
+                        if (attr === SELECTED) {
+                            return node._selectedToggle;
+                        } else  if (oldGetAttr) {
+                            return oldGetAttr.apply(node, arguments);
+                        }
+                    };
+                    node._setAttr = function (attr, value) {
+                        var target = null;
+                        if (attr === SELECTED) {
+                            
+                            if (value) {
+                                target = Y.one(value);
+                                target.set(SELECTED,true);
+                                this._selectedToggle = (target.get(SELECTED)?target:null);
+                            } else {
+                                this._selectedToggle = null;
+                            }
+                                
+                            this.all(TOGGLE_BUTTON_SELECTOR).each(function (node) {
+                                if (node !== target) {
+                                    node.set(SELECTED, false);
+                                }
+                            });
+                        } else  if (oldSetAttr) {
+                            return oldSetAttr.apply(node, arguments);
+                        }
+                    };
+
+
+                    node.delegate(CLICK, function(ev) {
+                        ev.container.set(SELECTED, ev.target);
+                    },'.' + C_TOGGLE);
+                };
+
+                btn.addToggles = function (container) {
+                    container = Y.one(container);
+                    container.all(TOGGLE_BUTTON_SELECTOR).each(btn._addToggle);
+                    container.all('.' + C_EXCLUSIVE).each(btn._addButtonGroup);
+                };
+
+
+                Y.Button = btn;                
+                
+                /* end of Y.Button */
+    
+                /*
+                 * usage examples below:
+                 */
+    
+                Y.Button.addToggles('#toolbar');
+                
+                var t1 = Y.one('#toggle0');
+                
+                t1.on(CLICK, function (){
+                    Y.log('click on 0, selected: '  + this.get(SELECTED));
+                });
+
+                Y.log('before 0, selected: ' + t1.get(SELECTED));
+                t1.set(SELECTED,true);
+                Y.log('after 0, selected: ' +t1.get(SELECTED));
+                
+				// Select the second button
+                Y.one('#group').set(SELECTED,'#toggle2');
+                
+                Y.delegate(CLICK, function(ev) {
+                    Y.log('group click, selected: ' + ev.container.get(SELECTED).getContent());
+                },'#group', TOGGLE_BUTTON_SELECTOR);
+                
+                window.setTimeout(function() {
+					// unselect it
+                    Y.one('#group').set(SELECTED,null);
+                },3000);
+                 
+				// This has no effect on the regular button 
+                Y.one('#regular').set(SELECTED,true);
+				// The return is undefined
+                Y.log('regular button has no selected: ' + Y.one('#regular').get(SELECTED));
+				
+				// The regular 'selected' attribute works fine with other nodes
+				Y.one('#select').get('children').item(2).set(SELECTED,true);
+            });
+        </script>
+    </body>
+</html>

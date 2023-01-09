@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Making one cell depend on another</title>
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+
+	</head>
+	<body class="yui-skin-sam">
+		<div id="doc" class="yui-t3"> 
+			<div id="hd">
+				<h1>Making one cell depend on another</h1>
+			</div>
+			<div id="bd"></div>
+			<div id="ft">
+				<p>The left hand side cell is editable, you can click on it and enter any number.  
+				The right hand side column is 5 units more than the first one.</p>
+			</div>
+		</div>
+	
+	
+<script type="text/javascript">
+
+(function () {
+    var loader = new YAHOO.util.YUILoader();
+    loader.loadOptional = true;
+    loader.require("reset-fonts-grids","base","datatable");
+    loader.insert({
+        onSuccess: function() {
+            //shortcuts
+            var DT = YAHOO.widget.DataTable;
+			
+			// This method is added to the DataTable normal methods.  
+			// It recalculates all the cells in a row
+			DT.prototype.refreshRow = function(row) {
+				var Dom = YAHOO.util.Dom;
+				Dom.batch(Dom.getChildren(this.getTrEl(row)),
+					function(el) {
+						this.formatCell(el.firstChild);
+					},this,true
+				);
+			};           
+
+			// This is the DataTable
+            var dt = new DT(
+                'bd',
+                [	
+					{
+	                    key:'firstNum',label:'Editable Cell',
+	                    formatter:DT.formatNumber,
+						// The cell editor is set to return a number.  
+						// If this is not added, the value will be stored as a string and the 5 appended, not added, to the string.
+	                    editor: new YAHOO.widget.TextboxCellEditor({validator:function(value) {
+							value = parseFloat(value);
+							if (YAHOO.lang.isNumber(value)) { return value; }
+						}})
+	                },
+					// There is no field value coming from the DataSource, this cell is made up.
+					// It requires a formatter
+	                {key:'secondNum',label:'Calculated cell', 
+						// This is the formatter which fill in the cell based on the values of the first cell
+						formatter:function(elCell, oRecord, oColumn){
+							elCell.innerHTML = oRecord.getData("firstNum") + 5;
+						}
+					}                    
+                ],
+				new YAHOO.util.DataSource(
+                    [
+						// Just one value for the first column of the single row
+						{firstNum:12}
+					],
+                    {
+						responseType:YAHOO.util.DataSource.TYPE_JSARRAY,
+						responseSchema: {fields:['firstNum']}
+					}
+				)
+            );
+               
+            dt.subscribe('cellClickEvent', dt.onEventShowCellEditor);
+			
+			// In response to the editorSaveEvent we force a recalculation of other field
+            dt.subscribe('editorSaveEvent',function(oArgs) {
+// either:
+				// We either refresh all the row, including the field just entered and those not affected
+				this.refreshRow(oArgs.editor.getTdEl());
+//	or:
+				// We specifically refresh the calculated cell.
+				// The way to reference the cell is highly dependent on the layout of the DataTable
+				// If the cell is further to the right, there would be more nextSibling.nextSibling.nextSibling .....
+//				this.formatCell(oArgs.editor.getTdEl().nextSibling.firstChild);
+			});
+        }
+    });
+})();
+
+</script>
+</body>
+</html>

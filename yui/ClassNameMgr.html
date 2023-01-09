@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.8.0/build/yui/yui.js"></script>
+    </head>
+    <body class="yui3-skin-sam">
+        <div id="dt1"></div>
+        <hr/>
+        <div id="dt2"></div>
+        <hr/>
+        <div id="dt3"></div>
+        <hr/>
+        <div id="dt4"></div>
+        <hr/>
+        <p>Regular slider</p>
+        <div id="sl1"></div>
+        <hr/>
+        <p>Subclassed slider with its own NAME</p>
+        <div id="sl2"></div>
+        <hr/>
+        <p>Subclassed slider with its own NAME and CSS_PREFIX: 'yui3-slider'</p>
+        <div id="sl3"></div>
+        <hr/>
+        <p>Regular TabView</p>
+        <div id="tb1"></div>
+        <hr/>
+        <p>Subclassed TabView with its own NAME</p>
+        <div id="tb2"></div>
+        <hr/>
+        <script>
+            // Create a new YUI instance and populate it with the required modules.
+            YUI().use('datatable','slider','tabview', 'base-build', function (Y) {
+                // Columns must match data object property names
+                var data = [
+                    { id: "ga-3475", name: "gadget",   price: "$6.99", cost: "$5.99" },
+                    { id: "sp-9980", name: "sprocket", price: "$3.75", cost: "$3.25" },
+                    { id: "wi-0650", name: "widget",   price: "$4.25", cost: "$3.75" }
+                ];
+
+                (new Y.DataTable({
+                    columns: ["id", "name", "price"],
+                    data: data,
+
+                    caption: 'Regular DataTable'
+                })).render("#dt1");
+
+                var MyDT = Y.Base.create(
+                    'my-dt',
+                    Y.DataTable,
+                    [],
+                    {},
+                    {}
+                );
+
+                (new MyDT({
+                    columns: ["id", "name", "price"],
+                    data: data,
+
+                    caption: "Subclassed datatable with its own NAME"
+                })).render("#dt2");
+
+                var MyDT2 = Y.Base.create(
+                    'datatable',
+                    Y.DataTable,
+                    [],
+                    {},
+                    {}
+                );
+                var table = new MyDT2({
+                    columns: ["id", "name", "price"],
+                    data: data,
+
+                    caption: "Subclassed datatable with NAME: 'datatable'"
+                });
+
+                table.render("#dt3");
+
+                var MyDT3 = Y.Base.create(
+                    'my-dt',
+                    Y.DataTable,
+                    [],
+                    {},
+                    {
+                        CSS_PREFIX: 'yui3-datatable'
+                    }
+                );
+                var table = new MyDT3({
+                    columns: ["id", "name", "price"],
+                    data: data,
+
+                    caption: "Subclassed datatable with its own NAME and CSS_PREFIX = 'yui3-datatable'"
+                });
+
+                table.render("#dt4");
+
+
+                (new Y.Slider()).render("#sl1");
+
+                var MySlider = Y.Base.create(
+                    'my-slider',
+                    Y.Slider,
+                    [],
+                    {},
+                    {}
+                );
+                (new MySlider()).render("#sl2");
+
+                var MySlider = Y.Base.create(
+                    'my-slider',
+                    Y.Slider,
+                    [],
+                    {},
+                    {
+                        CSS_PREFIX: 'yui3-slider'
+                    }
+                );
+                (new MySlider()).render("#sl3");
+
+                (new Y.TabView({
+                    children: [{
+                        label: 'foo',
+                        content: '<p>foo content</p>'
+                    }, {
+                        label: 'bar',
+                        content: '<p>bar content</p>'
+                    }, {
+                        label: 'baz',
+                        content: '<p>baz content</p>'
+                    }]
+                })).render('#tb1');
+                var MyTabView = Y.Base.create(
+                    'my-tabview',
+                    Y.TabView,
+                    [],
+                    {},
+                    {}
+                );
+                (new MyTabView({
+                    children: [{
+                        label: 'foo',
+                        content: '<p>foo content</p>'
+                    }, {
+                        label: 'bar',
+                        content: '<p>bar content</p>'
+                    }, {
+                        label: 'baz',
+                        content: '<p>baz content</p>'
+                    }]
+                })).render('#tb2');
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Inline Cell Editing</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/datatable/assets/skins/sam/datatable.css" />
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.2r1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.2r1/build/element/element-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.2r1/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.2r1/build/datatable/datatable-min.js"></script>
+
+
+</head>
+
+<body class="yui-skin-sam">
+
+
+<h1>Inline Cell Editing</h1>
+
+<div class="exampleIntro">
+<p>colA has an asyncSubmitter assigned, colB does not and it is there to compare to normal behavior.</p>  
+<p>Click on any cell and enter a text.  While the cell editor is still shown, click on another cell.</p>
+<p>In the first table, the value entered in the cell editor will be saved in the other cell clicked.  
+In the second table, the value will be saved in the edited cell and the new cell editor will be prevented from being shown while the DataTable is disabled.
+</p>
+<p>The issue is that the disable method, that prevents the DataTable from being modified while waiting for the asyncSubmitter to respond, 
+does not prevent a new cell editor from being shown.</p>			
+<p>To fix it, I listen both to disableEvent and undisableEvent and set a local variable to signal the enabled state of the table.  Then, I redefine
+method showCellEditor so that if the table is disabled, I won't pop a new cell editor.  This should not disturb the user since the table should
+be greyed out so the user would not expect the datatable to respond.</p>
+</div>
+
+<h2>Fails</h2>
+<div id="celleditingB"></div>
+<hr/>
+<h2>Works fine</h2>
+<div id="cellediting"></div>
+
+<script type="text/javascript">
+
+
+YAHOO.util.Event.addListener(window, "load", function() {
+
+	var disabled = false;
+
+	var oldShowCellEditor = YAHOO.widget.DataTable.prototype.showCellEditor;
+	YAHOO.widget.DataTable.prototype.showCellEditor = function () {
+		if (!disabled) {
+			oldShowCellEditor.apply(this,arguments);
+		}
+	};
+
+
+	var myColumnDefs = [
+		{key:"colA", editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true, asyncSubmitter : function(callback, newValue) {
+			window.setTimeout(function() {
+				callback(true,newValue);
+			},1000);
+		}})},
+		{key:"colB", editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+	];
+
+	var myDataSource = new YAHOO.util.DataSource([
+		{colA:"abcd",colB:"1234"},
+		{colA:"efgh",colB:"5678"},
+		{colA:"ijkl",colB:"9012"}
+	]);
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+	myDataSource.responseSchema = {
+		fields: ["colA","colB"]
+	};
+
+	var myDataTable = new YAHOO.widget.DataTable("cellediting", myColumnDefs, myDataSource, {});
+
+	myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
+	
+	myDataTable.on('disableEvent', function() {
+		disabled = true;
+	});
+	myDataTable.on('undisableEvent', function() {
+		disabled = false;
+	});	
+
+
+	var myColumnDefsB = [
+		{key:"colA", editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true, asyncSubmitter : function(callback, newValue) {
+			window.setTimeout(function() {
+				callback(true,newValue);
+			},1000);
+		}})},
+		{key:"colB", editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+	];
+
+	var myDataSourceB = new YAHOO.util.DataSource([
+		{colA:"abcd",colB:"1234"},
+		{colA:"efgh",colB:"5678"},
+		{colA:"ijkl",colB:"9012"}
+	]);
+	myDataSourceB.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+	myDataSourceB.responseSchema = {
+		fields: ["colA","colB"]
+	};
+
+	var myDataTableB = new YAHOO.widget.DataTable("celleditingB", myColumnDefsB, myDataSourceB, {});
+
+	myDataTableB.subscribe("cellClickEvent", myDataTableB.onEventShowCellEditor);
+	
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+.yui3-treeview ul {
+	list-style: none;
+    cursor:pointer ;
+	padding-left: 18px;
+}
+.yui3-treeview > ul {
+	background: none;
+	padding-left: 0;
+}
+.yui3-treeview li.yui3-flyweightmanager-loading .yui3-treenode-toggle {
+	background: url(treeview-loading.gif) 0 0 no-repeat;
+}
+.yui3-treeview li {
+	clear: both;
+	overflow: hidden;
+    background: url(img/tvsprite.png) -318px 0 repeat-y; 
+}
+.yui3-treeview li.yui3-flyweightmanager-last-child {
+	background: none;
+}
+.yui3-treeview li .yui3-treenode-toggle {
+	width:18px; height:22px; 
+	float: left;
+}
+.yui3-treeview .yui3-treenode-toggle {
+    background: url(img/tvsprite.png) 0 0 repeat-y; 
+	
+}
+.yui3-treeview li .yui3-treenode-content {
+	float: left;
+}
+.yui3-treeview li.yui3-flyweightmanager-collapsed ul.yui3-flyweightmanager-children {
+	display: none;
+}
+.yui3-treeview li.yui3-flyweightmanager-no-children >  .yui3-treenode-toggle {
+    background-position: -18px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-no-children.yui3-flyweightmanager-last-child  > .yui3-treenode-toggle {
+    background-position: -36px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-expanded > .yui3-treenode-toggle {
+    background-position: -54px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-expanded  > .yui3-treenode-toggle:hover {
+    background-position: -72px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-expanded.yui3-flyweightmanager-last-child  > .yui3-treenode-toggle {
+    background-position: -90px 0; 
+}
+
+.yui3-treeview li.yui3-flyweightmanager-expanded.yui3-flyweightmanager-last-child  > .yui3-treenode-toggle:hover {
+    background-position: -108px 0; 
+}
+
+
+.yui3-treeview li.yui3-flyweightmanager-collapsed > .yui3-treenode-toggle {
+    background-position: -126px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-collapsed  > .yui3-treenode-toggle:hover {
+    background-position: -144px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-collapsed.yui3-flyweightmanager-last-child  > .yui3-treenode-toggle {
+    background-position: -162px 0; 
+}
+.yui3-treeview li.yui3-flyweightmanager-collapsed.yui3-flyweightmanager-last-child  > .yui3-treenode-toggle:hover {
+    background-position: -180px 0; 
+}

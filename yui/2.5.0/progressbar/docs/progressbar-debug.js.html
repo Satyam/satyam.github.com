@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: progressbar   progressbar-debug.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1231606236.31" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1231606236.31" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1231606236.31"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1231606236.31"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>ProgressBar Widget&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_progressbar.html" title="progressbar">progressbar</a>
+                
+                 &gt; progressbar-debug.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="c">/*</span>
+<span class="c">People working in large organizations need this sort of statement to be able to include it in their applications, so here it goes:</span>
+
+<span class="c">Copyright (c) 2008, Daniel Barreiro (a.k.a. Satyam). All rights reserved.</span>
+<span class="c">satyam at satyam dot com dot ar  (yes, it ends with ar)</span>
+<span class="c">It is the intention of the author to make this component freely available for use along the YAHOO User Interface Library</span>
+<span class="c">so it is licensed with a BSD License: http://developer.yahoo.net/yui/license.txt</span>
+<span class="c">developped along version: 2.5.2 of YUI</span>
+<span class="c">*/</span>
+<span class="c">/**</span>
+<span class="c"> * The ProgressBar widget provides an easy way to draw a bar depicting progress of an operation.</span>
+<span class="c"> * It allows for highly customized styles</span>
+<span class="c"> *</span>
+<span class="c"> * @module progressbar</span>
+<span class="c"> * @requires yahoo, dom, event, element</span>
+<span class="c"> * @optional animation</span>
+<span class="c"> * @title ProgressBar Widget</span>
+<span class="c"> */</span>
+
+<span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">Dom</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Dom</span><span class="o">,</span>
+		<span class="nx">Event</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span><span class="o">,</span>
+		<span class="nx">Lang</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">lang</span><span class="o">;</span>
+	
+<span class="c">/**</span>
+<span class="c"> * A Progress Bar providing various visual options, animation, it can grow vertically or horizontally in any direction</span>
+<span class="c">  * and fires several events while moving.</span>
+<span class="c"> * @namespace YAHOO.widget</span>
+<span class="c"> * @class ProgressBar</span>
+<span class="c"> * @extends YAHOO.util.Element</span>
+<span class="c"> * @param oConfigs {object} An object containing any configuration attributes to be set </span>
+<span class="c"> * @constructor</span>
+<span class="c"> */</span>        
+	<span class="kd">var</span> <span class="nx">Prog</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oConfigs</span><span class="p">)</span> <span class="p">{</span>
+        
+		<span class="nx">Prog</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span> <span class="o">,</span> <span class="nx">oConfigs</span><span class="p">);</span>
+    <span class="c">/**</span>
+<span class="c">         * Fires when the value is about to change.  It reports the starting value</span>
+<span class="c">         * @event startEvent</span>
+<span class="c">         * @type CustomEvent</span>
+<span class="c">         * @param value {Number} the current (initial) value of the node</span>
+<span class="c">         */</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">&#39;startEvent&#39;</span><span class="p">);</span>
+    <span class="c">/**</span>
+<span class="c">         * If animation is loaded, it will trigger for each frame of the animation providing partial values</span>
+<span class="c">         * @event changingEvent</span>
+<span class="c">         * @type CustomEvent</span>
+<span class="c">         * @param  value{Number} the current (changing) value of the node</span>
+<span class="c">         */</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">&#39;changingEvent&#39;</span><span class="p">);</span>
+    <span class="c">/**</span>
+<span class="c">         * It will fire at the end of the animation or immediately upon changing values if animation is not loaded</span>
+<span class="c">         * @event completeEvent</span>
+<span class="c">         * @type CustomEvent</span>
+<span class="c">         * @param value {Number} the current (final)  value of the node</span>
+<span class="c">         */</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">&#39;completeEvent&#39;</span><span class="p">);</span>
+
+		<span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;anim&#39;</span><span class="p">);</span>
+		<span class="c">// If there is an instance of Animator available, I fire the events</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">anim</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">anim</span><span class="p">.</span><span class="nx">onTween</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;changingEvent&#39;</span><span class="o">,</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_tweenFactor</span> <span class="o">*</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">_previousValue</span><span class="p">));</span>
+			<span class="p">}</span><span class="o">,</span><span class="k">this</span><span class="o">,</span><span class="kc">true</span><span class="p">);</span>
+			<span class="nx">anim</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;completeEvent&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_previousValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">));</span>
+				<span class="nx">Dom</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;barEl&#39;</span><span class="p">)</span><span class="o">,</span><span class="s1">&#39;yui-pb-anim&#39;</span><span class="p">);</span>
+			<span class="p">}</span><span class="o">,</span><span class="k">this</span><span class="o">,</span><span class="kc">true</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="c">// I&#39;m listening to AttributeProvider&#39;s own attribute change events to adjust the bar according to the new sizes</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;minValueChange&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">redraw</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;maxValueChange&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">redraw</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;widthChange&#39;</span><span class="o">,</span>	<span class="k">this</span><span class="p">.</span><span class="nx">redraw</span><span class="p">);</span>
+	<span class="p">};</span>
+	
+	<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">ProgressBar</span> <span class="o">=</span> <span class="nx">Prog</span><span class="o">;</span>
+	
+	<span class="nx">Lang</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">Prog</span><span class="o">,</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Element</span><span class="o">,</span> <span class="p">{</span>
+<span class="c">/**</span>
+<span class="c"> * Implementation of Element&#39;s abstract method. Sets up config values.</span>
+<span class="c"> *</span>
+<span class="c"> * @method initAttributes</span>
+<span class="c"> * @param oConfigs {Object} (Optional) Object literal definition of configuration values.</span>
+<span class="c"> * @private</span>
+<span class="c"> */</span>	
+		<span class="nx">initAttributes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oConfigs</span><span class="p">)</span> <span class="p">{</span>
+
+		    <span class="nx">Prog</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initAttributes</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">oConfigs</span><span class="p">);</span>
+
+			<span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">);</span>
+			<span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> 	<span class="s1">&#39;&lt;div class=&quot;yui-pb-bar&quot;&gt;&lt;/div&gt;&lt;table class=&quot;yui-pb-mask&quot;&gt;&lt;tr&gt;&lt;td class=&quot;yui-pb-tl&quot;&gt;&lt;/td&gt;&lt;td class=&quot;yui-pb-tr&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;yui-pb-bl&quot;&gt;&lt;/td&gt;&lt;td class=&quot;yui-pb-br&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#39;</span><span class="o">;</span>
+			<span class="kd">var</span> <span class="nx">barEl</span>  <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">firstChild</span><span class="o">;</span>
+			<span class="kd">var</span> <span class="nx">maskEl</span> <span class="o">=</span> <span class="nx">barEl</span><span class="p">.</span><span class="nx">nextSibling</span><span class="o">;</span>
+ <span class="c">/**</span>
+<span class="c">    * @attribute barEl</span>
+<span class="c">    * @description Reference to the HTML object that makes the moving bar (read-only)</span>
+<span class="c">    * @type HTMLElement (div)</span>
+<span class="c">    * @readonly</span>
+<span class="c">    */</span>			
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;barEl&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="nx">barEl</span>
+		    <span class="p">});</span>
+<span class="c">/**</span>
+<span class="c">    * @attribute maskEl</span>
+<span class="c">    * @description Reference to the HTML object that overlays the bar providing the mask. (read-only)</span>
+<span class="c">    * @type HTMLElement (table)</span>
+<span class="c">    * @readonly</span>
+<span class="c">    */</span>			
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;maskEl&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="nx">maskEl</span>
+		    <span class="p">});</span>
+			
+<span class="c">/**</span>
+<span class="c">    * @attribute direction</span>
+<span class="c">    * @description Direction of movement of the bar.  </span>
+<span class="c">    *    It can be any of &#39;lr&#39; (left to right), &#39;rl&#39; (the reverse) , &#39;tb&#39; (top to bottom) or &#39;bt&#39;, case-insensitive.</span>
+<span class="c">    *    Can only be set once and only before rendering.</span>
+<span class="c">    * @default &#39;lr&#39;</span>
+<span class="c">    * @type String</span>
+<span class="c">    */</span>			
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">writeOnce</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+				<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;lr&#39;</span><span class="o">,</span>
+				<span class="nx">validator</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">switch</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">case</span> <span class="s1">&#39;lr&#39;</span><span class="o">:</span>
+						<span class="nx">case</span> <span class="s1">&#39;rl&#39;</span><span class="o">:</span>
+						<span class="nx">case</span> <span class="s1">&#39;tb&#39;</span><span class="o">:</span>
+						<span class="nx">case</span> <span class="s1">&#39;bt&#39;</span><span class="o">:</span>
+							<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+						<span class="nx">default</span><span class="o">:</span>
+							<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+<span class="c">/**</span>
+<span class="c">    * @attribute maxValue</span>
+<span class="c">    * @description Represents the top value for the bar. </span>
+<span class="c">    *   The bar will be fully extended when reaching this value.  </span>
+<span class="c">    *   Values higher than this will be ignored. </span>
+<span class="c">    * @default 100</span>
+<span class="c">    * @type Number</span>
+<span class="c">    */</span>				    
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;maxValue&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="mi">100</span><span class="o">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">).</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuemax&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_recalculateConstants</span><span class="p">();</span>
+				<span class="p">}</span>
+		    <span class="p">});</span>
+			
+<span class="c">/**</span>
+<span class="c">    * @attribute minValue</span>
+<span class="c">    * @description Represents the lowest value for the bar. </span>
+<span class="c">    *   The bar will be totally collapsed when reaching this value.  </span>
+<span class="c">    *    Values lower than this will be ignored. </span>
+<span class="c">    * @default 0</span>
+<span class="c">    * @type Number</span>
+<span class="c">    */</span>				
+
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;minValue&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">).</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuemin&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_recalculateConstants</span><span class="p">();</span>
+				<span class="p">}</span>
+		    <span class="p">});</span>
+<span class="c">/**</span>
+<span class="c">    * @attribute width</span>
+<span class="c">    * @description Width of the ProgressBar.</span>
+<span class="c">    *     If a number, it will be presumed to be in pixels.  </span>
+<span class="c">    *     If a string it should be a valid setting for the CSS width attribute.  </span>
+<span class="c">    *     It will always be returned as a string including units.</span>
+<span class="c">    * @default 200px</span>
+<span class="c">    * @type Number or String</span>
+<span class="c">    */</span>				
+
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;200px&#39;</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+						<span class="nx">value</span> <span class="o">+=</span> <span class="s1">&#39;px&#39;</span><span class="o">;</span>
+					<span class="p">}</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Setting width: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">maskEl</span><span class="o">,</span><span class="s1">&#39;width&#39;</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+				<span class="p">}</span>
+		    <span class="p">});</span>
+
+<span class="c">/**</span>
+<span class="c">    * @attribute height</span>
+<span class="c">    * @description Height of the ProgressBar.</span>
+<span class="c">    *     If a number, it will be presumed to be in pixels.  </span>
+<span class="c">    *     If a string it should be a valid setting for the CSS height attribute.  </span>
+<span class="c">    *     It will always be returned as a string including units.</span>
+<span class="c">    * @default 20px</span>
+<span class="c">    * @type Number or String</span>
+<span class="c">    */</span>				
+		    <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="o">,</span> <span class="p">{</span>
+		        <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;20px&#39;</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+						<span class="nx">value</span> <span class="o">+=</span> <span class="s1">&#39;px&#39;</span><span class="o">;</span>
+					<span class="p">}</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Setting height: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="c">//Dom.setStyle(maskEl,&#39;height&#39;, value);</span>
+				<span class="p">}</span>
+		    <span class="p">});</span>
+			
+<span class="c">/**</span>
+<span class="c">    * @attribute barColor</span>
+<span class="c">    * @description Color for the bar.  It can be any valid CSS color value.</span>
+<span class="c">    * @default &#39;blue&#39;</span>
+<span class="c">    * @type String - CSS color specification</span>
+<span class="c">    */</span>				
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;barColor&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;blue&#39;</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Setting bar color: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;background-color&#39;</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+					<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;background-image&#39;</span><span class="o">,</span> <span class="s1">&#39;none&#39;</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+
+<span class="c">/**</span>
+<span class="c">    * @attribute backColor</span>
+<span class="c">    * @description Color for the background.  It can be any valid CSS color value.</span>
+<span class="c">    * @default &#39;white&#39;</span>
+<span class="c">    * @type String - CSS color specification</span>
+<span class="c">    */</span>				
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;backColor&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;white&#39;</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Setting background color: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;background-color&#39;</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;background-image&#39;</span><span class="o">,</span> <span class="s1">&#39;none&#39;</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+			
+<span class="c">/**</span>
+<span class="c">    * @attribute border</span>
+<span class="c">    * @description CSS attributes for the border.</span>
+<span class="c">    * @default &#39;none&#39;</span>
+<span class="c">    * @type String - CSS border specification</span>
+<span class="c">    */</span>				
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;border&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;none&#39;</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Setting border: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;border&#39;</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+			
+<span class="c">/**</span>
+<span class="c">    * @attribute ariaText</span>
+<span class="c">    * @description The text to be voiced by screen readers.  </span>
+<span class="c">    *     The text should contain a vertical bar character where the current  value of the bar should be inserted.</span>
+<span class="c">    * @default &#39;|&#39;</span>
+<span class="c">    * @type String</span>
+<span class="c">    */</span>				
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;ariaText&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;|&#39;</span>
+			<span class="p">});</span>
+<span class="c">/**</span>
+<span class="c">    * @attribute value</span>
+<span class="c">    * @description The value for the bar.  </span>
+<span class="c">    *     Valid values are in between the minValue and maxValue attributes.</span>
+<span class="c">    * @default 50</span>
+<span class="c">    * @type Number</span>
+<span class="c">    */</span>			
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="mi">50</span><span class="o">,</span>
+				<span class="nx">validator</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;minValue&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;maxValue&#39;</span><span class="p">);</span>
+				<span class="p">}</span><span class="o">,</span>
+				<span class="nx">method</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;set value: &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+					<span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;anim&#39;</span><span class="p">)</span><span class="o">,</span>
+						<span class="nx">pixelValue</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">value</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">_mn</span><span class="p">)</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">_barFactor</span><span class="p">)</span><span class="o">,</span>
+						<span class="nx">container</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">)</span><span class="o">,</span>
+						<span class="nx">barEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;barEl&#39;</span><span class="p">);</span>
+						
+					<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuenow&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuetext&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;ariaText&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">));</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;startEvent&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_previousValue</span><span class="p">);</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">anim</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">Dom</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;barEl&#39;</span><span class="p">)</span><span class="o">,</span><span class="s1">&#39;yui-pb-anim&#39;</span><span class="p">);</span>
+						<span class="k">this</span><span class="p">.</span><span class="nx">_tweenFactor</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">_previousValue</span><span class="p">)</span> <span class="o">/</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">totalFrames</span><span class="o">;</span>
+						<span class="nx">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">))</span> <span class="p">{</span>
+							<span class="nx">case</span> <span class="s1">&#39;lr&#39;</span><span class="o">:</span>
+								<span class="nx">anim</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span><span class="p">{</span> <span class="nx">to</span><span class="o">:</span> <span class="nx">pixelValue</span> <span class="p">}};</span> 
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;rl&#39;</span><span class="o">:</span>
+								<span class="nx">anim</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span>
+									<span class="nx">width</span><span class="o">:</span><span class="p">{</span> <span class="nx">to</span><span class="o">:</span> <span class="nx">pixelValue</span> <span class="p">}</span><span class="o">,</span>
+									<span class="nx">left</span><span class="o">:</span><span class="p">{</span><span class="nx">to</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">-</span> <span class="nx">pixelValue</span><span class="p">}</span>
+								<span class="p">};</span> 
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;tb&#39;</span><span class="o">:</span>
+								<span class="nx">anim</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="nx">height</span><span class="o">:</span><span class="p">{</span><span class="nx">to</span><span class="o">:</span> <span class="nx">pixelValue</span><span class="p">}};</span>
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;bt&#39;</span><span class="o">:</span>
+								<span class="nx">anim</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span>
+									<span class="nx">height</span><span class="o">:</span><span class="p">{</span><span class="nx">to</span><span class="o">:</span> <span class="nx">pixelValue</span><span class="p">}</span><span class="o">,</span>
+									<span class="nx">top</span><span class="o">:</span><span class="p">{</span><span class="nx">to</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">-</span> <span class="nx">pixelValue</span><span class="p">}</span>
+								<span class="p">};</span>
+								<span class="k">break</span><span class="o">;</span>
+						<span class="p">}</span>
+						<span class="nx">anim</span><span class="p">.</span><span class="nx">animate</span><span class="p">();</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+						<span class="nx">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">))</span> <span class="p">{</span>
+							<span class="nx">case</span> <span class="s1">&#39;lr&#39;</span><span class="o">:</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;width&#39;</span><span class="o">,</span>  <span class="nx">pixelValue</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;rl&#39;</span><span class="o">:</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;width&#39;</span><span class="o">,</span>  <span class="nx">pixelValue</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;left&#39;</span><span class="o">,</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">-</span> <span class="nx">pixelValue</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;tb&#39;</span><span class="o">:</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;height&#39;</span><span class="o">,</span>  <span class="nx">pixelValue</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="k">break</span><span class="o">;</span>
+							<span class="nx">case</span> <span class="s1">&#39;bt&#39;</span><span class="o">:</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;height&#39;</span><span class="o">,</span>  <span class="nx">pixelValue</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;top&#39;</span><span class="o">,</span>  <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">-</span> <span class="nx">pixelValue</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+								<span class="k">break</span><span class="o">;</span>
+						<span class="p">}</span>
+						<span class="c">// If the animation utility has not been loaded then changing the value will always complete immediately.</span>
+						<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;completeEvent&#39;</span><span class="o">,</span><span class="nx">value</span><span class="p">);</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+		    <span class="p">});</span>
+<span class="c">/**</span>
+<span class="c">    * @attribute anim</span>
+<span class="c">    * @description A reference to the YAHOO.util.Anim instance attached to the bar.  (ReadOnly)  </span>
+<span class="c">    *   If the Animation utility is loaded, it will be automatically used.  </span>
+<span class="c">    * @default null</span>
+<span class="c">    * @type {instance of YAHOO.util.Anim}</span>
+<span class="c">    */</span>			
+			
+			<span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="s1">&#39;anim&#39;</span><span class="o">,</span> <span class="p">{</span>
+				<span class="nx">readOnly</span><span class="o">:</span><span class="kc">true</span><span class="o">,</span>
+				<span class="nx">value</span><span class="o">:</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Anim</span><span class="o">?</span><span class="k">new</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Anim</span><span class="p">(</span><span class="nx">barEl</span><span class="p">)</span><span class="o">:</span><span class="kc">null</span>
+			<span class="p">});</span>
+			
+		<span class="p">}</span><span class="o">,</span>
+	<span class="c">/** </span>
+<span class="c">	 *  It will render the ProgressBar into the given container.  </span>
+<span class="c">	 *  If the container has other content, the ProgressBar will be appended to them.</span>
+<span class="c">	 *  If the second argument is provided, the ProgressBar will be inserted before the given child.</span>
+<span class="c">	 * The method is chainable since it returns a reference to this instance.</span>
+<span class="c">	 * @method render</span>
+<span class="c">	 * @param el {HTML Element}  HTML element that will contain the ProgressBar</span>
+<span class="c">	 * @param before {HTML Element}  (optional) If present, the ProgressBar will be inserted before this element.</span>
+<span class="c">	 * @return {YAHOO.widget.ProgressBar}</span>
+<span class="c">	 * @chainable</span>
+<span class="c">	 */</span>
+		<span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="o">,</span><span class="nx">before</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start render&#39;</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+
+			<span class="k">this</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;yui-pb&#39;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">);</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">tabIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="o">,</span><span class="s1">&#39;progressbar&#39;</span><span class="p">);</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuemin&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;minValue&#39;</span><span class="p">));</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuemax&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;maxValue&#39;</span><span class="p">));</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuenow&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">));</span>
+			<span class="nx">container</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;aria-valuetext&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;ariaText&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)));</span>
+
+			<span class="k">this</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">el</span><span class="o">,</span><span class="nx">before</span><span class="p">);</span>
+			
+			<span class="k">this</span><span class="p">.</span><span class="nx">redraw</span><span class="p">();</span>
+			<span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+		<span class="p">}</span><span class="o">,</span>
+
+	<span class="c">/** </span>
+<span class="c">	 *  It will recalculate the bar size and position and redraw it</span>
+<span class="c">	 * @method redraw</span>
+<span class="c">	 * @return  void</span>
+<span class="c">	 * @private</span>
+<span class="c">	 */</span>
+		<span class="nx">redraw</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_recalculateConstants</span><span class="p">();</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="o">,</span><span class="kc">true</span><span class="p">);</span>
+		<span class="p">}</span><span class="o">,</span>
+			
+	<span class="c">/** </span>
+<span class="c">	 *  It will destroy the ProgressBar, related objects and unsubscribe all events</span>
+<span class="c">	 * @method destroy</span>
+<span class="c">	 * @return  void</span>
+<span class="c">	 */</span>
+		<span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="o">,</span><span class="s1">&#39;info&#39;</span><span class="o">,</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;anim&#39;</span><span class="p">);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">anim</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">anim</span><span class="p">.</span><span class="nx">onTween</span><span class="p">.</span><span class="nx">unsubscribeAll</span><span class="p">();</span>
+				<span class="nx">anim</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">.</span><span class="nx">unsubscribeAll</span><span class="p">();</span>
+			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">unsubscribeAll</span><span class="p">();</span>
+			<span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">);</span>
+			<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+		<span class="p">}</span><span class="o">,</span>
+<span class="c">/**</span>
+<span class="c">  * The previous value setting for the bar.  Used mostly as information to event listeners</span>
+<span class="c">  * @property _previousValue</span>
+<span class="c">  * @type Number</span>
+<span class="c">  * @private</span>
+<span class="c">  * @default  100</span>
+<span class="c">  */</span>
+		<span class="nx">_previousValue</span><span class="o">:</span><span class="mi">100</span><span class="o">,</span>
+<span class="c">/**</span>
+<span class="c">  * The actual space (in pixels) available for the bar within the mask</span>
+<span class="c">  * @property _barSpace</span>
+<span class="c">  * @type Number</span>
+<span class="c">  * @private</span>
+<span class="c">  * @default  100</span>
+<span class="c">  */</span>
+		<span class="nx">_barSpace</span><span class="o">:</span><span class="mi">100</span><span class="o">,</span>
+<span class="c">/**</span>
+<span class="c">  * The factor to convert the actual value of the bar into pixels</span>
+<span class="c">  * @property _barSpace</span>
+<span class="c">  * @type Number</span>
+<span class="c">  * @private</span>
+<span class="c">  * @default  1</span>
+<span class="c">  */</span>
+		<span class="nx">_barFactor</span><span class="o">:</span><span class="mi">1</span><span class="o">,</span>
+	<span class="c">/** </span>
+<span class="c">	 *  Calculates some auxiliary values to make the rendering faster</span>
+<span class="c">	 * @method _recalculateConstants</span>
+<span class="c">	 * @return  void</span>
+<span class="c">	 * @private</span>
+<span class="c">	 */</span>		
+		<span class="nx">_recalculateConstants</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">barEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;barEl&#39;</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_mn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;minValue&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="o">;</span>
+
+			<span class="nx">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">))</span> <span class="p">{</span>
+				<span class="nx">case</span> <span class="s1">&#39;lr&#39;</span><span class="o">:</span>
+				<span class="nx">case</span> <span class="s1">&#39;rl&#39;</span><span class="o">:</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">)</span> <span class="o">-</span> 
+						<span class="nb">parseInt</span><span class="p">(</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;marginLeft&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">)</span>  <span class="o">-</span>
+						<span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;marginRight&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">));</span>
+					<span class="k">break</span><span class="o">;</span>
+				<span class="nx">case</span> <span class="s1">&#39;tb&#39;</span><span class="o">:</span>
+				<span class="nx">case</span> <span class="s1">&#39;bt&#39;</span><span class="o">:</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">)</span> <span class="o">-</span>
+						<span class="nb">parseInt</span><span class="p">(</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;marginTop&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">)</span> <span class="o">-</span>
+						<span class="nb">parseInt</span><span class="p">(</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">barEl</span><span class="o">,</span><span class="s1">&#39;marginBottom&#39;</span><span class="p">)</span><span class="o">,</span><span class="mi">10</span><span class="p">);</span> 
+					<span class="k">break</span><span class="o">;</span>
+			<span class="p">}</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_barFactor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_barSpace</span> <span class="o">/</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;maxValue&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">_mn</span><span class="p">)</span>  <span class="o">||</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="p">}</span>
+	<span class="p">});</span>
+    
+<span class="p">})();</span>
+<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;progressbar&#39;</span><span class="o">,</span><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">ProgressBar</span><span class="o">,</span><span class="p">{</span><span class="nx">version</span><span class="o">:</span> <span class="s2">&quot;2.5.2&quot;</span><span class="o">,</span> <span class="nx">build</span><span class="o">:</span> <span class="s2">&quot;0&quot;</span><span class="p">});</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_progressbar.html" title="progressbar">progressbar</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="YAHOO.widget.ProgressBar.html" title="YAHOO.widget.ProgressBar">YAHOO.widget.ProgressBar</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="progressbar-debug.js.html" title="progressbar-debug.js">progressbar-debug.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2009 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.ProgressBar.html#config_anim", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "anim"}, {"url": "YAHOO.widget.ProgressBar.html#event_animChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "animChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_ariaText", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "ariaText"}, {"url": "YAHOO.widget.ProgressBar.html#event_ariaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "ariaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_backColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "backColor"}, {"url": "YAHOO.widget.ProgressBar.html#event_backColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "backColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_barColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barColor"}, {"url": "YAHOO.widget.ProgressBar.html#event_barColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_barEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barEl"}, {"url": "YAHOO.widget.ProgressBar.html#event_barElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAnimChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAnimChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAriaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAriaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBackColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBackColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBorderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBorderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeDirectionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeDirectionChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeHeightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeHeightChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMinValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMinValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeWidthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeWidthChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_border", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "border"}, {"url": "YAHOO.widget.ProgressBar.html#event_borderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "borderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_changingEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "changingEvent"}, {"url": "YAHOO.widget.ProgressBar.html#event_completeEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "completeEvent"}, {"url": "YAHOO.widget.ProgressBar.html#method_destroy", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "destroy"}, {"url": "YAHOO.widget.ProgressBar.html#config_direction", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "direction"}, {"url": "YAHOO.widget.ProgressBar.html#event_directionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "directionChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_height", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "height"}, {"url": "YAHOO.widget.ProgressBar.html#event_heightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "heightChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_maskEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maskEl"}, {"url": "YAHOO.widget.ProgressBar.html#event_maskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_maxValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maxValue"}, {"url": "YAHOO.widget.ProgressBar.html#event_maxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_minValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "minValue"}, {"url": "YAHOO.widget.ProgressBar.html#event_minValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "minValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#method_render", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "render"}, {"url": "YAHOO.widget.ProgressBar.html#event_startEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "startEvent"}, {"url": "YAHOO.widget.ProgressBar.html#config_value", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "value"}, {"url": "YAHOO.widget.ProgressBar.html#event_valueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "valueChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_width", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "width"}, {"url": "YAHOO.widget.ProgressBar.html#event_widthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "widthChange"}];
+</script>
+</body>
+</html>

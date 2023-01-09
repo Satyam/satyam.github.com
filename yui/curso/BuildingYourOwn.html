@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Building your own components</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>Building your own components</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<h2>How to customize existing components</h2>
+
+<p>Non-static YUI components can be tailored in many ways.  Once you notice you are using it in very similar ways in different pages, you might wonder if you can't have your own version of that component that acts your way.  There are several ways to do this.</p>
+
+<h2>Just use it</h2>
+<ul>
+<li>Within your customized component, you create a variable which holds a reference to the original component</li>
+<li>In the constructor for your component, you create the original component and set it up your way</li>
+<li>If you need further access to the original component you either have to:<ul>
+    <li>Allow access to it by exposing the variable that holds a reference to it, or</li>
+    <li>Provide public methods to access the functionality of the original component you wish to expose</li>
+    </ul></li>
+<li>Example: the <code>cfg</code> property of the <code>YAHOO.widget.Module</code> and all its descendants, which points to an instance of <code>YAHOO.util.Config</code></li>
+<li>Compare:</li>
+</ul>
+<pre>myModule.cfg.setProperty("underlay","matte");
+myDataTable.set('caption','This is an important table');</pre>
+
+
+<h2>Augment it</h2>
+<ul>
+<li>Use <code>YAHOO.lang.augment</code> to add new functionality to the original object</li>
+<li>You have full access to the original object plus your added functionality</li>
+<li>Your original object becomes permanently altered, you can no longer create an instance of the unmodified object</li>
+<li>Example:  add a <code>show</code> and <code>hide</code> functions to a DataTable</li>
+</ul>
+<pre>YAHOO.widget.DataTable.prototype.show = function () {
+    YAHOO.util.Dom.setStyle(this._elContainer,'display','')
+};
+YAHOO.widget.DataTable.prototype.hide = function () {
+    YAHOO.util.Dom.setStyle(this._elContainer,'display','none')
+};
+</pre>
+<ul>
+<li>Function <code>YAHOO.lang.augment</code> can also be used but it requires a fully defined object prototype</li>
+</ul>
+<pre>var myHideAndShowPatch = function () {
+};
+myHideAndShowPatch.prototype = {
+    show: function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','')},
+    hide: function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','none')}
+};
+
+YAHOO.lang.augment(YAHOO.widget.DataTable,myHideAndShowPatch);</pre>
+      
+<ul>
+<li>You have to be careful to avoid name collisions</li>
+<li>You can redefine (override) existing methods</li>
+<li>For example, the DataTable uses US Dollars for currencies</li>
+</ul>
+<pre>YAHOO.widget.DataTable.formatCurrency = function(el, oRecord, oColumn, oData) {
+    var pounds = Math.floor(oData);
+    var shillings = (oData - pounds) * 20;
+    var pence = Math.floor((shillings - Math.floor(shillings)) * 12);
+    var shillings = Math.floor(shillings);
+    
+    el.innerHTML =  '&pound;' + pounds + ' ' + shillings + 's ' + pence + 'd';
+};</pre>
+<ul>
+<li>Notice that <code>formatCurrency</code> is a static function, not an instance method, though it does have access to <code>this</code></li>
+<li>When overriding a function or method, make sure you use the same 'signature'</li>
+</ul>
+<h2>Extend it</h2>
+<ul>
+<li><code>YAHOO.lang.extend</code> allows you to create an object prototype based on an existing one</li>
+<li>This is what in other class-based languages would be declaring a class inheriting from a previous one</li>
+<li>The new object has all the properties, methods and behavior of the original one plus what you add to it</li>
+<li>It is different from augmenting in that you can create an object from either one</li>
+</ul>
+<p>From your test page:</p>
+<pre>YAHOO.namespace('idp');
+YAHOO.idp.Editor = function (where, options) {
+    var myDefaultOptions = {
+        height: '185px',
+        width: '100%',
+        dompath: false, //Turns on the bar at the bottom
+        animate: true, //Animates the opening, closing and moving of Editor windows
+        extracss: 'body {background-color: #F9FBF0; height: 160px;}',
+        toolbar: {
+            buttons: [
+                { group: 'textstyle',
+                    buttons: [
+                        { type: 'push', label: 'Bold', value: 'bold' },
+                        { type: 'push', label: 'Italic', value: 'italic' },
+                        { type: 'push', label: 'Underline', value: 'underline' },
+                        { type: 'separator' },
+                        { type: 'select', label: 'Arial', value: 'fontname',
+                            menu: [
+                                { text: 'Arial', checked: true },
+                                { text: 'Arial Black' },
+                                { text: 'Comic Sans MS' },
+                                { text: 'Courier New' },
+                                { text: 'Lucida Console' },
+                                { text: 'Tahoma' },
+                                { text: 'Times New Roman' },
+                                { text: 'Trebuchet MS' },
+                                { text: 'Verdana' }
+                            ]
+                        },
+                        { type: 'spin', label: '13', value: 'fontsize', range: [ 9, 75 ] },
+                        { type: 'separator' },
+                        { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' }
+                    ]
+                }
+            ]
+        }
+    };
+    if (options) {
+        for (var name in options)  {
+            if (options.hasOwnProperty(name)) {
+                myDefaultOptions[name] = options[name];
+            }
+        }
+    }
+    YAHOO.idp.Editor.superclass.constructor.call(this, where, myDefaultOptions); 
+};
+
+Lang.extend(YAHOO.idp.Editor,YAHOO.widget.Editor);
+</pre>
+<p>Now, to create your own flavour of editor, you just do:</p>
+<pre>
+
+var myEditor = new YAHOO.idp.Editor('msgpost');
+myEditor.render();
+
+</pre>
+<h3>Suggested objects to extend</h3>
+<ul>
+	<li>A <code>YAHOO.util.DataSource</code> already set up to use JSON on remote links and <code>YAHOO.lang.JSON</code> instead of the built in JSON decoder</li>
+	<li>A <code>YAHOO.widget.DataTable</code> already set up to use the previous DataSource</li>
+	<li>A <code>YAHOO.widget.ContextMenu</code> with basic functionality for several other components, such as a DataTable</li>
+	<li>A <code>YAHOO.widget.SimpleDialog</code> for basic <code>window.confirm</code> or <code>window.alert</code> functionality</li>
+	</ul>
+
+
+<h2>Static objects</h2>
+<ul>
+<li>Objects containing static functions (not prototypes) cannot be instanced and hold no context information</li>
+<li>These objects are just a convenient way to pack several functions together</li>
+<li>They would rarely be extended or augmented</li>
+<li>A custom object might regroup some of its functions in some convenient way, but the object as a hole doesn't need to be redefined</li>
+</ul>
+
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

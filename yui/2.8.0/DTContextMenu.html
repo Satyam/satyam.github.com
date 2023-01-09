@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css&2.8.1/build/menu/assets/skins/sam/menu.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yahoo-dom-event/yahoo-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js&2.8.1/build/container/container_core-min.js&2.8.1/build/menu/menu-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+<title>DataTable with Dynamic Context Menu</title>
+
+<style type="text/css">
+		.dp-highlighter th, .dp-highlighter td {
+			border:0;
+			padding:0;
+		}
+		.dp-highlighter .line1, .dp-highlighter  .line2 {
+			padding-left:10px;
+			white-space:nowrap;
+		}
+		.ft {
+			margin-top:1em;
+		}
+		.yui-skin-sam .yuimenu .hd,.yui-skin-sam .yuimenu .ft {
+			background-color:silver;
+			font-weight:bolder;
+		}
+</style>
+
+
+</head>
+
+<body class="yui-skin-sam">
+   <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>DataTable with Dynamic Context Menu</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p>I've modified the <a href="http://developer.yahoo.com/yui/examples/datatable/dt_contextmenu.html">example</a>
+			shown in the DataTable homepage about using a ContextMenu to show how you can change it depending on the cell clicked.
+			The DataTable used is the same as in that example, same definition, same data, so I won't show how to build it.
+			This is how the ContextMeny is created, the same as in the example:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu",
+					{trigger:myDataTable.getTbodyEl()});
+				myContextMenu.render("container");
+			</textarea>
+			<p>To be able to change the contents of the menu, I listen to the <code>beforeShowEvent</code> which Menu inherits
+			from Module.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				myContextMenu.beforeShowEvent.subscribe(function(type, aArgs, dt) {
+					var target = this.contextEventTarget,
+						record = dt.getRecord(target),
+						column = dt.getColumn(target);
+						
+					while (this.removeItem(0)) {}
+					var menu = menus[column.key];
+					if (menu) {
+						this.addItems(menu);
+						this.setHeader(column.label || column.key);
+						this.setFooter(record.getData('SKU'));
+						this.render();
+					} else {
+						YAHOO.util.Dom.setStyle(this.element,'left','-9999px');
+					}
+				},myDataTable);
+			</textarea>
+			<p>To start with, I read all the information from the DataTable that I might need to decide what to show on the menu.
+			Basically, that means references to the <code>record</code> and <code>column</code> that intersect at the cell where
+			the right-click happened.  Then I start manipulating the menu.</p>
+			<p>A tight while-loop removes all items in the current menu.  In this example, I assume that the items to be shown vary
+			on a per-column basis.  This might not be so in your application, you have access to all the relevant data in the DataTable
+			so it is up to you to decide how to do it.  Anyway, I have the menu items stored in a hash table <code>menus</code> indexed
+			by the column <code>key</code> value.  Some columns might not have a menu so, if there is one, I add those items to the menu
+			using <code>addItems</code>.  Just to show that I have access to other information from the DataTable, I have also used
+			<code>setHeader</code> and <code>setFooter</code> to show some extra information.  This is certainly not required and
+			perhaps not even recommended (you need to add some CSS styles for it to show properly), it is just for the sake of the example.
+			Finally, calling <code>render<code> again with no arguments, refreshes the items.</p>
+			<p>If there was no menu for a particular column (or any other condition that you decide upon) I will not show the menu.  Unfortunately
+			there is no way to cancel a menu that is about to be shown so I used a simple trick, I rendered it well out of the screen.
+			Since the ContextMenu adjusts its position according to the coordinates of the mouse, setting the <code>left</code> CSS attribute
+			is fine since it will be set again by ContextMenu the next time it pops up.</p>
+			<p>This is how the <code>menus</code> hash looks like:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var menus = {
+					SKU: [
+						{text:'SKU',onclick:{fn:clickHandler}},
+						{text:'do this',onclick:{fn:clickHandler}},
+						{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+					],
+					Quantity:[
+						{text:'Quantity',onclick:{fn:clickHandler}},
+						{text:'do this',onclick:{fn:clickHandler}},
+						{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+					],
+					Item:[
+						{text:'Item',onclick:{fn:clickHandler}},
+						{text:'do this',onclick:{fn:clickHandler}},
+						{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+					]
+				};
+			</textarea>
+			<p>I created an object literal which I use as a hash, using the column key values as indexes.  
+			I have no menu items for the Description column to show how to handle a no-menu.  For each
+			column I have an array of <a href="http://developer.yahoo.com/yui/menu/#mitemconfigref">menuItem configuration attributes</a>.
+			Here I have chosen the <code>onclick</code> configuration attribute which I set to the same function for all options though
+			you would probably point it to different ones.  I have used only the <code>onclick.fn</code> attribute, but there are others
+			which you might find useful.  Since I'm pointing all menu items to the same function, I must as well have listened
+			to the <code>clickEvent</code> event, since I'm concentrating everything into a single function. Also, I made all the menus
+			mostly the same except for the first one in each set to show that there is a difference, if only slight. You are free to 
+			use whatever configuration options you want, including submenus.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var clickHandler = function() {
+					var target = myContextMenu.contextEventTarget,
+						record = myDataTable.getRecord(target),
+						column = myDataTable.getColumn(target);
+						
+					alert(
+						'Clicked on menu "' + this.cfg.getProperty('text') +
+						'" in column "' + column.key +
+						'" for SKU "' + record.getData('SKU') + '"'
+					);
+				};
+			</textarea>
+			<p>The sample function I used for all items in the menu is quite simple.  From the <code>contextEventTarget</code>
+			I read the <code>record</code> and <code>column</code> which might let me decide on what to do.  The handler
+			is called in the context of the clicked menuItem so <code>this</code> points to the clicked item.  The only
+			thing I do here is to show in an alert box a sample of information read</p>
+		
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="http://developer.yahoo.com/yui/examples/datatable/assets/js/data.js"></script>
+<script type="text/javascript">
+YAHOO.util.Event.onDOMReady(function() {
+
+	var myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.inventory,{
+		responseType:YAHOO.util.DataSource.TYPE_JSARRAY,
+		responseSchema: {
+			fields: ["SKU","Quantity","Item","Description"]
+		}
+	});
+
+	var myDataTable = new YAHOO.widget.DataTable("container", [
+		{key:"SKU", sortable:true},
+		{key:"Quantity", sortable:true},
+		{key:"Item", sortable:true},
+		{key:"Description"}
+	], myDataSource);
+
+	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu",
+			{trigger:myDataTable.getTbodyEl()});
+	myContextMenu.render("container");
+	
+	var clickHandler = function() {
+		var target = myContextMenu.contextEventTarget,
+			record = myDataTable.getRecord(target),
+			column = myDataTable.getColumn(target);
+			
+			alert(
+				'Clicked on menu "' + this.cfg.getProperty('text') +
+				'" in column "' + column.key +
+				'" for SKU "' + record.getData('SKU') + '"'
+			);
+	};
+	
+	
+	var menus = {
+		SKU: [
+			{text:'SKU',onclick:{fn:clickHandler}},
+			{text:'do this',onclick:{fn:clickHandler}},
+			{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+		],
+		Quantity:[
+			{text:'Quantity',onclick:{fn:clickHandler}},
+			{text:'do this',onclick:{fn:clickHandler}},
+			{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+		],
+		Item:[
+			{text:'Item',onclick:{fn:clickHandler}},
+			{text:'do this',onclick:{fn:clickHandler}},
+			{text:"cant't do this",disabled:true,onclick:{fn:clickHandler}}
+		]
+	};
+		
+	myContextMenu.beforeShowEvent.subscribe(function(type,aArgs, dt) {
+		var target = this.contextEventTarget,
+			record = dt.getRecord(target),
+			column = dt.getColumn(target);
+			
+		while (this.removeItem(0)) {}
+		var menu = menus[column.key];
+		if (menu) {
+			this.addItems(menu);
+			this.setHeader(column.label || column.key);
+			this.setFooter(record.getData('SKU'));
+			this.render();
+		} else {
+			YAHOO.util.Dom.setStyle(this.element,'left','-9999px');
+		}
+	},myDataTable);
+        
+});
+</script>
+
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>	
+
+</body>
+</html>

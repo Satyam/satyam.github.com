@@ -1,0 +1,5209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DataTable.BaseCellPopupEditor</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Base.html">DataTable.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.html">DataTable.BaseCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.KeyFiltering.html">DataTable.BaseCellEditor.KeyFiltering</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellInlineEditor.html">DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellPopupEditor.html">DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.html">DataTable.BodyView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.InputFormatters.html">DataTable.BodyView.InputFormatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.ColumnWidths.html">DataTable.ColumnWidths</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Core.html">DataTable.Core</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editable.html">DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editors.html">DataTable.Editors</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.HeaderView.html">DataTable.HeaderView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Message.html">DataTable.Message</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Mutable.html">DataTable.Mutable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Scrollable.html">DataTable.Scrollable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Sortable.html">DataTable.Sortable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.TableView.html">DataTable.TableView</a></li>
+            
+                <li><a href="..&#x2F;classes/Plugin.DataTableDataSource.html">Plugin.DataTableDataSource</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-base.html">datatable-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-body.html">datatable-body</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-base.html">datatable-celleditor-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-inline.html">datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-keyfiltering.html">datatable-celleditor-keyfiltering</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-column-widths.html">datatable-column-widths</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-core.html">datatable-core</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-datasource.html">datatable-datasource</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-editable.html">datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-formatters.html">datatable-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-head.html">datatable-head</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-input-formatters.html">datatable-input-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-message.html">datatable-message</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-mutable.html">datatable-mutable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-scroll.html">datatable-scroll</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-sort.html">datatable-sort</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-table.html">datatable-table</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>DataTable.BaseCellPopupEditor Class</h1>
+<div class="box meta">
+    
+
+    
+        <div class="extends">
+            Extends <a href="../classes/DataTable.BaseCellEditor.html" class="crosslink">DataTable.BaseCellEditor</a>
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l6"><code>js&#x2F;celleditor-popup.js:6</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a><br>
+            Parent Module: <a href="../modules/datatable.html">datatable</a>
+        
+    
+
+    
+        <p>Available since 3.8.0</p>
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>This module defines an extension of View that includes a BASE Y.DataTable.BaseCellPopupEditor View class definition
+cell "pop-up" editor.  This view class includes an editor with HTML inserted into an Overlay widget directly over
+the TD cell.  Positioning, event management, creation/destruction and attribute changes are managed by this class.</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__afterVisibleChange">_afterVisibleChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__afterXYChange">_afterXYChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__bindUI">_bindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__clearDOMSelection">_clearDOMSelection</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__createOverlay">_createOverlay</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__createOverlayButtons">_createOverlayButtons</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__createTemplateContent">_createTemplateContent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__defCancelFn">_defCancelFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__defRenderFn">_defRenderFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__defSaveFn">_defSaveFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected inherited">
+                                <a href="#method__defShowFn">_defShowFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__formatter">_formatter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__keyFilter">_keyFilter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__mouseLeave">_mouseLeave</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected inherited">
+                                <a href="#method__onKeyDown">_onKeyDown</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__onValueChange">_onValueChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__parser">_parser</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__processKeyFiltering">_processKeyFiltering</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__regExpFilter">_regExpFilter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__unbindUI">_unbindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_cancelEditor">cancelEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected inherited">
+                                <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_hideEditor">hideEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected inherited inherited">
+                                <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_render">render</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_saveEditor">saveEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_showEditor">showEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__cellInfo">_cellInfo</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__classError">_classError</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__classInput">_classInput</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__classItem">_classItem</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__classOverlay">_classOverlay</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__classOverlayBtn">_classOverlayBtn</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected inherited">
+                                <a href="#property__inputNode">_inputNode</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__keyFilteringSubscr">_keyFilteringSubscr</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected inherited">
+                                <a href="#property__subscr">_subscr</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_btnTemplate">btnTemplate</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_overlay">overlay</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_template">template</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs extends">
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_active">active</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_cell">cell</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_formatter">formatter</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hidden">hidden</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_inputKeys">inputKeys</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_inputWidth">inputWidth</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_keyFiltering">keyFiltering</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_lastValue">lastValue</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_name">name</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_navigationEnabled">navigationEnabled</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_offsetXY">offsetXY</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_overlayConfig">overlayConfig</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_overlayWidth">overlayWidth</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_parser">parser</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_saveOnEnterKey">saveOnEnterKey</a>
+                            </li>
+                        
+                            <li class="index-item attr private">
+                                <a href="#attr_template">template</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_templateEngine">templateEngine</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_templateObject">templateObject</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_validator">validator</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_value">value</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_visible">visible</a>
+                            </li>
+                        
+                            <li class="index-item attr inherited">
+                                <a href="#attr_xy">xy</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                        
+                            <li class="index-item event inherited">
+                                <a href="#event_cancel">cancel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event inherited">
+                                <a href="#event_keyNav">keyNav</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event inherited">
+                                <a href="#event_render">render</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event inherited">
+                                <a href="#event_save">save</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event inherited">
+                                <a href="#event_show">show</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterVisibleChange" class="method item private inherited">
+    <h3 class="name"><code>_afterVisibleChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__afterVisibleChange">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l503"><code>js&#x2F;celleditor-base.js:503</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Responds to changes in the <a href="#attr_visible">visible</a> attribute by showing/hiding the
+cell editor</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Standard Attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterXYChange" class="method item private">
+    <h3 class="name"><code>_afterXYChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__afterXYChange">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l398"><code>js&#x2F;celleditor-popup.js:398</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This method can be used to quickly reset the current View editor's position,
+ used for scrollable DataTables.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The xy attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__bindUI" class="method item private inherited">
+    <h3 class="name"><code>_bindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__bindUI">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l220"><code>js&#x2F;celleditor-base.js:220</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the event listeners.
+If <a href="#property__inputNode">_inputNode</a> is set it will also set listeners for it.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__clearDOMSelection" class="method item private">
+    <h3 class="name"><code>_clearDOMSelection</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l422"><code>js&#x2F;celleditor-popup.js:422</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Helper method to clear DOM "selected" text or ranges
+NOTE: could probably do this with CSS <code>user-select: none;</code>, but anyway ...</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createOverlay" class="method item private">
+    <h3 class="name"><code>_createOverlay</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Y.Overlay</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l213"><code>js&#x2F;celleditor-popup.js:213</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method that creates the Editor's Overlay instance and populates the base content.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Y.Overlay</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__createOverlayButtons" class="method item private">
+    <h3 class="name"><code>_createOverlayButtons</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>overlay</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l256"><code>js&#x2F;celleditor-popup.js:256</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method creates a footer section within the Overlay and adds the buttons entered
+as the "buttons" config property of "overlayConfig".</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">overlay</code>
+                        <span class="type">Widget</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createTemplateContent" class="method item private">
+    <h3 class="name"><code>_createTemplateContent</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>overlay</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l294"><code>js&#x2F;celleditor-popup.js:294</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method used to process the <a href="#attr_templateObject">templateObject</a> attribute and generate the
+Overlay's <code>bodyContent</code>.  This method uses the <code>Y.Template</code> module to prepare the HTML, which
+is passed in via <a href="#attr_templateObject">templateObject</a>'s <code>html</code> property.</p>
+
+<p>This method uses the <code>Y.Template.Micro</code> module by default to process the template.  Implementers
+can pass in any different Y.Template supported-template engine via the <a href="#attr_templateEngine">templateEngine</a>
+attribute (i.e. <code>templateEngine: Y.Handlebars</code>) but will have to modify the <code>html</code> property of templateObject
+appropriately for that engine.</p>
+
+<p>Implementers can pass in "options" and other properties to the <a href="#attr_templateObject">templateObject</a> ATTR and
+this function will normalize the <code>this.options</code> to an Object with keys {value,text,title,raw} which can be
+used more directly within HTML construction.</p>
+
+<p>The templateObject ATTR <code>options</code> property can be either an Array or an Object, this function converts and
+normalizes the content to an output Array as <code>this.options</code> within the template definitions.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">overlay</code>
+                        <span class="type">Widget</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Overlay instance for this View</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defCancelFn" class="method item private inherited">
+    <h3 class="name"><code>_defCancelFn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__defCancelFn">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l278"><code>js&#x2F;celleditor-base.js:278</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The default action for the <a href="#event_cancel">cancel</a> event.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defRenderFn" class="method item private">
+    <h3 class="name"><code>_defRenderFn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Y.Overlay</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__defRenderFn">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l97"><code>js&#x2F;celleditor-popup.js:97</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates this View's container, including instantiating the Overlay widget within
+the container, incorporating user-supplied overlay configs, creating buttons and
+creating the internal HTML content within the Overlay (using a Template-based
+method)</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Y.Overlay</span>:
+                    
+                    Overlay instance for this View
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__defSaveFn" class="method item private inherited">
+    <h3 class="name"><code>_defSaveFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__defSaveFn">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l265"><code>js&#x2F;celleditor-base.js:265</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The default action for the <a href="#event_save">save</a> event.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>For <a href="#event_save">save</a> event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defShowFn" class="method item protected">
+    <h3 class="name"><code>_defShowFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__defShowFn">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l168"><code>js&#x2F;celleditor-popup.js:168</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The default action for the <code>show</code> event which should make the editor visible.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__formatter" class="method item private inherited">
+    <h3 class="name"><code>_formatter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__formatter">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l67"><code>js&#x2F;celleditor-base.js:67</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Copy of the <a href="#attr_formatter">formatter</a> attribute for internal use.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__keyFilter" class="method item private inherited">
+    <h3 class="name"><code>_keyFilter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__keyFilter">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-keyfiltering.js.html#l56"><code>js&#x2F;celleditor-keyfiltering.js:56</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Internal copy of the function set in the <a href="#attr_keyFiltering">keyFiltering</a>
+attribute for faster processing.  If  <a href="#attr_keyFiltering">keyFiltering</a>
+was a RegExp, it will be converted to a function using that RegExp to check
+the entry.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>input value to be validated</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    true if value is valid
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__mouseLeave" class="method item private">
+    <h3 class="name"><code>_mouseLeave</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l412"><code>js&#x2F;celleditor-popup.js:412</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to mouseleave event that closes the active editor</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onClick" class="method item private inherited">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__onClick">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l475"><code>js&#x2F;celleditor-base.js:475</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to INPUT "click" events that will stop bubbling to the DT TD listener,
+to prevent closing editing while clicking within an INPUT.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyDown" class="method item protected inherited">
+    <h3 class="name"><code>_onKeyDown</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__onKeyDown">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l409"><code>js&#x2F;celleditor-base.js:409</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Key listener for the input element <code>keydown</code> event.
+It handles navigation, Enter or Esc.
+It is automatically attached if <a href="#property__inputNode">_inputNode</a> is set.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Keydown event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onValueChange" class="method item private inherited">
+    <h3 class="name"><code>_onValueChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__onValueChange">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-keyfiltering.js.html#l129"><code>js&#x2F;celleditor-keyfiltering.js:129</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles validation while the value is being entered. It applies the
+<a href="#attr_keyFiltering">keyFiltering</a> regular expression or function to the input
+and rejects the entry if it doesn't match.</p>
+
+<p>It will be active if there is an <a href="#property__inputNode">_inputNode</a> set and
+a <a href="#attr_keyFiltering">keyFiltering</a> set.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event facade as provided by the <code>valuechange</code> event.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__parser" class="method item private inherited">
+    <h3 class="name"><code>_parser</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__parser">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l76"><code>js&#x2F;celleditor-base.js:76</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Copy of the <a href="#attr_parser">parser</a> attribute for internal use.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__processKeyFiltering" class="method item private inherited">
+    <h3 class="name"><code>_processKeyFiltering</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__processKeyFiltering">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-keyfiltering.js.html#l80"><code>js&#x2F;celleditor-keyfiltering.js:80</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Processes both changes in the <a href="#attr_keyFiltering">keyFiltering</a>  attribute
+and the initial rendering of the input element to be monitored for valid
+entries.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__regExpFilter" class="method item private inherited">
+    <h3 class="name"><code>_regExpFilter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>regExp</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__regExpFilter">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-keyfiltering.js.html#l111"><code>js&#x2F;celleditor-keyfiltering.js:111</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a function that uses the regular expression provided to check a value
+passed to that function.  It is used along the <a href="#attr_keyFiltering">keyFiltering</a>
+attribute to set the <a href="#method__keyFilter">_keyFilter</a> method for input validation.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">regExp</code>
+                        <span class="type">RegExp</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>regular expression to use when checking.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                    Function that checks a value passed to it against the regular expression.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__unbindUI" class="method item private">
+    <h3 class="name"><code>_unbindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method__unbindUI">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l143"><code>js&#x2F;celleditor-popup.js:143</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Detaches the listeners that were set on this view, any widgets that were created
+and on the View's Overlay instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_cancelEditor" class="method item public inherited">
+    <h3 class="name"><code>cancelEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_cancelEditor">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l395"><code>js&#x2F;celleditor-base.js:395</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Called when the user has requested to cancel and abort any changes to the DT cell,
+usually signified by a keyboard ESC or "Cancel" button, etc..</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item protected inherited">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_destructor">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l173"><code>js&#x2F;celleditor-base.js:173</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hideEditor" class="method item public inherited">
+    <h3 class="name"><code>hideEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_hideEditor">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l377"><code>js&#x2F;celleditor-base.js:377</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides the current editor View instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected inherited">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_initializer">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l105"><code>js&#x2F;celleditor-base.js:105</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the View instance and sets the container and bindings</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_render" class="method item inherited">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_render">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l186"><code>js&#x2F;celleditor-base.js:186</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Renders the editor and binds several event listeners.
+Developers writing specific cell editors should not override this method
+but <a href="#method__defRenderFn">_defRenderFn</a> instead.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_saveEditor" class="method item public inherited">
+    <h3 class="name"><code>saveEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_saveEditor">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l343"><code>js&#x2F;celleditor-base.js:343</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Saves the value provided after validating and parsing it.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Raw value (not yet parsed) to be saved.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_showEditor" class="method item public inherited">
+    <h3 class="name"><code>showEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cellInfo</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#method_showEditor">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l313"><code>js&#x2F;celleditor-base.js:313</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Displays, positions and resizes the cell editor over the edited TD element.</p>
+
+<p>Sets the initial value after formatting.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cellInfo</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Information about the cell that is to be edited, including:</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">td</code>
+                                    <span class="type">Node</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Reference to the table cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">record</code>
+                                    <span class="type">Model</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Reference to the model containing the underlying data</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">colKey</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Key of the column for the cell to be edited</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">initialValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The underlying value of the cell to be edited</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__cellInfo" class="property item private inherited">
+    <h3 class="name"><code>_cellInfo</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property__cellInfo">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l85"><code>js&#x2F;celleditor-base.js:85</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Collection of information related to the cell being edited.
+It is used mostly to provide context information when firing events.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__classError" class="property item private inherited">
+    <h3 class="name"><code>_classError</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property__classError">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l95"><code>js&#x2F;celleditor-base.js:95</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS class name to add to an input box when it fails validation.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;yui3-datatable-celleditor-error&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__classInput" class="property item protected">
+    <h3 class="name"><code>_classInput</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l51"><code>js&#x2F;celleditor-popup.js:51</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS classname to identify the input HTML node within the View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-editor-input&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__classItem" class="property item protected">
+    <h3 class="name"><code>_classItem</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l61"><code>js&#x2F;celleditor-popup.js:61</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS classname to identify the individual input collection HTML nodes within
+the View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-editor-input-item&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__classOverlay" class="property item protected">
+    <h3 class="name"><code>_classOverlay</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l72"><code>js&#x2F;celleditor-popup.js:72</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS classname for the Overlay content within the View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-editor-overlay&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__classOverlayBtn" class="property item protected">
+    <h3 class="name"><code>_classOverlayBtn</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l82"><code>js&#x2F;celleditor-popup.js:82</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS classname used for Overlay BUTTON elements within the View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-editor-overlay-button&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__inputNode" class="property item protected inherited">
+    <h3 class="name"><code>_inputNode</code></h3>
+    <span class="type">Node</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property__inputNode">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l41"><code>js&#x2F;celleditor-base.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder for the input or textarea Node created within the View container.
+For input widgets that don't have any, such as Calendar, this can be left null.
+In such cases, code must be provided for navigation and to display and update
+the <a href="#attr_value">value</a> attribute with the entered value.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__keyFilteringSubscr" class="property item private inherited">
+    <h3 class="name"><code>_keyFilteringSubscr</code></h3>
+    <span class="type">EventHandle | null</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property__keyFilteringSubscr">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-keyfiltering.js.html#l46"><code>js&#x2F;celleditor-keyfiltering.js:46</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event handle to changes in the <a href="#attr_keyFiltering">keyFiltering</a> attribute
+value change, to detach when done.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscr" class="property item protected inherited">
+    <h3 class="name"><code>_subscr</code></h3>
+    <span class="type">EventHandles</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property__subscr">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l54"><code>js&#x2F;celleditor-base.js:54</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Array of generic event listener handles created by this class to be
+detached on destruction.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_btnTemplate" class="property item">
+    <h3 class="name"><code>btnTemplate</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l29"><code>js&#x2F;celleditor-popup.js:29</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the HTML content "template" for BUTTON elements that are added to the Overlay
+via the overlayButtons attribute.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> See Code</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_overlay" class="property item">
+    <h3 class="name"><code>overlay</code></h3>
+    <span class="type">Widget</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l39"><code>js&#x2F;celleditor-popup.js:39</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder property for the Overlay that is created by this View</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_template" class="property item">
+    <h3 class="name"><code>template</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#property_template">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l19"><code>js&#x2F;celleditor-popup.js:19</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the HTML content "template" for the containing Overlay of this editor,
+this property is also set by default to the attribute</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> See Code</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_active" class="attr item inherited">
+    <a name="config_active"></a> 
+    <h3 class="name"><code>active</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_active">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l581"><code>js&#x2F;celleditor-base.js:581</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Signals whether the editor is open and active.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_cell" class="attr item">
+    <a name="config_cell"></a> 
+    <h3 class="name"><code>cell</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l571"><code>js&#x2F;celleditor-popup.js:571</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A cell reference object populated by the calling DataTable, contains the following key properties:
+  <code>{td,value,recClientId,colKey}</code></p>
+    </div>
+
+    
+        <p><strong>Default:</strong> {}</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_formatter" class="attr item inherited">
+    <a name="config_formatter"></a> 
+    <h3 class="name"><code>formatter</code></h3>
+    <span class="type">Function |  | null</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_formatter">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l537"><code>js&#x2F;celleditor-base.js:537</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Function to execute on the <a href="#attr_value">value</a> just prior to displaying in the
+editor's input element.
+(i.e. typically used for pre-formatting Date information from JS to mm/dd/YYYY format)</p>
+
+<p>This function will receive the value from the record as its only argument
+and should return the formatted version to be shown to the user.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hidden" class="attr item">
+    <a name="config_hidden"></a> 
+    <h3 class="name"><code>hidden</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l619"><code>js&#x2F;celleditor-popup.js:619</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setting to check if the editor is "still open" but just hidden, created in order to support
+scrolling datatables when an editor scrolls out of open window.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_inputKeys" class="attr item">
+    <a name="config_inputKeys"></a> 
+    <h3 class="name"><code>inputKeys</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l510"><code>js&#x2F;celleditor-popup.js:510</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A flag to indicate if cell-to-cell navigation should be implemented (currently setup for CTRL-arrow
+key, TAB and Shift-TAB) capability</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_inputWidth" class="attr item">
+    <a name="config_inputWidth"></a> 
+    <h3 class="name"><code>inputWidth</code></h3>
+    <span class="type">String | Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l489"><code>js&#x2F;celleditor-popup.js:489</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies a width attribute style to set the <code>_classInput</code> Node element to upon rendering.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_keyFiltering" class="attr item">
+    <a name="config_keyFiltering"></a> 
+    <h3 class="name"><code>keyFiltering</code></h3>
+    <span class="type">RegExp | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_keyFiltering">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l672"><code>js&#x2F;celleditor-popup.js:672</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides a keystroke filtering capability to restrict input into the editing area checked during the
+"keypress" event.  This attribute is set to either a RegEx or a function that confirms if the keystroke
+was valid for this editor.  (TRUE meaning valid, FALSE meaning invalid)</p>
+
+<p>If a function is provided, the single argument is the keystroke event facade <code>e</code> and if
+the keystroke is valid it should return true, otherwise if invalid false;</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> /^\d*$/            // for numeric digit-only input
+ /^(\d|\-|\.)*$/      // for floating point numeric input
+ /^(\d|\/)*$/         // for Date field entry in MM/DD/YYYY format
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_lastValue" class="attr item">
+    <a name="config_lastValue"></a> 
+    <h3 class="name"><code>lastValue</code></h3>
+    <span class="type">String | Number | Date</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l594"><code>js&#x2F;celleditor-popup.js:594</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Value that was contained in the cell when the Editor View was initiated</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_name" class="attr item">
+    <a name="config_name"></a> 
+    <h3 class="name"><code>name</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l444"><code>js&#x2F;celleditor-popup.js:444</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Name for this View, this is useful because the <code>name</code> attribute is prefixed to the
+ 'Options' string for some Views (i.e. a cell editor named 'myRadio' will have a defined
+ set of options available of 'myRadioOptions'</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_navigationEnabled" class="attr item inherited">
+    <a name="config_navigationEnabled"></a> 
+    <h3 class="name"><code>navigationEnabled</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_navigationEnabled">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l660"><code>js&#x2F;celleditor-base.js:660</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A flag to indicate if cell-to-cell navigation should be implemented (currently setup for CTRL-arrow
+key, TAB and Shift-TAB) capability</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_offsetXY" class="attr item">
+    <a name="config_offsetXY"></a> 
+    <h3 class="name"><code>offsetXY</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l634"><code>js&#x2F;celleditor-popup.js:634</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets an offset of the XY coordinates that will be used for positioning the Overlay upon
+displaying the editor View</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> [0,0]</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_overlayConfig" class="attr item">
+    <a name="config_overlayConfig"></a> 
+    <h3 class="name"><code>overlayConfig</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l475"><code>js&#x2F;celleditor-popup.js:475</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Additional config parameters for the Overlay to be used in constructing the Editor.
+These configs are merged with the defaults required by the Editor.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> {}</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_overlayWidth" class="attr item">
+    <a name="config_overlayWidth"></a> 
+    <h3 class="name"><code>overlayWidth</code></h3>
+    <span class="type">String | Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l499"><code>js&#x2F;celleditor-popup.js:499</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the <code>width</code> parameter to set the Overlay widget to upon rendering, can also be overridden
+by setting <code>overlayConfig.width</code>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_parser" class="attr item inherited">
+    <a name="config_parser"></a> 
+    <h3 class="name"><code>parser</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_parser">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l558"><code>js&#x2F;celleditor-base.js:558</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Function to execute prior to saving the data to the record (Model).</p>
+
+<p>This function will receive the raw value from the INPUT element as
+its only argument and should return the value to be stored in the record.</p>
+
+<p>This method can also be used for input validation prior to saving.
+If the returned value is <code>Y.Attribute.INVALID_VALUE</code> saving will be prevented.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_saveOnEnterKey" class="attr item">
+    <a name="config_saveOnEnterKey"></a> 
+    <h3 class="name"><code>saveOnEnterKey</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_saveOnEnterKey">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l657"><code>js&#x2F;celleditor-popup.js:657</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A flag to signify whether the editor View should be "saved" upon detecting the RTN keystroke
+within the INPUT area.</p>
+
+<p>For example, textarea typically will not, to allow a newline to be added.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_template" class="attr item private">
+    <a name="config_template"></a> 
+    <h3 class="name"><code>template</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l458"><code>js&#x2F;celleditor-popup.js:458</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the Overlay's HTML template for the overall View (not recommended to change this!!)
+NOTE: This the Overlay structure template <strong>and not</strong> the bodyContent template for the Overlay,
+it is not recommended you change this attr.</p>
+
+<p>Please see the <a href="#attr_templateObject">templateObject</a> attribute to define the HTML for your View!</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_templateEngine" class="attr item">
+    <a name="config_templateEngine"></a> 
+    <h3 class="name"><code>templateEngine</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l522"><code>js&#x2F;celleditor-popup.js:522</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the type of template engine that will be used to parse Templates, (via Y.Template).
+Typically this would be set to <code>Y.Template.Micro</code> or <code>Y.Handlebars</code></p>
+
+<p>NOTE: If you use Y.Handlebars (or any other YUI template engine) you MUST include it in your YUI.use
+loader statement ("template" is included in this module's <code>requires</code> by default)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> Y.Template.Micro</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_templateObject" class="attr item">
+    <a name="config_templateObject"></a> 
+    <h3 class="name"><code>templateObject</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l537"><code>js&#x2F;celleditor-popup.js:537</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This attribute is used to define the HTML content that will be created / generated and inserted within
+this View's Y.Overlay.   The attribute definitions include an object with the following recognizable
+properties: <code>html, xxxOptions, propValue, propText, propTitle</code></p>
+
+<p>Note that xxxOptions matches the <code>name</code> attribute (i.e. the editor "name" you include on your column
+definitions), where xxx is replaced with the name.  For "radio" it is <code>radioOptions</code>, for "select" it is
+<code>selectOptions</code>, "checkbox" it is <code>checkboxOptions</code>, etc...</p>
+
+<p>The method <a href="#method__createTemplateContent">_createTemplateContent</a> uses this attribute and processes the
+template using the <code>html</code> and other properties to generate the HTML.  It then inserts the compiled HTML into
+the Overlay's <code>bodyContent</code>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> templateObject: {
+     // set the template definition
+     html: '&lt;select class="myselect"&gt;'
+        +  '&lt;% Y.Array.each( data.options, function(r){ %&gt;'
+        +  '&lt;option value="&lt;%= r.value %&gt;" &lt;% (r.title) ? \'title="r.title"\' :  %&gt;&gt;'
+        +  '&lt;%= r.text %&gt;&lt;/option&gt;'
+        +  '&lt;% },this); %&gt;'
+        +  '&lt;/select&gt;'
+     options: states   // [ {value:'AZ', text:'Arizona}, {value:'DE', text:'Delaware' } ]
+ }
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_validator" class="attr item">
+    <a name="config_validator"></a> 
+    <h3 class="name"><code>validator</code></h3>
+    <span class="type">RegExp | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_validator">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l693"><code>js&#x2F;celleditor-popup.js:693</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides the capability to validate the final saved value after editing is finished.
+This attribute can be set to either a RegEx or a function, that operates on the entire
+"value" setting of the editor input (whereas <a href="#attr_keyFilter">keyFiltering</a> performs
+validation checks on each key input).</p>
+
+<p>If a function is provided, the single argument is the value setting of the editor.
+the keystroke is valid it should return true, otherwise if invalid false;</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> /^\d$/            // for numeric digit-only input
+ /^\d|\-|\.|\+$/   // for floating point numeric input
+ /^\d|\/$/         // for Date field entry in MM/DD/YYYY format
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_value" class="attr item">
+    <a name="config_value"></a> 
+    <h3 class="name"><code>value</code></h3>
+    <span class="type">String | Number | Date</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_value">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l583"><code>js&#x2F;celleditor-popup.js:583</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Value that was saved in the Editor View and returned to the record</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_visible" class="attr item">
+    <a name="config_visible"></a> 
+    <h3 class="name"><code>visible</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag readonly">readonly</span>
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_visible">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l606"><code>js&#x2F;celleditor-popup.js:606</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setting for checking the visibility status of this Editor</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_xy" class="attr item">
+    <a name="config_xy"></a> 
+    <h3 class="name"><code>xy</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#attr_xy">
+                DataTable.BaseCellEditor
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-popup.js.html#l646"><code>js&#x2F;celleditor-popup.js:646</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>XY coordinate position of the View container Overlay for this editor</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_cancel" class="events item inherited">
+    <h3 class="name"><code>cancel</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#event_cancel">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l156"><code>js&#x2F;celleditor-base.js:156</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired when editing is cancelled (without saving) on this cell editor.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event facade, including:</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">td</code>
+                                    <span class="type">Node</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The TD Node that was edited</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">record</code>
+                                    <span class="type">Model</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Model instance of the record data for the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">colKey</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Column key (or name) of the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">initialValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The original value of the underlying data for the cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_keyNav" class="events item inherited">
+    <h3 class="name"><code>keyNav</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#event_keyNav">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l418"><code>js&#x2F;celleditor-base.js:418</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires when the navigation keys are pressed to move to another cell.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>event facade including:</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">dx</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>number of cells to move in the x direction. (usually -1: left, 0 or 1: right)</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">dy</code>
+                                    <span class="type">Integer</span>
+                                
+
+                                <div class="param-description">
+                                    <p>number of cells to move in the y direction. (usually -1: up, 0 or 1: down)</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_render" class="events item inherited">
+    <h3 class="name"><code>render</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#event_render">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l115"><code>js&#x2F;celleditor-base.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event fired when the inline editor has been initialized and is ready for use.</p>
+    </div>
+
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_save" class="events item inherited">
+    <h3 class="name"><code>save</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#event_save">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l140"><code>js&#x2F;celleditor-base.js:140</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event that is fired when the user has finished editing the View's cell contents</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event facade, including:</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">td</code>
+                                    <span class="type">Node</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The TD Node that was edited</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">record</code>
+                                    <span class="type">Model</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Model instance of the record data for the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">colKey</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Column key (or name) of the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">initialValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The original value of the underlying data for the cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">formattedValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Data value as entered by the user</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">newValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Parsed value ready to be saved</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_show" class="events item inherited">
+    <h3 class="name"><code>show</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..&#x2F;classes&#x2F;DataTable.BaseCellEditor.html#event_show">DataTable.BaseCellEditor</a>:
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_celleditor-base.js.html#l124"><code>js&#x2F;celleditor-base.js:124</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event fired when the cell editor is displayed and becomes visible.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">ev</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event Facade including:</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">td</code>
+                                    <span class="type">Node</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The TD Node that was edited</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">record</code>
+                                    <span class="type">Model</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Model instance of the record data for the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">colKey</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Column key (or name) of the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">initialValue</code>
+                                    <span class="type">Any</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The original value of the underlying data for the cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">inputNode</code>
+                                    <span class="type">Node</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The editor's INPUT / TEXTAREA Node</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">formattedValue</code>
+                                    <span class="type">String</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The value as shown to the user.</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

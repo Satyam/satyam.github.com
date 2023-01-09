@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: progressbar   classmap.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1231604923.39" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1231604923.39" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1231604923.39"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1231604923.39"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>ProgressBar Widget&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_progressbar.html" title="progressbar">progressbar</a>
+                
+                 &gt; classmap.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">classMap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;YAHOO.widget.ProgressBar&quot;</span><span class="o">:</span> <span class="s2">&quot;progressbar&quot;</span><span class="p">};</span>
+
+<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">resolveClass</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span><span class="o">=</span><span class="nx">className</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="o">,</span> <span class="nx">ns</span><span class="o">=</span><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">classMap</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">ns</span><span class="p">[</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="nx">ns</span> <span class="o">=</span> <span class="nx">ns</span><span class="p">[</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">ns</span><span class="o">;</span>
+<span class="p">};</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_progressbar.html" title="progressbar">progressbar</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="YAHOO.widget.ProgressBar.html" title="YAHOO.widget.ProgressBar">YAHOO.widget.ProgressBar</a></li>
+                                <li class=""><a href="YAHOO.widget.ProgressBar.html" title="YAHOO.widget.ProgressBar">YAHOO.widget.ProgressBar</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="classmap.js.html" title="classmap.js">classmap.js</a></li>
+                                <li class="selected"><a href="classmap.js.html" title="classmap.js">classmap.js</a></li>
+                                <li class=""><a href="progressbar-debug.js.html" title="progressbar-debug.js">progressbar-debug.js</a></li>
+                                <li class=""><a href="progressbar-debug.js.html" title="progressbar-debug.js">progressbar-debug.js</a></li>
+                                <li class=""><a href="progressbar-debug.js.html" title="progressbar-debug.js">progressbar-debug.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2009 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.ProgressBar.html#config_anim", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "anim"}, {"url": "YAHOO.widget.ProgressBar.html#config_anim", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "anim"}, {"url": "YAHOO.widget.ProgressBar.html#event_animChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "animChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_animChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "animChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_ariaText", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "ariaText"}, {"url": "YAHOO.widget.ProgressBar.html#config_ariaText", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "ariaText"}, {"url": "YAHOO.widget.ProgressBar.html#event_ariaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "ariaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_ariaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "ariaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_backColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "backColor"}, {"url": "YAHOO.widget.ProgressBar.html#config_backColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "backColor"}, {"url": "YAHOO.widget.ProgressBar.html#event_backColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "backColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_backColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "backColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_barColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barColor"}, {"url": "YAHOO.widget.ProgressBar.html#config_barColor", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barColor"}, {"url": "YAHOO.widget.ProgressBar.html#event_barColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_barColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_barEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barEl"}, {"url": "YAHOO.widget.ProgressBar.html#config_barEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "barEl"}, {"url": "YAHOO.widget.ProgressBar.html#event_barElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_barElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "barElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAnimChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAnimChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAnimChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAnimChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAriaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAriaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeAriaTextChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeAriaTextChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBackColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBackColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBackColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBackColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarColorChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarColorChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBarElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBarElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBorderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBorderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeBorderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeBorderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeDirectionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeDirectionChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeDirectionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeDirectionChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeHeightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeHeightChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeHeightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeHeightChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMaxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMaxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMinValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMinValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeMinValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeMinValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeWidthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeWidthChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_beforeWidthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "beforeWidthChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_border", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "border"}, {"url": "YAHOO.widget.ProgressBar.html#config_border", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "border"}, {"url": "YAHOO.widget.ProgressBar.html#event_borderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "borderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_borderChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "borderChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_changingEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "changingEvent"}, {"url": "YAHOO.widget.ProgressBar.html#event_changingEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "changingEvent"}, {"url": "YAHOO.widget.ProgressBar.html#event_completeEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "completeEvent"}, {"url": "YAHOO.widget.ProgressBar.html#event_completeEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "completeEvent"}, {"url": "YAHOO.widget.ProgressBar.html#method_destroy", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "destroy"}, {"url": "YAHOO.widget.ProgressBar.html#method_destroy", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "destroy"}, {"url": "YAHOO.widget.ProgressBar.html#config_direction", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "direction"}, {"url": "YAHOO.widget.ProgressBar.html#config_direction", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "direction"}, {"url": "YAHOO.widget.ProgressBar.html#event_directionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "directionChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_directionChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "directionChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_height", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "height"}, {"url": "YAHOO.widget.ProgressBar.html#config_height", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "height"}, {"url": "YAHOO.widget.ProgressBar.html#event_heightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "heightChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_heightChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "heightChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_maskEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maskEl"}, {"url": "YAHOO.widget.ProgressBar.html#config_maskEl", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maskEl"}, {"url": "YAHOO.widget.ProgressBar.html#event_maskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_maskElChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maskElChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_maxValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maxValue"}, {"url": "YAHOO.widget.ProgressBar.html#config_maxValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "maxValue"}, {"url": "YAHOO.widget.ProgressBar.html#event_maxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_maxValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "maxValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_minValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "minValue"}, {"url": "YAHOO.widget.ProgressBar.html#config_minValue", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "minValue"}, {"url": "YAHOO.widget.ProgressBar.html#event_minValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "minValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_minValueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "minValueChange"}, {"url": "YAHOO.widget.ProgressBar.html#method__recalculateConstants", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "_recalculateConstants"}, {"url": "YAHOO.widget.ProgressBar.html#method__recalculateConstants", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "_recalculateConstants"}, {"url": "YAHOO.widget.ProgressBar.html#method_render", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "render"}, {"url": "YAHOO.widget.ProgressBar.html#method_render", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "method", "name": "render"}, {"url": "YAHOO.widget.ProgressBar.html#event_startEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "startEvent"}, {"url": "YAHOO.widget.ProgressBar.html#event_startEvent", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "startEvent"}, {"url": "YAHOO.widget.ProgressBar.html#config_value", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "value"}, {"url": "YAHOO.widget.ProgressBar.html#config_value", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "value"}, {"url": "YAHOO.widget.ProgressBar.html#event_valueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "valueChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_valueChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "valueChange"}, {"url": "YAHOO.widget.ProgressBar.html#config_width", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "width"}, {"url": "YAHOO.widget.ProgressBar.html#config_width", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "config", "name": "width"}, {"url": "YAHOO.widget.ProgressBar.html#event_widthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "widthChange"}, {"url": "YAHOO.widget.ProgressBar.html#event_widthChange", "access": "", "host": "YAHOO.widget.ProgressBar", "type": "event", "name": "widthChange"}];
+</script>
+</body>
+</html>

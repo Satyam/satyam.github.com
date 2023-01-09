@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Testing Menu and App together</title>
+		<base href="/menuAndApp" />
+	</head>
+	<body  class="yui3-skin-sam">
+		<div id="menu1" class="yui3-menu  yui3-menu-horizontal">
+			<div class="yui3-menu-content">
+				<ul>
+					<li class="yui3-menuitem">
+						<a class="yui3-menuitem-content" href="123">123</a>
+					</li>
+					<li>
+						<a class="yui3-menu-label" href="#">Has submenus</a>
+						<div class="yui3-menu">
+							<div class="yui3-menu-content">
+								<ul>
+									<li class="yui3-menuitem">
+										<a class="yui3-menuitem-content" href="abc">abc</a>
+									</li>
+									<li class="yui3-menuitem">
+										<a class="yui3-menuitem-content" href="def">def</a>
+									</li>
+									<li class="yui3-menuitem">
+										<a class="yui3-menuitem-content" href="ghi">ghi</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>			
+		<script type="text/javascript" src="http://yui.yahooapis.com/3.5.0pr1/build/yui/yui.js"></script>
+		<script>
+
+			YUI().use("node-menunav",'app', function(Y) {
+				var menuNode = Y.one('#menu1');
+				menuNode.plug(Y.Plugin.NodeMenuNav);
+				
+				menuNode.delegate('click', function (ev) {
+					ev.preventDefault(); 
+				}, 'a[href="#"]');				
+
+				var TestApp = new Y.Base.create(
+					'testApp', 
+					Y.App, 
+					[], 
+					{
+						
+					},
+					{
+						ATTRS: {
+							linkSelector: {
+								value:'a.yui3-menuitem-content'
+							},
+							serverRouting: {
+								value: false
+							},
+							routes: {
+								value: [
+//									{
+//										path:'#',
+//										callback: function() {
+//											this.replace();
+//											
+//										}
+//									},
+									{
+										path: '/123', 
+										callback: function () {
+											console.log('123 callback');
+										}
+									},
+									{
+										path: '/abc', 
+										callback: function () {
+											console.log('abc callback');
+										}
+									},
+									{
+										path: '/def', 
+										callback: function () {
+											console.log('def callback');
+										}
+									},
+									{
+										path: '/ghi', 
+										callback: function () {
+											console.log('ghi callback');
+										}
+									}
+								]
+							}
+						}
+					}
+				);
+				
+				var testApp = new TestApp();
+			});
+		</script>
+	</body>
+</html>

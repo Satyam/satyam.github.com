@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css">
+    <title>Delete Rows By</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Delete Rows By</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+			<button id="delete">Delete Selected</button>
+		</div>
+		<div class="ft">
+			<p>Click on the checkboxes of the rows you want deleted and then click on the <code>Delete Selected</code> button.
+			The rows will be deleted in one batch, avoiding individual calls to deleteRow, which implies multiple redraws of the table</p>
+			<p>I've defined a new method for DataTable <code>deleteRowsBy</code> which receives a single argument, a function
+			which should return true or false depending on whether you want the record deleted or not. 
+			The function will receive an object which contains the values for each record as a simple object with the field
+			names as its keys.</p>
+			<p>The method is used at the very bottom of the code section.  On receiving the button click I call the <code>deleteRowsBy</code>
+			method which simply returns the value <code>Selected</code> field.</p>
+			<p>The method is not complete.  
+			It does not check to see whether any of the records marked for deletion is on the array of selected rows or cells.  
+			It does not fire any event.</p>
+			<p>(2.5.1) If you drag the columns around, and then check a checkbox, it will fail, 
+			the <code>getColumn</code> function fails when columns have been moved around</p>
+		</div>
+	</div>
+
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript" >
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("datatable");
+
+	if (location.search.indexOf('logger') !== -1) {
+		loader.require('logger');
+	}
+	loader.insert({ 
+		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+		
+			if (location.search.indexOf('logger') !== -1) {
+				var myLogReader = new YAHOO.widget.LogReader();  
+			}
+			YAHOO.log('hello, I\'m the logger');
+
+			var Dom = YAHOO.util.Dom,
+				Event = YAHOO.util.Event,
+				log = function (msg) {
+					YAHOO.log(msg,'info','deleteRowsBy demo');
+				};
+			
+
+			
+			YAHOO.widget.DataTable.prototype.deleteRowsBy = function (condition) {
+				var start = 0, count = 0, current = 0, 
+					recs = this.getRecordSet().getRecords();
+				
+				while (current < recs.length) {
+					if (condition(recs[current].getData())) {
+						if (count === 0) {
+							start = current;
+							log('got one to delete at ' + start);
+						} else {
+							log('got 1 more to delete');
+						}
+						count++;
+						current++;
+					} else {
+						if (count) {
+							log('deleting ' + count + ' rows starting at ' + start);
+							recs.splice(start, count);
+							count = 0;
+							current = start;
+						} else {
+							current++;
+						}
+					}
+				}
+				if (count) {
+					log('deleting ' + count + ' rows starting at ' + start);
+					recs.splice(start, count);
+				}
+				log('rendering');
+				this.render();
+			};
+			
+			
+	        var dt = new YAHOO.widget.DataTable(
+				"container", 
+				[
+		            {key:"Select", label:'<input type="checkbox"/>', resizeable:true, formatter:"checkbox"},
+		            {key:"Numbers", children:[
+		                {key:"SKU", label:"SKU", sortable:true, resizeable:true},
+		                {key:"Quantity", sortable:true, resizeable:true}
+		            ]},
+		            {key:"Text", children:[
+		                {key:"Item", sortable:true, className:"myClass",resizeable:true},
+		                {key:"Description", sortable:true, width:200, minWidth:200, resizeable:true}
+		            ]}
+		        ],
+                new YAHOO.util.DataSource(
+					[
+						{SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+						{SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football."},
+						{SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles"},
+						{SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+						{SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+						{SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:""},
+						{SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+						{SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:""},
+						{SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+						{SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+						{SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+						{SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+						{SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:""},
+						{SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+					],
+					{
+						responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+						responseSchema: {
+							fields: ["SKU","Quantity","Item","Description"]
+						}
+					}
+				),
+				{
+					draggableColumns:true
+				}
+			);
+			
+			dt.subscribe('checkboxClickEvent', function(oArgs) {
+				var elCheckbox = oArgs.target;
+				var newValue = elCheckbox.checked;
+				var record = this.getRecord(elCheckbox);
+				var column = this.getColumn(elCheckbox);
+				record.setData(column.key,newValue);
+			});
+			
+			dt.on('theadCellClickEvent', function (oArgs) {
+				var target = oArgs.target,
+					column = this.getColumn(target),
+					actualTarget = Event.getTarget(oArgs.event),
+					check = actualTarget.checked;
+					
+				if (column.key == 'Select') {
+					var rs = this.getRecordSet(), l = rs.getLength();
+					for (var i=0;i < l; i++) {
+						rs.getRecord(i).setData('Select',check);
+					}
+					this.render();
+				}
+			});
+			
+			
+			Event.on('delete','click', function() {
+				dt.deleteRowsBy(function (data) {
+					return data.Select;
+				});
+			});
+		}
+	}, 'js');
+})();
+
+</script>
+</body>
+</html>

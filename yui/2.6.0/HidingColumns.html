@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Show and hide columns</title>
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+
+	loader.require("reset-fonts-grids","base","datatable","dragdrop","button");
+	loader.insert({ 
+		onSuccess: function() {
+			//shortcuts
+			var Dom = YAHOO.util.Dom;
+				
+			var dt = new YAHOO.widget.DataTable(
+				'Container',
+				[
+					{key:"id",label:"ID",resizeable:true},
+					{key:"name",label:"Name",resizeable:true},
+					{key:"date",label:"Date",resizeable:true},
+					{key:"price",label:"Price","type":"number",resizeable:true},
+					{key:"number",label:"Number",resizeable:true},
+					{key:"address",label:"Address",resizeable:true},
+					{key:"company",label:"Company",resizeable:true},
+					{key:"desc",label:"Description",resizeable:true},
+					{key:"age",label:"Age",resizeable:true},
+					{key:"title",label:"Title",resizeable:true},
+					{key:"phone",label:"Phone",resizeable:true},
+					{key:"email",label:"Email",resizeable:true},
+					{key:"zip",label:"Zip",resizeable:true},
+					{key:"country",label:"Country",resizeable:true}
+				],
+				new YAHOO.util.DataSource(
+					'json_meta_proxy.php?',
+					{
+						responseType:YAHOO.util.DataSource.TYPE_JSON,
+						responseSchema: {
+							resultsList:'records',
+							fields:['id','name','date','price','number','address','company','desc','age','title','phone','email','zip','country']
+						}
+					}
+				),
+				{
+					initialRequest:'startIndex=0&results=25',
+			        paginator: new YAHOO.widget.Paginator({ 
+			            containers: null,
+			            currentPage: 1,
+			            dropdownOptions: [10,25,50],
+			            pageLinks: 0,
+			            rowsPerPage: 10
+			        }),
+					draggableColumns:true
+				}
+			);
+
+			var menu = new YAHOO.widget.Menu('nowhere');
+
+
+			var showColumns = new YAHOO.widget.Button(
+				{
+					type: "split",  
+					label: "Show Columns", 
+					name: "showColumnsButton", 
+					menu: menu, 
+                    container: "splitButtonContainer",
+					disabled:true
+				}
+			);   
+			
+			var refreshButton = function() {
+		        if (Dom.inDocument('nowhere')) {
+					menu.render();
+				} else {
+					menu.render(document.body);
+				}
+				showColumns.set('disabled', menu.getItems().length === 0);
+			};
+	
+			dt.subscribe('headerCellClickEvent' ,function(ev) {
+				var column = this.getColumn(ev.target);
+				this.hideColumn(column);
+				menu.addItem({text: column.label || column.key,value:column.key});
+				refreshButton();
+			});
+			
+			/*  Hijacking
+			dt.hideColumn = function (col) {
+				console.log('before hiding');
+				YAHOO.widget.DataTable.prototype.hideColumn.apply(this,arguments);
+				console.log('after hiding');
+			};
+			*/
+
+			showColumns.on("click", function () {
+				var m = menu.getItems();
+				for (var i = 0; i < m.length; i++) {
+					dt.showColumn(dt.getColumn(m[i].value));
+				}
+				menu.clearContent();
+				refreshButton();
+			});
+
+			showColumns.on("appendTo", function () {
+				menu = this.getMenu();
+				menu.subscribe("click", function onMenuClick(sType, oArgs) {
+				
+					var oMenuItem = oArgs[1]; 
+				
+					if (oMenuItem) {
+						dt.showColumn(dt.getColumn(oMenuItem.value));
+						menu.removeItem(oMenuItem.index);
+						refreshButton();
+					}
+				});
+			});
+		}
+	});
+})();
+		</script>
+<style type="text/css">
+.hide {
+	display:none;
+}
+</style>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc3"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div style="float:right" id="splitButtonContainer"></div>
+		<h1>Show and hide columns</h1>
+		<p>Click on any column header to hide a column.  Click on the button at right to show all columns or use the drop-down to select which one to show. 
+		Drag columns to move them to other positions, drag the borders to resize them. See comments below. </p>
+		<div id="Container"></div>
+		<h2>Comments</h2>
+		<p>This example shows an easy way to hide and show columns in a DataTable.  
+		When you click the header of any column, that column will hide. 
+		It uses the new 2.5.1 methods <code>hideColumn</code> and <code>showColumn</code>.  Notice that in contrast to 
+		the <a href="../HidingColumns.html">example</a> for the previous version there is no fooling around with the DOM,
+		it is now supported by the DataTable itself.  Moreover, instead of completely dissappearing, the hidden columns
+		give a hint of their existence by showing a very narrow strip.</p>
+		<p>It uses a split button to show the hidden columns.  If you click the body of the button, all columns hidden will be shown again.
+		You can also use the dropdown of the split button to show individual columns.   
+		The dropdown of the split button is updated with the headings of the hidden columns and the button itself gets disabled when all columns are shown.</p>
+		<p>Dragging and resizing columns was done by simply adding the corresponding attributes to the general DataTable configuration attributes 
+		(the fouth argument in its constructor) or in the column definition for each column. </p>
+		<p>Notice how well it differentiates in between clicking (which hides the column), dragging (which moves it around) 
+		and dragging the border (which resizes it).  
+		Still, this might be confusing to the user, for example, the four arrow cursor hints at moving the column around, 
+		but says nothing about hiding it and column sorting is disabled. 
+		A context menu might be in order, or providing suitable icons on the headers to make it clear.</p>
+		<p>It uses the same PHP server script as the <a href="index.html#ServerDriven">Server driven DataTable</a> example.</p>
+
+	</div>
+	</body>
+</html>
+				

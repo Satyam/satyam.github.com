@@ -1,0 +1,1191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Record and RecordSet test</title>
+
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssgrids-deprecated/grids-min.css&3.2.0/build/cssbase/base-min.css" /> <!--&3.2.0/build/overlay/assets/skins/sam/overlay.css"-->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/datatable/assets/skins/sam/datatable.css">
+		<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+		<style>
+			.yui-form,.yui3-form {
+				width:400px;
+				padding: 1em;
+				border:thin solid silver;
+			}
+			.yui-form fieldset,.yui3-form fieldset  {
+				border:thin solid silver;
+				padding: 1em;
+
+			}
+			.yui-form legend,.yui3-form legend {
+				margin:0.5em;
+			}
+
+			.yui-form label,.yui3-form label {
+				float:left;
+				width:45%;
+			}
+			.yui-form .yui-form-field-container,.yui3-BaseField-input {
+				float:left;
+				width:45%;
+			}
+			.yui-form .yui-form-fieldset-container, .yui3-basefield{
+				overflow:hidden;
+				clear:both;
+				margin:1em;
+			}
+			#table, #form, #table1, #form1  {
+				margin:1em;
+			}
+			.yui3-pager a {
+				text-decoration:none;
+				margin:0.5em;
+				color:black;
+			}
+		</style>
+		<style type="text/css">
+			.dp-highlighter th, .dp-highlighter td {
+				border:0;
+				padding:0;
+			}
+			.dp-highlighter .line1, .dp-highlighter  .line2 {
+				padding-left:10px;
+				white-space:nowrap;
+			}
+		</style>
+    </head>
+    <body class="yui3-skin-sam yui-skin-sam">
+
+		<div class="yui3-d0">					
+
+			<h1 id="hd">Record and RecordSet test</h1>
+
+			<div id="bd">
+				<div id="table"></div>
+				<p>The table above was built using the classNames and CSS of the YUI2 DataTable but it is certainly not an active DataTable.
+				RecordSet's tabulate function just creates a nicely formatted HTML table, nothing more.
+				Though this method can be useful, YUI3 DataTable should be a component that can display and work with a
+				RecordSet as a storage, taking some of the definitions from it.  Method tabulate does use the formatter set in DataType.Types
+				for each of the fields, so should DataTable.
+				</p>
+				<div id="pager"></div>
+				<div id="form"></div>
+				<pre id="output"></pre>
+				<p>This example uses a Y.Form object and Y.Form.Field objects for the fields.<br />
+				You can actually page through the records.  You can change any of the fields.<br />  
+				The serialize button will become enabled when a record has 'dirty' fields.  <br />
+				The value of the fields will be retained when paging back and forth.<br />
+				When clicking the button, all changed fields within the whole recordset will be serialized.<br />
+				The <code>id</code> field is marked as PrimaryKey so it will always be present when serializing.  This field cannot be edited.
+				</p>
+				<p>The Form is created with the following code:</p>
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					var form = new Y.Form({
+						recordSet: formRs,
+						method:'POST',
+						submitLabel:'Serialize',
+						pager:'#pager'
+					}).render('#form').on('submit', function (ev) {
+						ev.preventDefault();
+						Y.one('#output').set('innerHTML',formRs.serialize());
+					});
+				</textarea>
+				<p>I used some of the few configuration attributes I put in Form just to show them working, the only that makes any difference
+				is <code>pager</code> which will actually make a paging control show and work, otherwise I could have used <code>index</code>
+				which is the index of the Record to be shown within the RecordSet and defaults to 0.</p>
+				<p>A configuration attribute I have not dealt with is the <code>fields</code> attribute which will contain overrides
+				and additional properties for each of the fields.  For example, I might want to hide a field which is defined in the RecordSet,
+				I could do it (it is not implemented) by the following:
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					var form = new Y.Form({
+						recordSet: formRs,
+						fields: {
+							id: {
+								hidden:true
+							}
+						}
+					});
+				</textarea>
+				<p>After rendering the form, I set a listener on the <code>submit</code> event where I show the serialization of the
+				changed fields in the RecordSet into the container below the form.</p>
+				<p>Of course, the most important attribute is <code>recordSet</code> which is set to <code>formRs</code> where the actual data is stored.
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					var formRs = new Y.RecordSet();
+					formRs.set('fieldDefSet', new Y.FieldDefSet([
+						{name:'nameExtra', label:'First Group',	children: [
+							{name:'name', label:'Name'},
+							{name:'extra', label:'Extra', type:'padded'}
+						]},
+						{name:'date', label:'Date',	type:'myDate'},
+						{name:'id',	type:'number', primaryKey:true	}
+					]));
+				</textarea>
+				<p>I first create a RecordSet instance and set its fields definitions with an instance of FieldDefSet.  
+				This definition is the same as in the table above. The fieldDef <code>nameExtra</code> which in the 
+				table is shown as a nested header, here it sets a &lt;fieldset&gt; with the other fields nested within.</p>
+				<p>Several fields have <code>type</code> definitions.  Though the data comes from an external source all serialized as strings
+				the <code>type</code> definition lets me have the <code>id</code> stored internally as a number though it is read as a string
+				and send to the screen as text, while the field <code>date</code> is stored internally as instances of Date objects, received
+				as a string in YYYY-MM-DD hh:mm:ss format, send to the screen in DD/MM/YYYY format and, should I have a CalendarField object,
+				entered via YUI2 Calendar widget. Though the <code>number</code> type is standard, the other two are custom and are made
+				by collecting definitions of converters, as I'll show later.</p>
+				<p>The other notable attribute is <code>primaryKey</code>.  This has two effects.  That field will always be included in the serialization
+				even if it is not modified, to identify the record on the server.  The other consequence is that it cannot be edited.  There will be no
+				TextBox to enter a new value for it. (for this example, I made it visible, though unchangeable)</p>  
+				<p>The data is loaded via a DataSource: </p>
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					formRs.set('dataSource',myDataSource);
+					formRs.after('loadData',function(ev) {
+						// Here is where the code to render the form goes
+					});
+					formRs.sendRequest();
+				</textarea>
+				<p>I set the <code>dataSource</code> attribute of my RecordSet instance to a standard YUI3 DataSource that I created elsewhere.
+				Since the load is going to be asynchronous, I set a listener for the <code>loadData</code> event to create the form with the code
+				I've shown above.  When that is set, I request the data.</p>
+				<p>I added my <code>myDate</code> custom data type to the built-in table (in fact, there is no 'built-in' table, but lets assume there was one),
+				by using the following code:</p>
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					Y.mix(Y.namespace('DataType.Types'), {
+						myDate: {
+							server: Y.DataType.Converters.SQLDate,
+							ui: Y.DataType.Converters.dmyDate
+						}
+					});
+				</textarea>
+				<p>Both the <code>DataType.Types</code> and <code>DataType.Converters</code> are static tables I suggest having.  Here
+				I'm saying that, to communicate with the server, I should parse and format dates using the <code>SQLDate</code> converter while
+				to format and parse what's entered in the screen I should use the <code>dmyDate</code> converter.  They come from the following table:</p>
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					Y.mix(Y.namespace('DataType.Converters'), {
+						SQLDate: {
+							parser:function(value) {
+								var parts = value.split(' ');
+								var datePart = parts[0].split('-');
+								if (parts.length > 1) {
+									var timePart = parts[1].split(':');
+									return new Date(datePart[0],datePart[1]-1,datePart[2],timePart[0],timePart[1],timePart[2]);
+								} else {
+									return new Date(datePart[0],datePart[1]-1,datePart[2]);
+								}
+							},
+							formatter:function(value) {
+								return Y.DataType.Date.format(value,{format:'%Y-%m-%d %T'});
+							}
+						},
+						dmyDate: {
+							parser: function(value) {
+								var datePart = value.split('/');
+								return new Date(datePart[0],datePart[1]-1,datePart[2]);
+							},
+							formatter:function(value) {
+								return Y.DataType.Date.format(value,{format:'%d/%m/%Y'});
+							}
+						}
+					});
+				</textarea>
+				<p>Each converter is made of a parser and a formatter.  I've only shown the two related to my date format but 
+				there should be one for any possible date format both for IO against the server as well as for communicating with the user</p>
+				<p>The part that is missing here is the editors and validators.  These should be associated with the DataType.Types table
+				but since I only made the TextBoxField field there wasn't much to show.  If I had the CalendarField done, I could have added:</p>
+				<textarea  name="code" class="JScript" cols="60" rows="3">				
+					Y.DataType.Types.myDate.ui.editor = Y.Form.CalendarField;
+				</textarea>
+				<p>This sounds a little complicated but remember that the Y.DataType.Types and Y.DataType.Converters table should already contain
+				many standard converters and data types and that as for custom types, these will usually be application-wide, you wouldn't be
+				setting them on a page-by-page basis but for the whole of your application, as you are likely to receive and show each type
+				of data in the same format all across so all this types and converter stuff will be in your standard include.</p>
+				
+			</div>
+			<div id="footer" style="margin-top:1em">
+				<h3><a href="recordDocs/index.html">API Docs</a></h3>
+				<h3>Change Log</h3>
+				<p>Since <a href="http://yuilibrary.com/forum/viewtopic.php?f=18&t=4641&p=16657#p16657">announced</a> the following has been added/changed:</a>
+				<ul>
+				<li>Method search allows for fetching any record by the values of its primaryKey fields</li>
+				<li>Serialization constants changed to hash table with serailization functions</li>
+				<li>serializeFormat attribute now takes a function</li>
+				<li>Field attributes are now instances of Y.Attribute and are validated (and documented)</li>
+				<li>Now there is sort</li>
+				<li>If primaryKey is changed on any field, index will be rebuilt</li>
+				<li>Changed the frequently used <code>key</code> argument (which wasn't a descriptive name) into <code>fieldName</code></li>
+				<li>Made <code>FieldDef</code> and <code>FieldDefSet</code> separate classes</li>
+				<li>In doing so, I kept the previous <code>setFieldDef</code> method, which I think it is messy, I should look for a better way</li>
+				<li><code>RecordSet</code> holds one <code>FieldDefSet</code> which can contain several <code>FieldDef</code>
+				    which can have children</li>
+				<li>Table sample now has nested column headers</li>
+				<li>Changed <code>sort</code> to fire event <code>sort</code> so it can be captured</li>
+				<li>Added destructor method to <code>RecordSet</code> and added calls to method <code>destroy()</code> in test because listeners were piling up</li>
+				<li>Added a 'formalize' method that builds a form out of one of the records.  Not even the name is really serious, it is just to prove the principle.</li>
+				<li>Changed <code>Record.Field</code> into a sub-class of Base and made all its properties attributes</li>
+				<li>I added a few lines of code towards the end of this test so you can run any individual test case by providing its name
+				after the hash sign, <a href="http://localhost/gerumayui/js/recordTest.html#Tabulate%20and%20Formalize">example</a></li>
+				<li>Created a Form class and Form.BaseField, Form.TextBoxField and Form.UneditableField 
+				which draws a Form with the information of the field definitions in the RecordSet.</li>
+				</ul>
+			</div>
+
+        
+		</div>        
+
+		<!-- YUI Seed -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/3.2.0/build/yui/yui.js"></script>
+
+		<script type="text/javascript">
+
+
+			YUI({
+				filter:'raw',
+				groups: {
+					js: {
+						base: './',
+						modules: {
+							recordset: {
+								path:'record.js',
+								requires: ['record','collection','base','datatype','widget','substitute']
+							}
+							
+						}
+					}
+				}}).use(
+				'datatype',"datasource-local", "datasource-arrayschema",'recordset','test','json','console','substitute','widget',
+			function(Y) {
+				var logger = new Y.Console().render();
+				
+				var A = Y.Assert, T = Y.Test,
+					R = Y.Record, RS = Y.RecordSet, FD = Y.FieldDef, FDS = Y.FieldDefSet;
+				
+
+				A.isEmpty = function(obj,message){
+					A._increment();
+					for(var i in obj){
+						throw new A.ComparisonFailure(A._formatMessage(message, "Object should be empty."), {}, obj);
+					}
+				};
+				A.isNotEmpty = function(obj,message){
+					A._increment();
+					for(var i in obj){
+						return;
+					}
+					throw new A.ComparisonFailure(A._formatMessage(message, "Object should not be empty."), {}, obj);
+				};
+				
+				var data = [
+					{name:"abc",id:"123",extra:"foo",date:"2010-09-01"},
+					{name:"def",id:"456",extra:"bar",date:"2010-08-04"},
+					{name:"ghi",id:"789",extra:"baz",date:"2011-01-05"}
+				];
+	
+				var data2 = [
+					{name:"abc",id:"123",extra:"new!!!!",date:"2010-09-03"},
+					{name:"def",id:"666",extra:"bar",date:"2010-08-04"},
+					{name:"mmm",id:"789",extra:"baz",date:"2011-01-05"}
+				];
+				//create the test suite
+				var suite = new T.Suite("RecordSet tests");
+				var rs = null, r = null, fds = null, fd = null, f = null;
+				
+				suite.add(new T.Case({
+					name: "FieldDefSet creation",
+					tearDown: function() {
+						fd = fds = null;
+					},
+					testSimpleFieldDefSet: function() {
+						fds = new FDS([
+							{name:"one",type:"padded"}
+						]);
+						A.areEqual("padded", fds.item('one').get('type'),'Type of FieldDef one should be padded');
+						A.areSame(fds, fds.item('one').get('root'), 'Root of a single item should be itself');
+						A.areSame(fds, fds.item('one').get('parent'), 'Root should have no parent');
+					},
+					testTwoSimpleFieldDefSet: function() {
+						fds = new FDS([
+							{name:"one",type:"padded"},
+							{name:"two",type:"number"}
+						]);
+						A.areEqual("padded", fds.item('one').get('type'),'Type of FieldDef one should be padded');
+						A.areEqual("number", fds.item('two').get('type'),'Type of FieldDef two should be number');
+					},
+					testOneWithChild: function () {
+						fds = new FDS([
+							{name:"one",children:[
+								{name:'child',type:'number'}
+							]}
+						]);
+						A.areEqual("number", fds.item('child').get('type'),'Type of FieldDef child should be number');
+					},
+					testAddToChild: function () {
+						fds = new FDS([
+							{name:"one",children:[
+								{name:'child',type:'number'}
+							]}
+						]);
+						A.areEqual("number", fds.item('child').get('type'),'Type of FieldDef child should be number');
+						fds.item('one').add({name:'sibling',type:'myDate'});
+						A.areEqual("myDate", fds.item('sibling').get('type'),'Type of FieldDef sibling should be myDate');
+						fds.item('child').set('label','Child');
+						A.areEqual("Child", fds.item('child').get('label'),'label of FieldDef child should be Child');
+						fds.set('one','label','One');
+						A.areEqual('One',fds.get('one','label'),'label of field one should be One');
+						
+						
+					},
+					testTraverseSameDepth: function () {
+						fds = new FDS([
+							{
+								name:'name',
+								label:'Name'
+							},
+							{
+								name:'extra',
+								label:'Extra',
+								type:'padded'
+							},
+							{
+								name:'date',
+								label:'Date',
+								type:'myDate'
+							},
+							{
+								name:'id',
+								type:'number'
+							}
+						]);
+						var tests =  function (item, depth) {
+							A.areEqual(0,depth,'Depth of all should be 0: ', item.get('name'));
+							switch (item.get('name')) {
+							case 'name':
+								A.areEqual('Name', item.get('label'), 'Label for name should be Name');
+								break;
+							case 'extra':
+								A.areEqual('Extra', item.get('label'), 'Label for extra should be Extra');
+								break;
+							case 'date':
+								A.areEqual('Date', item.get('label'), 'Label for date should be Date');
+								break;
+							case 'id':
+								A.areEqual('id', item.get('label'), 'Label for id should be id');
+								break;
+							}
+						};
+						Y.log(FDS.TRAVERSE_DEEP);
+						fds.traverse(FDS.TRAVERSE_DEEP,tests);
+						Y.log(FDS.TRAVERSE_SHALLOW);
+						fds.traverse(FDS.TRAVERSE_SHALLOW,tests);
+						Y.log(FDS.TRAVERSE_LEAVES);
+						fds.traverse(FDS.TRAVERSE_LEAVES,tests);
+					},
+					testTraverseNested: function () {
+						fds = new FDS([
+							{
+								name:'nameExtra',
+								label:'First Group',
+								children: [
+									{
+										name:'name',
+										label:'Name'
+									},
+									{
+										name:'extra',
+										label:'Extra',
+										type:'padded'
+									}
+								]
+							},
+							{
+								name:'dateId',
+								label:'Second Group',
+								children: [
+									{
+										name:'date',
+										label:'Date',
+										type:'myDate'
+									},
+									{
+										name:'id',
+										type:'number'
+									}
+								]
+							}
+						]);
+						var names;
+						var tests =  function (item, depth,method) {
+							names.push(item.get('name'));
+							switch (item.get('name')) {
+								case 'name':
+									A.areEqual(1,depth,'Depth of name should be 0: ', item.get('name'));
+									A.areEqual('Name', item.get('label'), 'Label for name should be Name');
+									break;
+								case 'extra':
+									A.areEqual(1,depth,'Depth of extra should be 0: ', item.get('name'));
+									A.areEqual('Extra', item.get('label'), 'Label for extra should be Extra');
+									break;
+								case 'date':
+									A.areEqual(1,depth,'Depth of date should be 0: ', item.get('name'));
+									A.areEqual('Date', item.get('label'), 'Label for date should be Date');
+									break;
+								case 'id':
+									A.areEqual(1,depth,'Depth of id should be 0: ', item.get('name'));
+									A.areEqual('id', item.get('label'), 'Label for id should be id');
+									break;
+								case 'nameExtra':
+									A.areEqual(0,depth,'Depth of nameExtra should be 0: ', item.get('name'));
+									A.areEqual('First Group', item.get('label'), 'Label for nameExtrashould be First Group');
+									break;
+								case 'dateId':
+									A.areEqual(0,depth,'Depth of dateId should be 0: ', item.get('name'));
+									A.areEqual('Second Group', item.get('label'), 'Label for dateId should be Second Group');
+									break;
+							}
+						};
+						Y.log(FDS.TRAVERSE_DEEP);
+						names = [];
+						fds.traverse(FDS.TRAVERSE_DEEP,function(item, depth) {
+							tests(item, depth, FDS.TRAVERSE_DEEP);
+						});
+						Y.ArrayAssert.itemsAreEqual(['nameExtra','name','extra','dateId','date','id'],names);
+						Y.log(FDS.TRAVERSE_SHALLOW);
+						names = [];
+						fds.traverse(FDS.TRAVERSE_SHALLOW,function(item, depth) {
+							tests(item, depth, FDS.TRAVERSE_SHALLOW);
+						});
+						Y.ArrayAssert.itemsAreEqual(['nameExtra','dateId','name','extra','date','id'],names);
+						Y.log(FDS.TRAVERSE_LEAVES);
+						names = [];
+						fds.traverse(FDS.TRAVERSE_LEAVES,function(item, depth) {
+							tests(item, depth, FDS.TRAVERSE_LEAVES);
+						});
+						Y.ArrayAssert.itemsAreEqual(['name','extra','date','id'],names);
+	
+					}
+				}));
+					
+				suite.add(new T.Case({
+					name: "Simple Empty Record test",
+					setUp : function () {
+						r = new R();
+					},
+					tearDown: function() {
+						r.destroy();
+						r = null;
+					},
+						
+					testEmptyRecord : function () {
+						var d = r.getValue();
+						A.isObject(d,'Record data is not an object');
+						Y.ObjectAssert.ownsNoKeys(d);
+						A.isEmpty(d,'Record is not empty');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isFalse(r.get('dirty'),'Record should not be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+					},
+					testNotEmptyRecord : function () {
+						var dirtyEv = null;
+						r.after('dirtyChange',function(ev) {
+							dirtyEv = ev;
+						});
+						r.setValue('algo',1);
+						var d = r.getValue();
+						A.isObject(d,'Record data is not an object');
+						A.isNotEmpty(d,'Record is empty');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isTrue(r.get('dirty'),'Record should be dirty');
+						A.isNotNull(dirtyEv,'There was no event');
+						A.isTrue(dirtyEv.newVal);
+						A.areEqual('algo',dirtyEv.fieldName,'Dirty field should be "algo"');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						A.areSame(1, r.getValue('algo'),'algo not 1');
+					}
+				}));
+				suite.add(new T.Case({
+					name: 'Simple Initialized Record',
+					setUp: function() {
+						r = new R({data:data[0]});
+					
+					},
+					tearDown: function () {
+						r.destroy();
+						r = null;
+					},
+					testRecordInitialized: function () {
+						var d = r.getValue();
+						A.isObject(d,'Record data is not an object');
+						A.isNotEmpty(d,'Record is empty');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isFalse(r.get('dirty'),'Record should not be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						Y.each(data[0],function (v,k) {
+							A.areSame(v, r.getValue(k),'getValue failed');
+						});
+					},
+					testRecordModified: function() {
+						var dirtyEv = null;
+						r.after('dirtyChange',function(ev) {
+							dirtyEv = ev;
+						});
+						r.setValue('extra','qqq');
+						// {name:"abc",id:123,extra:"foo"},
+						A.isTrue(r.get('dirty'),'Record should be dirty');
+						A.isNotNull(dirtyEv,'There was no event');
+						A.isTrue(dirtyEv.newVal);
+						A.areEqual('extra',dirtyEv.fieldName,'Dirty field should be "extra"');
+						A.areSame('abc', r.getValue('name'),'getValue("name") failed');
+						f = r.getField('name');
+						A.isFalse(f.get('dirty'),'name should not be dirty');
+						A.isTrue(f.get('new'),'name should be new');
+						
+						A.areSame("123", r.getValue('id'),'getValue("id") failed');
+						f = r.getField('id');
+						A.isFalse(f.get('dirty'),'id should not be dirty');
+						A.isTrue(f.get('new'),'id should be new');
+						
+						A.areSame('qqq', r.getValue('extra'),'getValue("extra") failed');
+						f = r.getField('extra');
+						A.isTrue(f.get('dirty'),'extra should be dirty');
+						A.isTrue(f.get('new'),'extra should be new');
+					},
+					testRecordUndone: function() {
+						r.setValue('extra','qqq');
+						r.undo('extra');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isFalse(r.get('dirty'),'Record should not be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						Y.each(data[0],function (v,k) {
+							A.areSame(v, r.getValue(k),'getValue failed');
+						});
+					},
+					testRecordUndoneOnce: function() {
+						r.setValue('extra','qqq');
+						r.setValue('extra','ppp');
+						A.areSame('ppp', r.getValue('extra'),'getValue("extra") == ppp failed');
+						r.undo('extra');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isTrue(r.get('dirty'),'Record should be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						A.areSame('qqq', r.getValue('extra'),'getValue("extra") failed');
+						f = r.getField('extra');
+						A.isTrue(f.get('dirty'),'extra should be dirty');
+						A.isTrue(f.get('new'),'extra should be new');
+					},
+					testRecordReset: function() {
+						r.setValue('extra','qqq');
+						r.setValue('extra','ppp');
+						A.areSame('ppp', r.getValue('extra'),'getValue("extra") == ppp failed');
+						r.reset('extra');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isFalse(r.get('dirty'),'Record should not be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						Y.each(data[0],function (v,k) {
+							A.areSame(v, r.getValue(k),'getValue failed');
+						});
+					},
+					testRecordResetAll: function() {
+						r.setValue('extra','qqq');
+						r.setValue('extra','ppp');
+						r.setValue('name','asdfadfasdf');
+						A.areSame('ppp', r.getValue('extra'),'getValue("extra") == ppp failed');
+						r.reset();
+						A.isTrue(r.get('new'),'Record should be new');
+						A.isFalse(r.get('dirty'),'Record should not be dirty');
+						A.isFalse(r.get('deleted'),'Record should not be deleted');
+						Y.each(data[0],function (v,k) {
+							A.areSame(v, r.getValue(k),'getValue failed');
+						});
+					},
+					testRecordAccepted: function() {
+						r.setValue('extra','qqq');
+						// {name:"abc",id:123,extra:"foo"},
+						A.isTrue(r.get('dirty'),'Record should be dirty');
+						A.isTrue(r.get('new'),'Record should be new');
+						A.areSame('abc', r.getValue('name'),'getValue("name") failed');
+						f = r.getField('name');
+						A.isFalse(f.get('dirty'),'name should not be dirty');
+						A.isTrue(f.get('new'),'name should be new');
+						
+						A.areSame('123', r.getValue('id'),'getValue("id") failed');
+						f = r.getField('id');
+						A.isFalse(f.get('dirty'),'id should not be dirty');
+						A.isTrue(f.get('new'),'id should be new');
+						
+						A.areSame('qqq', r.getValue('extra'),'getValue("extra") failed');
+						f = r.getField('extra');
+						A.isTrue(f.get('dirty'),'extra should be dirty');
+						A.isTrue(f.get('new'),'extra should be new');
+						
+						r.accept();
+						
+						A.isFalse(r.get('dirty'),'Record should not be dirty after accept');
+						A.isFalse(r.get('new'),'Record should not be new after accept');
+						
+						A.areSame('abc', r.getValue('name'),'getValue("name") failed  after accept');
+						f = r.getField('name');
+						A.isFalse(f.get('dirty'),'name should not be dirty after accept');
+						A.isFalse(f.get('new'),'name should not be new after accept');
+						
+						A.areSame('123', r.getValue('id'),'getValue("id") failed after accept');
+						f = r.getField('id');
+						A.isFalse(f.get('dirty'),'id should not be dirty after accept');
+						A.isFalse(f.get('new'),'id should not be new after accept');
+						
+						A.areSame('qqq', r.getValue('extra'),'getValue("extra") failed after accept');
+						f = r.getField('extra');
+						A.isFalse(f.get('dirty'),'extra should not be dirty after accept');
+						A.isFalse(f.get('new'),'extra should not be new after accept');
+						
+						r.reset();
+						A.isFalse(r.get('dirty'),'Record should not be dirty after reset');
+						A.isFalse(r.get('new'),'Record should not be new after reset');
+						
+						A.areSame('abc', r.getValue('name'),'getValue("name") failed after reset');
+						f = r.getField('name');
+						A.isFalse(f.get('dirty'),'name should not be dirty after reset');
+						A.isFalse(f.get('new'),'name should not be new after reset');
+						
+						A.areSame('123', r.getValue('id'),'getValue("id") failed after reset');
+						f = r.getField('id');
+						A.isFalse(f.get('dirty'),'id should not be dirty after reset');
+						A.isFalse(f.get('new'),'id should not be new after reset');
+						
+						A.areSame('qqq', r.getValue('extra'),'getValue("extra") failed after reset');
+						f = r.getField('extra');
+						A.isFalse(f.get('dirty'),'extra should not be dirty after reset');
+						A.isFalse(f.get('new'),'extra should not be new after reset');
+					},
+					testDeleted: function() {
+						r.set('deleted',true);
+						A.isNull(r.getValue(),'Record data is not null');
+						A.isTrue(r.get('dirty'),'Record should be dirty');
+						A.isTrue(r.get('deleted'),'Record should be deleted');
+					}
+						
+
+						
+				}));
+
+				var myDataSource = new Y.DataSource.Local({
+					source:data			
+				});
+
+				myDataSource.plug(Y.Plugin.DataSourceArraySchema, {
+					schema: {
+						resultFields:["name","id","extra","date"]
+					}
+				});
+
+
+				suite.add(new T.Case({
+					name:"Simple RecordSet",
+					setUp: function() {
+						rs = new RS();
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testRSEmpty: function() {
+						A.isTrue(rs.isEmpty(),'RecordSet not empty');
+					},
+					testAdd: function () {
+						rs.add(new R({data:data[0]}));
+						A.isFalse(rs.isEmpty(),'RecordSet should not be empty');
+						A.areSame('abc',rs.item(0).getValue('name'),'first record first field');
+					},
+					testLoad: function () {
+						rs.set('dataSource',myDataSource);
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								Y.each(data, function (row, index) {
+									Y.each(row, function (value, fieldName) {
+										A.areSame(value,rs.item(index).getValue(fieldName),'RecordSet data vs. data');
+									});
+								});
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testLoadWithParser: function () {
+						var parse = function(value) {return '===' + value + '---';};
+						rs.set('dataSource',myDataSource);
+						rs.setFieldDef('name', 'server.parser',parse);
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								Y.each(data, function (row, index) {
+									Y.each(row, function (value, fieldName) {
+										switch(fieldName) {
+											case 'name':
+												value = parse(value);
+												break;
+										}
+										A.areSame(value,rs.item(index).getValue(fieldName),'RecordSet data vs. data');
+									});
+								});
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testLoadWithType: function () {
+						rs.set('dataSource',myDataSource);
+						rs.setFieldDef('extra', 'type','padded');
+						rs.setFieldDef('id', 'type','number');
+						rs.setFieldDef('date', 'type','myDate');
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								Y.each(data, function (row, index) {
+									Y.each(row, function (value, fieldName) {
+										switch(fieldName) {
+											case 'extra':
+												value = '===[' + value + ']===';
+												break;
+											case 'id':
+												value = parseInt(value,10);
+												break;
+											case 'date':
+												A.areSame(value,Y.DataType.Date.format(rs.item(index).getValue(fieldName),{format:'%Y-%m-%d'}),'RecordSet data vs. data');
+												return;
+										}
+										A.areSame(value,rs.item(index).getValue(fieldName),'RecordSet data vs. data');
+									});
+								});
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					}
+						
+				}));
+				
+				suite.add(new T.Case({
+					name:"SerializeRecordSet",
+					setUp: function() {
+						rs = new RS();
+						rs.set('dataSource',myDataSource);
+						rs.setFieldDef('extra', 'type','padded');
+						rs.setFieldDef('id', 'type','number');
+						rs.setFieldDef('date', 'type','myDate');
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testNoData: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.set('serializeFormat','URL');
+								A.areEqual("",rs.serialize());
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testDirtyDataURL: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.item(1).setValue('name','qqq');
+								rs.set('serializeFormat','URL');
+								A.areEqual("id=456&name=qqq",rs.serialize());
+								rs.set('serializeFormat','JSON');
+								A.areEqual('[{"id":456,"name":"qqq"}]',rs.serialize());
+							});
+						},this,true);
+						rs.setFieldDef('id','primaryKey',true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testDirtyDataURL2: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.item(1).setValue('extra','===[qqq]===');
+								rs.item(2).setValue('name','ppp');
+								rs.set('serializeFormat','URL');
+								A.areEqual("extra0=qqq&id0=456&id1=789&name1=ppp",rs.serialize());
+								rs.set('serializeFormat','JSON');
+								A.areEqual('[{"extra":"qqq","id":456},{"id":789,"name":"ppp"}]',rs.serialize());
+							});
+						},this,true);
+						rs.setFieldDef('id','primaryKey',true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testDirtyDataJSON: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.set('serializeFormat','URL');
+								A.areEqual("",rs.serialize());
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					}
+				}));
+				suite.add(new T.Case({
+					name:"Primary Keys",
+					setUp: function() {
+						rs = new RS();
+						rs.set('dataSource',myDataSource);
+						rs.setFieldDef('id', 'type','number');
+						rs.setFieldDef('date', 'type','myDate');
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testLoadOneKey: function () {
+						rs.setFieldDef('id', 'primaryKey',true);
+						var once = false;
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								if (once) {
+									rs.get('dataSource').set('source',data);
+									A.areEqual(4,rs.size(),"second pass, there should be 5 items");
+								} else {
+									once = true;
+									A.areEqual(3,rs.size(),"first pass, there should be 3 items");
+									rs.get('dataSource').set('source',data2);
+									rs.sendRequest();
+									this.wait();
+								}
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testLoadTwoKeys: function () {
+						rs.setFieldDef('id', 'primaryKey', true);
+						rs.setFieldDef('name', 'primaryKey', true);
+						var once = false;
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								if (once) {
+									rs.get('dataSource').set('source',data);
+									A.areEqual(5,rs.size(),"second pass, there should be 5 items");
+								} else {
+									once = true;
+									A.areEqual(3,rs.size(),"first pass, there should be 3 items");
+									rs.get('dataSource').set('source',data2);
+									rs.sendRequest();
+									this.wait();
+								}
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testSearchOneKey: function () {
+						rs.setFieldDef('id', 'primaryKey', true);
+						var once = false;
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								if (once) {
+									rs.get('dataSource').set('source',data);
+									A.isNotNull(r = rs.search(456),'Failed search for 456');
+									A.areEqual('def',r.getValue('name'),'Search for id 456');
+									A.isNotNull(r = rs.search({id:456}),'Failed search for {id:456}');
+									A.areEqual('def',r.getValue('name'),'Search for id 456 by object');
+									A.isNull(rs.search(1234566),"Search should have failed");
+									
+								} else {
+									once = true;
+									A.areEqual(3,rs.size(),"first pass, there should be 3 items");
+									rs.get('dataSource').set('source',data2);
+									rs.sendRequest();
+									this.wait();
+								}
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testSearchTwoKeys: function () {
+						rs.setFieldDef('id', 'primaryKey', true);
+						rs.setFieldDef('name', 'primaryKey', true);
+						var once = false;
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								if (once) {
+									rs.get('dataSource').set('source',data);
+									A.isNotNull(r = rs.search({id:123,name:"abc"}),'Second search for {id:123,name:"abc"}');
+									A.areEqual('new!!!!',r.getValue('extra'),'Second search for {id:123,name:"abc"} by object');
+									A.isNotNull(r = rs.search({name:"mmm",id:"789"}),'Failed search for {name:"mmm",id:"789"}');
+									A.areEqual('baz',r.getValue('extra'),'Search for {name:"mmm",id:"789"} by object');
+
+								} else {
+									once = true;
+									A.areEqual(3,rs.size(),"first pass, there should be 3 items");
+									A.isNotNull(r = rs.search({id:123,name:"abc"}),'First search for {id:123,name:"abc"}');
+									A.areEqual('foo',r.getValue('extra'),'First search for id {id:123,name:"abc"} by object');
+									A.isNull(rs.search({name:"mmm",id:"789"}),'Search for {id:123,name:"abc"} by object should have failed');
+									rs.get('dataSource').set('source',data2);
+									rs.sendRequest();
+									this.wait();
+								}
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testSearchOneKeyAddSecond: function () {
+						rs.setFieldDef('id', 'primaryKey', true);
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								A.isNotNull(r = rs.search(456),'Failed search for 456');
+								A.areEqual('def',r.getValue('name'),'Search for id 456');
+								A.isNotNull(r = rs.search({id:456}),'Failed search for {id:456}');
+								A.areEqual('def',r.getValue('name'),'Search for id 456 by object');
+								A.isNull(rs.search(1234566),"Search should have failed");
+								rs.setFieldDef('name', 'primaryKey', true);
+								A.isNotNull(r = rs.search({id:123,name:"abc"}),'Failed search for {id:123,name:"abc"}');
+								A.areEqual('foo',r.getValue('extra'),'First search for id {id:123,name:"abc"} by object');
+								A.isNull(rs.search({name:"mmm",id:"789"}),'Search for {id:123,name:"abc"} by object should have failed');
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					},
+					testSearchTwoKeysDropOne: function () {
+						rs.setFieldDef('id', 'primaryKey', true);
+						rs.setFieldDef('name', 'primaryKey', true);
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								A.isNotNull(r = rs.search({id:123,name:"abc"}),'Failed search for {id:123,name:"abc"}');
+								A.areEqual('foo',r.getValue('extra'),'First search for id {id:123,name:"abc"} by object');
+								A.isNull(rs.search({name:"mmm",id:"789"}),'Search for {id:123,name:"abc"} by object should have failed');
+								rs.setFieldDef('name', 'primaryKey', false);
+								A.isNotNull(r = rs.search(456),'Failed search for 456');
+								A.areEqual('def',r.getValue('name'),'Search for id 456');
+								A.isNotNull(r = rs.search({id:456}),'Failed search for {id:456}');
+								A.areEqual('def',r.getValue('name'),'Search for id 456 by object');
+								A.isNull(rs.search(1234566),"Search should have failed");
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					}
+				}));
+				suite.add(new T.Case({
+					name:"Initial Values",
+					setUp: function() {
+						rs = new RS();
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testIndividualSets: function () {
+						rs.setFieldDef('something','initialValue','qqq');
+						rs.add(new R({data:data[0]}));
+						A.areEqual('qqq',rs.item(0).getValue('something'),'Field something should have defaulted to qqq');
+						
+					},
+					testDatasource: function () {
+						rs.setFieldDef('something','initialValue','qqq');
+						rs.set('dataSource',myDataSource);
+						rs.setFieldDef('id', 'type','number');
+						rs.setFieldDef('date', 'type','myDate');
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								A.areEqual('qqq',rs.item(0).getValue('something'),'Field something should have defaulted to qqq');
+							});
+						},this,true);
+						rs.sendRequest();
+						this.wait();
+					}
+				}));
+				suite.add(new T.Case({
+					name:"Sort",
+					setUp: function() {
+						rs = new RS();
+						Y.each(data, function(row) {
+							rs.add(new R({data:row}));
+						});
+						rs.set('sortedBy',{
+							fieldName:'id',
+							desc: false
+						});
+						rs.setFieldDef('id','primaryKey',true);
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testIndividualSets: function () {
+						A.areEqual(123,rs.item(0).getValue('id'),'pre sort, first should be 123');
+						A.areEqual(456,rs.item(1).getValue('id'),'pre sort, second should be 456');
+						A.areEqual(789,rs.item(2).getValue('id'),'pre sort, third should be 789');
+						A.isNotNull(r = rs.search(123),'Failed search for 123');
+						A.areEqual(123,r.getValue('id'),'pre sort, search by key should be 123');
+						rs.sort('id'); // desc remains false, it shouldn't change
+						A.areEqual(123,rs.item(0).getValue('id'),'first sort, first should be 123');
+						A.areEqual(456,rs.item(1).getValue('id'),'first sort, second should be 456');
+						A.areEqual(789,rs.item(2).getValue('id'),'first sort, third should be 789');
+						A.isNotNull(r = rs.search(123),'Failed search for 123');
+						A.areEqual(123,r.getValue('id'),'first sort, search by key should be 123');
+						rs.sort('id', true); 
+						A.areEqual(789,rs.item(0).getValue('id'),'second sort, first should be 789');
+						A.areEqual(456,rs.item(1).getValue('id'),'second sort, second should be 456');
+						A.areEqual(123,rs.item(2).getValue('id'),'second sort, third should be 123');
+						A.isNotNull(r = rs.search(123),'Failed search for 123');
+						A.areEqual(123,r.getValue('id'),'second sort, search by key should be 123');
+						rs.sort('name');
+						A.areEqual(123,rs.item(0).getValue('id'),'third sort, first should be 123');
+						A.areEqual(456,rs.item(1).getValue('id'),'third sort, second should be 456');
+						A.areEqual(789,rs.item(2).getValue('id'),'third sort, third should be 789');
+						A.isNotNull(r = rs.search(123),'Failed search for 123');
+						A.areEqual(123,r.getValue('id'),'third sort, search by key should be 123');
+					}
+				}));
+				suite.add(new T.Case({
+					name:"Tabulate and Formalize",
+					setUp: function() {
+						rs = new RS();
+						rs.set('dataSource',myDataSource);
+					},
+					tearDown: function () {
+						rs.destroy();
+					},
+					testTabulate: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.tabulate('#table');
+							});
+						},this,true);
+						rs.set('fieldDefSet', new FDS([
+							{
+								name:'nameExtra',
+								label:'First Group',
+								children: [
+									{
+										name:'name',
+										label:'Name'
+									},
+									{
+										name:'extra',
+										label:'Extra',
+										type:'padded'
+									}
+								]
+							},
+							{
+								name:'date',
+								label:'Date',
+								type:'myDate'
+							},
+							{
+								name:'id',
+								type:'number'
+							}
+						]));
+						rs.sendRequest();
+						this.wait();
+					},
+					/*testFormalize: function () {
+						rs.after('loadData',function(ev) {
+							this.resume(function() {
+								rs.formalize('#form',1,{
+									method:'POST',
+									submitLabel:'Aceptar',
+									pager:'#pager'
+								});
+							});
+						},this,true);
+						rs.set('fieldDefSet', new FDS([
+							{
+								name:'nameExtra',
+								label:'First Group',
+								children: [
+									{
+										name:'name',
+										label:'Name'
+									},
+									{
+										name:'extra',
+										label:'Extra',
+										type:'padded'
+									}
+								]
+							},
+							{
+								name:'date',
+								label:'Date',
+								type:'myDate'
+							},
+							{
+								name:'id',
+								type:'number'
+							}
+						]));
+						rs.sendRequest();
+						this.wait();
+					},*/
+					testForm: function () {
+						var formRs = new RS();
+						formRs.set('dataSource',myDataSource);
+						formRs.after('loadData',function(ev) {
+							this.resume(function() {
+								var form = new Y.Form({
+									recordSet: formRs,
+									method:'POST',
+									submitLabel:'Serialize',
+									pager:'#pager'
+								}).render('#form').on('submit', function (ev) {
+									ev.preventDefault();
+									Y.one('#output').set('innerHTML',formRs.serialize());
+								});
+								
+							});
+						},this,true);
+						formRs.set('fieldDefSet', new FDS([
+							{
+								name:'nameExtra',
+								label:'First Group',
+								children: [
+									{
+										name:'name',
+										label:'Name'
+									},
+									{
+										name:'extra',
+										label:'Extra',
+										type:'padded'
+									}
+								]
+							},
+							{
+								name:'date',
+								label:'Date',
+								type:'myDate'
+							},
+							{
+								name:'id',
+								type:'number',
+								primaryKey:true
+							}
+						]));
+						formRs.sendRequest();
+						this.wait();
+					}
+
+				}));
+				
+				var suitName = window.location.hash;
+				if (suitName) {
+					suitName = suitName.substr(1);
+					if (!Y.some(suite.items, function(test) {
+						if (test.name == suitName) {
+							T.Runner.add(test);
+							return true;
+						}
+					})) {
+						T.Runner.add(suite);
+					}
+				} else {
+					T.Runner.add(suite);
+				}
+				T.Runner.run();
+
+	
+			});
+		
+		</script>
+ 		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		       
+    </body>
+</html>
+

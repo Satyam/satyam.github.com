@@ -1,0 +1,2924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DataTable.BodyView</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Base.html">DataTable.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.html">DataTable.BaseCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.KeyFiltering.html">DataTable.BaseCellEditor.KeyFiltering</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellInlineEditor.html">DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellPopupEditor.html">DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.html">DataTable.BodyView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.InputFormatters.html">DataTable.BodyView.InputFormatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.ColumnWidths.html">DataTable.ColumnWidths</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Core.html">DataTable.Core</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editable.html">DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editors.html">DataTable.Editors</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.HeaderView.html">DataTable.HeaderView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Message.html">DataTable.Message</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Mutable.html">DataTable.Mutable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Scrollable.html">DataTable.Scrollable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Sortable.html">DataTable.Sortable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.TableView.html">DataTable.TableView</a></li>
+            
+                <li><a href="..&#x2F;classes/Plugin.DataTableDataSource.html">Plugin.DataTableDataSource</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-base.html">datatable-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-body.html">datatable-body</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-base.html">datatable-celleditor-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-inline.html">datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-keyfiltering.html">datatable-celleditor-keyfiltering</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-column-widths.html">datatable-column-widths</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-core.html">datatable-core</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-datasource.html">datatable-datasource</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-editable.html">datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-formatters.html">datatable-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-head.html">datatable-head</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-input-formatters.html">datatable-input-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-message.html">datatable-message</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-mutable.html">datatable-mutable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-scroll.html">datatable-scroll</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-sort.html">datatable-sort</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-table.html">datatable-table</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>DataTable.BodyView Class</h1>
+<div class="box meta">
+    
+
+    
+        <div class="extends">
+            Extends View
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;js_body.js.html#l20"><code>js&#x2F;body.js:20</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/datatable-body.html">datatable-body</a><br>
+            Parent Module: <a href="../modules/datatable.html">datatable</a>
+        
+    
+
+    
+        <p>Available since 3.5.0</p>
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>View class responsible for rendering the <code>&lt;tbody&gt;</code> section of a table. Used as
+the default <code>bodyView</code> for <code>Y.DataTable.Base</code> and <code>Y.DataTable</code> classes.</p>
+
+<p>Translates the provided <code>modelList</code> into a rendered <code>&lt;tbody&gt;</code> based on the data
+in the constituent Models, altered or ammended by any special column
+configurations.</p>
+
+<p>The <code>columns</code> configuration, passed to the constructor, determines which
+columns will be rendered.</p>
+
+<p>The rendering process involves constructing an HTML template for a complete row
+of data, built by concatenating a customized copy of the instance's
+<code>CELL_TEMPLATE</code> into the <code>ROW_TEMPLATE</code> once for each column.  This template is
+then populated with values from each Model in the <code>modelList</code>, aggregating a
+complete HTML string of all row and column data.  A <code>&lt;tbody&gt;</code> Node is then created from the markup and any column <code>nodeFormatter</code>s are applied.</p>
+
+<p>Supported properties of the column objects include:</p>
+
+<ul>
+<li><code>key</code> - Used to link a column to an attribute in a Model.</li>
+<li><code>name</code> - Used for columns that don't relate to an attribute in the Model
+(<code>formatter</code> or <code>nodeFormatter</code> only) if the implementer wants a
+predictable name to refer to in their CSS.</li>
+<li><code>cellTemplate</code> - Overrides the instance's <code>CELL_TEMPLATE</code> for cells in this
+column only.</li>
+<li><code>formatter</code> - Used to customize or override the content value from the
+Model.  These do not have access to the cell or row Nodes and should
+return string (HTML) content.</li>
+<li><code>nodeFormatter</code> - Used to provide content for a cell as well as perform any
+custom modifications on the cell or row Node that could not be performed by
+<code>formatter</code>s.  Should be used sparingly for better performance.</li>
+<li><code>emptyCellValue</code> - String (HTML) value to use if the Model data for a
+column, or the content generated by a <code>formatter</code>, is the empty string,
+<code>null</code>, or <code>undefined</code>.</li>
+<li><code>allowHTML</code> - Set to <code>true</code> if a column value, <code>formatter</code>, or
+<code>emptyCellValue</code> can contain HTML.  This defaults to <code>false</code> to protect
+against XSS.</li>
+<li><code>className</code> - Space delimited CSS classes to add to all <code>&lt;td&gt;</code>s in a column.</li>
+</ul>
+
+<p>A column <code>formatter</code> can be:</p>
+
+<ul>
+<li>a function, as described below.</li>
+<li>a string which can be:
+<ul><li>the name of a pre-defined formatter function
+which can be located in the <code>Y.DataTable.BodyView.Formatters</code> hash using the
+value of the <code>formatter</code> property as the index.</li>
+<li>A template that can use the <code>{value}</code> placeholder to include the value
+for the current cell or the name of any field in the underlaying model
+also enclosed in curly braces.  Any number and type of these placeholders
+can be used.</li></ul></li>
+</ul>
+
+<p>Column <code>formatter</code>s are passed an object (<code>o</code>) with the following properties:</p>
+
+<ul>
+<li><code>value</code> - The current value of the column's associated attribute, if any.</li>
+<li><code>data</code> - An object map of Model keys to their current values.</li>
+<li><code>record</code> - The Model instance.</li>
+<li><code>column</code> - The column configuration object for the current column.</li>
+<li><code>className</code> - Initially empty string to allow <code>formatter</code>s to add CSS
+classes to the cell's <code>&lt;td&gt;</code>.</li>
+<li><code>rowIndex</code> - The zero-based row number.</li>
+<li><code>rowClass</code> - Initially empty string to allow <code>formatter</code>s to add CSS
+classes to the cell's containing row <code>&lt;tr&gt;</code>.</li>
+</ul>
+
+<p>They may return a value or update <code>o.value</code> to assign specific HTML content.  A
+returned value has higher precedence.</p>
+
+<p>Column <code>nodeFormatter</code>s are passed an object (<code>o</code>) with the following
+properties:</p>
+
+<ul>
+<li><code>value</code> - The current value of the column's associated attribute, if any.</li>
+<li><code>td</code> - The <code>&lt;td&gt;</code> Node instance.</li>
+<li><code>cell</code> - The <code>&lt;div&gt;</code> liner Node instance if present, otherwise, the <code>&lt;td&gt;</code>.
+When adding content to the cell, prefer appending into this property.</li>
+<li><code>data</code> - An object map of Model keys to their current values.</li>
+<li><code>record</code> - The Model instance.</li>
+<li><code>column</code> - The column configuration object for the current column.</li>
+<li><code>rowIndex</code> - The zero-based row number.</li>
+</ul>
+
+<p>They are expected to inject content into the cell's Node directly, including
+any "empty" cell content.  Each <code>nodeFormatter</code> will have access through the
+Node API to all cells and rows in the <code>&lt;tbody&gt;</code>, but not to the <code>&lt;table&gt;</code>, as
+it will not be attached yet.</p>
+
+<p>If a <code>nodeFormatter</code> returns <code>false</code>, the <code>o.td</code> and <code>o.cell</code> Nodes will be
+<code>destroy()</code>ed to remove them from the Node cache and free up memory.  The DOM
+elements will remain as will any content added to them.  <em>It is highly
+advisable to always return <code>false</code> from your <code>nodeFormatter</code>s</em>.</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterColumnsChange">_afterColumnsChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterDataChange">_afterDataChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterModelListChange">_afterModelListChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__afterRenderCleanup">_afterRenderCleanup</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__applyNodeFormatters">_applyNodeFormatters</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createDataHTML">_createDataHTML</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createRowHTML">_createRowHTML</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createRowTemplate">_createRowTemplate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createTBodyNode">_createTBodyNode</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__getRowId">_getRowId</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_bindUI">bindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getCell">getCell</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_getClassName">getClassName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRecord">getRecord</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRow">getRow</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_render">render</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__eventHandles">_eventHandles</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__idMap">_idMap</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__rowTemplate">_rowTemplate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CELL_TEMPLATE">CELL_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CLASS_EVEN">CLASS_EVEN</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CLASS_ODD">CLASS_ODD</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Formatters">Formatters</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_host">host</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_ROW_TEMPLATE">ROW_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_TBODY_TEMPLATE">TBODY_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterColumnsChange" class="method item protected">
+    <h3 class="name"><code>_afterColumnsChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l458"><code>js&#x2F;body.js:458</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Handles changes in the source's columns attribute.  Redraws the table data.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <code>columnsChange</code> event object</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterDataChange" class="method item protected">
+    <h3 class="name"><code>_afterDataChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l477"><code>js&#x2F;body.js:477</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Handles modelList changes, including additions, deletions, and updates.</p>
+
+<p>Modifies the existing table DOM accordingly.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <code>change</code> event from the ModelList</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterModelListChange" class="method item protected">
+    <h3 class="name"><code>_afterModelListChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l494"><code>js&#x2F;body.js:494</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Handles replacement of the modelList.</p>
+
+<p>Rerenders the <code>&lt;tbody&gt;</code> contents.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <code>modelListChange</code> event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterRenderCleanup" class="method item private">
+    <h3 class="name"><code>_afterRenderCleanup</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l781"><code>js&#x2F;body.js:781</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Cleans up temporary values created during rendering.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__applyNodeFormatters" class="method item protected">
+    <h3 class="name"><code>_applyNodeFormatters</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>tbody</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>columns</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l518"><code>js&#x2F;body.js:518</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Iterates the <code>modelList</code>, and calls any <code>nodeFormatter</code>s found in the
+<code>columns</code> param on the appropriate cell Nodes in the <code>tbody</code>.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">tbody</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The <code>&lt;tbody&gt;</code> Node whose columns to update</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">columns</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The column configurations</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createDataHTML" class="method item protected">
+    <h3 class="name"><code>_createDataHTML</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>columns</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">HTML</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l609"><code>js&#x2F;body.js:609</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Iterates the <code>modelList</code> and applies each Model to the <code>_rowTemplate</code>,
+allowing any column <code>formatter</code> or <code>emptyCellValue</code> to override cell
+content for the appropriate column.  The aggregated HTML string is
+returned.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">columns</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The column configurations to customize the
+            generated cell content or class names</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">HTML</span>:
+                    
+                    The markup for all Models in the <code>modelList</code>, each applied
+            to the <code>_rowTemplate</code>
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__createRowHTML" class="method item protected">
+    <h3 class="name"><code>_createRowHTML</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>columns</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">HTML</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l636"><code>js&#x2F;body.js:636</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Applies the data of a given Model, modified by any column formatters and
+supplemented by other template values to the instance's <code>_rowTemplate</code> (see
+<code>_createRowTemplate</code>).  The generated string is then returned.</p>
+
+<p>The data from Model's attributes is fetched by <code>toJSON</code> and this data
+object is appended with other properties to supply values to {placeholders}
+in the template.  For a template generated from a Model with 'foo' and 'bar'
+attributes, the data object would end up with the following properties
+before being used to populate the <code>_rowTemplate</code>:</p>
+
+<ul>
+<li><code>clientID</code> - From Model, used the assign the <code>&lt;tr&gt;</code>'s 'id' attribute.</li>
+<li><code>foo</code> - The value to populate the 'foo' column cell content.  This
+value will be the value stored in the Model's <code>foo</code> attribute, or the
+result of the column's <code>formatter</code> if assigned.  If the value is '',
+<code>null</code>, or <code>undefined</code>, and the column's <code>emptyCellValue</code> is assigned,
+that value will be used.</li>
+<li><code>bar</code> - Same for the 'bar' column cell content.</li>
+<li><code>foo-className</code> - String of CSS classes to apply to the <code>&lt;td&gt;</code>.</li>
+<li><code>bar-className</code> - Same.</li>
+<li><code>rowClass</code>      - String of CSS classes to apply to the <code>&lt;tr&gt;</code>. This
+will be the odd/even class per the specified index plus any additional
+classes assigned by column formatters (via <code>o.rowClass</code>).</li>
+</ul>
+
+<p>Because this object is available to formatters, any additional properties
+can be added to fill in custom {placeholders} in the <code>_rowTemplate</code>.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Model instance to apply to the row template</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The index the row will be appearing</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">columns</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The column configurations</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">HTML</span>:
+                    
+                    The markup for the provided Model, less any <code>nodeFormatter</code>s
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__createRowTemplate" class="method item protected">
+    <h3 class="name"><code>_createRowTemplate</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>columns</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l724"><code>js&#x2F;body.js:724</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Creates a custom HTML template string for use in generating the markup for
+individual table rows with {placeholder}s to capture data from the Models
+in the <code>modelList</code> attribute or from column <code>formatter</code>s.</p>
+
+<p>Assigns the <code>_rowTemplate</code> property.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">columns</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Array of column configuration objects</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createTBodyNode" class="method item protected">
+    <h3 class="name"><code>_createTBodyNode</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l796"><code>js&#x2F;body.js:796</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the <code>&lt;tbody&gt;</code> node that will store the data rows.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getRowId" class="method item protected">
+    <h3 class="name"><code>_getRowId</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>clientId</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l833"><code>js&#x2F;body.js:833</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the row ID associated with a Model's clientId.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">clientId</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Model clientId</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_bindUI" class="method item protected">
+    <h3 class="name"><code>bindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l585"><code>js&#x2F;body.js:585</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Binds event subscriptions from the UI and the host (if assigned).</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item protected">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l810"><code>js&#x2F;body.js:810</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Destroys the instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getCell" class="method item">
+    <h3 class="name"><code>getCell</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>seed</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[shift]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l185"><code>js&#x2F;body.js:185</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the <code>&lt;td&gt;</code> Node from the given row and column index.  Alternately,
+the <code>seed</code> can be a Node.  If so, the nearest ancestor cell is returned.
+If the <code>seed</code> is a cell, it is returned.  If there is no cell at the given
+coordinates, <code>null</code> is returned.</p>
+
+<p>Optionally, include an offset array or string to return a cell near the
+cell identified by the <code>seed</code>.  The offset can be an array containing the
+number of rows to shift followed by the number of columns to shift, or one
+of "above", "below", "next", or "previous".</p>
+
+<p><pre class="code prettyprint"><code>// Previous cell in the previous row
+var cell = table.getCell(e.target, [-1, -1]);</p>
+
+<p>// Next cell
+var cell = table.getCell(e.target, 'next');
+var cell = table.getCell(e.taregt, [0, 1];</pre></code></p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">seed</code>
+                        <span class="type">Number | Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Array of row and column indexes, or a Node that
+    is either the cell itself or a descendant of one.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[shift]</code>
+                        <span class="type">Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Offset by which to identify the returned
+    cell Node</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getClassName" class="method item protected">
+    <h3 class="name"><code>getClassName</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>token</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l249"><code>js&#x2F;body.js:249</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the generated CSS classname based on the input.  If the <code>host</code>
+attribute is configured, it will attempt to relay to its <code>getClassName</code>
+or use its static <code>NAME</code> property as a string base.</p>
+
+<p>If <code>host</code> is absent or has neither method nor <code>NAME</code>, a CSS classname
+will be generated using this class's <code>NAME</code>.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">token</code>
+                        <span class="type">String</span>
+                    
+
+                    
+                        <span class="flag multiple" title="This argument may occur one or more times.">multiple</span>
+                    
+
+                    <div class="param-description">
+                        <p>Any number of token strings to assemble the
+    classname from.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRecord" class="method item">
+    <h3 class="name"><code>getRecord</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>seed</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Model</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l278"><code>js&#x2F;body.js:278</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the Model associated to the row Node or id provided. Passing the
+Node or id for a descendant of the row also works.</p>
+
+<p>If no Model can be found, <code>null</code> is returned.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">seed</code>
+                        <span class="type">String | Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Row Node or <code>id</code>, or one for a descendant of a row</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Model</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRow" class="method item">
+    <h3 class="name"><code>getRow</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l313"><code>js&#x2F;body.js:313</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the <code>&lt;tr&gt;</code> Node from the given row index, Model, or Model's
+<code>clientId</code>.  If the rows haven't been rendered yet, or if the row can't be
+found by the input, <code>null</code> is returned.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type">Number | String | Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Row index, Model instance, or clientId</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l854"><code>js&#x2F;body.js:854</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Initializes the instance. Reads the following configuration properties in
+addition to the instance attributes:</p>
+
+<ul>
+<li><code>columns</code> - (REQUIRED) The initial column information</li>
+<li><code>host</code>    - The object to serve as source of truth for column info and
+            for generating class names</li>
+</ul>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Configuration data</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">BodyView</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l340"><code>js&#x2F;body.js:340</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the table's <code>&lt;tbody&gt;</code> content by assembling markup generated by
+populating the <code>ROW\_TEMPLATE</code>, and <code>CELL\_TEMPLATE</code> templates with content
+from the <code>columns</code> and <code>modelList</code> attributes.</p>
+
+<p>The rendering process happens in three stages:</p>
+
+<ol>
+<li><p>A row template is assembled from the <code>columns</code> attribute (see
+<code>_createRowTemplate</code>)</p></li>
+<li><p>An HTML string is built up by concatening the application of the data in
+each Model in the <code>modelList</code> to the row template. For cells with
+<code>formatter</code>s, the function is called to generate cell content. Cells
+with <code>nodeFormatter</code>s are ignored. For all other cells, the data value
+from the Model attribute for the given column key is used.  The
+accumulated row markup is then inserted into the container.</p></li>
+<li><p>If any column is configured with a <code>nodeFormatter</code>, the <code>modelList</code> is
+iterated again to apply the <code>nodeFormatter</code>s.</p></li>
+</ol>
+
+<p>Supported properties of the column objects include:</p>
+
+<ul>
+<li><code>key</code> - Used to link a column to an attribute in a Model.</li>
+<li><code>name</code> - Used for columns that don't relate to an attribute in the Model
+(<code>formatter</code> or <code>nodeFormatter</code> only) if the implementer wants a
+predictable name to refer to in their CSS.</li>
+<li><code>cellTemplate</code> - Overrides the instance's <code>CELL_TEMPLATE</code> for cells in
+this column only.</li>
+<li><code>formatter</code> - Used to customize or override the content value from the
+Model.  These do not have access to the cell or row Nodes and should
+return string (HTML) content.</li>
+<li><code>nodeFormatter</code> - Used to provide content for a cell as well as perform
+any custom modifications on the cell or row Node that could not be
+performed by <code>formatter</code>s.  Should be used sparingly for better
+performance.</li>
+<li><code>emptyCellValue</code> - String (HTML) value to use if the Model data for a
+column, or the content generated by a <code>formatter</code>, is the empty string,
+<code>null</code>, or <code>undefined</code>.</li>
+<li><code>allowHTML</code> - Set to <code>true</code> if a column value, <code>formatter</code>, or
+<code>emptyCellValue</code> can contain HTML.  This defaults to <code>false</code> to protect
+against XSS.</li>
+<li><code>className</code> - Space delimited CSS classes to add to all <code>&lt;td&gt;</code>s in a
+column.</li>
+</ul>
+
+<p>Column <code>formatter</code>s are passed an object (<code>o</code>) with the following
+properties:</p>
+
+<ul>
+<li><code>value</code> - The current value of the column's associated attribute, if
+any.</li>
+<li><code>data</code> - An object map of Model keys to their current values.</li>
+<li><code>record</code> - The Model instance.</li>
+<li><code>column</code> - The column configuration object for the current column.</li>
+<li><code>className</code> - Initially empty string to allow <code>formatter</code>s to add CSS
+classes to the cell's <code>&lt;td&gt;</code>.</li>
+<li><code>rowIndex</code> - The zero-based row number.</li>
+<li><code>rowClass</code> - Initially empty string to allow <code>formatter</code>s to add CSS
+classes to the cell's containing row <code>&lt;tr&gt;</code>.</li>
+</ul>
+
+<p>They may return a value or update <code>o.value</code> to assign specific HTML
+content.  A returned value has higher precedence.</p>
+
+<p>Column <code>nodeFormatter</code>s are passed an object (<code>o</code>) with the following
+properties:</p>
+
+<ul>
+<li><code>value</code> - The current value of the column's associated attribute, if
+any.</li>
+<li><code>td</code> - The <code>&lt;td&gt;</code> Node instance.</li>
+<li><code>cell</code> - The <code>&lt;div&gt;</code> liner Node instance if present, otherwise, the
+<code>&lt;td&gt;</code>.  When adding content to the cell, prefer appending into this
+property.</li>
+<li><code>data</code> - An object map of Model keys to their current values.</li>
+<li><code>record</code> - The Model instance.</li>
+<li><code>column</code> - The column configuration object for the current column.</li>
+<li><code>rowIndex</code> - The zero-based row number.</li>
+</ul>
+
+<p>They are expected to inject content into the cell's Node directly, including
+any "empty" cell content.  Each <code>nodeFormatter</code> will have access through the
+Node API to all cells and rows in the <code>&lt;tbody&gt;</code>, but not to the <code>&lt;table&gt;</code>,
+as it will not be attached yet.</p>
+
+<p>If a <code>nodeFormatter</code> returns <code>false</code>, the <code>o.td</code> and <code>o.cell</code> Nodes will be
+<code>destroy()</code>ed to remove them from the Node cache and free up memory.  The
+DOM elements will remain as will any content added to them.  <em>It is highly
+advisable to always return <code>false</code> from your <code>nodeFormatter</code>s</em>.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">BodyView</span>:
+                    
+                    The instance
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__eventHandles" class="property item protected">
+    <h3 class="name"><code>_eventHandles</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l821"><code>js&#x2F;body.js:821</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the event subscriptions needing to be detached when the instance is
+<code>destroy()</code>ed.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__idMap" class="property item protected">
+    <h3 class="name"><code>_idMap</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l845"><code>js&#x2F;body.js:845</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Map of Model clientIds to row ids.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__rowTemplate" class="property item protected">
+    <h3 class="name"><code>_rowTemplate</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l881"><code>js&#x2F;body.js:881</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The HTML template used to create a full row of markup for a single Model in
+the <code>modelList</code> plus any customizations defined in the column
+configurations.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CELL_TEMPLATE" class="property item">
+    <h3 class="name"><code>CELL_TEMPLATE</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l116"><code>js&#x2F;body.js:116</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>HTML template used to create table cells.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;td {headers} class=&quot;{className}&quot;&gt;{content}&lt;&#x2F;td&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CLASS_EVEN" class="property item">
+    <h3 class="name"><code>CLASS_EVEN</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l126"><code>js&#x2F;body.js:126</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>CSS class applied to even rows.  This is assigned at instantiation.</p>
+
+<p>For DataTable, this will be <code>yui3-datatable-even</code>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-table-even&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CLASS_ODD" class="property item">
+    <h3 class="name"><code>CLASS_ODD</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l138"><code>js&#x2F;body.js:138</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>CSS class applied to odd rows.  This is assigned at instantiation.</p>
+
+<p>When used by DataTable instances, this will be <code>yui3-datatable-odd</code>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-table-odd&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Formatters" class="property item">
+    <h3 class="name"><code>Formatters</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l894"><code>js&#x2F;body.js:894</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.8.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Hash of formatting functions for cell contents.</p>
+
+<p>This property can be populated with a hash of formatting functions by the developer
+or a set of pre-defined functions can be loaded via the <code>datatable-formatters</code> module.</p>
+
+<p>See: <a href="./DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_host" class="property item">
+    <h3 class="name"><code>host</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l160"><code>js&#x2F;body.js:160</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The object that serves as the source of truth for column and row data.
+This property is assigned at instantiation from the <code>host</code> property of
+the configuration object passed to the constructor.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_ROW_TEMPLATE" class="property item">
+    <h3 class="name"><code>ROW_TEMPLATE</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l150"><code>js&#x2F;body.js:150</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>HTML template used to create table rows.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;tr id=&quot;{rowId}&quot; data-yui3-record=&quot;{clientId}&quot; class=&quot;{rowClass}&quot;&gt;{content}&lt;&#x2F;tr&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_TBODY_TEMPLATE" class="property item">
+    <h3 class="name"><code>TBODY_TEMPLATE</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_body.js.html#l173"><code>js&#x2F;body.js:173</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>HTML templates used to create the <code>&lt;tbody&gt;</code> containing the table rows.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;tbody class=&quot;{className}&quot;&gt;{content}&lt;&#x2F;tbody&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Issue with Panels</title>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","container");
+	loader.insert({ 
+		onSuccess: function() {
+			//shortcuts
+				
+			myTooltip = new YAHOO.widget.Tooltip("myTooltip", { 
+				context:YAHOO.util.Dom.getElementsByClassName('definition','span',YAHOO.util.Dom.get('defined')), 
+				text:'<\iframe id="iframe" width="300px" height="200px"><\/iframe>'
+			});
+			myTooltip.contextTriggerEvent.subscribe(function (context,target) {
+				YAHOO.util.Dom.get('iframe').src = 'glossary/' + target[0].innerHTML + '.html';
+			});
+		}
+	});
+})();
+		</script>
+<style type="text/css">
+.definition {
+	text-decoration:underline;
+	color:green;
+}
+</style>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	<div id="doc3"> 
+		<h1>Issue with Panels</h1>
+		<p>Hello,</p><div id="defined"><p>
+
+I'm a teacher and I'm really just getting into CSS / Javascript, so be
+gentle I've only just popped my <span class="definition">cherry</span>.
+</p><p>
+So far I've successfully figured out a system which allows a given
+word within a body of text to both have a tooltip popup box, as well
+as a panel pop up for it when clicked.   
+</p><p>
+My intent is to create a series of webpages that contain assignment
+information for students, such as how to complete a project.  The hope
+is that I can code this page in such a way that all the 'difficult'
+words contain a tooltip with a basic definition, and then have a panel
+that will pop up when they are clicked with a much more indepth
+definition, including a <span class="definition">pronunciation</span> guide and wave file that when an
+Icon is clicked the student can listen to the definition (for those
+with disabilities / language issues).
+</p><p>
+Here are the problems I forsee and would like help with avoiding:
+</p><p>
+Firstly, through my testing I have discovered that only the first
+instance of a particular id within a page will launch my tooltip or
+the panel.  This is problematic because though most students will 'get
+it' that the first instance is the only clickable one, I would like
+all of them to function the same.  I do not feel like coding a whole
+bunch of ID's and entries for those ID's to make that work... who would? 
+</p><p>
+Ive seen some stuff related to groupIDs but at my current level of
+understanding I really cant make sense of it.  Can someone explicate
+this a bit further for me.  I'm not dumb... I just dont have the
+rudiments down.
+</p><p>
+Secondly, I've done some limited testing to attempt to make it so that
+the in-depth glossary entries are not in-line to the page, but rather
+that they are external held in .html files in a sub-directory called
+/glossary/.  This would be an ideal setup because it would allow me to
+link to pages in the glossary directory for the content of my panels
+so that I would only need to change those .html files in order to
+change content over multiple assignment pages.
+</p><p>
+The problem I'm facing with this is that my limited CSS / HTML
+knowledge doesnt seem to be cutting it.  I attempted using a frame
+within the panel to show the content, but it doesnt even show the
+content of the referenced html file.
+</p></div>
+		</div>
+	</body>
+</html>
+				

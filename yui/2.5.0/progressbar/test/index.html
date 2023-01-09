@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Progress Bar</title>
+<!-- css -->
+<!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base.css"-->
+<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.6.0/build/logger/assets/skins/sam/logger.css">
+
+<link rel="stylesheet" type="text/css" href="progressbar.css">
+<!-- js -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<!--script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/animation/animation-min.js"></script-->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta.js"></script>
+
+<script type="text/javascript" src="progressbar-debug.js"></script>
+
+<style type="text/css">
+#lr .yui-pb-bar ,#rl .yui-pb-bar{
+	margin: 0px 20px;
+}
+#tb .yui-pb-bar, #bt .yui-pb-bar {
+	margin: 20px 0px;
+}
+</style>
+</head>
+<body class="yui-skin-sam1">
+	<div style="positi on:fixed;l eft:0;t op:0;bo rder:thin solid silver">
+		You can use this box<br/>
+		to change the value<br/>
+		of the bar.<br/>
+		Range: 0 - 100<br/>
+		<input id="newValue" value="50" maxlength="3" size="3" /><button id="setValue">Set</button>
+	</div>
+
+	<!--div id="docxx" style="pa dding:1em"> 	
+<table id="test" border="1"><tr>
+	<td colspan="2" class="h"><div id="lr"></div></td>
+</tr><tr>
+	<td colspan="2" class="h"><div id="rl"></div></td>
+</tr><tr>
+	<td width="50%" class="v"><div id="tb"></div></td>
+	<td width="50%" class="v"><div id="bt"></div></td>
+</tr></table>
+	</div-->
+	<div id="lr"></div>
+	<div id="rl"></div>
+	<div id="tb"></div>
+	<div id="bt"></div>
+<script  type="text/javascript">
+	var Dom = YAHOO.util.Dom, 
+		Event = YAHOO.util.Event;
+		if (YAHOO.env.ua.gecko) {
+			log = console.log;
+		} else {
+			log = function() {};
+		}
+
+	Event.onDOMReady(function () {
+		var myLogReader = new YAHOO.widget.LogReader("myLogger"); 
+		log('----------------lr-----------------------');
+		var lr = new YAHOO.widget.ProgressBar({barColor:'green',backColor:'orange',border:'thin solid black',direction:'lr',width:'200px',height:'30px'});
+		lr.render('lr');
+		log('----------------rl---------------------');
+
+		var rl = new YAHOO.widget.ProgressBar({barColor:'green',backColor:'orange',border:'thin solid black',direction:'rl',width:'200px',height:'30px'});
+		rl.render('rl');
+		log('----------------tb---------------------');
+		var tb = new YAHOO.widget.ProgressBar({barColor:'green',backColor:'orange',border:'thin solid black',direction:'tb',width:'30px',height:'200px'});
+		tb.render('tb');
+		log('----------------bt---------------------');
+		var bt = new YAHOO.widget.ProgressBar({ barColor:'green',backColor:'orange',border:'thin solid black',direction:'bt',width:'30px',height:'200px'});
+		bt.render('bt');
+
+		log('------------------lr---------------------');
+			lr.set('value',50);
+		log('------------------rl-------------------');
+			rl.set('value',50);
+		log('------------------tb------------------');
+			tb.set('value',50);
+		log('------------------bt-------------------');
+			bt.set('value',50);
+		
+		Event.on('setValue','click',function() {
+			var newVal = parseInt(Dom.get('newValue').value,10);
+
+		log('------------------lr---------------------');
+			lr.set('value',newVal);
+		log('------------------rl-------------------');
+			rl.set('value',newVal);
+		log('------------------tb------------------');
+			tb.set('value',newVal);
+		log('------------------bt-------------------');
+			bt.set('value',newVal);
+		},'#setValue');
+	});
+</script>
+</body>
+</html>
+	

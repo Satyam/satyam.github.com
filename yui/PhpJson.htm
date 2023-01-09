@@ -1,0 +1,634 @@
+<html>
+
+<head>
+    <meta name="generator" content=
+    "HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+    <meta http-equiv="Content-Language" content="en-us">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/base/base-min.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/assets/skins/sam/skin.css">
+<title>A PHP back end to YUI</title>
+
+<STYLE TYPE="text/css">
+    PRE { 
+        background-color: #e0e0e0;
+        border: 1px solid silver; 
+        padding: 1em ;
+        font-size:85%;
+		margin:1em
+    }
+	code {
+		background-color:#e0e0e0;
+		padding:0 3pt;
+	}
+    </STYLE>
+</head>
+
+  <body class="yui-skin-sam">
+    <div id="doc" class="yui-t1">
+      <div id="hd">
+
+<h1>A PHP back end to YUI</h1>
+      </div>
+      <div id="bd">
+
+<p>This is my package of PHP functions for the server side.</p>
+<p>I have my own personal standard on how to carry communications back and forth
+in between client and server. All transactions follow this standard even
+when they might use very little of it, but it helps make things very
+predictable, which helps mantainability.</p>
+<p>From the client to the server, all requests will go in a <code> POST</code> message in
+URL-encoded format. There will always be at least two arguments, <code> ajaxObj</code> and
+<code>ajaxAction</code>. The first is associated with a certain object, for
+example, a <code> DataTable</code> or a form. The second, <code> ajaxAction</code>, indicates what is
+it that I am requesting about that object. The rest of the arguments
+depend on the particular operation.</p>
+<p>On the reply from the server to the client, the format is as follows</p>
+<pre>{
+    replyCode:200, replyText:&quot;Ok&quot;, 
+    data:[{ ... } , ... ]
+    , .... 
+}</pre>
+<p>The <code>replyCode</code> and <code>replyText</code> are mandatory and will always be
+there. The first, <code>replyCode</code> I set to <code> 200</code> for
+<code> Ok</code>
+(much like in HTTP), <code> 201</code> for <code>Data Follows</code> or <code> 500</code> and
+above for
+errors. Though I adopted the numerical conventions of HTTP do not confuse
+them with those. These are application error codes, not communication
+codes. The browsers and caching proxies might take action on the HTTP
+codes and though I could use the <code>header</code> function to create any HTTP reply
+code I
+wanted, some of them might cause unexpected behavior, very difficult to
+trace. <code>replyText</code> hopefully will contain an '<code>Ok</code>' for no error
+or an appropriate message.</p>
+<p>This message format is usually called an <b>envelope</b> since the data goes
+inside or, as in this case, right afterward.&nbsp; An arbitrary number of named
+properties may follow the envelope, in particular, if present, an object named <code>data</code>
+carries tabular information. Its value will be an array of object literals, each element of
+the array will be one record represented as an object literal which will have a
+property named after each column containing the field value. Further properties
+and their values may follow.&nbsp; Certain transactions expect as
+a reply either an Ok or an error reply; those will carry no data.</p>
+<p>After including the standard includes, all my AJAX server pages call <code>ajaxReq
+</code>(<a href="#ajaxReq">shown
+later</a>)
+which branches to a function
+with the name pattern (in PHP syntax) <code>&quot;ajax_${ajaxObj}_${ajaxAction}&quot;</code> where <code>$ajaxObj</code>
+and <code>$ajaxAction</code> are PHP variable names representing arguments coming in
+the POST request. </p>
+<p>After the call to <code>ajaxReq</code> there will be a series of functions
+responding to that name pattern. To allow the same page to both serve AJAX and
+normal page requests, <code>ajaxReq</code> will first look for the <code>ajaxObj</code>
+ argument; if it doesn't find one, it returns, assuming that the request
+was a normal page request, not an AJAX one.  If the page does only serve
+AJAX request, it is enough to place an appropriate error reply right after the
+call to <code>ajaxReq</code>. If the <code>ajaxObj</code> argument is there it will
+search for an <code>ajaxAction</code> argument as well
+and it should find a function named as indicated or it will give an error. </p>
+<p>When <code>ajaxReq</code> reads the basic arguments and finds the corresponding function, it calls it and upon return sends back an
+<code>200 'Ok'</code> message back with no data, this is the hopeful default. At any time the called function can return with data or an
+error message. Returning some sort of data is actually the most frequent
+case. If so, the processing will be terminated and the default <code>200
+'Ok'</code> message will never be reached.</p>
+<p>The next important function is <code><a href="#ajaxReply">ajaxReply</a></code>, which
+takes a variable number of arguments. The first is what will become the <code>replyCode</code> 
+and it defaults to <code>200</code> if none is given, the second
+is the <code>replyText which defaults to 'Ok'.</code> The third and remaining optional arguments can be one of two things, either an array or an
+string, anything else will produce an error. Any number of them can be given in
+any order.&nbsp;&nbsp;</p>
+<p>If the extra argument is an array, it should be in the <code> name =&gt; value</code> format (not just
+unnamed values) so that they will be
+turned into named properties in the JSON reply. Care should be taken not to
+repeat property names when there is more than one array and that none of those
+coincide with any of the names already in use by the function.&nbsp; Though the
+argument itself, if it is an array, has to have named elements, the value of any
+of those named elements might be a simple array with no names.</p>
+<p> If the extra argument is a string, it will assume it is an
+SQL query, which will be executed and the data returned in the <code>data</code>
+property of the reply. If there are more than one SQL query in the arguments,
+the first will be in the <code>data</code> array, the second in a <code>data1</code> array,
+the third in a <code>data2</code> and so on.&nbsp; I usually don't have more than a
+single tabular element in the reply, and that is the one that goes into the
+DataTable.&nbsp; Other tabular elements might contain name-value pairs for a
+dropdown list.&nbsp;</p>
+<p><code>ajaxReply</code> does not return from the call, it always exits after the
+reply is sent to the client since the envelope ends up closed and further data
+would be ignored.</p>
+<a name="dropdownData"><p>Let's see a typical server page:</p></a>
+<pre>&lt;?php
+    include 'includes/include.php';
+    
+    ajaxReq();
+    
+    function ajax_Places_select() {
+        ajaxReply(201,'Data Follows','select IdPlace as value, Name as text from Places order by Name');
+    }
+</pre>
+<p>Right after including my personal library of functions, I call <code>ajaxReq</code>
+then, any number of function definitions may follow. Here I show just one,
+<code>ajax_Places_select</code> which will be invoked every time a request comes with <code>ajaxObj=Places&amp;ajaxAction=select</code>
+in the URL. This particular function, which I call a 'transaction' since that
+is what they usually turn into on the SQL side, does not need any further
+arguments so it does not read any more from the URL. It is simply a request to read a
+lookup table of places. These values will be used in an HTML select box and the
+DataTable formatter for dropdown boxes expects to receive its values as an array of <code> value =&gt; text</code> couples,
+so I use SQL to make the alias and, in order to have the select box sorted, I do
+the sorting at the SQL side, which is very fast. Since the third argument is a
+string, it will assume it is an SQL statement so <code>ajaxReply</code> will execute this statement and it will
+create an array of literal objects in the <code> data</code> element of the envelope, like: </p>
+<pre>{
+    replyCode:201, replyText:&quot;Data Follows&quot;, 
+    data:[
+        {&quot;value&quot;:23,&quot;text&quot;:&quot;Alice's&quot;},
+        {&quot;value&quot;:1,&quot;text&quot;:&quot;Home&quot;},
+         ... 
+    ] 
+}</pre>
+<p>Other functions might just return a status indication, for example: </p>
+<pre>function ajax_Places_delete() {
+    $IdPlace = parse_post_int('IdPlace');
+    mysql_query('delete from Places where IdPlace =' . $IdPlace)
+        or ajaxReply(500,'SQL error '  . mysql_error());
+    mysql_affected_rows() or ajaxReply(501,
+        'The record does not exist, it might have been deleted by someone else');
+}</pre>
+<p>The <code> delete</code> transaction calls <code> parse_post_int</code> to read argument <code>IdPlace</code>
+from the <code>POST</code> request, which it then checks with a regular expresion
+for valid
+digits and calls <code>intVal</code> to ensure it gets a number. Then it builds an SQL statement to delete a record. If the statement
+fails, it sends an error reply with a <code>500 replyCode</code> and a corresponding
+message. It then checks whether it actually deleted any records at all
+and, if not, sends another error message. The numbers used for the error
+codes are whatever you want, I follow the convention of assuming <code>5xx</code> are
+error codes, I have no standard on what each means, it is just a matter of
+documenting them for each transaction. If all goes according to plan, the function will finally return
+and <code>ajaxReq</code> which called it in the first place, will then send a <code>200
+'Ok'</code> message with no data. In neither success or failure replies I use
+the third argument to <code>ajaxReply</code> since there is no extra information to
+convey.
+</p>
+<p>Actually, since the pattern of calling <code>mysql_query</code> and then checking
+for errors is so frequent, I use a function called <code>ajaxSqlQuery</code>:
+</p>
+<pre>function ajaxSqlQuery($sql) {
+    $result = mysql_query($sql);
+    if ($result) return $result;
+    ajaxReply(620,'Sql error: ' . mysql_error(),array('sql' =&gt; $sql));
+}</pre>
+<p>If there is an error in the execution of the SQL statement, <code><a href="http://es.php.net/manual/en/function.mysql-query.php">mysql_query</a></code>
+will return <code>false</code> so anything else is a valid result, which it then
+returns.&nbsp; Otherwise, the reply will have <code>620</code> as a <code>replyCode</code>, the
+SQL error message as the <code>replyText</code> and an extra property named <code>'sql'</code>
+containing the
+failed SQL statement as its value.&nbsp; Not that the end user would care nor even should
+know what the structure of your database is but at development time this
+information is good.
+</p>
+<p>Another posible transaction on the same table, an update:
+</p>
+<pre>function ajax_Places_update() {
+    ajaxSqlQuery(
+        BuildSql('update Places set ?1x = ?2s where IdPlace = ?3i and ?1x = ?4s'
+            , $_POST['fieldName'], $_POST['newValue'], 
+            parse_post_int('IdLugar'), $_POST['oldValue']
+        )
+    );
+    mysql_affected_rows() or ajaxReply(501,
+        'The record does not exist or it might have been modofied by someone else');
+}</pre>
+<p><code>ajax_Places_update</code> executes an action query which does not
+return a value, nevertheless, the query is made so that it checks that the
+record to be changed still exists with its original value (taken from '<code>oldValue</code>'). I'll describe the
+<code>BuildSql</code> function <a href="#BuildSql">later</a>, right now it is
+enough to know that it is a sort of <code> sprintf</code> made for SQL where the <code> ?</code> starts
+the placeholder to the values, which follow the formatting list. <code>BuildSql</code>
+accepts positional arguments, indicated by the number after the <code>?</code>, thus
+here we use the first argument, <code>fieldName</code>, in two places. It checks if there was any affected rows, if there
+weren't it means someone else changed the original record and it returns a <code> 501</code>
+error. If none of the above happens, it will return and <code>ajaxReq</code> which
+called it, will return a <code>200,'Ok' </code> message. This kind of update function I
+often use for inline edits on DataTable fields. In none of the replies I
+use the third argument since there is nothing to return but a status code.
+</p>
+<p>The next function, <code>ajax_Places_insert</code> does a record insert and at the
+end it has a call to <code>ajaxReply </code> with the third argument set to an array which is the
+database record ID of the newly inserted record.</p>
+<pre>function ajax_Places_insert() {
+    ajaxSqlQuery(
+        BuildSql('insert into Places (Name,Address1, Address2, City,Zip) values (?s,?ns,?ns,?ns,?ns)'
+            , $_POST['Name'], $_POST['Address1'], $_POST['Address2'], $_POST['City'], $_POST['Zip']
+        )
+    );
+    ajaxReply(201,'Data Follows',array('IdPlace' =&gt; mysql_insert_id()));
+}    </pre>
+<p> This is how this reply would look:</p>
+<pre>{&quot;replyCode&quot;:201,&quot;replyText&quot;:&quot;Data Follows&quot;,&quot;IdPlace&quot;:26}</pre>
+<hr>
+<h3>Function <code><a name="ajaxReq">ajaxReq</a></code></h3>
+<p>The <code>ajaxReq</code> reads the <code>ajaxObj</code> argument from <code> $_POST</code>. If
+there is no <code> ajaxObj</code> argument, it assumes it was not an AJAX request so it
+returns. If it does find one, it does a little regexp check for valid characters
+then reads <code>ajaxAction</code> and validates it as well. It finally assembles the function name. If there is such a function,
+it will send the headers to prevent the reply from being cached and to insure
+the text is read in the proper charset (I don't expect to use anything but Roman
+characters, but UTF-8, Cyrillic or any other are reasonable alternatives). Then
+it calls the function and on return, if it does return (which it often does not)
+, it calls <code>ajaxReply</code>
+without arguments, which will produce a <code> 200, 'Ok'</code> reply.</p>
+<p>Notice the call to the PHP function <code> <a href="http://es.php.net/manual/en/function.set-error-handler.php"> set_error_handler</a></code> right before calling
+the variable function <code>$func</code>. This makes PHP send any error to the function
+named in the argument.&nbsp; The purpose of this handler is to format any error message in a JSON compatible way. PHP error
+messages are formatted in HTML to show on a browser. The function, <a href="#ajaxErrorHandler"> shown
+later</a>, takes the component of the error message and packs them into a JavaScript
+object literal. Usually you would save the old value of the error handler to restore it
+after whatever you did, but in this case since we are in 'AJAX mode' and we
+won't return to 'HTML mode', we don't want the normal handler restored.</p>
+<pre>function ajaxReq() {
+    $ajaxObj = trim($_POST['ajaxObj']);
+    if (strlen($ajaxObj)) {
+        if (preg_match('/^[a-zA-Z]+$/',$ajaxObj)) {
+            $ajaxAction = trim($_POST['ajaxAction']);
+            if (strlen($ajaxAction)) {
+                if (preg_match('/^[a-zA-Z]+$/',$ajaxAction)) {
+                    $func = &quot;ajax_${ajaxObj}_${ajaxAction}&quot;;
+                    if (function_exists($func)) {
+                        header('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
+                        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+                        header('Content-type: application/json; charset=utf-8');
+                        set_error_handler('ajaxErrorHandler');
+                        $func();
+                        ajaxReply();
+                    }
+                    ajaxReply(601,'function not defined: ' . $func);
+                }
+                ajaxReply(602,'action contains invalid chars: ' . $ajaxAction);
+            }
+            ajaxReply(603,'missing action');
+        } 
+        ajaxReply (604,'object name has invalid characters: ' . $ajaxObj);
+    }
+}</pre>
+<p>Reading <code>ajaxObj</code> and <code>ajaxAction</code> from <code>$_REQUEST</code> instead of
+<code>$_POST</code> is a valid alternative.&nbsp; This might allow you to order
+transactions from a GET request as well as from a POST one.</p>
+<hr>
+<h3>Function <code><a name="ajaxReply">ajaxReply</a></code></h3>
+<p><code>ajaxReply</code> uses two or more arguments.&nbsp; The first two default to a
+<code>200, 'Ok'</code> reply message.&nbsp;They are the basic envelope for any
+data which, if any, goes into the remaing arguments
+beyond the first two.&nbsp;</p>
+<p>First, it initializes variable <code>$s</code> where the content of the
+envelope will be assembled. It loops through the arguments starting with the
+third.&nbsp; It uses the PHP functions <a href="http://www.php.net/manual/en/function.func-num-args.php"><code>func_num_args</code></a>
+and <a href="http://www.php.net/manual/en/function.func-get-arg.php"><code>func_get_arg</code></a>
+to check the number of arguments and fetch each one, which will then be stored in <code>$arg</code>.&nbsp;&nbsp;</p>
+<p>If <code>$arg</code>
+is an array, it will use <a href="http://es.php.net/manual/en/function.json-encode.php"><code>json_encode</code></a>
+(which in PHP 5 is already built in) to encode it but, since this will produce a
+full json-encoded string, with its enclosing curly braces and we might not be
+finished yet, we strip those off and concatenate it into <code>$s</code> after a comma
+.&nbsp;</p>
+<p>
+If <code>$arg</code> a string then it assumes it to be an SQL statement and
+it calls <code>ajaxSqlQuery</code> to execute it. Remember <code>ajaxSqlQuery</code>
+already checks for errors and if any is found, it will return the appropriate
+reply and die so, if a <code>$result</code> is ever returned, it has to be a valid result
+set. I set <code>$s</code> to start a JavaScript array literal named <code>data<i>nn</i></code>,
+where <i><code>nn</code></i> is a sequential number (though there is no <code>data0</code>
+but simply <code>data)</code>. Each
+element is made of a row returned from the query turned into a JavaScript object
+literal made from the field names and field values.</p>
+<p>Since the optional arguments from the third on have to be either an array or
+a valid SQL statement, anything else will produce an error which, captured by
+the error handler set in <code>ajaxReq</code>, will produce a suitable error reply.&nbsp;</p>
+<p>Finally, the function assembles the envelope with <code>replyCode</code>, <code>replyText</code>
+and the data assembled in <code>$s</code>, if there is any.</p>
+<pre>function ajaxReply($replyCode = 200,$replyText = 'Ok') {
+    $s = '';
+    $nSql = '';
+    for ($iArg = 2;$iArg &lt; func_num_args();$iArg++) {
+        $arg = func_get_arg($iArg);
+        if (is_array($arg)) {
+            $arg = json_encode($arg);
+            $s .= ',' . substr($arg,1,strlen($arg)-2);
+        } elseif (is_string($arg)) {
+            $result = ajaxSqlQuery($arg);
+            $s .= ',&quot;data' . $nSql . '&quot;:[';
+            $nextRow = false;
+            while ($row = mysql_fetch_assoc($result)) {
+                if ($nextRow) {
+                    $s .= ',';
+                } else {
+                    $nextRow = true;
+                }
+                $s .= json_encode($row);
+            }
+            $s .= ']';
+            mysql_free_result($result);
+            $nSql++;
+        } else {
+            trigger_error(&quot;ajaxReply: optional argument at position $iArg value $arg is invalid, 
+                only arrays or SQL statements allowed&quot;,E_USER_ERROR);
+        }
+    }
+    echo '{&quot;replyCode&quot;:' , $replyCode , ',&quot;replyText&quot;:&quot;' , $replyText , '&quot;' , $s, '}';
+    exit;
+}</pre>
+<hr/>
+<h3><img src="new.png" /> Replying to YUI Get requests</h3>
+<p>The new YUI <a href="http://developer.yahoo.com/yui/get/">Get Utility</a> allows for cross-domain requests, nevertheless it imposses a restriction, it can only read scripts and stylesheets, it cannot read plain data as supplied by a plain JSON server.  Though a JSON reply is plain JavaScript, it is simply a value and, unless assigned to something, it is evaluated and completely forgotten.The way to go around this limitation is to provide the server with the name of a callback function so that the reply is actually a function call with the JSON reply as its argument.</p>
+<p>In order to do this, lets introduce another URL argument, <code>ajaxCallback</code> which will be the name of the function to call.  Then, the function <code>ajaxReply</code> above would end with the following lines:</p>
+<pre>
+    $ajaxCallback = trim($_POST['ajaxCallback']);
+    if (strlen($ajaxCallback)) {
+        header('Content-type: application/javascript; charset=utf-8');
+        echo $ajaxCallback, '({&quot;replyCode&quot;:' , $replyCode , ',&quot;replyText&quot;:&quot;' , $replyText , '&quot;' , $s, '});';
+    } else {
+        echo '{&quot;replyCode&quot;:' , $replyCode , ',&quot;replyText&quot;:&quot;' , $replyText , '&quot;' , $s, '}';
+    }
+    exit;
+}</pre>
+<p>If there is an <code>ajaxCallback</code> argument in the request, these last few lines will, first, change the response header from JSON to JavaScript, then echo the very same response enclosed in parenthesis with the name of the function provided in front.  This will make the <code>onSuccess</code> callback function of <code>Get</code> unnecesary since upon successful load and evaluation of the response, the callback function provided along the URL will be called and the reply will be handled by that function.</p>
+<hr>
+<h3>Function <code><a name="BuildSql">BuildSql</a></code></h3>
+<p>This is my <code> BuildSql</code> function which, as I said, it is a kind of <code> sprintf</code> for
+SQL. Placeholders start with ? not with % and they are composed of:</p>
+<p><code>?</code>: the start of the place holder</p>
+<p><code>n</code>: optional, a number (starting with 1) for the position of the argument in
+the argument list (position 0 is the format string itself). If not
+specified, they will be taken in the order in which they appear.</p>
+<p><code>m</code>: optional, either:</p>
+<ul>
+  <li><code>m</code>: mandatory: the function will return an error if the data is not
+    present.</li>
+  <li><code>n</code>: null if zero or zero lenght. Numeric 0, zero length strings,
+    empty date strings will be changed into the SQL literal <i><code>null</code></i>.</li>
+</ul>
+<p><code>t</code>: mandatory, the data type, which can be any of:</p>
+<ul>
+  <li><code>i</code>: integer</li>
+  <li><code>s</code>: string</li>
+  <li><code>f</code>: float</li>
+  <li><code>d</code>: date or datetime</li>
+  <li><code>t</code>: time</li>
+  <li><code>b</code>: boolean</li>
+  <li><code>p</code>: contents of the global variable <code> $table_prefix</code></li>
+  <li><code>x</code>: field name</li>
+</ul>
+<p>All the arguments can be either upper or lowercase. The first 6 are quite obvious. Dates are expected as regular PHP
+timestamp integer values so it is up to you to convert them from whatever the
+format of your date to a PHP timestamp. Strings are
+passed through <code>mysql_real_escape_string</code> to escape any might dislike and
+enclosed in quotes.</p>
+<p>The <code> P</code> argument stands for Prefix and is meant to put before the names of
+tables so that in a situation where you have to share the same database with
+other applications or development team, the contents of the <code> $table_prefix</code> global
+variable, which you would have read from some configuration file, will be put in
+front of the table name. For example:</p>
+<pre>select * from ?ptable</pre>
+<p>If <code> $table_prefix</code> is empty, then no harm is done, if it is not, then your
+table names will share the same prefix.</p>
+<p>Finally, the <code> X</code> argument is basically for field names, when the name of the
+field itself is a variable. You will have noticed it in the <code>ajax_Places_update</code> function in the example
+above, the posted <code> $_POST['fieldName']</code> contains the name of the field to be
+table column to be modified. The field name will be quoted with backticks
+as per MySql syntax and escaped. With all this escaping and the intvals,
+floatvals and such in the other datatypes, there shouldn't be much chance for
+SQL injection. </p>
+<pre>function BuildSql($query) {
+    global $table_prefix;
+    
+    $num_args = func_num_args();  // number of arguments available
+    $args_used = (1 &lt;&lt; $num_args) -2; // bit mask to check if arguments are used
+
+    $offset = -1;
+    $matches = array();
+    while(true) {
+        $offset++;
+        $match = array('start' =&gt; $offset);
+    
+        $offset = strpos($query,'?',$offset);
+        if ($offset === false) {
+            $match['len'] = -1;
+            $matches[] = $match;
+            break;
+        }
+        $match['len'] = $offset - $match['start'];
+        $state = 0;
+        do {
+            $offset++;
+            $ch = strtolower($query[$offset]);
+            switch($ch) {
+                case 's':
+                case 'i':
+                case 'f':
+                case 'd':
+                case 't':
+                case 'b': 
+                case 'p':
+                case 'x':
+                    $match['type'] = $ch;
+                    $state = 99;
+                    break;
+                case 'm':
+                    if ($state &lt; 10) {
+                        $match['mandatory'] = true;
+                        $state = 10;
+                    } else {
+                        trigger_error('BuildSql: Cannot have an &quot;M&quot; modifier at that position ' 
+                            . substr($query,0,$offset+1),E_USER_ERROR);
+                    }
+                                break;
+                case 'n':       // null if empty?
+                    if ($state &lt; 10) {
+                        $match['null'] = true;
+                        $state = 10;
+                    } else {
+                        trigger_error('BuildSql: Cannot have an &quot;N&quot; modifier at that position ' 
+                            . substr($query,0,$offset+1),E_USER_ERROR);
+                    }
+                                break;
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    switch($state) {
+                        case 0:
+                            $match['pos'] = intval($ch,10);
+                            $state = 3;
+                            break;
+                        case 3:
+                            $match['pos'] = $match['pos'] * 10 + intval($ch,10);
+                            $state = 5;
+                            break;
+                        default:
+                            trigger_error('BuildSql: Cannot have a digit at that position ' 
+                                . substr($query,0,$offset+1),E_USER_ERROR);
+                            break;
+                    }
+                    break;
+                default:
+                    trigger_error('BuildSql: Unknown formatting character: ' 
+                        . substr($query,0,$offset+1),E_USER_ERROR);
+            }
+        } while ($state &lt; 99);
+        $matches[] = $match;
+    }
+
+    $arg_pointer = 1; // sequential pointer to arguments
+    $s = '';  // output SQL statement
+    foreach($matches as $match) {
+        if ($match['len'] == -1) {
+            $s .= substr($query,$match['start']);
+            break;
+        }
+        $s .= substr($query,$match['start'],$match['len']);
+        // read the value of the argument
+        if ($match['type'] == 'p') {
+            $value = $table_prefix;     // t is a special case, it takes no argument from the list
+            $n = 0; // to avoid marking the argument as used.
+        } else {
+            if ($match['pos']) {
+                $n = $match['pos'];
+            } else {                        
+                // else, read the next sequential argument an increment the argument pointer
+                $n = $arg_pointer++;
+            }
+            // some bitwise magic to unset the bit position representing the argument
+            $args_used &amp;= ~ (1 &lt;&lt; $n);   
+            if ($n &gt;= $num_args) {
+                trigger_error(&quot;BuildSql: Missing argument $n after: $s&quot;,E_USER_ERROR);
+            } else {
+                $value = func_get_arg($n);      // otherwise, read it
+            }
+        }
+        if ($match['mandatory'] &amp;&amp; is_null($value)) {
+            trigger_error(&quot;BuildSql: Missing value for argument $n after: $s&quot;,E_USER_ERROR);
+        }
+        $NullIfEmpty = $match['null'];
+        switch($match['type']) { // now we process $value according to datatype and $NullIfEmpty flag
+            case 's':
+                if ($NullIfEmpty and strlen($value) == 0) {
+                    $s .='null';
+                } else {
+                    $s .= &quot;'&quot; . mysql_real_escape_string($value) . &quot;'&quot;;
+                }
+                break;
+            case 'i':
+                if ($NullIfEmpty and $value == 0) {
+                    $s .='null';
+                } else {
+                    $s .= intval($value);
+                }
+                break;
+            case 'f':
+                if ($NullIfEmpty and $value == 0) {
+                    $s .='null';
+                } else {
+                    $s .= floatval($value);
+                }
+                break;
+            case 'd':
+                if ($NullIfEmpty and empty($value)) {
+                    $s .='null';
+                } else {
+                    $s .= &quot;'&quot; . date('Y-m-d H:i:s', $value) . &quot;'&quot;;
+                }
+                break;
+            case 't':
+                if ($NullIfEmpty and empty($value)) {
+                    $s .='null';
+                } else {
+                    $s .= &quot;'&quot; . date('z H:i:s', $value) . &quot;'&quot;;
+                }
+                break;
+            case 'b':  // booleans cannot be null
+                $s .= intval($value!=false);
+                break;
+            case 'p':
+                $s .=  mysql_real_escape_string($value);
+                break;
+            case 'x':
+                $s .= '`' . mysql_real_escape_string($value) . '`';
+                break;
+        }
+    }
+    //
+    // if all arguments used, $args_used will be zero
+    if ($args_used) {
+        for($i=1; $i &lt; $num_args; $i++) {
+            $args_used &gt;&gt;=1; // bitmask is shifted right
+            // if right most bit still 1, it means it has not been used.
+            if ($args_used &amp; 1) trigger_error(&quot;BuildSql: Argument $i not used&quot;,E_USER_ERROR);
+        }
+    }
+    //
+    return $s;
+}
+</pre>
+
+<p><code>BuildSql</code> is of general use within or without AJAX, actually, I've been
+using it in several incarnations (including Visual Basic and VBScript versions)
+for years now.&nbsp; Notice that I use function <code>trigger_error</code> to signal
+errors which, with PHP error handler set to <code>ajaxErrorHandler</code> (shown <a href="#ajaxErrorHandler">below</a>)
+will be reported in true JSON fassion.</p>
+
+<hr>
+<h3>Function <code><a name="ajaxErrorHandler">ajaxErrorHandler</a></code></h3>
+<p>This is the error handler set by <code>ajaxReq</code> to handle error messages in JSON
+style. I took it from the example in the PHP manual which discriminates
+between the several errors, though it actually doesn't matter much, except to
+separate notices from the rest. You have to ignore notices since this
+function is called with all errors, warnings and notices, regardless of the
+error level you set. Besides setting <code> replyCode</code> and <code>replyText</code>, which are
+the least the JSON client expects, it sets other properties from values passed
+as arguments to this function.</p>
+<pre>function ajaxErrorHandler($errno, $errstr, $errfile, $errline)    {
+    switch ($errno) {
+        case E_USER_ERROR:
+            echo '{&quot;replyCode&quot;:611,&quot;replyText&quot;:&quot;User Error: ' 
+                , addslashes($errstr) . '&quot;,&quot;errno&quot;:', $errno;
+            break;
+        case E_USER_WARNING:
+            echo '{&quot;replyCode&quot;:612,&quot;replyText&quot;:&quot;User Warning: ' 
+                , addslashes($errstr) . '&quot;,&quot;errno&quot;:', $errno;
+            break;
+        case E_USER_NOTICE:
+        case E_NOTICE:
+            return false;
+        default:
+            echo '{&quot;replyCode&quot;:610,&quot;replyText&quot;:&quot;' 
+                , addslashes($errstr) . '&quot;,&quot;errno&quot;:', $errno;
+            break;
+    }
+    if ($errfile) {
+        echo ',&quot;errfile&quot;:&quot;' , addslashes($errfile) ,'&quot;';
+    }
+    if ($errline) {
+        echo ',&quot;errline&quot;:&quot;', $errline ,'&quot;';
+    }
+    echo '}';
+    die();
+}</pre>
+
+<hr>
+<p><b>Licensing</b>: I know company auditors require this so, for their benefit, let me
+state that all the code above can be freely used, modified, distributed or
+simply ignored, whichever pleases you most.&nbsp; Just be nice and don't take
+undue credit for it, if credit is due.&nbsp; Thanks.</p>
+</div>
+</div>
+</body>
+
+</html>

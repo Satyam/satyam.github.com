@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>YUI Documentation</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>YUI Documentation</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<h2>User guides and tutorials</h2>
+<p><a href="http://developer.yahoo.com/yui/">http://developer.yahoo.com/yui/</a></p>
+<ul>
+    <li>First point of entry for any component</li>
+    <li>Contains basic start up information and bits and pieces of code to get you started</li>
+    <li>Notice that the code is written for clarity, not efficiency</li>
+    <li>Points to all the rest</li>
+    <li>Only the most recent version is available</li>
+</ul>
+
+    
+<h2>API documentation</h2>
+<p><a href="http://developer.yahoo.com/yui/docs/">http://developer.yahoo.com/yui/docs/</a></p>
+
+<ul>
+    <li>Documentation extracted right from the actual source files</li>
+    <li>The YUI team plans to release the JSdoc utility they use to build the documentation for developers to document their own</li>
+    <li>The direct link always point to the most recent version, previous versions are available in the download package retrievable through <a href="http://sourceforge.net/project/showfiles.php?group_id=165715">SourceForge</a></li>
+</ul>
+<h3>Components</h3>
+<ul>
+    <li>It is a distribution unit, it does not correspond to a class of objects or any other formal JavaScript concept</li>
+    <li>A single component might have objects in the <code>YAHOO.widget</code> branch and in the <code>YAHOO.util</code> branch</li>
+    <li>Some elements are misplaced, the YUI team knows and they'll fix it, eventually</li>
+</ul>
+<h3>Classes</h3>
+<ul>
+    <li>Ok, JavaScript has no classes but that is what the heading says</li>
+    <li>When you first reach the page, you have to pick one of these</li>
+</ul>
+<h3>Files</h3>
+<ul>
+    <li>These show the source files before they are concatenated into the distribution units</li>
+    <li>They represent the original source files, not those that are distributed</li>
+    <li>Don't bother with them</li>
+</ul>
+<h3>Properties</h3>
+<ul>
+    <li>Lists object properties and constants</li>
+    <li>Constants are not really such, JavaScript does not have constants</li>
+    <li>Constant names are in all uppercase and their names are usually preceded by the object name since they are also static to remind you that you have to name them in full</li>
+    <li>The index does not list the properties of the objects it inherits from, these are mentioned at the end of the section</li>
+</ul>
+<h3>Methods</h3>
+<ul>
+    <li>Lists all methods and functions</li>
+    <li>Static functions are often preceded by the class name</li>
+    <li>The index does not list the methods and functions of the objects it inherits from, these are mentioned at the end of the section</li>
+</ul>
+<h3>Events</h3>
+<ul>
+    <li>These are custom events fired by the object</li>
+    <li>They are listened to by using the <code>subscribe</code> or <code>on</code> method (they are aliases)</li>
+    <li>By default, the event listener is executed in the context of the object</li>
+    <li>The index does not list the events fired by the objects it inherits from, these are mentioned at the end of the section</li>
+</ul>
+<pre>someObject.on('someEvent', function(args) {
+    // here, <code>this</code> points to <code>someObject</code>
+});</pre>
+<h3>Configuration attributes</h3>
+<ul>
+    <li>Some components take extra arguments in the form of 'configuration attributes'</li>
+    <li>When available, they are listed at the end of the index</li>
+    <li>They are usually set via the last optional argument of the object constructor, as an object literal with the configuration attribute as the property name</li>
+    <li>Once the object is created, they can also be set via<ul>
+        <li>the <code>set</code> or read via <code>get</code> methods inherited from the <code>Element</code> object which is augmented by <code>AttributeProvider</code> or any other directly augmented by <code>AttributeProvider</code>
+        <li>or via the <code>cfg</code> property <code>setProperty</code> and <code>getProperty</code> methods for components in the container family and menu.</code></li>
+        </ul></li>
+    <li>Changes made to those that have been augmented by <code>AttributeProvider</code> may have immediate effects</li>
+    <li>Those that have a <code>cfg</code> property need a call to <code>render</code> to have any effect</li>
+    <li>Eventually, those components that use <code>cfg</code> will move to the <code>AttributeProvider</code> mechanism</li>
+</ul>
+
+    
+<h2>Source files</h2>
+
+<ul>
+    <li>The ultimate resource, when everything else fails, this is what counts</li>
+    <li>Three flavours<ul>
+        <li><code>xxx-debug.js</code> These are the original ones.  They are not minified and contain calls to <code>YAHOO.log</code></li>
+        <li><code>xxx.js</code> Normal files, they are derived from the previous with the calls to <code>YAHOO.log</code> stripped out</li>
+        <li><code>xxx-min.js</code> Minified or compressed files from the previous ones, these are the final item fit for deployment</li>
+        </ul></li>
+    <li>The name convention for files is important because the YUI Loader <code>filter</code> property depends on it</li>
+    <li>Aggregated files, such as <code>utilities.js</code> and <code>reset-fonts-grids</code> come only in minified version</li>
+    <li>The YUI Loader automatically loads the aggregated file when enough single components contained in it are requested</li>
+</ul>
+
+
+<h2>Readmes</h2>
+
+<ul>
+    <li>Though admittedly they should be read with any release, at least you should read them when whatever worked in the previous version stops working in the new release</li>
+    <li>They are available on-line and also with each distribution in the same folder along with each component</li>
+</ul>
+
+<h2>Examples</h2>
+<ul>
+    <li>Unfortunately, the source for most of the code out there in the wild (all tables are called <code>myDataTable</code>)</li>
+    <li>They are just examples!!!</li>
+    <li>They are self-contained, in order to show everything in a single file</li>
+    <li>They don't follow any good practices regarding code organization, deployment, modularization, encapsulation and such</li>
+    <li>They are good for testing and experimenting, not for final deployment</li>
+    <li>Some need to have a PHP interpreter active to provide them with data</li>
+</ul>
+
+<h2>Cheat Sheets</h2>
+<ul>
+    <li>For those attached to paper</li>
+    <li>Compact one-page reference of the most often used elements</li>
+</ul>
+<h2>YUI Blog</h2>
+<p><a href="http://yuiblog.com/">http://yuiblog.com/</a></p>
+<ul>
+    <li>Unfortunately, not much movement there</li>
+    <li>Good for checking the news and some in-depth articles</li>
+    <li>Worth checking every once in a while</li>
+    <li>Check the dates on the articles when you search, some are outdated</li>
+</ul>
+<h2>YUI Theater</h2>
+<p><a href="http://developer.yahoo.com/yui/theater/">http://developer.yahoo.com/yui/theater/</a></p>
+
+<ul>
+    <li>Worth viewing<ul>
+        <li>Douglas Crockford - "The JavaScript Programming Language"</li>
+        <li>Nate Koechley - "The YUI CSS Foundation"</li>
+        <li>Grady Booch - "The Promise, the Limits, the Beauty of Software"</li>
+        </ul></li>
+    <li>Quality of the material and the presenter varies widely</li>
+    <li>Crockford's other presentations are not so great and might even be confusing</li>
+</ul>
+
+<h2>External Resources</h2>
+
+<ul>
+    <li>Team members private sites<ul>
+        <li><a href="http://www.julienlecomte.net/blog/">Julien Lecomte</a>
+        <li><a href="http://blog.davglass.com/">Dav Glass</a> (check: <a href="http://blog.davglass.com/2006/06/yui-code-samples/">samples</a>)</li>
+        <li><a href="http://www.nczonline.net/">Nicholas C. Zakas</a> Yes, he is one of the authors of that book in the home page</li>
+        </ul></li>
+    <li>Other friendly places<ul>
+        <li><a href="http://www.quirksmode.org/resources.html">Peter-Paul Koch</a> aka. PPK, Browser (in)compatibility tables</li>
+        <li><a href="http://www.dustindiaz.com/">Dustin Diaz</a> Ex-YUI dev.team member</li>
+        <li><a href="http://bubbling-library.com/">Caridy Pati&ntilde;o</a> Bubbling Library</li>
+        
+		
+        </ul></li>
+</ul>        
+    
+      
+      
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

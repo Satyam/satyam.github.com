@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Functions (continued)</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>Functions (continued)</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<h2>Singleton objects</h2>
+<ul>
+<li>Objects that will not be instanced</li>
+<li>They are simply a package of related functions</li>
+<li>In YUI:<ul>
+    <li><code>YAHOO.util.Connect</code></li>
+    <li><code>YAHOO.util.Get</code></li>
+    <li><code>YAHOO.util.Number</code></li>
+    </ul></li>
+<li>In JavaScript<ul>
+    <li><code>Math</code></li>
+    </ul></li>
+</ul>
+<br />
+<p>They are also called <b>static</b>, a name derived from C++ meaning that the value belongs to the class, not to its instances.  You don't need to create instances of these objects to access their static members, for example: <code>Math.floor</code>, <code>YAHOO.util.Connect.asyncRequest</code>, <code>YAHOO.util.Get.script</code> </p>
+<h2>Pattern of a singleton</h2>
+<p>(according to the name conventions, objects start with uppercase)</p>
+<pre>YAHOO.example.MySingleton = function () {
+    var privateVariable;
+    var privateArray;
+    var privateHelperFunction = function () {
+        // ....
+    };
+    
+    return {
+        publicVariable:2,
+        publicArray:[1,2,3],
+        publicFunction: function () {
+            // ....
+        },
+        getPrivateArray: function() {
+            return privateArray;      // Public methods have access to private variables
+        }
+    }
+}<b>()</b>;  // Important, it is meant to be executed!
+</pre>
+<ul>
+<li>At any time you can add more public properties (or methods) but since they are not enclosed in the same function, they won't be able to see the private members</li>
+</ul>
+<pre>// This method will always return <code>undefined</code>
+YAHOO.example.MySingleton.getPrivateVariable = function () {
+    return privateVariable;
+};
+</pre>
+<ul>
+<li>This also works, but the YUI compressor can't compress all the references to the main object, the YUI team avoids it</li>
+<li>Notice the change in the syntax, the equal signs and the semicolon at the end of each definition</li>
+</ul>
+<pre>YAHOO.example.MySingleton = function () {
+    var privateVariable;
+    var privateArray;
+    var privateHelperFunction = function () {
+        // ....
+    };
+    
+    YAHOO.example.MySingleton.publicVariable = 2;
+    YAHOO.example.MySingleton.publicArray = [1,2,3];
+    YAHOO.example.MySingleton.publicFunction = function () {
+        // ....
+    };
+}();  // It is still meant to be executed
+</pre>
+
+<h2>Hiding in Object Prototypes</h2>
+<ul>
+	<li>JavaScript does not have private variables, privacy is a trick done tweaking scoping rules</li>
+	<li>Object instances have it harder because what's not visible cannot be instantiated</li>
+	<li>Closure, once again, comes to the rescue</li>
+	<li>However, only <b>static</b> members can be hidden</li>
+	<li>All instance members are visible so we agree to put a leading underscore in their names</li>
+	</ul>
+	
+<pre>(function () {
+    YAHOO.example.MyPrototypeObject = function () {
+        this._id = nCount++;
+    };
+    
+    var MP = YAHOO.example.MyPrototypeObject,
+        proto = MP.prototype,
+        lang = YAHOO.lang,
+        Dom = YAHOO.util.Dom,
+        nCount = 0;
+    
+    MP.SOME_CONSTANT = 5;
+    MP.someUtilityFunction = function (arg) {
+        // does not have access to <code>this</code>
+        return arg;
+    };
+    
+    proto.somePublicInstanceProperty = 'abc';
+    proto.getId = function () {            
+        return this._id;
+    }
+})<b>()</b>;
+
+var mp1 = new YAHOO.example.MyPrototypeObject();
+var mp2 = new YAHOO.example.MyPrototypeObject();
+
+console.log(mp1.getId(), mp2.getId());                                      <tt>0 1</tt>
+
+console.log(YAHOO.example.MyPrototypeObject.SOME_CONSTANT);                 <tt>5</tt>
+console.log(YAHOO.example.MyPrototypeObject.someUtilityFunction(123));      <tt>123</tt>
+
+mp1.somePublicInstanceProperty = 65;
+console.log(mp1.somePublicInstanceProperty,mp2.somePublicInstanceProperty); <tt>65 'abc'</tt>
+</pre>      
+<ul>
+<li>Instance properties cannot be hidden so they are prefixed with an underscore to indicate intent</li>
+<li>Object prototypes can have a mix of static and instance properties</li>
+<li>Static members don't have access to <code>this</code></li>
+<li>Constants are named in all uppercase to indicate intent. Actually, they can be modified</li>
+<li>Since constants are not meant to be modified, it makes sense to make them static (shared) since the value should be the same for all</li>
+<li>The shortcut <code>MP</code> can't be created until after the object prototype is created because before creation <code>YAHOO.example.MyPrototypeObject</code> is <code>undefined</code> which is a value and is passed by value.  Once created, then it is passed by reference so they both point to the same object</li>
+</ul>
+
+<h2>Adjusting scope</h2>
+<ul>
+	<li>Function <code>someUtilityFunction</code> above can have access to <code>this</code> if it is called though <code>call</code> or <code>apply</code></li>
+</ul>
+<pre>(function () {
+    YAHOO.example.MyPrototypeObject = function () {
+        this._id = nCount++;
+    };
+    
+    var MP = YAHOO.example.MyPrototypeObject,
+        proto = MP.prototype,
+        nCount = 0;
+    
+    MP.prefixedId = function (prefix) {
+        return prefix + this._id;
+    };
+
+    proto.scopeAdjustedPrefixedId = function (prefix) {
+        return MP.prefixedId.call(this, prefix);
+    };    
+})<b>()</b>;
+</pre>
+<ul>
+	<li>This trick is sometimes used to make it easier on the library user to add plug-in functions</li>
+	<li>The user just needs to add a plain function, not a function prototype</li>
+	<li>This allows plug-in functions to be passed as arguments to a plug-in-setter function</li>
+	<li>This technique is used in the DataTable for custom cell formatters, in-line editors and sort functions</li>
+	</ul>
+	
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

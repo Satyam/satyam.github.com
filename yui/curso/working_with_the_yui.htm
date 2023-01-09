@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Working with the YUI</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>Working with the YUI</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+
+
+    <h2>Name Spaces</h2>
+      
+      <p>First step: define your own namespace</p>
+      <ul>
+        <li>JavaScript was not initially designed to make large applications</li>
+        <li>Every variable not declared goes into the global namespace</li>
+        <li>That is easy on the casual user, tough on developer teams</li>
+        <li>With current mash-ups and mix of third party software in the same page and the larger scale of developer teams, the risk of name collisions increases</li>
+    </ul>
+      <p>Though JavaScript doesn't have an internal mechanism to handle namespaces, it doesn't forbid one, like YUI's.</p>
+
+
+      <h2>YAHOO.namespace</h2>
+
+<pre>YAHOO.namespace('idp');</pre>
+      <p>Creates the <code>YAHOO.idp namespace</code>.</p>
+        <p>Also:</p>
+<pre>if (typeof BL == "undefined" || !BL) {
+    var BL = {idp:undefined};
+}</pre>
+      <p>or</p>
+<pre>if (typeof BL == "undefined" || !BL) {
+    var BL = {idp:YAHOO.namespace('BL.idp'};
+}</pre>
+      <p>Creates <code>BL.idp</code> (which also points to <code>YAHOO.BL.idp</code>)</p>
+
+
+      <h2>Page structure</h2>
+
+<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+        
+        &lt;link rel="stylesheet" type="text/css" 
+            href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css"/&gt;
+        &lt;!-- link rel="stylesheet" type="text/css" 
+            href="http://yui.yahooapis.com/2.5.0/build/base/base-min.css" / --&gt;
+        &lt;link rel="stylesheet" type="text/css" 
+            href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css" /&gt;
+        &lt;!-- your styles --&gt;
+
+        &lt;title&gt; .... &lt;/title&gt;
+        
+    &lt;/head&gt;
+    &lt;body class="yui-skin-sam"&gt;
+    
+        &lt;!-- your code here --> 
+        
+        &lt;script type="text/javascript"
+            src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js" &gt;
+        &lt;/ script&gt;
+        &lt;script type="text/javascript" src="js/myCode.js"&gt;&lt;/script&gt;
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+      <h2>Formatting with YUI Grids</h2>
+
+<pre>...
+
+&lt;div style="text-align:left" id="passepartout"&gt;&lt;/div&gt;
+&lt;div id="doc3" class="yui-t2"&gt;  &lt;!-- 100% width, 180px column on left --&gt;
+
+   &lt;div id="hd"&gt;Overall heading&lt;/div&gt;
+   
+   &lt;div id="bd"&gt;
+   
+      &lt;div id="yui-main"&gt;
+         &lt;div class="yui-b"&gt;main body&lt;/div&gt;
+      &lt;/div&gt;
+      
+      &lt;!-- this goes on the left though it gets loaded after --&gt;
+      &lt;div class="yui-b"&gt;left hand side bar&lt;/div&gt; 
+      
+   &lt;/div&gt;
+   
+   &lt;div id="ft"&gt;Copyright, etc.&lt;/div&gt;
+   
+&lt;/div&gt;
+...
+</pre>
+
+
+      <h2>Organizing code</h2>
+
+      <ul>
+        <li>myAppRoot { all HTML pages }
+        <ul>
+            <li>/js/<i>version</i> {all application JavaScript files}</li>
+            <li>/server {AJAX servers}</li>
+            <li>/style {style sheets and associated graphical elements}</li>
+            <li>/images { common (style independent) images }</li>
+</ul>
+</li>
+</ul>
+<p>It is good to have JavaScript files (and possibly patches to Stylesheets) versioned so that transition from one version to the next can be done gradually.  Migration can thus be done a page at a time with both versions coexisting in the meantime. Notice that many YUI components are still beta, which means their interfaces might still change so even if you don't plan to modify your scripts, you might be forced to.</p>
+      <p>It is a good idea to have:</p>
+      <ul>
+        <li>the user-accessible pages close to the root</li>
+        <li>HTML, stylesheets and JavaScript separate,
+          <ul>
+            <li>easy to edit</li>
+            <li>favours caching</li>
+            <li>can be compressed</li>
+        </ul></li>
+        <li>avoid delivering static content from active server pages, it prevents caching</li>
+    </ul>
+<h2>Enhanced markup</h2>
+<ul>
+    <li>It refers to the ability for pages to work without JavaScript active</li>
+    <li>It requires to design (and test) the page with and without JavaScript<ul>
+    <p><b>Important</b> server-side validation should always be done even if presumably it has already been verified in the client</p>
+    </ul></li>
+    <li>YUI is quite good at it, after all, YAHOO! has to deliver content to all sorts of clicking customers</li>
+    <li>For data-intensive sites, it is quite hard to program both for AJAX and normal page jumping</li>
+    <li>I prefer to test for JavaScript by branching off to a AJAX-enabled site and leave non-JavaScript users on a limited site</li>
+    <li>There is no actual security or performance reason not to have JavaScript enabled, just paranoia and bad advice</li>
+    <li>Search engine spiders won't see AJAX content</li>
+    </ul>
+<h2>YUI Compressor</h2>
+<ul>
+    <li>It is a Java application which compresses .js and .css files.</li>
+    <li>It eliminates all the whitespace that the interpreter itself would ignore and it shortens identifiers</li>
+    <li>It produces some useful diagnostics when run with the -v (verbose) options</li>
+    <li>It doesn't force any naming convention, but for compatibility with the YUI Loader, it is best to add <code>-min</code> to compressed files</li>
+    <li>Best used with a 'make' system to automatically compress what's been changed</li>
+</ul>
+<p>In Windows, to compress wholesale everything in a directory</p>
+    
+<pre>del *-min.js
+del *-min.css
+setlocal
+set comp=C:\web\YUI-Compressor\yuicompressor-2.3.5.jar
+set charset=iso-8859-15
+for %%f in (*.js *.css) do java -jar %comp% -v --charset %charset% %%f -o %%~nf-min%%~xf 2>%%~nf.log
+endlocal</pre>
+<blockquote>(Basically, what it says is, delete all previous minified versions and then, for all *.js and *.css, compress them, add a "-min" to the file name and send the verbose output on stderr to a file with .log extension)</blockquote>
+<p>To compress a single file</p>
+<pre>java -jar path/yuicompressor-2.3.5.jar -v --charset UTF-8 mySrc.js -o mySrc-min.js 2>mySrc.js.log
+java -jar path/yuicompressor-2.3.5.jar -v --charset UTF-8 mySrc.css -o mySrc-min.css 2>mySrc.css.log</pre>
+<ul>
+    <li>To further reduce loading time, several source files can be concatenated into a single one and then compressed</li>
+    <li>This reduces the overhead to establish a connection for each separate file (latency)</li>
+    <li>The YUI library does this with <code>utilities.js</code>, <code>yahoo-dom-event.js</code> and <code>reset-fonts-grids.css</code></li>
+</ul>
+
+
+      <h2>Sprites</h2>
+
+          <div style="float:left;border:thin solid silver"><img src="layout_sprite.png"></div>
+          <div style="margin-left:60px">
+            <p>A sprite is a single file with many icons inside set at regular intervals.</p>
+            <p>It is loaded (and cached) once, saving on connection setup (latency)</p>
+            <p>You set it through a CSS style as a background style for an element:</p>
+            <style type="text/css">
+                .rightButton {
+                    background: transparent url(layout_sprite.png) no-repeat -20px -200px;
+                    border: 1px solid #808080;
+                    width: 17px;
+                    height: 13px;
+                }
+            </style>
+            <p><div class="rightButton"></div></p>
+<pre>&lt;style&gt;
+    .rightButton {
+        background: transparent url(layout_sprite.png) no-repeat -20px -200px;
+        border: 1px solid #808080;
+        width: 17px;
+        height: 13px;
+    }
+&lt;/style&gt;
+</pre>
+<p><a href="http://www.imagemagick.org/script/index.php">Image Magick</a> is an excellent tool for building sprites</p>
+<pre>convert top.gif down.gif left.gif right.gif -append sprite.gif</pre>
+
+</div>      
+      
+      
+      <h2>YUI Loader</h2>
+      
+<pre>(function(){
+    var loader = new YAHOO.util.YUILoader();
+    loader.require('datatable', 'tabview', ....);
+    loader.insert({
+
+        loadOptional: true,
+        // filter: 'raw',  // or 'debug'
+
+        // base: '/test/yui/',
+        
+        onSuccess: function(){
+        
+            var Dom = YAHOO.util.Dom,
+                $ = Dom.get,
+                Event = YAHOO.util.Event,
+                Lang = YAHOO.lang;
+
+            // <b>Your code</b>
+
+        }
+    },'js');
+})();</pre>
+      <p>Just as before, all your code is within a function so nothing inside is visible outside.</p>
+      <p>Stylesheets have already been loaded so we only load scripts.</p>
+      <p>Optional <code>filter: 'raw'</code> allows loading of uncompressed sources for debugging, while <code>filter: 'debug'</code> allows you to load versions with logging enabled (see YUI logger)</p>
+      <p>Optional <code>base</code> allows you to load local (patched) versions of YUI (not recommended)</p>
+      
+      
+      <h2>Adding your own scripts</h2>
+      
+<pre>var loader = new YAHOO.util.YUILoader();
+
+loader.addModule({
+    name: 'places',
+    type: 'js',
+    fullpath: 'js/2.4.1/places.js',
+    requires: ['datatable', 'json']
+});
+
+loader.require('places', 'datatable', ....);</pre>
+<ul>
+    <li><code>fullpath</code> doesn't mean a full path from the root, it means it won't use the <code>base</code> configuration attribute as the root</li>
+</ul>
+      <p>Module should contain, at the end:</p>
+<pre>YAHOO.register('places', null, {version: '0.99 (almost there!)', build: '22'});</pre>
+<p>Generating the minified versions of our own scripts in the same directory and with the same naming convention as the YUI library allows us to switch from normal to minified in all scripts by using the <code>filter</code> property in the loader</p>
+<h2>Logging</h2>
+<ul>
+<li>Traditional way: use <code>alert()</code> calls<ul>
+    <li>halts program execution until dismissed</li>
+    <li>can't handle asynchronous events</li>
+    </ul>
+</li>
+<li>Firefox/Firebug way: use <code>console.log()</code><ul>
+    <li>doesn't interrupt program execution</li>
+    <li>allows for expansion of objects or arrays even after execution has finished</li>
+    <li>have to remember to remove them when moving to other browsers</li>
+    </ul>
+</li>
+<li>YUI Logger<ul>
+    <li>works in all browsers</li>
+    <li>doesn't interrupt program execution</li>
+    <li>shows only text messages</li>
+    <li>shows timestamp and allows categorization and grouping</li>
+    </ul>
+</li>
+</ul>
+
+<pre>var loader = new YAHOO.util.YUILoader();
+    loader.loadOptional = true;
+    loader.require('dom', 'event');
+    if (location.search.indexOf('logger') !== -1) {
+        loader.require('logger');
+    }
+    loader.insert({ 
+        onSuccess: function() {
+        
+            if (location.search.indexOf('logger') !== -1) {
+                var myLogReader = new YAHOO.widget.LogReader();  
+            }
+            YAHOO.log("hello, I'm the logger");</pre>
+
+
+<h2>Checking your code</h2>
+
+<h3>JSLint</h3>
+<p>JavaScript verifier, checks many potential errors</p>
+<ul>
+<li>On-line check via web: <a href="http://www.jslint.com/">http://www.jslint.com/</a></li>
+<li>Local check via YAHOO widget: <a href="http://widgets.yahoo.com/widgets/jslint-1">http://widgets.yahoo.com/widgets/jslint-1</a></li>
+</ul>
+<h3>YUI Compressor</h3>
+<p>Use the -v (verbose) option and check the output produced</p>
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+</div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

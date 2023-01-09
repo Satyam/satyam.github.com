@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>YUI dependencies (2.6.0)</title>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/grids/grids.css" />
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader.js"></script>
+		<style type="text/css">
+			body {
+				font-family:arial;
+			}
+			#moduleList p {
+				margin: 3px;
+				padding: 3px;			
+			}
+			#moduleList p.css {
+				background-color: green;
+			}
+			#moduleList p.js {
+				background-color: yellow;
+			}
+		</style>
+</head>		
+	<body class="yui-skin-sam">
+		<div style="text-align:left" id="passepartout"></div>
+		<div id="doc" class="yui-t2"> 
+			<div id="hd">
+				<h1>YUI dependencies (2.6.0)</h1>
+			</div>
+			<div id="bd">
+				<div id="yui-main">
+					<div class="yui-b">
+						<p>Check the YUI components from the list in the left pane, yellow are JavaScript, green are stylesheets, select the options from above and click on the button below</p>
+						<p>This utility creates an instance of the YUI Loader and lists all the modules from the loader internal tables to the left.  When you press the Go button below, it sets the loader with all the options given and then it almost reaches the point when it would actually load the modules requested.  At that point, the utility just skips the very final step and simply lists the inclusions it was about to add to the page for the requested modules in the very same order it would have done it</p>
+						<p>The result is the same as if you would have used the YUI Loader so, why don't you use the YUI Loader!</p>
+						<p>If any error is found (missing or out of order dependency), please report to <a href="http://sourceforge.net/tracker/?group_id=165715&atid=836476">SourceForge</a></p>
+						<fieldset id="generalOptions">
+							<legend>General Options</legend>
+							<div id="sourceTypes" style="float:left">
+									<input type="radio" name="sourceType" checked /> minified <br/>
+									<input type="radio" name="sourceType" value="debug" /> with logging <br/>
+									<input type="radio" name="sourceType" value="raw" /> normal
+							</div>
+							<div style="margin-left:180px">
+								<input type="checkbox" id="optionals" checked /> include optionals<br/>
+								<input type="checkbox" id="rollup" checked /> use rolled up versions
+							</div>
+							<p style="clear:both"><input type="text" id="sourcePath" size="50" value="" /> root path to sources</p>
+						</fieldset>
+						<p><button id="go">Go</button></p>
+						<pre id="results"></pre>
+					</div>
+				</div>
+				<div id="moduleList" class="yui-b"></div> 
+			</div>
+			<div id="ft"></div>
+		</div>
+		
+<script type="text/javascript">
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	
+	loader.require("dom","event","selector");
+	loader.insert({ 
+		loadOptional: true,
+		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+			var Dom = YAHOO.util.Dom,
+				$ = Dom.get,
+				Event = YAHOO.util.Event,
+				Lang = YAHOO.lang,
+				Select = YAHOO.util.Selector.query;
+
+			$('sourcePath').value = loader.base;
+			
+			var mi = loader.moduleInfo;
+			var moduleList = $('moduleList');
+			for (var moduleName in mi) {
+				if (mi.hasOwnProperty(moduleName)) {
+					var p = moduleList.appendChild(document.createElement('p'));
+					p.innerHTML = '<input type="checkbox" id="' + moduleName + '" /> ' + moduleName;
+					Dom.addClass(p,mi[moduleName].type);
+				}
+			}
+			Event.on('go','click',function(ev) {
+				var l = new YAHOO.util.YUILoader();
+				l._sandbox = true;
+				
+				Dom.batch(
+					Select('input[type==checkbox]:checked',$('moduleList')),
+					function (el) {
+						l.require(el.id);
+					}
+				);
+				l.calculate({
+					base: $('sourcePath').value,
+					loadOptional: $('optionals').checked,
+					allowRollup:  $('rollup').checked,
+					filter: Select('input:checked',$('sourceTypes'))[0].value
+				});
+				var css = [],js = [], mod;
+				for (var i = 0 ; i < l.sorted.length; i++) {
+		
+					mod = l.moduleInfo[l.sorted[i]];
+					if (mod.type == 'js') {
+						js.push('&lt;script type="text/javascript" src="' + l._url(mod.path) + '">&lt;/script>');
+					}
+					if (mod.type == 'css') {
+						css.push('&lt;link rel="stylesheet" type="text/css" href="' + l._url(mod.path) + '" />');
+					}
+					
+				}
+				$('results').innerHTML = css.join('<br/>') + '<br/> <br/>' + js.join('<br/>');
+						
+				
+			});
+	
+		}
+	},'js');
+})();
+</script>
+	</body>
+</html>

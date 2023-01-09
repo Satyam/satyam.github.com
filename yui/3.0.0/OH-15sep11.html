@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>Open Hours: MakeNode Extension</TITLE>
+
+	<STYLE TYPE="text/css">
+		BODY { font-family: "Arial", sans-serif; }
+		H1 { font-weight: normal }
+		H2 { border-top: 1.00pt solid #000000; padding: 0.05cm }
+		H2 { font-size: 20pt; font-style: normal }
+		CODE, PRE {background-color:#EEE}
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1>MakeNode Extension for Widget</H1>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html">API
+Doc</A></P>
+<h3>Usage:</h3>
+<ul><li><a target="accordion" href="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L34">Accordion</a></li></ul>
+<h3>Why:</h3>
+<UL>
+	<li>Avoids repetitive coding</li>
+	<li>More declarative than procedural (5
+	properties, 2 methods)</li>
+	<li>Promotes good practices<ul>
+	<LI>Where to refresh the UI</li>
+	<LI>I18n</li>
+	</ul></li>
+	<li>Exposes/leverages some cool stuff in Widget
+	that few know about.</li>
+</UL>
+<H2>Class Names</H2>
+<P>Static property <CODE>_CLASS_NAMES</CODE></P>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#property__CLASS_NAMES">API
+Doc</A></P>
+<H3>Usage: 
+</H3>
+<UL>
+	<li><A target="button" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button/js/gallery-md-button.js#L295">Button
+	and ButtonToggle</A></li>
+	<li><A target="accordion" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L199">Accordion</A></li>
+</UL>
+<H3>Notes:</H3>
+<UL>
+	<li>Saved in <CODE>this._classNames</CODE></li>
+	<li><code>this._classNames</code> not available in <CODE>HTML_PARSER</CODE></li>
+	<li>Class names are build per class: see:<ul>
+		<li><A target="makenode" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-makenode/tests/index.html#L365">nested classes</A> and 
+		<A target="makenode" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-makenode/tests/index.html#L415">testing classNames</A></li>
+		<li><a target="makenode" href="https://github.com/Satyam/yui3-gallery/commit/29ce013cb67477e9c8c80a5be11f6d6a219ea4b8#src/gallery-md-button/assets/gallery-md-button-core.css">Changes to Button's CSS</a></li>
+	</ul></li>
+	
+</UL>
+<H2>Templates</H2>
+<P>Static property <CODE>_TEMPLATE</CODE>
+and others</P>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#property__TEMPLATE">API
+Doc</A></P>
+<H3>Usage:</H3>
+<UL>
+	<li><A target="button" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button/js/gallery-md-button.js#L284">Button</A></li>
+	<li><A target="accordion" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L206">Accordion</A></li>
+</UL>
+<H3>Examples:</H3>
+<UL>
+	<li><CODE>&lt;input
+	type="checkbox" class="{c checkbox}" {? {@ value} "checked"	""} /&gt;</CODE></li>
+	<li><CODE>{? {p qty} {p qty} "none"}.</CODE></li>
+	<li><CODE>{? {p qty} "{p qty} {1 {p qty} "unit" "units"}" "none"} </CODE>
+	</li>
+</UL>
+<H3>Notes:</H3>
+<P>The {s} placeholder, in <A target="spinner" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-spinner/js/gallery-md-spinner.js#L380">Spinner</A>,
+used later in <a target="spinner" href="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-spinner/js/gallery-md-spinner.js#L279"><code>_TEMPLATE</code></a>
+taken from <A target="other" HREF="http://yuilibrary.com/yui/docs/widget/widget-extend.html">example</A></P>
+<ul><li><PRE>strings: {
+    value: {
+        input: &quot;Press the arrow up/down keys for minor increments, page up/down for major increments.&quot;,
+        up: &quot;Increment&quot;,
+        down: &quot;Decrement&quot;
+    }
+},
+
+var mySpinner = new Spinner({strings: Y.Intl.get(‘spinner’)});</PRE></li>
+<li><A target="makenode" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-makenode/tests/index.html#L150">Test: Internationalization</A></li>
+<li><A target="makenode" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-makenode/tests/index.html#L135">Test: placeholders within replacement string</A></li>
+</ul>
+<H2>Method _makeNode</H2>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#method__makeNode">API
+docs</A></P>
+<H3>Usage:</H3>
+<UL>
+	<li><A target="accordion" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L56">Accordion</A></li>
+	<li><A target="button" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button/js/gallery-md-button.js#L71">Button</A></li>
+	<LI><PRE>renderUI: function () {
+    var fieldset = this._makeNode();
+    this.each(function (item) {
+        fieldset.appendChild(this._makeNode(MultipleTemplates.RADIO_TEMPLATE, item));
+    }, this);
+    this.get(‘contentBox’).append(fieldset);
+}</PRE>
+</UL>
+<H3>Notes:</H3>
+<UL>
+	<li><code>_makeNode</code> returns a <code>Node</code> instance</li>
+	<li>If you want a string, use <code>_substitute</code></li>
+	<li>You still have the replacements object, just
+	as <code>Y.Lang.subs</code></li>
+</UL>
+<H2>Method _locateNodes</H2>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#method__locateNodes">API
+Docs</A></P>
+<H3>Usage:</H3>
+<UL>
+	<li><A target="accordion" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L56">Accordion</A></li>
+	<li><A target="button" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button/js/gallery-md-button.js#L71">Button</A></li>
+</UL>
+<H3>Notes:</H3>
+<UL>
+	<li>If arguments provided, it will locate only
+	those nodes, otherwise it searches for all entries in <CODE>_CLASS_NAMES</CODE></li>
+	<li>Creates private properties called <CODE>_<I>xxxxx</I></CODE><CODE>Node</CODE>:
+	<CODE>_inputNode</CODE>, <CODE>_buttonNode</CODE>,
+	<CODE>_formNode</CODE> and so on.</li>
+</UL>
+<H2>Refreshing the UI</H2>
+<P>static property <CODE>_ATTRS_2_UI</CODE></P>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#property__ATTRS_2_UI">API
+Docs</A></P>
+<P>Leverages little known <CODE><a target="APIDOCS" href="http://yuilibrary.com/yui/docs/api/classes/Widget.html#property__UI_ATTRS">_UI_ATTRS</A></CODE>
+(see <A target="widget" HREF="https://github.com/yui/yui3/blob/master/src/widget/js/Widget.js#L60">source</A>
+and <A target="widget" HREF="https://github.com/yui/yui3/blob/master/src/widget/js/Widget.js#L1170">then</A>)</P>
+<H3>Notes:</H3>
+<UL>
+	<li>Two properties: <CODE>SYNC</CODE>
+	and <CODE>BIND</CODE>. Lists configuration
+	attributes to be reflected in the UI when calling <CODE>syncUI</CODE>
+	(actually before) and to be bound (before <CODE>bindUI</CODE>)
+	to keep them updated.</li>
+	<li>Expects methods named <CODE>_uiSet<I>Xxxxx</I></CODE> to
+	do the actual setting</li>
+	<LI>If changes may come from the UI, check the src</li>
+	<li>It must be spelled <CODE><B>src</B></CODE> when setting!!</li>
+</UL>
+<H3>Usage:</H3>
+<UL>
+	<li><A target="accordion" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button/js/gallery-md-button.js#L403">Accordion</A></li>
+	<li><A target="button" HREF="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-accordion/js/gallery-md-accordion.js#L235">Button</A></li>
+</UL>
+<H2>Listening to events</H2>
+<P>Static property <CODE>_EVENTS</CODE></P>
+<P>(borrowed from <CODE>Y.View</CODE>)</P>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#property__EVENTS">API
+Docs</A></P>
+<H3>Usage:</H3>
+<P>The example in the API docs belongs to Spinner</P>
+<H3>Notes</H3>
+<UL>
+	<li>All events are 'after' events. <CODE>ev.halt()
+	</CODE>will never work on any of them.</li>
+	<li>Default name is <CODE>“_after”
+	+ </CODE><CODE><I>key</I></CODE><CODE>
+	+ </CODE><CODE><I>eventType</I></CODE></li>
+	<li>All event handlers will be cleared on
+	<CODE>destroy()</CODE>.</li>
+</UL>
+<H2>Publishing Events</H2>
+<P>Static property <CODE>_PUBLISH</CODE></P>
+<P><a target="APIDOCS" href="http://satyam.github.com/apiDocsGallery/MakeNode.html#property__PUBLISH">API
+Docs</A></P>
+<H3>Notes:</H3>
+<UL>
+	<li>It will override previous settings on
+	existing events</li>
+</UL>
+<h2>Miscellaneous</h2>
+<ul>
+<li><a target="other" href="https://github.com/Satyam/yui3-gallery/blob/master/src/gallery-md-button-group/js/gallery-md-button-group.js#L58">Making a Widget a WidgetChild</a></li>
+</ul>
+
+</BODY>
+</HTML>

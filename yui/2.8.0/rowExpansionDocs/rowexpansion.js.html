@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: rowexpansiondatatable   rowexpansion.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1281535936.55" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1281535936.55" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1281535936.55"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1281535936.55"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>RowExpansionDataTable Widget&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_rowexpansiondatatable.html" title="rowexpansiondatatable">rowexpansiondatatable</a>
+                
+                 &gt; rowexpansion.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="c">/**********</span>
+<span class="c">*</span>
+<span class="c">* Row Expansion DataTable for YUI 2</span>
+<span class="c">* Author: gelinase@yahoo-inc.com / Eric Gelinas</span>
+<span class="c">* &lt;br/&gt;</span>
+<span class="c">* Modified by Daniel Barreiro (satyam@satyam.com.ar)</span>
+<span class="c">* @module rowexpansiondatatable</span>
+<span class="c">* @requires yahoo, dom, event, element, datasource, datatable</span>
+<span class="c">* @title RowExpansionDataTable Widget</span>
+<span class="c">***********/</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+    <span class="kd">var</span> <span class="nx">Dom</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Dom</span><span class="o">,</span>
+		<span class="nx">Event</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span><span class="o">,</span>
+		<span class="nx">Lang</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">lang</span><span class="o">,</span>
+		<span class="nx">DT</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">DataTable</span><span class="o">,</span>
+
+        <span class="nx">ROW_EXPANSION</span> <span class="o">=</span> <span class="s1">&#39;yuiDtRowExpansion&#39;</span><span class="o">,</span>
+		
+		<span class="nx">TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;rowExpansionTemplate&#39;</span><span class="o">,</span>
+
+        <span class="nx">CLASS_EXPANDED</span> <span class="o">=</span> <span class="s1">&#39;yui-dt-expansion-expanded&#39;</span><span class="o">,</span>
+        <span class="nx">CLASS_COLLAPSED</span> <span class="o">=</span> <span class="s1">&#39;yui-dt-expansion-collapsed&#39;</span><span class="o">,</span>
+        <span class="nx">CLASS_EXPANSION</span> <span class="o">=</span> <span class="s1">&#39;yui-dt-expansion-expansion&#39;</span><span class="o">,</span>
+        <span class="nx">CLASS_LINER</span> <span class="o">=</span> <span class="s1">&#39;yui-dt-expansion-liner&#39;</span><span class="o">,</span>
+		<span class="nx">CLASS_TRIGGER</span> <span class="o">=</span> <span class="s1">&#39;yui-dt-expansion-trigger&#39;</span><span class="o">;</span>
+
+
+    <span class="c">/**</span>
+<span class="c">    * The RowExpansionDataTable class extends the DataTable class to provide</span>
+<span class="c">    * functionality for expanding rows to show more contextual data.</span>
+<span class="c">    *</span>
+<span class="c">    * @namespace YAHOO.widget</span>
+<span class="c">    * @class RowExpansionDataTable</span>
+<span class="c">    * @extends YAHOO.widget.DataTable</span>
+<span class="c">    * @constructor</span>
+<span class="c">    * @param elContainer {HTMLElement} Container element for the TABLE.</span>
+<span class="c">    * @param aColumnDefs {Object[]} Array of object literal Column definitions.</span>
+<span class="c">    * @param oDataSource {YAHOO.util.DataSource} DataSource instance.</span>
+<span class="c">    * @param oConfigs {object} (optional) Object literal of configuration values.</span>
+<span class="c">    */</span>
+    <span class="kd">var</span> <span class="nx">REDT</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elContainer</span><span class="o">,</span><span class="nx">aColumnDefs</span><span class="o">,</span><span class="nx">oDataSource</span><span class="o">,</span><span class="nx">oConfigs</span><span class="p">)</span> <span class="p">{</span>
+
+		<span class="c">// add trigger column</span>
+		<span class="nx">aColumnDefs</span><span class="p">.</span><span class="nx">unshift</span><span class="p">({</span>
+			<span class="nx">key</span><span class="o">:</span><span class="nx">ROW_EXPANSION</span><span class="o">,</span>
+			<span class="kd">label</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="o">,</span>
+			<span class="nx">className</span><span class="o">:</span><span class="nx">CLASS_TRIGGER</span>
+		<span class="p">});</span>
+        <span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">elContainer</span><span class="o">,</span><span class="nx">aColumnDefs</span><span class="o">,</span><span class="nx">oDataSource</span><span class="o">,</span><span class="nx">oConfigs</span><span class="p">);</span> 
+
+    <span class="p">};</span>
+	
+	<span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">RowExpansionDataTable</span> <span class="o">=</span> <span class="nx">REDT</span><span class="o">;</span>
+
+	<span class="c">// Copy over DataTable constants and other static members</span>
+	<span class="nx">Lang</span><span class="p">.</span><span class="nx">augmentObject</span><span class="p">(</span><span class="nx">REDT</span><span class="o">,</span> <span class="nx">DT</span><span class="p">);</span>
+		
+    <span class="nx">Lang</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span> 
+        <span class="nx">REDT</span><span class="o">,</span>
+        <span class="nx">DT</span><span class="o">,</span> 
+        <span class="p">{</span>
+			<span class="c">/**</span>
+<span class="c">			 * Initialize internal event listeners</span>
+<span class="c">			 *</span>
+<span class="c">			 * @method _initEvents</span>
+<span class="c">			 * @private</span>
+<span class="c">			 */</span>
+			<span class="nx">_initEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">_initEvents</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s1">&#39;postRenderEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">restoreExpandedRows</span> <span class="p">);</span>			
+				<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s1">&#39;cellClickEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onEventToggleRowExpansion</span> <span class="p">);</span>
+
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * Loops through all Record instances in the RecordSet</span>
+<span class="c">			 * @method forAllRecords</span>
+<span class="c">			 * @param fn {Function} Reference to a function that will be called once for ever record.  </span>
+<span class="c">			 *                      fn will receive a Record instance and the index for the record as its arguments.</span>
+<span class="c">			 *                      fn may return false to break out of the loop.</span>
+<span class="c">			 * @param scope {Object} (optional) Scope to execute fn in.  It defaults to the DataTable instance.</span>
+<span class="c">			 *</span>
+<span class="c">			 */</span>
+			<span class="nx">forAllRecords</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="o">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">fn</span><span class="p">))</span> <span class="p">{</span><span class="k">return</span><span class="o">;</span><span class="p">}</span>
+				<span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span> <span class="o">||</span> <span class="k">this</span><span class="o">;</span>
+				<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">recs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_oRecordSet</span><span class="p">.</span><span class="nx">_records</span><span class="o">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">recs</span><span class="p">.</span><span class="nx">length</span><span class="o">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scope</span><span class="o">,</span> <span class="nx">recs</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span><span class="o">;</span><span class="p">}</span>
+				<span class="p">}</span>
+			<span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Gets expansion state object for a specific record associated with the</span>
+<span class="c">             * DataTable.</span>
+<span class="c">             *</span>
+<span class="c">             * @method getExpansionState</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">             * @param {String} key  (optional) Key to return within the state object. Default is to</span>
+<span class="c">             * return all as a map</span>
+<span class="c">             * @return {Object} State data object or value for Key. </span>
+<span class="c">			 * The full state object contains &lt;ul&gt;</span>
+<span class="c">			 * &lt;li&gt;&lt;b&gt;record&lt;/b&gt;: reference to the associated Record instance&lt;/li&gt;</span>
+<span class="c">			 * &lt;li&gt;&lt;b&gt;expanded&lt;/b&gt;: true when the row is expanded&lt;/li&gt;</span>
+<span class="c">			 * &lt;li&gt;&lt;b&gt;expTrEl&lt;/b&gt;: the TR element for the expansion row&lt;/li&gt;</span>
+<span class="c">			 * &lt;li&gt;&lt;b&gt;expLinerEl&lt;/b&gt;: the container for the expansion&lt;/li&gt;</span>
+<span class="c">			 * &lt;li&gt;&lt;i&gt;other&lt;/i&gt;: Developers may store extra information in it&lt;/li&gt;</span>
+<span class="c">			 * &lt;/ul&gt;</span>
+<span class="c">            **/</span>
+            <span class="nx">getExpansionState</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="nx">key</span> <span class="p">){</span>
+
+                <span class="kd">var</span> <span class="nx">record</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">)</span><span class="o">,</span>
+                    <span class="nx">expansionState</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nx">_expansionState</span><span class="o">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">expansionState</span><span class="o">?</span><span class="nx">expansionState</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">:</span><span class="kc">null</span><span class="o">;</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="nx">expansionState</span> <span class="o">=</span> <span class="nx">expansionState</span> <span class="o">||</span> <span class="p">{};</span>
+					<span class="nx">expansionState</span><span class="p">.</span><span class="nx">record</span> <span class="o">=</span> <span class="nx">record</span><span class="o">;</span>
+					<span class="k">return</span> <span class="nx">expansionState</span><span class="o">;</span>
+				<span class="p">}</span>
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Sets a value to a expansion state object with a given Key for a record</span>
+<span class="c">             * which is associated with the DataTable</span>
+<span class="c">             *</span>
+<span class="c">             * @method setExpansionState</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">             * @param {String} key Key to use in map</span>
+<span class="c">             * @param {Mixed} value Value to assign to the key</span>
+<span class="c">             * @return {Object} State data object</span>
+<span class="c">            **/</span>
+            <span class="nx">setExpansionState</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="nx">key</span><span class="o">,</span> <span class="nx">value</span> <span class="p">){</span>
+
+                <span class="kd">var</span> <span class="nx">record</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">)</span><span class="o">,</span>
+                    <span class="nx">expansionState</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nx">_expansionState</span> <span class="o">||</span> <span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">_expansionState</span> <span class="o">=</span> <span class="p">{});</span>
+
+                <span class="nx">expansionState</span><span class="p">[</span> <span class="nx">key</span> <span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="o">;</span>
+
+                <span class="k">return</span> <span class="nx">expansionState</span><span class="o">;</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Over-ridden initAttributes method from DataTable, inherited from Element</span>
+<span class="c">             *</span>
+<span class="c">             * @method initAttributes</span>
+<span class="c">             * @param {Object} configuration attributes taken from the fourth argument to the constructor</span>
+<span class="c">            **/</span>
+            <span class="nx">initAttributes</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">oConfigs</span> <span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">oConfigs</span> <span class="o">=</span> <span class="nx">oConfigs</span> <span class="o">||</span> <span class="p">{};</span>
+
+                <span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initAttributes</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="k">this</span><span class="o">,</span> <span class="nx">oConfigs</span> <span class="p">);</span>
+
+                <span class="c">/**</span>
+<span class="c">                 * Template for the expansion row.  </span>
+<span class="c">				 * If a String, it will be processed through YAHOO.lang.substitute and will have all the values</span>
+<span class="c">				 * in the associated Record available.</span>
+<span class="c">				 * If a Function, it will receive the expansion state object, see: &lt;a href=&quot;#method_getExpansionState&quot;&gt;getExpansionState&lt;/a&gt;&lt;/li&gt;</span>
+<span class="c">                 *</span>
+<span class="c">                 * @attribute rowExpansionTemplate</span>
+<span class="c">                 * @type {String or Function} </span>
+<span class="c">                 * @default null</span>
+<span class="c">                **/</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="nx">TEMPLATE</span><span class="o">,</span> <span class="p">{</span>
+                    <span class="nx">value</span><span class="o">:</span> <span class="kc">null</span><span class="o">,</span>
+                    <span class="nx">validator</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">template</span> <span class="p">){</span>
+                        <span class="k">return</span> <span class="p">(</span>
+                            <span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span> <span class="nx">template</span> <span class="p">)</span> <span class="o">||</span>
+                            <span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span> <span class="nx">template</span> <span class="p">)</span>
+                        <span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+
+            <span class="c">/**</span>
+<span class="c">             * Toggles the expansion state of a row</span>
+<span class="c">             *</span>
+<span class="c">             * @method toggleRowExpansion</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">            **/</span>
+            <span class="nx">toggleRowExpansion</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">){</span>
+
+                <span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span><span class="s1">&#39;expanded&#39;</span> <span class="p">)</span> <span class="p">){</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">collapseRow</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">);</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">expandRow</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">);</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Sets the expansion state of a row to expanded</span>
+<span class="c">             *</span>
+<span class="c">             * @method expandRow</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">             * @return {Boolean} successful</span>
+<span class="c">            **/</span>
+            <span class="nx">expandRow</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">){</span>
+
+                <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">);</span>
+
+                <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">state</span><span class="p">.</span><span class="nx">expanded</span><span class="p">){</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">setExpansionState</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="s1">&#39;expanded&#39;</span><span class="o">,</span> <span class="kc">true</span> <span class="p">);</span>
+					<span class="kd">var</span> <span class="nx">expTrEl</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">expTrEl</span><span class="o">,</span>
+						<span class="nx">record</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">record</span><span class="o">,</span>
+                        <span class="nx">trEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getTrEl</span><span class="p">(</span> <span class="nx">record</span> <span class="p">);</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">expTrEl</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">Dom</span><span class="p">.</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">expTrEl</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">getTrEl</span><span class="p">(</span><span class="nx">recordId</span><span class="p">));</span>
+						<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">expTrEl</span><span class="o">,</span><span class="s1">&#39;display&#39;</span><span class="o">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+						<span class="nx">expTrEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">);</span>
+						<span class="kd">var</span> <span class="nx">expTdEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s1">&#39;td&#39;</span> <span class="p">)</span><span class="o">,</span>
+							<span class="nx">expLinerEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s1">&#39;div&#39;</span> <span class="p">)</span><span class="o">,</span>
+							<span class="nx">template</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">TEMPLATE</span><span class="p">);</span>
+
+						<span class="nx">Dom</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">expTrEl</span><span class="o">,</span> <span class="nx">CLASS_EXPANSION</span><span class="p">);</span>
+						<span class="nx">expTdEl</span><span class="p">.</span><span class="nx">colSpan</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFirstTrEl</span><span class="p">().</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span>
+						<span class="nx">Dom</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">expLinerEl</span><span class="o">,</span> <span class="nx">CLASS_LINER</span><span class="p">);</span>
+						<span class="nx">expTrEl</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span> <span class="nx">expTdEl</span> <span class="p">);</span>
+						<span class="nx">expTdEl</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span> <span class="nx">expLinerEl</span><span class="p">);</span>
+						
+						<span class="k">this</span><span class="p">.</span><span class="nx">setExpansionState</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="s1">&#39;expTrEl&#39;</span><span class="o">,</span> <span class="nx">expTrEl</span><span class="p">);</span>
+						<span class="k">this</span><span class="p">.</span><span class="nx">setExpansionState</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="s1">&#39;expLinerEl&#39;</span><span class="o">,</span> <span class="nx">expLinerEl</span><span class="p">);</span>
+						
+						<span class="c">// refresh the copy of the expansion state</span>
+						<span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">recordId</span><span class="p">);</span>
+
+						<span class="k">if</span><span class="p">(</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span> <span class="nx">template</span> <span class="p">)</span> <span class="p">){</span>
+
+							<span class="nx">expLinerEl</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">substitute</span><span class="p">(</span> <span class="nx">template</span><span class="o">,</span> <span class="nx">record</span><span class="p">.</span><span class="nx">getData</span><span class="p">()</span> <span class="p">);</span>
+
+						<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span> <span class="nx">template</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+
+							<span class="nx">template</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span>  <span class="nx">state</span> <span class="p">);</span>
+
+						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+							<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+						<span class="p">}</span>
+					<span class="p">}</span>
+
+                    <span class="c">//Insert new row</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">insertAfter</span><span class="p">(</span> <span class="nx">expTrEl</span><span class="o">,</span> <span class="nx">trEl</span> <span class="p">);</span>
+
+
+
+
+					<span class="nx">Dom</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span> <span class="nx">trEl</span><span class="o">,</span> <span class="nx">CLASS_COLLAPSED</span><span class="o">,</span> <span class="nx">CLASS_EXPANDED</span> <span class="p">);</span>
+
+					<span class="c">/**</span>
+<span class="c">					 * Fires when a row is expanded</span>
+<span class="c">					 *</span>
+<span class="c">					 * @event rowExpandedEvent</span>
+<span class="c">					 * @param state {Object} see &lt;a href=&quot;#method_getExpansionState&quot;&gt;getExpansionState&lt;/a&gt;</span>
+<span class="c">					 */</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span> <span class="s2">&quot;rowExpandedEvent&quot;</span><span class="o">,</span> <span class="nx">state</span><span class="p">);</span>
+
+					<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Sets the expansion state of a row to collapsed</span>
+<span class="c">             * @method collapseRow</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">             * @return {Boolean} successful</span>
+<span class="c">            **/</span>
+            <span class="nx">collapseRow</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">recordId</span> <span class="p">){</span>
+
+                <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">recordId</span><span class="p">);</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">expanded</span> <span class="p">){</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">setExpansionState</span><span class="p">(</span> <span class="nx">recordId</span><span class="o">,</span> <span class="s1">&#39;expanded&#39;</span><span class="o">,</span> <span class="kc">false</span> <span class="p">);</span>
+					
+
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">getTrEl</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">record</span><span class="p">)</span><span class="o">,</span> <span class="nx">CLASS_EXPANDED</span><span class="o">,</span> <span class="nx">CLASS_COLLAPSED</span> <span class="p">);</span>
+					<span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">expTrEl</span><span class="o">,</span><span class="s1">&#39;display&#39;</span><span class="o">,</span><span class="s1">&#39;none&#39;</span><span class="p">);</span>
+
+					<span class="c">/**</span>
+<span class="c">					 * Fires when a row is collapsed</span>
+<span class="c">					 *</span>
+<span class="c">					 * @event rowCollapsedEvent</span>
+<span class="c">					 * @param state {Object} see &lt;a href=&quot;#method_getExpansionState&quot;&gt;getExpansionState&lt;/a&gt;</span>
+<span class="c">					 */</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s2">&quot;rowCollapsedEvent&quot;</span><span class="o">,</span><span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">recordId</span><span class="p">));</span>
+
+					<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+					<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+				<span class="p">}</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Collapses all expanded rows. </span>
+<span class="c">             *</span>
+<span class="c">             * @method collapseAllRows</span>
+<span class="c">            **/</span>
+            <span class="nx">collapseAllRows</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+
+				<span class="k">this</span><span class="p">.</span><span class="nx">forAllRecords</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collapseRow</span><span class="p">);</span>
+
+            <span class="p">}</span><span class="o">,</span>
+
+            <span class="c">/**</span>
+<span class="c">             * Restores rows which have been expanded state but the original markup</span>
+<span class="c">			 * has been removed from the page.</span>
+<span class="c">             *</span>
+<span class="c">             * @method restoreExpandedRows</span>
+<span class="c">            **/</span>
+            <span class="nx">restoreExpandedRows</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+
+				<span class="k">this</span><span class="p">.</span><span class="nx">forAllRecords</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">record</span><span class="o">,</span><span class="s1">&#39;expanded&#39;</span><span class="p">))</span> <span class="p">{</span>
+						<span class="kd">var</span> <span class="nx">trEl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getTrEl</span><span class="p">(</span><span class="nx">record</span><span class="p">);</span>
+						<span class="k">if</span> <span class="p">(</span><span class="nx">trEl</span><span class="p">)</span> <span class="p">{</span>
+							<span class="nx">Dom</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">trEl</span><span class="o">,</span><span class="nx">CLASS_COLLAPSED</span><span class="o">,</span> <span class="nx">CLASS_EXPANDED</span><span class="p">);</span>        
+							<span class="nx">Dom</span><span class="p">.</span><span class="nx">insertAfter</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">record</span><span class="o">,</span><span class="s1">&#39;expTrEl&#39;</span><span class="p">)</span><span class="o">,</span><span class="nx">trEl</span><span class="p">);</span>
+						<span class="p">}</span>
+					<span class="p">}</span>
+				<span class="p">});</span>
+
+            <span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * returns the container element for the expansion</span>
+<span class="c">			 * @method getExpansionContainer</span>
+<span class="c">             * @param {Mixed} recordId Record / Row / or Index id</span>
+<span class="c">			 * @return {HTMLElement} container element</span>
+<span class="c">			 */</span>
+			<span class="nx">getExpansionContainer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">recordId</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">recordId</span><span class="o">,</span><span class="s1">&#39;expLinerEl&#39;</span><span class="p">);</span>
+			<span class="p">}</span><span class="o">,</span>
+
+
+            <span class="c">/**</span>
+<span class="c">             * Helper method which toggles row expansion. </span>
+<span class="c">             *</span>
+<span class="c">             * @method onEventToggleRowExpansion</span>
+<span class="c">             * @param {Object} oArgs context of a subscribed event</span>
+<span class="c">            **/</span>
+            <span class="nx">onEventToggleRowExpansion</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">oArgs</span> <span class="p">){</span>
+				<span class="kd">var</span> <span class="nx">column</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">column</span> <span class="o">&amp;&amp;</span> <span class="nx">column</span><span class="p">.</span><span class="nx">key</span> <span class="o">==</span> <span class="nx">ROW_EXPANSION</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">toggleRowExpansion</span><span class="p">(</span> <span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span> <span class="p">);</span>
+					<span class="nx">Event</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">);</span>
+					<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * Destroys a expansion row</span>
+<span class="c">			 * @method _destroyExpansion</span>
+<span class="c">			 * @param recordId &lt;HTMLElement | Number | String&gt;    DOM reference to a TR element (or child of a TR element), RecordSet position index, or Record ID.</span>
+<span class="c">			 * @private</span>
+<span class="c">			 */</span>
+			<span class="nx">_destroyExpansion</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">recordId</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getExpansionState</span><span class="p">(</span><span class="nx">recordId</span><span class="p">)</span><span class="o">,</span>
+					<span class="nx">expTrEl</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">expTrEl</span><span class="o">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">expTrEl</span><span class="p">)</span> <span class="p">{</span>
+					<span class="c">/**</span>
+<span class="c">					 * Fires when a row is about to be deleted</span>
+<span class="c">					 *</span>
+<span class="c">					 * @event rowExpansionDestroyEvent</span>
+<span class="c">					 * @param state {Object} see &lt;a href=&quot;#method_getExpansionState&quot;&gt;getExpansionState&lt;/a&gt;</span>
+<span class="c">					 */</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;rowExpansionDestroyEvent&#39;</span><span class="o">,</span> <span class="nx">state</span><span class="p">);</span>
+					<span class="nx">expTrEl</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">expTrEl</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * Overrides DataTable&#39;s destroy method to also destroy expansion rows.</span>
+<span class="c">			 * @method destroy</span>
+<span class="c">			 */</span>
+			<span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">forAllRecords</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">);</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">destroy</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+			
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * This is an override for DataTable&#39;s own &lt;code&gt;initializeTable&lt;/code&gt;</span>
+<span class="c">			 * which it calls after it destroys all expansion rows</span>
+<span class="c">			 *</span>
+<span class="c">			 * @method initializeTable</span>
+<span class="c">			 */</span>
+			<span class="nx">initializeTable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">forAllRecords</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">);</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initializeTable</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * This is an override for DataTable&#39;s own &lt;code&gt;onDataReturnSetRows&lt;/code&gt;</span>
+<span class="c">			 * which it calls after it destroys all expansion rows since</span>
+<span class="c">			 * with server-side pagination, with every new page it ignores the previous records</span>
+<span class="c">			 *</span>
+<span class="c">			 * @method onDataReturnSetRows</span>
+<span class="c">			 */</span>
+			<span class="nx">onDataReturnSetRows</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">forAllRecords</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">);</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">onDataReturnSetRows</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * This is an override for DataTable&#39;s own &lt;code&gt;deleteRow&lt;/code&gt;</span>
+<span class="c">			 * to delete the expansion row before the main row is deleted</span>
+<span class="c">			 *</span>
+<span class="c">			 * @method deleteRow</span>
+<span class="c">			 * @param row {HTMLElement | String | Number} DOM element reference or ID string</span>
+<span class="c">			 * to DataTable page element or RecordSet index.</span>
+<span class="c">			 */</span>
+			<span class="nx">deleteRow</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">row</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">deleteRow</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span><span class="nx">arguments</span><span class="p">);</span>
+			<span class="p">}</span><span class="o">,</span>
+			<span class="c">/**</span>
+<span class="c">			 * This is an override for DataTable&#39;s own &lt;code&gt;deleteRows&lt;/code&gt;</span>
+<span class="c">			 * to delete the expansion rows before the main rows are deleted</span>
+<span class="c">			 *</span>
+<span class="c">			 * @method deleteRows</span>
+<span class="c">			 * @param row {HTMLElement | String | Number} DOM element reference or ID string</span>
+<span class="c">			 * to DataTable page element or RecordSet index.</span>
+<span class="c">			 * @param count {Number} (optional) How many rows to delete. A negative value</span>
+<span class="c">			 * will delete towards the beginning.</span>
+<span class="c">			 */</span>
+			<span class="nx">deleteRows</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">row</span><span class="o">,</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">while</span> <span class="p">(</span><span class="nx">count</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+						<span class="nx">row</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getNextTrEl</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+					<span class="p">}</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="k">while</span> <span class="p">(</span><span class="nx">count</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">this</span><span class="p">.</span><span class="nx">_destroyExpansion</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+						<span class="nx">row</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getPreviousTrEl</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+				<span class="nx">REDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">deleteRows</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span><span class="nx">arguments</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+
+<span class="p">})();</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_rowexpansiondatatable.html" title="rowexpansiondatatable">rowexpansiondatatable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="YAHOO.widget.RowExpansionDataTable.html" title="YAHOO.widget.RowExpansionDataTable">YAHOO.widget.RowExpansionDataTable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="rowexpansion.js.html" title="rowexpansion.js">rowexpansion.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.RowExpansionDataTable.html#event_beforeRowExpansionTemplateChange", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "beforeRowExpansionTemplateChange"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_collapseAllRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "collapseAllRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_collapseRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "collapseRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_deleteRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "deleteRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_deleteRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "deleteRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_destroy", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "destroy"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method__destroyExpansion", "access": "private", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "_destroyExpansion"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_expandRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "expandRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_forAllRecords", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "forAllRecords"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_getExpansionContainer", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "getExpansionContainer"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_getExpansionState", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "getExpansionState"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_initAttributes", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "initAttributes"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method__initEvents", "access": "private", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "_initEvents"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_initializeTable", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "initializeTable"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_onDataReturnSetRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "onDataReturnSetRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_onEventToggleRowExpansion", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "onEventToggleRowExpansion"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_restoreExpandedRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "restoreExpandedRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowCollapsedEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowCollapsedEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpandedEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpandedEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpansionDestroyEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpansionDestroyEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#config_rowExpansionTemplate", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "config", "name": "rowExpansionTemplate"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpansionTemplateChange", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpansionTemplateChange"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_setExpansionState", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "setExpansionState"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_toggleRowExpansion", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "toggleRowExpansion"}];
+</script>
+</body>
+</html>

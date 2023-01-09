@@ -1,0 +1,558 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: Accordion   accordion.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>Accordion&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_accordion.html" title="Accordion">Accordion</a>
+                
+                 &gt; accordion.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+                        <div class="highlight"><pre><span class="cm">/*jslint white: true, nomen: true, maxerr: 50, indent: 4 */</span>
+<span class="cm">/*global YUI */</span>
+<span class="cm">/**</span>
+<span class="cm"> * The accordion module creates a control with titles and expandable sections for each</span>
+<span class="cm"> * @module Accordion</span>
+<span class="cm"> */</span>
+<span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;accordion&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+	<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">ACCORDION</span> <span class="o">=</span> <span class="s1">&#39;Accordion&#39;</span><span class="p">,</span>
+		<span class="nx">ACC_PANEL</span> <span class="o">=</span> <span class="s1">&#39;AccordionPanel&#39;</span><span class="p">,</span>
+		<span class="nx">Lang</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span>
+
+		<span class="nx">BBX</span> <span class="o">=</span> <span class="s1">&#39;boundingBox&#39;</span><span class="p">,</span>
+		<span class="nx">BODY</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetStdMod</span><span class="p">.</span><span class="nx">BODY</span><span class="p">,</span>
+		<span class="nx">HEADER</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetStdMod</span><span class="p">.</span><span class="nx">HEADER</span><span class="p">,</span>
+		<span class="nx">EXPANDED</span> <span class="o">=</span> <span class="s1">&#39;expanded&#39;</span><span class="p">,</span>
+		<span class="nx">EXPANDING</span> <span class="o">=</span> <span class="s1">&#39;expanding&#39;</span><span class="p">,</span>
+		<span class="nx">COLLAPSED</span> <span class="o">=</span> <span class="s1">&#39;collapsed&#39;</span><span class="p">,</span>
+		<span class="nx">COLLAPSING</span> <span class="o">=</span> <span class="s1">&#39;collapsing&#39;</span><span class="p">,</span>
+		<span class="nx">LABEL</span> <span class="o">=</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span>
+		<span class="nx">CONTENT</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span>
+		<span class="nx">ICON</span> <span class="o">=</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span>
+		<span class="nx">STATUS</span> <span class="o">=</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span>
+		<span class="nx">CLOSE</span> <span class="o">=</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span>
+		<span class="nx">PANEL_CLOSE</span> <span class="o">=</span> <span class="s1">&#39;panelClose&#39;</span><span class="p">,</span>
+		<span class="nx">MULTI_EXPAND</span> <span class="o">=</span> <span class="s1">&#39;multiExpand&#39;</span><span class="p">,</span>
+		<span class="nx">RESIZEABLE</span> <span class="o">=</span> <span class="s1">&#39;resizeable&#39;</span><span class="p">,</span>
+		<span class="nx">CLOSEABLE</span> <span class="o">=</span> <span class="s1">&#39;closeable&#39;</span><span class="p">,</span>
+		<span class="nx">UI</span> <span class="o">=</span> <span class="s1">&#39;ui&#39;</span><span class="p">;</span>
+	<span class="cm">/**</span>
+<span class="cm">	 * The AccordionPanel class represents one of the panels within an accordion</span>
+<span class="cm">	 * @class AccordionPanel</span>
+<span class="cm">	 * @extends Widget</span>
+<span class="cm">	 * @uses WidgetChild, WidgetStdMod, MakeNode</span>
+<span class="cm">	 * @constructor </span>
+<span class="cm">	 * @param cfg {object} (optional) configuration attributes</span>
+<span class="cm">	 */</span>
+		
+	<span class="nx">Y</span><span class="p">[</span><span class="nx">ACC_PANEL</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+		<span class="nx">ACC_PANEL</span><span class="p">,</span>
+		<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+		<span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetChild</span><span class="p">,</span><span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetStdMod</span><span class="p">,</span><span class="nx">Y</span><span class="p">.</span><span class="nx">MakeNode</span><span class="p">],</span>
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * With the accordion panel container filled with with WidgetStdMod divs</span>
+<span class="cm">			 * it seems like too much to have a separate contentBox</span>
+<span class="cm">			 * @property CONTENT_TEMPLATE</span>
+<span class="cm">			 * @value null</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">CONTENT_TEMPLATE</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * This is an override of WidgetStdMod method to prevent it from re-rendering the </span>
+<span class="cm">			 * three sections again and again and wiping out the resize handles</span>
+<span class="cm">			 * @method _syncUIStdMod</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_syncUIStdMod</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * Adds the resizer to the body of the three section StdMod</span>
+<span class="cm">			 * and creates a container for the actual content within</span>
+<span class="cm">			 * @method renderUI</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			 
+			<span class="nx">renderUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">setStdModContent</span><span class="p">(</span><span class="nx">BODY</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">setStdModContent</span><span class="p">(</span><span class="nx">HEADER</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">(</span><span class="nx">Y</span><span class="p">[</span><span class="nx">ACC_PANEL</span><span class="p">].</span><span class="nx">_HEADER_TEMPLATE</span><span class="p">));</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">();</span>
+			<span class="p">},</span>
+
+			<span class="cm">/**</span>
+<span class="cm">			 * Listener for the after Expanded change event, toggles the panel</span>
+<span class="cm">			 * @method _afterExpanded</span>
+<span class="cm">			 * @param ev {EventFacade}</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetExpanded</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">src</span> <span class="o">===</span> <span class="nx">UI</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span><span class="p">;</span>
+				<span class="p">}</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">expand</span><span class="p">();</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the label on the header of this panel</span>
+<span class="cm">			 * @method _uiSetLabel</span>
+<span class="cm">			 * @param value {String} text to be shown</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetLabel</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_labelNode</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the content on this panel</span>
+<span class="cm">			 * @method _uiSetContent</span>
+<span class="cm">			 * @param value {String | Node} content to be shown</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetContent</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_bodyNode</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Plugs/unplugs the resize-plugin (if available) in response to the resizeable attribute</span>
+<span class="cm">			 * @method _uiSetResizeable</span>
+<span class="cm">			 * @param value {Boolean} new value for the resizeable attribute</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetResizeable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getStdModNode</span><span class="p">(</span><span class="nx">BODY</span><span class="p">);</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">Resize</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+						<span class="nx">body</span><span class="p">.</span><span class="nx">plug</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">Resize</span><span class="p">,</span> <span class="p">{</span>
+							<span class="nx">handles</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+						<span class="p">});</span>
+					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+						<span class="nx">body</span><span class="p">.</span><span class="nx">unplug</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">Resize</span><span class="p">);</span>
+					<span class="p">}</span>						
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the close icon visible or not depending on the attribute &lt;code&gt;closeable&lt;/code&gt;</span>
+<span class="cm">			 * @method _uiSetCloseable</span>
+<span class="cm">			 * @param value {Boolean} new value for the closeeable attribute</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetCloseable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_closeNode</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_closeNode</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Expands this panel</span>
+<span class="cm">			 * @method expand</span>
+<span class="cm">			 */</span>
+			<span class="nx">expand</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
+					<span class="nx">cns</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">;</span>
+				<span class="nx">bbx</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">cns</span><span class="p">[</span><span class="nx">COLLAPSED</span><span class="p">],</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDING</span><span class="p">]);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">getStdModNode</span><span class="p">(</span><span class="nx">BODY</span><span class="p">).</span><span class="nx">show</span><span class="p">(</span><span class="kc">true</span><span class="p">,{},</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="nx">bbx</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDING</span><span class="p">],</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDED</span><span class="p">]);</span>
+				<span class="p">});</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">EXPANDED</span><span class="p">,</span><span class="kc">true</span><span class="p">,{</span><span class="nx">src</span><span class="o">:</span><span class="nx">UI</span><span class="p">});</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Collapses this panel</span>
+<span class="cm">			 * @method collapse</span>
+<span class="cm">			 */</span>
+			<span class="nx">collapse</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">bbx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">),</span>
+					<span class="nx">cns</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_classNames</span><span class="p">;</span>
+				<span class="nx">bbx</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDED</span><span class="p">],</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDING</span><span class="p">]);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">getStdModNode</span><span class="p">(</span><span class="nx">BODY</span><span class="p">).</span><span class="nx">hide</span><span class="p">(</span><span class="kc">true</span><span class="p">,{},</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="nx">bbx</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">cns</span><span class="p">[</span><span class="nx">EXPANDING</span><span class="p">],</span><span class="nx">cns</span><span class="p">[</span><span class="nx">COLLAPSED</span><span class="p">]);</span>
+				<span class="p">});</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">EXPANDED</span><span class="p">,</span><span class="kc">false</span><span class="p">,{</span><span class="nx">src</span><span class="o">:</span><span class="nx">UI</span><span class="p">});</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Toggles this panel from expanded to collapsed</span>
+<span class="cm">			 * @method toggle</span>
+<span class="cm">			 */</span>
+			<span class="nx">toggle</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">EXPANDED</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">EXPANDED</span><span class="p">));</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * Responds to clicks in the header of this panel to toggle it</span>
+<span class="cm">			 * @method _onHeaderClick</span>
+<span class="cm">			 * @param ev {EventFacade} uses target to make sure it is the </span>
+<span class="cm">			 * header of this accordion and not that of a nested one</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span> 
+			<span class="nx">_onHeaderClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">target</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">getStdModNode</span><span class="p">(</span><span class="nx">HEADER</span><span class="p">))</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">toggle</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			
+			<span class="cm">/**</span>
+<span class="cm">			 * Convenience method to close this panel.</span>
+<span class="cm">			 * Called when the close icon, if present, is clicked.</span>
+<span class="cm">			 * It fires the &lt;code&gt;panelClose&lt;/code&gt; event to signal </span>
+<span class="cm">			 * the container for it to remove the panel</span>
+<span class="cm">			 * from the accordion.</span>
+<span class="cm">			 * @method close</span>
+<span class="cm">			 */</span>
+			 <span class="cm">/**</span>
+<span class="cm">			  * Fired by the panel to signal the accordion to remove this panel.</span>
+<span class="cm">			  * Closure of the panel can be prevented by listening and halting this event.</span>
+<span class="cm">			  * @event panelClose</span>
+<span class="cm">			  */</span>
+			<span class="nx">close</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">PANEL_CLOSE</span><span class="p">);</span>
+			<span class="p">}</span>	
+		<span class="p">},</span>
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the class names used by MakeNode, later stored in this._classNames.</span>
+<span class="cm">			 * @property _CLASS_NAMES</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="nx">EXPANDED</span><span class="p">,</span> <span class="nx">COLLAPSED</span><span class="p">,</span> <span class="nx">BODY</span><span class="p">,</span> <span class="nx">ICON</span><span class="p">,</span> <span class="nx">LABEL</span><span class="p">,</span> <span class="nx">STATUS</span><span class="p">,</span> <span class="nx">CLOSE</span><span class="p">,</span> <span class="nx">EXPANDING</span><span class="p">,</span> <span class="nx">COLLAPSING</span><span class="p">],</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the template used by MakeNode to build the container for the body</span>
+<span class="cm">			 * @property _TEMPLATE</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_TEMPLATE</span><span class="o">:</span> <span class="s1">&#39;&lt;div class=&quot;{c body}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the template used by MakeNode to build the container for the header</span>
+<span class="cm">			 * @property _HEADER_TEMPLATE</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			 <span class="nx">_HEADER_TEMPLATE</span><span class="o">:</span> <span class="s1">&#39;&lt;div class=&quot;{c icon}&quot;&gt;&lt;/div&gt;&lt;a href=&quot;#&quot; class=&quot;{c label}&quot;&gt;&lt;/a&gt;&lt;div class=&quot;{c status}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;{c close}&quot;&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the UI events to be attached through MakeNode,</span>
+<span class="cm">			 * specifically, click on the headers</span>
+<span class="cm">			 * @property _EVENTS</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_EVENTS</span><span class="o">:</span> <span class="p">{</span>
+				<span class="c1">// this HEADER is not a constant called HEADER but the string &quot;HEADER&quot;</span>
+				<span class="nx">HEADER</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">click</span><span class="o">:</span> <span class="s1">&#39;_onHeaderClick&#39;</span>
+				<span class="p">},</span>
+				<span class="c1">// Sorry, can&#39;t use constants such as CLOSE here, it&#39;s a JavaScript thing.</span>
+				<span class="c1">// Same with the event type, can&#39;t use a constant CLICK even if I had one.</span>
+				<span class="nx">close</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">click</span><span class="o">:</span> <span class="s1">&#39;close&#39;</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.</span>
+<span class="cm">			 * @property _ATTRS_2_UI</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">BIND</span><span class="o">:</span> <span class="p">[</span><span class="nx">LABEL</span><span class="p">,</span> <span class="nx">CONTENT</span><span class="p">,</span> <span class="nx">EXPANDED</span><span class="p">,</span> <span class="nx">RESIZEABLE</span><span class="p">,</span> <span class="nx">CLOSEABLE</span><span class="p">],</span>
+				<span class="nx">SYNC</span><span class="o">:</span> <span class="p">[</span><span class="nx">LABEL</span><span class="p">,</span> <span class="nx">CONTENT</span><span class="p">,</span> <span class="nx">EXPANDED</span><span class="p">,</span> <span class="nx">RESIZEABLE</span><span class="p">,</span> <span class="nx">CLOSEABLE</span><span class="p">]</span>
+			<span class="p">},</span>
+			<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * State of this panel</span>
+<span class="cm">				 * @attribute expanded</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default false (collapsed)</span>
+<span class="cm">				 */</span>
+				<span class="nx">expanded</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Text to be shown in the header of this accordion panel</span>
+<span class="cm">				 * @attribute label</span>
+<span class="cm">				 * @type String</span>
+<span class="cm">				 */</span>
+				<span class="nx">label</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Content to be shown in the body of this accordion panel</span>
+<span class="cm">				 * @attribute content</span>
+<span class="cm">				 * @type String or Node instance</span>
+<span class="cm">				 */</span>
+				<span class="nx">content</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;&#39;</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Allows panels to be resized.</span>
+<span class="cm">				 * Requires the optional resize-plugin module to be loaded.</span>
+<span class="cm">				 * @attribute resizeable</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default true</span>
+<span class="cm">				 */</span>
+				<span class="nx">resizeable</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Allows panels to be closed via an icon in the header.</span>
+<span class="cm">				 * It shows or hides the close icon.  </span>
+<span class="cm">				 * Panels can be closedvia programming at any time, regardless of this attribute.</span>
+<span class="cm">				 * @attribute closeable</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default true</span>
+<span class="cm">				 */</span>
+				<span class="nx">closeable</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		
+		<span class="p">}</span>
+	<span class="p">);</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	 * A collection of vertically aligned collapsible panels</span>
+<span class="cm">	 * @class Accordion</span>
+<span class="cm">	 * @extends Widget</span>
+<span class="cm">	 * @uses WidgetParent, MakeNode</span>
+<span class="cm">	 */</span>
+	<span class="nx">Y</span><span class="p">[</span><span class="nx">ACCORDION</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+		<span class="nx">ACCORDION</span><span class="p">,</span>
+		<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+		<span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetParent</span><span class="p">,</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">MakeNode</span><span class="p">],</span>
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Event listener for child expansion/collapse, ensures that only one is expanded</span>
+<span class="cm">			 * at a time if multiExpand is not set.</span>
+<span class="cm">			 * @method _afterChildExpanded</span>
+<span class="cm">			 * @param ev {EventFacade}</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_afterChildExpanded</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">ev</span><span class="p">.</span><span class="nx">newVal</span>  <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">MULTI_EXPAND</span><span class="p">))</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">panel</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">if</span> <span class="p">(</span><span class="nx">panel</span> <span class="o">!==</span> <span class="nx">child</span> <span class="o">&amp;&amp;</span> <span class="nx">panel</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">EXPANDED</span><span class="p">))</span> <span class="p">{</span>
+							<span class="nx">panel</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
+						<span class="p">}</span>
+					<span class="p">});</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Listens to the &lt;code&gt;panelClose&lt;/code&gt; and destroys the panel</span>
+<span class="cm">			 * and removes it from the collection of panels.</span>
+<span class="cm">			 * @method</span>
+<span class="cm">			 * @param ev {EventFacade} uses ev.target to locate the panel requesting the close</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			
+			<span class="nx">_afterPanelClose</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">panel</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">panel</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">panel</span><span class="p">);</span>
+					<span class="nx">panel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the resizeable attribute of all panels to the value set for the whole accordion</span>
+<span class="cm">			 * @method _uiSetResizeable</span>
+<span class="cm">			 * @param value {Boolean} new value of the resizeable attribute</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetResizeable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">panel</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">panel</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">RESIZEABLE</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+				<span class="p">});</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the closeable attribute of all panels to the value set for the whole accordion</span>
+<span class="cm">			 * @method _uiSetCloseable</span>
+<span class="cm">			 * @param value {Boolean} new value of the closeable attribute</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetCloseable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">panel</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">panel</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">CLOSEABLE</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+				<span class="p">});</span>
+			<span class="p">}</span>
+		<span class="p">},</span>
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines the attributes that MakeNode should link to _uiSetXxxx methods to reflect them in the UI.</span>
+<span class="cm">			 * @property _ATTRS_2_UI</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">BIND</span><span class="o">:</span> <span class="p">[</span><span class="nx">RESIZEABLE</span><span class="p">,</span> <span class="nx">CLOSEABLE</span><span class="p">],</span>
+				<span class="nx">SYNC</span><span class="o">:</span> <span class="p">[</span><span class="nx">RESIZEABLE</span><span class="p">,</span> <span class="nx">CLOSEABLE</span><span class="p">]</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Defines events that are to be associated to listeners by MakeNode.</span>
+<span class="cm">			 * Here it links a couple of events from the items,</span>
+<span class="cm">			 * expandedChange to ensure only one panel is open at a time and</span>
+<span class="cm">			 * panelClose to destroy and remove a panel</span>
+<span class="cm">			 * @property _EVENTS</span>
+<span class="cm">			 * @type Object</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_EVENTS</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">THIS</span><span class="o">:</span> <span class="p">{</span>
+					<span class="s1">&#39;AccordionPanel:expandedChange&#39;</span><span class="o">:</span> <span class="s1">&#39;_afterChildExpanded&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;AccordionPanel:panelClose&#39;</span><span class="o">:</span> <span class="s1">&#39;_afterPanelClose&#39;</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+
+			<span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Default type of children to create.  Used by WidgetParent.</span>
+<span class="cm">				 * @attribute defaultChildType</span>
+<span class="cm">				 * @type WidgetChild</span>
+<span class="cm">				 * @default AccordionPanel</span>
+<span class="cm">				 * @protected</span>
+<span class="cm">				 */</span>
+				<span class="nx">defaultChildType</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span> <span class="nx">ACC_PANEL</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Whether several panels may be expanded at once.</span>
+<span class="cm">				 * @attribute multiExpand</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default true</span>
+<span class="cm">				 */</span>
+				<span class="nx">multiExpand</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">},</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Helper attribute to set all panels resizeable attribute at once.</span>
+<span class="cm">				 * May be overriden in each panel separately.</span>
+<span class="cm">				 * Requires the optional resize-plugin module to be loaded.</span>
+<span class="cm">				 * @attribute resizeable</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default true</span>
+<span class="cm">				 */</span>
+				<span class="nx">resizeable</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">},</span>
+								<span class="cm">/**</span>
+<span class="cm">				 * Helper attribute to set all panels closeable attribute at once.</span>
+<span class="cm">				 * May be overriden in each panel separately.</span>
+<span class="cm">				 * @attribute closeable</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default true</span>
+<span class="cm">				 */</span>
+				<span class="nx">closeable</span><span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">}</span>
+
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+
+
+<span class="p">},</span> <span class="s1">&#39;0.9&#39;</span> <span class="p">,{</span>
+	<span class="nx">requires</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;widget&#39;</span><span class="p">,</span><span class="s1">&#39;widget-parent&#39;</span><span class="p">,</span><span class="s1">&#39;widget-child&#39;</span><span class="p">,</span><span class="s1">&#39;widget-stdmod&#39;</span><span class="p">,</span><span class="s1">&#39;makenode&#39;</span><span class="p">],</span>
+	<span class="nx">optional</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;resize-plugin&#39;</span><span class="p">,</span><span class="s1">&#39;transition&#39;</span><span class="p">],</span>
+	<span class="nx">skinnable</span><span class="o">:</span><span class="kc">true</span>
+<span class="p">});</span>
+</pre></div>
+
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_accordion.html" title="Accordion">Accordion</a></li>
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class=""><a href="module_button-group.html" title="button-group">button-group</a></li>
+                                <li class=""><a href="module_makenode.html" title="makenode">makenode</a></li>
+                                <li class=""><a href="module_spinner.html" title="spinner">spinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Accordion.html" title="Accordion">Accordion</a></li>
+                                <li class=""><a href="AccordionPanel.html" title="AccordionPanel">AccordionPanel</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="accordion.js.html" title="accordion.js">accordion.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "Accordion.html#method_", "access": "private", "host": "Accordion", "type": "method", "name": ""}, {"url": "Accordion.html#method__afterChildExpanded", "access": "private", "host": "Accordion", "type": "method", "name": "_afterChildExpanded"}, {"url": "AccordionPanel.html#method__afterExpanded", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_afterExpanded"}, {"url": "AccordionPanel.html#property__ATTRS_2_UI", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "Accordion.html#property__ATTRS_2_UI", "access": "protected", "host": "Accordion", "type": "property", "name": "_ATTRS_2_UI"}, {"url": "AccordionPanel.html#property__CLASS_NAMES", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_CLASS_NAMES"}, {"url": "AccordionPanel.html#method_close", "access": "", "host": "AccordionPanel", "type": "method", "name": "close"}, {"url": "AccordionPanel.html#config_closeable", "access": "", "host": "AccordionPanel", "type": "config", "name": "closeable"}, {"url": "Accordion.html#config_closeable", "access": "", "host": "Accordion", "type": "config", "name": "closeable"}, {"url": "AccordionPanel.html#event_closeableChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "closeableChange"}, {"url": "Accordion.html#event_closeableChange", "access": "", "host": "Accordion", "type": "event", "name": "closeableChange"}, {"url": "AccordionPanel.html#method_collapse", "access": "", "host": "AccordionPanel", "type": "method", "name": "collapse"}, {"url": "AccordionPanel.html#config_content", "access": "", "host": "AccordionPanel", "type": "config", "name": "content"}, {"url": "AccordionPanel.html#event_contentChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "contentChange"}, {"url": "AccordionPanel.html#property_CONTENT_TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "CONTENT_TEMPLATE"}, {"url": "Accordion.html#config_defaultChildType", "access": "protected", "host": "Accordion", "type": "config", "name": "defaultChildType"}, {"url": "Accordion.html#event_defaultChildTypeChange", "access": "", "host": "Accordion", "type": "event", "name": "defaultChildTypeChange"}, {"url": "AccordionPanel.html#property__EVENTS", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_EVENTS"}, {"url": "Accordion.html#property__EVENTS", "access": "protected", "host": "Accordion", "type": "property", "name": "_EVENTS"}, {"url": "AccordionPanel.html#method_expand", "access": "", "host": "AccordionPanel", "type": "method", "name": "expand"}, {"url": "AccordionPanel.html#config_expanded", "access": "", "host": "AccordionPanel", "type": "config", "name": "expanded"}, {"url": "AccordionPanel.html#event_expandedChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "expandedChange"}, {"url": "AccordionPanel.html#property__HEADER_TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_HEADER_TEMPLATE"}, {"url": "AccordionPanel.html#config_label", "access": "", "host": "AccordionPanel", "type": "config", "name": "label"}, {"url": "AccordionPanel.html#event_labelChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "labelChange"}, {"url": "Accordion.html#config_multiExpand", "access": "", "host": "Accordion", "type": "config", "name": "multiExpand"}, {"url": "Accordion.html#event_multiExpandChange", "access": "", "host": "Accordion", "type": "event", "name": "multiExpandChange"}, {"url": "AccordionPanel.html#method__onHeaderClick", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_onHeaderClick"}, {"url": "AccordionPanel.html#event_panelClose", "access": "", "host": "AccordionPanel", "type": "event", "name": "panelClose"}, {"url": "AccordionPanel.html#method_renderUI", "access": "protected", "host": "AccordionPanel", "type": "method", "name": "renderUI"}, {"url": "AccordionPanel.html#config_resizeable", "access": "", "host": "AccordionPanel", "type": "config", "name": "resizeable"}, {"url": "Accordion.html#config_resizeable", "access": "", "host": "Accordion", "type": "config", "name": "resizeable"}, {"url": "AccordionPanel.html#event_resizeableChange", "access": "", "host": "AccordionPanel", "type": "event", "name": "resizeableChange"}, {"url": "Accordion.html#event_resizeableChange", "access": "", "host": "Accordion", "type": "event", "name": "resizeableChange"}, {"url": "AccordionPanel.html#method__syncUIStdMod", "access": "protected", "host": "AccordionPanel", "type": "method", "name": "_syncUIStdMod"}, {"url": "AccordionPanel.html#property__TEMPLATE", "access": "protected", "host": "AccordionPanel", "type": "property", "name": "_TEMPLATE"}, {"url": "AccordionPanel.html#method_toggle", "access": "", "host": "AccordionPanel", "type": "method", "name": "toggle"}, {"url": "AccordionPanel.html#method__uiSetCloseable", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetCloseable"}, {"url": "Accordion.html#method__uiSetCloseable", "access": "private", "host": "Accordion", "type": "method", "name": "_uiSetCloseable"}, {"url": "AccordionPanel.html#method__uiSetContent", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetContent"}, {"url": "AccordionPanel.html#method__uiSetLabel", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetLabel"}, {"url": "AccordionPanel.html#method__uiSetResizeable", "access": "private", "host": "AccordionPanel", "type": "method", "name": "_uiSetResizeable"}, {"url": "Accordion.html#method__uiSetResizeable", "access": "private", "host": "Accordion", "type": "method", "name": "_uiSetResizeable"}];
+</script>
+</body>
+</html>

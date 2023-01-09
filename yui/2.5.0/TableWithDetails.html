@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>DataTable with extra details in tabbed pop-up</title>
+<!-- Load the YUI Loader script: -->
+<script src="http://yui.yahooapis.com/2.5.1/build/yuiloader/yuiloader-beta-min.js"></script>
+
+<script type="text/javascript">
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","datatable", "tabview","calendar","container");
+	loader.insert({ 
+		onSuccess: function() {
+			var panel = new YAHOO.widget.Panel("PanelDetalle", {visible:false, draggable:true, close:true, width:'600px' } );   
+			panel.setHeader('');   
+			panel.setBody('');   
+			panel.render(YAHOO.util.Dom.get('bd'));  
+			
+			var tabView = new YAHOO.widget.TabView();
+			tabView.addTab( new YAHOO.widget.Tab({
+				label: 'Tab 1',
+				content: '<div id="tab1"></div>',
+				active: true
+			}));
+			
+			tabView.addTab( new YAHOO.widget.Tab({
+				label: 'Tab 2',
+				content: '<div id="tab2"></div>'
+			}));
+			
+			tabView.addTab( new YAHOO.widget.Tab({
+				label: 'Tab 3',
+				content: '<div id="tab3"></div>'
+			}));
+			
+			tabView.addTab( new YAHOO.widget.Tab({
+				label: 'Tab 4',
+				content: '<div id="tab4"></div>'
+			}));
+
+			tabView.appendTo(panel.body);
+
+			// this variables hold information for the table content generator
+			// Since you can only pass the function a single string argument
+			// using this variables is the only way to pass it 4 arguments
+			// without encoding and parsing a silly string.
+			var baseRecordId;
+			var tableId;
+			var rows, cols;
+			
+			var tableContentGenerator = function() {
+				var response = [];
+				for (var row = 1;row <= rows;row++) {
+					var dataRow ={};
+					for (var col = 1;col <= cols;col++) {
+						dataRow['tab'+ tableId + 'col' + col] = 'Base: ' + baseRecordId + ', tab:' + tableId + ', row:' + row + ', col: ' + col;
+					}
+					response.push(dataRow);
+				}
+				return response;
+			};
+						
+			var dataTable1;
+			var lastBaseIdShown1;
+			var setTable1 = function () {
+				if (lastBaseIdShown1 == baseRecordId) return;
+				lastBaseIdShown1 = baseRecordId;
+				
+				// set arguments for tableContentGenerator
+				tableId = 1;
+				cols = 4;
+				rows = 5;
+				
+				// if this table does not yet exist, create it
+				if (dataTable1 === undefined) {
+					
+					// notice the argument is a reference to the content generator
+					var ds = new YAHOO.util.DataSource(tableContentGenerator);
+					// this tells the datasource that the content generator will return an array
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['tab1col1','tab1col2','tab1col3','tab1col4']
+					};
+					
+					dataTable1 = new YAHOO.widget.DataTable(
+						'tab1',	
+						[
+							{key:'tab1col1'},
+							{key:'tab1col2'},
+							{key:'tab1col3'},
+							{key:'tab1col4'}
+						], 
+						ds
+					);
+				} else {
+					dataTable1.getDataSource().sendRequest(
+						'', 
+						{
+							success:dataTable1.onDataReturnInitializeTable,
+							scope:dataTable1
+						}
+					);
+				}
+			};
+			
+			var dataTable2;
+			var lastBaseIdShown2;
+			var setTable2 = function () {
+				if (lastBaseIdShown2 == baseRecordId) return;
+				lastBaseIdShown2 = baseRecordId;
+				tableId = 2;
+				cols = 5;
+				rows = 3;
+				if (dataTable2 === undefined) {
+					
+					var ds = new YAHOO.util.DataSource(tableContentGenerator);
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['tab2col1','tab2col2','tab2col3','tab2col4','tab2col5']
+					};
+					
+					dataTable2 = new YAHOO.widget.DataTable(
+						'tab2',
+						[
+							{key:'tab2col1'},
+							{key:'tab2col2'},
+							{key:'tab2col3'},
+							{key:'tab2col4'},
+							{key:'tab2col5'}
+						],
+						ds
+					);
+				} else {
+					dataTable2.getDataSource().sendRequest(
+						'', 
+						{
+							success:dataTable2.onDataReturnInitializeTable, 
+							scope:dataTable2
+						}
+					);
+				}
+			};
+
+			var dataTable3;
+			var lastBaseIdShown3;
+			var setTable3 = function () {
+				if (lastBaseIdShown3 == baseRecordId) return;
+				lastBaseIdShown3 = baseRecordId;
+				tableId = 3;
+				cols = 3;
+				rows = 6;
+				if (dataTable3 === undefined) {
+					
+					var ds = new YAHOO.util.DataSource(tableContentGenerator);
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['tab3col1','tab3col2','tab3col3']
+					};
+					
+					dataTable3 = new YAHOO.widget.DataTable(
+						'tab3',
+						[
+							{key:'tab3col1'},
+							{key:'tab3col2'},
+							{key:'tab3col3'}
+						],
+						ds
+					);
+				} else {
+					dataTable3.getDataSource().sendRequest(
+						'', 
+						{
+							success:dataTable3.onDataReturnInitializeTable, 
+							scope:dataTable3
+						}
+					);
+				}
+			};
+
+			var dataTable4;
+			var lastBaseIdShown4;
+			var setTable4 = function () {
+				if (lastBaseIdShown4 == baseRecordId) return;
+				lastBaseIdShown4 = baseRecordId;
+
+				tableId = 4;
+				cols = 3;
+				rows = 7;
+
+				if (dataTable4 === undefined) {
+					
+					var ds = new YAHOO.util.DataSource(tableContentGenerator);
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['tab4col1','tab4col2','tab4col3']
+					};
+					
+					dataTable4 = new YAHOO.widget.DataTable(
+						'tab4',
+						[
+							{key:'tab4col1'},
+							{key:'tab4col2'},
+							{key:'tab4col3'}
+						],
+						ds
+					);
+				} else {
+					dataTable4.getDataSource().sendRequest(
+						'', 
+						{
+							success:dataTable4.onDataReturnInitializeTable, 
+							scope:dataTable4
+						}
+					);
+				}
+			};
+			
+			var show = function (recordId,caption,cell) {
+
+				baseRecordId = recordId;
+				panel.setHeader(caption);
+				panel.cfg.setProperty("context", [cell, "tl", "bl"]);
+				panel.cfg.setProperty("visible", true);
+				tabView.set('activeIndex', 0); 
+			};
+
+			var hide = function () {
+				panel.cfg.setProperty("visible", false);
+			};
+
+			tabView.on('activeTabChange', function (ev) {
+				switch(tabView.getTabIndex(ev.newValue)) {
+					case 0:
+						setTable1();
+						break;
+					case 1:
+						setTable2();
+						break;
+					case 2:
+						setTable3();
+						break;
+					case 3:
+						setTable4();
+						break;
+				}
+			});
+			
+			var ds = new YAHOO.util.DataSource([
+				{id:1,data:'this is the data for row 1'},
+				{id:2,data:'this is the data for row 2'},
+				{id:3,data:'this is the data for row 3'},
+				{id:4,data:'this is the data for row 4'},
+				{id:5,data:'this is the data for row 5'},
+				{id:6,data:'this is the data for row 6'}
+			]);
+			ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			ds.responseSchema = {
+				fields: ['id','data']
+			};
+			
+			var myDataTable = new YAHOO.widget.DataTable(
+				'baseTable',
+				[
+					{key:'id'},
+					{key:'data'}
+				],
+				ds
+			);
+			myDataTable.subscribe('cellClickEvent',function (ev) {
+				var target = YAHOO.util.Event.getTarget(ev);
+				var record = this.getRecord(target);
+				show(record.getData('id'),record.getData('data'),target);
+			});
+	
+
+		}
+	});
+})();
+		</script>
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc"> 		<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+			<div id="hd">
+				<h1>DataTable with extra details in tabbed pop-up</h1>
+			</div>
+			<div id="bd" style="margin:2em">
+				<div id="baseTable"></div>
+			</div>
+			<div id="ft">
+				<p>This example has a very simple base table and on clicking on any of the cells, 
+				a panel will pop up containing information related to the clicked record. 
+				This information is presented in several tabs, each containing a child DataTable.</p>
+				<p>All of the tables in this example are either filled with a static array or via a function.
+				None of them take their contents from any server so the example is fully self-contained
+				except for the YUI components retieved from the YUI download site.</p>
+				<p>To make this example work with server data, in those places where each DataSource is instantiated,
+				the reference to the local array or the filling function should be changed to an appropriate URL.  
+				An initialRequest configuration property would probably need to be added to the DataTable.</p>
+				<p>The floating panel is statically built, its contents are simple divs to hold each of the DataTables.
+				Though the panel can load content from remote servers, it does not make sense in this case since
+				the content will always be a table, the content of the table is the one that will change, 
+				not the definition of the table itself.  Thus, the server is to provide the data for the table, 
+				not its definition, which is static.</p>
+				<p>On each change of active tab a separate setTableX is called.  It first checks to see if the
+				current baseRecordId is the same as the one last shown.  If it is, then it means the table data
+				it has previously loaded is still good and simply returns, if it is not it then checks if the table is actually created.
+				If it is, it simply reloads it from the same source, if it is not, it creates the table and loads it, 
+				in both cases from the filler function.</p>
+				<p>This example is self-contained, its only dependencies come from the YUI site.</p>
+			</div>
+		</div>
+	</body>
+</html>
+

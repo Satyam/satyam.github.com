@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css">
+    <title>DataTable with Tooltips</title>
+	<style type="text/css">
+		.ft {
+			margin-top:1em;
+		}
+		#container {
+			margin-left:5em;
+		}
+	</style>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>DataTable with Tooltips</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p>In this example we are assuming the Description for the Items was too long so instead of populating the table with it,
+			we show it as a Tooltip when the cursor lies on the Item column.  The code listens to DataTable's own cellMouseoverEvent and cellMouseoutEvent and 
+			handles its own timers to show and hide the tooltip.  There is only one Tooltip for the whole of the DataTable which is set
+			on the fly when the cursor remains for half a second on any cell in the Item column.  The text for the Tooltip is taken from the extra
+			filed in the Record object which is not displayed and the location is also calculated from the cursor coordinates when the event was triggered.</p>
+		</div>
+	</div>
+
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript" >
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("datatable","container");
+
+	loader.insert({ 
+		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+		
+
+			var Dom = YAHOO.util.Dom,
+				Event = YAHOO.util.Event;
+				
+			var showTimer,hideTimer;
+			
+			
+			
+	        var dt = new YAHOO.widget.DataTable(
+				"container", 
+				[
+	                {key:"SKU", sortable:true},
+	                {key:"Quantity", sortable:true},
+	                {key:"Item", sortable:true}
+		        ],
+                new YAHOO.util.DataSource(
+					[
+						{SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+						{SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football."},
+						{SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles"},
+						{SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+						{SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+						{SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:""},
+						{SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+						{SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:""},
+						{SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+						{SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+						{SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+						{SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+						{SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:""},
+						{SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+					],
+					{
+						responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+						responseSchema: {
+							fields: ["SKU","Quantity","Item","Description"]
+						}
+					}
+				)
+			);
+			var tt = new YAHOO.widget.Tooltip("myTooltip");
+			
+			dt.on('cellMouseoverEvent', function (oArgs) {
+				if (showTimer) {
+					window.clearTimeout(showTimer);
+					showTimer = 0;
+				}
+
+				var target = oArgs.target;
+				var column = this.getColumn(target);
+				if (column.key == 'Item') {
+					var record = this.getRecord(target);
+					var description = record.getData('Description') || 'no further description';
+					var xy = [parseInt(oArgs.event.clientX,10) + 10 ,parseInt(oArgs.event.clientY,10) + 10 ];
+
+					showTimer = window.setTimeout(function() {
+						tt.setBody(description);
+						tt.cfg.setProperty('xy',xy);
+						tt.show();
+						hideTimer = window.setTimeout(function() {
+							tt.hide();
+						},5000);
+					},500);
+				}
+			});
+			dt.on('cellMouseoutEvent', function (oArgs) {
+				if (showTimer) {
+					window.clearTimeout(showTimer);
+					showTimer = 0;
+				}
+				if (hideTimer) {
+					window.clearTimeout(hideTimer);
+					hideTimer = 0;
+				}
+				tt.hide();
+			});
+		}
+	}, 'js');
+})();
+
+</script>
+</body>
+</html>

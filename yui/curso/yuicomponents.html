@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>YUI components</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>YUI components</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+<h2>Reserved Namespaces</h2>
+<ul>
+<li>All YUI components occupy only a single global variable name: <code>YAHOO</code></li>
+    <li>Some properties and methods hang right from <code>YAHOO</code><ul>
+        <li><code>YAHOO.log</code> to log into the YUI Logger</li>
+            
+        <li><code>YAHOO.namespace</code> to create other custom namespaces</li>
+        <li><code>YAHOO.register</code><ul>
+            <li>used by all components to announce their existence</li>
+            <li>should be used by custom components when meant to be loaded via the YUI Loader</li>
+            </ul></li>
+        <li><code>YAHOO.VERSION</code>, <code>YAHOO.BUILD</code> constants identifying the library version</li>
+        <li>deprecated methods relocated elsewhere<ul>
+            <li><code>augment</code></li>
+            <li><code>extend</code></li>
+            </ul></li>
+        </ul></li>
+    </ul></li>
+</ul>
+    <h2><code>YAHOO.env</code></h2>
+    <ul>
+        <li>contains several YUI internal (though accessible) variables for the library to keep track of its workings</li>
+        <li>the most useful property is <code>ua</code> (User Agent) which identifies the browser (within those supported)</li>
+        </ul></li>
+    </ul>
+    <h2><code>YAHOO.lang</code></h2>
+    <ul>
+        <li>Contains many functions that supplement or replace missing JavaScript functionality:<ul>
+            <li><code>is<i>Xxxx</i></code> static functions for type checking</li>
+            <li>Object manipulation<ul>
+                <li><code>extend</code></li>
+                <li><code>augment</code> aka <code>augmentProto</code></li>
+                <li><code>augmentObject</code></li>
+                </ul></li>
+            <li>Missing JavaScript functionality<ul>
+                <li><code>trim</code> trims whitespaces from ends of string</li>
+                <li><code>substitute</code> replaces variables into template</li>
+                <li><code>merge</code> merges two objects, provides a way to clone objects</li>
+                <li>Theoretically, these functions should have augmented the native JavaScript objects (<code>String.prototype.trim</code>, <code>Object.prototype.merge</code>)</li>
+                <li>In practice, since most people don't use <code>hasOwnProperty</code> when enumerating, doing so would have broken countless pages</li>
+                </ul></li>
+            <li>Misplaced functionality (should be under <code>util</code>)<ul>
+                <li><code>dump</code> handy to dump variables if not in Firebug</li>
+                <li><code>later</code> a more versatile replacement for <code>window.setTimeout</code></li>
+                <li><code>JSON</code> coding and decoding of JSON data</li>
+                </ul></li>
+            </ul></li>
+        </ul></li>
+    </ul>
+    <h2><code>YAHOO.util</code></h2>
+    <ul>
+        <li>most utility objects are under this namespace (too long to list)</li>
+        <li>they are spread over many of the YUI files, some misplaced, in DataSource:<ul>
+            <li><code>YAHOO.util.Number.format</code></li>
+            <li><code>YAHOO.util.Date.format</code></li>
+            </ul></li>
+        <li>Many members are static (don't need to be instanced)<ul>
+            <li>the two mentioned above</li>
+            <li><code>YAHOO.util.Connect.asyncRequest</code></li>
+            <li><code>YAHOO.util.Get.script</code></li>
+            <li><code>YAHOO.util.Dom.get</code></li>
+            <li><code>YAHOO.util.Event.on</code></li>
+			<li>many more...</li>
+            </ul></li>
+        </ul></li>
+    </ul>
+    <h2><code>YAHOO.widget</code></h2>
+    <ul>
+        <li>All UI-related objects</li>
+        <li>Most are object prototypes, since there can be more than one of each in a single page</li>
+        <li>A few singletons<ul>
+            <li><code>Logger</code>, there should be only one</li>
+            <li><code>MenuManager</code>, <code>EditorInfo</code>, singletons meant to coordinate in between instances</li>
+            </ul></li>
+        <li>At least one misplaced<ul>
+            <li><code>DateMath</code> in <code>Calendar</code> should be under <code>util</code></li>
+            </ul></li>
+        </ul></li>
+    </ul>
+    <h2><code>YAHOO.tool</code></h2>
+    <ul>
+        <li>Development tools, these are not expected to be delivered to end users<ul>
+            <li><code>Profiler</code></li>
+            <li>various Test objects</li>
+            </ul></li>
+        </ul></li>
+    </ul>
+    <h2><code>YAHOO.example</code></h2>
+    <ul>
+        <li>This namespace is free to use</li>
+        <li>It is used by all the examples available in the YUI site</li>
+        <li>It is not used otherwise</li>
+        </ul></li>
+    </ul>
+    
+    
+    <h2>Class hierarchy</h2>
+    <h3>There is none</h3>
+    <ul>
+        <li>JavaScript is not based on rigid classes but on flexible objects and prototypes</li>
+        <li>This provides flexibility but does not enforce discipline</li>
+        <li>In other environments, there would be a <code>YAHOO.widget</code> abstract class</li>
+        <li>YUI is not consistent</li>
+    </ul>
+    <table class="compact">
+    <tr>
+        <th>Datatable</th>
+        <th>Menu</th>
+        <th>TreeView</th>
+    </tr>
+    <tr>
+        <td><pre>new ...DataTable(
+    elContainer,
+    columnDefs,
+    myDataSource,
+    { ... configs ...}
+)
+// the DataTable gets 
+// rendered immediately</pre></td>
+        <td><pre>new ...Menu(
+    'menuId' , 
+    {... configs ...)</pre></td>
+        <td><pre>new ...TreeView(elContainer)</pre></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><pre>myMenu.addItems( { 
+    // full menu hierarchy
+})</pre></td>
+        <td><pre>root = myTreeView.getRoot()
+newNode = new TextNode('label',root,false)
+newNode2 = new TextNode('label2',newNode,false)</pre></td>
+    </tr>
+    <tr>
+        <td><pre>myDataTable.set()
+// most act immediatly</pre></td>
+        <td><pre>myMenu.cfg.setProperty()
+// need to call render</pre></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><pre>myMenu.render(elContainer)</pre></td>
+        <td><pre>myTreeView.draw()</pre></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><pre>myMenu.show()</pre></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><pre>myDataTable.render()
+// actually means refresh</pre></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </table>
+        
+        
+        
+            
+            
+            
+        
+      
+      
+      
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

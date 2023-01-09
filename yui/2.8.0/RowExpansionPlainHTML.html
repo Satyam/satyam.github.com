@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Row Expansion with plain HTML</title>
+
+<!-- Combo-handled YUI CSS files: -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yuiloader-dom-event/yuiloader-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js&2.8.1/build/json/json-min.js"></script>
+
+<script type="text/javascript" src="YQLDataSource.js"></script>
+
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+<style type="text/css">
+	.dp-highlighter th, .dp-highlighter td {
+		border:0;
+		padding:0;
+	}
+	.dp-highlighter .line1, .dp-highlighter  .line2 {
+		padding-left:10px;
+		white-space:nowrap;
+	}
+	#ft {
+		margin-top:1em;
+	}
+	
+	#list li {
+		list-style:none;
+		clear:both;
+		border:thin solid gray;
+		height:22px;
+	}
+	#list li div {
+		height:22px;
+	}
+	#list li .name {
+		float:left;
+		width:80%;
+		border-right: thin solid silver;
+	}
+	#list li .trackCount {
+		float:left;
+		width:15%;
+	}
+	#list li.collapsed div.trigger {
+		float:left;
+		width:22px;
+		height:22px;
+		background:url(http://developer.yahoo.com/yui/examples/datatable/assets/images/arrow_closed.png) 4px 4px no-repeat;
+		border-right: thin solid silver;
+	}
+	#list li.expanded div.trigger{
+		float:left;
+		width:22px;
+		height:22px;
+		background:url(http://developer.yahoo.com/yui/examples/datatable/assets/images/arrow_open.png) 4px 4px no-repeat;
+		border-right: thin solid silver;
+	}
+	#list li .title,  #list li .label {
+		float:left;
+		width:45%;
+	}
+	#list li .releaseYear  {
+		float:left;
+		width:9%;
+	}
+	#list li .title, #list li .releaseYear  {
+		border-right: thin solid silver;
+	}
+	#list ul.custom-row {
+		border:thin solid gray;
+		clear:both;
+		margin-left:0;
+		padding:0 0 0 22px;
+	}
+	#list li.collapsed ul.custom-row {
+		display:none;
+	}
+
+	
+</style>
+    </head>
+ <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div id="hd">
+			<h1>Row Expansion with plain HTML</h1>
+		</div>
+		<div id="bd">
+			<ul id="list"></ul>
+		</div>
+		<div id="ft">
+			<p>So, you want an expandable table, well, maybe YUI's DataTable is not for you.  
+			This is only a brief sample not really meant for a final application though it can be the basis for one.
+			If you want nested DataTables, you may not actually need real YUI DataTables, perhaps not even HTML tables.
+			This table has been created with the following code:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				YAHOO.example.YQLSubstitute(
+					'list',
+					Lang.substitute(YQL_QUERY_ARTIST,{query:'madonna'}),
+					ARTIST_TEMPLATE
+				);
+			</textarea>
+			<p>Where the uppercase variables are as follows, plus a couple of extra ones which we'll use later:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			var YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+				ARTIST_TEMPLATE = '<li class="collapsed"><div class="trigger"  id="r{id}"><\/div><div class="name">{name}<\/div><div class="trackCount">{trackCount}<\/div><\/li>',
+
+				YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+				ALBUM_TEMPLATE = '<li><div class="title"><a href="{url}">{title}<\/a><\/div><div class="releaseYear">{releaseYear}<\/div><div class="label">{label}<\/div><\/li>';
+			</textarea>
+			<p>See <a href="YQLDataSource.html">YQL DataSource</a> for an explanation of what the YQLSubstitute function does.
+			In a nutshell, it will fill the HTML element referenced in the first argument with the YQL statement given in the second
+			using the templated in the third argument.</p>
+			<p>The third argument is the key here, it applies that template to each row received replacing the 
+			field names inside the curly braces with the value of that field for each row.
+			Now, this is obviously not a DataTable and it is not even an HTML table, it is a unordered list
+			smartly formatted. All that set of &lt;li&gt; elements will go into the element in the first argument, which has been defined thus: <code>&lt;ul id="list"&gt;&lt;/ul&gt;</code></p>
+			<p>The first element in that template, the div with <code>class="trigger"</code> contains the icon signaling that the row can be expanded.
+			The id of that row has the primary key for the artist table, with a leading letter to make it a valid identifier, which can later be used
+			to fetch the albums for that artist, with this code:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				Event.on('list','click', function(ev) {
+					var trigger = Event.getTarget(ev);
+					// We can always reconize the cell with the trigger icon by the trigger className which is not used for decoration
+					if (Dom.hasClass(trigger,TRIGGER)) {
+						Event.stopEvent(ev);
+						
+						// fetch the row where the trigger is contained and the next one
+						var thisRow = Dom.getAncestorByTagName(trigger,'li'),
+							customRow = Dom.getLastChild(thisRow);
+							
+						// if the trigger is collapsed
+						if (Dom.hasClass(thisRow, COLLAPSED)) {
+							// change it to expanded
+							Dom.replaceClass(thisRow,COLLAPSED, EXPANDED);
+							
+							// if the next row is a custom row, then it means it has already been created
+							if (!Dom.hasClass(customRow,CUSTOM_ROW)) {
+								// otherwise, we create it
+								customRow = document.createElement('ul');
+								Dom.addClass(customRow,CUSTOM_ROW);
+								// we add it at the end of the current row
+								thisRow.appendChild(customRow);
+								// and use it as the target for the next batch of data fetched from YQL
+								YAHOO.example.YQLSubstitute(
+									customRow,
+									Lang.substitute(YQL_QUERY_ALBUMS,{query:trigger.id.substr(1)}),
+									ALBUM_TEMPLATE 
+								);
+							}
+						} else {
+							// if it is expanded, we change it to collapsed
+							Dom.replaceClass(thisRow,EXPANDED,COLLAPSED);
+						}
+						return false;
+					}
+				});
+			</textarea>
+			<p>I set a listener for a click anywhere in the list.  If the target happens to have the className of "trigger" then it 
+			really was the trigger cell and I start paying attention. First, I stop the bubbling and any default action associated
+			with clicking. I fetch both the row where the trigger is and what I assume might be the custom rows added, 
+			which should be the very last element in the current row.</p>
+			<p>If I find <code>thisRow</code> is collapsed by checking the className, then I set it to expanded.
+			I check whether the <code>customRow</code> is really such because it should have the right className.  If it is not, what
+			I got there is a regular element within <code>thisRow</code> so I need to create that <code>customRow</code>, mark it with the correct
+			className so I can identify it later, and append it to the current row.
+			Finally, I fill the custom row the same way I filled the original one using a different query and template.</p>
+			<p>If the row was expanded, in the last <code>} else {</code> I mark it as collapsed.  
+			The custom row is set to have <code>display:none</code> when nested within a collapsed row.</p>
+			<p>It is not much of a deal to nest a further level by adding another trigger icon on these added rows and
+			adding to the click event listener to tell apart clicks on the outer level from clicks in the nested rows.
+			The CSS styles also need some polishing. I leave all this as an exercise to the reader.</p>
+		</div>
+	</div>
+
+		<script type="text/javascript">
+				
+			YAHOO.example.YQLSubstitute = function(container, query, template, config) {
+				config = config || {};
+				var s = YAHOO.lang.substitute, output = [];
+				(new YAHOO.util.YQLDataSource(config.YQLWebService,config)).sendRequest(query, {
+					success: function (request, results) {
+						for (var i = 0, r = results.results, l = r.length;i < l;i++) {
+							output.push(s(template,r[i]));
+						}
+						YAHOO.util.Dom.get(container).innerHTML = output.join('\n');
+					}
+				});
+			};
+		</script>
+		<script type="text/javascript">
+			var Dom = YAHOO.util.Dom,
+				Event = YAHOO.util.Event,
+				Lang = YAHOO.lang;
+				
+			var EXPANDED = 'expanded',
+				COLLAPSED = 'collapsed',
+				TRIGGER = 'trigger',
+				CUSTOM_ROW = 'custom-row';
+				
+		
+			var YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+				ARTIST_TEMPLATE = '<li class="collapsed"><div class="trigger"  id="r{id}"><\/div><div class="name">{name}<\/div><div class="trackCount">{trackCount}<\/div><\/li>',
+				YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+				ALBUM_TEMPLATE = '<li><div class="title"><a href="{url}">{title}<\/a><\/div><div class="releaseYear">{releaseYear}<\/div><div class="label">{label}<\/div><\/li>',				
+				
+				// I'll leave this one as an excercise to the reader, expand the album one level further:
+				YQL_QUERY_TRACKS = 'select Track.discNumber, Track.trackNumber, Track.duration, Track.title, Track.popularity from music.release.id where ids="{query}" and response="tracks"';
+
+			YAHOO.util.Event.onDOMReady(function() {
+
+				YAHOO.example.YQLSubstitute(
+					'list',
+					Lang.substitute(YQL_QUERY_ARTIST,{query:'madonna'}),
+					ARTIST_TEMPLATE
+				);
+				Event.on('list','click', function(ev) {
+					var trigger = Event.getTarget(ev);
+					// We can always reconize the cell with the trigger icon by the trigger className which is not used for decoration
+					if (Dom.hasClass(trigger,TRIGGER)) {
+						Event.stopEvent(ev);
+						
+						// fetch the row where the trigger is contained and the next one
+						var thisRow = Dom.getAncestorByTagName(trigger,'li'),
+							customRow = Dom.getLastChild(thisRow);
+							
+						// if the trigger is collapsed
+						if (Dom.hasClass(thisRow, COLLAPSED)) {
+							// change it to expanded
+							Dom.replaceClass(thisRow,COLLAPSED, EXPANDED);
+							
+							// if the next row is a custom row, then it means it has already been created
+							if (!Dom.hasClass(customRow,CUSTOM_ROW)) {
+								// otherwise, we create it
+								customRow = document.createElement('ul');
+								Dom.addClass(customRow,CUSTOM_ROW);
+								// we add it at the end of the current row
+								thisRow.appendChild(customRow);
+								// and use it as the target for the next batch of data fetched from YQL
+								YAHOO.example.YQLSubstitute(
+									customRow,
+									Lang.substitute(YQL_QUERY_ALBUMS,{query:trigger.id.substr(1)}),
+									ALBUM_TEMPLATE 
+								);
+							}
+						} else {
+							// if it is expanded, we change it to collapsed
+							Dom.replaceClass(thisRow,EXPANDED,COLLAPSED);
+						}
+						return false;
+					}
+				});
+						
+
+			});
+		</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+        
+    </body>
+</html>

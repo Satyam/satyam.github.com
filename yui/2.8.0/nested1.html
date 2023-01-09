@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Nested DataTables</title>
+		<!-- Individual YUI CSS files -->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/autocomplete/assets/skins/sam/autocomplete.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/datatable/assets/skins/sam/datatable.css">
+		<!-- Individual YUI JS files -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yuiloader-dom-event/yuiloader-dom-event.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datasource/datasource-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/autocomplete/autocomplete-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datatable/datatable-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/json/json-min.js"></script>
+
+		<!-- dependencies from this site -->
+		<link rel="stylesheet" type="text/css" href="nesteddatatable.css">
+		<!-- YQL DataSource requires DataSource, Get and JSON -->
+		<script type="text/javascript" src="YQLDataSource.js"></script>
+		<script type="text/javascript" src="datatablepatch.js"></script>
+		<script type="text/javascript" src="nesteddatatable.js"></script>
+
+
+ 
+
+    <style type="text/css">
+        h1 {
+            text-align:center;
+        }
+        #ft {
+            margin:1em;
+            padding:1em;
+            border-top: thin solid silver;
+        }
+		#autocomplete {
+			height:2em;
+			width:30em;
+		}
+
+		.yui-skin-sam .yui-dt td.right .yui-dt-liner {
+			text-align:right;
+		}
+    </style>    
+  </head>
+  <body id="doc"  class="yui-skin-sam">
+  <p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+    <div id="hd">
+        <h1>Nested DataTables</h1>
+    </div>
+    <div id="bd">
+        <div id="autocomplete">
+            <input id="acInput" type="text">
+            <div id="acDropDown"></div>
+        </div>
+        <div id="table"></div>
+
+    </div>
+
+    <div id="ft">
+        <p>Start typing the name of a recording artist in the box above, suggestions should show up right underneath, 
+		ordered in decreasing number of published tracks (most popular at the top).
+        You can use the down arrow to go and select any of them and hit Enter when found.</p>
+		<p>Released albums by that artist will be shown in a table, the latest at the top.   
+		Clicking in the [+] sign will expand any of those albums to show its track list.
+		Clicking on the title itself will open up the album description page in a separate tab.
+		More than one album can be expanded at once. All data columns are sortable.</p>
+		<hr/>
+		<p>This program uses YQL to fetch the data and also show how to nest several DataTables within a master DataTable.</p>
+		<p>The artist search only finds complete words, which makes the AutoComplete box seem erratic.  
+		This is a limitation in the service that provides the information.  
+		Neither YQL, which intermediates the queries, nor this application can improve on the base service.</p>
+		<hr/>
+		<p>For this example, the nesting functionality has been encapsulated in a YAHOO.widget.NestedDataTable object
+		that takes the following arguments:</p>
+		<ol>
+			<li><code>container</code>: container element for the master table</li>
+			<li><code>masterColDefs</code>: the columns definitions for the master table</li>
+			<li><code>masterDataSource</code>: the DataSource instance for the master table</li>
+			<li><code>nestedColDefs</code>: the array of column definitions for the nested tables</li>
+			<li><code>nestedDataSource</code>: the DataSource instance for the nested tables</li>
+			<li><code>masterOptions</code>: the configuration options for the master table</li>
+			<li><code>nestedOptions</code>: (optional) the configuration options for the nested tables</li>
+		</ol>
+		<p>The configuration options for the master table needs to have a <code>generateNestedRequest</code> attribute
+		which should be a function that will receive a reference to the record in the master table being expanded 
+		and should return a value that will be used as the initialRequest configuration attribute for the nested
+		DataTable for this record.  The nature of such value depends on the type of DataSource used. For a YQLDataSource
+		it should be the YQL statement to send, for an XHRDataSource it would be the URL-arguments to append to the base-URL.</p>
+		<p>The code has been tested with both client and server side sorting and paging.</p>
+		<p><a href="apidocs/YAHOO.widget.NestedDataTable.html">API Documentation</a></p>
+    </div>
+	<script type="text/javascript">
+		var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event, 
+			Lang = YAHOO.lang, 
+			YQLDS = YAHOO.util.YQLDataSource, 
+			DT = YAHOO.widget.DataTable, NDT = YAHOO.widget.NestedDataTable;
+	
+
+        YAHOO.util.Event.onDOMReady(function () {
+
+			// These are the templates for all the YQL queries used in this example	
+			var YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+				YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+				YQL_QUERY_TRACKS = 'select Track.discNumber, Track.trackNumber, Track.duration, Track.title, Track.popularity from music.release.id where ids="{query}" and response="tracks"';
+
+			// The Main DataTable containing album information
+			var albumDt = null;
+
+
+							
+			// function to show the main table
+			var showArtistAlbums = function (id, name) {
+				// If there is an existing table (meaning, this is a request for a different artist)
+				// we need to get rid of all the child tables
+				if (!albumDt) {
+					albumDt = new NDT(
+						'table', 
+						// column defs for master table
+						[
+							{key:'title', label:'Title', sortable:true, formatter:'link',linkOptions:{urlSource:'url', target:'Album Page'}}, 
+							{key:'releaseYear', label:'Release Year', sortable:true, className:'right'}, 
+							{key:'label', label:'Label', sortable:true}
+						], 
+						// DataSource for master table
+						new YQLDS(null, {
+							responseSchema: {
+								// once again, we only list those fields that require special processing
+								// the others will be there anyway
+								fields:[
+									{key:'id', parser:'number'}, 
+									{key:'releaseYear', parser:'number'}
+								]
+							}
+						}), 
+						// Column defs for nested tables
+						[
+							{key:'Track.discNumber', label:'Disc', className:'right'}, 
+							{key:'Track.trackNumber', label:'Track', className:'right'}, 
+							{key:'Track.title', label:'Title'}, 
+							{key:'Track.duration', label:'Duration', className:'right'}, 
+							{key:'Track.popularity', label:'Popularity', className:'right'}
+						], 
+						// Datasource for nested tables
+						new YQLDS(null, {
+							responseSchema: {
+								// The YQL DataSource reads all fields that come, 
+								// we only need to list the fields that have any extra processing, 
+								// like numbers or dates.  
+								// The other fields (usually strings) will be there even if not listed here
+								fields:[
+									{key:'Track.discNumber', parser:'number'}, 
+									{key:'Track.trackNumber', parser:'number'}, 
+									{key:'Track.popularity', parser:'number'}
+								]
+							}
+						}),
+						// configuration attributes for master table
+						{
+							// we'll leave the actual loading for later
+							initialLoad:false, 
+							sortedBy: {
+								key:'releaseYear', 
+								dir:DT.CLASS_DESC
+							},
+							// This function links the master to the nested tables
+							generateNestedRequest: function (record) {
+								return Lang.substitute(YQL_QUERY_TRACKS, {query:record.getData('id')});
+
+							}
+						}
+						// configuration attributes for the nested tables would go here
+					);
+				}
+					
+
+				// Here we do the actual query for the artist's albums
+				albumDt.requery(Lang.substitute(YQL_QUERY_ALBUMS, {query:id}));
+				
+			};
+
+			// We set the autocomplete box				
+			var myAC = new YAHOO.widget.AutoComplete("acInput", "acDropDown", new YQLDS());
+
+			// here we build the YQL request
+			myAC.generateRequest = function(sQuery) {
+				return Lang.substitute(YQL_QUERY_ARTIST, {query: sQuery});
+			};
+
+			// Autocomplete will usually show the first field that comes along, if more than one
+			// We have no control over the order of the fields that YQL sends so we have to
+			// force AutoComplete to show the field we want, which is not the first
+			myAC.resultTypeList = false;
+			myAC.formatResult = function(oResultData, sQuery, sResultMatch) {
+				return oResultData.name;
+			};
+
+			// Once again, AutoComplete takes the first field in the record to be the reply and
+			// we cannot convince YQL to send the fields in the order we want so we have to prevent it
+			// from updating the input box on its own
+			myAC.suppressInputUpdate = true;
+			myAC.itemSelectEvent.subscribe(function(sType, aArgs) {
+				var result = aArgs[2];
+				// here we update the input box
+				Dom.get('acInput').value = result.name;
+				// and show this artist albums.
+				showArtistAlbums(result.id, result.name);
+			});
+			
+
+		});
+      
+    </script>
+  </body>
+</html>

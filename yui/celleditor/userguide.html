@@ -1,0 +1,139 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Guide</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+<h3 id="cellediting">Cell Editing</h3>
+
+<p>
+    Editing of cell contents can be enabled by including either
+    of two cell-editing modules:  </p><ul>
+        <li>The <code>datatable-celleditor-inline</code> module
+        provides an editing box that overlaps the cell being edited so the user
+        perceives it as editing in the table cell itself.
+
+        It includes the following  editors:
+        <ul>
+            <li>inline (default)</li>
+            <li>inlineNumber</li>
+            <li>inlineDate</li>
+            <li>inlineAC (text with auto-complete)</li>
+        </ul></li>
+        <li>   The <code>datatable-celleditor-popup</code>
+        module creates an overlay aligned with the cell being edited, but with a potentially
+        larger area, allowing for richer input widgets.
+
+        It includes the following  editors:
+        <ul>
+            <li>text (default)</li>
+            <li>textarea</li>
+            <li>checkbox</li>
+            <li>radio</li>
+            <li>dropdown</li>
+            <li>autocomplete</li>
+            <li>calendar</li>
+            <li>date</li>
+            <li>number</li>
+        </ul></li>
+
+    </ul>
+    Neither of these modules are included in the <code>datatable</code> rollup module,
+    so they <strong>must</strong> be included separately.
+<p></p>
+
+<h4 id="celleditor-config">Cell editor configuration</h4>
+
+<p>
+    After including either of the cell-editing modules, editing is enabled on each individual
+    datatable by setting the <code>editable</code> attribute in the datatable configuration.
+    All cells in the table become editable unless explicitly disabled in the column
+    configuration by setting the <code>editable</code> configuration attribute to <code>false</code>.
+</p>
+<p>
+    Specific editing widgets can be specified by setting the <code>editor</code> property
+    for each column to any of the named editors listed above.
+    If no editor is specified then the default editor is used
+    which is a plain input box either in-line or in a popup.
+    The default editor can be changed by setting
+    the <code>defaultEditor</code> datatable attribute to any of the editor names provided.
+    The editor will open with the action specified in the <code>editorOpenAction</code>
+    which defaults to <code>dblclick</code>.
+</p>
+<pre class="code prettyprint">var table = new Y.DataTable({
+    columns: [
+        {key: 'id', editable: false},
+        {key: 'name'},
+        {key: 'description', editor: 'textarea'}
+    ],
+    data: [ ... ],
+    editable: true,
+    editorOpenAction: 'click'
+}).render('#ce');</pre>
+
+<p>
+In the datatable above, editing has been globally enabled except for the column <code>id</code>
+where it has been explicitly disabled.  The <code>description</code> column will use the
+<code>textarea</code> pop-up cell editor while the <code>name</code> column will use the default,
+single-line input box.  The editor will open by simply clicking on the cell.
+</p>
+<p>
+Further options can be specified in any of the columns as properties in the
+<code>editorConfig</code> object.
+</p>
+<pre class="code prettyprint">{key: 'date_of_claim', editor: 'inlineDate', editorConfig: {dateformat: '%Y-%m-%d'}}</pre>
+
+<p>
+See the <a href="http://yuilibrary.com/yui/docs/api/classes/DataTable.Editors.html">API docs</a> of the
+cell editors themselves for the applicable options.
+</p>
+
+<h4 id="celleditor-show-save">Showing and Saving</h4>
+
+<p>The cell editors read the values from the underlying model, not from the displayed
+values. All cell editors have a <code>formatter</code> attribute which, if not null, should be a function
+to format the raw value into the one the user edits.  This is provided because
+the value as displayed by the regular formatter might be decorated in ways that
+might make editing harder.
+</p>
+
+<p>
+The edited values will be saved when the <code>Enter</code> key is pressed, except in some
+editors such as <code>textarea</code> where a <code>Save</code> button is explicitly provided.
+The <code>saveOnEnterKey</code> attribute controls the effect of the <code>Enter</code> key.
+The <code>Esc</code> key will always cancel editing.
+</p>
+<p>
+Validation will be applied to the value before being saved.  If the <code>validator</code>
+attribute is set to a Regular Expression, the value will be first checked against it.
+The value is then passed to the function set in the <code>parser</code> attribute to reverse
+the effect of the <code>formatter</code> function.   The <code>parser</code> function may do further
+validation on the value, returning <code>Y.Attribute.INVALID_VALUE</code> to reject it.
+</p>
+<p>
+If a value is rejected the editor will not close, allowing the user to correct
+the entry or press the <code>Esc</code> key to cancel.  A CSS class name is applied to the
+container for the cell editor so that visual clue can be provided to the user.
+</p>
+
+
+<h4 id="celleditor-navigation">Navigation</h4>
+
+<p>
+The editor provides keyboard navigation in between the editing cells by using the
+arrow keys along with the <code>ctrl</code> key.  It will also move right and left by using the
+<code>tab</code> and shift-<code>tab</code> (backtab) keys.  When reaching any edge, navigation will
+continue on the first cell on the opposite edge when the <code>wrapAroundNavigation</code>
+attribute is set (the default).  Non-editable cells will be skipped over.
+</p>
+<p>
+Individual cell editors may disable navigation
+if these key combinations conflict with their operation by setting the <code>navigationEnabled</code>
+attribute to false.
+</p>    </body>
+</html>

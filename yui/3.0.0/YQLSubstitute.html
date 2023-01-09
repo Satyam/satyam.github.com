@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>YQLSubstitute using the YQLQuery component</title>
+
+<style type="text/css">
+	.dp-highlighter th, .dp-highlighter td {
+		border:0;
+		padding:0;
+	}
+	.dp-highlighter .line1, .dp-highlighter  .line2 {
+		padding-left:10px;
+		white-space:nowrap;
+	}
+	#ft {
+		margin-top:1em;
+	}
+</style>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+
+<script type="text/javascript" src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script>
+
+
+
+</head>
+
+<body class="yui3-skin-sam  yui-skin-sam">
+
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div id="hd">
+			<h1>YQLSubstitute using the YQLQuery component</h1>
+		</div>
+		<div id="bd">
+			<ul id="list"></ul>
+		</div>
+		<div id="ft">
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			YUI({
+				gallery: 'gallery-2010.01.27-20'
+			}).use("node", "substitute",'gallery-yql', function(Y) {
+			
+				var YQLSubstitute = function(container, query, template) {
+					new Y.yql(query, function(r) {
+						if (r.error) {
+							Y.one(container).setContent(r.error);
+						} else {
+							// if no error, we can resolve r.query.results and make r point to it.
+							r = r.query.results;
+							var output = [];
+
+							// Looking for the changing property name under r
+							// If r is null, as it can be, this for will simply be skipped over with no error, which is just fine.
+							for (var list in r) {
+								if (r.hasOwnProperty(list)) {
+									// whichever name came back, we take it
+									
+									// We loop through the array, first ensuring that it really is
+									// an array using Y.Array to do so.
+									Y.Array.each(Y.Array(r[list]),function (v) {
+										output.push(Y.substitute(template, v)); 
+									});
+									Y.one(container).setContent(output.join('\n'));
+									return;
+								}
+							}
+						}
+					});
+				};
+				
+				YQLSubstitute(
+					'#list',
+					'select title,abstract,url,source from search.news where query="barcelona"',
+					'<li><h2>{title}<\/h2><p>{abstract}<\/p><address><a href="{url}">{source}<\/a><\/address><\/li>'
+				);	
+			});
+			</textarea>
+			<p>We are using the YQLQuery module to fill in a list with the restults of a YQL query based on a template.  
+			This is a YUI3 version of this <a href="../2.8.0/YQLDataSource.html">YUI2 example</a>. </p>
+			<p>After the initial call to <code>YUI().use()</code> to load the required components we define the
+			<code>YQLSubstitute</code> function which takes:<ol>
+			<li>A reference to the container where the results will be stored</li>
+			<li>The YQL query to be executed</li>
+			<li>The template to use on the results</li>
+			</ol>
+			<p>Once the YQLQuery instance is created, you can either provide a callback function or listen to the completion events.  
+			Here we have used the callback.  The single <code>r</code> argument can either contain an <code>error</code> property
+			with the error message, which we show in the container or the actual results which will be in a property under 
+			<code>r.query.results</code>.  Since by this time we know there are not other worthy members of <code>r</code>,
+			we resolve the results into r itself.</p>
+			<p>Unfortunately, YQL produces the results in various ways.  <ul>
+			<li>If there are no results, <code>r</code> will contain <code>null</code>, that is <code>r = null</code></li>
+			<li>If a single row came back, it will place that single row under a different property name 
+			depending on how the YQL table was defined, for example: <code>r = {someProperty: {fieldName1:"value1", ...} }</code></li>
+			<li>If the query results in several rows, then that changing property name will contain an array, such as:<br/> 
+			<code>r = {someProperty: <b>[</b> {fieldName1:"value1row1", ...}, {fieldName1:"value1row2", ...} <b>]</b> }</code>.  
+			</ul>Usually, we would
+			expect a more predictable result, always an array with 0, 1 or more results, but YQL is not consistent in this.
+			What we do is start a loop over the keys in the <code>r</code> object and pick the first property listed and then
+			run another loop over whatever that property contains, which may or may not be an array, so we first make sure it is one
+			using the static <code>Y.Array</code> and then <code>Y.Array.each</code> to loop through it.</p>
+			<p>The <a href="../2.8.0/YQLDataSource.html">YUI2 version of YQLSubstitute</a>, which uses YQLDataSource, has this solved by YQLDataSource.</p>
+			<p>For each item we pile up into <code>output</code> the results
+			of substituting each record into the <code>template</code> and, when done, set the contents of the container with the 
+			results</p>
+			<p>In contrast to the YUI2 version, this one does not support nested fields nor parsing the field values.</p>
+		</div>
+	</div>
+		<script type="text/javascript">
+			YUI({
+				gallery: 'gallery-2010.01.27-20'
+			}).use("node", "substitute",'gallery-yql', function(Y) {
+				var YQLSubstitute = function(container, query, template) {
+					new Y.yql(query, function(r) {
+						if (r.error) {
+							Y.one(container).setContent(r.error);
+						} else {
+							r = r.query.results;
+							var output = [];
+
+							for (var list in r) {
+								if (r.hasOwnProperty(list)) {
+									Y.Array.each(Y.Array(r[list]),function (v) {
+										output.push(Y.substitute(template, v)); 
+									});
+									Y.one(container).setContent(output.join('\n'));
+									return;
+								}
+							}
+						}
+					});
+				};
+				YQLSubstitute(
+					'#list',
+					'select title,abstract,url,source from search.news where query="barcelona"',
+					'<li><h2>{title}<\/h2><p>{abstract}<\/p><address><a href="{url}">{source}<\/a><\/address><\/li>'
+				);	
+			});
+		</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+
+	</body>
+</html>
+

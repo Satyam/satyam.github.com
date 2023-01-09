@@ -1,0 +1,1025 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: recordset  Record   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1285452587.44" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1285452587.44" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1285452587.44"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1285452587.44"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>recordset&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_recordset.html" title="recordset">recordset</a>
+                 &gt; Record 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Record</b>
+                        <span class="extends">
+                           - extends <a href="Base.html" title="Base">Base</a>
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        The Record class provides storage for a single row of data.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Record</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                cfg
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">cfg</span>
+                                                    &lt;<span property="yui:type">object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Configuration Attributes</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:property" resource="#property__fields">
+                                    <h4><a name="property__fields" property="yui:name">_fields</a>
+                                        - <code>private <span property="yui:type">[Record.Field]</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Array of <a href="Record.Field.html"><code>Record.Field</code></a> objects
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method_accept">
+                                    <h4>
+                                        <a name="method_accept">accept</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">accept</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Accepts the current value of a field or of whole record as good.  
+Used when the Record has been synchronized with the original source 
+(usually a database table in the server) 
+to signal that the current value has been accepted as good by the server.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) If provided, it will accept the named field, otherwise, it accepts the whole record</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_addField">
+                                    <h4>
+                                        <a name="method_addField">addField</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">addField</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                                        , 
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Adds a new <a href="Record.Field.html"><code>Record.Field</code></a> to the Record
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the field</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">any</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  initial value</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_each">
+                                    <h4>
+                                        <a name="method_each">each</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">each</strong>
+                                           (
+                                                
+                                                        
+                                                         fn
+                                                    
+                                                
+                                                        , 
+                                                         context
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Loops through each of the fields
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fn</span>
+                                                        &lt;<span property="yui:type">function</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Function to be executed on each field.  It will receive the Field object and the field name</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">context</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Context to execute the function in</span>
+                                                        </dd>
+                                                </dl>
+
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getField">
+                                    <h4>
+                                        <a name="method_getField">getField</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Record.Field
+                                            <strong property="yui:name">getField</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the instance of <a href="Record.Field.html"><code>Record.Field</code></a> for the field
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the field</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Record.Field
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">field definition</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getValue">
+                                    <h4>
+                                        <a name="method_getValue">getValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        any
+                                            <strong property="yui:name">getValue</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns the value of a field or an object with all the field values
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Optional: if provided it will return the value of that field, 
+otherwise it will return an object literal with all values</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        any
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">The value of the field requested, an object with all values or null if the Record is marked as deleted</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_initializer">
+                                    <h4>
+                                        <a name="method_initializer">initializer</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">initializer</strong>
+                                           (
+                                                
+                                                        
+                                                         cfg
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Initializer inherited from Y.Base and overridden
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">cfg</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Initial configuration
+If the configuration object has a <code>data</code> property containing an oject literal, 
+it will load the Record with those values</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_reset">
+                                    <h4>
+                                        <a name="method_reset">reset</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">reset</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Restores the initial value of a field or of a whole record
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) If provided, it will reset the named field, otherwise, it resets the whole record</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_setValue">
+                                    <h4>
+                                        <a name="method_setValue">setValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">setValue</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                                        , 
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the value for a specific field.  If field does not exist, it creates it.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Name of the field</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">any</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  value to be set</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_undo">
+                                    <h4>
+                                        <a name="method_undo">undo</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">undo</strong>
+                                           (
+                                                
+                                                        
+                                                         fieldName
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Restores the previous value of a field or of a whole record.  There is only one level of undo.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fieldName</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) If provided, it will undo the named field, otherwise, it undoes the whole record</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_beforeDeletedChange">
+                                    <h4>
+                                        <a name="event_beforeDeletedChange">beforeDeletedChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeDeletedChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'deleted' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeDirtyChange">
+                                    <h4>
+                                        <a name="event_beforeDirtyChange">beforeDirtyChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeDirtyChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'dirty' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_beforeNewChange">
+                                    <h4>
+                                        <a name="event_beforeNewChange">beforeNewChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeNewChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'new' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_deletedChange">
+                                    <h4>
+                                        <a name="event_deletedChange">deletedChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">deletedChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'deleted' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_dirtyChange">
+                                    <h4>
+                                        <a name="event_dirtyChange">dirtyChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">dirtyChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'dirty' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_newChange">
+                                    <h4>
+                                        <a name="event_newChange">newChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">newChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'new' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_deleted">
+                                    <h4><a name="config_deleted">deleted</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Marks the record as deleted
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_dirty">
+                                    <h4><a name="config_dirty">dirty</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            True when any of the fields is dirty. Read only.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_new">
+                                    <h4><a name="config_new">new</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            True when all the fields are new. Read Only
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_recordset.html" title="recordset">recordset</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="DataType.Converters.html" title="DataType.Converters">DataType.Converters</a></li>
+                                <li class=""><a href="DataType.Types.html" title="DataType.Types">DataType.Types</a></li>
+                                <li class=""><a href="FieldDef.html" title="FieldDef">FieldDef</a></li>
+                                <li class=""><a href="FieldDefSet.html" title="FieldDefSet">FieldDefSet</a></li>
+                                <li class=""><a href="Form.html" title="Form">Form</a></li>
+                                <li class=""><a href="Form.BaseField.html" title="Form.BaseField">Form.BaseField</a></li>
+                                <li class="selected"><a href="Record.html" title="Record">Record</a></li>
+                                <li class=""><a href="Record.Field.html" title="Record.Field">Record.Field</a></li>
+                                <li class=""><a href="RecordSet.html" title="RecordSet">RecordSet</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="record.js.html" title="record.js">record.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#property__fields" title="_fields">_fields</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method_accept" title="accept">accept</a></li>
+                                <li class=""><a href="#method_addField" title="addField">addField</a></li>
+                                <li class=""><a href="#method_each" title="each">each</a></li>
+                                <li class=""><a href="#method_getField" title="getField">getField</a></li>
+                                <li class=""><a href="#method_getValue" title="getValue">getValue</a></li>
+                                <li class=""><a href="#method_initializer" title="initializer">initializer</a></li>
+                                <li class=""><a href="#method_reset" title="reset">reset</a></li>
+                                <li class=""><a href="#method_setValue" title="setValue">setValue</a></li>
+                                <li class=""><a href="#method_undo" title="undo">undo</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_beforeDeletedChange" title="beforeDeletedChange">beforeDeletedChange</a></li>
+                                <li class=""><a href="#event_beforeDirtyChange" title="beforeDirtyChange">beforeDirtyChange</a></li>
+                                <li class=""><a href="#event_beforeNewChange" title="beforeNewChange">beforeNewChange</a></li>
+                                <li class=""><a href="#event_deletedChange" title="deletedChange">deletedChange</a></li>
+                                <li class=""><a href="#event_dirtyChange" title="dirtyChange">dirtyChange</a></li>
+                                <li class=""><a href="#event_newChange" title="newChange">newChange</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_deleted" title="deleted">deleted</a></li>
+                                <li class=""><a href="#config_dirty" title="dirty">dirty</a></li>
+                                <li class=""><a href="#config_new" title="new">new</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Record.html#method_accept", "access": "", "host": "Record", "type": "method", "name": "accept"}, {"url": "FieldDef.html#method_add", "access": "", "host": "FieldDef", "type": "method", "name": "add"}, {"url": "FieldDefSet.html#method_add", "access": "", "host": "FieldDefSet", "type": "method", "name": "add"}, {"url": "Record.html#method_addField", "access": "", "host": "Record", "type": "method", "name": "addField"}, {"url": "FieldDef.html#event_beforeChildrenChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeChildrenChange"}, {"url": "Record.html#event_beforeDeletedChange", "access": "", "host": "Record", "type": "event", "name": "beforeDeletedChange"}, {"url": "Record.html#event_beforeDirtyChange", "access": "", "host": "Record", "type": "event", "name": "beforeDirtyChange"}, {"url": "FieldDef.html#event_beforeInitialValueChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeInitialValueChange"}, {"url": "FieldDef.html#event_beforeLabelChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeLabelChange"}, {"url": "FieldDef.html#event_beforeNameChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeNameChange"}, {"url": "Record.html#event_beforeNewChange", "access": "", "host": "Record", "type": "event", "name": "beforeNewChange"}, {"url": "FieldDef.html#event_before_parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "before_parentChange"}, {"url": "FieldDef.html#event_beforeParentChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeParentChange"}, {"url": "FieldDef.html#event_beforePrimaryKeyChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforePrimaryKeyChange"}, {"url": "FieldDef.html#event_beforeRootChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeRootChange"}, {"url": "FieldDef.html#event_beforeServerChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServerChange"}, {"url": "FieldDef.html#event_beforeServer.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServer.formatterChange"}, {"url": "FieldDef.html#event_beforeServer.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeServer.parserChange"}, {"url": "FieldDef.html#event_beforeSortCompareFunctionChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeSortCompareFunctionChange"}, {"url": "FieldDef.html#event_beforeTypeChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeTypeChange"}, {"url": "FieldDef.html#event_beforeUiChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUiChange"}, {"url": "FieldDef.html#event_beforeUi.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUi.formatterChange"}, {"url": "FieldDef.html#event_beforeUi.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "beforeUi.parserChange"}, {"url": "FieldDef.html#config_children", "access": "", "host": "FieldDef", "type": "config", "name": "children"}, {"url": "FieldDef.html#event_childrenChange", "access": "", "host": "FieldDef", "type": "event", "name": "childrenChange"}, {"url": "Record.html#config_deleted", "access": "", "host": "Record", "type": "config", "name": "deleted"}, {"url": "Record.html#event_deletedChange", "access": "", "host": "Record", "type": "event", "name": "deletedChange"}, {"url": "Record.html#config_dirty", "access": "", "host": "Record", "type": "config", "name": "dirty"}, {"url": "Record.html#event_dirtyChange", "access": "", "host": "Record", "type": "event", "name": "dirtyChange"}, {"url": "FieldDefSet.html#method_each", "access": "", "host": "FieldDefSet", "type": "method", "name": "each"}, {"url": "Record.html#method_each", "access": "", "host": "Record", "type": "method", "name": "each"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_DEEP", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_DEEP"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_LEAVES", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_LEAVES"}, {"url": "FieldDefSet.html#property_FieldDefSet.TRAVERSE_SHALLOW", "access": "", "host": "FieldDefSet", "type": "property", "name": "FieldDefSet.TRAVERSE_SHALLOW"}, {"url": "Record.html#property__fields", "access": "private", "host": "Record", "type": "property", "name": "_fields"}, {"url": "FieldDefSet.html#method_get", "access": "", "host": "FieldDefSet", "type": "method", "name": "get"}, {"url": "FieldDef.html#method_getChildCount", "access": "", "host": "FieldDef", "type": "method", "name": "getChildCount"}, {"url": "FieldDefSet.html#method_getDepth", "access": "", "host": "FieldDefSet", "type": "method", "name": "getDepth"}, {"url": "Record.html#method_getField", "access": "", "host": "Record", "type": "method", "name": "getField"}, {"url": "Record.html#method_getValue", "access": "", "host": "Record", "type": "method", "name": "getValue"}, {"url": "FieldDefSet.html#method__init", "access": "", "host": "FieldDefSet", "type": "method", "name": "_init"}, {"url": "Record.html#method_initializer", "access": "", "host": "Record", "type": "method", "name": "initializer"}, {"url": "FieldDef.html#config_initialValue", "access": "", "host": "FieldDef", "type": "config", "name": "initialValue"}, {"url": "FieldDef.html#event_initialValueChange", "access": "", "host": "FieldDef", "type": "event", "name": "initialValueChange"}, {"url": "FieldDefSet.html#method_isEmpty", "access": "", "host": "FieldDefSet", "type": "method", "name": "isEmpty"}, {"url": "FieldDefSet.html#method_item", "access": "", "host": "FieldDefSet", "type": "method", "name": "item"}, {"url": "FieldDefSet.html#property__items", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_items"}, {"url": "FieldDefSet.html#property__keys", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_keys"}, {"url": "FieldDef.html#config_label", "access": "", "host": "FieldDef", "type": "config", "name": "label"}, {"url": "FieldDef.html#event_labelChange", "access": "", "host": "FieldDef", "type": "event", "name": "labelChange"}, {"url": "FieldDef.html#config_name", "access": "", "host": "FieldDef", "type": "config", "name": "name"}, {"url": "FieldDef.html#event_nameChange", "access": "", "host": "FieldDef", "type": "event", "name": "nameChange"}, {"url": "Record.html#config_new", "access": "", "host": "Record", "type": "config", "name": "new"}, {"url": "Record.html#event_newChange", "access": "", "host": "Record", "type": "event", "name": "newChange"}, {"url": "FieldDef.html#property__parent", "access": "private", "host": "FieldDef", "type": "property", "name": "_parent"}, {"url": "FieldDef.html#config__parent", "access": "private", "host": "FieldDef", "type": "config", "name": "_parent"}, {"url": "FieldDef.html#config_parent", "access": "", "host": "FieldDef", "type": "config", "name": "parent"}, {"url": "FieldDefSet.html#property__parent", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_parent"}, {"url": "FieldDef.html#event__parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "_parentChange"}, {"url": "FieldDef.html#event_parentChange", "access": "", "host": "FieldDef", "type": "event", "name": "parentChange"}, {"url": "FieldDef.html#config_primaryKey", "access": "", "host": "FieldDef", "type": "config", "name": "primaryKey"}, {"url": "FieldDef.html#event_primaryKeyChange", "access": "", "host": "FieldDef", "type": "event", "name": "primaryKeyChange"}, {"url": "Record.html#method_reset", "access": "", "host": "Record", "type": "method", "name": "reset"}, {"url": "FieldDef.html#property__root", "access": "private", "host": "FieldDef", "type": "property", "name": "_root"}, {"url": "FieldDef.html#config_root", "access": "", "host": "FieldDef", "type": "config", "name": "root"}, {"url": "FieldDefSet.html#property__root", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_root"}, {"url": "FieldDef.html#event_rootChange", "access": "", "host": "FieldDef", "type": "event", "name": "rootChange"}, {"url": "FieldDef.html#config_server", "access": "", "host": "FieldDef", "type": "config", "name": "server"}, {"url": "FieldDef.html#event_serverChange", "access": "", "host": "FieldDef", "type": "event", "name": "serverChange"}, {"url": "FieldDef.html#config_server.formatter", "access": "", "host": "FieldDef", "type": "config", "name": "server.formatter"}, {"url": "FieldDef.html#event_server.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "server.formatterChange"}, {"url": "FieldDef.html#config_server.parser", "access": "", "host": "FieldDef", "type": "config", "name": "server.parser"}, {"url": "FieldDef.html#event_server.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "server.parserChange"}, {"url": "FieldDefSet.html#method_set", "access": "", "host": "FieldDefSet", "type": "method", "name": "set"}, {"url": "Record.html#method_setValue", "access": "", "host": "Record", "type": "method", "name": "setValue"}, {"url": "FieldDefSet.html#method_size", "access": "", "host": "FieldDefSet", "type": "method", "name": "size"}, {"url": "FieldDef.html#config_sortCompareFunction", "access": "", "host": "FieldDef", "type": "config", "name": "sortCompareFunction"}, {"url": "FieldDef.html#event_sortCompareFunctionChange", "access": "", "host": "FieldDef", "type": "event", "name": "sortCompareFunctionChange"}, {"url": "FieldDefSet.html#property__totalDepth", "access": "private", "host": "FieldDefSet", "type": "property", "name": "_totalDepth"}, {"url": "FieldDefSet.html#method_traverse", "access": "", "host": "FieldDefSet", "type": "method", "name": "traverse"}, {"url": "FieldDef.html#config_type", "access": "", "host": "FieldDef", "type": "config", "name": "type"}, {"url": "FieldDef.html#event_typeChange", "access": "", "host": "FieldDef", "type": "event", "name": "typeChange"}, {"url": "FieldDef.html#config_ui", "access": "", "host": "FieldDef", "type": "config", "name": "ui"}, {"url": "FieldDef.html#event_uiChange", "access": "", "host": "FieldDef", "type": "event", "name": "uiChange"}, {"url": "FieldDef.html#config_ui.formatter", "access": "", "host": "FieldDef", "type": "config", "name": "ui.formatter"}, {"url": "FieldDef.html#event_ui.formatterChange", "access": "", "host": "FieldDef", "type": "event", "name": "ui.formatterChange"}, {"url": "FieldDef.html#config_ui.parser", "access": "", "host": "FieldDef", "type": "config", "name": "ui.parser"}, {"url": "FieldDef.html#event_ui.parserChange", "access": "", "host": "FieldDef", "type": "event", "name": "ui.parserChange"}, {"url": "Record.html#method_undo", "access": "", "host": "Record", "type": "method", "name": "undo"}];
+</script>
+</body>
+</html>

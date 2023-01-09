@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>YQL Query</title>
+		<!-- Combo-handled YUI CSS files: -->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/fonts/fonts-min.css&2.7.0/build/reset/reset-min.css&2.7.0/build/grids/grids-min.css&2.7.0/build/base/base-min.css&2.7.0/build/datatable/assets/skins/sam/datatable.css">
+		<!-- Combo-handled YUI JS files: -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo/yahoo.js&2.7.0/build/dom/dom.js&2.7.0/build/event/event.js&2.7.0/build/element/element.js&2.7.0/build/get/get.js&2.7.0/build/datasource/datasource.js&2.7.0/build/datatable/datatable.js"></script>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<h1>YQL Query</h1>
+		<p>Thanks to Jonathan LeBlanc's <a href="http://www.yuiblog.com/blog/2009/06/17/yui-and-yql/">article on the YUI Blog</a> 
+		I thought that it would be cool to have a YQLDataSource to make it easier to use YQL data in DataTable, Charts and AutoComplete.
+		The table below is built using such a DataSource.</p><p>  All the code is visible in the source of this same page.  Further comments below.</p>
+		<div id="Container"></div>
+		<p>The YQLDataSource does not require any parameters.  It will automatically use the Get utility to access the YQL servers using JSON format
+		and providing a suitable callback.  The DataSource just needs to be instanced like:</p>
+		<pre>var ds = new YAHOO.util.YQLDataSource();</pre>
+		<p>There is no need to indicate the server, responseType or responseSchema, all of these will be taken care of.
+		In a DataTable, the YQL query has to be set in the 
+		<a href="http://developer.yahoo.com/yui/docs/YAHOO.widget.DataTable.html#config_initialRequest">initialRequest</a> configuration attribute:</p>
+		<pre>initialRequest:'select * from flickr.photos.search where text = "YDN"'</pre>
+		<p>All the fields returned in the results will be copied in the RecordSet, care should be taken if using <code>Select *</code> without any limits
+		in the number of fields or the number of records, it might take lots of memory.  
+		The responseType will always be of type JSON and the <code>responseSchema.resultsList</code> will always
+		point to the very first repeating element under <code>query.results</code></p>
+		<p>Unfortunately, the YQL response provides no clue as to the data type of the individual fields.
+		By default, all fields will be read as strings but if any field needs to be parsed, you can specify those fields
+		in the usual <code>responseSchema.fields = [ ..., {key:"xxxx",parser;"date"},...]</code> or whichever the type might be.  
+		All fields coming in the response will be read in anyway,
+		you only need to specify those that need a parser, all the rest will be added to the <code>fields</code> array and read as strings.</p>
+		<p>The new YQLDataSource derives from ScriptNodeDataSource. </p>
+		<p>Thanks to Jonathan for the idea</p>
+
+	</div>
+<script type="text/javascript">
+
+YAHOO.util.YQLDataSource = function (oLiveData, oConfigs) {
+	oLiveData = oLiveData || 'http://query.yahooapis.com/v1/public/yql?format=json&q=';
+	YAHOO.util.YQLDataSource.superclass.constructor.call(this, oLiveData, oConfigs); 
+};
+
+YAHOO.lang.extend(YAHOO.util.YQLDataSource, YAHOO.util.ScriptNodeDataSource, {
+	responseType:YAHOO.util.DataSource.TYPE_JSON,
+	parseJSONData: function  ( oRequest , oFullResponse ) {	
+		var i,q = oFullResponse.query.results,
+			rSch = this.responseSchema,
+			fs = {};
+			
+		if ('fields' in rSch  && rSch.fields.length) {
+			for (i = 0;i < rSch.fields.length;i++) {
+				fs[rSch.fields[i].key || rSch.fields[i]] = i;
+			}
+		} else {
+			rSch.fields = [];
+		}
+		var pushFields = function(node,prefix) {
+			if (prefix) {
+				prefix += '.';
+			} else {
+				prefix = '';
+			}
+			for (var field in node) {
+				if (node.hasOwnProperty(field) && !(field in fs)) {
+					if (YAHOO.lang.isObject(node[field])) {
+						pushFields(node[field],prefix + field);
+					} else {
+						rSch.fields.push(prefix + field);
+					}
+				}
+			}
+		};
+			
+		for (var list in q) {
+			if (q.hasOwnProperty(list)) {
+				rSch.resultsList = rSch.resultsList || 'query.results.' + list;
+				pushFields(q[list][0]);
+				return YAHOO.util.YQLDataSource.superclass.parseJSONData.apply(this,arguments);
+			}
+		}
+	},
+	makeConnection : function(oRequest, oCallback, oCaller) {
+		YAHOO.util.YQLDataSource.superclass.makeConnection.call(this,encodeURIComponent(oRequest),oCallback,oCaller);
+	}
+});
+
+YAHOO.lang.augmentObject(YAHOO.util.YQLDataSource, YAHOO.util.DataSourceBase);
+
+
+YAHOO.util.Event.onDOMReady(function () {
+
+	(new YAHOO.widget.DataTable(
+		'Container',
+		[
+			{key:"id",label:"ID",resizeable:true},
+			{key:"owner",label:"Owner",resizeable:true},
+			{key:"title",label:"Title",resizeable:true},
+			{key:"img",label:"Photo", formatter: function(elCell, oRecord, oColumn, oData) {
+				elCell.innerHTML = YAHOO.lang.substitute(
+					'<img src="http://farm3.static.flickr.com/{server}/{id}_{secret}.jpg?v=0" width="80" height="80" />',
+					oRecord.getData()
+				);
+			}}
+		],
+		new YAHOO.util.YQLDataSource(),
+		{
+			initialRequest:'select * from flickr.photos.search where text = "YDN"'
+		}
+	));
+});
+		</script>
+	</body>
+</html>
+				

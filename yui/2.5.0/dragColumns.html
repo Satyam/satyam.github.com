@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Draggable Columns with Nested Headers</title>
+
+<!-- Point to 2.5.0 -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base-min.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/datatable/assets/skins/sam/datatable.css" />
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/dragdrop/dragdrop.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/element/element-beta.js"></script>
+
+<!-- Point to drop -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/datasource/datasource-beta-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/datatable/datatable-beta-min.js"></script>
+
+
+
+</head>
+
+<body class=" yui-skin-sam">
+		<div id="doc" class="yui-t6"> 
+		  <div class="yui-b">
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  <p>something</p>
+		  </div> 
+	      <div id="yui-main">   
+			<div class="yui-b">
+<h1>Draggable Columns with Nested Headers</h1>
+
+
+<div id="nestedBasic"></div>
+<h3>How to break it</h3>
+<p>I set up the above table using one of the templates in grids.css.  The column to the right is a side-bar while the DataTable above is in the main body.</p>
+<p>The table is set with draggable and resizeable columns.  If you move the cursor over the main heading, it will change to a 'move' four pointed arrow.  It only works for main headers (when nested) or non-nested column headers.  It also has resizeable columns, so that if you move the cursor near the borders in the headers, the cursor will change to an E-W arrow meaning that border can be moved.</p>
+<p>So, place the cursor on the 'Numbers' heading.  Drag that column set left until a red border appears on the left of the 'Rank' column header.  Drop it there.  The columns change order.  Now, drag the column set named 'Text' over the column named 'Rank'.  Now 'Rank' overlaps the sidebar.  It has also picked the width of the 'Text' column.
+</p> 
+<p>An easier way to break it?  Just widen any of the columns that let you resize them.  You can try this same example with 2.4.1, just copy this HTML file and do a search and replace of all "2.5.0" to "2.4.1", you'll see the table always remains in its bounds.  Since space is limited, the columns resize in funny ways, one column that widens makes another narrower, but it never overflows into the adjoining text.</p>
+<script type="text/javascript">
+
+YAHOO.util.Event.addListener(window, "load", function() {
+    
+    YAHOO.example.Nested = new function() {
+        this.datatables = [];
+
+        var myColumnDefs = [
+            {key:"Rank", label:"<input type='checkbox'> Rank", editor:"date", resizeable:true},
+            {key:"Numbers", children:[
+                {key:"SKU", label:"<input type='checkbox'> SKU", sortable:true, resizeable:true, editor:"date", resizeable:true},
+                {key:"Quantity", sortable:true, resizeable:true, editor:"textbox", resizeable:true}
+            ]},
+            {key:"Text", children:[
+                {key:"Item", sortable:true, resizeable:true, editor:"textbox",className:"myClass",resizeable:true},
+                {key:"Description", sortable:true, resizeable:true, editor:"textbox", width:200, minWidth:200, resizeable:true}
+            ]}
+        ];
+
+        this.myDataSource = new YAHOO.util.DataSource([
+        {SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+        {SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football."},
+        {SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles"},
+        {SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+        {SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+        {SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:""},
+        {SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+        {SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:""},
+        {SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+        {SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+        {SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+        {SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+        {SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:""},
+        {SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+    ]);
+        this.myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        this.myDataSource.responseSchema = {
+            fields: ["SKU","Quantity","Item","Description"]
+        };
+        this.myDataTableBasic = new YAHOO.widget.DataTable("nestedBasic", myColumnDefs,
+                this.myDataSource, {draggableColumns:true, renderLoopSize:5});
+
+    };
+
+});
+</script>
+
+
+</body>
+</html>
+

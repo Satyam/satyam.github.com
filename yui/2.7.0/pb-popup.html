@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<title>Progress Bar examples - Poping up</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/reset-fonts-grids/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/base/base.css">
+
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/container/assets/skins/sam/container.css">
+
+
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/build/progressbar/assets/skins/sam/progressbar.css">
+
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">
+
+<!-- js -->
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/element/element-min.js"></script>
+
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/container/container-min.js"></script>
+
+
+<script type="text/javascript" src="http://developer.yahoo.com/yui/build/progressbar/progressbar-debug.js"></script>
+
+<style type="text/css">
+
+
+code {
+	background-color:#e0e0e0;
+	border:thin solid #c0c0c0;
+	white-space:pre;
+	font-size:10px;
+}
+
+.dp-highlighter th, .dp-highlighter td {
+	border:0;
+	padding:0;
+}
+.dp-highlighter .line1, .dp-highlighter  .line2 {
+	padding-left:10px;
+	white-space:nowrap;
+}
+
+</style>
+</head>
+<body class="yui-skin-sam">
+
+	<div id="doc">
+		<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+		<div id="hd">
+			<h1>Progress Bar examples - Pop Up</h1>
+			<p>This example shows a ProgressBar in a pop up window.</p>
+		</div>
+		<div id="bd">
+		</div>
+		<div id="ft">
+			<p>The ProgressBar itself is created with this code:</p>
+			<textarea name="code" class="JScript" cols="60" rows="1">
+				var myPanel = new YAHOO.widget.Panel("myProgressBarPanel",{ 
+					width:"240px",
+					fixedcenter:true,
+					close:false,
+					draggable:false,
+					zindex:4,
+					modal:true,
+					visible:false
+				});
+
+				var myProgressBarContainer = document.createElement('div');
+				myPanel.appendToBody(myProgressBarContainer);
+				myPanel.setHeader('Title');
+
+				var myProgressBar = new YAHOO.widget.ProgressBar({value:50}).render(myProgressBarContainer);
+				myPanel.render(document.body);
+				myPanel.show();
+			</textarea>
+			
+			<p>Most of the code in this example deals with doing the animation.  
+			In the end, it all involves	showing, hiding and changing the value for the bar.  
+			We use an interval timer to move the bar a random amount every half a second,
+			hide it when it reaches the top, wait for a couple of seconds and show it again, over and over again.</p>
+			<textarea name="code" class="JScript" cols="60" rows="1">
+				var val = 50;
+				window.setInterval(function() {
+					if (val < 0) {
+						val++;
+					} else {
+						if (val == 0) {
+							myPanel.show();
+							val = 1;
+						} else 	if (val == 100) {
+							val = -4;
+							myPanel.hide();
+						} else {
+							val += 10 * Math.random();
+							val = Math.min(val,100);
+						}
+						myProgressBar.set('value',val);
+					}
+				},500);
+			</textarea>
+			
+		</div>
+	</div>
+	
+<script  type="text/javascript">
+
+
+	YAHOO.util.Event.onDOMReady( function () {
+			
+		var myPanel = new YAHOO.widget.Panel("myProgressBarPanel",{ 
+			width:"240px",
+			fixedcenter:true,
+			close:false,
+			draggable:false,
+			zindex:4,
+			modal:true,
+			visible:false
+		});
+
+		var myProgressBarContainer = document.createElement('div');
+		myPanel.appendToBody(myProgressBarContainer);
+		myPanel.setHeader('Title');
+
+		var myProgressBar = new YAHOO.widget.ProgressBar({value:50}).render(myProgressBarContainer);
+		myPanel.render(document.body);
+		myPanel.show();
+		
+		var val = 50;
+		window.setInterval(function() {
+			if (val < 0) {
+				val++;
+			} else {
+				if (val == 0) {
+					myPanel.show();
+					val = 1;
+				} else 	if (val == 100) {
+					val = -4;
+					myPanel.hide();
+				} else {
+					val += 10 * Math.random();
+					val = Math.min(val,100);
+				}
+				myProgressBar.set('value',val);
+			}
+		},500);
+	});
+</script>
+<script type="text/javascript" src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script type="text/javascript" language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>
+</body>
+</html>
+	

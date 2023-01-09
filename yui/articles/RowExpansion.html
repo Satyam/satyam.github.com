@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Win32)">
+	<META NAME="CREATED" CONTENT="20100806;15371200">
+	<META NAME="CHANGED" CONTENT="20100816;9153200">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H2>Row Expansion and Nested DataTables</H2>
+<P>This has been an on-going issue for quite some time: the need to
+expand the information associated with a row in a DataTable so that
+the extra information is shown right below it, usually in the way of
+a further DataTable which might also have its rows expandable into
+more nested levels. So far there has been several serious attempts at
+it. DataTable's own list of examples includes a <A HREF="http://developer.yahoo.com/yui/examples/datatable/dt_rowexp_basic.html">Row
+Expansion</A> example by Eric Gelinas. John Lindal presented his
+<A HREF="http://jafl.github.com/yui2/treeble/">Treeble</A> in a <A HREF="http://www.yuiblog.com/blog/2010/04/14/treeble-using-nested-yui-2-datasources-for-row-expansion/">YUI
+Blog article</A> some time ago with a <A HREF="http://yuilibrary.com/gallery/show/treeble">version
+for YUI3</A> in the Gallery and I also tried with my <A HREF="http://www.satyam.com.ar/yui/#NestedDataTables">NestedDataTable</A>.</P>
+<P>Neither of them is completely satisfactory and the question comes
+up again and again, two people asked for it at the <A HREF="http://www.yuiblog.com/blog/2010/07/29/ask-satyam/">Ask
+Satyam</A> article in the YUI Blog so I'll go again at it picking
+some ideas from here and there but first of all, let me explain a
+deep design issue in DataTable that makes this request hard to
+fulfill. Though it may sound a little depressing at first, there are
+solutions to these issues and they don't affect the built-in features
+of the DataTable itself (none that I could detect) but some API
+methods it offers or their use. You need to know the issues to decide
+so, here we go. 
+</P>
+<H3>A few issues to consider</H3>
+<P>DataTable makes a couple of very basic assumptions. One is that
+the ordinal position of a Record corresponds to the same ordinal
+position of a row within the <CODE>&lt;tbody&gt;</CODE> of the
+markup. I count 17 occurrences of property <CODE>sectorRowIndex</CODE>
+which returns the ordinal number of a <CODE>&lt;tr&gt;</CODE> element
+within its section, that is, the <CODE>&lt;tbody&gt;</CODE>, <CODE>&lt;thead&gt;</CODE>
+or <CODE>&lt;tfoot&gt;</CODE> where it is contained. There are also
+many occurrences where the ordinal position of the Record is used as
+an index into array of rows. For example, in the <A HREF="http://developer.yahoo.com/yui/examples/datatable/dt_rowexp_basic_clean.html">Row
+Expansion</A> example, let it run to the end, expand any row about
+half-way to the table and then, in the debugging console execute the
+following two statements:</P>
+<PRE>YAHOO.example.Basic.oDT.getTrEl(YAHOO.example.Basic.oDT.getRecord(17)).id 
+YAHOO.example.Basic.oDT.get<B>Next</B>TrEl(YAHOO.example.Basic.oDT.getRecord(17)).id </PRE><P>
+Both will show <CODE>“yui-rec17”</CODE> as the answer, which is
+not correct since the second statement should return the id of the
+next row. If you do the same with no rows expanded or using a low
+number, before the expanded row, the second statement will correctly
+return <CODE>“yui-rec18”</CODE>.</P>
+<P>Obviously, all examples listed work as they stand, you have to
+trick it to make it fail as with the above statements, and if your
+application stays within these safe boundaries, you are fine but a
+feature added to your application at a later time may bring the whole
+thing tumbling down. DataTable is very robust, its built-in
+functionality is pretty safe, it sorts columns, edits cells, selects
+and highlights fine, as far as I tested it. I wasn't able to break
+its most popular built-in features, but just beware, it may happen.</P>
+<P>Nesting things within the DataTable also brings some other issues:
+clicking somewhere in an expanded custom row might be troublesome
+since the click on the nested element would bubble up to the
+containing DataTable where it can mess things up. You must remember
+that when listening to events such as <CODE>cellClickEvent</CODE> on
+the parent table since the target cell reported might not belong to
+the parent table but to a nested one so fetching the Record or Column
+for that cell may fail.</P>
+<P>Finally, there are some conceptual issues, what does <CODE>getNextTrEl</CODE>
+mean? Does it include only DataTable's own rows, lets call them data
+rows, or should include custom rows added later, as it does now? I
+would say it should only include data rows since the custom rows,
+being nested, are not siblings to the data rows but children and,
+though the HTML markup forces us to use plain <CODE>&lt;TR&gt;</CODE>
+elements, conceptually, they are not siblings. Then, if you somehow
+reach a <CODE>&lt;TR&gt;</CODE> element and ask for its corresponding
+Record in the containing DataTable using method <CODE>getRecord()</CODE>,
+if that <CODE>&lt;TR&gt;</CODE> is a custom row, what would be its
+corresponding Record, <CODE>null</CODE> (since it doesn't belong to
+the containing DataTable but to the nested one) or the Record of the
+data row it is a child of? 
+</P>
+<P>How do you want the stripes on the rows? Currently, it takes even
+and odd rows indiscriminately, whether data rows or custom rows but
+perhaps you would like the custom rows to carry on the same
+background color as the data row they belong to.</P>
+<P>Though this issues need defining, any decision on them, as long as
+it is consistent and predictable, would be just fine.</P>
+<H3>Nesting without DataTable</H3>
+<P>Of course, we might live with this restrictions, but then what is
+the point of bothering with the DataTable at all? If all you want is
+to display some nested information in a tabular form, just use a
+regular <CODE>&lt;table&gt;</CODE> element or something like it. In
+fact, the YUI3 version of Treeble does exactly that; since there is
+no YUI3 version of DataTable to be used, it uses none at all. You
+might as well do the very same thing with YUI2, like in <A HREF="http://satyam.com.ar/yui/2.8.0/RowExpansionPlainHTML.html">this
+example</A>, where no DataTable nor HTML <CODE>&lt;table&gt;</CODE>
+was used at all. Admittedly, the example is very simple and visually
+ugly (I'd never claimed I had good taste) but if that is all you care
+for, at least you know it won't fail you. Just an idea you might want
+to evaluate when you decide on what to do.</P>
+<H3>Row Expansion with DataTable</H3>
+<P>Finally, you might really want to use a DataTable so, how do we go
+about that? Both Treeble and my own <A HREF="http://satyam.com.ar/yui/2.8.0/nested1.html">NestedDataTable</A>
+nest two DataTables. Eric Gelinas, in contrast, has used another
+approach, which I find more flexible. He does not make any
+assumptions on what is going to be in the expansion. It uses a
+<CODE>rowExpansionTemplate</CODE> configuration attribute which can
+either take a string template or a reference to a function. The
+string template is processed via <CODE>YAHOO.lang.substitute</CODE>
+along the data from the Record object for the row about to be
+expanded. We know that we don't need to list in the column
+definitions array all the fields we have read with the DataSource, we
+can keep those extra fields in reserve for later use. This template
+mechanism lets us display in the expansion row those other fields we
+didn't have space enough in the regular row. The <A HREF="http://developer.yahoo.com/yui/examples/datatable/dt_rowexp_basic.html">example</A>
+lists picture names from Flickr, images which might be too big to
+show in the main DataTable. The fields to assemble the URL pointing
+to those pictures are loaded from the start. Upon row expansion,
+those bits are put together to built an <CODE>&lt;img&gt;</CODE> tag
+and the thumbnail for the picture is shown in the expansion row.</P>
+<P>Now, if we set <CODE>rowExpansionTemplate</CODE> to a function
+reference, then we get all the flexibility we might possibly want. I
+used that idea in <A HREF="http://satyam.com.ar/yui/2.8.0/nestedRowExpansion.html">this
+example</A>, but with a somewhat different <A HREF="http://www.satyam.com.ar/yui/2.8.0/rowexpansion.js">rowexpansion.js</A>
+file. The original was more focused on using the string template and
+it assumed that the expansion row could be destroyed and rebuild at
+any time at no cost. That is not the case when the expansion is
+something more complex, such as a DataTable with further DataTables
+nested within. Every time a column is sorted, DataTable will delete
+all rows and start anew, which would be tremendously expensive with
+complex content if it was to be deleted and reconstructed as well.
+So, what I do is to keep a reference to the expansion row in the
+expansion state object (see description in method <CODE><A HREF="http://www.satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html#method_getExpansionState">getExpansionState</A></CODE>),
+which is stored in the Record of the parent table, which is not
+deleted, and restore that same row whenever the parent row is
+re-rendered. 
+</P>
+<P>Sometimes, however, the parent rows will be deleted on purpose or
+the parent DataTable reloaded from the server with, possibly,
+different data which requires the children to be refreshed. I need to
+explicitly delete the child rows in such cases because otherwise they
+would remain in memory as zombies. Thus, I override several methods
+(<CODE>deleteRow</CODE>, <CODE>deleteRows</CODE>, <CODE>initializeTable</CODE>,
+<CODE>destroy</CODE>) and delete the nested content before its parent
+Record is deleted. Deleting, however, is not enough, since the
+content might need some more elaborate means of disposal. As many
+complex components, DataTable has a <CODE>destroy</CODE> method which
+needs to be called when deleting. I added the
+<CODE>rowExpansionDestroyEvent</CODE> event to signal that the nested
+row is about to be destroyed, thus allowing the developer to handle
+the content as required, for example:</P>
+<PRE>albumDT.on('rowExpansionDestroyEvent', function (state) {
+    state[NESTED_DT].destroy();
+});</PRE><P>
+All events receive the <CODE>state</CODE> object as their single
+argument. Here, I use the reference to the nested DataTable which I
+stored under a property name of my own (constant <CODE>NESTED_DT</CODE>,
+declared elsewhere) and call its <CODE>destroy</CODE> method.</P>
+<P>RowExpansionDataTable adds the column that triggers row expansion
+automatically and also listens to clicks on that column, you don't
+need to do anything for that column to show up and be active. It
+always adds it on the left hand side by using this simple code in the
+constructor:</P>
+<PRE>var REDT = function(elContainer,aColumnDefs,oDataSource,oConfigs) {
+
+     aColumnDefs.unshift({
+          key:ROW_EXPANSION,
+          label:'',
+          className:CLASS_TRIGGER
+     });
+     REDT.superclass.constructor.call(this, elContainer,aColumnDefs,oDataSource,oConfigs); 
+};
+
+YAHOO.widget.RowExpansionDataTable = REDT;</PRE><P>
+It also sets a listener for <CODE>cellClickEvent</CODE> and checks if
+the column clicked is the one with its key set to the value stored in
+constant <CODE>ROW_EXPANSION</CODE>, there is no need for us to
+respond to that event while it doesn't prevent us to set further
+listeners for our own purposes on other columns.</P>
+<P>Though the basis of my <A HREF="http://www.satyam.com.ar/yui/2.8.0/rowexpansion.js">rowexpansion.js</A>
+file is Eric's, I'm afraid it is hard to run a diff in between them
+as it will show too many differences. I changed many of the variable,
+method and property names to conform to the standard naming
+conventions and fixed plenty of errors flagged by <A HREF="http://www.jslint.com/">JSLint</A>
+so diff goes wild. In its basics, the code is still Eric's.</P>
+<P>The <A HREF="http://satyam.com.ar/yui/2.8.0/nestedRowExpansion.html">example</A>
+is well commented and described after the sample table the
+<A HREF="http://www.satyam.com.ar/yui/2.8.0/rowexpansion.js">rowexpansion.js</A>
+file is easy to follow and its <A HREF="http://satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html">API
+Docs</A> also available.</P>
+<H3>Overlaying children</H3>
+<P>Another alternative to adding rows is to make the expansion float
+above the parent row. I have used this in my own <A HREF="http://satyam.com.ar/yui/2.8.0/nested1.html">NestedDataTable
+example</A>. This example also uses YQL tables via YQLDataSource and,
+as I mentioned in the <A HREF="http://www.yuiblog.com/blog/2010/08/09/ask-satyam-yql-and-yui/">previous
+article</A>, the YQL Artists search table is somewhat clumsy to use
+along AutoComplete as it won't bring back matches with partial artist
+names.</P>
+<P>Here, when you expand a row, a container <CODE>&lt;div&gt;</CODE>
+is created and appended to the document body. The container uses
+absolute positioning and is moved to overlap the row right below the
+one being expanded. The container thus covers the rows next to the
+one being expanded so, the height of this row is increased to make
+space for the overlapping container. 
+</P>
+<P>This mechanism spares us from the two issues I mentioned before:
+no row is added to the DataTable, the ordinal positions of Records
+and Rows match at all times and events can't bubble from the
+containers to the DataTable since they are not descendants of the
+DataTable. However, keeping up the position of the containers
+requires paying attention to several events and recalculating their
+position. Sorting the main table with several children open will move
+all the containers to their new positions with ease, and so will
+resizing the browser window. 
+</P>
+<P>This <A HREF="http://satyam.com.ar/yui/2.8.0/nested1.html">example</A>
+uses just two levels of nesting while the RowExpansionDataTable
+example could be expanded to any limit. I have tried to combine the
+two and I see no theoretical reason why it would not succeed,
+however, in trying to do so I found the example got so complex that
+it was hard to describe in a blog article of any reasonable size. The
+example, as it is, has complete control over the parent and child
+tables, knows when they expand or contract, move, get redrawn or
+change in any other way, and can easily access any of them an adjust
+their layout. In trying to extend this to any number of levels, I
+found that communicating all those changes up and down the hierarchy
+of nested components, not all of them necessarily DataTables, was
+hard, with changes deep in one branch possibly affecting nested
+components on other branches. 
+</P>
+<P>As I said, the complexity lies not so much in communicating those
+changes up and down and acting on them as in trying to provide
+standard interfaces for generic child elements to participate. If you
+have full control over the several containers and their content, it
+should be manageable, but it would only justify doing so if the
+RowExpansionDataTable fails in some particular application, as I
+admit it may, and cannot be fixed easily.</P>
+<H3>Conclusion</H3>
+<P>You don't always need real DataTables to have tables nested inside
+each other, but if you do, my RowExpansionDataTable is a good choice,
+besides being a good example on how to extend DataTable. It has some
+issues, which I described so that if you bump into them, you know
+where to look and, hopefully be able to work around them. DataTable
+itself is amazingly robust and handles quite nicely. Overlapping
+content in the DataTable is also a possible solution, if signaling
+the changes in size and position of the children can be solved
+efficiently, though it is hard to do in a generic component, so I
+didn't even try to get into it. Neither did I try a version
+inheriting from ScrollingDataTable: it is not that I forgot but that
+I know it is not trivial.</P>
+</BODY>
+</HTML>

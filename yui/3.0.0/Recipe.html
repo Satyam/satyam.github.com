@@ -1,0 +1,1050 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>A Recipe for a YUI3 Application</TITLE>
+
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1>A Recipe for a YUI3 Application</H1>
+<P>YUI3 has been designed to build applications around modules. I
+won't discuss what a module is since it has been well described my
+Nicholas Zakas in his presentation <A HREF="http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture">Scalable
+JavaScript Application Architecture</A>. I'll just stick to how to
+build these modules. Most of what I will say can be found in the
+on-line documentation, along with several other alternatives, after
+all, that is the point of good documentation: to tell you about all
+the possible ways of doing things. That's why this is a recipe, just
+one way of doing it amongst many others. It also assumes a smallish
+application, with not as many layers as Nicholas' suggests, since
+this is just an article and not a book. 
+</P>
+<H2>Identifying the modules.</H2>
+<P>The first step is to identify the modules we will need. A good
+approach is to start slicing the design of the application screen
+into individual sections: title bar, menu bar, content, side panels
+or whatever else there might be there. Then take a look at what the
+library has to offer. For example, YUI3 has no Menu, but there is the
+<A HREF="http://developer.yahoo.com/yui/3/node-menunav/">Node-MenuNav
+plugin</A>, which takes a basic menu structure made of nested
+unordered list &lt;UL&gt; elements and turns them into an active
+menu. Or you may want to check the <A HREF="http://yuilibrary.com/gallery/">YUI
+Gallery</A> for basic components. Anyway, you'll eventually reach the
+point where you have a box in that layout that you have to fill in
+yourself, so let's do that.</P>
+<P>I recommend placing each module in its own file and its own
+directory by the same name. Thus, a <CODE>weather</CODE>
+module would be in <CODE>weather/weather.js</CODE>.
+The reason for this is because your module is likely to require some
+styling, some CSS and image files, it makes it easy for the built-in
+loader if you place them where it can easily find them, in this case,
+the main style sheet would be in
+<CODE>weather/assets/skins/sam/weather.css</CODE>,
+with the other assets, images and so on, alongside. This is assuming
+you are not using the YUI Builder which will already do things this
+way anyhow, but that is another story. The folder names <CODE>assets</CODE>
+and <CODE>skins</CODE> are more or less
+self-explanatory, <CODE>sam</CODE> however is not
+quite obvious. It is the default value for the <CODE><A HREF="http://developer.yahoo.com/yui/3/api/config.html#property_skin">skin</A></CODE>
+property of the loader because that is the default skin shipped with
+YUI, named after the designer, Sam Lind. As this suggests, you are
+free to put your name on your own skins and the <CODE>skin</CODE>
+property allows you to tell YUI to load them, but to keep it simple,
+lets just go with the default.</P>
+<H2>Module file template</H2>
+<P>This is the file structure I use more often, which I'll describe
+in a moment:</P>
+<PRE>/*jslint devel: true,  undef: true, newcap: true, strict: true, maxerr: 50 */ 
+/*global YUI*/ 
+/** 
+ * The module-name module creates the blah blah 
+ * @module module-name 
+ */ 
+YUI.add('module-name', function (Y) { 
+    &quot;use strict&quot;; 
+    // handy constants and shortcuts used in the module 
+    var Lang = Y.Lang, 
+        CBX = 'contentBox', 
+        BBX = 'boundingBox',
+        NAME = 'xxxx'; 
+
+ 
+    /** 
+     * The Xxxx class does .... 
+     * @class Xxxx 
+     * @extends Widget 
+     * @uses WidgetParent 
+     * @constructor 
+     * @cfg {object} configuration attributes 
+     */ 
+    Y.Xxxx = Y.Base.create( 
+        NAME, 
+        Y.Widget, 
+        [Y.WidgetParent], 
+        { 
+            // Instance members here 
+        }, 
+        { 
+            // Static members here, specially: 
+            ATTRS: { 
+            } 
+        } 
+    ); 
+
+ 
+}, '0.99', { 
+    requires: ['widget','widget-parent'], 
+    skinnable: true 
+});</PRE><P>
+The first two lines of comments are for the benefit of <A HREF="http://www.jslint.com/">JSLint</A>,
+the JavaScript verification tool which I really recommend. If you go
+to the <A HREF="http://www.jslint.com/">web version</A>, there is a
+box to set options. At the bottom of that options box you can see the
+way to encode those options into the file itself. If you use the YUI
+Builder, it will run JSLint for you and set these options for you but
+you can still override them for any individual file if you wish. 
+</P>
+<P>The doc comments are for the YUI API docs builder. It is less of a
+headache if you include the initial template for those API docs,
+eventually you will fill them. As the application grows and you are
+unable to remember it all, you'll need them. 
+</P>
+<P>Now comes the first actual line of code, the <CODE>YUI.add()</CODE>
+statement. This is the way to tell the YUI loader the name and
+contents of the module and several other pieces of information.
+Module names are usually named with all lowercase letters and hyphens
+in between words. Those are the names you see in the <A HREF="http://developer.yahoo.com/yui/3/api/index.html">API
+Docs</A> in the top-most index on the left. You can see the
+convention is not strictly followed, some module names don't have any
+hyphens. Anyway, this is mostly up to you as long as you use it
+consistently. 
+</P>
+<P>The second argument of the <CODE>YUI.add()</CODE>
+statement is a function that receives a single argument,
+conventionally called <CODE>Y</CODE>. That function
+contains the body of the module and <CODE>Y</CODE> is
+the reference to a sandboxed instance of YUI which is where you can
+find all the other YUI and Gallery modules you have asked for.
+Jumping to the bottom of that code box, you can see the rest of the
+arguments of the <CODE>.add()</CODE> method, the
+version (<CODE>'0.99'</CODE> or not quite there yet)
+and the configuration for this module, an object with a a series of
+properties. Here, I tell the loader that this module requires <CODE>widget</CODE>
+and <CODE>widget-parent</CODE> and that it has a
+skin. Listing <CODE>widget</CODE> is redundant, since
+<CODE>widget-parent</CODE> already requires <CODE>widget</CODE>,
+but don't trouble yourself with that, the Loader won't load a module
+twice and, if at a later point you drop one dependency, you don't
+need to check for other assumptions you might have made: state them
+all and let the Loader deal with it. You can find a list of all the
+options in the API docs for the <CODE><A HREF="http://developer.yahoo.com/yui/3/api/Loader.html#method_addModule">.addModule()</A></CODE>
+method of the Loader.</P>
+<P>Within the body of the function, the first thing is the <CODE>“use
+strict”;</CODE> declaration. This is for your code to comply with
+the EcmaScript 5 standard, which at this point puts you on the safe
+side to ensure compatibility with all the platforms you are likely to
+encounter in the future. For older interpreters, this declaration is
+nothing more than a string which is not assigned to anything and is
+ignored. The <CODE>“use”</CODE> declaration has
+function scope and it is safer to place it within the function body
+than at the top of the file, so that it only affects the module you
+are defining. If you place it at the top of the file, it would also
+apply to any other JavaScript file you load afterwards, and many of
+them might not comply with ES5.</P>
+<P>Then come the shortcuts and constants, which are constants only in
+usage since JavaScript has no concept of constants. We name then in
+all-uppercase letters and underscores, as constants often are in
+other languages. There are two good reasons to use constants,
+specially string constants. First is that when you write the same
+string several times, you might mistype one of them and you will only
+notice when a bug pops up. If you use constants, JSLint will warn you
+when you type the constant name wrong, since it will be undefined.
+The second reason is that the YUI Compressor can do a better job
+since constant names can be compressed while string literals cannot.
+Good candidates for named constants are the names of configuration
+attributes and events.</P>
+<P>Shortcuts, such as <CODE>Lang</CODE> for <CODE>Y.Lang</CODE>
+are also good because they allow you to type less, the interpreter
+has less to evaluate (each dot implies a new search into the object
+members) and they can be compressed by the YUI Compressor.</P>
+<P>After the API docs comments for the class, we get to the actual
+declaration. We have to declare our class as a property of <CODE>Y</CODE>,
+thus <CODE>Y.Xxxx</CODE>. My suggestion is to use
+<CODE>Y.Base.create()</CODE> to create it, as shown
+here. It can only create classes derived of <CODE>Base</CODE>
+(and <CODE>Widget</CODE> which also is a subclass of
+<CODE>Base</CODE>) but that will cover most of the
+modules you will use so it is unusual to need to do it in other way.
+The first argument is the name of the module, the <CODE><A HREF="http://developer.yahoo.com/yui/3/base/#nameprop">NAME</A></CODE>
+property described for the <CODE>Base</CODE>
+component. Conventionally, the <CODE>NAME</CODE>
+property is a camel-case version of the class name. This name is used
+as the prefix for events (the part before the colon like
+<CODE>“io:success”</CODE>), for CSS class names
+generated by the <CODE>Widget</CODE> class (i.e.:
+<CODE>“yui3-xxxx-content”</CODE>) and for the
+default implementation of <CODE>toString()</CODE>,
+which you will often see in traces by the debugger. Here I use the
+value of the constant <CODE>NAME</CODE> to define the
+class <CODE>NAME</CODE> property.</P>
+<P>The second argument is the class it extents. You will often use
+either <CODE>Y.Base</CODE>, for utility modules which
+will have no user interface, <CODE>Y.Widget</CODE>
+for those that will have a UI, <CODE>Y.Plugin.Base</CODE>
+for plugins or any other class derived from <CODE>Y.Base</CODE>,
+such as any you might have already created using <CODE>Y.Base.create()</CODE>.</P>
+<P>The third argument holds the extensions you will use. Extensions
+are classes whose properties and methods you want to have mixed into
+your class. Good candidates for extensions are <CODE>ArrayList</CODE>
+for <CODE>Base</CODE> or any of the <CODE>Widget-Xxxx</CODE>
+submodules for <CODE>Widget</CODE>. <CODE>Attribute</CODE>,
+<CODE>EventTarget</CODE> and <CODE>PluginHost</CODE>
+come already mixed into <CODE>Base</CODE> so you can
+always count on those three being there. Extensions are very
+powerful, if you look at the <A HREF="http://developer.yahoo.com/yui/3/api/Overlay.js.html">source
+code for <CODE>Overlay</CODE></A>, you can see there
+is nothing but <CODE>Widget</CODE> and extensions.
+Several extensions can be mixed into a component so the third
+argument is an array.</P>
+<P>Finally, we get to the actual code. The fourth and fifth arguments
+are both object literals containing the instance and static members
+of the class. Instance members are the properties and methods that go
+into the class <CODE>prototype</CODE>, those that
+each instance will get a copy and usually need to be references by
+<CODE>this</CODE>. Static members are those that will
+be shared by all instances. 
+</P>
+<H2>Configuration Attributes</H2>
+<P>The most important of these static members is the <CODE>ATTRS</CODE>
+property. This lists the configuration attributes your class will
+have. For example, lets say we want to have a configuration attribute
+called <CODE>value</CODE> to hold numeric values and
+initially set to 0. Within the fifth argument, we would declare it
+thus:</P>
+<PRE>ATTRS: {
+    value: {
+        value: 0,
+        validator: Lang.isNumber
+    }
+}</PRE><P>
+We can list any number of attributes in the <CODE>ATTRS</CODE>
+property and each can be configured with several options, two of
+which I've shown here. You can read about the rest of the options in
+the <CODE><A HREF="http://developer.yahoo.com/yui/3/api/Attribute.html#method_addAttr">addAttr()</A></CODE>
+method of <CODE>Attribute</CODE>. As can be seen, I
+have used the <CODE>Lang</CODE> shortcut that I
+declared at the beginning of the module declaration. The <CODE>validator</CODE>
+must be a function that takes the value to verify and returns a
+Boolean. All of the <CODE>Y.Lang.isXxxx</CODE>
+methods do exactly that so they can be used directly. For more
+elaborate validators, setters or getters, you need to define
+functions. I recommend providing the name of the function as a
+string, <CODE>Attribute</CODE> takes care of
+resolving the function name to the actual function. For example, if I
+were to define a, say, <CODE>validCodes</CODE>
+attribute that can either take an single valid code or an array of
+valid codes but should always return an array, I would do:</P>
+<PRE>ATTRS: {
+    validCodes: {
+        setter: '_setValidCodes'
+    }
+}</PRE><P>
+We need to declare the <CODE>_setValidCodes</CODE>
+method along the other instance members in the fourth argument of
+<CODE>Y.Base.create()</CODE>:</P>
+<PRE>_setValidCodes: function (value) {
+    if (!Lang.isArray(value)) {
+        value = [ value ];
+    }
+    return value;
+}</PRE><P>
+It is best to declare setters, getters and any but the most trivial
+of validators as separate instance functions and let <CODE>Attribute</CODE>
+resolve the function name into the actual function call.</P>
+<P>In general, use setters to normalize the value, as shown above,
+not to produce secondary effects. All configuration attributes will
+fire before and after change events with the before event able to
+prevent the attribute from changing. Use these change events to
+produce any secondary effects, not the setter. The after event is the
+best since by then you know that nothing prevented the attribute from
+being set since other code might have subscribed to the before (on)
+change event and canceled it.</P>
+<P>You can make your attribute more or less strict depending on how
+you define your validator and setter.  If you make the validator very
+restrictive, your attribute will be very strict, accepting only valid
+values, in this case, the setter might be unnecessary.  On the other
+hand, you might not use a validator at all and rely completely on the
+setter to massage any value received into something acceptable.  For
+example, you can have either of these two:</P>
+<PRE>validator: Y.Lang.isBoolean,   // to make the attribute accepts strictly a Boolean
+setter: Boolean, // to make the attribute accept any value and have Boolean turn it into one</PRE><P>
+<A NAME="property_Attribute.INVALID_VALUE"></A>Setters can also serve
+as validators.  Setters should return the value to be assigned to the
+attribute but they can also return <CODE>Y.Attribute.INVALID_VALUE
+</CODE>which will leave the attribute unchanged, as if a validator
+had rejected it.</P>
+<P>When I define a configuration attribute I often define a constant
+for it, which I place at the top of the module (along <CODE>CBX</CODE>,
+<CODE>BBX</CODE> and the shortcuts), for example:</P>
+<PRE>var VALUE = 'value',
+    VALID_CODES = 'validCodes';</PRE><P>
+The chances are that I will use those configuration attributes
+several times within the module and this will save me some troubles.
+However, be careful, don't use that constant when declaring the
+attribute, don't do this:</P>
+<PRE>ATTRS: {
+    <B>// *** Don't do this *** //</B>
+    VALUE: {
+        value: 0,
+        validator: Lang.isNumber
+    }
+}</PRE><P>
+If you do this, you would get an attribute called <CODE>VALUE</CODE>
+instead of <CODE>value</CODE>. This is a JavaScript
+issue, not a YUI one. Also, be careful not to overstep on any of the
+configuration attributes already declared for either the base class
+or any of the extensions. <CODE>Widget</CODE> already
+has a bunch of attributes declared (see <A HREF="http://developer.yahoo.com/yui/3/widget/#attributes">table</A>)
+and though you would hardly add a <CODE>boundingBox</CODE>
+attribute yourself, you might easily forget that <CODE>visible</CODE>,
+<CODE>disabled</CODE>, <CODE>height</CODE>
+or <CODE>width</CODE> are already defined. If your
+intended use matches what <CODE>Widget</CODE> uses
+them for, everything will be fine. That said, you can alter the
+definition of any of them. <CODE>Y.Base.create()</CODE>
+merges the definition of the configuration attributes of the
+extension with those of the base class so, if you want to change,
+say, the default value for an existing attribute, you can do so by
+declaring that attribute again in your subclass.</P>
+<P>Be careful if you mean to initialize an attribute with an array or
+an object. Objects (and arrays are objects) are passed by reference
+and if you initialize an attribute with an object, they might all end
+up pointing to the same object so that when you alter part of it
+(remove an item from an array or add a property to the object) you
+end up altering all of the instances at once. <CODE>Base</CODE>,
+however, has some internal logic that will allow you to safely
+initialize an attribute with object and array literals.  If the
+initialization value is an object or array literal then <CODE>Base</CODE>
+will clone it.   Use the <CODE>valueFn</CODE> option
+or initialize it in the class initializer for other objects.</P>
+<H2>Other Static Members</H2>
+<P>There are two other static members you might define in the fifth
+argument of <CODE>Y.Base.create()</CODE>. If you are
+creating a plugin, you absolutely must declare the <CODE>NS</CODE>
+property, if you don't, the plugin will not work and silently fail.
+The <CODE>NS</CODE> property must be set to a string
+which will be used as the property name to store the plugin within
+the host object, keep this in mind when you pick the name so you
+don't override any existing property.</P>
+<P>If you are building a widget and you plan it to support
+progressive enhancement, then you will use the <CODE>HTML_PARSER</CODE>
+static property. This is set to an object which contains properties
+named after the configuration attributes to set from parsing the
+existing HTML and either CSS3 selectors or functions that will
+produce their values. See <A HREF="http://developer.yahoo.com/yui/3/widget/#progressive">Progressive
+Enhancement</A> in the Widget user guide.</P>
+<P>You might also want to provide values to be used by developers
+using your class. The constants declared at the top of the file are
+completely invisible from outside the module itself. If you want to
+provide public constants, this is the place to do it. Examples of
+such are the <CODE>HEADER</CODE>, <CODE>BODY</CODE>
+and <CODE>FOOTER</CODE> constants of <CODE><A HREF="http://developer.yahoo.com/yui/3/api/WidgetStdMod.html#property_WidgetStdMod.BODY">WidgetStdMod</A></CODE>
+(to use them you actually have to use the fully qualified name:
+<CODE>Y.WidgetStdMod.BODY</CODE> and such).</P>
+<H2>Instance Members</H2>
+<P>The fourth argument of <CODE>Y.Base.create()</CODE>
+are the properties and methods that will go into the <CODE>prototype</CODE>
+of the created class. Usually, we declare properties first and
+methods later. I don't have any reason for this, the order is
+actually irrelevant, neither JavaScript nor YUI require you to do it
+this way, but it makes it easier to locate things in the source file.
+Though instance properties can be created on the fly in the
+initializer, I do recommend declaring them explicitly and
+initializing them. Each property should be preceded by an API doc
+comment. 
+</P>
+<P>Properties will usually be private and its name prefixed by an
+underscore. It is best if the public interface of the object is
+exposed via configuration attributes and not properties. Properties
+are very dumb, configuration attributes can have validators, type
+conversion (via setter) and produce secondary effects (via change
+events) and it is often not long until you find out that you want all
+those features.</P>
+<P>As with configuration attributes, don't initialize properties to
+objects or arrays, they all end up pointing to the same object and
+you run into trouble. It is better to set properties that are to hold
+objects to <CODE>null</CODE>. Also, don't leave
+properties unset, if you don't know their value yet, set them to <CODE>null</CODE>
+instead. Later on, when debugging, a property set to <CODE>undefined</CODE>
+points to an error, usually a typo.</P>
+<H3>Base Instance Methods</H3>
+<P>You might have noticed that we have not declared any constructor
+for our subclass. <CODE>Base</CODE> does the
+initialization of the module and then calls a method called
+<CODE>initializer</CODE>, if it exists, with the same
+arguments it has received when instantiated so, for all purposes, you
+may consider that <CODE>initializer</CODE> is your
+constructor. All classes derived from <CODE>Base</CODE>
+usually take a single argument when being created, an object
+containing the configuration attributes. <CODE>Base</CODE>
+(or <CODE>Widget</CODE>, since it is a class of <CODE>Base</CODE>)
+reads this argument and sets the configuration attributes before
+calling <CODE>initializer</CODE>. For a <CODE>Widget</CODE>,
+if there is an <CODE>HTML_PARSER</CODE> property, it
+would also have been processed and the values for the attributes read
+from the markup will be set as well.</P>
+<P>The <CODE>initializer</CODE> method has several
+tasks. First, it should set any properties that need to be
+initialized to objects or arrays. Then it will publish all the events
+this class will produce. <CODE>EventTarget</CODE>
+will allow you to fire an event that has not been published first
+using the default settings for events, but even in this case, I
+suggest you declare them anyway. This is a good place to add the API
+docs comments for those events even if it looks a little weird, being
+in the body of a function declaration, but there is no better place
+to do so.</P>
+<P>The argument received by <CODE>initializer</CODE>
+would have been processed by then, but sometimes you want some extra
+options to be used on initialization and you don't care to keep
+actual attributes for them. For example, <CODE>Base</CODE>
+accepts the attributes <CODE>on</CODE>, <CODE>after</CODE>,
+<CODE>bubbleTargets</CODE> and <CODE>plugins</CODE>
+(see <CODE><A HREF="http://developer.yahoo.com/yui/3/api/Base.html">Base</A></CODE>)
+though it has no configuration attributes for those. Likewise
+<CODE>WidgetParent</CODE> takes a <CODE>children</CODE>
+attribute on initialization but has no configuration attribute of
+that name. The <CODE>initializer</CODE> method is the
+one that processes them. Thus, though your class will end up taking
+only one argument on instantiation, this single argument can carry
+all the information you might need.</P>
+<P>JavaScript has no notion of destructors. <CODE>Base</CODE>
+compensates for this by allowing you to declare a <CODE>destructor</CODE>
+method where you can place the code to free the resources your object
+might have taken. This is only a partial solution, the JavaScript
+interpreter does not call it automatically when dropping an object so
+you are still responsible for destroying an object before discarding
+it, but at least you know a destructor will be there.</P>
+<P>Users of your class will never call <CODE>initializer</CODE>
+and <CODE>destructor</CODE> directly. <CODE>Base</CODE>
+will call them when required. <CODE>initializer</CODE>
+will be called when the object is instantiated, <CODE>destructor</CODE>
+will be called when the user of your class calls its <CODE>destroy</CODE>
+method.</P>
+<P>One of the things that often produce memory leaks are event
+listeners left behind. <CODE>Widget</CODE> tries to
+detach all listeners attached to elements of the user interface
+contained within the Bounding Box element, but it cannot detach any
+others. <CODE>Base</CODE> cannot detach any event
+listeners at all. This is the code I use to help me with that. Along
+the other private, instance properties I declare the <CODE>_eventHandles</CODE>
+property:</P>
+<PRE STYLE="margin-bottom: 0.5cm">_eventHandles: null,</PRE><P>
+Then, in the <CODE>initializer</CODE> method, I set
+it to an array:</P>
+<PRE>initializer: function (cfg) {
+    this._eventHandles = [];
+    // … ...
+},</PRE><P>
+In the same <CODE>initializer</CODE> (also in <CODE>bindUI</CODE>
+if it were a <CODE>Widget</CODE>) I would then attach
+listeners by doing:</P>
+<PRE STYLE="margin-bottom: 0.5cm">this._eventHandles.push(this.after('someAttributeChange', this._afterSomeAttributeChange, this));</PRE><P>
+Then, in <CODE>destructor</CODE>, I have:</P>
+<PRE>destructor: function () {
+    Y.each(this._eventHandles, function (handle) {
+        handle.detach();
+    });
+},</PRE><P>
+It is here, in the <CODE>initializer</CODE>, that you
+hook up the event listeners for the attributes that should produce
+secondary effects (you may differ it for <CODE>bindUI</CODE>
+if this secondary effect has to deal with the UI). As I said earlier,
+attribute setter functions should only deal with normalizing the
+value of the attribute. Should that setting produce any effects
+beyond storing the value, these should be handled by event listeners.
+In the above example, I have set the method <CODE>_afterSomeAttributeChange</CODE>
+to listen for any change in the <CODE>someAttribute</CODE>
+attribute. Event listeners will receive a single argument, the event
+facade which I usually call <CODE>ev</CODE>, an
+object with several properties, one of them, <CODE>newVal</CODE>
+containing the value being set. 
+</P>
+<H3>Widget Instance Properties</H3>
+<P>Two important properties that <CODE>Widget</CODE>
+uses are <CODE>BOUNDING_TEMPLATE</CODE> and
+<CODE>CONTENT_TEMPLATE</CODE>. Both are initially set
+to <CODE>“&lt;div&gt;&lt;/div&gt;”</CODE> which
+produces the standard structure of two containers one within the
+other that most widgets use. This, however, might not be suitable for
+all widgets, for example, a <CODE>Button</CODE>
+widget might better be served by a <CODE>&lt;span&gt;</CODE>
+element within an anchor (<CODE>&lt;a&gt;</CODE>)
+element instead of two nested <CODE>&lt;div&gt;</CODE>s.
+In fact, you might not care to have a <CODE>contentBox</CODE>
+at all, <CODE>Widget</CODE> doesn't require you to.
+You can set these two instance properties to any markup you want. For
+example, for the <CODE>Button</CODE> class I might
+have:</P>
+<PRE>BOUNDING_TEMPLATE: '&lt;a&gt;',
+CONTENT_TEMPLATE: null,</PRE><P>
+Having <CODE>CONTENT_TEMPLATE</CODE> set to <CODE>null</CODE>
+will tell <CODE>Widget</CODE> that you don't want a
+<CODE>contentBox</CODE> at all. In this case the
+<CODE>contentBox</CODE> configuration attribute will
+point to the same element as the <CODE>boundingBox</CODE>
+configuration attribute does.</P>
+<P>You should not put into these templates the whole HTML for the
+widget, make these two simple HTML elements and create any extra
+markup via code in <CODE>renderUI</CODE> (which we'll
+see later).</P>
+<P><CODE>Widget</CODE> will add an <CODE>id</CODE>
+attribute and the standard classes it uses to any markup you want,
+such as <CODE>yui3-xxxx</CODE>, <CODE>yui3-xxxx-visible</CODE>
+or <CODE>yui3-xxxx-disabled</CODE>, where <CODE>xxxx</CODE>
+is the value of the <CODE>NAME</CODE> property turned
+into lowercase.</P>
+<H3>Widget Instance Methods</H3>
+<P><CODE>Widget</CODE> splits its initialization in
+several steps. Beyond the <CODE>initializer</CODE>,
+called when the object is instantiated, and the <CODE>destructor</CODE>,
+called by <CODE>destroy</CODE>, both methods handled
+by <CODE>Base</CODE>, <CODE>Widget</CODE>
+adds <CODE>renderUI</CODE>, <CODE>bindUI</CODE>
+and <CODE>syncUI</CODE> for the building phase, which
+will be called in sequence when <CODE>Widget</CODE>'s
+<CODE>render</CODE> method is called.</P>
+<P>The <CODE>renderUI</CODE> method takes care of
+producing the basic HTML for the widget. Both the <CODE>boundingBox</CODE>
+and <CODE>contentBox</CODE> have been rendered at
+this point. If using progressive enhancement, <CODE>renderUI</CODE>
+first has to check whether the elements already exist on the page. If
+we have used the <CODE>HTML_PARSER</CODE> property
+then the configuration attributes holding the references to those
+elements will have been set by then, if not, we need to create them.</P>
+<P>To do so, the easiest way (assuming no progressive enhancement) is
+to use <CODE>Y.Node.create</CODE>, like this:</P>
+<PRE>renderUI: function () {
+    var cbx = this.get(CBX);
+    cbx.append(Y.Node.create(Y.substitute(Y.Xxxx.TEMPLATE, CLASS_NAMES)));
+},</PRE><P>
+This assumes a lot of things, which I'll explain right away. First, I
+have the <CODE>CBX</CODE> constant declared as shown
+in the first code box in this article. Then it assumes <CODE>Node</CODE>
+is loaded, which <CODE>Widget</CODE> uses so it is
+safe, but it also assumes <CODE>Y.substitute</CODE>
+is there, which is optional. You have to add <CODE>'substitute'</CODE>
+to the <CODE>requires</CODE> list for your module.
+Then it expects a template for the widget to be in a static variable
+called <CODE>TEMPLATE</CODE> which is up to you to
+define along other static class members (right by <CODE>ATTRS</CODE>
+and such). Finally it assumes there is a constant <CODE>CLASS_NAMES</CODE>
+declared somewhere. 
+</P>
+<P>I usually declare <CODE>CLASS_NAMES</CODE> up in
+my module definition, along BBX and CBX (see the first code box in
+this article), like this:</P>
+<PRE>var BBX = 'boundingBox',
+    CBX = 'contentBox',
+    NAME = 'button',
+    // other constants and shortcuts ….
+    YCM = Y.ClassNameManager.getClassName,
+    getClassName = function () {
+        var args = Y.Array(arguments);
+        args.unshift(NAME);
+        return YCM.apply(this, args).toLowerCase();
+    },
+    LABEL = 'label',
+    PRESSED = 'pressed',
+    ICON = 'icon',
+    CLASS_NAMES = {
+        pressed: getClassName(PRESSED),
+        icon: getClassName(ICON),
+        label: getClassName(LABEL),
+        noLabel: getClassName('no', LABEL)
+    };</PRE><P>
+<CODE>CLASS_NAMES</CODE> will then be a constant
+containing an object with properties created by <CODE>ClassNameManager</CODE>
+(which also comes included with <CODE>Widget</CODE>).
+In the code above, I first create the shortcut <CODE>YCM</CODE>
+to make later accesses faster, then I create the function
+<CODE>getClassName</CODE>, a private function that is
+only accessible within the module definition. The function works
+pretty much like the method of the <A HREF="http://developer.yahoo.com/yui/3/api/Widget.html#method_getClassName">same
+name</A> of <CODE>Widget</CODE>, but it is a static
+function which I can use to define further static values. That is
+exactly what I do later on, when I create <CODE>CLASS_NAMES</CODE>
+as an object with the generated class names as their properties. This
+allows me to write a <CODE>TEMPLATE</CODE> string
+such as:</P>
+<PRE STYLE="margin-bottom: 0.5cm">TEMPLATE: '&lt;label class=”{label}”&gt;&lt;input/&gt;',</PRE><P>
+Which is pretty dumb so far. I would also like to merge into this
+template values from other sources, specifically, configuration
+attributes. This is how I get to do it:</P>
+<PRE>this.get(CBX).append(Y.Node.create(Y.substitute(TEMPLATE , CLASS_NAMES, Y.bind(function (key, suggested, arg) {
+    return (key === '_'?this.get(arg):suggested);
+},this))));</PRE><P>
+I add a third argument to <CODE>Y.substitute</CODE>,
+a function. Usually, placeholders for <CODE>Y.substitute</CODE>
+are made of characters enclosed in between curly brackets, however,
+if there is a space, it will split the placeholder in two, the part
+up to the space being the key and the second an optional argument.
+This comes handy when the third argument is a function, such as here.
+The function will receive three arguments, the first is the key, the
+second is the value found in the replacement object, here
+<CODE>CLASS_NAMES</CODE>, if any, and the third is
+the optional argument. So, in the statement above, I can use a
+template like this:</P>
+<PRE STYLE="margin-bottom: 0.5cm">TEMPLATE: '&lt;label class=”{label} for=”{_ id}”/&gt;&lt;input id=”{_ id}” value=”{_ value}” /&gt;',</PRE><P>
+<CODE>Y.substitute</CODE> will find <CODE>{label}</CODE>
+and search for it in <CODE>CLASS_NAMES</CODE>. It
+will find it and get <CODE>'yui3-button-label'</CODE>.
+It will then call the replacement function with arguments <CODE>'label'</CODE>,
+<CODE>'yui3-button-label'</CODE> and <CODE>undefined</CODE>.
+Since <CODE>key</CODE> is not equal to <CODE>'_'</CODE>
+it will return the value in the second argument, the original class
+name. When it gets to <CODE>{_ id}</CODE>, there is
+no value for a property called <CODE>_</CODE> in
+<CODE>CLASS_NAMES</CODE> so it will call the
+replacement function with arguments <CODE>'_'</CODE>,
+<CODE>undefined</CODE> and <CODE>'id'</CODE>.
+With <CODE>key</CODE> equal <CODE>'_'</CODE>,
+the function will go and fetch the value of the <CODE>'id'</CODE>
+attribute. It will do the same again for the <CODE>{_
+value}</CODE> placeholder. 
+</P>
+<P>All the constants declared at the top are hidden from any code
+outside the module but you might want to make some of them visible,
+such as <CODE>CLASS_NAMES</CODE>. To do that, in the
+static members section, the last argument to <CODE>Y.Base.create</CODE>,
+you could have:</P>
+<PRE STYLE="margin-bottom: 0.5cm">CLASS_NAMES: CLASS_NAMES</PRE><P>
+Then the object with all the class names would be visible as
+<CODE>Y.MyWidget.CLASS_NAMES</CODE>.</P>
+<P>I suggest you do as much formatting as you can with the HTML
+string that will make the widget's content. String manipulation in
+JavaScript is much faster than accessing the DOM so the more you do
+before calling <CODE>Y.Node.create</CODE> with that
+string, the faster you'll get it done.</P>
+<P>The next instance method called for any widget is <CODE>bindUI</CODE>.
+This is where you attach event listeners to any elements created by
+<CODE>renderUI</CODE>, for example, the listener for
+any changes in the value in the <CODE>&lt;input&gt;</CODE>
+box of the <CODE>TEMPLATE</CODE> above. The value on
+the textbox and that in the configuration attribute should always be
+kept in sync. The <CODE>value</CODE> attribute can be
+changed either via code or by the user typing into the input box. If
+it comes from external code, the textbox should be refreshed, if it
+comes from the textbox, it should not, otherwise you risk entering an
+infinite loop: the change in the textbox sets the <CODE>value</CODE>
+attribute which then sets the <CODE>value</CODE> on
+the textbox which then changes and sets the <CODE>value</CODE>
+attribute and so on. Lets see how to handle this case. We set a
+listener on the synthetic <CODE>valueChange</CODE>
+event on the input box. To do that we need to add the
+<CODE>event-valuechange</CODE> module to the <CODE>requires</CODE>
+list of this module. 
+</P>
+<PRE STYLE="margin-bottom: 0.5cm">this._eventHandles.push(this._inputEl.after('valueChange', this._afterInputChange, this));</PRE><P>
+We assume the object has a reference to the textbox saved in
+<CODE>_inputEl</CODE>. The listener does this:</P>
+<PRE>_afterInputChange: function (ev) {
+    this.set(VALUE, ev.target.get(VALUE),{source:UI});
+},</PRE><P>
+Here we assume we have the constants <CODE>VALUE</CODE>
+and <CODE>UI</CODE> declared as <CODE>'value'</CODE>
+and <CODE>'ui'</CODE> respectively. We simply set the
+attribute <CODE>value</CODE> to the value read from
+the input box. However, we are adding a third argument to the set
+method: <CODE>{source:UI}</CODE>. The <CODE>set</CODE>
+method can take a third argument, an object, whose properties will be
+mixed into the event facade of the attribute change event. This is
+the way we can tell the difference in between value being set from
+the textbox or from external code. In <CODE>bindUI</CODE>
+we would have had set this listener:</P>
+<PRE STYLE="margin-bottom: 0.5cm">this._eventHandles.push(this.after('valueChange',this._afterValueChange));</PRE><P>
+This is the listener for a change in the <CODE>value</CODE>
+attribute of your object, the other was for a change in the value of
+the <CODE>&lt;input&gt; </CODE>box, they are called
+the same, after all, they both listen to changes in something called
+<I>value</I>, but are not the same thing. Usually, listeners for
+attribute changes are set in the <CODE>initializer</CODE>,
+but since this one affects a UI element, we put it in <CODE>bindUI</CODE>
+so that we know the textbox will be there. The listener will have:</P>
+<PRE>_afterValueChange: function (ev) {
+    if (ev.source === UI) {
+        return;
+    }
+    this._inputEl.set(VALUE, ev.newVal);
+},</PRE><P>
+The first thing we do is to check the <CODE>source</CODE>
+of the event. If it comes from the <CODE>UI</CODE>
+then we ignore it. Both the property name, <CODE>source</CODE>
+and its value, <CODE>UI</CODE> are arbitrary, those
+are the ones I used when setting the <CODE>value</CODE>
+attribute so those are the ones I check for in the listener, but any
+name/value would do just as well. Actually, <CODE>Widget</CODE>
+provides a constant for that, <CODE><A HREF="http://developer.yahoo.com/yui/3/api/Widget.html#property_Widget.UI_SRC">Y.Widget.UI_SRC</A></CODE>,
+but it is kind of long so I would probably use a shortcut anyway.</P>
+<P>Another tidbit: you can set attributes declared as read-only by
+using <CODE>_set </CODE>instead of <CODE>set</CODE>.
+The <CODE>_set</CODE> method is meant to be
+protected, to be used internally but, as we know, JavaScript knows
+nothing about security so <CODE>_set</CODE> is open
+to any but, at least, we try by declaring the attribute with
+<CODE>readOnly:true</CODE> and documenting it as such
+in the API docs.</P>
+<P>Finally we declare <CODE>syncUI</CODE>. While the
+first two, <CODE>renderUI</CODE> and <CODE>bindUI</CODE>
+are going to be called once and only once, <CODE>syncUI</CODE>
+will be called at least once by Widget itself and you might call it
+several times afterwards. Its purpose is to refresh the UI to reflect
+the current state of the object. Since the state might change, the UI
+might need to be refreshed over time. However, I can't provide a
+simple recipe for handling this. For a simple UI, <CODE>syncUI</CODE>
+might refresh everything in the screen and be called every time
+anything changes. For more complex UIs refreshing the whole UI might
+take time and cause flickering so you might want to refresh only the
+bits and pieces you need. If so, you will have separate methods to
+refresh each of these parts and <CODE>syncUI</CODE>
+will call each of them just once. Moreover, as I've shown in the
+example for <CODE>renderUI</CODE>, I set the value of
+the textbox right there, though that should be done in <CODE>syncUI</CODE>.</P>
+<P>In the more general case, you will have a function for each UI
+element that can be set separately. That function will be called once
+from <CODE>syncUI</CODE>, when initializing, and any
+number of times from the after attribute change event listener. For
+example, we could have:</P>
+<PRE>_valueUIRefresh: function (value) {
+    this._inputEl.set(VALUE, value);
+}</PRE><P>
+Which could be called from <CODE>syncUI</CODE> along
+other similar setters:</P>
+<PRE>syncUI: function () {
+    this._valueUIRefresh(this.get(VALUE));
+    // other such refreshers 
+},</PRE><P>
+and by the after listener:</P>
+<PRE>_afterValueChange: function (ev) {
+    if (ev.source === UI) {
+        return;
+    }
+    this._valueUIRefresh(ev.newVal);
+},</PRE><H2>
+Communicating with others</H2>
+<P>Once you have the logic of one of your modules finished, you want
+it to interact with other modules on your page. If you've seen
+Nicholas Zakas video, you already know what tight and loose coupling
+is. Calling methods and setting attributes from one module to another
+means having those modules tightly coupled and it is the traditional
+way, so I won't talk about it since you know how to do it. The other
+way to do it is to fire custom events. <CODE>Base</CODE>
+already includes everything you need to do that.</P>
+<P>First, in <CODE>initializer</CODE>, you <CODE>publish</CODE>
+the custom events you want everybody to find out about. 
+</P>
+<PRE>initializer: function (cfg) {
+    this.publish('eventName', { /*… options … */});
+},</PRE><P>
+Normally, the name of the event will come from a constant, since you
+will use that same name every time you fire it and you don't want
+typos there. 
+</P>
+<P>Normally, when you have a reference to an object, such as:</P>
+<PRE STYLE="margin-bottom: 0.5cm">var myWidget = new Y.MyWidget({ /* .. attributes … */ });</PRE><P>
+you can listen to its events by doing:</P>
+<PRE STYLE="margin-bottom: 0.5cm">myWidget.after('eventName', this._eventNameListener, this);</PRE><P>
+However, to do this, you need to have a reference to <CODE>myWidget</CODE>,
+which is not as tightly coupled as calling its methods directly but
+it is still quite tight: at least one module knows about the other
+or, perhaps, a supervisor module knows about both and sets the links
+in between them. Two options are important to get modules to
+communicate in between themselves, <CODE>broadcast</CODE>
+and <CODE>emitFacade</CODE>. 
+</P>
+<P>The first, <CODE>broadcast</CODE>, lets you set
+listeners for that event in other modules. When <CODE>broadcast</CODE>
+is left at 0, the default, you have to do as shown above. If you want
+the event to be listened to elsewhere, you will want <CODE>broadcast</CODE>
+set to 1, so events are <CODE>broadcast</CODE> within
+the same sandbox and sometimes 2, so they can go across sandboxes. In
+this context, a sandbox is what you get when you call: 
+</P>
+<PRE>YUI().use( 'module1', …, 'moduleN', function (Y) {
+    // this is your sandbox
+});</PRE><P>
+You can have several such sandboxes in your page:</P>
+<PRE>YUI().use( 'module1', …, 'moduleN', function (Y) {
+    // this is your sandbox
+});
+YUI().use( 'moduleX-1', …, 'moduleX-N', function (Z) {
+    // this is another sandbox
+});</PRE><P>
+If you set <CODE>broadcast</CODE> to 2, then an
+object in the second sandbox can listen to an event when fired in the
+first. You can see the details in the <A HREF="http://developer.yahoo.com/yui/3/event/#broadcast">Event
+user guide</A>. Lets just stick to the simple sandbox case.</P>
+<P>To listen to an event fired from another module within the same
+sandbox you need to know the value of the <CODE>NAME</CODE>
+static property of that module and the name of the event. Remember,
+<CODE>Y.Base.create </CODE>takes, as its first
+argument, the value that it will use for its <CODE>NAME</CODE>
+property, thus, if you created a module in this way:</P>
+<PRE>Y.MyWidget = Y.Base.create(
+    'xxxx',
+    Y.Widget,
+    // … and so on</PRE><P>
+and then, in the initializer you published the <CODE>'help'</CODE>
+event like this:</P>
+<PRE>initializer: function (config) {
+    this.publish('help', {
+        broadcast: 1,
+        emitFacade: true
+    });
+},</PRE><P>
+To listen to that event in any other module within the same sandbox,
+you do:</P>
+<PRE STYLE="margin-bottom: 0.5cm">Y.after('xxxx:help', function (ev) { … }, this);</PRE><P>
+Here, I am calling <CODE>Y.after</CODE>, not
+<CODE>myWidget.after</CODE>, I don't need to have a
+reference to the module firing the event. This is the same method
+used to listen to DOM events or other synthetic events such as
+<CODE>'valueChange' </CODE>the only difference being
+the prefix, the part before the colon. <CODE>Base</CODE>
+already takes care to prefix all events with the value of the <CODE>NAME</CODE>
+property so you don't have to take care of that when publishing them.
+You can do so, you can even use something else as a prefix; if one
+such prefix is there, <CODE>Base</CODE> will respect
+it, but usually you just want the default, which <CODE>Base</CODE>
+provides. 
+</P>
+<P>You also want to set <CODE>emitFacade</CODE>
+because you will want to have a reference to the instance that fired
+the event, which the event facade provides in <CODE>ev.target</CODE>.
+But wait, if the listener module gets a reference to the firing
+module, don't they become tightly coupled once again? Not quite, as
+long as you don't preserve that reference in the listening module,
+the coupling will be volatile. Still, we can do better.</P>
+<P>When firing the event we may add all the information the listener
+needs in the facade, like this:</P>
+<PRE STYLE="margin-bottom: 0.5cm">this.fire('help', {helpTopic: 'Event Broadcasting'});</PRE><P>
+Method <CODE>fire</CODE> takes the name of the event
+being fired (which <CODE>Base</CODE> will further
+prefix with the <CODE>NAME</CODE> of the class) and
+an object containing any number of properties which will be merged
+into the event facade. The listener then doesn't need to query the
+firing module for any information, all that might be needed is there.
+This is as loose as it gets. The listener simply knows that some
+module, and there may be many such modules, is asking for help on
+'Event Broadcasting' and that is really all it needs to know. It
+doesn't even care which module asked for it. New modules may be added
+later and the help system will also work for them.</P>
+<H2>Events and Default Behaviors</H2>
+<P>The usual solution to changing the behavior of a class is to
+sub-class it so you can override one of its functions and do whatever
+it is you want to do instead. You can still do that. You can use
+<CODE>Y.Base.create</CODE> to define a module based
+on, say <CODE>Y.Widget </CODE>and then use
+<CODE>Y.Base.create</CODE> again using your new
+module as the base to change a particular behavior. For example, I
+might have:</P>
+<PRE>Y.MySimpleWidget = Y.Base.create(
+    'simpleWidget',
+    Y.Widget,
+    [],
+    {
+        // instance members here, amongst them:
+        renderUI: function () {
+            this.get(CBX).append(Y.Node.create(' … whatever goes into the widget … ' ));
+        }
+    },
+    {
+        ATTRS: {
+            // configuration attributes
+        }
+        // other static members
+    }
+);</PRE><P>
+and then:</P>
+<PRE>Y.MyFancyWidget = Y.Base.create(
+    'fancyWidget',
+    Y.MySimpleWidget,
+    [],
+    {
+        renderUI: function () {
+            Y.MyFancyWidget.superclass.renderUI.apply(this, arguments);
+            this.get(CBX).append(Y.Node.create(' … add some bells and whistles … ' ));
+    }
+    // Presumably the fancy version does not need any further static members so I skip the last argument
+);</PRE><P>
+<CODE>MyFancyWidget</CODE> improves over
+<CODE>MySimpleWidget</CODE> by adding some bells and
+whistles. This might be too much of a trouble in some cases, you
+might plan for a base class more flexible and easier to change.
+Custom events can help with that.</P>
+<P>Imagine you have a class that has a <CODE>sort</CODE>
+function. The sort function takes a <CODE>key</CODE>
+and <CODE>direction</CODE> argument and is declared
+like this:</P>
+<PRE>sort: function (key, direction) {
+     // sorting happens here
+},</PRE><P>
+If you know that the behavior of that function might be changed in
+some circumstances, you might do the following. In the <CODE>initializer</CODE>
+method, you can have:</P>
+<PRE>initializer: function (config) {
+    // amongst many other things:
+    this.publish(SORT, {defaultFn: this._defSortFn});
+},</PRE><P>
+Where <CODE>SORT</CODE> is a constant containing
+<CODE>'sort'</CODE>. Then, you declare the <CODE>sort</CODE>
+function like this:</P>
+<PRE>sort: function(key, direction) {
+    this.fire(SORT, {key:key, direction:direction});
+},</PRE><P>
+The <CODE>sort</CODE> function simply transforms the
+standard function call into a fired event containing the same
+arguments. Though this is meant to provide alternatives, you still
+want the class to sort somehow, you do that through the default sort
+function:</P>
+<PRE>_defSortFn: function (ev) {
+    var key = ev.key, direction = ev.direction;
+    // same code as the original sort function
+},</PRE><P>
+The class will do sort as before, the body of <CODE>_defSortFn</CODE>
+might be just the same as the original one, once you have read the
+<CODE>key</CODE> and <CODE>direction</CODE>
+arguments from the event facade, but any other piece of code can set
+a listener for that same sort event and change it, for example:</P>
+<PRE>myObjectThatSorts.on('sort', function (ev) {
+    var key = ev.key, direction = ev.direction;
+    ev.preventDefault();
+    // now do your own sort
+});</PRE><P>
+By calling <CODE>preventDefault</CODE> I tell
+<CODE>myObjectThatSorts</CODE> not to call
+<CODE>_defSortFn</CODE>. I could do this
+conditionally and decide, based on whatever I want, whether I may
+leave the original sort go ahead or unconditionally stop it, as I did
+here. I might not even care to stop it ever, I might listen to the
+<CODE>after</CODE> event and simply flip an arrow
+somewhere in the UI to signal which way the sort went. 
+</P>
+<P>I may also alter the event facade. There is only one copy of the
+event facade that gets built when the event is fired and it is
+propagated through all before (on) listeners, to the default function
+and then to the after listeners until finally it is dropped. You can
+change the values of its properties at any point. Of course, it
+hardly matters any changes you might do after the default function is
+called but any changes done in the before (on) listeners will reach
+the default function, for example:</P>
+<PRE>myObjectThatSorts.on('sort', function (ev) {
+    ev.direction = (ev.direction==='desc'?'asc':'desc');
+});</PRE><P>
+This would get the sort done upside down.</P>
+<H2>YUI_config</H2>
+<P>The easiest way to get your module on your page is to include it
+in its own <CODE>&lt;script&gt;</CODE> tag or in a
+script tag pointing to a combo URL (via creating a file on the server
+that is a manual concatenation of files or a combo service is the
+server supports one). Integrating custom modules into the Loader is a
+more advanced option, though it might improve performance. The
+important point in this case is to make sure the <CODE>YUI.add()</CODE>
+includes the <CODE>requires: [...]</CODE> in the last
+parameter, so<CODE> use()</CODE> will apply the
+module and its dependencies in the proper order. 
+</P>
+<P>For small applications, you will probably have everything loaded
+from the start as outlined above.  However, for larger applications,
+you might not want everything loaded from the start since it can take
+too long.  You can call <CODE>use()</CODE> more than
+once to request extra functionality as needed.  However, having the
+Loader find out about each module's dependencies when it loads each
+is time consuming since it might take several sequential requests
+until it finally gets everything it needs. Instead, you can forewarn
+the Loader of your modules and their dependencies so, when the time
+comes, it knows how to deal with them and can load them all in
+parallel.</P>
+<P>To do so, you need to add the module description and requirements
+to the tables that the YUI Loader uses to fetch modules. The easiest
+way is to build a <CODE>yui_config.js</CODE> file (or
+whatever you want to call it) that contains all those definitions.
+That file will look like this:</P>
+<PRE>YUI_config = {
+    filter:'raw',
+    //combine:false,
+    gallery: 'gallery-2011.02.18-23-10',
+    groups: {
+        js: {
+            base: 'build/',
+            modules: {
+                'myWidget': {
+                    path: 'myWidget/myWidget.js',
+                    requires: ['widget', 'widget-parent', 'widget-child', 'widget-stdmod', 'transition'],
+                    skinnable: true
+                },
+                // other modules here
+            }
+        }
+        // other groups here
+    }
+};</PRE><P>
+You include this file in a regular <CODE>&lt;script&gt;</CODE>
+tag in your HTML file before you issue the first <CODE>YUI().use()
+</CODE>statement. They replace those options you would otherwise
+place as the first argument to <CODE>YUI().use()</CODE>,
+as if you did <CODE>YUI(YUI_config).use()</CODE>, but
+YUI does it for you. You can use any of the options listed <A HREF="http://developer.yahoo.com/yui/3/api/Loader.html">here</A>.
+</P>
+<P>The <CODE>filter</CODE> option can be set to <CODE>'min'</CODE>
+for production code (the default so you would usually comment out),
+<CODE>'debug'</CODE> for the fully expanded with log
+statements (which might overwhelm your console) and <CODE>'raw'</CODE>
+for fully expanded without log statements, the last two used only in
+development. Likewise with the <CODE>combine</CODE>
+option, only used when you have really tough bugs and you want to
+find out what is going on and get lost in those huge combos. Then you
+put your <CODE>gallery</CODE> option, if you use any
+gallery modules, to freeze your gallery modules to a version you know
+it works. 
+</P>
+<P>The <CODE>groups</CODE> option is where you start
+describing your own modules. The first name, in this case <CODE>js</CODE>,
+can be anything, whatever you want to call your group of files. You
+could create one such group for each family of files in a common
+location. The first declaration in each group is the <CODE>base</CODE>
+location of the group of files relative to the home page or an
+absolute path. That is, basically, the criteria for grouping files,
+however, there are several more options, listed <A HREF="http://developer.yahoo.com/yui/3/api/Loader.html#method_addGroup">here</A>.
+</P>
+<P>Finally, in the <CODE>modules</CODE> section you
+start listing your modules. The key for each entry is the module
+name, the very same name that you have used as the first argument in
+the <CODE>YUI.add</CODE> in your file and the same
+that you will use in the module list when you issue the<CODE>
+YUI().use()</CODE> call in your application. Then you specify the
+location of the module file, relative to the previous <CODE>base</CODE>
+or the <CODE>fullpath</CODE> if located elsewhere,
+and the rest of the options that where at the very end of the <CODE>YUI.add</CODE>
+declaration and are listed <A HREF="http://developer.yahoo.com/yui/3/api/Loader.html#method_addModule">here</A>.
+The <CODE>requires</CODE> list can list YUI modules,
+gallery modules or modules of your own either within the same group
+or from other groups in your config file. Skins will be loaded
+automatically by setting <CODE>skinnable:true</CODE>
+if you locate them as I recommended at the beginning of this article.
+</P>
+<P>To simplify things for myself, I created a <A HREF="http://www.satyam.com.ar/yui/3.0.0/YUIconf.zip">Windows
+script file</A> that builds the<CODE> YUI_config
+</CODE>options for me. It basically scans the folder with the module
+files and reads each of them and extracts the information from each
+<CODE>YUI.add</CODE> call by defining a fake <CODE>YUI.add</CODE>
+function that extracts the arguments for me. It makes plenty of quite
+simplistic assumptions but it works for me as it is, you use it at
+your own risk.</P>
+<H2>Conclusion</H2>
+<P>YUI3 is very flexible and you can build your modules in many ways.
+ This is no more than one way to do that; I don't always do it this
+way, sometimes, not often, I don't need all of what <CODE>Base</CODE>
+provides so <CODE>Y.Base.create</CODE> is of no use,
+but this works most of the time.</P>
+</BODY>
+</HTML>

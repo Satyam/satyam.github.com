@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Content/Bounding box via HTML_PARSER</title>
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.1.0/build/widget/assets/skins/sam/widget.css" />
+<!-- JS -->
+<script type="text/javascript" src="http://yui.yahooapis.com/3.1.0/build/yui/yui.js"></script>
+
+</head>
+<body class="yui-skin-sam">
+	<div id="markup1" class="SHOULD_BE_BOUNDING_BOX">
+		<div class="SHOULD_BE_CONTENT_BOX"></DIV>
+	</div>
+	<div id="markup2" class="SHOULD_BE_BOUNDING_BOX">
+		<div class="SHOULD_BE_CONTENT_BOX"></DIV>
+	</div>
+	<script  type="text/javascript">
+
+YUI.add('sample', function(Y) {
+	Y.Sample = Y.Base.create(
+		'sample', 
+		Y.Widget, 
+		[], 
+		{
+			BOUNDING_TEMPLATE: '<div class="BB_FROM_TEMPLATE></div>',
+			CONTENT_TEMPLATE: '<div class="CB_FROM_TEMPLATE></div>',
+			
+		},
+		{
+			ATTRS : {
+			},
+			HTML_PARSER: {
+				boundingBox:  function (srcNode) {
+					return srcNode;
+				},
+
+				contentBox: 'div.SHOULD_BE_CONTENT_BOX'
+			}
+		}
+	);
+
+
+}, '@VERSION@' ,{requires:['widget','selector-css3']});
+YUI().use('sample',function(Y) {
+	var s1 = new Y.Sample({srcNode:'#markup1'});
+	s1.render();
+	var s2 = new Y.Sample({srcNode:'#markup2', contentBox:'div.SHOULD_BE_CONTENT_BOX',boundingBox:'div.SHOULD_BE_BOUNDING_BOX'});
+	s2.render();
+});
+	</script>
+</body>
+</html>
+	

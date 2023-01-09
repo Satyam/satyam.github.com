@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Button test (using Y.Node.ATTRS)</title>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.5.0pr1/build/yui/yui.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0pr1/build/cssreset/reset-min.css&3.5.0pr1/build/cssfonts/fonts-min.css&3.5.0pr1/build/cssbase/base-min.css&3.5.0pr1/build/cssgrids/grids-min.css" />
+        <link rel="stylesheet" type="text/css" href="cssbutton.css" />
+		<style>
+			body {
+				width:700px;
+				margin:auto;
+			}
+		</style>
+			
+
+	</head>
+    <body class="yui3-skin-sam">
+        <div id="toolbar">
+            <button id="toggle0" class="yui3-button yui3-button-toggle">toggle</button>
+			<p>You should be able to toggle this one and get the selected state logged on each click</p>
+			<hr/>
+            <button id="regular" class="yui3-button">normal button</button>
+			<p>This is a normal button, clicks get logged, no selected attribute,
+			on click the log will always show undefined</p>
+			<hr/>
+            <span id="group" class="yui3-button-group-exclusive">
+                <button id="toggle1" class="yui3-button yui3-button-toggle">1</button>
+                <button id="toggle2" class="yui3-button yui3-button-toggle">2</button>
+                <button id="toggle3" class="yui3-button yui3-button-toggle">3</button>
+
+            </span>
+			<p>Group of mutually exclusive buttons, only one active at a time.  
+			It starts with the 2 selected and after 3 seconds none will.  All changes get logged.</p>
+			<hr/>
+            <span id="preselectedgroup" class="yui3-button-group-exclusive">
+                <button id="toggle11" class="yui3-button yui3-button-toggle">A</button>
+                <button id="toggle12" class="yui3-button yui3-button-toggle">B</button>
+                <button id="toggle13" class="yui3-button yui3-button-toggle yui3-button-selected">C</button>
+
+            </span>
+			<p>Mutually exclusive buttons, button C is preselected via existing markup.</p>
+			<hr/>
+            <select id="select">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+                <option>four</option>
+            </select>
+			<p>This is a plain dropdown whose options have a selected attribute which is handled normally 
+			and does not get messed up with that of the toggle buttons or button groups.
+			Initially the three label should show. The state of the selected option will be logged by showing an X
+			in the position of the one selected.</p>
+        </div>
+        <script type="text/javascript" >
+            YUI({
+                filter:'raw'
+            }).use('node','event','console', function (Y) {
+                "use strict";
+                
+                
+                new Y.Console().render();
+                var C_BUTTON = 'yui3-button',
+                C_TOGGLE = C_BUTTON + '-toggle',
+                C_SELECTED = C_BUTTON + '-selected',
+                C_EXCLUSIVE = C_BUTTON + '-group-exclusive',
+                SELECTED = 'selected',
+                CLICK = 'click',
+                TOGGLE_BUTTON_SELECTOR = 'button.' + C_TOGGLE,
+				SELECTED_BUTTON_SELECTOR = 'button.' + C_SELECTED,
+                ARIA_PRESSED = 'aria-pressed',
+				BUTTON_TOGGLE = 1,
+				GROUP_TOGGLE = 2;
+                    
+     
+    
+                /*
+                 * This is the code for my suggested button.  
+                 * It adds a 'selected' property to both a toggle button and to an exclusive button group.
+                 * The 'selected' property makes no sense on a button group which either has no exclusivity amongst its buttons
+                 * since more than one can be selected at once not if it has no toggle buttons.
+                 * 
+                 * A toggle button is recognized as any button having the 'yui3-button-toggle' className.
+                 * An exclusive button group is recognized as any HTML element having the 'yui3-button-group-exclusive' className.
+                 * 
+                 * For a toggle button, the selected property is boolean indicating whether the button is pressed.
+                 * For a button group, it sets/gets the button currently selected.   When setting a selected button
+                 * you can provide a reference to a button or a selector.  Passing null means none is selected.
+                 * I have not dealt with button groups with a mandatory selected button.  
+                 * An extra className set on the container for the button group would be enough to signal such a button group.
+                 * 
+                 * The only public method is the static addToggles which takes a container and it will search within it
+                 * for all elements with suitable classNames.  If no container is given, it searches the document body.
+                 */
+                var btn = function() {
+                };
+
+				Y.Node.ATTRS[SELECTED] = {
+					getter: function () {
+						switch (this._toggleType) {
+							case BUTTON_TOGGLE:
+								return this._toggleSelected;
+							case GROUP_TOGGLE:
+								return this._selectedToggle;
+							default:
+								return Y.Node.DEFAULT_GETTER.call(this, SELECTED);
+						}
+					},
+					setter: function(value) {
+						var target = null;
+						switch (this._toggleType) {
+							case BUTTON_TOGGLE:
+								this[value?'addClass':'removeClass'](C_SELECTED);
+								this[value?'setAttribute':'removeAttribute'](ARIA_PRESSED, true);
+								this._toggleSelected = !!value
+								break;
+							case GROUP_TOGGLE:
+								if (value) {
+									target = Y.one(value);
+									target.set(SELECTED, true);
+									this._selectedToggle = (target.get(SELECTED)?target:null);
+								} else {
+									this._selectedToggle = null;
+								}						
+								this.all(TOGGLE_BUTTON_SELECTOR).each(function (node) {
+									if (node !== target) {
+										node.set(SELECTED, false);
+									}
+								});	
+								break;
+							default:
+								Y.Node.DEFAULT_SETTER.call(this,SELECTED, value);
+								break;
+						}
+						return value;
+					}
+				}
+
+                btn._addToggleButton = function (node) {
+					node._toggleType = BUTTON_TOGGLE;
+					node.set(SELECTED, node.hasClass(C_SELECTED));
+                    node.on(CLICK, function () {
+                        this.set(SELECTED, !this.get(SELECTED));
+                    });
+
+                };
+                btn._addButtonGroup = function (node) {
+					node._toggleType = GROUP_TOGGLE;
+					node.set(SELECTED, Y.one(SELECTED_BUTTON_SELECTOR));
+                    node.delegate(CLICK, function(ev) {
+						var target = ev.target;
+                        ev.container.set(SELECTED, target.get(SELECTED)?target:null);
+                    },TOGGLE_BUTTON_SELECTOR);
+                };
+
+                btn.addToggles = function (container) {
+                    container = Y.one(container || 'body');
+                    container.all(TOGGLE_BUTTON_SELECTOR).each(btn._addToggleButton);
+                    container.all('.' + C_EXCLUSIVE).each(btn._addButtonGroup);
+                };
+
+
+                Y.Button = btn;                
+                
+                /* end of Y.Button */
+    
+                /*
+                 * usage examples below:
+                 */
+    
+                Y.Button.addToggles('#toolbar');
+                
+                var t1 = Y.one('#toggle0');
+                
+                t1.on(CLICK, function (){
+                    Y.log('click on toggle, selected: '  + this.get(SELECTED));
+                });
+
+				Y.on(CLICK, function() {
+					Y.log('click on regular, selected ' + this.get(SELECTED));
+				},'#regular');
+                Y.log('before 0, selected: ' + t1.get(SELECTED));
+                t1.set(SELECTED,true);
+                Y.log('after 0, selected: ' +t1.get(SELECTED));
+                
+                // Select the second button
+                Y.one('#group').set(SELECTED,'#toggle2');
+                
+                Y.delegate(CLICK, function(ev) {
+					var selected = ev.container.get(SELECTED);
+                    Y.log('group click, selected: ' + (selected?selected.getContent():'none'));
+                },'#group', TOGGLE_BUTTON_SELECTOR);
+                
+                window.setTimeout(function() {
+                    // unselect it
+                    Y.one('#group').set(SELECTED,null);
+                },3000);
+
+				Y.delegate(CLICK, function(ev) {
+					var selected = ev.container.get(SELECTED);
+                    Y.log('group click, selected: ' + (selected?selected.getContent():'none'));
+                },'#preselectedgroup', TOGGLE_BUTTON_SELECTOR);
+                 
+                // This has no effect on the regular button 
+                Y.one('#regular').set(SELECTED,true);
+                // The return is undefined
+                Y.log('regular button has no selected: ' + Y.one('#regular').get(SELECTED));
+                
+                // The regular 'selected' attribute works fine with other nodes
+                Y.one('#select').get('children').item(2).set(SELECTED,true);
+				
+				Y.one('#select').on('change', function (ev) {
+					var sel = '';
+					this.get('children').each(function(option) {
+						sel += (option.get(SELECTED)?'X':'-');
+					})
+					Y.log('regular select box changed: ' + sel);
+				});
+            });
+        </script>
+	</body>
+</html>

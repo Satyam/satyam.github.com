@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>JavaScript</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>JavaScript</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+
+<h2>Data Types</h2>
+
+
+<ul>
+<li>JavaScript has loose-typing but it does have types</li>
+<li>Any variable can be any type, but at any one time it will have a specific type</li>
+</ul>
+<h3>Types</h3>
+<ul>
+<li>Number: integer, floating point all in 64 bits, plus <code>NaN</code></li>
+<li>Strings: all in UTF-8, no 'char' type</li>
+<li>Boolean: <code>true</code> or <code>false</code></li>
+<li><code>null</code></li>
+<li><code>undefined</code> meaning, not initialized</li>
+<li><code>Object</code>, including <code>Function</code> and <code>Array</code></li>
+</ul>
+
+<h3>Type detection</h3>
+<ul>
+<li>Allows to find if a variable is of a certain type</li>
+<li>Specially useful in writing general purpose functions taking different types of arguments</li>
+<li>JavaScript native functions don't do a good job</li>
+</ul>
+
+<pre>console.log(typeof null)             <tt>object</tt>
+console.log(typeof [1,2,3]);         <tt>object</tt>
+console.log(typeof function () {});  <tt>function</tt></pre>
+
+<p>YUI offers several <b>reliable</b> <code>YAHOO.lang.is<i>Xxxxx</i></code> functions to check for data types</p>
+
+<h2>Naming conventions</h2>
+
+<ul>
+<li>Variables, which includes functions, properties and methods, use camel-case: <code>getSomeValue</code></li>
+<li>Constants, which don't actually exist, use all uppercase with underscore instead of spaces: <code>MONTH_AUGUST</code></li>
+<li>Object constructors use each initial, including the first, in uppercase with no spaces <code>DataTable</code></li>
+<li>Variables starting with an underscore are meant as private, though JavaScript does not support that</li>
+<li>Avoid variables starting with $, they are reserved for machine generated code</li>
+<li>(however) function <code>$()</code> has become an alias for <code>YAHOO.util.Dom.get()</code></li>
+<li>Function <code>_()</code> is usually reserved for I18n (see <a href="http://www.gnu.org/software/gettext/">gettext</a>)</li>
+<li>Many programmers use prefixes on variables to highlight the expected nature of their contents, its usage in the YUI is not consistent<ul>
+    <li><code>el..</code> refers to HTML elements</li>
+    <li><code>o..&nbsp;</code> refers to objects</li>
+    <li><code>s..&nbsp;</code> prefixes strings</li>
+    <li><code>my..</code> shamelessly copied from the examples</li>
+    </ul>
+</li>
+</ul>
+      
+<h2>Recommendations</h2>
+
+<ul>
+<li>Avoid <code>eval</code>, usually it can be replaced by something else</li>
+<li>Never use <code>with</code>, its behavior is inconsistent</li>
+<li>Use <code>===</code> and <code>!==</code> instead of <code>==</code> and <code>!=</code></li>
+<li>Always use optional base argument when calling <code>parseInt</code></li>
+</ul>
+<pre>var august = "08"
+console.log(parseInt(x));      <tt>0</tt>
+console.log(parseInt(x,10));   <tt>8</tt>
+</pre>
+<pre>// Instead of:
+var x = new Object();
+var y = new Array();
+
+// Use:
+
+var x = {};
+var y = [];
+</pre>
+<ul>
+<li>Undeclared variables go into the global namespace and might be altered from elsewhere (or you might be altering the variable of someone else)</li>
+<li>If you declare a variable twice in the same scope, it doesn't get re-initialized so no harm is done</li>
+</ul>
+<pre>// Always use <code>hasOwnProperty</code>:
+for( var key in myObject) {
+    if (myObject.hasOwnProperty(key)) {
+        // do your stuff
+    }
+}</pre>
+<ul>
+<li>Don't put a trailing comma in the last element of an array</li>
+</ul>
+<pre>console.log([1,2,3,].length); // In IE: <tt>4</tt></pre>
+            
+
+<ul>
+<li>If a function takes more than a few arguments and some are optional, use a literal object for the optionals</li>
+</ul>
+<pre>
+var myCreateElement = function (type, attributes) {
+    var el = document.createElement(type);
+    for (var name in attributes) {
+        if (attributes.hasOwnProperty(name)) {
+            el.setAttribute(name,attributes[name]);
+        }
+    }
+    return el;
+}
+
+$('someContainer').appendChild(myCreateElement('img',{src:'up.gif'}));</pre>
+
+
+
+<h2>Handy operators</h2>
+<h3>Conversions</h3>
+<pre>"" + 1               <tt>"1"</tt>  // to string
+1 * "08"             <tt>8</tt>    // to number
+1 * "08t"            <tt>NaN</tt>  // not safe
+parseInt("08t",10)   <tt>8</tt>    // cuts at first non-digit
+!!1                  <tt>true</tt> // to boolean</pre>
+<h3>Guard and default</h3>
+<ul>
+<li>And <code>&amp;&amp;</code> and or <code>||</code> logical operators don't return Booleans (and they call them logical!)</li>
+<li><code>&amp;&amp;</code> returns the value of the right-hand-side expression if the left-hand-side is 'truish'</li>
+<li><code>||</code> returns the value of the right-hand-side expression if the left-hand-side is 'falsy'</li>
+<li><code>undefined</code> is 'falsy' so this two operators can help in checking for existence</li>
+</ul>
+<p>In the following expression, the <code>oConfig</code> object might contain optional configuration attributes.  <code>oConfig</code> itself might not exist.  If it does not exist it can't have a <code>doOptional</code> property (nor any other).  The following expression checks first for  the existence of <code>oConfig</code> and if it succeeds, then it checks its property</p>
+<pre>var doThis = oConfig &amp;&amp; oConfig.doOptional;
+var doThis = oConfig ? oConfig.doOptional : undefined;  // both are the same</pre>
+<p>Here, we want an <code>oConfig</code> object.  If one is received as the third argument in the function call, we'll take that but if it doesn't exist (<code>arguments[2]</code> will be <code>undefined</code> hence false) we'll default to an empty one.</p>
+<pre>var oConfig = arguments[2] || {};</pre>
+<ul>
+<li><code>&amp;&amp;</code><ul>
+    <li>is called 'guard' because it has to give you an Ok before letting you reach the second one</li>
+    <li>if chained, it will return the first 'falsy' value if finds</li>
+    <li>it might return <code>false</code>, <code>null</code>, <code>undefined</code> or <code>""</code> since they are all 'falsy'.  <code>{}</code> is not 'falsy'</li>
+	<li>in other words, it will return the last value if all the previous are not 'falsy'</li>
+    </ul></li>
+<li><code>||</code><ul>
+    <li>is the 'default' operator because if the first value fails, it provides the next one as the default value</li>
+    <li>if chained, it will return the first 'truish' value it finds</li>
+    </ul></li>
+    <li>Both have the same precedence and, if combined in a chain, will be resolved from left to right as they are found.</li>
+	<li>Unless they are all of the same type, it is safer to clarify their precedence with parenthesis</li>
+</ul>
+
+<h2>Reserved Words</h2>
+
+<ul>
+<li>JavaScript has more reserved words than it actually uses</li>
+<li>The next version will use some of those reserved and some more that nobody thought about and are currently valid</li>
+<li>Not two list of reserved words in the net match, and they are all supposed to come from the standard</li>
+<li>The problem is that some browsers have added their own</li>
+<li>Most browsers respond idiosyncratically to those words, some don't mind, some fail</li>
+<li>Within a browser, <code>window</code> and its properties and methods appear in the global namespace and seem as JavaScript keywords (<code>alert</code>, <code>setTimeout</code>, <code>location</code>)</li>
+</ul>
+
+<h2>Quotes</h2>
+<ul>
+<li>JavaScript makes no difference in between single and double quotes.</li>
+<li>It is better to settle on a style</li>
+<li>I use single quotes for JavaScript so I have double quotes free to use inside:</li>
+</ul>
+<pre>elCell.innerHTML = '&lt;img src="image.png" />';
+alert('I\'m unlikely to use single quotes in Spanish');   // however ....</pre>
+
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

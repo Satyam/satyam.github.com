@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Nested DataTables using RowExpansionDataTable</title>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+		<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yuiloader-dom-event/yuiloader-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js&2.8.1/build/json/json-min.js"></script>
+
+		<script src="rowexpansion.js"></script>
+		<link rel="stylesheet" type="text/css" href="rowexpansion.css" />
+		
+		<script type="text/javascript" src="YQLDataSource.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+		<style type="text/css">
+			.dp-highlighter th, .dp-highlighter td {
+				border:0;
+				padding:0;
+			}
+			.dp-highlighter .line1, .dp-highlighter  .line2 {
+				padding-left:10px;
+				white-space:nowrap;
+			}
+			#ft {
+				margin-top:1em;
+			}
+			.yui-skin-sam .yui-dt .right {
+				text-align:right;
+			}
+		</style>
+    </head>
+ <body class="yui-skin-sam">
+    <div id="doc">
+		<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div id="hd">
+			<h1>Nested DataTables using RowExpansionDataTable</h1>
+		</div>
+		<div id="bd">
+		</div>
+		<div id="ft">
+			<p>This example uses a <a href="rowexpansion.js">variation</a> of 
+			<a href="http://developer.yahoo.com/yui/examples/datatable/dt_rowexp_basic.html">Eric Gelinas rowexpansion.js</a> from YUI DataTable examples,
+			somewhat modified by me.  Here you can find the <a href="rowexpansion.js">JavaScript</a>, <a href="rowexpansion.css">CSS</a> files and 
+			the <a href="rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html">API Docs</a>.</p>
+			<p>I start by defining some constants:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var Dom = YAHOO.util.Dom,
+					Event = YAHOO.util.Event,
+					Lang = YAHOO.lang,
+					YQLDS = YAHOO.util.YQLDataSource, 
+					REDT = YAHOO.widget.RowExpansionDataTable,
+					
+					// YQL Queries for each of the tables
+					YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+					YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+					YQL_QUERY_TRACKS = 'select Track.discNumber, Track.trackNumber, Track.duration, Track.title, Track.popularity from music.release.id where ids="{query}" and response="tracks" | sort(field="Track.trackNumber")',
+					
+					// property name within the expansion state for my own data
+					NESTED_DT = 'nestedDT';
+			</textarea>
+			<p>The first set are shortnames for the often used components, the second set the series of YQL queries with placeholders
+			so that the variable part of them can be inserted via <code>YAHOO.lang.substitute</code>.  Finally, <code>NESTED_DT</code>
+			holds the property name I'll use to store each nested DataTable in the expansion state.</p>
+			
+			<p>There are three YQLDataSource instances, here is one of them:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var artistDS = new YQLDS('', {
+					responseSchema: {
+						fields:[
+							{key:'id', parser:'number'}, 
+							{key:'trackCount', parser:'number'}
+						]
+					}
+				});
+			</textarea>
+			<p>This one corresponds to the data fetched by the <code>YQL_QUERY_ARTIST</code> query.  
+			Only those fields that need some processing, like parsers, are listed, the <code>name</code>
+			field, being a string, needs no parsing and doesn't need to be listed, but will be there nonetheless</p>
+			
+			<p>Just as the DataSources are repetitive, the code to list each of the tables is also quite similar. 
+			I'll just show the one for the Album table which is the middle level.  It shows both the code
+			needed for a nested DataTable and for one containing a nested DataTable so it shows both ends.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var showAlbums = function(state) {
+					var albumDT = new REDT(
+						state.expLinerEl,
+						[
+							{key:'title', label:'Title', sortable:true}, 
+							{key:'releaseYear', label:'Release Year', sortable:true, className:'right'}, 
+							{key:'label', label:'Label', sortable:true}
+						],
+						albumDS,
+						{
+							// I fill in the YQL Query template with the Artist Id taken from the record in the parent row
+							initialRequest: Lang.substitute(YQL_QUERY_ALBUMS,{query:state.record.getData('id')}),
+
+							// On row expansion, I will call showTracks
+							rowExpansionTemplate : showTracks,
+
+							sortedBy: {
+								key:'releaseYear',
+								dir: REDT.CLASS_DESC
+							}
+						}
+					);
+
+					// Store the reference to this datatable object for any further use 
+					// (specially destroying it, as above)
+					this.setExpansionState(state.record,NESTED_DT,albumDT);
+
+					//Subscribe to the rowExpansionDestroyEvent so I can destroy the tracksDT table
+					// before its container (the album row) is gone and it ends a zombie
+					albumDT.on('rowExpansionDestroyEvent', function (state) {
+						state[NESTED_DT].destroy();
+					});
+				};
+			</textarea>
+			<p>Function <code>showAlbums</code> will be used as the value for the 
+			<a href="http://satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html#config_rowExpansionTemplate"><code>rowExpansionTemplate</code></a> 
+			configuration attribute of the parent Artists table.  The function will be called when any row in the parent
+			table is expanded the first time.  It will receive the 
+			<a href="http://satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html#method_getExpansionState"><code>state</code></a> argument which contains
+			several pieces of information regarding this expansion, amongst them the Record instance for the
+			parent record and the container where the new table is to be built.</p>
+			
+			<p>We immediately create the albumDT RowExpansionDataTable, using the container provided in <code>state.expLinerEl</code>.
+			We don't need to define a column for the expansion trigger element, RowExpansionDataTable will create one for us.
+			We use the corresponding YQLDataSource which we set previously: for <code>albumDT</code> we use <code>albumDS</code>.</p>
+			
+			<p>Then we go into the configuration attributes.  We assemble the <code>initialRequest</code> from the <code>YQL_QUERY_ALBUMS</code> template
+			filling in the placeholders with the corresponding value taken from the field in the parent record: <code>state.record.getData('id')</code>.</p>
+
+			<p>We also set the <code>rowExpansionTemplate</code> configuration attribute to <code>showTracks</code>, the name of the function
+			that will create the DataTable nested to this one (the third level of nesting).  We also tell the DataTable how the data will come 
+			sorted from the server, as can be seen towards the end of the YQL query.</p>
+			
+			<p>Once the DataTable is created, we just need to do two more things.  We must save this instance of the DataTable
+			just in case, as we'll see in a moment, into the expansion state object for this row using 
+			<a href="http://satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html#method_setExpansionState"><code>setExpansionState</code></a>.
+			This object has several pre-defined properties but is otherwise open for us to store any extra information we might need.</p>
+			
+			<p>We must also listen to the <a href="http://satyam.com.ar/yui/2.8.0/rowExpansionDocs/YAHOO.widget.RowExpansionDataTable.html#event_rowExpansionDestroyEvent"><code>rowExpansionDestroyEvent</code></a>
+			because we need to destroy any nested DataTable if at any time
+			its row in its parent DataTable gets deleted; otherwise, we would be leaving behind a lot of zombie objects taking up
+			memory when a row is deleted. If <code>rowExpansionTemplate</code> had been set to a string we would not need
+			to do this, since it won't leave anything behind. </p>
+			<p>We use the <code>NESTED_DT</code> property where we wisely saved the DataTable instance 
+			and call its <code>destroy</code> method.  The DataTable we are destroying here is not the <code>albumDT</code> instance we
+			have just created but the <code>tracksDT</code> tables that are nested to it.  We always listen to this event
+			in the parent table so we can cleanup its children.  Of course it all relies on the <code>showTracks</code> function
+			to store that info for each table it creates.</p>
+			
+			<p>The Tracks DataTable is a regular DataTable since it has not further children.  If I were to use the RowExpansionDataTable, the 
+			trigger column would show up, with nothing to show.</p>
+		
+		</div>
+	</div>
+
+		<script type="text/javascript">
+		
+YAHOO.util.Event.onDOMReady(function() {
+	
+		// shortnames
+	var Dom = YAHOO.util.Dom,
+		Event = YAHOO.util.Event,
+		Lang = YAHOO.lang,
+		YQLDS = YAHOO.util.YQLDataSource, 
+		REDT = YAHOO.widget.RowExpansionDataTable,
+        
+		// YQL Queries for each of the tables
+		YQL_QUERY_ARTIST = 'select name, trackCount, id from music.artist.search where keyword="{query}"  | sort(field="trackCount", descending="true") ', 
+		YQL_QUERY_ALBUMS = 'select id, title, releaseYear, label, url from music.release.artist where id="{query}"   | sort(field="releaseYear", descending="true")', 
+		YQL_QUERY_TRACKS = 'select Track.discNumber, Track.trackNumber, Track.duration, Track.title, Track.popularity from music.release.id where ids="{query}" and response="tracks" | sort(field="Track.trackNumber")',
+		
+		// property name within the expansion state for my own data
+		NESTED_DT = 'nestedDT';
+	
+	// All three YQLDataSources for each of the tables
+	var artistDS = new YQLDS('', {
+		responseSchema: {
+			// we only list those fields that require special processing, like parsers
+			// the others will be there anyway
+			fields:[
+				{key:'id', parser:'number'}, 
+				{key:'trackCount', parser:'number'}
+			]
+		}
+	});
+	var albumDS = new YQLDS('', {
+		responseSchema: {
+			fields:[
+				{key:'id', parser:'number'}, 
+				{key:'releaseYear', parser:'number'}
+			]
+		}
+	});
+	var tracksDS = new YQLDS('', {
+		responseSchema: {
+			fields:[
+				{key:'Track.discNumber', parser:'number'}, 
+				{key:'Track.trackNumber', parser:'number'},
+				{key:'Track.duration', parser:'number'},
+				{key:'Track.popularity', parser:'number'}
+			]
+		}
+	});
+	
+	// Function to show the tracks of a given album
+	// It takes the expansion state object of the containing row
+	var showTracks = function(state) {
+		var tracksDT = new REDT(
+			state.expLinerEl,
+			[
+				{key:"Track.discNumber",label:"Disk", sortable:true, className:'right'},
+				{key:'Track.trackNumber', label:'Track', sortable:true, className:'right'}, 
+				{key:'Track.title',label:'Title',sortable:true},
+				{key:'Track.duration', label:'Duration', sortable:true, className:'right'}, 
+				{key:'Track.popularity', label:'Popularity', sortable:true, className:'right'}
+			],
+			tracksDS,
+			{
+				// I fill in the YQL Query template with the Album Id taken from the record in the parent row
+				initialRequest: Lang.substitute(YQL_QUERY_TRACKS,{query:state.record.getData('id')}),
+				sortedBy: {
+					key:'Track.trackNumber',
+					dir: REDT.CLASS_ASC
+				}
+			}
+		);
+
+		// Store the reference to this datatable object for any further use 
+		this.setExpansionState(state.record,NESTED_DT,tracksDT);
+	}
+	
+	var showAlbums = function(state) {
+		var albumDT = new REDT(
+			state.expLinerEl,
+			[
+				{key:'title', label:'Title', sortable:true}, 
+				{key:'releaseYear', label:'Release Year', sortable:true, className:'right'}, 
+				{key:'label', label:'Label', sortable:true}
+			],
+			albumDS,
+			{
+				// I fill in the YQL Query template with the Artist Id taken from the record in the parent row
+				initialRequest: Lang.substitute(YQL_QUERY_ALBUMS,{query:state.record.getData('id')}),
+				// On row expansion, I will call showTracks
+				rowExpansionTemplate : showTracks,
+				sortedBy: {
+					key:'releaseYear',
+					dir: REDT.CLASS_DESC
+				}
+			}
+		);
+
+		// Store the reference to this datatable object for any further use 
+		// (specially destroying it, as above)
+		this.setExpansionState(state.record,NESTED_DT,albumDT);
+
+		//Subscribe to the rowExpansionDestroyEvent so I can destroy the tracksDT table
+		// before its container (the album row) is gone and it ends a zombie
+		albumDT.on('rowExpansionDestroyEvent', function (state) {
+			state[NESTED_DT].destroy();
+		});
+	};
+	
+
+	var artistDT = new REDT(
+		"bd",
+		[
+			{key:'name', label:'Artist', sortable:true}, 
+			{key:'trackCount', label:'Nbr of Tracks', sortable:true, className:'right'}
+		],
+		artistDS,
+		{
+			// I fill in the YQL Query template with the Artist name
+			// I should probably take it from an input box
+			initialRequest: Lang.substitute(YQL_QUERY_ARTIST,{query:"Madonna"}),
+
+			sortedBy: {
+				key:'trackCount',
+				dir: REDT.CLASS_DESC
+			},
+			// On row expansion, I will call showAlbums
+			rowExpansionTemplate : showAlbums
+			
+		}
+	);
+
+	//Subscribe to the rowExpansionDestroyEvent so I can destroy the albumDT
+	// before its container (the artist row) is gone and it ends a zombie
+	artistDT.on('rowExpansionDestroyEvent', function (state) {
+		state[NESTED_DT].destroy();
+	});		
+	
+
+});
+		</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+        
+    </body>
+</html>

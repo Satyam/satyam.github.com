@@ -1,0 +1,179 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yahoo-dom-event/yahoo-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+	<style type="text/css">
+		.dp-highlighter th, .dp-highlighter td {
+			border:0;
+			padding:0;
+		}
+		.dp-highlighter .line1, .dp-highlighter  .line2 {
+			padding-left:10px;
+			white-space:nowrap;
+		}
+		.ft {
+			margin-top:1em;
+		}
+	</style>
+    <title>Infinite Scrolling DataTable</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Infinite Scrolling DataTable</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p>The challenge was to create a table that got records appended as you scrolled.  The solution was to create a
+			ScrollingDataTable with an initial number of records and then keep adding as you scrolled into 'empty' space.
+			The first challenge was how to create that empty space.  The size and position of the knob on the scroll bar
+			is meant to correlate to the size and position of the portion being viewed.  We need to really fill that 'empty' space
+			with something, otherwise, the scrollbar would reach the bottom when there is really more rows available, and it would
+			jump back as soon as those rows are added to represent the end is further away.  So, the first task is to fill up that
+			'empty' space, which we do by creating a &lt;tfoot&gt; section:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var spacer;
+				dt.on('initEvent', function () {
+					var tfoot = this.getTableEl().appendChild(document.createElement('tfoot')),
+						tr = tfoot.appendChild(document.createElement('tr'));
+						
+					spacer = tr.appendChild(document.createElement('td'));
+				});
+			</textarea>
+			<p>We keep a reference to the single cell in that section because it is the height of that cell that will compensate
+			for the missing records.  We calculate it on the <code>renderEvent</code>:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				dt.on('renderEvent', function () {
+					var tbodyHeight = Dom.getRegion(this.getTbodyEl()).height,
+						numRecs = this.getRecordSet().getLength();
+					Dom.setStyle(spacer,'height',(tbodyHeight / numRecs * (TOTAL_ROWS - numRecs)) + 'px');
+				});
+			</textarea>
+			<p>We make the empty space as tall as the missing records in proportion to what the current rows take.
+			In this example TOTAL_ROWS is a constant containing the total number of records. In a real life case,
+			this piece of data would be a value obtained somehow from the server.</p> 
+			<p>Now, we need to detect when the scrolling reaches the 'empty' space.  To do that, we read the <code>scrollTop</code>
+			property of the scrolling area and compare it to the height of the &lt;tbody&gt; section of the table, which contains the
+			actual records.  If the scrollTop is larger than the height of the &lt;tbody&gt;, the
+			rows are completely hidden from view. In fact, we need to start filling it up before it goes completely away, 
+			we have to do it as soon as a sliver of 'empty' space starts showing up.  To achieve that we substract
+			the height of the visible area.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				Event.on(dt.getBdContainerEl(),'scroll',function (ev) {
+					var scrollTop = Event.getTarget(ev).scrollTop,
+						tbodyHeight = Dom.getRegion(dt.getTbodyEl()).height,
+						bdContainerHeight = Dom.getRegion(dt.getBdContainerEl()).height;
+
+					if (scrollTop > tbodyHeight - bdContainerHeight) {
+					
+						dt.getDataSource().sendRequest("", {
+							success : dt.onDataReturnAppendRows,
+							failure : dt.onDataReturnAppendRows,
+							scope:dt
+						});
+					}
+				});
+			</textarea>
+			<p>The second half of this code fetches a further batch of records once the 'empty' space becomes visible.
+			In this example, the records are provided by a function which produces on the fly 20 records at a time with
+			the first column holding the position and the second the batch the record belongs to.  When you see a new value
+			in the second column it means a new batch of records has been loaded.</p>
+			<p>There are two flickers in this example.  One is because if a new batch of records has a field longer than
+			any record already loaded, the table will suddenly widen to hold it.  This can easily be solved by setting
+			a fixed width on any records that might change in size.
+			The other cause is that the new rows get added first and then the spacer height is adjusted so the knob on
+			the scrollbar first goes up a little and then back again.  Anyway, since the height of the spacer is an
+			approximation, this is likely to happen anyway.</p>
+		</div>
+	</div>
+
+<script type="text/javascript" >
+
+YAHOO.util.Event.onDOMReady(function() {
+		
+	var Dom = YAHOO.util.Dom,
+		Event = YAHOO.util.Event,
+		Lang = YAHOO.lang;
+	
+
+	var row = 0, set = 0,
+		ROWS_PER_SET = 20, TOTAL_ROWS = 100;
+	
+	var dt = new YAHOO.widget.ScrollingDataTable(
+		"container", 
+		[
+			{key:"row"},
+			{key:"set"},
+			{key:"filler"}
+		],
+		new YAHOO.util.DataSource(
+			function () {
+				var output = [];
+				for (var i = 0; i < ROWS_PER_SET && row < TOTAL_ROWS; i++) {
+					output.push({
+						row: row++,
+						set: set,
+						filler:"asfjasdf afasuasd foaif aof aosf aof asudof asdu oasdfouisdf ocv oufsd fa fvc iuasdkjwe".substr(Math.round(Math.random() * 20), 10 + Math.round(Math.random() * 20)) 
+					});
+				}
+				set++;
+				return output;
+		
+			},
+			{
+				responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+				responseSchema: {
+					fields: ["row","set","filler"]
+				}
+			}
+		),
+		{
+			height:'10em',
+			initialRequest:'qqq'
+		}
+	);
+	
+	var spacer;
+	dt.on('initEvent', function () {
+		var tfoot = this.getTableEl().appendChild(document.createElement('tfoot')),
+			tr = tfoot.appendChild(document.createElement('tr'));
+			
+		spacer = tr.appendChild(document.createElement('td'));
+	});
+	dt.on('renderEvent', function () {
+		var tbodyHeight = Dom.getRegion(this.getTbodyEl()).height,
+			numRecs = this.getRecordSet().getLength();
+		Dom.setStyle(spacer,'height',(tbodyHeight / numRecs * (TOTAL_ROWS - numRecs)) +'px');
+	});
+	Event.on(dt.getBdContainerEl(),'scroll',function (ev) {
+		var scrollTop = Event.getTarget(ev).scrollTop,
+			tbodyHeight = Dom.getRegion(dt.getTbodyEl()).height,
+			bdContainerHeight = Dom.getRegion(dt.getBdContainerEl()).height;
+		// console.log(scrollTop,tbodyHeight,bdContainerHeight, tbodyHeight-bdContainerHeight );
+		if (scrollTop > tbodyHeight - bdContainerHeight) {
+		
+			dt.getDataSource().sendRequest("", {
+				success : dt.onDataReturnAppendRows,
+				failure : dt.onDataReturnAppendRows,
+				scope:dt
+			});
+		}
+	});
+		
+		
+	
+});
+</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+</body>
+</html>

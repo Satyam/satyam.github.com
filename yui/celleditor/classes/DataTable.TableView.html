@@ -1,0 +1,3432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DataTable.TableView</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Base.html">DataTable.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.html">DataTable.BaseCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.KeyFiltering.html">DataTable.BaseCellEditor.KeyFiltering</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellInlineEditor.html">DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellPopupEditor.html">DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.html">DataTable.BodyView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.InputFormatters.html">DataTable.BodyView.InputFormatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.ColumnWidths.html">DataTable.ColumnWidths</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Core.html">DataTable.Core</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editable.html">DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editors.html">DataTable.Editors</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.HeaderView.html">DataTable.HeaderView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Message.html">DataTable.Message</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Mutable.html">DataTable.Mutable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Scrollable.html">DataTable.Scrollable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Sortable.html">DataTable.Sortable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.TableView.html">DataTable.TableView</a></li>
+            
+                <li><a href="..&#x2F;classes/Plugin.DataTableDataSource.html">Plugin.DataTableDataSource</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-base.html">datatable-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-body.html">datatable-body</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-base.html">datatable-celleditor-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-inline.html">datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-keyfiltering.html">datatable-celleditor-keyfiltering</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-column-widths.html">datatable-column-widths</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-core.html">datatable-core</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-datasource.html">datatable-datasource</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-editable.html">datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-formatters.html">datatable-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-head.html">datatable-head</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-input-formatters.html">datatable-input-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-message.html">datatable-message</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-mutable.html">datatable-mutable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-scroll.html">datatable-scroll</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-sort.html">datatable-sort</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-table.html">datatable-table</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>DataTable.TableView Class</h1>
+<div class="box meta">
+    
+
+    
+        <div class="extends">
+            Extends View
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;js_table.js.html#l16"><code>js&#x2F;table.js:16</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/datatable-table.html">datatable-table</a><br>
+            Parent Module: <a href="../modules/datatable.html">datatable</a>
+        
+    
+
+    
+        <p>Available since 3.6.0</p>
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>View class responsible for rendering a <code>&lt;table&gt;</code> from provided data.  Used as
+the default <code>view</code> for <code>Y.DataTable.Base</code> and <code>Y.DataTable</code> classes.</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterCaptionChange">_afterCaptionChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterSummaryChange">_afterSummaryChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__afterWidthChange">_afterWidthChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__bindUI">_bindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__createTable">_createTable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__defRenderBodyFn">_defRenderBodyFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__defRenderFooterFn">_defRenderFooterFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__defRenderHeaderFn">_defRenderHeaderFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__defRenderTableFn">_defRenderTableFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__extractDisplayColumns">_extractDisplayColumns</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__initEvents">_initEvents</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__relayAttrChange">_relayAttrChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__uiSetCaption">_uiSetCaption</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__uiSetSummary">_uiSetSummary</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__uiSetWidth">_uiSetWidth</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method__validateView">_validateView</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getCell">getCell</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_getClassName">getClassName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRecord">getRecord</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRow">getRow</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_intializer">intializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_render">render</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property">
+                                <a href="#property_body">body</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_CAPTION_TEMPLATE">CAPTION_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_displayColumns">displayColumns</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_foot">foot</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_head">head</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_TABLE_TEMPLATE">TABLE_TEMPLATE</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs extends">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_bodyConfig">bodyConfig</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_bodyView">bodyView</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_caption">caption</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns">columns</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_footerConfig">footerConfig</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_footerView">footerView</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_headerConfig">headerConfig</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_headerView">headerView</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_summary">summary</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_width">width</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterCaptionChange" class="method item protected">
+    <h3 class="name"><code>_afterCaptionChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l200"><code>js&#x2F;table.js:200</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the table's <code>&lt;caption&gt;</code>.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventHandle</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The change event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterSummaryChange" class="method item protected">
+    <h3 class="name"><code>_afterSummaryChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l188"><code>js&#x2F;table.js:188</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the table's <code>summary</code> attribute.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventHandle</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The change event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__afterWidthChange" class="method item protected">
+    <h3 class="name"><code>_afterWidthChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l212"><code>js&#x2F;table.js:212</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the table's width.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventHandle</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The change event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__bindUI" class="method item protected">
+    <h3 class="name"><code>_bindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l224"><code>js&#x2F;table.js:224</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Attaches event subscriptions to relay attribute changes to the child Views.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createTable" class="method item protected">
+    <h3 class="name"><code>_createTable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l247"><code>js&#x2F;table.js:247</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the <code>&lt;table&gt;</code>.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                    The <code>&lt;table&gt;</code> node
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__defRenderBodyFn" class="method item protected">
+    <h3 class="name"><code>_defRenderBodyFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l261"><code>js&#x2F;table.js:261</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Calls <code>render()</code> on the <code>bodyView</code> class instance.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The renderBody event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defRenderFooterFn" class="method item protected">
+    <h3 class="name"><code>_defRenderFooterFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l273"><code>js&#x2F;table.js:273</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Calls <code>render()</code> on the <code>footerView</code> class instance.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The renderFooter event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defRenderHeaderFn" class="method item protected">
+    <h3 class="name"><code>_defRenderHeaderFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l285"><code>js&#x2F;table.js:285</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Calls <code>render()</code> on the <code>headerView</code> class instance.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The renderHeader event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defRenderTableFn" class="method item protected">
+    <h3 class="name"><code>_defRenderTableFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l297"><code>js&#x2F;table.js:297</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Renders the <code>&lt;table&gt;</code> and, if there are associated Views, the <code>&lt;thead&gt;</code>,
+<code>&lt;tfoot&gt;</code>, and <code>&lt;tbody&gt;</code> (empty until <code>syncUI</code>).</p>
+
+<p>Assigns the generated table nodes to the <code>tableNode</code>, <code>_theadNode</code>,
+<code>_tfootNode</code>, and <code>_tbodyNode</code> properties.  Assigns the instantiated Views
+to the <code>head</code>, <code>foot</code>, and <code>body</code> properties.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The renderTable event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__extractDisplayColumns" class="method item protected">
+    <h3 class="name"><code>_extractDisplayColumns</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l392"><code>js&#x2F;table.js:392</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Processes the full column array, distilling the columns down to those that
+correspond to cell data columns.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__initEvents" class="method item protected">
+    <h3 class="name"><code>_initEvents</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l432"><code>js&#x2F;table.js:432</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Publishes core events.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__relayAttrChange" class="method item protected">
+    <h3 class="name"><code>_relayAttrChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l467"><code>js&#x2F;table.js:467</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Relays attribute changes to the child Views.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventHandle</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The change event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetCaption" class="method item protected">
+    <h3 class="name"><code>_uiSetCaption</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>htmlContent</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l520"><code>js&#x2F;table.js:520</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Creates, removes, or updates the table's <code>&lt;caption&gt;</code> element per the input
+value.  Empty values result in the caption being removed.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">htmlContent</code>
+                        <span class="type">HTML</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The content to populate the table caption</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetSummary" class="method item protected">
+    <h3 class="name"><code>_uiSetSummary</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l552"><code>js&#x2F;table.js:552</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the table's <code>summary</code> attribute with the input value.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__uiSetWidth" class="method item protected">
+    <h3 class="name"><code>_uiSetWidth</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>width</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l567"><code>js&#x2F;table.js:567</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the <code>boundingBox</code> and table width per the input value.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">width</code>
+                        <span class="type">Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The width to make the table</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__validateView" class="method item protected">
+    <h3 class="name"><code>_validateView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l588"><code>js&#x2F;table.js:588</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Ensures that the input is a View class or at least has a <code>render</code> method.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type">View | Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The View class</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item protected">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l360"><code>js&#x2F;table.js:360</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Cleans up state, destroys child views, etc.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getCell" class="method item">
+    <h3 class="name"><code>getCell</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>seed</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[shift]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l90"><code>js&#x2F;table.js:90</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the <code>&lt;td&gt;</code> Node from the given row and column index.  Alternately,
+the <code>seed</code> can be a Node.  If so, the nearest ancestor cell is returned.
+If the <code>seed</code> is a cell, it is returned.  If there is no cell at the given
+coordinates, <code>null</code> is returned.</p>
+
+<p>Optionally, include an offset array or string to return a cell near the
+cell identified by the <code>seed</code>.  The offset can be an array containing the
+number of rows to shift followed by the number of columns to shift, or one
+of "above", "below", "next", or "previous".</p>
+
+<p><pre class="code prettyprint"><code>// Previous cell in the previous row
+var cell = table.getCell(e.target, [-1, -1]);</p>
+
+<p>// Next cell
+var cell = table.getCell(e.target, 'next');
+var cell = table.getCell(e.taregt, [0, 1];</pre></code></p>
+
+<p>This is actually just a pass through to the <code>bodyView</code> instance's method
+by the same name.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">seed</code>
+                        <span class="type">Number | Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Array of row and column indexes, or a Node that
+    is either the cell itself or a descendant of one.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[shift]</code>
+                        <span class="type">Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Offset by which to identify the returned
+    cell Node</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getClassName" class="method item protected">
+    <h3 class="name"><code>getClassName</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>token</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l124"><code>js&#x2F;table.js:124</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the generated CSS classname based on the input.  If the <code>host</code>
+attribute is configured, it will attempt to relay to its <code>getClassName</code>
+or use its static <code>NAME</code> property as a string base.</p>
+
+<p>If <code>host</code> is absent or has neither method nor <code>NAME</code>, a CSS classname
+will be generated using this class's <code>NAME</code>.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">token</code>
+                        <span class="type">String</span>
+                    
+
+                    
+                        <span class="flag multiple" title="This argument may occur one or more times.">multiple</span>
+                    
+
+                    <div class="param-description">
+                        <p>Any number of token strings to assemble the
+    classname from.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRecord" class="method item">
+    <h3 class="name"><code>getRecord</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>seed</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Model</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l153"><code>js&#x2F;table.js:153</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Relays call to the <code>bodyView</code>'s <code>getRecord</code> method if it has one.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">seed</code>
+                        <span class="type">String | Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node or identifier for a row or child element</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Model</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRow" class="method item">
+    <h3 class="name"><code>getRow</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Node</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l166"><code>js&#x2F;table.js:166</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the <code>&lt;tr&gt;</code> Node from the given row index, Model, or Model's
+<code>clientId</code>.  If the rows haven't been rendered yet, or if the row can't be
+found by the input, <code>null</code> is returned.</p>
+
+<p>This is actually just a pass through to the <code>bodyView</code> instance's method
+by the same name.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type">Number | String | Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Row index, Model instance, or clientId</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Node</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_intializer" class="method item protected">
+    <h3 class="name"><code>intializer</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l449"><code>js&#x2F;table.js:449</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Constructor logic.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Configuration object passed to the constructor</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">TableView</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l496"><code>js&#x2F;table.js:496</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the UI in the configured <code>container</code>.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">TableView</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_body" class="property item">
+    <h3 class="name"><code>body</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l50"><code>js&#x2F;table.js:50</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The object or instance of the class assigned to <code>bodyView</code> that is
+responsible for rendering and managing the table's <code>&lt;tbody&gt;</code>(s) and its
+content.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_CAPTION_TEMPLATE" class="property item">
+    <h3 class="name"><code>CAPTION_TEMPLATE</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l29"><code>js&#x2F;table.js:29</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The HTML template used to create the caption Node if the <code>caption</code>
+attribute is set.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;caption class=&quot;{className}&quot;&#x2F;&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_displayColumns" class="property item">
+    <h3 class="name"><code>displayColumns</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l421"><code>js&#x2F;table.js:421</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Array of the columns that correspond to those with value cells in the
+data rows. Excludes colspan header columns (configured with <code>children</code>).</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_foot" class="property item">
+    <h3 class="name"><code>foot</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l62"><code>js&#x2F;table.js:62</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The object or instance of the class assigned to <code>footerView</code> that is
+responsible for rendering and managing the table's <code>&lt;tfoot&gt;</code> and its
+content.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_head" class="property item">
+    <h3 class="name"><code>head</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l74"><code>js&#x2F;table.js:74</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The object or instance of the class assigned to <code>headerView</code> that is
+responsible for rendering and managing the table's <code>&lt;thead&gt;</code> and its
+content.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_TABLE_TEMPLATE" class="property item">
+    <h3 class="name"><code>TABLE_TEMPLATE</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l40"><code>js&#x2F;table.js:40</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>The HTML template used to create the table Node.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;table cellspacing=&quot;0&quot; class=&quot;{className}&quot;&#x2F;&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_bodyConfig" class="attr item">
+    <a name="config_bodyConfig"></a> 
+    <h3 class="name"><code>bodyConfig</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l739"><code>js&#x2F;table.js:739</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Configuration overrides used when instantiating the <code>bodyView</code>
+instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_bodyView" class="attr item">
+    <a name="config_bodyView"></a> 
+    <h3 class="name"><code>bodyView</code></h3>
+    <span class="type">Function | Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l719"><code>js&#x2F;table.js:719</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>An instance of this class is used to render the contents of the table's
+<code>&lt;tbody&gt;</code>&mdash;the data cells in the table.</p>
+
+<p>The instance of this View will be assigned to the instance's <code>body</code>
+property.</p>
+
+<p>It is not strictly necessary that the class function assigned here be
+a View subclass.  It must however have a <code>render()</code> method.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> Y.DataTable.BodyView</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_caption" class="attr item">
+    <a name="config_caption"></a> 
+    <h3 class="name"><code>caption</code></h3>
+    <span class="type">HTML</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l612"><code>js&#x2F;table.js:612</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>HTML content of an optional <code>&lt;caption&gt;</code> element to appear above the
+table.  Leave this config unset or set to a falsy value to remove the
+caption.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> undefined (initially unset)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_columns" class="attr item">
+    <a name="config_columns"></a> 
+    <h3 class="name"><code>columns</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l624"><code>js&#x2F;table.js:624</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Columns to include in the rendered table.</p>
+
+<p>This attribute takes an array of objects. Each object is considered a
+data column or header cell to be rendered.  How the objects are
+translated into markup is delegated to the <code>headerView</code>, <code>bodyView</code>,
+and <code>footerView</code>.</p>
+
+<p>The raw value is passed to the <code>headerView</code> and <code>footerView</code>.  The
+<code>bodyView</code> receives the instance's <code>displayColumns</code> array, which is
+parsed from the columns array.  If there are no nested columns (columns
+configured with a <code>children</code> array), the <code>displayColumns</code> is the same
+as the raw value.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_footerConfig" class="attr item">
+    <a name="config_footerConfig"></a> 
+    <h3 class="name"><code>footerConfig</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l709"><code>js&#x2F;table.js:709</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Configuration overrides used when instantiating the <code>footerView</code>
+instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_footerView" class="attr item">
+    <a name="config_footerView"></a> 
+    <h3 class="name"><code>footerView</code></h3>
+    <span class="type">Function | Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l691"><code>js&#x2F;table.js:691</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>An instance of this class is used to render the contents of the
+<code>&lt;tfoot&gt;</code> (if appropriate).</p>
+
+<p>The instance of this View will be assigned to the instance's <code>foot</code>
+property.</p>
+
+<p>It is not strictly necessary that the class function assigned here be
+a View subclass.  It must however have a <code>render()</code> method.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_headerConfig" class="attr item">
+    <a name="config_headerConfig"></a> 
+    <h3 class="name"><code>headerConfig</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l681"><code>js&#x2F;table.js:681</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Configuration overrides used when instantiating the <code>headerView</code>
+instance.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_headerView" class="attr item">
+    <a name="config_headerView"></a> 
+    <h3 class="name"><code>headerView</code></h3>
+    <span class="type">Function | Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l661"><code>js&#x2F;table.js:661</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>An instance of this class is used to render the contents of the
+<code>&lt;thead&gt;</code>&mdash;the column headers for the table.</p>
+
+<p>The instance of this View will be assigned to the instance's <code>head</code>
+property.</p>
+
+<p>It is not strictly necessary that the class function assigned here be
+a View subclass.  It must however have a <code>render()</code> method.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> Y.DataTable.HeaderView</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_summary" class="attr item">
+    <a name="config_summary"></a> 
+    <h3 class="name"><code>summary</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l601"><code>js&#x2F;table.js:601</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.5.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Content for the <code>&lt;table summary="ATTRIBUTE VALUE HERE"&gt;</code>.  Values
+assigned to this attribute will be HTML escaped for security.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&#x27; (empty string)</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_width" class="attr item">
+    <a name="config_width"></a> 
+    <h3 class="name"><code>width</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_table.js.html#l646"><code>js&#x2F;table.js:646</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 3.6.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>Width of the table including borders.  This value requires units, so
+<code>200</code> is invalid, but <code>'200px'</code> is valid.  Setting the empty string
+(the default) will allow the browser to set the table width.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

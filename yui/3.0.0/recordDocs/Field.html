@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: recordset  Field   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1283618790.51" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1283618790.51" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1283618790.51"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1283618790.51"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>recordset&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_recordset.html" title="recordset">recordset</a>
+                 &gt; Field 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Field</b>
+                        <span class="extends">
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        The Field class stores a single piece of data, keeping track of its modified (dirty) or newly created(new)
+current, previous and initial values.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Field</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                value
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">value</span>
+                                                    &lt;<span property="yui:type">mixed</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  initial value for this field</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:property" resource="#property__dirty">
+                                    <h4><a name="property__dirty" property="yui:name">_dirty</a>
+                                        - <code>private <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Signals if the value was modified since last created or accepted as good
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__initialValue">
+                                    <h4><a name="property__initialValue" property="yui:name">_initialValue</a>
+                                        - <code>private <span property="yui:type">any</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Stores the initial value of the field
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__new">
+                                    <h4><a name="property__new" property="yui:name">_new</a>
+                                        - <code>private <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Signals if the field has been newly created instead of loaded from a remote source
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:property" resource="#property__oldValue">
+                                    <h4><a name="property__oldValue" property="yui:name">_oldValue</a>
+                                        - <code>private <span property="yui:type">any</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Stores the most recent previous value, useful for undoing
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_value">
+                                    <h4><a name="property_value" property="yui:name">value</a>
+                                        - <code><span property="yui:type">any</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Stores the value for this field
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_recordset.html" title="recordset">recordset</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="Field.html" title="Field">Field</a></li>
+                                <li class=""><a href="Record.html" title="Record">Record</a></li>
+                                <li class=""><a href="RecordSet.html" title="RecordSet">RecordSet</a></li>
+                                <li class=""><a href="RecordSet.FieldDef.html" title="RecordSet.FieldDef">RecordSet.FieldDef</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="record.js.html" title="record.js">record.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#property__dirty" title="_dirty">_dirty</a></li>
+                                <li class="private"><a href="#property__initialValue" title="_initialValue">_initialValue</a></li>
+                                <li class="private"><a href="#property__new" title="_new">_new</a></li>
+                                <li class="private"><a href="#property__oldValue" title="_oldValue">_oldValue</a></li>
+                                <li class=""><a href="#property_value" title="value">value</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Record.html#method_addField", "access": "", "host": "Record", "type": "method", "name": "addField"}, {"url": "Record.html#event_beforeDeletedChange", "access": "", "host": "Record", "type": "event", "name": "beforeDeletedChange"}, {"url": "Record.html#event_beforeDirtyChange", "access": "", "host": "Record", "type": "event", "name": "beforeDirtyChange"}, {"url": "Record.html#event_beforeNewChange", "access": "", "host": "Record", "type": "event", "name": "beforeNewChange"}, {"url": "Record.html#config_deleted", "access": "", "host": "Record", "type": "config", "name": "deleted"}, {"url": "Record.html#event_deletedChange", "access": "", "host": "Record", "type": "event", "name": "deletedChange"}, {"url": "Record.html#config_dirty", "access": "", "host": "Record", "type": "config", "name": "dirty"}, {"url": "Field.html#property__dirty", "access": "private", "host": "Field", "type": "property", "name": "_dirty"}, {"url": "Record.html#event_dirtyChange", "access": "", "host": "Record", "type": "event", "name": "dirtyChange"}, {"url": "Record.html#method_each", "access": "", "host": "Record", "type": "method", "name": "each"}, {"url": "Record.html#property__fields", "access": "private", "host": "Record", "type": "property", "name": "_fields"}, {"url": "Record.html#method_getField", "access": "", "host": "Record", "type": "method", "name": "getField"}, {"url": "Record.html#method_getValue", "access": "", "host": "Record", "type": "method", "name": "getValue"}, {"url": "Record.html#method_initializer", "access": "", "host": "Record", "type": "method", "name": "initializer"}, {"url": "Field.html#property__initialValue", "access": "private", "host": "Field", "type": "property", "name": "_initialValue"}, {"url": "Record.html#config_new", "access": "", "host": "Record", "type": "config", "name": "new"}, {"url": "Field.html#property__new", "access": "private", "host": "Field", "type": "property", "name": "_new"}, {"url": "Record.html#event_newChange", "access": "", "host": "Record", "type": "event", "name": "newChange"}, {"url": "Field.html#property__oldValue", "access": "private", "host": "Field", "type": "property", "name": "_oldValue"}, {"url": "Record.html#method_reset", "access": "", "host": "Record", "type": "method", "name": "reset"}, {"url": "Record.html#method_setValue", "access": "", "host": "Record", "type": "method", "name": "setValue"}, {"url": "Record.html#method_undo", "access": "", "host": "Record", "type": "method", "name": "undo"}, {"url": "Field.html#property_value", "access": "", "host": "Field", "type": "property", "name": "value"}];
+</script>
+</body>
+</html>

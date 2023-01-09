@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Grouping repeated column values</title>
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+
+	loader.require("reset-fonts-grids","base","datatable");
+	loader.insert({ 
+		filter:'raw',
+		onSuccess: function() {
+			//shortcuts
+			var Dom = YAHOO.util.Dom,
+				Lang = YAHOO.lang;
+				// Stores the previous values of the row to find out when they change
+			var previousRow = {}, 
+			
+				// When a cell receives a new value, 
+				dirty = false,
+				
+				// Row always start in a clean state
+				resetDirty = function (elRow,oRecord) {
+					dirty = false;
+					return true;
+				},
+				
+				// This is the function doing the groupping.  
+				// It is set as a formatter for the DataTable. 
+				// It can be set on any or all columns
+				grouper = function(elCell, oRecord, oColumn, value) {
+				
+					var k = oColumn.key,
+						// this.getTdEl() doesn't work at this point.  Call it a but or whatever
+						td = Dom.getAncestorByTagName(elCell,'td');
+					
+					// if the column should not be grouped, the value is shown 
+					// and the style set according to the current row setting
+					if (oColumn.group === false) {
+						elCell.innerHTML = value;
+						Dom.addClass(td,(dirty?'first':'next'));
+						// It is always important to clear any className previously set.
+						Dom.removeClass(td,(dirty?'next':'first'));
+					} else {
+						
+						// if the row is dirty (a value changed in a previous column)
+						// or the value changed in this very column
+						if (dirty || previousRow[k] != value) {
+							// mark the remaining columns in the row as dirty
+							dirty = true;
+							// set the corresponding className
+							Dom.addClass(td,'first');
+							Dom.removeClass(td,'next');
+							// fill the cell with the value
+							elCell.innerHTML = value;
+							// save the now current value
+							previousRow[k] = value;
+						} else {
+							// set the style for repeated cells
+							Dom.addClass(td,'next');
+							Dom.removeClass(td,'first');
+							//Make sure the cell is empty
+							elCell.innerHTML = '';
+						}
+					}
+				};
+				
+			var dt = new YAHOO.widget.DataTable(
+				'Container',
+				[
+					{key:"Col1", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col2", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col3", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col4", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col5", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col6", formatter: grouper,sortable:true,editor:'textbox'},
+					{key:"Col7", formatter: grouper,sortable:true,editor:'textbox'},
+					// The last column can never be grouped, otherwise, empty rows might appear
+					{key:"Col8", formatter: grouper,sortable:true,editor:'textbox',group:false}
+				],
+				// There is actual need to be concerned about how I build the table
+				// It simply takes random segments of the long random string below and
+				// it repeats them on a per-column basis about 80% of the time
+				new YAHOO.util.FunctionDataSource(function() {
+					var sample = "asdf iouw trlfg lnrw t0uf m foij fd0 45jas dfoijasd fjhbcvhbfsda iuwer 9823 uasf djnfd nroh234 988 sfadohjfds8y 489cnfasdjp8asiofgy095 dffsda iuo 08945 jfoutru843 trujsdfa f98urfijnc89";
+					var sampleLen = sample.length - 10;
+					var row = [],i, col;
+					var response = [];
+					var rndString = function() {
+						return Lang.trim(sample.substr(Math.random() * sampleLen, Math.random() * 6 + 6));
+					};
+					// Fills the initial sample row
+					for (col = 1; col < 9; col++) {
+						row[col] = rndString();
+					}
+					// Builds the response
+					for (i = 0; i < 100;i++) {
+						response[i] = {};
+						for (col = 1; col < 9;col++) {
+							// with a chance of about 20%, it changes the value in the sample row
+							if (Math.random() > 0.8) {
+								row[col] = rndString();
+							}
+							response[i]['Col' + col] = row[col];
+						}
+					}
+					return response;					
+				}),
+				{
+					formatRow:resetDirty
+				}
+			);
+			dt.subscribe("cellClickEvent", dt.onEventShowCellEditor);
+			
+			//  After rendering the DataTable, make sure to clear the image of the last row checked
+			// so that if the table is refreshed (via sort or whatever) it will start comparing from zero
+			dt.subscribe('renderEvent',function () {
+				previousRow = {};
+			});
+			
+			// When a cell is checked, we refresh the full row comparing it with the row above,
+			// and the row below comparing it to this one.
+			dt.subscribe('editorSaveEvent',function(oArgs) {
+				var recIndex = this.getRecordIndex(oArgs.editor.getRecord());
+				if (recIndex > 0) {
+					previousRow = this.getRecord(recIndex -1).getData();
+					this.updateRow(recIndex,this.getRecord(recIndex).getData());
+				}
+					
+				if (recIndex < this.getRecordSet().getLength()) {
+					previousRow = this.getRecord(recIndex).getData();
+					this.updateRow(recIndex + 1 ,this.getRecord(recIndex + 1).getData());
+				}
+			});
+
+		}
+	});
+})();
+		</script>
+<style type="text/css">
+	.yui-skin-sam .yui-dt td.first {
+		border-top: inset medium silver;
+	}
+	.yui-skin-sam .yui-dt td.next {
+		/* optional, I did nothing */
+	}
+</style>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<h1>Grouping repeated column values</h1>
+		<p>This DataTable is filled with random values with an 80% chance that the value on any cell will repeat the value on the cell above. </p>
+		<p>All columns have a cell formatter assigned which will compare the current value of that cell with the value of the cell above.</p>
+		<p>If the cell values are the same, it won't store the value in the cell and will assign it a particular className. 
+		If the value for the cell is different then it will show it and will assign a different className which, in this case, simply draws
+		a border to separate it from the previous row. </p>
+		<p>Once a value changes in a cell, the remaining of the row will be marked as different even though some values may actually repeat.</p>
+		<p>Columns may be excluded from the grouping by setting <code>group:false</code> in its column definition. 
+		At least one column should not be grouped, otherwise whole rows might be empty.  Here, we don't group the last one.  
+		Still, they need the formatter so that the style for the grouping propagates across all the row.</p>
+		<p>All columns are sortable and all cells -even empty ones- are editable.  You can group/ungroup cells by changing the values of the cells making them equal/different
+		than the value of the cells above/below.</p>
+		<p>The new <a href="http://developer.yahoo.com/yui/docs/YAHOO.widget.DataTable.html#config_formatRow">row formatter</a> option would be the best place to handle this, but several deficiencies in the function makes it impractical.</p>
+		<div id="Container"></div>
+
+	</div>
+	</body>
+</html>
+				

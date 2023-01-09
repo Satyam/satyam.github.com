@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>JavaScript Objects</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>JavaScript Objects</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+      
+      <h2>JavaScript objects</h2>
+      
+      <ul>
+        <li>JavaScript objects are dynamic objects more like hash tables and collections than traditional class-based objects</li>
+        <li>Properties and methods can be added at any time</li>
+        <li>Methods are nothing more than properties that reference (point to) functions</li>
+        <li>Objects inherit from objects, not from classes (there aren't any). Ultimately, they all inherit from Object</li>
+        <li>Functions and Arrays are objects</li>
+        <li>Objects can be used anywhere a variable is expected.</li>
+        <li>Functions, being objects, can be used anywhere a variable is expected</li>
+        <li>Functions can have properties, just like any other object</li>
+    </ul>
+    
+
+    <h2>Object literal</h2>
+
+    <ul>
+        <li>Handy place to store information</li>
+        <li>Cannot be instanced, it <b>is</b> an instance</li>
+</ul>
+<pre>var mySimpleObject = {
+    numericValue: 1,
+    stringValue: 'abc',
+    nestedObject: {
+        num: 2,
+        str: 'def'
+    },
+    myFunction: function (arg) {
+        alert(arg);
+    }
+};
+
+alert(mySimpleObject.numericValue);     <tt>1</tt>
+alert(mySimpleObject.nestedObject.str); <tt>def</tt>
+mySimpleObject.myFunction('hello');     <tt>hello</tt>
+
+mySimpleObject.numericValue = 2;
+alert(mySimpleObject.numericValue);     <tt>2</tt>
+
+mySimpleObject.newStringValue = 'xyz';
+alert(mySimpleObject.newStringValue);   <tt>xyz</tt>
+
+alert(mySimpleObject.noValueAtAll);     <tt>undefined</tt>
+
+// new properties can be added at any time
+mySimpleObject.extraProperty = 56;</pre>
+
+<ul>
+<li>You don't use <code>var</code> to declare new properties in an object, you just reference them as if they existed</li>
+<li>Objects are a great way to pass extra optional arguments to functions</li>
+<li>For all arguments after the first few mandatory arguments, take an object and simply browse through it picking up the extra named arguments</li>
+</ul>
+<pre>
+var myCreateElement = function (type, attributes) {
+    var el = document.createElement(type);
+    for (var name in attributes) {
+        if (attributes.hasOwnProperty(name)) {
+            el.setAttribute(name,attributes[name]);
+        }
+    }
+    return el;
+}
+
+$('someContainer').appendChild(myCreateElement('img',{src:'up.gif'}));</pre>
+
+      <h2>Objects</h2>
+
+      <ul>
+        <li>Properties (hence functions) can be added at any time</li>
+        <li>Objects are always passed by reference</li>
+        <li>Comparing objects only compares the values of the references, not the contents</li>
+        <li>Objects are not copied (cloned) on assignment</li>
+</ul>
+<pre>var notACopy = mySimpleObject;                    // both point to the same object
+var myClone = YAHOO.lang.merge(mySimpleObject);   // myClone is a separate object</pre>
+<ul>
+<li>Properties can be accessed as an array:</li>
+</ul>
+<pre>// These two are the same
+alert(YAHOO['example'].mySimpleObject['numericValue']);
+alert(YAHOO.example.mySimpleObject.numericValue);</pre>
+
+<ul>
+<li>Which allows for otherwise invalid identifiers:</li>
+</ul>
+<pre>YAHOO['example'].mySimpleObject['invalid identifier'] = 'something';</pre>
+
+<ul>
+<li>Can be enumerated</li>
+</ul>
+<pre>for (var key in mySimpleObject) {
+    if (mySimpleObject.hasOwnProperty(key)) {
+        var value = mySimpleObject[key];
+        // ...
+    }
+}</pre>
+
+
+<h2>Arrays</h2>
+
+<ul><li>Arrays are also dynamic, no space needs to be reserved for them</li>
+<li>Arrays can be sparsely populated, unused locations take no space</li>
+<li>Comparing arrays only compares the values of the references, not the contents</li>
+<li>Property <code>length</code> reports one higher than the highest index, not the existing number of elements</li>
+</ul>
+<pre>var myEmptyArray = [];
+var mySmallArray = ['red','green','blue'];
+mySmallArray[10] = 'pink';
+alert(mySmalArray.length); <tt>11</tt>
+alert(mySmallArray[9]);    <tt>undefined</tt>
+</pre>
+<ul><li>Can be enumerated:</li></ul>
+<pre>for (var i = 0; i &lt; mySmallArray.length; i++ ){
+    var value = mySmallArray[i];
+}</pre>
+<ul><li>Can store objects</li>
+<li>Can be contained in objects:</li></ul>
+<pre>var myArray = [
+    {key: 'first', value: 'firstValue'},
+    {key: 'second', value: 'secondValue'},
+    {key: 'third', value: ['3.1', '3.2', '3.3']
+];</pre>
+<p><b>Important</b>: Never leave a trailing comma after the last element of an array.</p>
+<ul><li>Can be used as stack:</li></ul>
+<pre>myStack.push('value');
+alert(myStack[myStack.length -1]);  // peek at value at top of stack
+alert(myStack.pop());               // pop and show top of the stack value
+</pre>
+<ul><li>Can be used as a queue:</li></ul>
+<pre>myQ.shift('incoming value');
+alert(myQ.pop())  // pop and show head of queue</pre>
+<ul>
+<li>Just like any other object, assigning an array copies the <u>reference</u> to the array, it doesn't copy the array</li>
+</ul>
+<pre>myArray = [1, 2, 3];
+myOtherReference = myArray;
+myClonedArray = myArray.slice(0);  // produces a clone (copy) of the array
+myArray.push(4);                   // add an element to the first one
+console.log(myArray.length, myOtherReference.length, myClonedArray.length); <tt>4 4 3</tt>
+</pre>
+    
+
+<h2>JSON: JavaScript Object Notation</h2>
+
+<ul>
+<li>Data interchange format based on JavaScript syntax, simplified to make it portable.</li>
+<li>It should not contain code or anything that might cause execution</li>
+<li>All identifiers should be quoted</li>
+<li>JavaScript has specific syntax to write Regular Expressions, but none for dates.  This limitation gets reflected on JSON which does not have a standard way to transfer dates</li>
+<li>JSON will reject expressions such as <code>{"date": new Date(2008, 3, 11)}</code> because it does not allow any method invocation</li>
+<li>The best would be if it accepted, for example, <code>{"date": #2008-03-11#}</code> or something like it</li>
+</ul>
+<pre>var dataArray = {
+    date: new Date(2008, 3, 11),
+    number: 1,
+    bool: true
+}
+
+var jsonString = YAHOO.lang.JSON.stringify(dataArray);
+console.log(jsonString); <tt>{"date": "2008-04-10T22:00:00Z", "number": 1, "bool": true}</tt>
+
+console.log(YAHOO.lang.JSON.parse(jsonString,function(k,v) {
+    switch (k) {
+        case 'date':
+            return YAHOO.lang.JSON.stringToDate(v);
+            break;
+        // any other field that needs to be converted
+        default:
+            return v;
+    }
+}));
+               <tt>bool        true                                                     </tt>
+               <tt>date        Fri Apr 11 2008 00:00:00 GMT+0200 (Romance Standard Time)</tt>
+               <tt>number      1                                                        </tt></pre>
+
+<ul>
+<li>The problem with this is that it forces the YUI JSON component to traverse the whole data structure</li>
+<li>Field names to be converted have to be listed in all conversions</li>
+<li>It does not make any difference in between fields of the same name but containing different data in other branches of the hierarchy</li>
+<li>If data is received via <code>YAHOO.util.DataSource</code>, parsing can be done there (since the DataSource has to loop through the data anyway, no extra time is lost)</li>
+</ul>
+<p>See: <a href="http://www.json.org">www.json.org</a></p>
+
+<h2><code>this</code></h2>
+
+<ul>
+<li>Intrinsic variable available within all functions.</li>
+<li>It represents the scope in which the function is being executed (the 'scope' being whatever <code>this</code> points to)</li>
+<li>If a function is within an object, <code>this</code> will point to the object itself allowing access to the other members of the object</li>
+</ul>
+<pre>var x = function () {
+    console.log('x:', this);
+};
+
+var y = {
+    x: function () {
+        console.log('y.x:', this);
+    },
+    z: function () {
+        var w = function () {
+            console.log('y.z:', this);
+        };
+        w();
+    }
+    
+};
+
+
+x();                            <tt>x: window</tt>
+y.x();                          <tt>y.x: Object (in fact, y)</tt>
+y.z();                          <tt>y.z: window</tt>
+
+y.v = function() {             // notice how easy it is to add one more property or method
+    var w = function() {
+        console.log('y.v:', this);
+    }
+    w.call(this);
+};
+
+y.v();                          <tt>y.v: Object (y)</tt>
+
+console.log('new x:', new x()); <tt>x: Object (y)</tt>
+                                <tt>new x: Object (y)</tt>
+console.log('no call:', x);     <tt>no call: function()</tt>
+
+</pre>
+
+<h2><code>this</code> and returns</h2>
+<p>Functions can be called in three ways:</p>
+<ul>
+<li>As a plain function<ul>
+    <li><code>this</code> points to the global scope</li>
+    <li>returns <code>undefined</code> unless stated otherwise (<code>return value</code> statement)</li>
+    </ul>
+</li>
+<li>As a method<ul>
+    <li><code>this</code> points to the object it belongs to</li>
+    <li>returns <code>undefined</code> unless stated otherwise</li>
+    </ul>
+</li>
+<li>As a constructor<ul>
+    <li><code>this</code> points to the object being instanced</li>
+    <li>returns the new object being built (in fact, <code>this</code>) or whatever is explicitly returned</li>
+    </ul>
+</li>
+</ul>
+<p><code>this</code> can also be forced via the <code>call</code> or <code>apply</code> methods.</p>
+<ul>
+<li>Both take a first argument which can be any object. <code>this</code> will then reference this object.</li>
+<li>The arguments after the first will be passed by <code>call</code> to the function as their only arguments</li>
+<li><code>apply</code> takes an array as a second argument and this will be expanded and become the individual, separate arguments of the called function, this allows for the dynamic assembly of arguments</li>
+</ul>
+                              
+
+            
+                              
+<h2>Object prototypes</h2>
+
+<p>An object that can be instantiated</p>
+<ul><li>You define a function, which will become the constructor:</li></ul>
+<pre>var MyPrototype = function (args) {
+    this.args = args;
+};</pre>
+<ul>
+<li>Object prototypes are defined by the existence of its constructor</li>
+<li>It is customary for its name to start in upper case, like classes in other languages</li>
+<li>Objects have a <code>this</code> variable which points to itself so its own properties can be accessed</li>
+<li>So far, it is nothing more than another function, it is the way it is called that makes it a constructor</li>
+</ul>
+<pre>var myObjectInstance1 = new MyPrototype('object 1');
+var myObjectInstance2 = new MyPrototype('object 2');
+alert(myObjectInstance1.args);   <tt>object 1</tt>
+alert(myObjectInstance2.args);   <tt>object 2</tt>
+</pre>
+<ul><li>If you forget the <code>new</code> ... </li></ul>
+<pre>var myFailedInstance = MyPrototype('no object');  // no <code>new</code>
+alert(window.args);              <tt>no object</tt>
+alert(myFailedInstance);         <tt>undefined</tt>
+</pre>
+<p> ... <code>this</code> will point to the global namespace and you will have no object at all.  Constructors return a reference to the instance they have just created.  The <code>new</code> keyword when you call a function makes it a constructor.  No <code>new</code>, no constructor, no new object returned. Tough luck.</p>
+
+<p>The constructor might do nothing, but it must be there for the object to exist.  <code>Function</code> objects have the <code>prototype</code> property which is built-in and allows for object prototypes.</p>
+
+<h2>Method and property prototypes</h2>
+
+<ul>
+<li>Functions have a <code>prototype</code> property which itself contains an object that is initially empty</li>
+<li>Objects instanced from an object prototype will get its prototypes copied (actually a reference to the prototype)</li>
+<li>It is the mechanism for inheritance</li>
+</ul>
+
+<pre>
+var myPrototype = function (location) {
+    this.location = location;
+};
+
+myPrototype.regularFunction = function () {
+    return this.location;
+};
+
+myPrototype.prototype.getLocation = function () {
+    return this.location;
+};
+
+var myInstance = new myPrototype('at London');
+// console.log(myInstance.regularFunction());                   // this one gives a syntax error
+console.log(myInstance.getLocation());                          <tt>at London</tt>
+console.log(myPrototype.regularFunction());                     <tt>undefined</tt>
+
+myPrototype.prototype.theAnswer = 42;
+
+myPrototype.prototype.getTheAnswer = function () {
+    return this.theAnswer;
+}
+
+console.log('The answer is ',myInstance.getTheAnswer());        <tt>The answer is 42</tt>
+console.log(myInstance.getLocation());                          <tt>still at London</tt>
+</pre>
+<ul>
+<li>Changes to the <code>prototype</code> get immediately reflected in their inheritors, even those already created</li>
+</ul>
+<pre>
+String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, "");
+};
+
+console.log('|' + '      asdf    '.trim() + '|');         <tt>|asdf|</tt>
+</pre>
+<ul>
+<li>The object instance has no constructor, it is not copied to the instance, so it is no better than an object literal and it cannot be instanced</li>
+</ul>
+<ul>
+<li>There are two ways to create instance properties<ul>
+    <li>By setting them in the constructor</li>
+    <li>By declaring them as prototypes in the object prototype</li>
+    </ul></li>
+</ul>
+<pre>// First way, it gets created and dynamically initialized
+var myPrototype = function (location) {
+    this.location = location;
+    this.getLocation = function() {
+        return this.location;
+    }
+};
+
+// Second way, variables can only get initialized with a constant
+myPrototype.prototype.location = 'London';
+myPrototype.prototype.getLocation = function () {
+    return this.location;
+};
+</pre>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+</div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

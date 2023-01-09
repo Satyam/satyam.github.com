@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Events</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>Events</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      
+<h2>Events</h2>
+<ul>
+    <li>Vital in a responsive user interface</li>
+    <li>Events may come from<ul>
+        <li>User interaction<ul>
+            <li>Mouse Clicks</li>
+            <li>Keystrokes</li>
+            <li>Manipulation of environment</li>
+            </ul></li>
+        <li>Timers<ul>
+            <li><code>window.setTimeout</code></li>
+            <li><code>window.setInterval</code></li>
+            <li><code>YAHOO.lang.later</code></li>
+            </ul></li>
+        <li>Communications<ul>
+            <li><code>YAHOO.util.Connect.asyncRequest</code></li>
+            <li><code>YAHOO.util.Get.script</code></li>
+            </ul></li>
+        </ul></li>
+	<li>Events are not triggered while the execution thread is working, the whole UI is frozen, but they are queued</li>
+	<li>More than one listener can be set to listen to the same event.  They are called in the order they registered themselves</li>
+    </ul>
+    
+<h2>Callbacks</h2>
+<ul>
+    <li>Events are listened to by callback functions</li>
+    <li>Callback functions are just regular functions or object methods</li>
+    <li>Each type of event lists the arguments this callback function is to expect</li>
+    <li>A callback function can be<ul>
+        <li>A function you define elsewhere and then you provide the listener with a reference to it</li>
+        </ul></li>
+    </ul>
+<pre>var myCallback = function (ev) {
+    alert('You pressed ' + (ev.shiftKey?'uppercase ':'lowercase ') + String.fromCharCode(ev.charCode) );
+};
+
+YAHOO.util.Event.on(document.body, 'keypress', myCallback);</pre>
+<ul>
+    <ul>
+        <li>A function you define on the spot</li>
+        </ul>
+    </ul>
+<pre>YAHOO.util.Event.on(document.body, 'keypress', function (ev) {
+    alert('You pressed ' + (ev.shiftKey?'uppercase ':'lowercase ') + String.fromCharCode(ev.charCode) );
+});</pre>
+<ul>
+    <ul>
+        <li>A built-in function provided by the component for that purpose</li>
+        </ul>
+    </ul>
+<pre>myDataTable.subscribe('cellClickEvent', myDataTable.onEventShowCellEditor);</pre>
+<ul>
+	<li>An event listener can prevent the normal propagation (bubbling) of events</li>
+</ul>
+<pre>YAHOO.util.Event.on(document.body, 'keypress', function (ev) {
+	if (ev.charCode === 13) {
+		YAHOO.util.Event.stopEvent(ev);
+		// I'll take care of handling this one
+	}
+});</pre>
+
+
+<h2>Scope</h2>
+<ul>
+    <li>The scope of the callback will be that of the object listened to</li>
+    <li>For a regular UI event, such as the key-press above, it will be the object in the first argument (ie: <code>document.body</code>)</li>
+    <li>For a YUI custom event, such as DataTable's <code>cellClickEvent</code> it will be the object you subscribe to (ie: the DataTable)</li>
+	<li>The scope is important because if the same callback is used to listen to similar events in different objects, it needs to know which one called</li>
+    <li>The scope can be adjusted to anything you want when you add the listener</li>
+</ul>
+<h2>Event listeners and Closure</h2>
+<ul>
+    <li>Closure can be used to great advantage in in-line callbacks</li>
+    </ul>
+<pre>// this code is a segment of some event listener
+// The scope is set to that of the DataTable
+
+//<code>rowPos</code> is an argument saying where to insert a new empty row
+this.addRow({}, rowPos);
+this.highlightRow(rowPos);
+var self = this;
+window.setTimeout(function () {
+    self.unhighlightRow(rowPos);
+}, 2000);</pre>
+<ul>
+    <li>Both <code>rowPos</code> and <code>self</code> are seen from inside the callback function</li>
+    <li>The <code>this</code> of the outer function is not available to the inner function, but a variable (<code>self</code>) can hold a copy which will be visible inside</li>
+    </ul>
+    
+<h2>Event Delegation</h2>
+<ul>
+    <li>Each event listener consumes resources</li>
+	<li>Events bubble up from the innermost element all the way up to the document body</li>
+    <li>When a group of elements need to be listened to, if they are within the same container, set the listener to the container</li>
+	<li>You can find out which was the actual target of the event<ul>
+		<li>Via <code>YAHOO.util.Event.getTarget</code> on the event argument received in the callback</li>
+		<li>Some custom events provide the target as an argument</li>
+		</ul></li>
+    <li>For example, in the DataTable, the <code>cellClickEvent</code> is set to listen to clicks on the <code>&lt;table></code> and it provides the target in an argument</li>
+    </ul>
+<pre>
+myDataTable.subscribe('cellClickEvent', function (oArgs) {
+    var target = oArgs.target;
+    var column = this.getColumn(target);
+    var record = this.getRecord(target);
+    switch (column.key) {
+        // decide what to do based on which column was clicked
+    }
+});
+</pre>
+
+<h2>Don'ts and don'ts</h2>
+<pre>&lt;button onClick="javascript:doSomething(this)">Click Here&lt;/button></pre>
+
+<h2>Checking for the availability of elements</h2>
+<ul>
+	<li>With all sorts of things happening asynchronously, it is sometimes difficult to keep everything in sync</li>
+	<li>Your scripts might load before the page is rendered</li>
+	<li>If the scripts are loaded via YUI Loader at the end of the &lt;body>, these checks are not required</li>
+	<li>The user will see the static elements of the page faster if the scripts are loaded later but the stylesheets first</li>
+	<li>You can either check for the availablilty of specific elements or for the full page availability</li>
+	</ul>
+<pre>YAHOO.util.Event.on('window','load',function() {
+	// everything should be ready now
+};
+
+YAHOO.util.Event.onDOMReady(function () {
+	// everything should be ready now
+	// images not yet loaded
+};
+
+YAHOO.util.Event.onAvailable('elementId',function() {
+	// element with id 'elementId' should be ready now
+};
+
+YAHOO.util.Event.onContentReady('elementId',function() {
+	// element with id 'elementId' and its nextSibling should be ready now
+};</pre>
+<ul>
+<li>Care should also be taken with dynamically generated content<ul>
+<li>Upon return of the creation of a DataTable, the DataTable contents might not be ready, wait for <code>renderEvent</code></li>
+<li>If a tab content was set via <code>dataSrc</code>, wait for <code>dataLoadedChange</code></li>
+<li>Likewise with any other content loaded asynchronously, though each component has a different trick</li>
+</ul></li>
+</ul>
+
+
+      
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

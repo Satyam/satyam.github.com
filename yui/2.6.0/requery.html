@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>DataTable Requery</title>
+		<script src="http://yui.yahooapis.com/2.7.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc3"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<h1>DataTable Requery</h1>
+		<p>This page shows my <code>requery</code> custom method for YUI DataTable:</p>
+		<pre>
+YAHOO.widget.DataTable.prototype.requery = function(newRequest) {
+	var ds = this.getDataSource();
+	if (ds instanceof YAHOO.util.LocalDataSource) {
+		ds.liveData = newRequest;
+		ds.sendRequest("",
+			{
+				success: this.onDataReturnInitializeTable,
+				failure: this.onDataReturnInitializeTable,
+				scope: this
+			}
+		);
+	} else {
+		ds.sendRequest(
+			(newRequest === undefined?this.get('initialRequest'):newRequest),
+			{
+				success: this.onDataReturnInitializeTable,
+				failure: this.onDataReturnInitializeTable,
+				scope: this
+			}
+		);
+	}
+};
+</pre>
+		<p>The method has to be included in the page that will use it at any time after the source code 
+		for the DataTable gets loaded but before any DataTable is instantiated.  
+		The method accepts a single argument which 
+		is the new request which depends of the nature of the DataSource used.  For LocalDataSources,
+		it has to be the new set of data to be loaded.  For all the rest is an argument of the same
+		nature as that initially provided in the <code>initialRequest</code> configuration attribute
+		of the DataTable.  In this case, if not provided, the requery will use the same values
+		as set initially.</p>
+		
+		<p>Below you will find three DataTables, the first one built using an XHRDataSource on remote JSON data, 
+		the second a LocalDataSource on a local array and the third using a function data source.  
+		The two last examples actually use the same source of data as the first
+		which is first fetched from the same remote source via Connection Manager, parsed with the YUI JSON parser
+		and stored in a local variable so, in the end, it is a local array for the purpose of the DataSource.</p>
+		
+		<p>Each table has a 'requery' button.  The code for them is:</p>
+<pre>// remote DataSource
+Event.on('requeryXHR','click',function() {
+	dtXHR.requery('startIndex=10&amp;results=8');
+});
+
+// Local Data Source
+Event.on('requeryLocal','click',function() {
+	dtLocal.requery(data.slice(10,18));
+});
+
+// Function Data Source
+Event.on('requeryFunction','click',function() {
+	dtFunction.requery({
+		startIndex: 10,
+		endIndex:18
+	});
+});
+</pre>
+		<p>The first XHRDataSource was instantiated with the base URL of the server page providing the data 
+		and the extra URL arguments, stating the startIndex and number of records expected, was given in the 
+		<code>initialRequest</code> configuration attribute of the DataTable.  
+		The requery takes a different string to be used as URL arguments which will be appended to the same base URL.</p>
+
+		<p>The second, a LocalDataSource, was instantiated with a slice of the big array of data fetched via Connection Manager.
+		On doing the requery, we provide a different slice of that same data.</p>
+
+		<p>The third, a FunctionDataSource, was instantiated with the code of the function that will retrieve the data.
+		The function simply returns a slice of the very same data that the previous DataTable uses.  
+		To tell the function which slice of the data we want, we provide an <code>initialRequest</code> 
+		configuration attribute to the DataTable with an object literal containing the start and end indexes.
+		On doing the requery, we simply provide a different set of arguments, the function remains the same.</p>
+
+		<p>This does not work with server side paging and/or sorting.</p>
+			
+		<h2>Using Remote DataSource via XHR</h2>
+		<div id="ContainerXHR"></div>
+		<button id="requeryXHR">Requery</button>
+
+		<h2>Using Local DataSource</h2>
+		<div id="ContainerLocal"></div>
+		<button id="requeryLocal">Requery</button>
+
+		<h2>Using Function DataSource</h2>
+		<div id="ContainerFunction"></div>
+		<button id="requeryFunction">Requery</button>
+	</div>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+
+	loader.require("reset-fonts-grids","base","json","datatable");
+	loader.insert({ 
+		onSuccess: function() {
+			//shortcuts
+			var Event = YAHOO.util.Event;
+				
+			// This is my requery method
+			YAHOO.widget.DataTable.prototype.requery = function(newRequest) {
+				var ds = this.getDataSource();
+				// The only one that needs to be treated different is the LocalDataSource
+				if (ds instanceof YAHOO.util.LocalDataSource) {
+					ds.liveData = newRequest;
+					ds.sendRequest("",
+						{
+							success: this.onDataReturnInitializeTable,
+							failure: this.onDataReturnInitializeTable,
+							scope: this
+						}
+					);
+				} else {
+					ds.sendRequest(
+						(newRequest === undefined?this.get('initialRequest'):newRequest),
+						{
+							success: this.onDataReturnInitializeTable,
+							failure: this.onDataReturnInitializeTable,
+							scope: this
+						}
+					);
+				}
+			};
+			
+			// All tables share the same basic definition
+
+			var columnDefs = [
+				{key:"id",label:"ID",resizeable:true},
+				{key:"name",label:"Name",resizeable:true},
+				{key:"date",label:"Date",resizeable:true},
+				{key:"price",label:"Price","type":"number",resizeable:true},
+				{key:"number",label:"Number",resizeable:true},
+				{key:"address",label:"Address",resizeable:true},
+				{key:"company",label:"Company",resizeable:true},
+				{key:"desc",label:"Description",resizeable:true},
+				{key:"age",label:"Age",resizeable:true},
+				{key:"title",label:"Title",resizeable:true},
+				{key:"phone",label:"Phone",resizeable:true},
+				{key:"email",label:"Email",resizeable:true},
+				{key:"zip",label:"Zip",resizeable:true},
+				{key:"country",label:"Country",resizeable:true}
+			],
+			fields = ['id','name','date','price','number','address','company','desc','age','title','phone','email','zip','country'];
+			
+			// I load the data for the local array from the same initial request as the remote DataSource does.
+			// I use the Connection Manager and then use the YUI JSON parser to save it in the data variable:
+			
+			var data;
+							
+			YAHOO.util.Connect.asyncRequest('GET','json_meta_proxy.php?startIndex=0&results=200',{
+				success: function (o) {
+					data = YAHOO.lang.JSON.parse(o.responseText).records;
+					
+					
+			//------------------------------------------------
+			// This is the DataTable with remote data via XHR		
+					var dtXHR = new YAHOO.widget.DataTable(
+						'ContainerXHR',
+						columnDefs,
+						new YAHOO.util.XHRDataSource(
+							// The location of the remote server page is provided here:
+							'json_meta_proxy.php?',
+							{
+								responseType:YAHOO.util.DataSource.TYPE_JSON,
+								responseSchema: {
+									resultsList:'records',
+									fields:fields
+								}
+							}
+						),
+						{
+							// The query arguments are provided here
+							initialRequest:'startIndex=0&results=12'
+						}
+					);
+					
+			// This is the code that calls the requery method
+					Event.on('requeryXHR','click',function() {
+						dtXHR.requery('startIndex=10&results=8');
+					});
+					
+			//------------------------------------------------
+			// This is the DataTable built from local data
+					var dtLocal = new YAHOO.widget.DataTable(
+						'ContainerLocal',
+						columnDefs,
+						new YAHOO.util.LocalDataSource(
+							// The data is provided right in the constructor for DataSource:
+							data.slice(0,12),
+							{
+								responseType:YAHOO.util.DataSource.TYPE_ARRAY,
+								responseSchema: {
+									fields:fields
+								}
+							}
+						)
+					);
+					
+			// The listener to the requery button simply calls requery passing a different slice of the same data
+					Event.on('requeryLocal','click',function() {
+						dtLocal.requery(data.slice(10,18));
+					});
+					
+			//------------------------------------------------
+			// This is the DataTable built via a function from local data
+					var dtFunction = new YAHOO.widget.DataTable(
+						'ContainerFunction',
+						columnDefs,
+						new YAHOO.util.FunctionDataSource(
+							// The function is given in the constructor for DataSource:
+							function(oArgs) {
+								return data.slice(oArgs.startIndex,oArgs.endIndex);
+							},
+							{
+								responseType:YAHOO.util.DataSource.TYPE_ARRAY,
+								responseSchema: {
+									fields:fields
+								}
+							}
+						),
+						{
+							// The function arguments for the initial data retrieval
+							// are provided in the initialRequest configuration attribute, 
+							// as an object literal.
+							initialRequest: {
+								startIndex: 0,
+								endIndex:12
+							}
+						}
+					);
+					
+			// The listener to the requery button simply calls requery passing a different set of arguments
+					Event.on('requeryFunction','click',function() {
+						dtFunction.requery({
+							startIndex: 10,
+							endIndex:18
+						});
+					});
+			//------------------------------------------------
+			//------------------------------------------------
+					
+					
+					
+				// the remainder of the call to asyncRequest
+				},	
+				failure: function (o) {
+					alert('something went wrong :' + o.statusText);
+				}
+					
+			});
+			
+		}
+	});
+})();
+		</script>
+	</body>
+</html>
+				

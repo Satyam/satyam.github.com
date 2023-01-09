@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: nesteddatatable   nesteddatatable.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1269283871.7" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1269283871.7" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1269283871.7"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1269283871.7"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>NestedDataTable Widget&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_nesteddatatable.html" title="nesteddatatable">nesteddatatable</a>
+                
+                 &gt; nesteddatatable.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="c">/*</span>
+<span class="c"> Copyright (c) 2010, Daniel Barreiro Lage (aka Satyam)</span>
+<span class="c"> Code licensed under the BSD License:</span>
+<span class="c"> http://developer.yahoo.net/yui/license.txt</span>
+<span class="c"> version: 1.0 (YUI 2.8.0)</span>
+<span class="c"> */</span>
+<span class="c">/**</span>
+<span class="c"> * The NestedDataTable widget provides an extension to YAHOO.widget.DataTable </span>
+<span class="c"> * that allows displaying nested DataTables nested within each row of the master table</span>
+<span class="c"> *</span>
+<span class="c"> * @module nesteddatatable</span>
+<span class="c"> * @requires yahoo, dom, event, element, datasource, datatable</span>
+<span class="c"> * @title NestedDataTable Widget</span>
+<span class="c"> */</span>
+<span class="c">/**</span>
+<span class="c"> * NestedDataTable class for Satyam&#39;s NestedDataTable widget.</span>
+<span class="c"> *</span>
+<span class="c"> * @namespace YAHOO.widget</span>
+<span class="c"> * @class NestedDataTable</span>
+<span class="c"> * @extends YAHOO.widget.DataTable</span>
+<span class="c"> * @constructor</span>
+<span class="c"> * @param elContainer {HTMLElement} Container element for the TABLE.</span>
+<span class="c"> * @param masterColDefs {Object[]} Array of object literal Column definitions for the master table.</span>
+<span class="c"> * @param masterDataSource {YAHOO.util.DataSource} DataSource instance for the master table.</span>
+<span class="c"> * @param nestedColDefs {Object[]} Array of object literal Column definitions for the nested tables.</span>
+<span class="c"> * @param nestedDataSource {YAHOO.util.DataSource} DataSource instance for the nested tables.</span>
+<span class="c"> * @param masterOptions {object} (optional) Object literal of configuration values for the master table.</span>
+<span class="c"> * @param nestedOptions {object} (optional) Object literal of configuration values for the nested tables.</span>
+<span class="c"> */</span>
+
+<span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Dom</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Dom</span><span class="o">,</span>
+        <span class="nx">Event</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span><span class="o">,</span>
+        <span class="nx">Lang</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">lang</span><span class="o">,</span>
+        <span class="nx">DT</span> <span class="o">=</span> <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">DataTable</span><span class="o">,</span>
+        <span class="nx">NESTED</span> <span class="o">=</span> <span class="s1">&#39;__NESTED__&#39;</span><span class="o">,</span>
+        <span class="nx">NESTED_TABLE</span> <span class="o">=</span> <span class="s1">&#39;__NESTED_TABLE__&#39;</span><span class="o">,</span>
+        <span class="nx">URL_GENERATOR</span> <span class="o">=</span> <span class="s1">&#39;generateNestedRequest&#39;</span><span class="o">;</span>
+
+
+    <span class="kd">var</span> <span class="nx">NDT</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">elContainer</span><span class="o">,</span> <span class="nx">masterColDefs</span><span class="o">,</span> <span class="nx">masterDataSource</span><span class="o">,</span> <span class="nx">nestedColDefs</span><span class="o">,</span> <span class="nx">nestedDataSource</span><span class="o">,</span> <span class="nx">masterOptions</span><span class="o">,</span> <span class="nx">nestedOptions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_nestedColDefs</span> <span class="o">=</span> <span class="nx">nestedColDefs</span><span class="o">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_nestedDataSource</span> <span class="o">=</span> <span class="nx">nestedDataSource</span><span class="o">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_nestedOptions</span> <span class="o">=</span> <span class="nx">nestedOptions</span> <span class="o">||</span> <span class="p">{};</span>
+
+        <span class="c">// Add the column with the toggle button</span>
+        <span class="nx">masterColDefs</span><span class="p">.</span><span class="nx">unshift</span><span class="p">({</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="nx">NESTED</span><span class="o">,</span>
+            <span class="kd">label</span><span class="o">:</span> <span class="s1">&#39; &#39;</span><span class="o">,</span>
+            <span class="nx">className</span><span class="o">:</span> <span class="nx">NESTED</span><span class="o">,</span>
+            <span class="nx">formatter</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_toggleFormatter</span>
+        <span class="p">});</span>
+
+        <span class="nx">NDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">elContainer</span><span class="o">,</span> <span class="nx">masterColDefs</span><span class="o">,</span> <span class="nx">masterDataSource</span><span class="o">,</span> <span class="nx">masterOptions</span><span class="p">);</span>
+
+        <span class="c">// Listen for a click on the toggle column</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellClickEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onEventToggleNested</span><span class="p">);</span>
+
+        <span class="c">// Whenever the master table is re-rendered, for example, in a sort, </span>
+        <span class="c">// we need to adjust the position of the child tables</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;renderEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onMasterRendered</span><span class="p">);</span>
+        <span class="c">// on a window resize the master table may move around, </span>
+        <span class="c">// we need to adjust the nested tables</span>
+        <span class="nx">Event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nb">window</span><span class="o">,</span> <span class="s1">&#39;resize&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onWindowResized</span><span class="o">,</span> <span class="k">this</span><span class="o">,</span> <span class="kc">true</span><span class="p">);</span>
+
+        <span class="c">// when rows are deleted, we need to delete the nested tables</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;rowDeleteEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onRowDeleteDestroyNested</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;rowsDeleteEvent&#39;</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onRowsDeleteDestroyNested</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nx">YAHOO</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">NestedDataTable</span> <span class="o">=</span> <span class="nx">NDT</span><span class="o">;</span>
+
+    <span class="nx">Lang</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">NDT</span><span class="o">,</span> <span class="nx">DT</span><span class="o">,</span> <span class="p">{</span>
+        <span class="c">// adding the generateNestedRequest configuration attribute</span>
+        <span class="nx">initAttributes</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oConfigs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">NDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initAttributes</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+            <span class="c">/**</span>
+<span class="c">             * @attribute generateNestedRequest</span>
+<span class="c">             * @description A function that receives a reference to the record in the master table being expanded </span>
+<span class="c">             * and should return a value that will be used as the initialRequest configuration attribute for the nested</span>
+<span class="c">             * DataTable for this record.  The value returned varies depending on the type of DataSource used.</span>
+<span class="c">             * @type function</span>
+<span class="c">             * @default null</span>
+<span class="c">             */</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setAttributeConfig</span><span class="p">(</span><span class="nx">URL_GENERATOR</span><span class="o">,</span> <span class="p">{</span>
+                <span class="nx">value</span><span class="o">:</span> <span class="kc">null</span><span class="o">,</span>
+                <span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isFunction</span>
+            <span class="p">});</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * Loops through all the records and calls the given function on all those</span>
+<span class="c">         * that have nested tables.</span>
+<span class="c">         * The function will receive:</span>
+<span class="c">         * &lt;ul&gt;</span>
+<span class="c">         * &lt;li&gt;&lt;code&gt;detail&lt;/code&gt;: details of the nested table (same as provided for all events)&lt;/li&gt;</span>
+<span class="c">         * &lt;li&gt;&lt;code&gt;record&lt;/code&gt;: reference to the Record object in the master table&lt;/li&gt;</span>
+<span class="c">         * &lt;/ul&gt;</span>
+<span class="c">         *</span>
+<span class="c">         * @method _forAllNested</span>
+<span class="c">         * @param fn {function} The function to be called on each nested tableelement to format with markup.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_forAllNested</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">rs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getRecordSet</span><span class="p">()</span><span class="o">,</span>
+                <span class="nx">rsl</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span><span class="o">,</span>
+                <span class="nx">record</span><span class="o">,</span> <span class="nx">detail</span><span class="o">;</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">rsl</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">record</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+                <span class="c">// With server-side paging and sorting, not all records might be present at once</span>
+                <span class="c">// Since you can skip pages, some intermediate records might be missing, </span>
+                <span class="c">// we need to check they exist</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">detail</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">NESTED</span><span class="p">);</span>
+                    <span class="c">// I only care for records that have a NESTED field, </span>
+                    <span class="c">// that means the record has a child table</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">detail</span><span class="o">,</span> <span class="nx">record</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Checks the vertical positions of all the expanded nested tables</span>
+<span class="c">         * whenever the master table has been re-arranged</span>
+<span class="c">         *</span>
+<span class="c">         * @method _checkPositions</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_checkPositions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_forAllNested</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">detail</span><span class="o">,</span> <span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c">// Move it down from the top corner for as much as the original height of that row</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setY</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getY</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">td</span><span class="p">)</span> <span class="o">+</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">tdOrigHeight</span><span class="p">);</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;nestedMovedEvent&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * Formats the toggle cell.  </span>
+<span class="c">         * It is a standard cell formatter but is not made public since it is tied to the toggle column</span>
+<span class="c">         * and is useless in any other context</span>
+<span class="c">         *</span>
+<span class="c">         * @method _toggleFormatter</span>
+<span class="c">         * @param el {HTMLElement} The element to format with markup.</span>
+<span class="c">         * @param oRecord {YAHOO.widget.Record} Record instance.</span>
+<span class="c">         * @param oColumn {YAHOO.widget.Column} Column instance.</span>
+<span class="c">         * @param oData {Object} (Optional) Data value for the cell.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_toggleFormatter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="o">,</span> <span class="nx">oRecord</span><span class="o">,</span> <span class="nx">oColumn</span><span class="o">,</span> <span class="nx">oData</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">expanded</span> <span class="o">=</span> <span class="nx">oData</span> <span class="o">&amp;&amp;</span> <span class="nx">oData</span><span class="p">.</span><span class="nx">expanded</span><span class="o">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">expanded</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">Dom</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">el</span><span class="o">,</span> <span class="s1">&#39;expand&#39;</span><span class="o">,</span> <span class="s1">&#39;collapse&#39;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">Dom</span><span class="p">.</span><span class="nx">replaceClass</span><span class="p">(</span><span class="nx">el</span><span class="o">,</span> <span class="s1">&#39;collapse&#39;</span><span class="o">,</span> <span class="s1">&#39;expand&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;#&quot; aria-role=&quot;button&quot; aria-pressed=&quot;&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">expanded</span> <span class="o">?</span> <span class="s1">&#39;true&#39;</span> <span class="o">:</span> <span class="s1">&#39;false&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt; &amp;nbsp; &lt;/a&gt;&#39;</span><span class="o">;</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * Expands or collapses the nested table.  </span>
+<span class="c">         * It is preset as the event listener for the cellClickEvent</span>
+<span class="c">         * and responds only on the toggle column</span>
+<span class="c">         *</span>
+<span class="c">         * @method _onEventToggleNested</span>
+<span class="c">         * @param oArgs.event {HTMLEvent} Event object.</span>
+<span class="c">         * @param oArgs.target {HTMLElement} Target element.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_onEventToggleNested</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="o">,</span>
+                <span class="nx">event</span> <span class="o">=</span> <span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="o">,</span>
+                <span class="nx">record</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="o">,</span>
+                <span class="nx">column</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">column</span><span class="p">.</span><span class="nx">key</span> <span class="o">==</span> <span class="nx">NESTED</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">Event</span><span class="p">.</span><span class="nx">stopEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFirstTdEl</span><span class="p">(</span><span class="nx">record</span><span class="p">)</span><span class="o">,</span>
+                    <span class="nx">detail</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">NESTED</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">detail</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c">// if there are no details, we make a new nested table </span>
+                    <span class="c">// and create the field to store the information about it</span>
+                    <span class="nx">record</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">NESTED</span><span class="o">,</span> <span class="p">{</span>
+                        <span class="nx">td</span><span class="o">:</span> <span class="nx">td</span><span class="o">,</span>
+                        <span class="nx">expanded</span><span class="o">:</span> <span class="kc">true</span>
+                    <span class="p">});</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_makeNestedTable</span><span class="p">(</span><span class="nx">record</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c">// if the nested table exists, we only need to toggle its visibility</span>
+                    <span class="c">// and make or take the space for it</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                        <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">td</span><span class="o">,</span> <span class="s1">&#39;height&#39;</span><span class="o">,</span> <span class="kc">null</span><span class="p">);</span>
+                        <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="s1">&#39;display&#39;</span><span class="o">,</span> <span class="s1">&#39;none&#39;</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                        <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">td</span><span class="o">,</span> <span class="s1">&#39;height&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">tdNewHeight</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+                        <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="s1">&#39;display&#39;</span><span class="o">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+                        <span class="c">// if the screen was resized while the table was hidden</span>
+                        <span class="c">// we need to position it once made visible since positioning values</span>
+                        <span class="c">// are ignored when invisible</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">setHorizPos</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">Dom</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getX</span><span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="o">+</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getRegion</span><span class="p">(</span><span class="nx">td</span><span class="p">).</span><span class="nx">width</span><span class="p">);</span>
+                            <span class="nx">detail</span><span class="p">.</span><span class="nx">setHorizPos</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;nestedToggleEvent&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">);</span>
+
+                    <span class="c">// whether we are collapsing or expanding the detail table</span>
+                    <span class="c">// we need to adjust the position of all the tables since they won&#39;t</span>
+                    <span class="c">// move along their master records</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_checkPositions</span><span class="p">();</span>
+                <span class="p">}</span>
+                <span class="c">// we have to redraw the toggle icon</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">formatCell</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getTdLinerEl</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="o">,</span> <span class="nx">record</span><span class="o">,</span> <span class="nx">column</span><span class="p">);</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Event listener for the renderEvent on the master table.</span>
+<span class="c">         * When the master is rendered, the nested tables have to be repositioned</span>
+<span class="c">         * @method _onMasterRendered</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_onMasterRendered</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_forAllNested</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">detail</span><span class="o">,</span> <span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c">// The rows of the master table will be redrawn so we need to</span>
+                <span class="c">// get a reference to the new toggle cell</span>
+                <span class="nx">detail</span><span class="p">.</span><span class="nx">td</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFirstTdEl</span><span class="p">(</span><span class="nx">record</span><span class="p">);</span>
+                <span class="c">// The row might be paged out of view so we must check it is still there</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">td</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c">// the newly rendered cells will all be collapsed</span>
+                        <span class="c">// we need to make space for the nested tables</span>
+                        <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">td</span><span class="o">,</span> <span class="s1">&#39;height&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">tdNewHeight</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c">// If the row is no longer visible we hide the nested table and mark it as not expanded</span>
+                    <span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="s1">&#39;display&#39;</span><span class="o">,</span> <span class="s1">&#39;none&#39;</span><span class="p">);</span>
+                <span class="p">}</span>
+
+            <span class="p">});</span>
+            <span class="c">// now we set the positions</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_checkPositions</span><span class="p">();</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Event listener for the &lt;code&gt;window.resize&lt;/code&gt; event.</span>
+<span class="c">         * Repositions the nested tables since the master table might have been moved around</span>
+<span class="c">         * @method _onWindowResized</span>
+<span class="c">         * @param ev {DOMEvent} the Event object from the DOM</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_onWindowResized</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_forAllNested</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">detail</span><span class="o">,</span> <span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">td</span><span class="o">;</span>
+                <span class="c">// When the detail is expanded, we can adjust the position immediately</span>
+                <span class="c">// if not, we need to mark it pending since invisible elements cannot be positioned</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">expanded</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="o">,</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getX</span><span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="o">+</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getRegion</span><span class="p">(</span><span class="nx">td</span><span class="p">).</span><span class="nx">width</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">detail</span><span class="p">.</span><span class="nx">setHorizPos</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_checkPositions</span><span class="p">();</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Makes each of the nested tables</span>
+<span class="c">         * @method _makeNestedTable</span>
+<span class="c">         * @param record {YAHOO.widget.Record} the Record instance of the master table</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+
+        <span class="nx">_makeNestedTable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">detail</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">NESTED</span><span class="p">)</span><span class="o">,</span>
+                <span class="nx">urlGen</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">URL_GENERATOR</span><span class="p">)</span><span class="o">,</span>
+                <span class="nx">parent</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+
+            <span class="c">// the reference to for the nested table can be fixed (I doubt it)</span>
+            <span class="c">// or produced by the generateNestedRequest function</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_nestedOptions</span><span class="p">.</span><span class="nx">initialRequest</span> <span class="o">=</span> <span class="p">(</span><span class="nx">urlGen</span> <span class="o">?</span> <span class="nx">urlGen</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">record</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_nestedOptions</span><span class="p">.</span><span class="nx">initialRequest</span><span class="p">);</span>
+            <span class="c">// if there is no such request, we do nothing</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_nestedOptions</span><span class="p">.</span><span class="nx">initialRequest</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c">// Create the container for the child DataTable that will float</span>
+                <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">));</span>
+                <span class="nx">Dom</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">div</span><span class="o">,</span> <span class="nx">NESTED_TABLE</span><span class="p">);</span>
+
+                <span class="c">// the nested datatables are regular instances of DataTable</span>
+                <span class="kd">var</span> <span class="nx">dt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DT</span><span class="p">(</span><span class="nx">div</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_nestedColDefs</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_nestedDataSource</span><span class="o">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_nestedOptions</span><span class="p">);</span>
+
+                <span class="c">// Since we need to measure the size of the child table to make it space under the master one</span>
+                <span class="c">// we have to wait until the table is initialized to find out how tall and wide it is</span>
+                <span class="nx">dt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;initEvent&#39;</span><span class="o">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">td</span><span class="o">;</span>
+
+                    <span class="kd">var</span> <span class="nx">tdRegion</span> <span class="o">=</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getRegion</span><span class="p">(</span><span class="nx">td</span><span class="p">)</span><span class="o">,</span>
+                        <span class="nx">tdHeight</span> <span class="o">=</span> <span class="nx">tdRegion</span><span class="p">.</span><span class="nx">height</span><span class="o">,</span>
+                        <span class="nx">tdWidth</span> <span class="o">=</span> <span class="nx">tdRegion</span><span class="p">.</span><span class="nx">width</span><span class="o">,</span>
+                        <span class="nx">tableWidth</span> <span class="o">=</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getRegion</span><span class="p">(</span><span class="nx">td</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">width</span><span class="o">;</span> <span class="c">// that should be the row</span>
+                    <span class="c">// We keep the original height of the row so we can collapse it to its original size					</span>
+                    <span class="nx">detail</span><span class="p">.</span><span class="nx">tdOrigHeight</span> <span class="o">=</span> <span class="nx">tdHeight</span><span class="o">;</span>
+                    <span class="c">// We need first to set the width and then to measure the height of the table</span>
+                    <span class="c">// because if a long title gets in a narrow cell, it will get wrapped to the next</span>
+                    <span class="c">// line and make the table taller</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">div</span><span class="o">,</span> <span class="s1">&#39;width&#39;</span><span class="o">,</span> <span class="p">(</span><span class="nx">tableWidth</span> <span class="o">-</span> <span class="nx">tdWidth</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+                    <span class="nx">detail</span><span class="p">.</span><span class="nx">tdNewHeight</span> <span class="o">=</span> <span class="nx">tdHeight</span> <span class="o">+</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getRegion</span><span class="p">(</span><span class="nx">div</span><span class="p">).</span><span class="nx">height</span><span class="o">;</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">td</span><span class="o">,</span> <span class="s1">&#39;height&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">.</span><span class="nx">tdNewHeight</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+                    <span class="c">// I offset the child table to the right of the expand icon</span>
+                    <span class="nx">Dom</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">div</span><span class="o">,</span> <span class="nx">Dom</span><span class="p">.</span><span class="nx">getX</span><span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="o">+</span> <span class="nx">tdWidth</span><span class="p">);</span>
+                    <span class="nx">parent</span><span class="p">.</span><span class="nx">_checkPositions</span><span class="p">();</span>
+                <span class="p">});</span>
+                <span class="c">// We store both the container and the reference to this child table in the record</span>
+                <span class="nx">detail</span><span class="p">.</span><span class="nx">div</span> <span class="o">=</span> <span class="nx">div</span><span class="o">;</span>
+                <span class="nx">detail</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="nx">dt</span><span class="o">;</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;nestedCreateEvent&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Destroys a nested table</span>
+<span class="c">         * @method _destroyNested</span>
+<span class="c">         * @param detail.div {HTMLElement} The DIV element containing the nested table instance.</span>
+<span class="c">         * @param detail.dt {YAHOO.widget.DataTable} The nested DataTable instance.</span>
+<span class="c">         * @param detail.expanded {Boolean} Whether the master record is expanded and the nested table visible</span>
+<span class="c">         * @param detail.td {HTMLElement} The toggle cell in the row of the master table</span>
+<span class="c">         * @param detail.tdNewHeight {Integer} The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+<span class="c">         * @param detail.tdOldHeight {Integer} The original height, in pixels, of the row in the master record before it was expanded.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_destroyNested</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">detail</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">detail</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;nestedDestroyEvent&#39;</span><span class="o">,</span> <span class="nx">detail</span><span class="p">);</span>
+                <span class="nx">detail</span><span class="p">.</span><span class="nx">dt</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+                <span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">detail</span><span class="p">.</span><span class="nx">div</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * This is an override for DataTable&#39;s own &lt;code&gt;initializeTable&lt;/code&gt;</span>
+<span class="c">         * which it calls after it destroys all nested tables.		 </span>
+<span class="c">         *</span>
+<span class="c">         * @method initializeTable</span>
+<span class="c">         */</span>
+        <span class="nx">initializeTable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_forAllNested</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_destroyNested</span><span class="p">);</span>
+
+            <span class="nx">NDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initializeTable</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * This is an override for DataTable&#39;s own &lt;code&gt;onDataReturnSetRows&lt;/code&gt;</span>
+<span class="c">         * which it calls after it destroys all nested tables since</span>
+<span class="c">         * with server-side pagination, with every new page it ignores the previous records</span>
+<span class="c">         *</span>
+<span class="c">         * @method onDataReturnSetRows</span>
+<span class="c">         */</span>
+        <span class="nx">onDataReturnSetRows</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_forAllNested</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_destroyNested</span><span class="p">);</span>
+            <span class="nx">NDT</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">onDataReturnSetRows</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="p">}</span><span class="o">,</span>
+
+        <span class="c">/**</span>
+<span class="c">         * Event listener for the &lt;code&gt;rowDeleteEvent&lt;/code&gt; event.</span>
+<span class="c">         * Destroys the nested table, if any.</span>
+<span class="c">         * @method _onRowDeleteDestroyNested</span>
+<span class="c">         * @param oArgs.oldData {Object} Object literal of the deleted data.</span>
+<span class="c">         * @param oArgs.recordIndex {Number} Index of the deleted Record.</span>
+<span class="c">         * @param oArgs.trElIndex {Number} Index of the deleted TR element, if on current page.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+
+        <span class="nx">_onRowDeleteDestroyNested</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_destroyNested</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">oldData</span><span class="p">[</span><span class="nx">NESTED</span><span class="p">]);</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="c">/**</span>
+<span class="c">         * Event listener for the &lt;code&gt;rowsDeleteEvent&lt;/code&gt; event.</span>
+<span class="c">         * Destroys the nested tables, if any.</span>
+<span class="c">         *</span>
+<span class="c">         * @method _onRowsDeleteDestroyNested</span>
+<span class="c">         * @param oArgs.oldData {Object[]} Array of object literals of the deleted data.</span>
+<span class="c">         * @param oArgs.recordIndex {Number} Index of the first deleted Record.</span>
+<span class="c">         * @param oArgs.count {Number} Number of deleted Records.</span>
+<span class="c">         * @private</span>
+<span class="c">         */</span>
+        <span class="nx">_onRowsDeleteDestroyNested</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oArgs</span><span class="p">.</span><span class="nx">oldData</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">_destroyNested</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">oldData</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">NESTED</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="p">});</span>
+<span class="p">})();</span>
+
+<span class="c">/**</span>
+<span class="c"> * Fired when a nested table has been moved.</span>
+<span class="c"> *</span>
+<span class="c"> * @event nestedMovedEvent</span>
+<span class="c"> * @param oArgs.div {HTMLElement} The DIV element containing the nested table instance.</span>
+<span class="c"> * @param oArgs.dt {YAHOO.widget.DataTable} The nested DataTable instance.</span>
+<span class="c"> * @param oArgs.expanded {Boolean} Whether the master record is expanded and the nested table visible</span>
+<span class="c"> * @param oArgs.td {HTMLElement} The toggle cell in the row of the master table</span>
+<span class="c"> * @param oArgs.tdNewHeight {Integer} The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+<span class="c"> * @param oArgs.tdOldHeight {Integer} The original height, in pixels, of the row in the master record before it was expanded.</span>
+<span class="c"> */</span>
+<span class="c">/**</span>
+<span class="c"> * Fired when the row in the master table has been expanded or collapsed.</span>
+<span class="c"> *</span>
+<span class="c"> * @event nestedToggleEvent</span>
+<span class="c"> * @param oArgs.div {HTMLElement} The DIV element containing the nested table instance.</span>
+<span class="c"> * @param oArgs.dt {YAHOO.widget.DataTable} The nested DataTable instance.</span>
+<span class="c"> * @param oArgs.expanded {Boolean} Whether the master record is expanded and the nested table visible</span>
+<span class="c"> * @param oArgs.td {HTMLElement} The toggle cell in the row of the master table</span>
+<span class="c"> * @param oArgs.tdNewHeight {Integer} The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+<span class="c"> * @param oArgs.tdOldHeight {Integer} The original height, in pixels, of the row in the master record before it was expanded.</span>
+<span class="c"> */</span>
+<span class="c">/**</span>
+<span class="c"> * Fired when a nested table has been created.</span>
+<span class="c"> *</span>
+<span class="c"> * @event nestedCreateEvent</span>
+<span class="c"> * @param oArgs.div {HTMLElement} The DIV element containing the nested table instance.</span>
+<span class="c"> * @param oArgs.dt {YAHOO.widget.DataTable} The nested DataTable instance.</span>
+<span class="c"> * @param oArgs.expanded {Boolean} Whether the master record is expanded and the nested table visible</span>
+<span class="c"> * @param oArgs.td {HTMLElement} The toggle cell in the row of the master table</span>
+<span class="c"> * @param oArgs.tdNewHeight {Integer} The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+<span class="c"> * @param oArgs.tdOldHeight {Integer} The original height, in pixels, of the row in the master record before it was expanded.</span>
+<span class="c"> */</span>
+<span class="c">/**</span>
+<span class="c"> * Fired when a nested table is about to be destroyed.</span>
+<span class="c"> *</span>
+<span class="c"> * @event nestedDestroyEvent</span>
+<span class="c"> * @param oArgs.div {HTMLElement} The DIV element containing the nested table instance.</span>
+<span class="c"> * @param oArgs.dt {YAHOO.widget.DataTable} The nested DataTable instance.</span>
+<span class="c"> * @param oArgs.expanded {Boolean} Whether the master record is expanded and the nested table visible</span>
+<span class="c"> * @param oArgs.td {HTMLElement} The toggle cell in the row of the master table</span>
+<span class="c"> * @param oArgs.tdNewHeight {Integer} The height, in pixels, needed for the row in the master record to hold the nested DataTable.</span>
+<span class="c"> * @param oArgs.tdOldHeight {Integer} The original height, in pixels, of the row in the master record before it was expanded.</span>
+<span class="c"> */</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_nesteddatatable.html" title="nesteddatatable">nesteddatatable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="YAHOO.widget.NestedDataTable.html" title="YAHOO.widget.NestedDataTable">YAHOO.widget.NestedDataTable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="nesteddatatable.js.html" title="nesteddatatable.js">nesteddatatable.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.NestedDataTable.html#event_beforeGenerateNestedRequestChange", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "beforeGenerateNestedRequestChange"}, {"url": "YAHOO.widget.NestedDataTable.html#method__checkPositions", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_checkPositions"}, {"url": "YAHOO.widget.NestedDataTable.html#method__destroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_destroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__forAllNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_forAllNested"}, {"url": "YAHOO.widget.NestedDataTable.html#config_generateNestedRequest", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "config", "name": "generateNestedRequest"}, {"url": "YAHOO.widget.NestedDataTable.html#event_generateNestedRequestChange", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "generateNestedRequestChange"}, {"url": "YAHOO.widget.NestedDataTable.html#method_initializeTable", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "initializeTable"}, {"url": "YAHOO.widget.NestedDataTable.html#method__makeNestedTable", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_makeNestedTable"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedCreateEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedCreateEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedDestroyEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedDestroyEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedMovedEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedMovedEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#event_nestedToggleEvent", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "event", "name": "nestedToggleEvent"}, {"url": "YAHOO.widget.NestedDataTable.html#method_onDataReturnSetRows", "access": "", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "onDataReturnSetRows"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onEventToggleNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onEventToggleNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onMasterRendered", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onMasterRendered"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onRowDeleteDestroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onRowDeleteDestroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onRowsDeleteDestroyNested", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onRowsDeleteDestroyNested"}, {"url": "YAHOO.widget.NestedDataTable.html#method__onWindowResized", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_onWindowResized"}, {"url": "YAHOO.widget.NestedDataTable.html#method__toggleFormatter", "access": "private", "host": "YAHOO.widget.NestedDataTable", "type": "method", "name": "_toggleFormatter"}];
+</script>
+</body>
+</html>

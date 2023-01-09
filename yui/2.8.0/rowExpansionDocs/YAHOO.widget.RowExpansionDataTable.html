@@ -1,0 +1,1383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: rowexpansiondatatable  YAHOO.widget.RowExpansionDataTable   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1281535936.55" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1281535936.55" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1281535936.55"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1281535936.55"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>RowExpansionDataTable Widget&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_rowexpansiondatatable.html" title="rowexpansiondatatable">rowexpansiondatatable</a>
+                 &gt; YAHOO.widget.RowExpansionDataTable 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">YAHOO.widget.RowExpansionDataTable</b>
+                        <span class="extends">
+                           - extends <a href="YAHOO.widget.DataTable.html" title="YAHOO.widget.DataTable">YAHOO.widget.DataTable</a>
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        The RowExpansionDataTable class extends the DataTable class to provide
+functionality for expanding rows to show more contextual data.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">YAHOO.widget.RowExpansionDataTable</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                elContainer
+
+                                                , 
+                                                aColumnDefs
+
+                                                , 
+                                                oDataSource
+
+                                                , 
+                                                oConfigs
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">elContainer</span>
+                                                    &lt;<span property="yui:type">HTMLElement</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Container element for the TABLE.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">aColumnDefs</span>
+                                                    &lt;<span property="yui:type">Object[]</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  Array of object literal Column definitions.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">oDataSource</span>
+                                                    &lt;<span property="yui:type">YAHOO.util.DataSource</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  DataSource instance.</span>
+                                                </dd>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">oConfigs</span>
+                                                    &lt;<span property="yui:type">object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description">  (optional) Object literal of configuration values.</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="private" rel="yui:method" resource="#method__destroyExpansion">
+                                    <h4>
+                                        <a name="method__destroyExpansion">_destroyExpansion</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_destroyExpansion</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Destroys a expansion row
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> <HTMLElement | Number | String>    DOM reference to a TR element (or child of a TR element), RecordSet position index, or Record ID.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="private" rel="yui:method" resource="#method__initEvents">
+                                    <h4>
+                                        <a name="method__initEvents">_initEvents</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         private 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_initEvents</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Initialize internal event listeners
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_collapseAllRows">
+                                    <h4>
+                                        <a name="method_collapseAllRows">collapseAllRows</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">collapseAllRows</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Collapses all expanded rows.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_collapseRow">
+                                    <h4>
+                                        <a name="method_collapseRow">collapseRow</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Boolean
+                                            <strong property="yui:name">collapseRow</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the expansion state of a row to collapsed
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Boolean
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">successful</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_deleteRow">
+                                    <h4>
+                                        <a name="method_deleteRow">deleteRow</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">deleteRow</strong>
+                                           (
+                                                
+                                                        
+                                                         row
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>deleteRow</code>
+to delete the expansion row before the main row is deleted
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">row</span>
+                                                        &lt;<span property="yui:type">HTMLElement | String | Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  DOM element reference or ID string
+to DataTable page element or RecordSet index.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_deleteRows">
+                                    <h4>
+                                        <a name="method_deleteRows">deleteRows</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">deleteRows</strong>
+                                           (
+                                                
+                                                        
+                                                         row
+                                                    
+                                                
+                                                        , 
+                                                         count
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>deleteRows</code>
+to delete the expansion rows before the main rows are deleted
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">row</span>
+                                                        &lt;<span property="yui:type">HTMLElement | String | Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  DOM element reference or ID string
+to DataTable page element or RecordSet index.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">count</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) How many rows to delete. A negative value
+will delete towards the beginning.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_destroy">
+                                    <h4>
+                                        <a name="method_destroy">destroy</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">destroy</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Overrides DataTable's destroy method to also destroy expansion rows.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_expandRow">
+                                    <h4>
+                                        <a name="method_expandRow">expandRow</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Boolean
+                                            <strong property="yui:name">expandRow</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the expansion state of a row to expanded
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Boolean
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">successful</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_forAllRecords">
+                                    <h4>
+                                        <a name="method_forAllRecords">forAllRecords</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">forAllRecords</strong>
+                                           (
+                                                
+                                                        
+                                                         fn
+                                                    
+                                                
+                                                        , 
+                                                         scope
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Loops through all Record instances in the RecordSet
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">fn</span>
+                                                        &lt;<span property="yui:type">Function</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  Reference to a function that will be called once for ever record.  
+fn will receive a Record instance and the index for the record as its arguments.
+fn may return false to break out of the loop.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">scope</span>
+                                                        &lt;<span property="yui:type">Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) Scope to execute fn in.  It defaults to the DataTable instance.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getExpansionContainer">
+                                    <h4>
+                                        <a name="method_getExpansionContainer">getExpansionContainer</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        HTMLElement
+                                            <strong property="yui:name">getExpansionContainer</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            returns the container element for the expansion
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        HTMLElement
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">container element</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getExpansionState">
+                                    <h4>
+                                        <a name="method_getExpansionState">getExpansionState</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Object
+                                            <strong property="yui:name">getExpansionState</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                                        , 
+                                                         key
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Gets expansion state object for a specific record associated with the
+DataTable.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">key</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description">  (optional) Key to return within the state object. Default is to
+return all as a map</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Object
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">State data object or value for Key. 
+The full state object contains <ul>
+<li><b>record</b>: reference to the associated Record instance</li>
+<li><b>expanded</b>: true when the row is expanded</li>
+<li><b>expTrEl</b>: the TR element for the expansion row</li>
+<li><b>expLinerEl</b>: the container for the expansion</li>
+<li><i>other</i>: Developers may store extra information in it</li>
+</ul></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_initAttributes">
+                                    <h4>
+                                        <a name="method_initAttributes">initAttributes</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">initAttributes</strong>
+                                           (
+                                                
+                                                        
+                                                         configuration
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Over-ridden initAttributes method from DataTable, inherited from Element
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">configuration</span>
+                                                        &lt;<span property="yui:type">Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> attributes taken from the fourth argument to the constructor</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_initializeTable">
+                                    <h4>
+                                        <a name="method_initializeTable">initializeTable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">initializeTable</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>initializeTable</code>
+which it calls after it destroys all expansion rows
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_onDataReturnSetRows">
+                                    <h4>
+                                        <a name="method_onDataReturnSetRows">onDataReturnSetRows</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">onDataReturnSetRows</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            This is an override for DataTable's own <code>onDataReturnSetRows</code>
+which it calls after it destroys all expansion rows since
+with server-side pagination, with every new page it ignores the previous records
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_onEventToggleRowExpansion">
+                                    <h4>
+                                        <a name="method_onEventToggleRowExpansion">onEventToggleRowExpansion</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">onEventToggleRowExpansion</strong>
+                                           (
+                                                
+                                                        
+                                                         oArgs
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Helper method which toggles row expansion.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">oArgs</span>
+                                                        &lt;<span property="yui:type">Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> context of a subscribed event</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_restoreExpandedRows">
+                                    <h4>
+                                        <a name="method_restoreExpandedRows">restoreExpandedRows</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">restoreExpandedRows</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Restores rows which have been expanded state but the original markup
+has been removed from the page.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_setExpansionState">
+                                    <h4>
+                                        <a name="method_setExpansionState">setExpansionState</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Object
+                                            <strong property="yui:name">setExpansionState</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                                        , 
+                                                         key
+                                                    
+                                                
+                                                        , 
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets a value to a expansion state object with a given Key for a record
+which is associated with the DataTable
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">key</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Key to use in map</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Value to assign to the key</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Object
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">State data object</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_toggleRowExpansion">
+                                    <h4>
+                                        <a name="method_toggleRowExpansion">toggleRowExpansion</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">toggleRowExpansion</strong>
+                                           (
+                                                
+                                                        
+                                                         recordId
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Toggles the expansion state of a row
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">recordId</span>
+                                                        &lt;<span property="yui:type">Mixed</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Record / Row / or Index id</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_beforeRowExpansionTemplateChange">
+                                    <h4>
+                                        <a name="event_beforeRowExpansionTemplateChange">beforeRowExpansionTemplateChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">beforeRowExpansionTemplateChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires before the value for the configuration attribute 'rowExpansionTemplate' changes. Return false to cancel the attribute change.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_rowCollapsedEvent">
+                                    <h4>
+                                        <a name="event_rowCollapsedEvent">rowCollapsedEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">rowCollapsedEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         state
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when a row is collapsed
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">state</span>
+                                                                &lt;<span property="yui:type">Object</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  see <a href="#method_getExpansionState">getExpansionState</a></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_rowExpandedEvent">
+                                    <h4>
+                                        <a name="event_rowExpandedEvent">rowExpandedEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">rowExpandedEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         state
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when a row is expanded
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">state</span>
+                                                                &lt;<span property="yui:type">Object</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  see <a href="#method_getExpansionState">getExpansionState</a></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_rowExpansionDestroyEvent">
+                                    <h4>
+                                        <a name="event_rowExpansionDestroyEvent">rowExpansionDestroyEvent</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">rowExpansionDestroyEvent</strong>
+
+                                            (
+                                                
+                                                        
+                                                         state
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when a row is about to be deleted
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">state</span>
+                                                                &lt;<span property="yui:type">Object</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">  see <a href="#method_getExpansionState">getExpansionState</a></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_rowExpansionTemplateChange">
+                                    <h4>
+                                        <a name="event_rowExpansionTemplateChange">rowExpansionTemplateChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">rowExpansionTemplateChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'rowExpansionTemplate' changes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">{oldValue: any, newValue: any}</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An object containing the previous attribute value and the new value.</span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_rowExpansionTemplate">
+                                    <h4><a name="config_rowExpansionTemplate">rowExpansionTemplate</a>
+                                        <code>- <span property="yui:type">{String or Function}</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Template for the expansion row.  
+If a String, it will be processed through YAHOO.lang.substitute and will have all the values
+in the associated Record available.
+If a Function, it will receive the expansion state object, see: <a href="#method_getExpansionState">getExpansionState</a></li>
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: null
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_rowexpansiondatatable.html" title="rowexpansiondatatable">rowexpansiondatatable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="YAHOO.widget.RowExpansionDataTable.html" title="YAHOO.widget.RowExpansionDataTable">YAHOO.widget.RowExpansionDataTable</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="rowexpansion.js.html" title="rowexpansion.js">rowexpansion.js</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="private"><a href="#method__destroyExpansion" title="_destroyExpansion">_destroyExpansion</a></li>
+                                <li class="private"><a href="#method__initEvents" title="_initEvents">_initEvents</a></li>
+                                <li class=""><a href="#method_collapseAllRows" title="collapseAllRows">collapseAllRows</a></li>
+                                <li class=""><a href="#method_collapseRow" title="collapseRow">collapseRow</a></li>
+                                <li class=""><a href="#method_deleteRow" title="deleteRow">deleteRow</a></li>
+                                <li class=""><a href="#method_deleteRows" title="deleteRows">deleteRows</a></li>
+                                <li class=""><a href="#method_destroy" title="destroy">destroy</a></li>
+                                <li class=""><a href="#method_expandRow" title="expandRow">expandRow</a></li>
+                                <li class=""><a href="#method_forAllRecords" title="forAllRecords">forAllRecords</a></li>
+                                <li class=""><a href="#method_getExpansionContainer" title="getExpansionContainer">getExpansionContainer</a></li>
+                                <li class=""><a href="#method_getExpansionState" title="getExpansionState">getExpansionState</a></li>
+                                <li class=""><a href="#method_initAttributes" title="initAttributes">initAttributes</a></li>
+                                <li class=""><a href="#method_initializeTable" title="initializeTable">initializeTable</a></li>
+                                <li class=""><a href="#method_onDataReturnSetRows" title="onDataReturnSetRows">onDataReturnSetRows</a></li>
+                                <li class=""><a href="#method_onEventToggleRowExpansion" title="onEventToggleRowExpansion">onEventToggleRowExpansion</a></li>
+                                <li class=""><a href="#method_restoreExpandedRows" title="restoreExpandedRows">restoreExpandedRows</a></li>
+                                <li class=""><a href="#method_setExpansionState" title="setExpansionState">setExpansionState</a></li>
+                                <li class=""><a href="#method_toggleRowExpansion" title="toggleRowExpansion">toggleRowExpansion</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_beforeRowExpansionTemplateChange" title="beforeRowExpansionTemplateChange">beforeRowExpansionTemplateChange</a></li>
+                                <li class=""><a href="#event_rowCollapsedEvent" title="rowCollapsedEvent">rowCollapsedEvent</a></li>
+                                <li class=""><a href="#event_rowExpandedEvent" title="rowExpandedEvent">rowExpandedEvent</a></li>
+                                <li class=""><a href="#event_rowExpansionDestroyEvent" title="rowExpansionDestroyEvent">rowExpansionDestroyEvent</a></li>
+                                <li class=""><a href="#event_rowExpansionTemplateChange" title="rowExpansionTemplateChange">rowExpansionTemplateChange</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_rowExpansionTemplate" title="rowExpansionTemplate">rowExpansionTemplate</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2010 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "YAHOO.widget.RowExpansionDataTable.html#event_beforeRowExpansionTemplateChange", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "beforeRowExpansionTemplateChange"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_collapseAllRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "collapseAllRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_collapseRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "collapseRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_deleteRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "deleteRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_deleteRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "deleteRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_destroy", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "destroy"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method__destroyExpansion", "access": "private", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "_destroyExpansion"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_expandRow", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "expandRow"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_forAllRecords", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "forAllRecords"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_getExpansionContainer", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "getExpansionContainer"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_getExpansionState", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "getExpansionState"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_initAttributes", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "initAttributes"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method__initEvents", "access": "private", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "_initEvents"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_initializeTable", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "initializeTable"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_onDataReturnSetRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "onDataReturnSetRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_onEventToggleRowExpansion", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "onEventToggleRowExpansion"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_restoreExpandedRows", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "restoreExpandedRows"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowCollapsedEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowCollapsedEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpandedEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpandedEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpansionDestroyEvent", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpansionDestroyEvent"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#config_rowExpansionTemplate", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "config", "name": "rowExpansionTemplate"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#event_rowExpansionTemplateChange", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "event", "name": "rowExpansionTemplateChange"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_setExpansionState", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "setExpansionState"}, {"url": "YAHOO.widget.RowExpansionDataTable.html#method_toggleRowExpansion", "access": "", "host": "YAHOO.widget.RowExpansionDataTable", "type": "method", "name": "toggleRowExpansion"}];
+</script>
+</body>
+</html>

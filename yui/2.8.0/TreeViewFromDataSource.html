@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>TreeView from DataSource</title>
+
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css">
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/treeview/assets/skins/sam/treeview.css">
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datasource/datasource-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/treeview/treeview-min.js"></script>
+
+		
+
+		<script type="text/javascript">
+			YAHOO.namespace("SATYAM");
+			/**
+			 * builds a TreeView instance from data read from a DataSource instance.
+			 * @method buildTreeFromDataSource
+			 * @param where {HTMLElement|string} reference to a container that will hold the tree
+			 * @param dataSource {YAHOO.util.DataSource} datasource instance that will provide the data
+			 * @param callback {function} function to be called back when the data is finally received and parsed
+			 * it will receive a reference to an instance of a YAHOO.widget.TreeView
+			 * @param options {object} containing several configuration options:<ul>
+			 * <li><b>nodeId</b>: {string} Mandatory. Field name that is the unique key for each record</li>
+			 * <li><b>parentRef</b>: {string} Mandatory. Field name that contains a reference to the nodeId of the parent</li>
+			 * <li><b>scope</b>: {object} scope adjustment for the callback</li>
+			 * <li><b>translate</b>: {object} an object listing fields to be renamed in the form "oldName": "newName". 
+			 *     if newName is an empty string or null, the field will be deleted, useful to delete the nodeId and parentRef fields.</li>
+			 * </ul>
+			 * Any node with no parent will be assumed to be a root node
+			 */
+			
+			YAHOO.SATYAM.buildTreeFromDataSource = function (where,dataSource, callback, options) {
+				var nodeId = options.nodeId,
+					parentRef = options.parentRef;
+				if (!(nodeId && parentRef)) {
+					return;
+				}
+				dataSource.sendRequest(options.initialRequest,{
+					success: function (oRequest,oParsedResponse) {
+					
+						var i, results = oParsedResponse.results, hash = {},
+							node, parent,treeDef = [], newTree, 
+							translate = options.translate || {}, old;
+
+						if (!oParsedResponse.error) {
+							for (i = 0; i < results.length;i++) {
+								node = results[i];
+								hash[node[nodeId]] = node;
+								node.__ID__ = node[nodeId];
+							}
+							for (i = 0; i < results.length;i++) {
+								node = results[i];
+								parent = hash[node[parentRef]];
+								if (parent) {
+									if (!("children" in parent)) {
+										parent.children = [];
+									}
+									parent.children.push(node);
+									node.__hasParent__ = true;
+								}
+							}
+							for (i = 0; i < results.length;i++) {
+								node = results[i];
+								for (old in translate) {
+									if (translate.hasOwnProperty(old)) {
+										if (old in node) {
+											if (translate[old]) {
+												node[translate[old]] = node[old];
+											}
+											delete node[old];
+										}
+									}
+								}
+										
+								if (node.__hasParent__) {
+									delete node.__hasParent__;
+									delete hash[node.__ID__];
+								}
+								delete node.__ID__;
+							}
+							for (i in hash) {
+								if (hash.hasOwnProperty(i)) {
+									treeDef.push(hash[i]);
+								}
+							}
+						}
+						newTree = new YAHOO.widget.TreeView(where,treeDef);
+						if (options.scope) {
+							callback.call(options.scope,newTree);
+						} else {
+							callback(newTree);
+						}
+					},
+					failure: function (oRequest,oParsedResponse) {
+						alert("Oops!: [" + oParsedResponse.status + "] " + oParsedResponse.statusText);
+					}
+				});
+			
+			};
+
+			YAHOO.util.Event.onDOMReady(function () {
+				
+				var myDS = new YAHOO.util.DataSource([
+					{id: 1, text:'Label 0',parentId: 0},
+					{id: 2, type:'Text', text:'text label 1', title:'this is the tooltip for text text 1',parentId: 0},
+					{id: 3, type:'Text', text:'branch 1', title:'there should be children here', expanded:true,parentId: 0},
+					{id: 4, text: 'Label 1-0',parentId: 3},
+					{id: 5, type:'Text',text:'YAHOO',title:'this should be an href', href:'http://www.yahoo.com', target:'somewhere new',parentId: 0},
+					{id: 6, type:'HTML',html:'<a href="developer.yahoo.com/yui">YUI<\/a>',parentId: 0},
+					{id: 7, type:'MenuNode',text:'branch 3',title:'this is a menu node', expanded:false,parentId: 0},
+					{id: 8, text: 'Label 3-0',parentId: 7},
+					{id: 9, text: 'Label 3-1',parentId: 7}
+				],{
+					responseSchema: {
+						fields: ["id","text","type","title","html","expanded","target","href","parentId"]
+					}
+				});
+				
+				
+				YAHOO.SATYAM.buildTreeFromDataSource("treeDiv1", myDS, function(myTree) {
+					myTree.render();
+				},{
+					nodeId:	"id",
+					parentRef: "parentId",
+					translate: {
+						"id": null,
+						"parentId": null,
+						"text":"label"
+					}
+				});
+				
+			});
+		</script>
+		<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+		<style type="text/css">
+			.dp-highlighter th, .dp-highlighter td {
+				border:0;
+				padding:0;
+			}
+			.dp-highlighter .line1, .dp-highlighter  .line2 {
+				padding-left:10px;
+				white-space:nowrap;
+			}
+			#ft {
+				margin-top:0.5em;
+				border-top:thin solid silver;
+				padding-top:0.5em;
+			}
+		</style>
+	</head>
+	<body id="doc"  class="yui-skin-sam">
+		<div id="hd">
+			<h1>TreeView from DataSource</h1>
+		</div>
+		<div id="bd">
+			<div id="treeDiv1"></div>
+		</div>
+		<div id="ft">
+			<p>Trees are often represented in tables in a server-side database.  The way to represent a hierarchical
+			structure such as that of a tree in a shallow table is to make child records to hold a reference to their parents.</p>
+			<p>This function uses a DataSource to fetch a table from the server and assemble the hierarchical structure
+			out of those child ==&gt; parent relationthips.</p>
+			<p>The function is included along this page as <code>YAHOO.SATYAM.buildTreeFromDataSource</code> and can be freely copied
+			to a suitable JavaScript library file; may this serve as a license agreement: feel free.</p>
+			<textarea name="code" class="JScript" cols="60" rows="1">
+				YAHOO.SATYAM.buildTreeFromDataSource("treeDiv1", myDS, function(myTree) {
+					myTree.render();
+				},{
+					nodeId:	"id",
+					parentRef: "parentId",
+					translate: {
+						"id": null,
+						"parentId": null,
+						"text":"label"
+					}
+				});
+			</textarea>
+			<p>The code above calls that function passing as arguments a reference to an HTMLElement, a div, that will hold the tree,
+			a reference to an instance of a DataSource which retrieves the data from the server, a function and several configuration options.</p>
+			<p>The function will receive a reference to the tree just created based on the definition retrieved.  Fetching data from 
+			a remote source is an asynchronous event so the tree cannot be created immediatly, it will be created as soon as the data
+			is received and when that happens, this function will be called.</p>
+			<p>The configuration options has two mandatory attributes, <code>nodeId</code> is a string which corresponds to the name of the field
+			that serves as the primary key of the records in the database table.  <code>parentRef</code> is the name of the field that 
+			contains the references to the parent of each record.  These two attributes are mandatory.</p>
+			<p>The <code>scope</code> configuration option allows to adjust the scope of the callback function.  The <code>translate</code>
+			option is made of an object literal where each item defines field names that are to be translated.  Each entry should be in the form
+			<code>"oldName":"newName"</code> or <code>"oldName":null</code>, where the second indicates that the field should be deleted.  In the above example,
+			both the primary key and the reference to the primary key are deleted, since they are no longer needed, while the "text" field
+			read from the server is translated into "label" so it can be used to create TextNodes</p>
+		</div>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>	
+	</body>
+</html>
+  

@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>DataTable with extra details in tabbed pop-up</title>
+<!-- Load the YUI Loader script: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.1/build/yuiloader/yuiloader-beta-min.js"></script>
+<style type="text/css">
+	/* a couple of settings to compensate for the incompatibility in between treeview.js and base.css */
+	.ygtvitem td {
+		border:0;
+		padding:0;
+	}
+	.ygtvitem table {
+		margin:0;
+	}
+	
+	code {
+		background-color:silver;
+		padding:0 3pt;
+	}
+</style>
+<script type="text/javascript">
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids", "base","datatable", "treeview","container", "logger");
+	loader.insert({ 
+		onSuccess: function() {
+			YAHOO.util.Event.onDOMReady(function() {
+				var myLogReader = new YAHOO.widget.LogReader();  
+				
+
+				/* This functions replaces the server that should resolve the query and provide the data
+					It simply generates and returns an array containing the label provided plus the row and column position for each cell
+				*/
+				var tableContentGenerator = function(key) {
+					YAHOO.log('query data for key ' + key,'warn');
+					if (key) {
+						var response = [];
+						var rows = Math.floor((Math.random()*4) + 3);
+						for (var row = 1;row <= rows;row++) {
+							var dataRow = {};
+							for (var col = 1;col <= 4;col++) {
+								dataRow['col' + col] = 'Query: ' + key + ', <br/>row:' + row + ', col: ' + col;
+							}
+							response.push(dataRow);
+						}
+						return response;
+					} else {
+						return [];
+					}
+				};
+							
+				var showTable = function (where,key) {
+					
+					
+					// notice the argument is a reference to the content generator function
+					// In normal circumstances, this would be the base URL of the server providing the data.
+					var ds = new YAHOO.util.DataSource(tableContentGenerator);
+					// this tells the datasource that the content generator will return an array
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['col1','col2','col3','col4']
+					};
+					
+					// I am actually concerned with the TD element containing the link, not with the link itself
+					where = where.parentNode;
+					
+					// First, if there are any event listeners attached to that node or any child, wipe them out
+					YAHOO.util.Event.purgeElement(where,true);
+
+					//  The contents of each node is like this:
+					// TD -> A -> label text
+					// what I do here is to take the contents of the A element and put it into the TD so that I drop the A itself, but retain the text
+					where.innerHTML = where.firstChild.innerHTML;
+					
+					YAHOO.log('Creating new table');
+					var dt = new YAHOO.widget.DataTable(
+						// The datatable requires its container to be a DIV, not any other kind of HTML element
+						// so we make one right underneath the label
+						where.appendChild(document.createElement('div')) ,	
+						[
+							{key:'col1',editor:'textbox'},
+							{key:'col2',editor:'textbox'},
+							{key:'col3',editor:'textbox'},
+							{key:'col4',editor:'textbox'}
+						], 
+						ds,
+						{
+							initialRequest: key
+						}
+					);
+					dt.subscribe("cellClickEvent", dt.onEventShowCellEditor);  
+				};
+				
+				
+				var treeInit1 = function () {
+
+					var tree = new YAHOO.widget.TreeView("treeDiv1");
+				
+					makeTreeBranch(tree.getRoot(), true);
+
+					tree.draw();
+
+					tree.subscribe('labelClick',function (node) {
+						// if it is an end node ...
+						if (!node.hasChildren()) {
+							// I show the table in it.
+							showTable(node.getLabelEl(),node.data.key);
+						}
+					});
+				};
+				
+
+				//This function adds a random number <4 of child nodes to a given
+				//node, stopping at a specific node depth:
+				var makeTreeBranch = function (node, multiExpand) {
+				
+					// the root node has no data so I have to check if there is any data and then pick the key, otherwise provide an empty space for the first level out of root
+					var key = (node.data && node.data.key + '-') || '';
+					
+					// I make a random number of nodes for each level.
+					// since I substract the depth of the tree on each calculation, the deeper it goes the less child nodes it will create
+					// until eventually, deep enough, no further nodes will be created
+					for ( var i = 0; i < Math.floor(Math.random() * 6  - node.depth) ; i++ ) {
+					
+						// each node will have a label text and also a custom property called 'key'
+						// which will be part of the query. to the database server
+						// the label would usually be some other descriptive text, here I use the key itself for lack of anything better
+						var newNode = new YAHOO.widget.TextNode({label: 'Label-' + key + i, key: key + i}, node, false);
+						newNode.multiExpand = multiExpand;
+						makeTreeBranch(newNode);
+					}
+				};
+				
+				
+
+				var treeInit2 = function () {
+					var dt,ds,
+					lastDiv = undefined,lastNode = undefined,
+
+					tree = new YAHOO.widget.TreeView("treeDiv2");
+				
+					// I use the same tree builder setting the second argument, multExpand, to false
+					makeTreeBranch(tree.getRoot(), false);
+
+					tree.draw();
+
+					tree.subscribe('labelClick',function (node) {
+						// if it is an end node ...
+						if (!node.hasChildren()) {
+							// If not DataTable was ever build
+							if (!lastDiv) {
+								// I create the div that will contain it and append it to the node holding the label
+								lastDiv = node.getLabelEl().appendChild(document.createElement('div'));
+								YAHOO.log('creating movable table');
+								dt = new YAHOO.widget.DataTable(
+									lastDiv,
+									[
+										{key:'col1',editor:'textbox'},
+										{key:'col2',editor:'textbox'},
+										{key:'col3',editor:'textbox'},
+										{key:'col4',editor:'textbox'}
+									],
+									ds,
+									{
+										initialRequest:node.data.key
+									}
+								);
+								dt.subscribe("cellClickEvent", dt.onEventShowCellEditor);  
+
+							} else {
+								// Ifthe node just clicked is the same as the last one, I just toggle the visibility
+								if (lastNode == node.getLabelEl()) {
+									YAHOO.log('Toggling table visibility');
+									var event = YAHOO.util.Event.getEvent();
+									var target = YAHOO.util.Event.getTarget(event);
+									if (YAHOO.util.Dom.hasClass(target,'ygtvlabel')) {
+										lastDiv.style.display = YAHOO.util.Dom.getStyle(lastDiv,'display') == 'none'?'block':'none';
+									}
+								} else {
+									// If the node just clicked is a different one, I remove the div holding the table from the previous
+									// node and append it to the node clicked
+									YAHOO.log('Moving table around');
+									lastDiv.style.display = 'block';
+									lastDiv = node.getLabelEl().appendChild(lastNode.removeChild(lastDiv));
+									// Then I ask the datasource for new data 
+									// It may actually come from the cache
+									ds.sendRequest(
+										node.data.key, 
+										{
+											success:dt.onDataReturnInitializeTable,
+											scope:dt
+										}
+									);
+								}
+							}
+							// I have to keep track of which was the last node clicked
+							// so as to pick the table from it and move it elsewhere
+							lastNode = node.getLabelEl();
+						
+						}
+					});
+
+
+					ds = new YAHOO.util.DataSource(tableContentGenerator);
+					// this tells the datasource that the content generator will return an array
+					ds.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+					ds.responseSchema = {
+						fields: ['col1','col2','col3','col4']
+					};
+					ds.maxCacheEntries = 2;
+				};
+				
+				treeInit1();
+				treeInit2();
+			});
+		}
+	});
+})();
+		</script>
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc"> 		<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+			<div id="hd">
+				<h1>Tree View with DataTables as nodes</h1>
+			</div>
+			<div id="bd" style="margin:2em">
+				<h3>Multiple Tables</h3>
+				<div id="treeDiv1"></div>
+				<h3>One table at a time</h3>
+				<div id="treeDiv2"></div>
+			</div>
+			
+			<div id="ft">
+				<p>Here I am making a couple of trees of a random number of elements and random depth 
+				assigning to each node both a <code>label</code> and a <code>key</code> made up of numbers representing
+				each node position in the tree. If you refresh the page, a new random tree will be generated.</p>
+				
+				<p>I listen to label clicks on each node.  If it doesn't have any children, I build a DataTable on it</p>
+
+				<p>The data for each node is created dynamically via a function which takes the <code>key</code> to 
+				generate the contents of each cell.  In normal circumstances, this custom property of the node should serve
+				as the query argument to an XHR request to a server providing the records for that query.</p>
+				
+				<p>In the first tree, each DataTable is built once and remains there.  
+				If a node is collapsed and expanded again, the DataTable in it will
+				be hidden and just shown again not rebuilt.  
+				Notice that I turn the label inactive once I create the DataTable under it
+				so that clicking on it will have no effect, ie., it will not recreate the DataTable.</p>
+				
+				<p>In the second tree, there is only one DataTable for the whole tree. 
+				Since the nodes of the tree are set to expand just one at a time (setting nodes <code>multiExpand</code> property to false), 
+				I know I don't need more than one table at once.</p>
+				
+				<p>If the table is not yet created when I get to a leaf node, I do create it, 
+				but if there is already a DataTable created, I just move it around manipulating the DOM element where it is contained 
+				and asking the DataSource for a new set of data.</p>
+				
+				<p>I didn't disable the label in this case so that clicking on the label will toggle the visibility of the table.</p>
+				
+				<p>I enabled caching on the DataSource so that if the data is still there, I won't bother the server again.</p>
+				
+				<p>The effect on the server can be seen in the logger.  I am logging the calls to the function that acts as the data server
+				with a 'warning' category so they are more visible in the logger.  Notice that until the cache is filled up 
+				(I set it to hold few entries so you could overflow it and see what happens), 
+				if the data is cached, the server won't be bothered again</p>
+				
+				<p>Both tables have cell editing enabled.  
+				In the first tree, it is not much of an issue since all tables are visible at all times.
+				In the second tree, since the table is drawn within the label itself, I had to add code to
+				tell when it was the actual tree label that was clicked and when it was the DataTable
+				so that by clicking the label, the node would collapse while by clicking the DataTable
+				the cell editor would pop up but the node would remain expanded.</p>
+				
+				<p>This example is self-contained, its only dependencies come from the YUI site.</p>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>YQL and YQLDataSource</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Win32)">
+	<META NAME="CREATED" CONTENT="20100805;10310300">
+	<META NAME="CHANGED" CONTENT="20100806;22314000">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1>YQL and YQLDataSource</H1>
+<P>Yahoo! Query Language, <A HREF="http://developer.yahoo.com/yql/" NAME="YAHOO! Query Language">YQL</A>,
+is a great way of accessing an immense amount of information via a
+standard easy to use interface. To have a taste of how easy it is,
+compare the old <A HREF="http://developer.yahoo.com/music/api_guide/ArtistService.html">Artist
+Service documentation </A>with the YQL query: <CODE><A HREF="http://developer.yahoo.com/yql/console/?q=select%20*%20from%20music.artist.search%20where%20keyword='Rihanna'&amp;_uiFocus=music">select
+* from music.artist.search where keyword='Rihanna'.</A></CODE> The
+<A HREF="http://developer.yahoo.com/yql/console/">YQL Console</A> is
+very easy to use. It lists many of the tables available and sample
+queries on them so you can easily explore the wealth of information
+accessible through it. YQL does not store the data, it is a query
+interface to other databases or APIs. The number of tables that YQL
+lists from Yahoo! sources is 142 but if you click on the <A HREF="http://developer.yahoo.com/yql/console/?q=show%20tables&amp;env=store://datatables.org/alltableswithkeys">Show
+Community Tables</A> link, the count rises to 825 and includes access
+to public data on Amazon, Facebook, NetFlix or the New York Times.
+Sometimes these tables require an access key you have to obtain from
+their owners; without it you may either not be able to perform the
+query or you will get a limited number of results. The YQL service
+itself has two addresses, one public and another which requires
+registration and provides better performance and, of course, you will
+need authentication to access private data from some of its tables.</P>
+<P>By default, YQL will only provide a sample reply with about 10
+records. You can specify a larger number of results by adding the
+number requested in parenthesis after the table name, for example:</P>
+<PRE>select * from music.artist.search(22) where keyword=&quot;madonna&quot;</PRE><P>
+Next to each table name in the Data Tables list in the YQL Console,
+whenever you mouse over a table name a <span style="color:white;background-color:grey;font-family:Verdana, sans-serif">&nbsp;Desc&nbsp;</span>
+button will show to the right of the table name. That will provide a
+description of the table, including a sample queries and a list of
+fields where it is very important to check out which of those are
+marked as required. There is where you may find required access keys
+for certain tables. 
+</P>
+<P>Some tables are not fit for AutoComplete since they don't provide
+results for partial search keys. Though YQL allows for where
+conditions such as <CODE>keyword like 'mado%'</CODE>, the actual
+provider of the data does not support such queries so as the user
+starts typing in the AutoComplete box the name of Madonna, only
+results with full word matches will appear and Madonna will not be
+offered until it is typed in full.</P>
+<P>Sorting in YQL is a filter applied after the result set is
+fetched. If you were to use YQL as the source for a DataTable with
+server-side sorting and pagination, you are in trouble because if the
+user has the table already sorted by a certain column and asks for
+page two, YQL will first select the next <I>N</I> records of the
+unsorted table and then sort those when you would normally expect the
+next <I>N</I> records of the sorted table. Let me explain that, say
+you have a table with a single numeric field and the table contains
+4,3,2,1 in that order. You have a DataTable with two rows per page
+and have it sorted by its single column. YQL will return 3,4 for the
+first page and 1,2 for the second, instead of 1,2 and then 3,4. That
+is because it first does the 'page' selection on the unsorted data
+and then sorts it.</P>
+<P>YQL responses change depending on the number of items returned. If
+we were to dump the variable pointing to the results, we may get any
+of these, depending on the item count:</P>
+<TABLE>
+	<TR>
+		<TH>Count</TH>
+		<TH>Dump</TH>
+		<TH>Wishfull expectation</TH>
+	</TR>
+	<TR>
+		<TD>0</TD>
+		<TD><pre>Null</pre></TD>
+		<TD><pre>[]</pre></TD>
+	</TR>
+	<TR>
+		<TD>1</TD>
+		<TD><pre>{someChangingPropertyName: {
+	fieldName1:value1, 
+	fieldName2:value2, 
+	...
+}}</pre></TD>
+		<TD><pre>[
+	{
+		fieldName1:value1, 
+		fieldName2:value2, 
+	...
+	}
+]</pre></TD>
+	</TR>
+	<TR>
+		<TD>2 or more</TD>
+		<TD><PRE>{someChangingPropertyName: [
+    {
+		fieldName1:value1row1, 
+		fieldName2:value2row1,
+		...
+	},
+    {
+		fieldName1:value1row2, 
+		fieldName2:value2row2, 
+		...
+	},
+    ...
+]}</PRE>
+		</TD>
+		<TD><PRE>[
+    {
+		fieldName1:value1row1, 
+		fieldName2:value2row1, 
+		...
+	},
+    {
+		fieldName1:value1row2, 
+		fieldName2:value2row2, 
+		...
+	},
+    ...
+]</PRE>
+		</TD>
+	</TR>
+</TABLE>
+<P>The last column shows a more consistent alternative, no whimsical property name and always an array with whatever number of items 
+the query might return, but always a simple array.</P>
+<P><A NAME="firstHeading"></A>YQL can also provide the very same
+information in several formats, <A HREF="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text=%22san%20francisco,%20ca%22">XML</A>,
+<A HREF="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text=%22san%20francisco,%20ca%22&amp;format=json">JSON</A>
+and <A HREF="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text=%22san%20francisco,%20ca%22&amp;format=json&amp;callback=cbfunc">JSONP</A>,
+the later being the one we are most interested in. Due to the
+<A HREF="http://en.wikipedia.org/wiki/Same_origin_policy">Same-Origin
+Policy</A>, browsers don't allow their <A HREF="http://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest</A>
+object to access sources out of its own domain. <A HREF="http://developer.yahoo.com/yui/connection/">YUI's
+Connection Manager</A> was affected by this until it introduced its
+<A HREF="http://developer.yahoo.com/yui/connection/#xdr">interface to
+Flash</A> which allows such cross-domain requests, however, just as
+there is still IE6 around, not everyone has the latest Flash version
+installed.</P>
+<P>The <A HREF="http://developer.yahoo.com/yui/get/">YUI Get Utility</A>
+coupled with YQL's <A HREF="http://en.wikipedia.org/wiki/JSONP#JSONP" NAME="Wikipedia entry for JSONP">JSONP</A>
+capability solves this. Let's see how this works. You can add
+<CODE>&lt;script&gt;</CODE> tags at any time and <CODE>&lt;script&gt;</CODE>
+tags can load anything from anywhere: we do this regularly when we
+load the YUI Library components from Yahoo!'s CDN regardless of where
+our page is located. However, this needs some help from the server,
+the <CODE>&lt;script&gt;</CODE> tag expects JavaScript code. If we
+were to load a file containing the following:</P>
+<PRE>123</PRE><P>
+it wouldn't help much. The number would be evaluated and then dropped
+since it hasn't been assigned to anything or used in any way. If we
+were to load this:</P>
+<PRE>var result = 123;</PRE><P>
+then, the number would be stored into variable <CODE>result</CODE>.
+Such a variable would be in the global scope, which is not a good
+idea. It has a further issue, though the value would be safely
+stored, since the script loads asynchronously, we would not know when
+it is finally available. The Get utility helps us because it monitors
+the communication and signals both successful and failed
+transactions. A more general solution, relying on some help from the
+server, is to wrap the value in a function call, like this:</P>
+<PRE>callbackFunction(123);</PRE><P>
+This function would take care of storing or processing the value and
+it would not be called until the content is fully loaded, so it can
+also signal the arrival of the data. Most JSONP servers accept an URL
+argument, usually called callback which contains the name of the
+function to wrap the data with. Namespaced functions such as
+<CODE>YAHOO.example.SiteExplorer.callback</CODE> are a far wiser
+option for callback functions.</P>
+<P>An important issue is to be considered: JSONP is by no means as
+secure as JSON. JSON does not allow any sort of executable code in
+the field values. Though, in principle, any good JSON encoder should
+prevent code from being injected into the JSON output, YUI's <A HREF="http://developer.yahoo.com/yui/json/">JSON
+utility</A> also checks that none is received. This is not the case
+with JSONP where anything received will be happily executed, with all
+sorts of possible side-effects, no questions asked. In JSONP, you are
+basically asking a foreign server to produce a script to load. Thus,
+be careful to use JSONP on trusted servers and if you plan to provide
+JSONP from your server, make sure to use a good JSON encoder before
+wrapping the results in the callback so that any field that might
+contain fraudulent code gets escaped and thus neutralized. Just as we
+learned about <A HREF="http://en.wikipedia.org/wiki/SQL_injection">SQL
+Injection</A> and how to prevent it, remember JSONP shares this kind
+of <A HREF="http://en.wikipedia.org/wiki/JSONP#Basic_Security_concerns">vulnerability</A>.
+Most techniques to prevent SQL Injection will also prevent JavaScript
+Injection.</P>
+<P>The YQL service allows for this, when selecting JSON as the output
+format, an extra input box shows to the right of the JSON checkbox,
+initially containing the text <CODE>cbfunc</CODE>. This is translated
+to an extra argument in the URL. The standard response is XML, if we
+select JSON, the URL changes from:</P>
+<PRE>http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22san%20francisco%2C%20ca%22</PRE><P>
+to</P>
+<PRE>http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22san%20francisco%2C%20ca%22&amp;format=json&amp;callback=cbfunc</PRE><P>
+The basic URL takes a <CODE>q</CODE> argument containing the
+URL-encoded query. For JSON we may specify <CODE>format=json</CODE>
+and to make it JSONP we provide the name of the <CODE>callback</CODE>
+function. An optional <CODE>diagnostics=true</CODE> argument may be
+added to get some extra diagnostics information in the response.</P>
+<P>The page for the Get utility contains an <A HREF="http://developer.yahoo.com/yui/examples/get/get-script-basic.html">example</A>
+that uses YQL as the source of data. Jonathan LeBlanc has written a
+nice <A HREF="http://github.com/jcleblanc/yql-utilities/tree/master/js-yql-display/">utility</A>
+to do YQL queries and format their results based on a simple
+template, which he presented in a <A HREF="http://www.yuiblog.com/blog/2009/06/17/yui-and-yql/">YUI
+Blog article</A>. It improves on the simple example in that you just
+need to provide the YQL query, the template to format the result and
+the container for the result and it takes care of all the minutiae
+for us.</P>
+<PRE>yqlWidget.push(
+   // query
+   'select item.description from weather.forecast where location = 90210',  
+   // configuration options
+   {},
+   // template with placeholders with field names inside curly brackets
+   '&lt;br style=&quot;clear:both&quot; /&gt;{item.description}',
+   // id of the container for the results
+   'widgetContainer'
+);
+yqlWidget.render();</PRE><P>
+Any number of fields can be requested and their field names, even
+nested fields such as <CODE>item.description</CODE>, can be used in
+the template by enclosing them in curly brackets.</P>
+<P>The result of a YQL query is usually some tabular information.
+YUI's <A HREF="http://developer.yahoo.com/yui/datasource/">DataSource</A>
+component is designed to retrieve this type of information. Several
+other YUI components use DataSource to fetch their data,
+<A HREF="http://developer.yahoo.com/yui/autocomplete/">AutoComplete</A>,
+<A HREF="http://developer.yahoo.com/yui/charts/">Charts</A> and
+<A HREF="http://developer.yahoo.com/yui/datatable/">DataTable</A> do
+so. Some time ago I developed a subclass of DataSource, <A HREF="http://www.satyam.com.ar/yui/2.8.0/YQLDataSource.js">YQLDataSource</A>
+that extends <CODE>YAHOO.util.ScriptNodeDataSource</CODE> to connect
+to the YQL web service to fetch data from it. I used it in <A HREF="http://www.satyam.com.ar/yui/2.8.0/nested1.html">this
+example</A>, where the data for an AutoComplete box and two levels of
+nested DataTables are provided by YQLDataSource (the nested
+DataTables will be the subject of a further article).</P>
+<P>YQLDataSource is very simple and could be simpler still. In the
+constructor we simply set the default URL for the YQL web service, if
+none is explicitly given by the developer:</P>
+<PRE>YAHOO.util.YQLDataSource = function (oLiveData, oConfigs) {
+    oLiveData = oLiveData || 'http://query.yahooapis.com/v1/public/yql?format=json&amp;q=';
+    YAHOO.util.YQLDataSource.superclass.constructor.call(this, oLiveData, oConfigs); 
+};</PRE><P>
+As part of the URL we already establish the format of the reply as
+JSON and add the <CODE>q</CODE> argument to receive the YQL query.</P>
+<P>Just as all other DataSource subclasses do, we also copy over the
+static members, mostly constants, that we can use:</P>
+<PRE>YAHOO.lang.augmentObject(YAHOO.util.YQLDataSource, YAHOO.util.DataSourceBase);</PRE><P>
+When extending the ScriptNodeDataSource, we override several of its
+members, the first of them being the <CODE>responseType</CODE> since
+we know it is going to be JSON:</P>
+<PRE>YAHOO.lang.extend(YAHOO.util.YQLDataSource, YAHOO.util.ScriptNodeDataSource, {
+    responseType:YAHOO.util.DataSource.TYPE_JSON,</PRE><P>
+Since we will receive a YQL statement as the request, we need to
+escape it before allowing it to be concatenated into the rest of the
+URL. We do that in the <CODE>makeConnection</CODE> method, which we
+override thus:</P>
+<PRE>makeConnection : function(oRequest, oCallback, oCaller) {
+    YAHOO.util.YQLDataSource.superclass.makeConnection.call(this,encodeURIComponent(oRequest),oCallback,oCaller);
+}</PRE><P>
+We simply call the original version with the <CODE>oRequest</CODE>
+argument, which contains the YQL query, properly escaped.</P>
+<P>Now we add some magic. We'll assume that we've been careful and
+explicitly enumerated the fields to retrieve. I really hate those
+<CODE>Select *</CODE> statements in production code, they are fine
+for exploring but wasteful in an end product. Thus, I'll trust that
+whatever fields come in the response are the ones we really wanted.
+Unfortunately, YQL does not return a list of fields nor their data
+type, moreover, depending on the query, fields such as dates might
+show up in very different formats. Since YQL is no more than an
+intermediary, the values it returns are those from the original
+source in whichever format they are provided, which accounts for the
+different formats of values such as dates or Booleans.</P>
+<P>So, in the end, we will trust whatever comes in the results but,
+if some piece of data is not in the proper format, we'll still allow
+a parser to be specified. For example, to sort a column containing
+numbers in YUI DataTable, number fields need to be actual JavaScript
+numbers, not just strings containing digits. The YQL query for the
+tracks of a particular album returns the numeric values as strings,
+so we need to parse them into numbers. We can say:</P>
+<PRE>var tracksDS = new YQLDS('', {
+    responseSchema: {
+        fields:[
+            {key:'Track.discNumber', parser:'number'}, 
+            {key:'Track.trackNumber', parser:'number'},
+            {key:'Track.duration', parser:'number'},
+            {key:'Track.popularity', parser:'number'}
+        ]
+    }
+});</PRE><P>
+The query also contains a <CODE>title</CODE> field, which is a string
+and needs no parsing, thus, we don't need to mention it, but it will
+be there anyhow. Also note that the data is nested a level further
+down so we use dot-notation to fetch it. If the first row of data,
+which we use to figure out what fields are coming, is not
+representative of the structure of the response, the fields missing
+in that first row can be specified as well and, finally, if for some
+reason the data is not located where YQLDataSource assumes, we can
+also specify the <CODE>resultsList</CODE>. 
+</P>
+<P>We won't go into the details of how it is done, the source code
+contains comments to that effect. Enough to say that the
+<CODE>parseJSONData</CODE> method is overridden so, before the
+original method is called, all the field information is extracted
+from the first row of the data about to be parsed and combined with
+whatever the developer has specified. In this method we also add the
+<CODE>responseSchema.metaFields </CODE>property, if not already
+present, to extract meta-information that is always available on the
+query, the number of records returned (<CODE>count</CODE>),when the
+result set was created (<CODE>created</CODE>) and the language of the
+data (<CODE>lang</CODE>).</P>
+<P>For simple cases, I build <A HREF="http://satyam.com.ar/yui/2.8.0/YQLDataSource.html">this
+example</A> which uses YQLDataSource and is able to fill a given
+container with the results of a query based on a template. The
+function can be called like this:</P>
+<PRE>YAHOO.example.YQLSubstitute(
+    'list',
+    'select title, abstract, url, source from search.news where query=&quot;barcelona&quot;',
+    '&lt;li&gt;&lt;h2&gt;{title}&lt;\/h2&gt;&lt;p&gt;{abstract}&lt;\/p&gt;&lt;address&gt;&lt;a href=&quot;{url}&quot;&gt;{source}&lt;\/a&gt;&lt;\/address&gt;&lt;\/li&gt;'
+);</PRE><P>
+I called the function <CODE>YQLSubstitute </CODE>and placed it under
+the <CODE>YAHOO.example</CODE> namespace. It takes the following
+arguments:</P>
+<OL>
+	<LI>A reference to or the id of the HTML that will contain the
+	results, in this case, a reference to a <CODE>&lt;ul id=”list”&gt;</CODE>
+	element elsewhere in the page. 
+	<LI>The YQL statement to execute 
+	<LI>The template with the field names as placeholders 
+	<LI><P>An optional configuration object. 
+	</P>
+</OL>
+<P>Since the query is supported by YQLDataSource, it is possible to
+use dot-notation to specify nested fields in the placeholders. The
+optional fourth argument, the configuration options, is passed
+straight through to the YQLDataSource so, if any parser is needed,
+they can be set here. Additionally, the <CODE>YQLWebService</CODE>
+configuration option lets you override the URL of the YQL web
+service.</P>
+<P>For YUI3, there are still not many other components that can
+consume the data from a DataSource and DataSchema so, for the time
+being, I used Dav Glass' <A HREF="http://yuilibrary.com/gallery/show/yql">YQLQuery</A>
+gallery module which will be part of the 3.2.0 release so it might be
+out of the gallery by the time you read this. In the <A HREF="http://satyam.com.ar/yui/3.0.0/YQLSubstitute.html">YQLSubstitute</A>
+example for YUI3 I tried to provide the same interface as in the YUI2
+example, with a few exceptions. The first argument is a CSS3 selector
+as is customary in YUI3, nested fields and parsers are not available
+and there is no extra configuration option, just the first three
+mandatory arguments. Both examples are well commented, just scroll
+down to reach after the query output.</P>
+<P>In this article we have: 
+</P>
+<UL>
+	<LI>seen what YQL is and explored the YQL Console which lets us try
+	and put together a YQL query and see the resulting output provided
+	in several formats 
+	<LI>explained what JSONP is, one of the output formats provided by
+	the YQL service, and how to use it with the YUI Get utility 
+	<LI>linked to a few examples that use Get to query YQL tables and
+	present the results 
+	<LI>seen the YQLDataSource and how it works, including examples with
+	AutoComplete and DataTable<LI>
+	defined a YQLSubstitute function using YQLDataSource 
+	<LI><P>defined the same function for YUI3 using the YQLQuery gallery
+	component 
+	</P>
+</UL>
+<P>Do explore the many links provided along the article, the examples
+are real, life queries going straight to the YQL web service and
+remember to scroll down past the sample output to read the
+descriptions and the commented code.</P>
+</BODY>
+</HTML>

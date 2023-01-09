@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Tree in DataTable</title>
+    <script src="http://yui.yahooapis.com/2.6.0/build/yuiloader/yuiloader-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+
+	loader.require("reset-fonts-grids","base","datatable");
+	loader.insert({ 
+		filter:'raw',
+		onSuccess: function() {
+			//shortcuts
+			var Dom = YAHOO.util.Dom,
+				Lang = YAHOO.lang;
+			
+			var hasChildren = {};
+			var dt = new YAHOO.widget.DataTable(
+				'Container',
+				[
+					 // Uncomment if you are interested in internals
+					/*
+					{key:"id"},
+					{key:"parent"},
+					{key:"depth"}, */
+					{key:"Col1", width:250,formatter:function(el, oRecord, oColumn, oData) {
+						el.innerHTML = oData;
+						Dom.addClass(el,'depth' + oRecord.getData('depth'));
+					}},
+					{key:"Col2"},
+					{key:"Col3"}
+				],
+
+				new YAHOO.util.FunctionDataSource(function() {
+					var sample = "asdf iouw trlfg lnrw t0uf m foij fd0 45jas dfoijasd fjhbcvhbfsda iuwer 9823 uasf djnfd nroh234 988 sfadohjfds8y 489cnfasdjp8asiofgy095 dffsda iuo 08945 jfoutru843 trujsdfa f98urfijnc89";
+					var sampleLen = sample.length - 10;
+					var i, col, r;
+					var response = [];
+					var stack = [-1];
+					var rndString = function() {
+						return Lang.trim(sample.substr(Math.random() * sampleLen, Math.random() * 6 + 6));
+					};
+					// Builds the response
+					for (i = 0; i < 100;i++) {
+						r = {
+							id: i,
+							parent: stack[stack.length -1],
+							depth: stack.length -1
+						};
+						if (Math.random() > 0.8) {
+							if (Math.random() * stack.length > 1) {
+								stack.pop();
+							} else {
+								stack.push(i-1);
+							}
+						}
+						for (col = 1; col < 4;col++) {
+							r['Col' + col] = rndString();
+						}
+						response[i] = r;
+					}
+					return response;					
+				}),
+				{
+					formatRow: function(row, record) {
+						var parent = record.getData('parent');
+						if (parent != -1) {
+							Dom.addClass(row,'hidden');
+						}
+						hasChildren[parent] = true;
+						return true;
+					}
+				}
+			);
+			dt.subscribe('renderEvent',function() {
+				var recSet = this.getRecordSet();
+				var recSetLen = recSet.getLength();		
+				for (var i = 0;i<recSetLen;i++) {
+					var r = recSet.getRecord(i);
+					if (hasChildren[r.getData('id')]) {
+						Dom.addClass(this.getTrEl(r),'collapsed');
+					}
+				}
+			});
+			dt.subscribe("cellClickEvent", function(oArgs) {
+				var target = oArgs.target;
+				var record = this.getRecord(target);
+				var parentId = record.getData('id');
+				var recSet = this.getRecordSet();
+				var recSetLen = recSet.getLength();
+				var self = this;
+				var visibility = function (parentId,visible) {
+					var count = 0;
+					for (var i = 0;i<recSetLen;i++) {
+						var r = recSet.getRecord(i);
+						if (r.getData('parent') == parentId) {
+							if (visible) {
+								Dom.removeClass(self.getTrEl(r),'hidden');
+							} else {
+								Dom.addClass(self.getTrEl(r),'hidden');
+							}
+							count += visibility(r.getData('id'),visible && r.getData('expanded'));
+							count++;
+						}
+					}
+					return count;
+				};
+				record.setData('expanded',!record.getData('expanded'));
+				if (visibility(parentId,record.getData('expanded'))) {
+					if (record.getData('expanded')) {
+						Dom.addClass(this.getTrEl(record),'expanded');
+						Dom.removeClass(this.getTrEl(record),'collapsed');
+					} else {
+						Dom.addClass(this.getTrEl(record),'collapsed');
+						Dom.removeClass(this.getTrEl(record),'expanded');
+					}
+				}
+			});
+
+		}
+	});
+})();
+		</script>
+		<style type="text/css">
+			.depth0 {
+				padding-left:2em !important;
+			}
+			.depth1 {
+				padding-left:4em !important;
+				background-position:2em 0  !important;
+			}
+			.depth2 {
+				padding-left:6em !important;
+				background-position:4em 0  !important;
+			}
+			.depth3 {
+				padding-left:8em !important;
+				background-position:6em 0  !important;
+			}
+			.depth4 {
+				padding-left:10em !important;
+				background-position:8em 0  !important;
+			}
+			.depth5 {
+				padding-left:12em !important;
+				background-position:10em 0  !important;
+			}
+			.hidden {
+				display:none;
+			}
+			.expanded .yui-dt-col-Col1 .yui-dt-liner{
+				background: url(expanded.gif) no-repeat;
+			}
+			.collapsed .yui-dt-col-Col1 .yui-dt-liner{
+				background: url(collapsed.gif) no-repeat;
+			}
+
+		</style>
+
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<h1>Tree in DataTable</h1>
+		<p><b>This is not a finished example.</b></p>
+		<p>The data in this example is mostly random text.  
+		The source of data is a function which will fill the visible columns with random pieces of text, 
+		except for a few fields which are not displayed and describe the structure of the tree.
+		These fields are:</p>
+		<ul>
+			<li><code>id</code>: a unique identifier for each record, in this case a simple autoincrement</li>
+			<li><code>parent</code>: the <code>id</code> this record is a child of, or -1 if none</li>
+			<li><code>depth</code>: how deep the record is nested in the tree</li>
+		</ul>
+		<p>You can click anywhere on a row to expand/collapse the children.  
+		Only those records that have icons have children.
+		The icons are not the best choice, I just grabbed them from elsewhere.</p>
+		
+		<div id="Container"></div>
+
+	</div>
+	</body>
+</html>
+				

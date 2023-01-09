@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/treeview/assets/skins/sam/treeview.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yahoo-dom-event/yahoo-dom-event.js&2.8.1/build/dragdrop/dragdrop-min.js&2.8.1/build/treeview/treeview-min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+	<style type="text/css">
+		.dp-highlighter th, .dp-highlighter td {
+			border:0;
+			padding:0;
+		}
+		.dp-highlighter .line1, .dp-highlighter  .line2 {
+			padding-left:10px;
+			white-space:nowrap;
+		}
+		.ft {
+			margin-top:1em;
+		}
+		.ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover  {
+			background-color:transparent;
+		}
+		.dropTarget{
+			background-color:yellow;
+		}
+	</style>
+    <title>Drag and Drop within a TreeView</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Drag and Drop within a TreeView</h1>
+		</div>
+		<div class="bd">
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p>Many people has asked how to drag and drop nodes on a TreeView.  Though this would seem a natural feature on a TreeView,
+			it simply is not that easy to define.  First of all, depending on the meaning of the nodes, not all of them can be dragged
+			so that is a first issue, though it could be easily if a tree Node had a 'draggable' property.</p>
+			<p>Most of the problems lie with dropping.  
+			Both the Favorites list on a browser and a window showing the file system of a disk show their information as a tree.  
+			In both, only folders can be drop targets, however, files or folders dropped in the file system will be displayed
+			wherever they fit in the preset sort order (usually alphabetically) with folders first.  Other trees have other
+			rules.  For example, departments and personnel.  You can drag and drop people into departments but if you drop
+			a department into another department, you are dropping the people in the dragged department into the target department.</p>
+			<p>In the end, there are so many possible alternatives that there is no way to easily describe all of them via a simple
+			set of properties. In the end, the only way would be to provide hooks to plug in custom functions to do all the analizing
+			of what can be dropped where and how.  However, this doesn't make much sense because, after all, the Drag and Drop
+			utility already provides events to signal when interesting things happen and TreeView provides enough methods
+			to manipulate its nodes so, there would be little to add to these.</p>
+			<p>This example shows how to match TreeView with Drag and Drop using an arbitrary way of behaving.  
+			I'll point out the places where such behaviour can be changed to suit a concrete need.  The whole code is contained 
+			within this very page so anything not mentioned in the following code boxes can be seen right in this page source.</p>
+			<p>First of all, I will use a drag proxy to move nodes around, a single proxy for all DD instances so I'll create that first:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var dragContainerId = 'dragContainer',
+					dragContainer = document.body.appendChild(document.createElement('div')),
+					dragTree = new YAHOO.widget.TreeView(dragContainer);	
+		
+				dragContainer.id = dragContainerId;
+			</textarea>
+			<p>DDProxy needs a container, usually a DIV element, which can be empty. My proxy will contain a TreeView instance instead.  
+			This is an option, you could simply use an empty outline
+			as DDProxy uses by default, I just do this to show how it can be done.  DDProxy asks for the id of the container
+			so I give it one.</p>
+			<p>I create a DDNode class which is my special variety of DDProxy:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			
+				var DDNode = function(id, sGroup, config) {
+					DDNode.superclass.constructor.call(this, id, sGroup, config);
+				};
+
+				YAHOO.extend(DDNode, YAHOO.util.DDProxy, {
+					// ---
+				});
+			</textarea>
+			<p>There is nothing new here, I just use the standard way of subclassing within YUI.  The commented
+			line is where the functions that handle the behavior of the D&D operations go.  First, what to do 
+			when dragging starts:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				startDrag: function(x, y) {
+					this.srcNode = tree.getNodeByElement(this.getEl());
+					Dom.setStyle(this.srcNode.getEl(), "visibility", "hidden");
+					dragTree.buildTreeFromObject(this.srcNode.getNodeDefinition());
+					dragTree.render();
+				},
+			</textarea>
+			<p>When dragging starts, I first find which tree Node is actually being dragged by using the
+			<code>getNodeByElement</code> method with the dragged HTML element returned by D&D <code>getEl</code> method.
+			Do not confuse Node's <code>getEl</code> with D&D's method of the same name.  Here, <code>this</code> points to 
+			the DDNode instance.  I make invisible the HTML element representing the Node.  I use <code>visibility:hidden</code>
+			instead of <code>display:none</code> so that the space it occupies is preserved, you might choose otherwise, 
+			for example, dimming the existing nodes by using a mask or suitable CSS styles.</p>
+			<p>I said I would drag the branch of the tree in the proxy element.  In fact, I will drag a clone of that tree,
+			I will not move the original node and its children until the element is dropped so, I use <code>getNodeDefinition</code>
+			to get all the information for the tree that I might need to make a copy under the <code>dragTree</code> which I created within my drag proxy,
+			which I then render.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				onDragOver: function(e, id) {
+					var tmpTarget = tree.getNodeByElement(Dom.get(id));
+						
+					if (this.destNode != tmpTarget) {
+						if (this.destNode) {
+							Dom.removeClass(this.destNode.getContentEl(),'dropTarget');
+						}
+						Dom.addClass(tmpTarget.getContentEl(),'dropTarget');
+						this.destNode = tmpTarget;
+					}
+				}
+			</textarea>
+			<p>While the object is being dragged, I check the potential destination.  I use <code>getNodeByElement</code> again to find
+			out the actual node which is being the potential target.  Since <code>onDragOver</code> will be called many times, I don't
+			want to repeat the same code over and over so I first check if the current target node is the same as the one already reported, 
+			if it isn't, then I add a className to the new target after removing that same className from the previous one, if there was any,
+			and make this new target the good one.  How you define the className is up to you, I went for a yellow background.</p>
+			<p>The important matter here is not so much the style but the decisions you can make here.  
+			You have two nodes, the <code>srcNode</code> which we saved in the <code>startDrag</code> method and the potential target
+			in <code>tmpTarget</code>.  It is up to you and your application whether the source node can be dropped into this target
+			so, in most cases, you would put some more logic here to decide.  Both source and target nodes are actual tree Node instances
+			(TextNode, HTMLNode or whatever) and you can store extra 
+			<a href="http://developer.yahoo.com/yui/treeview/#customproperties">custom information</a> in them to help you make that decission.
+			In the end, you have to either save into <code>destNode</code> a reference to the node if it is valid, or null if not.</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				onDragDrop: function (e, id) {
+					var parent = dest = this.destNode,
+						src = this.srcNode;
+					if (!dest) { return; }
+					while(parent) {
+						if (parent == src) {
+							return;
+						}
+						parent = parent.parent;
+					}
+					tree.popNode(src);
+					src.appendTo(dest);
+					tree.render();
+					makeDraggable();
+				
+				},
+			</textarea>
+			<p>Finally, you get to the drop part. We had the potential target in <code>destNode</code> or null if it is invalid.
+			One final check (which could also be done in <code>onDragOver</code>) we have to make sure not to drop the node
+			into itself or any of its children so we make sure the source node is not an ancestor of the destination node.
+			We then pop (remove without destroying it) the source node out of the tree and append it to the destination node.  
+			This is where most of the possible alternatives come into play.  I decided to append them as children, your application
+			will probably require otherwise. TreeView has plenty of methods, <code>appendTo</code>, <code>insertBefore</code> or
+			<code>insertAfter</code> to do as required.</p>
+			<p>Finally I re-render the tree.  The changes done by popping and appending the node will not be reflected on the
+			screen until the tree is refreshed.  Unfortunatly, this redraws the tree from scratch so all event listeners
+			are removed, including those set by the Drag and Drop utility, so I need to make those nodes draggable again.</p>
+			<p>Some clean up is in order.  Whether the source node is dropped or not, we need to clean some of the changes we
+			made to the tree, we use the <code>endDrag</code> method to do that:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				endDrag: function(x,y) {
+					Dom.setStyle(this.srcNode.getEl(), "visibility", "");
+					if (this.destNode) {
+						Dom.removeClass(this.destNode.getContentEl(),'dropTarget');
+					}
+				},
+			</textarea>
+			<p>We haven't made the tree yet, but that is up to you. Here I build a tree at random and you can see the code in the page source,
+			but it will be irrelevant to whatever you actually do.  The important part is how to make the nodes draggable:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var ddNodes = [];
+				var makeDraggable = function() {
+					for (var i = 0, l = ddNodes.length;i < l;i++) {
+						ddNodes[i].unreg();
+					}
+					ddNodes = [];
+						
+					var nodes = tree.getNodesBy(function(){return true;});
+					if (nodes) {
+						for (i = 0,l = nodes.length;i<l;i++) {
+							ddNodes.push(
+								new DDNode(
+									nodes[i].getContentEl(),
+									'default',
+									{
+										dragElId: dragContainerId
+									}
+								)
+							);
+						}
+					}
+				};
+			</textarea>
+			<p>As I said, when the tree is redrawn, the draggable and target elements are lost so we have to recreate them.  
+			However, the Drag and Drop Manager will still hold references to the elements.  I keep a copy of the DDNode elements
+			in the <code>ddNodes</code> array so I go around it unregistering all those elements.</p>
+			<p>To set the draggable nodes, I use <code>getNodesBy</code> using a function that always returns true so that I am actually
+			making all nodes draggable and targets.  You would probably use a more selective method such as <code>getNodesByProperty</code> or
+			a more selective function within <code>getNodesBy</code>.  Anyway, once you have your pick of nodes, you create your own instances
+			of our <code>DDNode</code> class, which we push into <code>ddNodes</code> to clean up in further calls.</p>
+			<p>The constructor of <code>DDNode</code> (which is a kind of DDProxy) takes, first, the HTML element that is to be dragged
+			or that can be a drop target.  For the nodes, we want the content element (<code>getContentEl</code>), not the whole node (<code>getEl</code>)
+			because that would include the children and we will probably want to be more selective than that.</p>
+			<p>The second argument is the drag group.  We might want to have different sets of nodes that can interact each with other elements
+			in the same group.  We use the 'default' group here, but you might want to use separate groups.</p>
+			<p>Finally, in the configuration options, we tell DDProxy that we mean to use our container which includes a TreeView, instead of the
+			empty box it uses by default</p>
+			<p>In this description I have omitted the piece of code that resizes the container of the proxy to hold the tree brach being dragged, 
+			the code can be seen in the page source</p>
+			
+
+			
+		</div>
+	</div>
+
+<script type="text/javascript" >
+
+YAHOO.util.Event.onDOMReady(function() {
+		
+	var Dom = YAHOO.util.Dom,
+		Event = YAHOO.util.Event,
+		Lang = YAHOO.lang;
+
+
+	var tree,
+		dragContainerId = 'dragContainer',
+		dragContainer = document.body.appendChild(document.createElement('div')),
+		dragTree = new YAHOO.widget.TreeView(dragContainer);	
+		
+	dragContainer.id = dragContainerId;
+
+
+	
+	var DDNode = function(id, sGroup, config) {
+		DDNode.superclass.constructor.call(this, id, sGroup, config);
+
+	};
+
+
+	YAHOO.extend(DDNode, YAHOO.util.DDProxy, {
+		srcNode: null,
+		destNode: null,
+
+		startDrag: function(x, y) {
+			this.srcNode = tree.getNodeByElement(this.getEl());
+			// The following section of code resizes the container of the proxy element.
+			(function () {
+				var proxyEl = this.getDragEl(),
+					dragEl = this.srcNode.getEl(),
+					dragRegion = Dom.getRegion(dragEl);
+			
+				Dom.setStyle( proxyEl, "width",  dragRegion.width  + "px" );
+				Dom.setStyle( proxyEl, "height", dragRegion.height + "px" );
+			}).call(this);
+
+			Dom.setStyle(this.srcNode.getEl(), "visibility", "hidden");
+			dragTree.buildTreeFromObject(this.srcNode.getNodeDefinition());
+			dragTree.render();
+		},
+		onDragDrop: function (e, id) {
+			var parent = dest = this.destNode,
+				src = this.srcNode;
+			if (!dest) { return; }
+			while(parent) {
+				if (parent == src) {
+					return;
+				}
+				parent = parent.parent;
+			}
+			tree.popNode(src);
+			src.appendTo(dest);
+			tree.render();
+			makeDraggable();
+		
+		},
+
+		endDrag: function(x,y) {
+			Dom.setStyle(this.srcNode.getEl(), "visibility", "");
+			if (this.destNode) {
+				Dom.removeClass(this.destNode.getContentEl(),'dropTarget');
+			}
+		},
+
+		onDragOver: function(e, id) {
+			var tmpTarget = tree.getNodeByElement(Dom.get(id));
+				
+			if (this.destNode != tmpTarget) {
+				if (this.destNode) {
+					Dom.removeClass(this.destNode.getContentEl(),'dropTarget');
+				}
+				Dom.addClass(tmpTarget.getContentEl(),'dropTarget');
+				this.destNode = tmpTarget;
+			}
+		}
+	});
+	
+	var ddNodes = [];
+	var makeDraggable = function() {
+		for (var i = 0, l = ddNodes.length;i < l;i++) {
+			ddNodes[i].unreg();
+		}
+		ddNodes = [];
+			
+		var nodes = tree.getNodesBy(function(){return true;});
+		if (nodes) {
+			for (i = 0,l = nodes.length;i<l;i++) {
+				ddNodes.push(
+					new DDNode(
+						nodes[i].getContentEl(),
+						'default',
+						{
+							dragElId: dragContainerId
+						}
+					)
+				);
+			}
+		}
+	};
+
+
+	var makeBranch = function (parent,label) {
+		label = label || '';
+		var n = Math.random() * (5 - parent.depth);
+		for (var i = 0;i < n;i++) {
+			makeBranch(new YAHOO.widget.TextNode({
+				label:'label' + label + '-' + i, 
+				renderHidden:true
+			}, parent),label + '-' + i);
+		}
+	};
+
+	tree = new YAHOO.widget.TreeView('container');
+	makeBranch(tree.getRoot());
+	tree.render();
+	
+	makeDraggable();
+		
+	
+});
+</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+</body>
+</html>

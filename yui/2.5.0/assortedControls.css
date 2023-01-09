@@ -1,0 +1,11 @@
+
+.yui-skin-sam .yui-dt-table td.center {
+	text-align:center;
+	padding: 4px 0px;
+}
+.yui-skin-sam .yui-dt-table th.center {
+	padding: 4px 0px;
+}
+table.yui-dt-table {
+	table-layout:auto;
+}

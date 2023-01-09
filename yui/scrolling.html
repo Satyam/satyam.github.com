@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scrolling</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+        <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
+        <style>
+            .yui3-datatable-content {
+                width: 150px;
+                height: 160px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+            }
+            .yui3-datatable-scrollbar {
+                overflow-x: hidden;
+                overflow-y: scroll;
+                position: absolute;
+                z-index: 2;
+            }
+            .yui3-datatable-scrollbar div {
+                position: absolute;
+                visibility: hidden;
+                width: 1px;
+            }
+
+        </style>
+    </head>
+    <body class="yui3-skin-sam">
+        <div id="dtable"></div>
+        <p>I moved the few CSS definitions I needed from the scrollable CSS files to this source and dropped the dependency.  Not very many as you can see.</p>
+        <p>I added handling of the fractional part of the scroll.  If you can't tell visually how I managed, then I succeeded.</p>
+        
+        <script>
+            YUI().use("datatable",'node-screen', function(Y) {
+
+                var S = function () {};
+                Y.mix(S.prototype, {
+                    initializer: function () {
+                        this.onceAfter('render', this._setVerticalScrollbar);
+                    },
+                    _setVerticalScrollbar: function () {
+                        var scrollbar = Y.Node.create('<div class="yui3-datatable-scrollbar"><div></div></div>');
+
+                        scrollbar.setStyle('width', (Y.DOM.getScrollbarWidth() + 1) + 'px');
+                        this.get('contentBox').appendChild(scrollbar);
+                        scrollbar.get('firstChild').setStyle('height', this._tbodyNode.get('scrollHeight') + 'px');
+                        var region = this.get('contentBox').get('region');
+                        scrollbar.setXY([region.left + region.width, region.top]);
+                        scrollbar.setStyle('height',region.height + 'px' );
+                        scrollbar.on('scroll', this._onVerticalScroll, this);
+                    },
+                    _onVerticalScroll: function (ev) {
+                        var cbx = this.get('contentBox'),
+                            tbody = this._tbodyNode,
+                            scrollbar = ev.target,
+                            scrollPos = scrollbar.get('scrollTop') /  (scrollbar.get('scrollHeight') - Y.DOM.getScrollbarWidth()),
+                            rows = tbody.all('tr'),
+                            topRow = Math.ceil((rows.size() + 1) * scrollPos);
+                    
+                        rows.each(function (row, index) {
+                            row.setStyle('display', (index < topRow ? 'none' : ''));
+                        });
+                        
+                        var bottom = cbx.get('clientHeight') + cbx.get('offsetTop'),
+                            i = rows.size() -1,
+                            beenHere = false,
+                            row;
+                    
+                        while (bottom > tbody.get('region').bottom) {
+                            row = rows.item(i--);
+                            row.setStyle('height', (parseInt(row.getComputedStyle('height'),0) + 2) + 'px');
+                            if (i <= topRow) {
+                                if (beenHere) {
+                                    break;
+                                }
+                                i = rows.size() -1;
+                                beenHere = true;
+                            }
+                        }
+                 
+                    }
+                });
+                Y.Base.mix(Y.DataTable, [S]);
+                var data = [];
+
+                for (var i = 1; i < 20; ++i) {
+                    data.push({a: 'a' + i , b: 'b' + i, c: 'c' + i, d: 'd' + i, e: 'e' + i, f: 'f' + i, g: 'g' + i, h: 'h' + i});
+                }
+
+                var table = new Y.DataTable({
+                    columns: ['a','b','c','d','e','f','g','h'],
+                    data: data
+                }).render("#dtable");
+            });
+
+        </script>
+
+    </body>
+</html>

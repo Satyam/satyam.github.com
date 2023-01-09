@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Make Node</title>
+		<style>
+			td,th {
+				border: thin solid black;
+			}
+		</style>
+
+
+    </head>
+    <body class="yui3-skin-sam yui-skin-sam">
+
+		<div class="yui3-d0">					
+
+			<h1 id="hd">Make Node</h1>
+			<div id="bd"></div>
+        
+		</div>        
+
+		<!-- YUI Seed -->
+		<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js"></script>
+
+		<script>
+			/*jslint devel: true,  undef: true, newcap: true, strict: true, maxerr: 50 */
+			/*global YUI*/
+
+			YUI().use(
+				'node','substitute','base', 'widget', 
+				'intl', // You may comment this one out to see what happens
+				function(Y) {
+					"use strict";
+					var TEMPLATE = [
+						'<table>',
+						'<tr><th>source<\/th><th>Placeholder</th><th>Should be<\/th><th>returns<\/th><\/tr>',
+						'<tr><th>Attribute<\/th><td>&#123;@ someAttr&#125;</td><td>42<\/td><td>{@ someAttr}<\/td><\/tr>',
+						'<tr><th>Property<\/th><td>&#123;p someProp&#125;</td><td>123<\/td><td>{p someProp}<\/td><\/tr>',
+						'<tr><th>Method<\/th><td>&#123;m someMethod 1 two three&#125;</td><td>[1] two (three)<\/td><td>{m someMethod 1 two three}<\/td><\/tr>',
+						'<tr><th>ClassName<\/th><td>&#123;c form input&#125;</td><td>yui3-maketest-form-input<\/td><td>{c form input}<\/td><\/tr>',
+						'<tr><th>Intl<\/th><td>&#123;_ someModule someText&#125;</td><td>algún texto<\/td><td>{_ someModule someText}<\/td><\/tr>',
+						'<tr><th>extra object<\/th><td>&#123;whatever&#125;</td><td>whatever<\/td><td>{whatever}<\/td><\/tr>',
+						'<tr><th>extra object<br />matching prefix<\/th><td>&#123;p&#125;</td><td>works<\/td><td>{p}<\/td><\/tr>',
+						'<\/table>'
+					].join('\n');
+						
+					if (Y.Intl.add) {
+						Y.Intl.add('someModule','es_ES',{
+							someText:'algún texto'
+						});
+						Y.Intl.setLang('someModule','es_ES');
+					}
+						
+					var X = Y.Base.create(
+						'MakeTest',
+						Y.Widget,
+						[],
+						{
+							someProp: 123,
+							someMethod: function (one, two, three) {
+								return '[' + one + '] ' + two + ' (' + three + ')';
+							},
+							renderUI: function() {
+								this.get('contentBox').append(this.makeNode(TEMPLATE,{
+									whatever:'whatever',
+									p:'works'
+								}));
+							},
+								
+							makeNode: function(template, extras) {
+								extras = extras || {};
+								var intlGet = Y.Intl.get || function (module, key, lang) {
+									return '[ ' + module + '] ' + key;
+								};
+								return Y.Node.create(Y.substitute(template , extras, Y.bind(function (key, suggested, arg) {
+									var args = [];
+									if (arg) {
+										args = arg.split(' ');
+										switch(key.toLowerCase()) {
+											case '_':
+												return intlGet.apply(Y.Intl, args);
+											case '@':
+												return this.get(arg);
+											case 'p':
+												return this[arg];
+											case 'm':
+												var m = args.shift();
+												return this[m].apply(this, args);
+											case 'c':
+												return this.getClassName.apply(this, args);
+//											default:
+//												return suggested;
+										}
+									}
+									return suggested;
+								}, this)));
+							}						
+						},
+						{
+							ATTRS: {
+								someAttr: {
+									value: '42'
+								}
+							}
+						}
+					);
+					var x = new X();
+					x.render('#bd');
+
+				}
+			);
+		
+		</script>
+        
+    </body>
+</html>
+
+
+

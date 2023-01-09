@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Functions</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+      <h1>Functions</h1>
+      <div id="toc"></div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+      
+<h2>JavaScript Functions</h2>
+
+<p>In JavaScript, functions are objects. There are three ways to declare them:</p>
+<h3>Object-like</h3>
+<pre>var myFunction = new Function(arg1, arg2, ...., "{ ... }");</pre>
+<ul>
+    <li>This is what it actually happens when you use any of the other two ways</li>
+    <li>A new <code>Function</code> object is created and the result can be assigned to a variable (which would be traditionally called the function name), with any number of arguments and the body of the function</li>
+    <li>Functions don't have intrinsic names, they are called (in both senses of the word) by the variable that references them</li>
+    <li>The body has to be set as a string, which is cumbersome since a string can't span multiple lines and all quotes within have to be escaped.</li>
+</ul>
+<h3>Traditional style</h3>
+<pre>function myFunction(arg1, arg2,....) {
+...
+};</pre>
+<ul>
+    <li>It looks like what is normally done in other languages</li>
+    <li>The body is written as normal code, stretching multiple lines and using the normal formatting for functions</li>
+    <li>This format always creates the function under the active scope, either the global object or the scope of the function (just like a variable would), it does not allow to set it under an object hierarchy</li>
+    <li>It makes you believe a function has a name, which is not true</li>
+</ul>
+<h3>Recommended way</h3>
+<pre>var myFunction = function (arg1, arg2, .... ) {
+....
+}</pre>
+<ul>
+    <li>Less cumbersome than the first but it represents quite well what really happens</li>
+    <li>The <code>function</code> statement returns a reference to a <code>Function</code> object and that reference can be used absolutely anywhere where a variable could be used</li>
+    <li>It can be assigned to a variable, it can be passed as an argument to a function, it can be returned from a function, it can be stored in an object property (so that it then becomes a method)</li>
+</ul>
+ <p>If you do <code>myFunction.toString()</code> with a function declared in any of the three styles, you'll get it in this last format. It won't give you the name of the function because functions don't have names.</p>
+
+
+<pre>var x = function (a) {
+    console.log('x:', a);
+};
+console.log('x.toString():',x.toString());
+            <tt>x.toString():  function (a) { console.log("x:", a); }</tt> </pre>
+                             
+<h2>Function arguments</h2>
+
+<ul>
+    <li>Functions can take any number and type of arguments</li>
+    <li>Functions can be called with more or less than the number of arguments declared<ul>
+        <li>extra arguments are ignored</li>
+        <li>missing arguments are <code>undefined</code></li>
+    </ul></li>
+    <li>All arguments can be retrieved through the built-in <code>arguments</code> variable, which has a <code>length</code> property so that it can be enumerated</li>
+</ul>
+<pre>var addInts = function() {
+    for (var total = 0, i = 0; i &lt; arguments.length; i++) {
+         total += parseInt(arguments[i],10);
+    }
+    return total;
+}
+
+console.log(addInts(1,2,'3','45.1',46.1));   <tt>97</tt></pre>
+
+<ul>
+<li>You can name some of the arguments and pick the rest via the <code>arguments</code> array</li>
+<li><code>arguments</code> is not a true <code>Array</code> object, it does not have any method or property except for <code>length</code></li>
+</ul>
+
+<h2>Nested functions and Recursion</h2>
+
+<ul>
+<li>Functions can be defined within other functions. They act as auxiliary helper functions within the enclosing one</li>
+<li>Inner functions have access to everything the enclosing function can see, except <code>this</code></li>
+<li>Functions can also call themselves recursively</li>
+<li>If the variable pointing to the function is visible, it can be invoked</li>
+</ul>
+
+<pre>var doSomethingWithArray = function (a) {
+
+    var doSomethingWithElement = function (arrayElement) {
+        // whatever ....
+        // actually, we can see both <code>a</code> and <code>i</code>
+        
+        // A little bit of recursion:
+        if (arrayElement.children && YAHOO.lang.isArray(arrayElement.children)) {
+            doSomethingWithArray(arrayElement.children);
+        }
+    };
+    
+    // do something with <code>a</code> to start with
+    
+    for (var i = 0; i &lt; a.length; i++) {
+        doSomethingWithElement(a[i]);
+    }
+    
+    // finish up whatever you were doing
+};</pre>
+
+
+      
+<h2>Hiding your ... private parts</h2>
+      
+<pre>(function () {
+
+    // shortcuts
+    var Dom = YAHOO.util.Dom,
+        $ = Dom.get,
+        Event = YAHOO.util.Event,
+        Lang = YAHOO.lang;
+
+    // your variables
+    var  ....;
+
+    // your functions
+    var xxx = function() {
+
+        ...
+
+    };
+
+})();</pre>
+<ul>
+<li>Nothing inside is visible outside</li>
+<li>All global resources are available inside</li>
+<li>It allows you to have easy access to all your local resources without congesting the global name space</li>
+<li>It lets you define handy shortcuts for global objects</li>
+</ul>
+
+<h2>Exposing some</h2>      
+
+<pre>(function () {
+
+    // shortcuts
+    var Dom = YAHOO.util.Dom,
+        $ = Dom.get,
+        Event = YAHOO.util.Event,
+        Lang = YAHOO.lang;
+
+    // your variables
+    var  ....;
+
+    // your functions
+    var xxx = function() {
+        ...
+    };
+
+    YAHOO.example.publicFunction = function () {
+        ...
+    };
+
+})();</pre>
+
+<ul>
+<li>Function <code>YAHOO.example.publicFunction</code> is visible globally</li>
+<li>It still has access to the hidden variables and functions inside the enclosing anonymous function</li>
+<li>Whatever is not found in the inner scope, it will be searched for in the outer scopes like <code>YAHOO</code> in the example above</li>
+</ul>
+
+<h2>Closure</h2>
+<p>The ability of a variable reference to remain valid after the scope in which it was defined disappears</p>
+
+<pre>
+// This code is being executed in response to a DataTable event.
+// <code>this</code> points to the DataTable itself.
+this.highlightRow(row);
+var self = this;                // <code>this</code> is not really a variable, it is impervious to closure
+window.setTimeout(function () {
+    self.unhighlightRow(row);   // this function uses both <code>self</code> and <code>row</code> 
+                                // both from the enclosing function which has exited long ago
+},2000);
+</pre>
+
+<p>It is the mechanism that allows encapsulation</p>
+<pre>
+(function () {
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event;
+    
+    Event.on('element','click',function (ev) {
+        var target = Event.getTarget(ev);
+        Dom.addClass(target,'highlight');
+        // ...
+    });
+    
+})();
+</pre>
+<p>Any event listener which might be triggered well after the enclosing function returns, will still find its references valid, such as <code>Dom</code> or <code>Event</code> in the example above.</p>
+
+      
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+      </div>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

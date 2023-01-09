@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: button-group   button-group.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css" />
+
+    <script type="text/javascript" src="assets/api-js"></script>
+    <script type="text/javascript" src="assets/ac-js"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>button-group&nbsp; <span class="subtitle">1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_button-group.html" title="button-group">button-group</a>
+                
+                 &gt; button-group.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+                        <div class="highlight"><pre><span class="cm">/* by: Daniel Barreiro (aka Satyam)</span>
+<span class="cm"> * based on Anthony Pipkin&#39;s at:</span>
+<span class="cm"> * http://www.assembla.com/code/yui/git/nodes/yui3-gallery/src/gallery-button/js/button.js?rev=master</span>
+<span class="cm"> */</span>
+ 
+<span class="cm">/*jslint browser: true, nomen: true, maxerr: 50, indent: 4 */</span>
+<span class="cm">/*global YUI */</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Provides a container to group buttons.</span>
+<span class="cm"> * It can hold instances of Y.Button, Y.ButtonToggle or Y.ButtonSeparator.</span>
+<span class="cm"> * @module button-group</span>
+<span class="cm"> */</span>
+<span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;button-group&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+	<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+	<span class="kd">var</span> <span class="nx">Lang</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span>
+		<span class="nx">BBX</span> <span class="o">=</span> <span class="s1">&#39;boundingBox&#39;</span><span class="p">,</span>
+		<span class="nx">EVENT_PRESS</span> <span class="o">=</span> <span class="s1">&#39;press&#39;</span><span class="p">,</span>
+		<span class="nx">LABEL</span> <span class="o">=</span> <span class="s1">&#39;label&#39;</span><span class="p">;</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	 * The ButtonSeparator class provides a passive divider to use in between groups of buttons</span>
+<span class="cm">	 * @class ButtonSeparator</span>
+<span class="cm">	 * @extends Y.Widget</span>
+<span class="cm">	 * @constructor</span>
+<span class="cm">	 */</span>
+	<span class="nx">Y</span><span class="p">.</span><span class="nx">ButtonSeparator</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+		<span class="s1">&#39;button-separator&#39;</span><span class="p">,</span>
+		<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+		<span class="p">[],</span>
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Overrides the standard bounding box template to produce a &amp;lt;span&amp;gt;</span>
+<span class="cm">			 * @property BOUNDING_TEMPLATE</span>
+<span class="cm">			 * @type String</span>
+<span class="cm">			 */</span>
+			<span class="nx">BOUNDING_TEMPLATE</span><span class="o">:</span> <span class="s1">&#39;&lt;span /&gt;&#39;</span>
+		<span class="p">},</span>
+		<span class="p">{</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+		
+	<span class="cm">/**</span>
+<span class="cm">	 * The ButtonGroup class provides a container for sets of Buttons.</span>
+<span class="cm">	 * All buttons added will be extended with Y.WidgetChild.</span>
+<span class="cm">	 * @class ButtonGroup</span>
+<span class="cm">	 * @extends Y.Widget</span>
+<span class="cm">	 * @uses Y.WidgetParent, Y.Makenode</span>
+<span class="cm">	 * @constructor</span>
+<span class="cm">	 * @param cfg {object} Configuration attributes</span>
+<span class="cm">	 */</span>
+
+
+	<span class="nx">Y</span><span class="p">.</span><span class="nx">ButtonGroup</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+		<span class="s1">&#39;button-group&#39;</span><span class="p">,</span> 
+		<span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span> 
+		<span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetParent</span><span class="p">,</span><span class="nx">Y</span><span class="p">.</span><span class="nx">MakeNode</span><span class="p">],</span> 
+		<span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Overrides the standard bounding box template to produce a &amp;lt;fieldset&amp;gt;</span>
+<span class="cm">			 * @property BOUNDING_TEMPLATE</span>
+<span class="cm">			 * @type String</span>
+<span class="cm">			 */</span>
+			<span class="nx">BOUNDING_TEMPLATE</span><span class="o">:</span> <span class="s1">&#39;&lt;fieldset /&gt;&#39;</span><span class="p">,</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the listener for the addChild event to extend children with Y.WidgetChild.</span>
+<span class="cm">			 * Publishes the &lt;code&gt;press&lt;/code&gt; event</span>
+<span class="cm">			 */</span>
+			<span class="nx">initializer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addChild&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+					<span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">child</span><span class="p">,</span>
+						<span class="nx">WC</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetChild</span><span class="p">;</span>
+					<span class="k">if</span> <span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
+						<span class="k">if</span> <span class="p">(</span><span class="nx">child</span> <span class="k">instanceof</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Button</span> <span class="o">||</span> <span class="nx">child</span> <span class="k">instanceof</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">ButtonSeparator</span><span class="p">)</span> <span class="p">{</span>
+							<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">child</span><span class="p">.</span><span class="nx">ancestor</span><span class="p">)</span> <span class="p">{</span>
+							
+								<span class="nx">Y</span><span class="p">.</span><span class="nx">augment</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">WC</span><span class="p">);</span>
+								
+								<span class="nx">child</span><span class="p">.</span><span class="nx">addAttrs</span><span class="p">(</span><span class="nx">child</span><span class="p">.</span><span class="nx">_protectAttrs</span><span class="p">(</span><span class="nx">WC</span><span class="p">.</span><span class="nx">ATTRS</span><span class="p">));</span>
+								
+								<span class="nx">WC</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+							<span class="p">}</span>
+						<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+							<span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+						<span class="p">}</span>
+					<span class="p">}</span>
+				<span class="p">});</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="nx">EVENT_PRESS</span><span class="p">);</span>
+			<span class="p">},</span>
+			
+
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets listeners for the press event of child buttons, see &lt;a href=&quot;#method__onButtonPress&quot;&gt;_onButtonPress&lt;/a&gt;.</span>
+<span class="cm">			 * @method bindUI</span>
+<span class="cm">			 */</span>
+			<span class="nx">bindUI</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+				<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">([</span><span class="s1">&#39;button:press&#39;</span><span class="p">,</span><span class="s1">&#39;button-toggle:press&#39;</span><span class="p">],</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onButtonPress</span> <span class="p">,</span><span class="k">this</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Processes the press event of child Buttons to enforce the &lt;a href=&quot;#config__alwaysSelected&quot;&gt;_alwaysSelected&lt;/a&gt; attribute,</span>
+<span class="cm">			 * and to propagate the press event</span>
+<span class="cm">			 * @method _onButtonPress</span>
+<span class="cm">			 * @param ev {EventFacade}</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_onButtonPress</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;alwaysSelected&#39;</span><span class="p">))</span> <span class="p">{</span>
+					<span class="kd">var</span> <span class="nx">selection</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;selection&#39;</span><span class="p">),</span>
+						<span class="nx">button</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+
+					<span class="k">if</span><span class="p">(</span><span class="nx">selection</span> <span class="o">===</span> <span class="nx">button</span> <span class="o">||</span> <span class="c1">// selection is the button OR</span>
+						<span class="p">(</span> 
+							<span class="nx">selection</span> <span class="k">instanceof</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">ArrayList</span> <span class="o">&amp;&amp;</span>		<span class="c1">// selection is an array AND</span>
+							<span class="nx">selection</span><span class="p">.</span><span class="nx">size</span><span class="p">()</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>				<span class="c1">// there is only one item AND</span>
+							<span class="nx">selection</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">===</span> <span class="nx">button</span>			<span class="c1">// that one item is the button</span>
+						<span class="p">)</span>
+					<span class="p">)</span> <span class="p">{</span>
+						<span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+						<span class="k">return</span><span class="p">;</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">EVENT_PRESS</span><span class="p">,</span> <span class="p">{</span><span class="nx">pressed</span><span class="o">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">});</span>
+			<span class="p">},</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Sets the label of the container from the value of the &lt;a href=&quot;#config_label&quot;&gt;label&lt;/a&gt; configuration attribute.</span>
+<span class="cm">			 * Creates the &amp;lt;legend&amp;gt; element to hold it if it does not exists.</span>
+<span class="cm">			 * @method _uiSetLabel</span>
+<span class="cm">			 * @param value {String} text to be shown</span>
+<span class="cm">			 * @private</span>
+<span class="cm">			 */</span>
+			<span class="nx">_uiSetLabel</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">_labelNode</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BBX</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_makeNode</span><span class="p">());</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">_locateNodes</span><span class="p">();</span>
+				<span class="p">}</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_labelNode</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+			<span class="p">}</span>
+
+		<span class="p">},</span> <span class="p">{</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Template for the &amp;lt;legend&amp;gt; element to hold the label.  Used by MakeNode.</span>
+<span class="cm">			 * @property Y.ButtonGroup._TEMPLATE</span>
+<span class="cm">			 * @type String</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_TEMPLATE</span><span class="o">:</span> <span class="s1">&#39;&lt;legend class=&quot;{c label}&quot;&gt;{@ label}&lt;/legend&gt;&#39;</span><span class="p">,</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Creates the label className key to be used in the template</span>
+<span class="cm">			 * @property Y.ButtonGroup._CLASS_NAMES</span>
+<span class="cm">			 * @type [Strings]</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_CLASS_NAMES</span><span class="o">:</span> <span class="p">[</span><span class="nx">LABEL</span><span class="p">],</span>
+			<span class="cm">/**</span>
+<span class="cm">			 * Hooks up &lt;a href=&quot;method__uiSetLabel&quot;&gt;_uiSetLabel&lt;/a&gt; to respond to changes in the &lt;a href=&quot;#config_label&quot;&gt;label&lt;/a&gt; attribute.</span>
+<span class="cm">			 * @property Y.ButtonGroup._ATTRS_2_UI</span>
+<span class="cm">			 * @type Object</span>
+<span class="cm">			 * @static</span>
+<span class="cm">			 * @protected</span>
+<span class="cm">			 */</span>
+			<span class="nx">_ATTRS_2_UI</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">BIND</span><span class="o">:</span> <span class="nx">LABEL</span><span class="p">,</span>
+				<span class="nx">SYNC</span><span class="o">:</span> <span class="nx">LABEL</span>
+			<span class="p">},</span>
+			<span class="nx">ATTRS</span> <span class="o">:</span> <span class="p">{</span>
+				<span class="cm">/**</span>
+<span class="cm">				 * Holds the label for this group of buttons</span>
+<span class="cm">				 * @attribute label</span>
+<span class="cm">				 * @type String</span>
+<span class="cm">				 * @default &quot;&quot;</span>
+<span class="cm">				 */</span>
+				<span class="nx">label</span> <span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+					<span class="nx">validator</span> <span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span>
+				<span class="p">},</span>
+
+				<span class="cm">/**</span>
+<span class="cm">				 * Defines the default type of child to be contained in this group.  </span>
+<span class="cm">				 * Used by WidgetParent to create the default children</span>
+<span class="cm">				 * @attribute defaultChildType</span>
+<span class="cm">				 * @type object</span>
+<span class="cm">				 * @default Y.Button</span>
+<span class="cm">				 */</span>
+				<span class="nx">defaultChildType</span> <span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span> <span class="o">:</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Button</span>
+				<span class="p">},</span>
+
+				<span class="cm">/**</span>
+<span class="cm">				 * Forces this group to always have at least one toggle button selected</span>
+<span class="cm">				 * @attribute alwaysSelected</span>
+<span class="cm">				 * @type Boolean</span>
+<span class="cm">				 * @default false</span>
+<span class="cm">				 */</span>
+				<span class="nx">alwaysSelected</span> <span class="o">:</span> <span class="p">{</span>
+					<span class="nx">value</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+					<span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+	
+
+	
+<span class="p">},</span> <span class="s1">&#39;0.9&#39;</span><span class="p">,</span> <span class="p">{</span>
+	<span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;base-build&#39;</span><span class="p">,</span><span class="s1">&#39;widget&#39;</span><span class="p">,</span> <span class="s1">&#39;makenode&#39;</span><span class="p">,</span> <span class="s1">&#39;widget-parent&#39;</span><span class="p">,</span><span class="s1">&#39;widget-child&#39;</span><span class="p">,</span> <span class="s1">&#39;button&#39;</span><span class="p">],</span>
+	<span class="nx">skinnable</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</pre></div>
+
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_accordion.html" title="Accordion">Accordion</a></li>
+                                <li class=""><a href="module_button.html" title="button">button</a></li>
+                                <li class="selected"><a href="module_button-group.html" title="button-group">button-group</a></li>
+                                <li class=""><a href="module_makenode.html" title="makenode">makenode</a></li>
+                                <li class=""><a href="module_spinner.html" title="spinner">spinner</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="ButtonGroup.html" title="ButtonGroup">ButtonGroup</a></li>
+                                <li class=""><a href="ButtonSeparator.html" title="ButtonSeparator">ButtonSeparator</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="button-group.js.html" title="button-group.js">button-group.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+
+    var ALL_YUI_PROPS = [{"url": "ButtonGroup.html#config_alwaysSelected", "access": "", "host": "ButtonGroup", "type": "config", "name": "alwaysSelected"}, {"url": "ButtonGroup.html#event_alwaysSelectedChange", "access": "", "host": "ButtonGroup", "type": "event", "name": "alwaysSelectedChange"}, {"url": "ButtonGroup.html#method_bindUI", "access": "", "host": "ButtonGroup", "type": "method", "name": "bindUI"}, {"url": "ButtonSeparator.html#property_BOUNDING_TEMPLATE", "access": "", "host": "ButtonSeparator", "type": "property", "name": "BOUNDING_TEMPLATE"}, {"url": "ButtonGroup.html#property_BOUNDING_TEMPLATE", "access": "", "host": "ButtonGroup", "type": "property", "name": "BOUNDING_TEMPLATE"}, {"url": "ButtonGroup.html#config_defaultChildType", "access": "", "host": "ButtonGroup", "type": "config", "name": "defaultChildType"}, {"url": "ButtonGroup.html#event_defaultChildTypeChange", "access": "", "host": "ButtonGroup", "type": "event", "name": "defaultChildTypeChange"}, {"url": "ButtonGroup.html#method_initializer", "access": "", "host": "ButtonGroup", "type": "method", "name": "initializer"}, {"url": "ButtonGroup.html#config_label", "access": "", "host": "ButtonGroup", "type": "config", "name": "label"}, {"url": "ButtonGroup.html#event_labelChange", "access": "", "host": "ButtonGroup", "type": "event", "name": "labelChange"}, {"url": "ButtonGroup.html#method__onButtonPress", "access": "private", "host": "ButtonGroup", "type": "method", "name": "_onButtonPress"}, {"url": "ButtonGroup.html#method__uiSetLabel", "access": "private", "host": "ButtonGroup", "type": "method", "name": "_uiSetLabel"}, {"url": "ButtonGroup.html#property_Y.ButtonGroup._ATTRS_2_UI", "access": "protected", "host": "ButtonGroup", "type": "property", "name": "Y.ButtonGroup._ATTRS_2_UI"}, {"url": "ButtonGroup.html#property_Y.ButtonGroup._CLASS_NAMES", "access": "protected", "host": "ButtonGroup", "type": "property", "name": "Y.ButtonGroup._CLASS_NAMES"}, {"url": "ButtonGroup.html#property_Y.ButtonGroup._TEMPLATE", "access": "protected", "host": "ButtonGroup", "type": "property", "name": "Y.ButtonGroup._TEMPLATE"}];
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+YUI.add("lang/gallery-timeline",function(a){a.Intl.add("gallery-timeline","",{categories:"Categories",noCategory:"-no category-",months:["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]});},"@VERSION@");

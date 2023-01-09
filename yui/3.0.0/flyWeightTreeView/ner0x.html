@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
+
+	</head>
+	<body class="yui3-skin-sam">
+		<div id="container" class="yui3-fw-treeview-checkbox"></div>
+		<button id="save">Save</button>
+		<div id="output"></div>
+		<script>
+			YUI({
+//				combine:false,
+//				filter:'raw',
+				groups: {
+					gallery: {
+//						base:'..//git/yui3-gallery/build/',
+						base:'http://satyam.github.com/yui3-gallery/build/',
+						modules: {
+							'gallery-flyweight-tree': {
+								path:'gallery-flyweight-tree/gallery-flyweight-tree.js',
+								requires:["base-base","base-build","classnamemanager"]
+							},
+							'gallery-fwt-treeview': {
+								path: 'gallery-fwt-treeview/gallery-fwt-treeview.js',
+								requires: ["gallery-flyweight-tree","widget","base-build"],
+								skinnable: true
+							}
+						}
+					}
+				}
+			}).use('gallery-fwt-treeview', 'json', function (Y) {
+				'use strict';
+				/*jslint white:true*/
+				var sampleString = ("In computer programming, flyweight is a software design pattern. " + 
+					"A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; " + 
+					"it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory." + 
+					" Often some parts of the object state can be shared, and it is common practice to hold them in external data structures and pass " + 
+					"them to the flyweight objects temporarily when they are used." + 
+					"A classic example usage of the flyweight pattern is the data structures for graphical representation of characters in a word processor. " + 
+					"It might be desirable to have, for each character in a document, a glyph object containing its font outline, font metrics, " + 
+					"and other formatting data, but this would amount to hundreds or thousands of bytes for each character. " + 
+					"Instead, for every character there might be a reference to a flyweight glyph object shared by " + 
+					"every instance of the same character in the document; only the position of each character " + 
+					"(in the document and/or the page) would need to be stored internally.Another example is string interning." + 
+					"In other contexts the idea of sharing identical data structures is called hash consing.").replace(/\W/g,'');
+				
+				
+				var FileNode = Y.Base.create(
+					'file-node',
+					Y.FWTreeNode,
+					[],
+					{						
+					},
+					{
+						ATTRS: {
+							path: {}
+						}
+						
+					}
+				);
+					
+					
+				var tv = new Y.FWTreeView({
+					tree: [
+						{
+							label:'nice files',
+							children: [
+								{
+									label: 'really nice',
+									path:'reallyNiceFiles'
+								},
+								{
+									label: 'so-so files',
+									path:'mediocreFiles'
+								}
+							]
+						},
+						{
+							label: 'ugly files',
+							path: 'nastyFiles'
+						}
+
+					],
+					dynamicLoader: function (node, callback) {
+						var returnFakeJSON = function(path) {
+							var i, l, f, reply = [];
+							for (i = 0,l = Math.random() * 5;i < l; i+=1) {
+								f = sampleString.substr(Math.random() * sampleString.length, Math.ceil(Math.random() * 10));
+								reply.push({
+									label:f,
+									path:path + '/' + f,
+									isLeaf:Math.random() > .3
+								})
+							}
+							return reply;
+						}
+						
+						var reply = returnFakeJSON(node.get('path'));
+						
+						callback(reply);
+						return;
+					},
+					defaultType: FileNode,
+					toggleOnLabelClick:true
+				});
+				tv.render('#container');
+				Y.one('#save').on('click', function() {
+					var output = [];
+					tv.forSomeNodes(function (node) {
+						if (node.get('selected')=== Y.FWTreeNode.FULLY_SELECTED) {
+							output.push({
+								path:node.get('path'),
+								isFolder: !node.get('isLeaf')
+							});
+						}
+					});
+					
+					Y.one('#output').setContent(Y.JSON.stringify(output));
+					
+				});
+			});
+		</script>
+	</body>
+</html>

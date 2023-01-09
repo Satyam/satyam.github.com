@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>DataTable Requery</title>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css" />
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css" />
+		<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/datatable/assets/skins/sam/datatable.css" />
+		<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/paginator/assets/skins/sam/paginator.css" />
+
+		<!-- Dependencies -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datasource/datasource-min.js"></script>
+
+		<!-- OPTIONAL: JSON Utility (for DataSource) -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/json/json-min.js"></script>
+
+		<!-- OPTIONAL: Connection Manager (enables XHR for DataSource) -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/connection/connection-min.js"></script>
+
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/paginator/paginator-min.js"></script>
+
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datatable/datatable.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+		<style type="text/css">
+			.dp-highlighter th, .dp-highlighter td {
+				border:0;
+				padding:0;
+			}
+			.dp-highlighter .line1, .dp-highlighter  .line2 {
+				padding-left:10px;
+				white-space:nowrap;
+			}
+		</style>
+		
+	</head>
+
+	<body class="yui-skin-sam">
+	
+	<div id="doc"> 
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<h1>DataTable Requery</h1>
+		<p>This page shows my <code>requery</code> custom method for YUI DataTable:</p>
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			YAHOO.widget.DataTable.prototype.requery = function(newRequest) {
+				var ds = this.getDataSource(),
+					req;
+				if (this.get('dynamicData')) {
+					// For dynamic data, newRequest is ignored since the request is built by function generateRequest.
+					var paginator = this.get('paginator');
+					this.onPaginatorChangeRequest(paginator.getState({'page':paginator.getCurrentPage()}));
+				} else {
+					// The LocalDataSource needs to be treated different
+					if (ds instanceof YAHOO.util.LocalDataSource) {
+						ds.liveData = newRequest;
+						req = "";
+					} else {
+						req = (newRequest === undefined?this.get('initialRequest'):newRequest);
+					}
+					ds.sendRequest(req,
+						{
+							success: this.onDataReturnInitializeTable,
+							failure: this.onDataReturnInitializeTable,
+							scope: this,
+							argument: this.getState() 
+						}
+					);
+				}
+			};
+		</textarea>
+		<p>The method has to be included in the page that will use it at any time after the source code 
+		for the DataTable gets loaded but before any DataTable is instantiated.  
+		The method accepts a single argument <code>newRequest</code> which can be:<ul>
+		<li>For DataTables with server-side sorting and pagination it is ignored.  
+		The request is built by the function set in the generateRequest configuration attribute so it 
+		makes no sense here.</li>
+		<li>For LocalDataSources it has to be the new set of data to be loaded.</li>
+		<li>For all other DataTables and DataSources it is the same
+		as that initially provided in the <code>initialRequest</code> configuration attribute.</li>
+		</ul>
+		If not provided, the requery will use the same values as set initially.</p>
+		
+		<p>Below you will find several examples with local, remote (XHR) and function DataSources
+		and with client-side or server-side sorting and/or paging.  All use a slightly modified version of the
+		PHP script (json_meta_proxy.php) that comes with the YUI examples, the modification only affects the last example as noted below.</p>
+		<h2>Examples</h2><ul>
+		<li><a href="#xhr">Using Remote DataSource via XHR</a></li>
+		<li><a href="#local">Using Local DataSource</a></li>
+		<li><a href="#function">Using Function DataSource</a></li>
+		<li><a href="#client">Client-side paging and sorting with XHR DataSource</a></li>
+		<li><a href="#server">Server-side paging and sorting with XHR DataSource</a></li>
+		</ul>
+		
+		<h2>Please read:</h2>
+		<p>There are several difficult issues with requerying.   The first three examples don't have sorting enabled, 
+		and there is a good reason for that.  If the user sorts by whichever column and the data is requeried, it will not
+		return sorted as the user requested, unless the server somehow helps in some way.  With local data, there is no
+		server involved, so even the sorting has to be handled on the client side.  The other option is to capture
+		the data before it is received by the DataTable (<a href="http://developer.yahoo.com/yui/docs/YAHOO.widget.DataTable.html#event_dataReturnEvent">dataReturnEvent</a>)
+		and sort it there.  This was not shown since, after all, not all DataTables need to be sorted.</p>
+		
+		<p>In the <a href="#client">Client-side paging example</a> I do request the server to return the data sorted as the user
+		has selected.  Though the DataTable will be sorted and paged locally, on the requery, the sort information is
+		sent to the server so the new batch of data comes sorted the right way.</p>
+		
+		<p>In the <a href="#server">server-side paging and sorting</a> example, we use the server to the full, 
+		always doing the paging and sorting via the server.</p>
+		<p>Another issue is row and cell selection:  the DataTable keeps track of selection via recordIds.  These are
+		reassigned to the new records on requerying the server.  The requery function will preserve the selection
+		as much as the DataTable is capable of, which simply doesn't work when the records come in a different order, 
+		a new record is inserted or an existing one is deleted, the recordIds will point to the wrong records.
+		If you want to support this functionality, you have to find the means to identify the selected records
+		with some immutable piece of data (a database primary key or such), do the requery, and re-establish the selection once the data has been received.</p>
+		
+		<p>Finally, in doing the tests I discovered a bug in the DataTable which I duly <a href="http://yuilibrary.com/projects/yui2/ticket/2528654">reported</a>,
+		the patch for that bug is included in the source for this example, methods <code>onDataReturnSetRows</code> and <code>_handleDataReturnPayload</code>.</p>
+		
+		<p>The important message is:  requerying the database may be tricky in certain circumstances, you can't trust a simple method to do it all, it depends
+		very much on your application, in many cases, you need support from the server.</p>
+		
+
+		<h2><a name="xhr"></a>Using Remote DataSource via XHR</h2>
+		<p>The first example XHRDataSource was instantiated with the base URL of the server page providing the data 
+		and the extra URL arguments, stating the startIndex and number of records expected, was given in the 
+		<code>initialRequest</code> configuration attribute of the DataTable:  <code>initialRequest:'startIndex=0&results=12'</code></p>
+		<p>The requery takes a different string to be used as URL arguments which will be appended to the same base URL.</p>
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			Event.on('requeryXHR','click',function() {
+				dtXHR.requery('startIndex=10&amp;results=8');
+			});
+		</textarea>
+
+		<div id="ContainerXHR"></div>
+		<button id="requeryXHR">Requery</button>
+		
+		<h2><a name="local"></a>Using Local DataSource</h2>
+		<p>The second, a LocalDataSource, was instantiated with a slice of a big array of data fetched separately via Connection Manager.
+		On doing the requery, we provide a different slice of that same data.</p>
+
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			Event.on('requeryLocal','click',function() {
+				dtLocal.requery(data.slice(10,18));
+			});
+		</textarea>
+
+		<div id="ContainerLocal"></div>
+		<button id="requeryLocal">Requery</button>
+
+		<h2><a name="function"></a>Using Function DataSource</h2>
+		<p>The third, a FunctionDataSource, was instantiated with the code of the function that will retrieve the data.
+		The function simply returns a slice of the very same data that the previous DataTable uses.  
+		To tell the function which slice of the data we want, we provide an <code>initialRequest</code> 
+		configuration attribute to the DataTable with an object literal containing the start and end indexes.
+		On doing the requery, we simply provide a different set of arguments, the function remains the same.</p>
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			Event.on('requeryFunction','click',function() {
+				dtFunction.requery({
+					startIndex: 10,
+					endIndex:18
+				});
+			});
+		</textarea>
+
+		<div id="ContainerFunction"></div>
+		<button id="requeryFunction">Requery</button>
+
+		<h2><a name="client"></a>Client-side paging and sorting with XHR DataSource</h2>
+		<p>For the next example, we use a a remote DataSource as in the first example, but we set a paginator for the DataTable.
+		Since the server can provide a variable number of results, when requerying we ask for less records than the first time around to show
+		how the requery will reset the paginator to show the correct number of pages.  Try this: if you go to page 2 and requery
+		it will show the new, shorted, second page.  Now, reload the page, go to page 4 and do the requery, the paginator
+		will now show the first page since there is no further page 4 in the new batch.</p>
+		<p>Though this is a client-side sorting example, when we do the requery, we have to ask the server to provide those
+		records sorted in whichever way the user has selected.  Somehow, it is a hybrid example in that the server does have to do
+		some sorting to reflect what the user has done.  However, further clicking on the column headers will do the sort locally on the client side.</p>
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			Event.on('requeryPaged','click',function() {
+				var sortedBy = dtPaged.get('sortedBy');
+				dtPaged.requery( "startIndex=0&results=20&sort=" + sortedBy.key + "&dir=" + (sortedBy.dir==YAHOO.widget.DataTable.CLASS_ASC?"asc":"desc"));
+			});
+		</textarea>
+		<div id="ContainerPaged"></div>
+		<button id="requeryPaged">Requery</button>
+
+		<h2><a name="server"></a>Server-side paging and sorting with XHR DataSource</h2>
+		<p>With server-side paging and sorting, evert change in page or sorting will create a new request
+		but if you want to refresh the current page, you can't, the button for that page is not even active
+		so the requery forces a request for that same page.  We have added an extra trick, the server
+		allows us to tell it how many total records I want reported.  
+		If I don't say how many, it will report close to 14 hundred records, more than fifty pages.  
+		On the requery, I add to the original request the argument to tell the server to report less records
+		than it actually has, so you can see how it handles the drastic reduction in the number of records.
+		You would not do that on normal operation.</p>
+		<textarea name="code" class="JScript" cols="60" rows="1">
+			Event.on('requeryServer','click',function() {
+				// this is just to trick the server to report less records
+				dtServer.getDataSource().liveData += "totalRecords=100&";
+				dtServer.requery();
+			});
+		</textarea>
+		<div id="ContainerServer"></div>
+		<button id="requeryServer">Requery</button>
+	</div>
+<script type="text/javascript">
+
+(function () {
+	var Event = YAHOO.util.Event,
+		DT = YAHOO.widget.DataTable,
+		lang = YAHOO.lang;
+		
+	// This is my requery method
+	YAHOO.widget.DataTable.prototype.requery = function(newRequest) {
+		var ds = this.getDataSource(),
+			req;
+		if (this.get('dynamicData')) {
+			// For dynamic data, newRequest is ignored since the request is built by function generateRequest.
+			var paginator = this.get('paginator');
+			this.onPaginatorChangeRequest(paginator.getState({'page':paginator.getCurrentPage()}));
+		} else {
+			// The LocalDataSource needs to be treated different
+			if (ds instanceof YAHOO.util.LocalDataSource) {
+				ds.liveData = newRequest;
+				req = "";
+			} else {
+				req = (newRequest === undefined?this.get('initialRequest'):newRequest);
+			}
+			ds.sendRequest(req,
+				{
+					success: this.onDataReturnInitializeTable,
+					failure: this.onDataReturnInitializeTable,
+					scope: this,
+					argument: this.getState() 
+				}
+			);
+		}
+	};		
+	
+	// In testing the requery function I found a couple of bugs reported in ticket 2528654.
+	// The changes are marked in the code below
+	// see: http://yuilibrary.com/projects/yui2/ticket/2528654
+
+	YAHOO.widget.DataTable.prototype.onDataReturnSetRows = function(oRequest, oResponse, oPayload) {
+		if((this instanceof DT) && this._sId) {
+			this.fireEvent("dataReturnEvent", {request:oRequest,response:oResponse,payload:oPayload});
+		
+			// Pass data through abstract method for any transformations
+			var ok    = this.doBeforeLoadData(oRequest, oResponse, oPayload),
+				pag   = this.get('paginator'),
+				index = 0;
+		
+			// Data ok to set
+			if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
+				// see: http://yuilibrary.com/projects/yui2/ticket/2528654
+				// Update state
+				this._handleDataReturnPayload(oRequest, oResponse, oPayload);
+				
+				// Update Records
+				if (this.get('dynamicData')) {
+					if (oPayload && oPayload.pagination &&
+						lang.isNumber(oPayload.pagination.recordOffset)) {
+						index = oPayload.pagination.recordOffset;
+					} else if (pag) {
+						index = pag.getStartIndex();
+					}
+					
+					this._oRecordSet.reset(); // Bug 2290604: dyanmic data shouldn't keep accumulating by default
+				}
+		
+				this._oRecordSet.setRecords(oResponse.results, index | 0);
+				
+				// see: http://yuilibrary.com/projects/yui2/ticket/2528654
+				// this._handleDataReturnPayload(oRequest, oResponse, oPayload);
+
+		
+				// Update UI
+				this.render();
+			}
+			// Error
+			else if(ok && oResponse.error) {
+				this.showTableMessage(this.get("MSG_ERROR"), DT.CLASS_ERROR);
+			}
+		}
+		else {
+		}
+	};
+	
+	YAHOO.widget.DataTable.prototype._handleDataReturnPayload = function (oRequest, oResponse, oPayload) {
+		oPayload = this.handleDataReturnPayload(oRequest, oResponse, oPayload);
+		if(oPayload) {
+			// Update pagination
+			var oPaginator = this.get('paginator');
+			if (oPaginator) {
+				// Update totalRecords
+				if(this.get("dynamicData")) {
+					if (YAHOO.widget.Paginator.isNumeric(oPayload.totalRecords)) {
+						oPaginator.set('totalRecords',oPayload.totalRecords);
+					}
+				}
+				else {
+				// See: http://yuilibrary.com/projects/yui2/ticket/2528654
+				//	oPaginator.set('totalRecords',this._oRecordSet.getLength());
+					oPaginator.set('totalRecords',oResponse.results.length);
+				}
+				// Update other paginator values
+				if (lang.isObject(oPayload.pagination)) {
+					oPaginator.set('rowsPerPage',oPayload.pagination.rowsPerPage);
+					oPaginator.set('recordOffset',oPayload.pagination.recordOffset);
+				}
+			}
+
+			// Update sorting
+			if (oPayload.sortedBy) {
+				// Set the sorting values in preparation for refresh
+				this.set('sortedBy', oPayload.sortedBy);
+			}
+			// Backwards compatibility for sorting
+			else if (oPayload.sorting) {
+				// Set the sorting values in preparation for refresh
+				this.set('sortedBy', oPayload.sorting);
+			}
+		}
+	};
+
+	
+	// All tables share the same basic definition
+
+	var columnDefs = [
+		{key:"id",label:"ID",resizeable:true},
+		{key:"name",label:"Name",resizeable:true},
+		{key:"date",label:"Date",resizeable:true},
+		{key:"price",label:"Price","type":"number",resizeable:true},
+		{key:"number",label:"Number",resizeable:true},
+		{key:"address",label:"Address",resizeable:true},
+		{key:"company",label:"Company",resizeable:true},
+		{key:"desc",label:"Description",resizeable:true},
+		{key:"age",label:"Age",resizeable:true},
+		{key:"title",label:"Title",resizeable:true},
+		{key:"phone",label:"Phone",resizeable:true},
+		{key:"email",label:"Email",resizeable:true},
+		{key:"zip",label:"Zip",resizeable:true},
+		{key:"country",label:"Country",resizeable:true}
+	],
+	sortableColumnDefs = [
+		{key:"id",label:"ID",resizeable:true,sortable:true},
+		{key:"name",label:"Name",resizeable:true,sortable:true},
+		{key:"date",label:"Date",resizeable:true,sortable:true},
+		{key:"price",label:"Price","type":"number",resizeable:true,sortable:true},
+		{key:"number",label:"Number",resizeable:true,sortable:true},
+		{key:"address",label:"Address",resizeable:true,sortable:true},
+		{key:"company",label:"Company",resizeable:true,sortable:true},
+		{key:"desc",label:"Description",resizeable:true,sortable:true},
+		{key:"age",label:"Age",resizeable:true,sortable:true},
+		{key:"title",label:"Title",resizeable:true,sortable:true},
+		{key:"phone",label:"Phone",resizeable:true,sortable:true},
+		{key:"email",label:"Email",resizeable:true,sortable:true},
+		{key:"zip",label:"Zip",resizeable:true,sortable:true},
+		{key:"country",label:"Country",resizeable:true,sortable:true}
+	],
+	fields = ['id','name','date','price','number','address','company','desc','age','title','phone','email','zip','country'];
+	
+
+	//------------------------------------------------
+	// This is the DataTable with remote data via XHR		
+	var dtXHR = new YAHOO.widget.DataTable(
+		'ContainerXHR',
+		columnDefs,
+		new YAHOO.util.XHRDataSource(
+			// The location of the remote server page is provided here:
+			'../2.6.0/json_meta_proxy.php?',
+			{
+				responseType:YAHOO.util.DataSource.TYPE_JSON,
+				responseSchema: {
+					resultsList:'records',
+					fields:fields
+				}
+			}
+		),
+		{
+			// The query arguments are provided here
+			initialRequest:'startIndex=0&results=12'
+		}
+	);
+	
+	// This is the code that calls the requery method
+	Event.on('requeryXHR','click',function() {
+		dtXHR.requery('startIndex=10&results=8');
+	});
+
+
+	// To show how it works with Local and Function DataSources, I need to have the data loaded locally.
+	// I load the data for the local array from the same initial request as the remote DataSource does.
+	// I use the Connection Manager and then use the YUI JSON parser to save it in the data variable:
+	
+	var data;
+					
+	YAHOO.util.Connect.asyncRequest('GET','../2.6.0/json_meta_proxy.php?startIndex=0&results=200',{
+		success: function (o) {
+			data = YAHOO.lang.JSON.parse(o.responseText).records;
+			
+			
+			
+	//------------------------------------------------
+	// This is the DataTable built from local data
+			var dtLocal = new YAHOO.widget.DataTable(
+				'ContainerLocal',
+				columnDefs,
+				new YAHOO.util.LocalDataSource(
+					// The data is provided right in the constructor for DataSource:
+					data.slice(0,12),
+					{
+						responseType:YAHOO.util.DataSource.TYPE_ARRAY,
+						responseSchema: {
+							fields:fields
+						}
+					}
+				)
+			);
+			
+	// The listener to the requery button simply calls requery passing a different slice of the same data
+			Event.on('requeryLocal','click',function() {
+				dtLocal.requery(data.slice(10,18));
+			});
+			
+	//------------------------------------------------
+	// This is the DataTable built via a function from local data
+			var dtFunction = new YAHOO.widget.DataTable(
+				'ContainerFunction',
+				columnDefs,
+				new YAHOO.util.FunctionDataSource(
+					// The function is given in the constructor for DataSource:
+					function(oArgs) {
+						return data.slice(oArgs.startIndex,oArgs.endIndex);
+					},
+					{
+						responseType:YAHOO.util.DataSource.TYPE_ARRAY,
+						responseSchema: {
+							fields:fields
+						}
+					}
+				),
+				{
+					// The function arguments for the initial data retrieval
+					// are provided in the initialRequest configuration attribute, 
+					// as an object literal.
+					initialRequest: {
+						startIndex: 0,
+						endIndex:12
+					}
+				}
+			);
+			
+	// The listener to the requery button simply calls requery passing a different set of arguments
+			Event.on('requeryFunction','click',function() {
+				dtFunction.requery({
+					startIndex: 10,
+					endIndex:18
+				});
+			});
+	//------------------------------------------------
+	//------------------------------------------------
+			
+			
+			
+		// the remainder of the call to asyncRequest
+		},	
+		failure: function (o) {
+			alert('something went wrong :' + o.statusText);
+		}
+			
+	});
+	var dtPaged = new YAHOO.widget.DataTable(
+		'ContainerPaged',
+		sortableColumnDefs,
+		new YAHOO.util.XHRDataSource('../2.6.0/json_meta_proxy.php?',
+			{
+				responseType:YAHOO.util.DataSource.TYPE_JSON,
+				responseSchema: {
+					resultsList:'records',
+					fields:fields
+				}
+			}
+		),
+		{
+
+			initialRequest: "startIndex=0&results=50",
+			paginator: new YAHOO.widget.Paginator({
+				rowsPerPage: 15 
+			}),
+			sortedBy:{
+				key:'id',
+				dir:YAHOO.widget.DataTable.CLASS_ASC
+			}
+		}
+	);
+			
+	// The listener to the requery button simply calls requery passing a different set of arguments
+	Event.on('requeryPaged','click',function() {
+		var sortedBy = dtPaged.get('sortedBy');
+		dtPaged.requery( "startIndex=0&results=20&sort=" + sortedBy.key + "&dir=" + (sortedBy.dir==YAHOO.widget.DataTable.CLASS_ASC?"asc":"desc"));
+	});
+	
+	//------------------------------------------------
+	// This is the DataTable with remote data via XHR		
+	var dtServer = new YAHOO.widget.DataTable(
+		'ContainerServer',
+		sortableColumnDefs,
+		new YAHOO.util.XHRDataSource(
+			// The location of the remote server page is provided here:
+			'../2.6.0/json_meta_proxy.php?',
+			{
+				responseType:YAHOO.util.DataSource.TYPE_JSON,
+				responseSchema: {
+					resultsList:'records',
+					fields:fields,
+					metaFields: {
+						startIndex: "startIndex",
+						totalRecords: "totalRecords" // Access to value in the server response
+					}
+				}
+			}
+		),
+		{
+			// The query arguments are provided here
+			initialRequest: "sort=id&dir=asc&startIndex=0&results=25", // Initial request for first page of data
+			dynamicData: true, // Enables dynamic server-driven data
+			sortedBy : {key:"id", dir:YAHOO.widget.DataTable.CLASS_ASC}, // Sets UI initial sort arrow
+			paginator: new YAHOO.widget.Paginator({ rowsPerPage:25 }) // Enables pagination 
+		}
+	);
+	dtServer.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		oPayload.pagination.recordOffset = oResponse.meta.startIndex;
+		return oPayload;
+	};
+	
+	// This is the code that calls the requery method
+	Event.on('requeryServer','click',function() {
+		dtServer.getDataSource().liveData += "totalRecords=100&";
+		dtServer.requery();
+	});	
+})();
+		</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+	</body>
+</html>
+				

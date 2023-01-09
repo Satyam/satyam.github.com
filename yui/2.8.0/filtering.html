@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yahoo-dom-event/yahoo-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+	<style type="text/css">
+		.dp-highlighter th, .dp-highlighter td {
+			border:0;
+			padding:0;
+		}
+		.dp-highlighter .line1, .dp-highlighter  .line2 {
+			padding-left:10px;
+			white-space:nowrap;
+		}
+		.ft {
+			margin-top:1em;
+		}
+		.yui-skin-sam .yui-dt tr.hidden {
+			display:none;
+		}
+	</style>
+    <title>Filtering by hiding rows</title>
+
+</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1>Filtering by hiding rows</h1>
+		</div>
+		<div class="bd">
+			<p>Show only rows with even quantities: <input type="checkbox" id="showEvenQtys" /></p>
+			<div id="container"></div>
+		</div>
+		<div class="ft">
+			<p>The <a href="http://developer.yahoo.com/yui/examples/datatable/dt_localfilter.html">Client-side Filtering of Local Data</a> example 
+			shows how records can be filtered at the source.  In certain circumstances, handling the visibility of the records is a good alternative.
+			It is faster since it doesn't have to go through all the process of fetching the data, but it doesn't always work.  For example, with 
+			client-side paging, pages will not all have the same number of rows, since some will not show.  With server-side paging it doesn't
+			make sense because, if you are relying on your server for the data, it is best to make it do the filtering.  
+			In both cases, it does work, it simply doesn't look good or it doesn't make sense.</p>
+			<p>In this example, I will selectively show the rows depending on whether they have an odd or even value in the Quantity column.
+			I loop through the records in the DataTable using my forAllRecords iterator:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				YAHOO.widget.DataTable.prototype.forAllRecords = function (fn,scope) {
+					if (!Lang.isFunction(fn)) {return;}
+					scope || (scope = this);
+					for (var rs = this.getRecordSet(), l = rs.getLength(), i = 0; i < l; i++) {
+						if (fn.call(scope, rs.getRecord(i), i) === false) return;
+					}
+				};
+			</textarea>
+			<p>On listening to the click on the checkbox, I loop through the records setting a className on the records with odd quantities:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				Event.on('showEvenQtys','click', function(ev) {
+					var target = Event.getTarget(ev);
+					if (target.checked) {
+						dt.forAllRecords(function(r) {
+							if (r.getData('Quantity') & 1) {
+								Dom.addClass(this.getTrEl(r),HIDDEN);
+							}
+						});
+					} else {
+						Dom.removeClass(Dom.getElementsByClassName(HIDDEN),HIDDEN);
+					}
+					redoStripes();
+				});
+			</textarea>
+			<p>I first read the value of the <code>showEventQtys</code> checkbox and if true, I add the className <code>HIDDEN</code> 
+			(a constant defined elsewhere) to the corresponding table row.  If the checkbox is unmarked, I remove that className wholesale
+			making them all visible. The className is defined thus:</p>
+			<textarea  name="code" class="CSS" cols="60" rows="3">
+				.yui-skin-sam .yui-dt tr.hidden {
+					display:none;
+				}
+			</textarea>
+			<p>If I were to do only this, I would end up with the light and dark stripes all messed up.  
+			That is why I call function <code>redoStripes()</code>.  The built-in private method to do the stripes 
+			doesn't help us because it relies on the indexes of the Records, which are still there, they are not visible, 
+			but they are there.  So I had to redo the striping assuming some records will not be showing:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+				var redoStripes = function() {
+					var odd = true, tr = dt.getFirstTrEl(),
+						EVEN = YAHOO.widget.DataTable.CLASS_EVEN, ODD = YAHOO.widget.DataTable.CLASS_ODD;
+					do {
+						if (!Dom.hasClass(tr,HIDDEN)) {
+							if (odd) {
+								Dom.replaceClass(tr, EVEN, ODD);
+							} else {
+								Dom.replaceClass(tr, ODD, EVEN);
+							}
+							odd = !odd;
+						}
+						tr = dt.getNextTrEl(tr);
+					} while (tr);		
+				};
+			</textarea>
+		</div>
+	</div>
+
+<script type="text/javascript" >
+
+YAHOO.util.Event.onDOMReady( function() {
+
+	var Dom = YAHOO.util.Dom,
+		Event = YAHOO.util.Event,
+		Lang = YAHOO.lang,
+		HIDDEN = 'hidden';
+	
+	YAHOO.widget.DataTable.prototype.forAllRecords = function (fn,scope) {
+		if (!Lang.isFunction(fn)) {return;}
+		scope || (scope = this);
+		for (var rs = this.getRecordSet(), l = rs.getLength(), i = 0; i < l; i++) {
+			if (fn.call(scope, rs.getRecord(i), i) === false) {return;}
+		}
+	};
+
+	var dt = new YAHOO.widget.DataTable(
+		"container", 
+		[
+			{key:"Numbers", children:[
+				{key:"SKU", label:"SKU", sortable:true},
+				{key:"Quantity", sortable:true}
+			]},
+			{key:"Text", children:[
+				{key:"Item", sortable:true, className:"myClass"},
+				{key:"Description", sortable:true, width:200}
+			]}
+		],
+		new YAHOO.util.DataSource(
+			[
+				{SKU:"23-23874", Quantity:43, Item:"Helmet", Description:"Red baseball helmet. Size: Large."},
+				{SKU:"48-38835", Quantity:84, Item:"Football", Description:"Leather football."},
+				{SKU:"84-84848", Quantity:31, Item:"Goggles", Description:"Light blue swim goggles"},
+				{SKU:"84-84843", Quantity:56, Item:"Badminton Set", Description:"Set of 2 badminton rackets, net, and 3 birdies."},
+				{SKU:"84-39321", Quantity:128, Item:"Tennis Balls", Description:"Canister of 3 tennis balls."},
+				{SKU:"39-48949", Quantity:55, Item:"Snowboard", Description:""},
+				{SKU:"99-28128", Quantity:77, Item:"Cleats", Description:"Soccer cleats. Size: 10."},
+				{SKU:"83-48281", Quantity:65, Item:"Volleyball", Description:""},
+				{SKU:"89-32811", Quantity:12, Item:"Sweatband", Description:"Blue sweatband. Size: Medium."},
+				{SKU:"28-22847", Quantity:43, Item:"Golf Set", Description:"Set of 9 golf clubs and bag."},
+				{SKU:"38-38281", Quantity:1, Item:"Basketball Shorts", Description:"Green basketball shorts. Size: Small."},
+				{SKU:"82-38333", Quantity:288, Item:"Lip balm", Description:"Lip balm. Flavor: Cherry."},
+				{SKU:"21-38485", Quantity:177, Item:"Ping Pong Ball", Description:""},
+				{SKU:"83-38285", Quantity:87, Item:"Hockey Puck", Description:"Glow-in-the-dark hockey puck."}
+			],
+			{
+				responseType: YAHOO.util.DataSource.TYPE_JSARRAY,
+				responseSchema: {
+					fields: ["SKU","Quantity","Item","Description"]
+				}
+			}
+		)
+	);
+	
+	var redoStripes = function() {
+		var odd = true, tr = dt.getFirstTrEl(),
+			EVEN = YAHOO.widget.DataTable.CLASS_EVEN, ODD = YAHOO.widget.DataTable.CLASS_ODD;
+		do {
+			if (!Dom.hasClass(tr,HIDDEN)) {
+				if (odd) {
+					Dom.replaceClass(tr, EVEN, ODD);
+				} else {
+					Dom.replaceClass(tr, ODD, EVEN);
+				}
+				odd = !odd;
+			}
+			tr = dt.getNextTrEl(tr);
+		} while (tr);		
+	};
+
+	
+	Event.on('showEvenQtys','click', function(ev) {
+		var target = Event.getTarget(ev);
+		if (target.checked) {
+			dt.forAllRecords(function(r) {
+				if (r.getData('Quantity') & 1) {
+					Dom.addClass(this.getTrEl(r),HIDDEN);
+				}
+			});
+		} else {
+			Dom.removeClass(Dom.getElementsByClassName(HIDDEN),HIDDEN);
+		}
+		redoStripes();
+	});
+});
+
+</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+</body>
+</html>

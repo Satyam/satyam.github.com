@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Testing</title>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css" />
+		<!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base-min.css" /-->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/assets/skins/sam/skin.css" />
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+</head>		
+	<body class="yui-skin-sam">
+		<div id="doc"> 
+			<div id="hd">Testing</div>
+			<div id="bd">
+				<div id="tableContainer"></div>
+				    <textarea name="msgpost" id="msgpost" cols="50" rows="10">Edit your note here</textarea>
+				<pre id="t"></pre>
+				<div id="t2"></div>
+			</div>
+		</div>
+		
+<script type="text/javascript">
+
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	
+	loader.loadOptional = true;
+	loader.require("dom","event", "logger",'json','editor','datatable','treeview');
+	/*for (mod in loader.moduleInfo) {
+		if (mod !== 'yuiloader' && loader.moduleInfo[mod].type == 'js') loader.require(mod);
+	}*/
+	loader.insert({ 
+		filter:'RAW',
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+
+			var Dom = YAHOO.util.Dom,
+				$ = Dom.get,
+				Event = YAHOO.util.Event,
+				Lang = YAHOO.lang;		
+				
+				
+				
+				
+/*				
+			YAHOO.namespace('idp');
+			YAHOO.idp.Editor = function (where, options) {
+				var myDefaultOptions = {
+				    height: '185px',
+				    width: '100%',
+				    dompath: false, //Turns on the bar at the bottom
+				    animate: true, //Animates the opening, closing and moving of Editor windows
+				    extracss: 'body {background-color: #F9FBF0; height: 160px;}',
+				    toolbar: {
+				        buttons: [
+				            { group: 'textstyle',
+				                buttons: [
+				                    { type: 'push', label: 'Bold', value: 'bold' },
+				                    { type: 'push', label: 'Italic', value: 'italic' },
+				                    { type: 'push', label: 'Underline', value: 'underline' },
+				                    { type: 'separator' },
+				                    { type: 'select', label: 'Arial', value: 'fontname',
+				                        menu: [
+				                            { text: 'Arial', checked: true },
+				                            { text: 'Arial Black' },
+				                            { text: 'Comic Sans MS' },
+				                            { text: 'Courier New' },
+				                            { text: 'Lucida Console' },
+				                            { text: 'Tahoma' },
+				                            { text: 'Times New Roman' },
+				                            { text: 'Trebuchet MS' },
+				                            { text: 'Verdana' }
+				                        ]
+				                    },
+				                    { type: 'spin', label: '13', value: 'fontsize', range: [ 9, 75 ] },
+				                    { type: 'separator' },
+				                    { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' }
+				                ]
+				            }
+				        ]
+				    }
+				};
+				if (options) {
+					for (var name in options)  {
+						if (options.hasOwnProperty(name)) {
+							myDefaultOptions[name] = options[name];
+						}
+					}
+				}
+				YAHOO.idp.Editor.superclass.constructor.call(this, where, myDefaultOptions); 
+			};
+		
+			Lang.extend(YAHOO.idp.Editor,YAHOO.widget.Editor);
+			
+			
+			var myEditor = new YAHOO.idp.Editor('msgpost');
+			myEditor.render();
+*/
+//			YAHOO.widget.DataTable.prototype.show = function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','')};
+//			YAHOO.widget.DataTable.prototype.hide = function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','none')};
+			
+			/*
+			
+			    var formatCurrency = function(el, oRecord, oColumn, oData) {
+					var pounds = Math.floor(oData);
+					var shillings = (oData - pounds) * 20;
+					var pence = Math.floor((shillings - Math.floor(shillings)) * 12);
+					var shillings = Math.floor(shillings);
+					
+					el.innerHTML =  '&pound;' + pounds + ' ' + shillings + 's ' + pence + 'd';
+				};
+				
+				console.log(formatCurrency($('t'),null,null,123.4567));
+				
+			
+			var myHideAndShowPatch = function () {
+			}
+			myHideAndShowPatch.prototype = {
+				show: function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','')},
+				hide:function () {YAHOO.util.Dom.setStyle(this._elContainer,'display','none')}
+			}
+
+			YAHOO.lang.augment(YAHOO.widget.DataTable,myHideAndShowPatch);
+			*/
+			
+			/*
+				var lastRadioChecked,beenTrueRadio = false;
+				var dt = new YAHOO.widget.DataTable('t2',
+					[
+						{key:'recordKey', label:'Record<br/>Key', className:'center'},
+						
+						{key:'checkbox', label:'Several<br/>rows', formatter:YAHOO.widget.DataTable.formatCheckbox, className:'center'},
+
+						{key:'radio', label:'Only<br/>one row', formatter:function(el, oRecord, oColumn, oData) {
+						    el.innerHTML = '<input type="radio"' + (oData ? ' checked' : '') +
+						        ' name="' + oColumn.getKey() + '-radio" />';
+							if (oData) {
+								lastRadioChecked = el.firstChild;
+							}
+						}, className:'center'},
+						
+						
+						{key:'dropdown', label:'Row options', formatter:YAHOO.widget.DataTable.formatDropdown, dropdownOptions:[
+							{value:'0', text:'-- please select --'},
+							{value:'1', text:'Option 1'},
+							{value:'2', text:'Option 2'},
+							{value:'3', text:'Option 3'}
+						]},
+						
+						{key:'button', label:'Action button', formatter:YAHOO.widget.DataTable.formatButton, className:'center'},
+						
+						// This column has no corresponding data in the DataSource
+						{key:'images', label:'Action images', className:'center', formatter: function (el, oRecord, oColumn, oData) {
+							el.innerHTML = '<a href="#add"><img src="add.png" title="Add" /><\/a> ' +
+							'<a href="#delete"><img src="delete.png" title="Delete" /><\/a> ' +
+							'<a href="#print"><img src="printer.png" title="Print" /><\/a>';
+						}},
+						
+						{key:'text', label:'TextBox', formatter: function (el, oRecord, oColumn, oData) {
+							el.innerHTML = '<input size="10" value="' + oData + '" /> ' + 
+								// This formatter sets the value of the input box (line above)
+								// and sets two sets of action buttons, one active, the other not
+								// which will be switched by later events
+								'<span style="opacity:0.3;' +
+								// This next attribute is to make IE do opacity
+								' display:inline-block;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);">' + 
+								'<img src="accept.png" title="Accept" /> ' +
+								'<img src="cancel.png" title="Cancel" /><\/span>' +
+								'<span style="display:none">' + 
+								'<a href="#accept"><img src="accept.png" title="Accept" /><\/a> ' +
+								'<a href="#cancel"><img src="cancel.png" title="Cancel" /><\/a><\/span>';
+						}}
+					],
+					new YAHOO.util.DataSource(
+						[
+							[100, true, true, 0, 'first', 'first'],
+							[101, false, true, 2, 'second', 'second'],
+							[102, true, false, 3, 'third', 'third'],
+							[103, false, false, 1, 'fourth', 'fourth'],
+							[104, false, true, 0, 'fifth', 'fifth']
+						],
+						{
+							responseType:YAHOO.util.DataSource.TYPE_JSARRAY,
+							responseSchema: {
+								fields:['recordKey',
+									{key:'radio',parser: function(value) {	return (!beenTrueRadio && (beenTrueRadio = value));}},
+									'checkbox','dropdown','button','text'
+								]
+							}
+						}
+					)
+				);
+				debugger;
+				*/
+
+
+		/*
+			var data = {
+	Anim:{component:'animation',subclasses:{
+		ColorAnim:{component:'animation',subclasses:{
+			Motion:{component:'animation'},
+			Scroll:{component:'animation'}
+		}}
+	}},
+	
+	Element:{component:'element',subclasses:{
+		Button:{component:'button'},
+		ButtonGroup:{component:'button'},
+		ColorPicker:{component:'colorpicker'},
+		DataTable:{component:'datatable'},
+		ToobarButton:{component:'editor'},
+		Toolbar:{component:'editor'},
+		SimpleEditor:{component:'editor', subclasses:{
+			Editor:{component:'editor'}
+		}},
+		Crop:{component:'imagecropper'},
+		Layout:{component:'layout'},
+		LayoutUnit:{component:'layout'},
+		Resize:{component:'resize'},
+		TabView:{component:'tabview'},
+		Tab:{component:'tabview'}
+	},augmented:['AttributeProvider','EventProvider']},
+	CalendarGroup:{component:'calendar',subclasses:{
+		Calendar2up:{component:'calendar'}
+	},augmented:['Calendar']},
+	AttributeProvider:{component:'element',subclasses:{
+		FlashAdapter:{component:'Calendar',subclasses:{
+			Chart:{component:'charts', subclasses:{
+				PieChart:{component:'charts'},
+				CartensianChart:{component:'charts'},
+				LineChart:{component:'charts'},
+				ColumnChart:{component:'charts'},
+				BarChart:{component:'charts'}
+			}},
+			Uploader:{component:'uploader'}
+		}}
+	},augmented:['EventProvider']},
+	Axis:{component:'charts',subclasses:{
+		NumericAxis:{component:'charts'},
+		TimeAxis:{component:'charts'},
+		CategoryAxis:{component:'charts'}
+	}},
+	Series:{component:'charts',subclasses:{
+		PieSeries:{component:'charts'},
+		CartesianSeries:{component:'charts',subclasses:{
+			ColumnSeries:{component:'charts'},
+			LineSeries:{component:'charts'},
+			BarSeries:{component:'charts'}
+		}}
+	}},
+	Module:{component:'container',subclasses:{
+		Overlay:{component:'container',subclasses:{
+			Tooltip:{component:'container'},
+			Panel:{component:'container',subclasses:{
+				Dialog:{component:'container',subclasses:{
+					SimpleDialog:{component:'container'},
+				}}
+			}},
+			Menu:{component:'menu',subclasses:{
+				ContextMenu:{component:'menu'},
+				MenuBar:{component:'menu'}
+			}}
+		}}
+	},augmented:['EventProvider']},
+	MenuItem:{component:'menu',subclasses:{
+		MenuBarItem:{component:'menu'}
+	},augmented:['EventProvider']},
+	DragDrop:{component:'dragdrop',subclasses:{
+		DDTarget:{component:'dragdrop'},
+		DD:{component:'dragdrop',subclasses:{
+			DDProxy:{component:'dragdrop',subclasses:{
+				ColumnDD:{component:'datatable'},
+				ColumnResizer:{component:'datatable'}
+			}},
+			SliderThumb:{component:'slider'}
+		}},
+		Slider:{component:'slider',augmented:['EventProvider']}
+	},augmented:['EventProvider']},
+	"ImageLoader.imgObj":{component:'imageloader',subclasses:{
+		bgImgObj:{component:'imageloader'},
+		srcImgObj:{component:'imageloader'},
+		pngImgObj:{component:'imageloader'}
+	}},
+	Node:{component:'treeview',subclasses:{
+		TextNode:{component:'treeview',subclasses:{
+			MenuNode:{component:'treeview'}
+		}},
+		RootNode:{component:'treeview'},
+		HTMLNode:{component:'treeview'}
+	},augmented:['EventProvider']},
+	DataSource:{component:'datasource',augmented:['EventProvider']},
+	RecordSet:{component:'datatable',augmented:['EventProvider']},
+	DualSlider:{component:'slider',augmented:['EventProvider']},
+	TreeView:{component:'treeview',augmented:['EventProvider']},
+	Config:{component:'container',augmented:['EventProvider']},
+	ContainerEffect:{component:'container',augmented:['EventProvider']},
+	Paginator:{component:'datatable',augmented:['AttributeProvider']}
+	
+	
+	
+};
+			var myLogReader = new YAHOO.widget.LogReader();  
+			YAHOO.log("My log message"); 			
+
+
+			var t = [];
+			var tv = new YAHOO.widget.TreeView('tableContainer');
+			var root = tv.getRoot();
+			var tn = new YAHOO.widget.TextNode({label:'Subclasses',id:'subclasses'},root,true);
+			var p = function (node1, relation, node2) {
+				t.push('[ "' + node1 + '" , "' + relation + '" , "' + node2 + '" ]');
+			}
+			
+			var drawTree = function (where, what,parentName) {
+				for (var name in what) {
+					if (what.hasOwnProperty(name)) {
+						var obj = what[name];
+						if (parentName) {
+							p(parentName,"child", name);
+						}
+						
+						p(name, "component", obj.component);
+						var aug = '';
+						if (obj.augmented) {
+							for (var i = 0 ; i < obj.augmented.length; i++) {
+								aug += ' + ' + obj.augmented[i];
+								p( name ,"augmented", obj.augmented[i] );
+							}
+						} 
+								
+						var tn = new YAHOO.widget.TextNode({label:name + ' (' + obj.component + ')' + aug ,id:name},where,false);
+						if (obj.subclasses) {
+							drawTree(tn,obj.subclasses,name);
+						}
+					}
+				}
+			}
+			drawTree(tn,data);
+			tv.draw();
+			$('t').innerHTML = t.join(',\n');
+			debugger;
+*/
+			
+			/*
+			var tv1 = new YAHOO.widget.TreeView('t2');
+			var tn = new YAHOO.widget.TextNode({label:'YAHOO',id:'YAHOO'},tv1.getRoot(),true);
+			try {
+				var list = function(where,what,level) {
+					for (var prop in what) {
+						if (what.hasOwnProperty(prop) && prop.substr(0,1) !=='_') {
+							var obj = what[prop],type;
+							switch(true) {
+								case Lang.isFunction(obj):
+									var j = 0;
+									for (var n in obj.prototype) {
+										j++;
+										break;
+									}
+									
+									if (j) {
+										type = 'prototype'
+									} else {
+										type = 'function';
+									}
+									break;
+								case Lang.isArray(obj):
+									type= 'array';
+									break;
+								case Lang.isObject(obj):
+									type = 'object';
+									break;
+								default:
+									type='variable'
+									break;
+							} 
+							var tn = new YAHOO.widget.TextNode({label:type + ' ' + prop ,id:prop},where,false);
+							if ((level < 1 || prop == 'lang') && type=='object') list(tn,obj,level+1);
+								
+						}
+					}
+				}
+				list(tn,YAHOO,0);
+			} catch(e) {
+				console.log(e);
+			}
+			tv1.draw();
+			*/
+			
+			
+		}
+	},'js');
+})();
+</script>
+	</body>
+</html>

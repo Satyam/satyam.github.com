@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Server-driven table definition, pagination and sorting</title>
+<script src="http://yui.yahooapis.com/2.4.0/build/yuiloader/yuiloader-beta-min.js"></script>
+
+<script type="text/javascript">
+
+(function () {
+
+
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("reset-fonts-grids","base","datatable","json");
+	loader.insert({ 
+		onSuccess: function() {
+			//shortcuts
+			var $C = YAHOO.util.Connect,
+				$E = YAHOO.util.Event,
+				$D = YAHOO.util.Dom,
+				$J = YAHOO.lang.JSON,
+				$ = $D.get;
+
+
+			var myDataTable;
+
+			// keeping track of what to show
+			var totalRecords, 
+				recordsReturned , 
+				startIndex = 0 , 
+				endIndex , 
+				rowsPerPage = 25, 
+				sortDir, 
+				sortKey;
+
+			// Main function to draw a pagefull of data depending on the above variables
+			var getPage = function() {
+
+				var newRequest = 'startIndex=' + startIndex + '&results=' + rowsPerPage;
+				if (sortKey) newRequest += '&sort=' + sortKey;
+				if (sortDir) newRequest += '&dir=' + sortDir; 
+				if (myDataTable === undefined) newRequest += '&meta=true';
+
+				$C.asyncRequest(
+					'GET',
+					'json_meta_proxy.php?' + newRequest,
+					{
+						success: function (o) {
+							var r = $J.parse(o.responseText);
+							sortDir = r.dir;
+							sortKey = r.sort;
+							// if the data table already exists, repopulate it, otherwise, create it
+							if (myDataTable) {
+								myDataTable.set('sortedBy', {
+									key: sortKey,
+									dir: sortDir
+								});
+								myDataTable.onDataReturnInitializeTable(
+									newRequest,
+									{
+										error:false,
+										results:r.records
+									}
+									,false
+								);
+							} else {
+							
+								// actually, the meta information coming from the server might need some converting, 
+								// but in this case it can be taken verbatim
+								var myColumnDefs = r.meta;
+								
+								var f = [];
+								for(var i = 0; i < myColumnDefs.length; i++) {
+									var c = myColumnDefs[i];
+									switch (c.type) {
+										case 'number':
+											f.push({key:c.key,parser:YAHOO.util.DataSource.parseNumber});
+											break;
+										// You could process any other datatype in a similar manner
+										default:
+											f.push(c.key);
+									}
+								}
+								
+								// DataSource instance
+								var myDataSource = new YAHOO.util.DataSource(r.records);
+								myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+								myDataSource.responseSchema = {
+									fields: f
+								};
+
+								// DataTable instance
+								myDataTable = new YAHOO.widget.DataTable(
+									'tableContainer', 
+									myColumnDefs, 
+									myDataSource,
+									{
+										sortedBy :{
+											key: sortKey,
+											dir: sortDir
+										}
+									}
+								);
+								
+								// sort handler, it doesn't actually make any sort, the server will do that, 
+								// it just sets the variables to ask the server for the sorted data
+								myDataTable.sortColumn = function(oColumn) {
+									if(oColumn.key === sortKey) {
+										sortDir = (sortDir === 'asc') ?
+												'desc' : 'asc';
+									} else {
+										sortDir = 'asc';
+									}
+									sortKey = oColumn.key;
+									startIndex = 0;
+									getPage();
+								};
+							}
+							
+							// reading the variables from the server that tells us what it has delivered
+							recordsReturned = parseInt(r.recordsReturned,10); // How many records this page
+							startIndex = parseInt(r.startIndex,10); // Start record index this page
+							endIndex = startIndex + recordsReturned -1; // End record index this page
+							totalRecords = parseInt(r.totalRecords,10); // Total records all pages
+
+							// Update the links UI
+							// based on the above variables you can draw them any way you want them
+							$('prevLink').innerHTML = (startIndex === 0) ? '&lt;' :
+									'<a href="#previous" alt="Show previous items">&lt;</a>' ;
+							$('nextLink').innerHTML =
+									(endIndex + 1 >= totalRecords) ? '&gt;' :
+									'<a href="#next" alt="Show next items">&gt;</a>';
+							$('startIndex').innerHTML = startIndex;
+							$('endIndex').innerHTML = endIndex;
+							$('ofTotal').innerHTML = ' of ' + totalRecords;
+						},
+						failure: function (o) {
+							alert('Failure: ' + o.statusText);
+							myDataTable.onDataReturnInitializeTable(newRequest,null,true);
+						},
+						scope:this
+					}
+				);
+			};
+			
+			var getPreviousPage = function(e) {
+				$E.stopEvent(e);
+				// Already at first page
+				if(startIndex === 0) {
+					return;
+				}
+				// it can be negative, the server will set it to zero anyway
+				startIndex -= rowsPerPage;
+				
+				getPage();
+			};
+			
+			var getNextPage = function(e) {
+				$E.stopEvent(e);
+				// Already at last page
+				if(startIndex + rowsPerPage >=  totalRecords) {
+					return;
+				}
+				startIndex += rowsPerPage;
+				getPage();
+			};
+			
+			var getRowsPerPage = function (e) {
+				rowsPerPage = parseInt($E.getTarget(e).value,10);
+				getPage();
+			};
+			
+			$E.addListener($('prevLink'), 'click', getPreviousPage, this, true);
+			$E.addListener($('nextLink'), 'click', getNextPage, this, true);
+			$E.addListener($('rowsPerPage'),'change',getRowsPerPage,this,true);
+			$E.addListener($('showComments'),'click',function () {
+				var b = $('comments');
+				if (b.style.display == 'none') {
+					b.style.display = 'block';
+					$('showComments').innerHTML = 'hide';
+				} else {
+					b.style.display = 'none';
+					$('showComments').innerHTML = 'show';
+				}
+			});
+			getPage();
+		}
+	});
+})();
+		</script>
+
+	</head>
+
+	<body class="yui-skin-sam">
+		<div id="doc3"> 
+			<div id="hd">
+				<h1>Server-driven table definition, pagination and sorting</h1>
+				<div id="dt-pag-nav">
+				    <span id="prevLink">&lt;</span> Showing items
+				    <span id="startIndex">0</span> - <span id="endIndex">24</span>
+				    <span id="ofTotal"></span> <span id="nextLink">&gt;</span> &nbsp;
+					<span> Rows per page </span><select id="rowsPerPage">
+						<option value="25" selected>25</option>
+						<option value="50">50</option>
+						<option value="75">75</option>
+						<option value="100">100</option>
+						<option value="150">150</option>
+						<option value="200">200</option>
+						<option value="300">300</option>
+					</select>
+				</div>
+			</div>
+			<div id="bd" style="margin:2em">
+				<div id="tableContainer"></div>
+			</div>
+			<div id="ft">
+				<p>This example builds a DataTable based on the columns information taken from the server.  
+				Instead of building a statically defined DataTable it will build it on what the server says.
+				It has been based on the <a href="http://developer.yahoo.com/yui/examples/datatable/dt_serverpagination.html">
+				server-side pagination</a> and <a href="http://developer.yahoo.com/yui/examples/datatable/dt_serversorting.html">
+				server-side sorting</a> examples. 
+				They have both been changed in that they do not use the DataSource to communicate with the server
+				but use a plain Connection Manager request to fetch the information and then pass it as a local source
+				to the DataSource.</p>
+				<p>All the fetching of information is done in the <code>getPage</code> method which establishes
+				the communication with the server and on return, if the DataTable already exists it refreshes it,
+				otherwise it creates it.  In order to do that, if the DataTable does not exists, it adds a 
+				<code>meta=true</code> argument to the URL so that the server provides the extra 'meta' information
+				for the client to build the DataTable.  This information is not requested on further communications
+				as the table, at that point, is built and cannot be changed.</p>
+				<p>The YUI Loader part was skipped, since it added too many extra and confusing lines of code to
+				the example. Instead the required files are loaded statically which is the way stated in the 
+				documentation of each of those components.</p>
+				<p>The paginator object within the DataTable has not been used.  For all the DataTable knows,
+				it has just a one-page table and is completely unaware that the table is any longer.  
+				The DataTable automatically updates the paginator based on this knowledge, 
+				no matter what you want to force it to believe, and it is pointless to fight it. 
+				See the <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1812126&group_id=165715&atid=836476">
+				Source Forge bug report</a> about this. Besides, it seems to me far less obscure to keep those variables
+				in plain view rather than using the paginator for what it was not designed to do.</p>
+				<p>The server is the same used in the examples mentioned above, except that it is now also capable
+				of adding the meta information if the URL argument 'meta' is true.  
+				Just as the data it provides is taken from a static array contained in the source itself, 
+				the meta information is also static and is basically a PHP array that will turn into a standard
+				DataTable columns definition array.  In real cases, just as the data will probably be fetched from
+				a database, the meta information will also be read from it and properly processed into 
+				column definitions.  A hint of that is one of the fields that has been declared as of 
+				<code>'type' => 'number'</code> in PHP parlance and on the client side this will add 
+				the <code>parseNumber</code> parser in the DataSource field declaration.</p>
+				<p>The source files for this sample are available for download in a 
+				<a href="dt_server_driven.zip">zip file</a>.  
+				The PHP server script requires an active PHP interpreter.  The YUI compoments are
+				fetched from the YUI site.</p>				
+				<p><a href="dt_server_driven.zip">Source files (zipped)</a></p>
+			</div>
+		</div>
+	</body>
+</html>

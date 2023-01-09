@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>YQL DataSource</title>
+
+<!-- Combo-handled YUI CSS files: -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts-grids/reset-fonts-grids.css&2.8.1/build/base/base-min.css&2.8.1/build/datatable/assets/skins/sam/datatable.css">
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.1/build/yuiloader-dom-event/yuiloader-dom-event.js&2.8.1/build/element/element-min.js&2.8.1/build/datasource/datasource-min.js&2.8.1/build/datatable/datatable-min.js&2.8.1/build/json/json-min.js"></script>
+
+<script type="text/javascript" src="YQLDataSource.js"></script>
+
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css" />
+<style type="text/css">
+	.dp-highlighter th, .dp-highlighter td {
+		border:0;
+		padding:0;
+	}
+	.dp-highlighter .line1, .dp-highlighter  .line2 {
+		padding-left:10px;
+		white-space:nowrap;
+	}
+	#ft {
+		margin-top:1em;
+	}
+</style>
+    </head>
+ <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div id="hd">
+			<h1>YQL DataSource</h1>
+		</div>
+		<div id="bd">
+			<ul id="list"></ul>
+		</div>
+		<div id="ft">
+			<p>A <a href="../3.0.0/YQLSubstitute.html">YUI3 version of this example</a> is also available</p>
+			<p>We create a very simple to use function to fetch data from a YQL query and fill a given container with it, 
+			formatted via a template string.   The function is used like this:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			YAHOO.util.Event.onDOMReady(function() {
+
+				YAHOO.example.YQLSubstitute(
+					'list',
+					'select title,abstract,url,source from search.news where query="barcelona"',
+					'<li><h2>{title}<\/h2><p>{abstract}<\/p><address><a href="{url}">{source}<\/a><\/address><\/li>'
+				);
+
+			});
+			</textarea>
+			<p>The first argument is a reference to the HTML that will contain the formatted output, or its id,
+			the second is the YQL query and the third the template to be used.  The names of the fields, enclosed
+			in curly brackets are the placeholders for the retrieved data.  For nested fields, the placeholders
+			can contain the full name with dots, just as YQL uses them.</p>
+			<p>The function is very simple:</p>
+			<textarea  name="code" class="JScript" cols="60" rows="3">
+			YAHOO.example.YQLSubstitute = function(container, query, template, config) {
+				config = config || {};
+				var s = YAHOO.lang.substitute, output = [];
+				(new YAHOO.util.YQLDataSource(config.YQLWebService,config)).sendRequest(query, {
+					success: function (request, results) {
+						for (var i = 0, r = results.results, l = r.length;i < l;i++) {
+							output.push(s(template,r[i]));
+						}
+						YAHOO.util.Dom.get(container).innerHTML = output.join('\n');
+					}
+				});
+			};
+			</textarea>
+			<p>First we normalize argument <code>config</code> to ensure it is an object literal.
+			Variable <code>s</code> is a shortname for the <code>YAHOO.lang.substitute</code> method because, 
+			since it is going to be used repeatedly in the loop,
+			it makes sense to resolve it only once.  Variable <code>output</code> will contain the formatted output, an array item per record fetched.</p>
+			<p>The first argument to the YQLDataSource constructor is the URL of the YQL web service, which defaults to its standard public address.
+			We add the possiblity of specifying a different address in the <code>YQLWebService</code> configuration attribute. 
+			We pass the rest of the configuration options
+			to the DataSource as well. We will rarely use this.  The reply is always of type JSON and YQLDataSource takes all the fields it finds. 
+			It assumes the programmer will be prudent in specifying no more fields than are actually required; please, do avoid using <code>select *</code>.
+			The only reason to use the <code>responseSchema.fields</code> configuration option would be to specify parsers for the data, 
+			otherwise, whatever it receives	will be available.</p>
+			<p>We immediately call DataSource's <code>sendRequest</code> method with the query and provide the <code>success</code> callback
+			which simply loops through the results list using <code>substitute</code> to pile up the formatted results on <code>output</code>,
+			which we finally insert into the given container</p>
+		</div>
+	</div>
+
+		<script type="text/javascript">
+				
+			YAHOO.example.YQLSubstitute = function(container, query, template, config) {
+				config = config || {};
+				var s = YAHOO.lang.substitute, output = [];
+				(new YAHOO.util.YQLDataSource(config.YQLWebService,config)).sendRequest(query, {
+					success: function (request, results) {
+						for (var i = 0, r = results.results, l = r.length;i < l;i++) {
+							output.push(s(template,r[i]));
+						}
+						YAHOO.util.Dom.get(container).innerHTML = output.join('\n');
+					}
+				});
+			};
+		</script>
+		<script type="text/javascript">
+		
+			YAHOO.util.Event.onDOMReady(function() {
+
+				YAHOO.example.YQLSubstitute(
+					'list',
+					'select title,abstract,url,source from search.news where query="barcelona"',
+					'<li><h2>{title}<\/h2><p>{abstract}<\/p><address><a href="{url}">{source}<\/a><\/address><\/li>'
+				);
+
+			});
+		</script>
+		<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+		<script language="javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>		
+        
+    </body>
+</html>

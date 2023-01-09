@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>X-Y scrolling in YUI 2.4</title>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset-fonts-grids/reset-fonts-grids.css" />
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/base/base-min.css" />
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/datatable/assets/skins/sam/datatable.css" />
+		<script src="http://yui.yahooapis.com/2.5.0/build/yuiloader/yuiloader-beta-min.js"></script>
+<style>
+	.hide {
+		display:none;
+	}
+	.vSlider {
+		float:right;
+		border:thin solid silver;
+	}
+	.hSlider {
+		clear:both;
+		width:100%;
+		border:thin solid silver;
+	}
+	.dtContainer {
+		/*overflow-x:scroll;*/
+	}
+	th .yui-dt-label, th .yui-dt-header {
+		position:static;
+	}
+	
+	.scrollingTable {
+		table-layout:auto;
+		position:absolute;
+	}
+	
+</style>
+
+	<body class="yui-skin-sam">
+		<div id="doc"> 
+			<div id="hd">
+				<h1>X-Y scrolling in YUI 2.4</h1>
+			</div>
+			<div id="bd">
+				<div id="tableContainer"></div>
+			</div>
+			<div id="ft">
+				<p>To start with, <b>this was done with DataTable 2.4</b>, not 2.5. 
+				Both DataTable and DataSource are 2.4.1, the rest, such as the Layout manager are 2.5.0.</p>
+				<p>This is not polished, not at all, but it shows a way of scrolling both ways.  
+				There are pixel widths and heights to be adjusted here and there, 
+				the scroll bars are not sized properly, some table borders have slipped out of the table.</p>
+				<p>It breaks the table container into three parts, two for a couple of Slider controls, 
+				one for the actual DataTable</p>
+				<p>For vertical scrolling I play with hidding and showing rows.  
+				I use the className <code>hide</code>, defined somewhere up there as <code>display:none</code>.
+				For vertical scrolling it hides one row while showing another one.</p>  
+				<p>For horizontal scrolling I move the left margin to negative values while I set a clipping
+				rectangle to hide everything to the left of the initial left and everything byond the scroll bar on the right.</p>
+				<p>I have taken the width of the table container as the width of the table, 
+				though a configuration attribute might also work.  For the number of rows, a configuration attribute
+				might be used, I just defined the constant MAX_NUMBER_OF_ROWS to be 10.
+				Otherwise, I could just start adding up row heights until I get to the height of the container, 
+				and hide the rows from then on.</p>
+				<p>In this version, it should work with nested column headers and it works with IE 
+				(it didn't before because I had left a console.log() somewhere :-{ ).
+				The not so nice thing about this version is the apparently random behavior of the 
+				browser's horizontal scroll bar.  The table is wider than the display window
+				and though much of it is not visible, the browser seems to be unaware of that and
+				offers to scroll to the invisible edges.</p>
+				<p>An important difference with version 2.5 is that this DataTable is actually in the page
+				and not floating around and that the headers are really part of the same table, 
+				not a separate one that has to be kept in synch. </p>
+				<p>Another important difference is that you can set scrolling off and you will still have
+				a normal HTML table, it does not compromise the whole component for just one feature.</p>
+				<p>By the way, if only horizontal scrolling is needed, then it is far easier, you can just
+				set the container style to overflow-x:scroll and let the browser handle it.  I tried this
+				but then you have no control over the styling of the scroll bar, it will be the browsers's
+				default so it didn't go along well with the vertical scroll bar, which is a YUI Slider.
+				This will not produce the random scrollbar at the very bottom of the page.</p>
+				<p>On the other hand, if you only want vertical scrolling (which is no more than a
+				very special way of doing pagination), then there is no issue with the bottom
+				scroll bar</p>
+				<p>Someone in the list asked me if I could mix DataTable 2.4.1 and components from 2.5.  
+				The answer is yes, as can be seen, though I wouldn't trust it is very robust, 
+				it will probably break somewhere. 
+				For example, the Company column is set for editing, if you try to when the table is scrolled right, 
+				the in-line editor will pop up in the original position of this cell before it was scrolled.</p>
+			</div>
+			<div id="left">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse justo nibh, pharetra at, adipiscing ullamcorper.... and all that ...</div>
+			<div id="right">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse justo nibh, pharetra at, adipiscing ullamcorper.... and all that ..</div>
+		</div>
+		<script type="text/javascript">
+
+(function () {
+	var loader = new YAHOO.util.YUILoader();
+	loader.loadOptional = true;
+	loader.require("slider","selector","layout");
+	loader.insert({ 
+		onFailure:function (msg,xhrobj) {
+			alert('Loader: ' + msg);
+		},
+		onSuccess: function() {
+			loader.dirty = true;
+			loader.require('datatable');
+			loader.insert({
+				onFailure:function (msg,xhrobj) {
+					alert('Loader2: ' + msg);
+				},
+				base: 'http://yui.yahooapis.com/2.4.1/build/',
+				onSuccess: function () {
+					
+					var $C = YAHOO.util.Connect,
+						$E = YAHOO.util.Event,
+						$D = YAHOO.util.Dom,
+						$L = YAHOO.lang,
+						$ = $D.get,
+						$DT = YAHOO.widget.DataTable;
+
+					var vSliderContainer = $('tableContainer').appendChild(document.createElement('div'));
+					$D.addClass(vSliderContainer,'vSlider');
+					var vSliderBg = vSliderContainer.appendChild(document.createElement('div'));
+					var vSliderThumb = vSliderBg.appendChild(document.createElement('div'));
+					vSliderThumb.innerHTML = '<img src="add.png" />';
+
+					var dtContainer = $('tableContainer').appendChild(document.createElement('div'));
+					$D.addClass(dtContainer,'dtContainer')
+
+					var hSliderContainer = $('tableContainer').appendChild(document.createElement('div'));
+					$D.addClass(hSliderContainer,'hSlider');
+					var hSliderBg = hSliderContainer.appendChild(document.createElement('div'));
+					var hSliderThumb = hSliderBg.appendChild(document.createElement('div'));
+					hSliderThumb.innerHTML = '<img src="add.png" />';
+
+					
+					var dt = new $DT(
+						dtContainer,
+						[
+							{key:"id",label:"ID 0"},
+							{key:"name",label:"Name 1",editor:'textbox'},
+							{key:"date",label:"Date 2"},
+							{key:"price",label:"Price 3","type":"number"},
+							{key:"number",label:"Number 4"},
+							{key:"address",label:"Address 5"},
+							{key:"company",label:"Company 6",editor:'textbox'},
+							{key:"desc",label:"Description 7"},
+							{key:"age",label:"Age 8"},
+							{key:"title",label:"Title 9"},
+							{key:"phone",label:"Phone 10"},
+							{key:"email",label:"Email 11"},
+							{key:"zip",label:"Zip 12"},
+							{key:"country",label:"Country 13"}
+						],
+						new YAHOO.util.DataSource(
+							'json_meta_proxy.php?',
+							{
+								responseType:YAHOO.util.DataSource.TYPE_JSON,
+								responseSchema: {
+									resultsList:'records',
+									fields:['id','name','date','price','number','address','company','desc','age','title','phone','email','zip','country']
+								}
+							}
+						),
+						{
+							initialRequest:'startIndex=0&results=25',
+							paginated:false, 
+							paginator:{ 
+								containers: null,
+								currentPage: 1,
+								dropdownOptions: [10,25,50],
+								pageLinks: 0,
+								rowsPerPage: 10
+							}
+						}
+					);
+					dt.subscribe('cellClickEvent',dt.onEventEditCell);
+					var vSlider = undefined,hSlider = undefined;
+
+					dt.on('refreshEvent',function () {
+						if (vSlider === undefined && hSlider === undefined) {
+							var tableEl = this.getTableEl();
+						
+							$D.addClass(tableEl,'scrollingTable');
+							var rightClip = (dtContainer.offsetWidth - vSliderContainer.offsetWidth);
+							$D.setStyle(tableEl,'clip','rect(auto,' + rightClip + 'px, auto,auto)');
+
+							hSlider = YAHOO.widget.Slider.getHorizSlider(
+								hSliderBg,hSliderThumb, 
+								0, 
+								hSliderContainer.offsetWidth - hSliderThumb.firstChild.offsetWidth
+							);  
+							hSlider.animate = false;  
+							var hFactor = (tableEl.offsetWidth - dtContainer.offsetWidth) / ( hSliderContainer.offsetWidth - hSliderThumb.firstChild.offsetWidth)
+
+							var lastHiddenRow,firstShownRow = 0;
+						
+							var MAX_NUMBER_OF_ROWS = 10;
+						
+						
+							var numRows = dt.getRecordSet().getLength();
+						
+							for (lastHiddenRow = numRows -1;lastHiddenRow > MAX_NUMBER_OF_ROWS ; lastHiddenRow--) {
+								$D.addClass(this.getTrEl(lastHiddenRow),'hide');
+							}
+							lastHiddenRow++;
+
+							var vTicks = Math.floor(tableEl.offsetHeight / (numRows - 1 - MAX_NUMBER_OF_ROWS));
+							vSliderContainer.style.height = tableEl.offsetHeight + 'px';
+							var vSlider = YAHOO.widget.Slider.getVertSlider(vSliderBg,vSliderThumb, 0, tableEl.offsetHeight,vTicks);  
+							vSlider.animate = false;  
+							
+							vSlider.subscribe("change", function(offset) {
+								var row = offset / vTicks;
+								if (row > firstShownRow) {
+									while (firstShownRow < row) {
+										$D.addClass(dt.getTrEl(firstShownRow),'hide');
+										$D.removeClass(dt.getTrEl(lastHiddenRow),'hide');
+										firstShownRow++;
+										lastHiddenRow++;
+									}
+								} else if (row < firstShownRow){
+									while (row < firstShownRow) {
+										$D.removeClass(dt.getTrEl(firstShownRow),'hide');
+										$D.addClass(dt.getTrEl(lastHiddenRow),'hide');
+										firstShownRow--;
+										lastHiddenRow--;
+									}
+								}
+
+							}); 
+							hSlider.subscribe("change", function(offset) {
+								var off = Math.floor(offset * hFactor);
+								$D.setStyle(tableEl,'margin-left',-off + 'px');
+								if (YAHOO.env.ua.ie) {
+									$D.setStyle(tableEl, 'clip','rect(auto,' + (rightClip + off) + 'px, auto,' + off + 'px)' );
+								}
+							});
+						} 
+						
+						dt.hideColumn = function(column) {
+							var col = this.getColumn(column);
+							YAHOO.util.Dom.addClass(YAHOO.util.Selector.query('.yui-dt-col-' + col.key, this.getTableEl()), 'hide');
+						}
+						dt.showColumn = function(column) {
+							var col = this.getColumn(column);
+							YAHOO.util.Dom.removeClass(YAHOO.util.Selector.query('.yui-dt-col-' + col.key, this.getTableEl()), 'hide');
+						}
+					
+					});
+					
+			        var layout = new YAHOO.widget.Layout({
+			            units: [
+			                {
+			                    position: 'top',
+			                    height: 50, 
+			                    resize: false, 
+			                    padding: '5px', 
+			                    collapse: true, 
+			                    resize: true,
+								body:'hd'
+			                },
+			                {
+			                    position: 'right',
+			                    header: 'Right',
+			                    width: 300,
+			                    resize: true, 
+			                    padding: '5px', 
+								gutter:'5px',
+			                    footer: 'Footer', 
+			                    collapse: true, 
+			                    scroll: true,
+								body:'right'
+			                },
+			                {
+			                    position: 'bottom', 
+			                    header: 'Bottom', 
+			                    height: 300, 
+			                    resize: true, 
+			                    padding: '5px', 
+			                    collapse: true,
+								body:'ft', 
+			                    scroll: true
+			                },
+			                {
+			                    position: 'left',
+			                    header: 'Left',
+			                    width: 200,
+			                    resize: true,
+			                    padding: '5px',
+			                    collapse: true,
+			                    close: true,
+			                    collapseSize: 50,
+			                    scroll: true,
+								body:'left'
+			                },
+			                {
+			                    position: 'center',
+								body:'tableContainer'
+			                }
+			            ]
+			        });
+			        layout.render();
+					layout.getUnitByPosition('center').on('resize', function (ev) {
+						// dt.refreshView();
+						var tableEl = dt.getTableEl();
+						var offset = hSlider.getXValue();
+						var rightClip = (dtContainer.offsetWidth - vSliderContainer.offsetWidth);
+						var hFactor = (tableEl.offsetWidth - dtContainer.offsetWidth) / ( hSliderContainer.offsetWidth - hSliderThumb.firstChild.offsetWidth)
+						var off = Math.floor(offset * hFactor);
+						$D.setStyle(tableEl,'margin-left',-off + 'px');
+						if (YAHOO.env.ua.ie) {
+							$D.setStyle(tableEl, 'clip','rect(auto,' + (rightClip + off) + 'px, auto,' + off + 'px)' );
+						} else {
+							$D.setStyle(tableEl, 'clip','rect(auto,' + (rightClip + off) + 'px, auto,auto)' );
+						}
+					
+					});
+				}
+			});
+		}
+	});
+})();
+	</script>
+	</body>
+</html>

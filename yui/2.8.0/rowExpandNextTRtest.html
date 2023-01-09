@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Row Expansion</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/yuitest/assets/testlogger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/yuitest/assets/skins/sam/yuitest.css">
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/get/get-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/json/json-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/datatable/datatable.js"></script>
+<script type="text/javascript" src="YQLDataSource.js"></script>
+<script type="text/javascript" src="expandtable.js"></script>
+
+<script src="http://yui.yahooapis.com/2.8.0r4/build/logger/logger-min.js"></script>
+<script src="http://yui.yahooapis.com/2.8.0r4/build/yuitest/yuitest-min.js"></script>
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* custom styles for this example */
+#expandable_table{width:500px;}
+		
+/** 
+*
+* Style the yui-dt-expandablerow-trigger column 
+*
+**/
+.yui-dt-expandablerow-trigger{
+	width:18px;
+	height:22px;
+	cursor:pointer;
+}
+.yui-dt-expanded .yui-dt-expandablerow-trigger{
+	background:url(http://developer.yahoo.com/yui/examples/datatable/assets/images/arrow_open.png) 4px 4px no-repeat;
+}
+.yui-dt-expandablerow-trigger, .yui-dt-collapsed .yui-dt-expandablerow-trigger{
+	background:url(http://developer.yahoo.com/yui/examples/datatable/assets/images/arrow_closed.png) 4px 4px no-repeat;
+}
+.yui-dt-expanded .yui-dt-expandablerow-trigger.spinner{
+	background:url(http://developer.yahoo.com/yui/examples/datatable/assets/img/spinner.gif) 1px 4px no-repeat;
+}
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body  id="doc"  class="yui-skin-sam">
+
+    <cite class="byline">DataTable Row Expansion was developed by <a href='http://standardpixel.com'>Eric Gelinas</a>. This was originally a concept for <a href='http://apt.yahoo.com/'>Yahoo! APT</a> by Ryan Leffel with designs by Edward Zee.</cite>
+
+<h1>Row Expansion</h1>
+
+<div class="exampleIntro">
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+
+<div id="expandable_table"></div>
+
+<script type="text/javascript">
+/* Modify as needed */
+YAHOO.util.Event.onDOMReady( function() {
+	var logger = new YAHOO.tool.TestLogger(); 
+
+	var myDataSource = new YAHOO.util.YQLDataSource();
+			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+			myDataSource.connXhrMode = "queueRequests";
+			myDataSource.responseSchema = {
+				resultsList: "query.results.photo"
+			};
+
+	/**
+	*
+	* Create a YUI DataTable instance.
+	*
+	**/
+	var myDataTable = new YAHOO.widget.ExpandableDataTable(
+		"expandable_table",
+		[
+			{
+				label:"",
+				/**
+				* This formatter adds a class that will be used to style a 
+				* trigger in the first column
+				**/
+				formatter:function( el, oRecord, oColumn, oData ) {
+
+					YAHOO.util.Dom.addClass( el.parentNode, "yui-dt-expandablerow-trigger" );
+
+				}
+			},
+			{
+				key:"title",
+				label:"Interestingness",
+				width : '200px',
+				/**
+				* This formatter includes a default string in cells where the record
+				* is missing a title. This just makes the finsished product look nicer.
+				**/
+				formatter: function( el, oRecord, oColumn, oData ){
+					
+					el.innerHTML = oData || '--[ No description ]--';
+					
+				}
+			}
+		],
+		myDataSource,
+		{ 
+			/**
+			* The "rowExpansionTemplate" property is passed a string. This is passed 
+			* through YAHOO.lang.substitute which can match tokens (represented with brackets), 
+			* which contain keys from the DataTables data.
+			**/
+			rowExpansionTemplate : '<img src="http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_m_d.jpg" /><div><a href="http://flickr.com/photos/{owner}">See more photos from this Flickr User<\/a><\/div>',
+			initialRequest: 'select * from flickr.photos.interestingness(20)'								
+			
+		}
+	);
+	var oTestCase = new YAHOO.tool.TestCase({
+
+		name: "getNextTrEl test",
+		
+		testSomething : function () {
+			
+			var numRecs  = myDataTable.getRecordSet().getLength(),
+				// This I will expand
+				middleRecord = myDataTable.getRecord(Math.floor( numRecs / 2)),
+				// This one is before the expanded row
+				quarterRecord  = myDataTable.getRecord(Math.floor(numRecs / 4)),
+				// This is after the expanded row
+				threeQuartersRecord = myDataTable.getRecord(Math.floor(numRecs * 3 / 4)),
+				
+				// row next to the record before the row to be expanded
+				nextToQuarterRow = myDataTable.getNextTrEl(quarterRecord),
+				
+				// row next to the record after the row to be expanded
+				nextToThreeQuartersRow = myDataTable.getNextTrEl(threeQuartersRecord);
+				
+			myDataTable.expandRow(middleRecord);
+			
+				// Row next to the record before the expanded row
+			var nextToQuarterRowAfter = myDataTable.getNextTrEl(quarterRecord),
+			
+				//row next to the record after the expanded row
+				nextToThreeQuartersRowAfter = myDataTable.getNextTrEl(threeQuartersRecord);
+
+			//Now, comparing the Ids of the rows before and after the expanded row
+			// This will still be the same
+			YAHOO.util.Assert.areEqual(nextToQuarterRowAfter.id,nextToQuarterRow.id,'id of quarter rows not equal');	
+			// This won't be the same
+			YAHOO.util.Assert.areEqual(nextToThreeQuartersRowAfter.id,nextToThreeQuartersRow.id,'id of three quarters rows not equal');	
+		}
+
+	});
+	myDataTable.on('initEvent',function() {
+		YAHOO.tool.TestRunner.add(oTestCase);
+		YAHOO.tool.TestRunner.run();
+	});
+
+	
+});
+</script>
+
+
+</body>
+</html>

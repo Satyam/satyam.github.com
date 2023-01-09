@@ -1,0 +1,823 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+    <meta http-equiv="Content-Language" content="en-us">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/base/base-min.css">
+    <link rel="stylesheet" type="text/css" href=
+    "http://yui.yahooapis.com/2.3.1/build/assets/skins/sam/skin.css">
+<title>DataTable, have it your way</title>
+<STYLE TYPE="text/css">
+    PRE { 
+        background-color: #e0e0e0;
+        border: 1px solid silver; 
+        padding: 1em ;
+        font-size:85%;
+		margin:1em
+    }
+	code {
+		background-color:#e0e0e0;
+		padding:0 3pt;
+	}
+</STYLE>
+</head>
+
+  <body class="yui-skin-sam">
+    <div id="doc" class="yui-t1">
+      <div id="hd">
+
+
+<h1>DataTable, have it your way</h1>
+      </div>
+      <div id="bd">
+
+<p>YUI's DataTable component has many options so that it can be used in all
+sorts of applications. Any single user, though, uses just a few of them. It is a
+good idea to encapsulate those few options in a single place so that even if at
+some point you decide to make a change, it will be propagated to all places at
+once. First of all, lets see which are the decisions you are most
+likely to have to take:</p>
+<ul>
+  <li>Communication: whether your queries will go as GET or POST, URL or
+    JSON-encoded, the
+    returned info as plain text, JSON or XML packets and if you use a standard
+    envelope are some of the basic decisions you have to make since they will also affect the
+    sever side of the application. Setting them in advance is required to let
+    each end team know how they will communicate with each
+    other.</li>
+  <li>Data types: A simple thing like a number might meant many things, a
+    quantity, a price, a serial number, etc. Though both might be transmitted
+    as a plain number, each might be formatted and/or edited
+    differently. Explicitly stating all these options for each field in
+    each and every page is
+    tedious. The ability of writing something like <code> type:'currency'</code> or
+    <code>
+    type:'serialNo'</code> in the column definitions to concentrate in such a
+    brief attribute a lot of these information would be valuable.</li>
+  <li>Make more accessible some often-used attributes. Properties like <code>caption</code>,
+    <code>sortedBy</code>, if used frequently, might be raised in the object hierarchy.
+    Others, such as tagging the columns that correspond to the primary key(s) of the
+    database table are irrelevant to the DataTable (and so inexistent) but very
+    important to the application, so you might create them.</li>
+  <li>Standardize behavior: whether you opt to use row select, context
+    menus, action buttons or any other means of user interaction, if you can set
+    those by default, you will make sure all pages behave alike and avoid
+    confusing the user with seemingly random behavior.</li>
+  <li>Patches and future features you can't wait for. After all, DataTable is
+    still beta. Avoid patching the original source, patch it
+    elsewhere. Can't wait for a feature?: add it to your own version.</li>
+</ul>
+<p>Casting all these decisions into one place makes further development and,
+when required, any changes much easier. Absurd as it might sound, using
+YUI DataTable might not be a good idea, not directly at least, it is better to make your own, inheriting from
+YUI's. </p>
+<p>I won't show you the full code for this article because the whole point is
+not to show you how to implement the decisions I made for my application but to show you how you can make
+your very own customized DataTable. </p>
+
+<h3>Update notes</h3>
+
+<p>Since this article was written, several versions of YUI have passed by, most of them quite harmless.  
+Version 2.5 brought significant changes and some of the code presented here is no longer valid.
+As any major change often does, this version also brought some nasty behavior and we all wished it would go away, 
+Now, with 2.6, most of the strange behavior of 2.5 will be solved and this might justify actually reviewing the article.
+Actually, from the previews of 2.6, a lot of this article will be irrelevant.
+For the time being, if you find anything that doesn't work, check the upgrade notes for 2.5 in the YUI DataTable docs
+and you are quite likely to find the reason.</p>
+<p>One of the big ones is the <code>render</code> method.  When this article was written, the DataTable had no such method.
+Starting 2.5, the <code>refresh</code> method was renamed <code>render</code> so my own method, instead of creating a new
+method, overrode an existing one.  Since the DataTable often calls <code>render</code>, it got to call my <code>render</code>
+not the one it actually intended.  The solution I used in my actual running code is to call my method <code>draw</code>
+so that it doesn't overlap the now native <code>render</code></p>
+
+<h3><a name="Usage">Usage</a></h3>
+
+<p>How would you like to define your DataTable like this:</p>
+
+<pre>var myDataTable;
+YAHOO.util.Event.onAvailable('PaymentsList',function() {
+    myDataTable= new SATYAM.DataTable('Payments');
+
+    myDataTable.caption = 'Payments';
+    myDataTable.sortedBy = {
+        key:'date',
+        dir:'desc'
+    };
+        
+    myDataTable.columnDefs = [
+        {key:'idPayment', isPrimaryKey:true, visible:false}
+        {key:'actions',label:' ', calculated:true, actions:[
+            {
+                src:'images/delete.png',
+                title:'delete',
+                onClick: myDataTable.deleteRecord,
+                ask:'Are you sure you want to delete this payment?'
+            }
+        ]},
+         {key:'date', label:'Date',type:'date', edit:true},
+        {key:'amount', label:'Amount', type:'currency', edit:true},
+        {key:'comment', label:'Comment', edit:true}
+    ];
+    myDataTable.render('PaymentsList');
+});</pre>
+
+<p>We create an instance of our DataTable, we set its <code>caption</code> and
+indicate how it will come sorted (the <code>sortedBy</code> does not force a sort, it
+just tells the DataTable how the data comes from the server so it can show the
+column in the proper style). Then we go into defining the columns. </p>
+
+<p>Column <code>idPayment</code> is the primary key in the database so we say so
+via the <code> isPrimaryKey</code> property. We don't want the user to see its value,
+so we set <code>visible</code> to <code>false</code>.</p>
+
+<p>The second column, actually the first that will be displayed, has a delete
+icon with a brief tooltip and a function that will delete the current row once
+the user confirms the question with the specified text. The column does
+not correspond to any data coming from the server so we say it is <code>calculated</code>,
+that is, made up.</p>
+
+<p>The rest of the columns are set to the application-defined data types: <code>date</code>
+and <code>currency</code>, while the last is left as a plain text type, which is the
+default. All are editable but we just say <code>edit:true</code>, we don't need
+to say which <code>editor</code> is to be used, our DataTable will know.
+</p>
+
+<p>Notice we don't set any DataSource. That is correct, there is no need
+to, our DataTable will take care of that.</p>
+
+<p>Short as it may seem, this is a full example. The trick is that all the
+rest is already set in our DataTable so let's see how it is done.</p>
+
+<h2><a name="Make a name for yourself">Make a name for yourself</a></h2>
+<p>YUI designers have been careful not to mess up with JavaScript global
+namespace, all YUI components just take a single global identifier: <code>YAHOO</code>.
+YUI provides a means for you to fall under that umbrella and avoid risking
+stepping on anybody else's feet. Under <code>YAHOO</code>, namespaces <code>lang</code>,
+<code>util</code>, <code> widget</code> and <code> example</code> are already defined and the first
+three reserved. The global component has several methods and properties
+defined right under YAHOO, though most of them are deprecated and are being
+moved under some other namespace. <code>YAHOO.example</code> you may use, but it is mostly intended not for libraries but for
+objects in a single page. If you are going to
+have your own library, the best is to reserve a namespace for yourself either a
+standalone global one or under <code>YAHOO</code>. Since my nickname is Satyam and
+that does not conflict with any names used by YAHOO, I'll have that as my
+namespace and I'll have it both ways, both in the global namespace and
+under <code>YAHOO</code>. The global component provides the way to do that with the
+<code>
+namespace</code> method</p>
+<pre>var SATYAM = YAHOO.namespace('satyam');</pre>
+<p>You would probably opt for one or the other, I just did it this way so you
+know it can be done. <code>SATYAM</code> then becomes an alias for <code>YAHOO.satyam</code>.
+Any name under any of those is mine and are equivalent. The nice thing
+about the <code> namespace</code> method is that if you have several include files for your
+components, you can put that same statement reserving the same namespace in all of them and the method will
+take care that they will all point to the same name hierarchy and they won't
+trample on each other.</p>
+<p>YUI DataTable has a constructor with three quite complex mandatory
+arguments. This requires preparing a lot of information outside from the
+DataTable itself so, when you have gathered all the information, you call the
+constructor which will build and render the DataTable all at
+once. I prefer doing things differently. Since the setup data will
+eventually go inside the DataTable, why not put it there from the start.
+With YUI DataTable you cannot because you can't set partial information since,
+calling the constructor already renders the DataTable with whatever you have set
+up so far. I prefer to split the instantiation of the DataTable from its
+rendering so that in the meantime I have the chance to set things up. My
+constructor is, thus, much simpler:</p>
+<pre>SATYAM.DataTable = function(name) {
+    this.name = name;
+
+    this.caption = '';
+    this.sortedBy = undefined;
+
+    this.serverUrl = document.location.href.split('?',1)[0];
+    if (this.serverUrl.substr(-1,1) == '#') {
+        this.serverUrl = this.serverUrl.substr(0,this.serverUrl.length -1 );
+    }
+    this.initialRequest = 'initialRequest=true';
+
+    this.columnDefs = [];
+
+    // ...
+};</pre>
+<p>My constructor takes a single argument, a name, which will later be used in
+communicating with the server to identify the source of the request. Even
+this is optional since, after all, it is an object property that can be set
+later. What the constructor mainly does is to initialize several
+properties. I am not listing all the properties I use nor all you
+may have, I'm just showing a sample of things you can set.</p>
+
+<p>Properties <code>caption</code> and <code>sortedBy</code> represent their namesakes in
+the configuration properties, the ones that can be set in the fourth, optional
+argument to the DataTable constructor. This represents one of the
+advantages of having your own DataTable. If you often use those
+configuration properties (or any other) and you feel it is awkward that they should be buried
+that deep, you can raise them to a first rate object property.</p>
+
+<p>Property <code>serverUrl</code> is initialized based on a possible setup. It
+assumes that the AJAX requests and the HTML requests will be served by the same
+server-side script, that is, depending on the arguments received, the same
+server-side script will produce either. Thus, under this assumption, it takes the URL of this page and strips it to the base URL with no
+arguments or page marker. Your site design might follow a different
+convention. Perhaps your HTML pages are static HTML files and the AJAX
+server scripts are separate PHP scripts, they might share the same name but have
+different extensions, the first <code>.html</code>, the second <code>.php</code>.
+Property <code>initialRequest</code> also depends on this decision. If both HTML
+and AJAX data is served from the same server page, we need to tell it what to
+provide, that's where <code>initialRequest</code> matters. If HTML and AJAX are
+served from different pages (one .html the other .php) then <code>initialRequest</code>
+might not matter. Whatever the convention you follow, you
+can set it as the default here or, if there is none, just leave those variables
+un-initialized and decide on a page by page basis.</p>
+
+<p>Property <code>columnDefs</code> stores the definitions of the columns, those that
+will eventually make up the second argument to the YUI DataTable constructor. Once again, it
+is just a handy place to assemble the information while you gather it. </p>
+
+<p>So far, I have a constructor for an object that is not yet related to YUI
+DataTable. To make this DataTable inherit from YUI you can do:</p>
+
+<pre>YAHOO.lang.extend(SATYAM.DataTable,YAHOO.widget.DataTable);
+
+// or:
+
+YAHOO.lang.extend(YAHOO.satyam.DataTable,YAHOO.widget.DataTable);
+</pre>
+
+<p>Both statements do the same since they both reference the same object.
+Now, my DataTable is an extension of YUI DataTable. It does nothing yet,
+but it will.</p>
+
+<h2><a name="The type property">The <code>type</code> property</a></h2>
+
+<p>The DataTable used to have a <code>type</code> property which is now
+obsolete. There is a limit of how much options you can put into a
+component and a single application may require so many application-specific data types
+that, in the end, a simple <code>type</code> property could not work, it is
+better to leave it to the final developer.</p>
+
+<p>For example, take a date. It may arrive from the server in <code>YYYY-MM-DD
+HH:mm:ss</code> format as per SQL or it may be read already formatted from existing
+markup. Then, you would want to convert it to a native JavaScript object
+since that would make things like sorting work nicely. For the user, you
+might want to format it as <code>dd/mm/yy</code> or <code>mm/dd/yy</code>  or you might want
+to dynamically use either format depending on the user locale. Then, you want to give the
+user the chance to edit it. There you are lucky because since 2.3.0 YUI
+uses the <a href="http://developer.yahoo.com/yui/calendar/">Calendar</a>
+component, so that is something you don't need to be concerned about.
+Nevertheless, if you do edit that information you will want to update it on the
+server which will require you to convert it back again to a format suitable for transmission
+since the <code>toString()</code> method of the <code>Date</code> object
+produces a representation that you will find hard to parse on the server (some
+languages don't have libraries to parse that format). As you
+can see, just for a single date type, there are many options and dozens of
+combinations of them. YUI can't provide for all of those combinations but you
+can simply because you are the one making many of those choices, which are likely to
+be consistent all over the application, and that reduces the options enormously.</p>
+
+<p>What we will do is to have an object <code> SATYAM.DataTable.type</code> which will hold
+all this information and we will be able to extend it to encompass all of our data types, for example a type <code> date</code> might be defined like this:</p>
+
+<pre>SATYAM.DataTable.type.date = {                
+    formatter: 'date',
+    className: 'satyam-dt-date',
+    editor: 'date',
+    parser: YAHOO.util.DataSource.parseDate,
+    sendFormatter: function (date) {
+        return date.toString();
+    }
+};</pre>
+
+<p>Here, we set a combination of some of the methods and properties that YUI
+provides us to handle <code> date</code> data and some we made ourselves, some are references
+to functions defined elsewhere, one of them is defined in-line. We will use
+the standard <code> 'date'</code> <code> formatter</code> and <code>editor</code>, but we defined a
+<code> className</code>  of our own for dates. We use the standard <code> parser</code> for dates provided
+with the DataSource but we have to define a <code> sendFormatter</code> since there is no such
+thing anywhere in YUI (this one is somewhat pointless since JavaScript
+would call the object <code> toString()</code> method anyhow). Now, all these assume dates are displayed in <code>mm/dd/yyyy</code>
+format and that with the server they will be exchanged like this: <code>&quot;Wed
+Nov 21 2007 00:00:00 GMT+0100 (Romance Standard Time)&quot;</code>
+. Most server software will produce and understand dates in this and
+similar formats since they are covered by several standards (note the plural
+there, if there is more than one standard, then it's not a standard) but some won't. Some
+may fail if you are using localization since parts of that date string won't make sense in other languages. So, we may change our
+definition of the date data type to:</p>
+
+<pre>SATYAM.DataTable.type.date = {                
+    formatter: function(elCell, oRecord, oColumn, oData) {
+        if(oData instanceof Date) {
+            elCell.innerHTML = oData.getDate() + &quot;/&quot; + (oData.getMonth()+1)  + &quot;/&quot; + oData.getFullYear();
+        } else {
+            elCell.innerHTML = YAHOO.lang.isValue(oData) ? oData : &quot;&quot;;
+        }
+    },
+    className: 'satyam-dt-date',
+    editor: 'date',
+    parser: function (oData) {
+        if (oData === undefined) return oData;
+        var parts = oData.split(' ');
+        var datePart = parts[0].split('-');
+        if (parts.length &gt; 1) {
+            var timePart = parts[1].split(':');
+            return new Date(datePart[0],datePart[1]-1,datePart[2],timePart[0],timePart[1],timePart[2]);
+        } else {
+            return new Date(datePart[0],datePart[1]-1,datePart[2]);
+        }
+    },
+    sendFormatter:function (date) {
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() 
+            + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    }
+};</pre>
+
+
+<p>Here, we are formatting the date as <code>dd/mm/yyyy</code>, we are still using the
+same <code>className</code> and the Calendar control for <code>editor</code> and
+we
+changed the <code>parser</code> and <code>sendFormatter</code> methods to use the <code>yyyy-mm-dd
+hh:mm:ss</code> format that works nicely in SQL.</p>
+
+<p>A <code> dropdown</code> data type might be defined like this:</p>
+
+<pre>SATYAM.DataTable.type.dropdown = {
+    formatter: 'dropdown',
+    className:YAHOO.widget.DataTable.CLASS_DROPDOWN,
+    editor: 'dropdown',
+    exec: function (colDef) {
+        if (YAHOO.lang.isString(colDef.dropdownOptions)) {
+            var key = colDef.key;
+            var ds = new YAHOO.util.DataSource(colDef.dropdownOptions);
+            ds.responseType = YAHOO.util.DataSource.TYPE_JSON;
+            ds.responseSchema = {
+                fields: ['value', 'text'],
+                resultsList: 'data'
+            };
+            ds.connMethodPost = true;
+            ds.sendRequest(''
+                ,function(sRequest, oResponse) {
+                    var oColumnSet = this.getColumnSet();
+                    var oColumn = oColumnSet.getColumn(key);
+                    oColumn.dropdownOptions = oResponse.results;
+                }
+                ,this
+            );
+        }
+    }
+};</pre>
+
+<p>Here, the <code>exec</code> property holds a function meant to be executed.
+Most properties simply get copied into the column definition, the <code>exec</code>
+property is expected to hold a function to be executed. It will execute in
+the scope of the DataTable and will receive a column definition object as its only
+argument. Here, we are expanding the options for a dropdown box. Usually,
+the <code>dropdownOptions</code> property holds an array of values or value-text sets
+which will fill the dropdown options. Here, we are giving the option that
+if the value is a string instead of an array, it will assume it to be the URL
+of a server script which will provide the values. So, what it does is to
+create a new DataSource object to read them. Since I settled on sending
+requests via POST and on using
+JSON for the reply with a particular envelope where the first set of tabular info
+will be under a <code>data</code> property, it is straightforward to set it up. Then, when
+the reply comes, we simply set the <code>dropdownOptions</code> to the array just
+received. This would require the reply to have two fields, one called <code>value</code>, the
+other <code>text</code>, containing the options of the array, which we can do as shown in
+this <a href="http://www.satyam.com.ar/int/PhpJson.htm#dropdownData">example</a>.</p>
+
+<p>There is a delicate timing issue in this particular example code. When the <code>exec</code>
+function is called, the YUI DataTable does not yet exist and what it receives is
+an element of the column definitions array. By the time the DataSource callback
+is called, the YUI DataTable will be already created, it will have read the column
+definitions and had them converted to the <code>ColumnSet</code> object it uses
+internally. At this point, changing the column definitions is pointless,
+the DataTable has already read those and will ignore any further changes.
+That is why in the callback function I look for the actual <code>Column</code> object
+within the DataTable <code>ColumnSet</code> object to set the <code>dropdownOptions</code>.
+If there are no time delays involved, the function can modify the column
+definition and that will affect the DataTable.</p>
+
+<p>
+Also notice how variable <code>key</code> is available to the callback function thanks
+to JavaScript's closure where an inner function has access to the containing
+function variables, even long after that function has returned.</p>
+
+<p>As I said before, our new DataTable will not render when instantiated, it needs a <code>render</code>
+method. That method will eventually call the original constructor after
+assembling all it needs.</p>
+
+<pre>SATYAM.DataTable.prototype.render = function (dataTableDiv) {
+
+    this.dataTableDiv = YAHOO.util.Dom.get(dataTableDiv);
+
+    var cds = this.columnDefs, 
+        dt = SATYAM.DataTable, dtt = dt.type,
+        dataFields = [],
+        cd, i, key, value;
+
+
+    for (i = 0; i &lt; cds.length; i++) {
+        cd = cds[i];
+        if (cd.type &amp;&amp; YAHOO.lang.isObject(dtt[cd.type])) {
+            for (key in dtt[cd.type]) {
+                if (dtt[cd.type].hasOwnProperty(key)) {
+                    value = dtt[cd.type][key];
+
+        // ....  to be continued</pre>
+
+<p>The <code> render</code> method requires a single argument, the HTML element which
+will contain the DataTable which can be passed as a DOM object reference or
+an Id which is resolved by the Dom component <code>get</code> method. It sets a
+few handy shortcuts (<code>cds, dt, dtt</code>) to some objects frequently used. </p>
+
+<p>It loops through each
+element of the column definitions,
+which it stores in variable <code>cd</code>. It looks whether that column
+definition has a <code>type</code> property and if there is an object under <code>SATYAM.DataTable.type</code>
+named after the value of the <code>type</code> property of the column it
+will read its options. It loops through each, storing the option name in <code>
+key</code> and its value in <code>value</code>. To decide what to do with each
+option, we use a <code>switch</code>: </p>
+
+<pre>switch(key) {
+    case 'editor':
+        if (cd.edit) {
+            cd.editor = value;
+        }
+        break;
+    case 'validator':
+        if (cd.edit) {
+            if (cd.editorOptions === undefined) {
+                cd.editorOptions = {};
+            }
+            cd.editorOptions.validator = value;
+        }
+        break;
+    case 'parser':
+        if (cd.calculated !== true) {
+            cd.parser = value;
+        }
+        break;
+    case 'sendFormatter':
+        this.sendFormatters[cd.key] = value;
+        break;
+    case 'exec':
+        value.call(this,cd);
+        break;
+    default:
+        cd[key] = value;
+        break;
+}</pre>
+
+<p>The easiest case is the default, just copy the property
+into the column definition. Other properties depend on other conditions.</p>
+
+<h3><a name="Properties edit and calculated">Properties <code>edit</code> and <code>calculated</code></a></h3>
+
+<p>Besides <code>type</code>, we have other extra column properties, one of them is <code>edit</code>.
+Since the editor we use will be specified by the data type, we just need to state
+whether the column will be editable or not, our DataTable will know which editor
+to use. In the column definitions we will have a
+property <code>edit</code> which, if set, will read the <code> editor</code> from the data type definition. Also, the <code>validator</code> option for that
+data type will only
+make sense if <code>edit:true</code> so if there is a <code>validator</code> and the column
+is editable we set the <code>validator</code> under <code>editorOptions</code> which we
+create if it doesn't exist. As I pointed out in a <a href="http://yuiblog.com/blog/2007/09/26/satyam-datatable-2/">previous
+article</a>, <code>validator</code> is somewhat hidden under <code>editorOptions</code> and
+it has a misleading name because, besides allowing
+you to do some validation, if we use, for example, the simple inline textbox
+editor, <code>validator</code> is the place to convert the data from the plain string
+that the input box returns into the correct data type, like an actual JavaScript
+integer or
+float. This doesn't seem very important until we sort the column and get
+strange results with the numbers stored as strings sorted by alphabetical
+instead of numerical order (It is not noticeable with a few string values, since
+the sort function will do type casting so unless two strings are compared a
+string will be converted to a number if compared to a number and the error won't
+show up).</p>
+
+<p>Property <code>calculated</code> means that the field is
+not part of the information coming from the server, it is either calculated from
+other fields in the record or it is a column meant to hold action buttons or
+icons and has no related data. So, unless we explicitly set <code>calculated</code>
+to <code>true</code>, we may need the <code> parser</code> function in the column
+definition because we will have to parse it when it comes from the server and
+format it on the way back.</p>
+
+<p>Property <code>exec</code> is handled differently, it does not set anything by
+itself, but it expects the value to be a function and it calls it setting its
+scope to that of the DataTable instance and passing it the column
+definition.</p>
+
+<p>Once finished with the loop going over each of the data type definitions, we check for
+defaults:</p>
+
+<pre>if (cd.edit &amp;&amp; !cd.editor) {
+    cd.editor = 'textbox';
+}
+
+if (cd.calculated !== true) {
+    dataFields.push({
+        key:cd.key,
+        parser:cd.parser
+    });
+}
+
+if (cd.isPrimaryKey) {
+    this.keyFields.push(cd.key);
+}
+
+if (cd.visible === false) {
+    cds.splice(i,1);
+    i--;
+}</pre>
+
+<p>If we set <code> edit</code> to <code> true</code>  but there is no <code> editor</code> assigned either
+by the data type definition or directly with the <code>editor</code> property in the column
+definition (which can still be used) then we will assign the default <code> textbox</code> editor.</p>
+
+<p>Then, we have to deal with the DataSource. Unless the field is <code>calculated</code>, we have to list its
+<code> key</code> and its <code>parser</code>, if any, in the <code> fields</code> array
+which we have to set for the DataSource. The DataSource can take either a
+simple string value for the <code> key</code> or an object if you want to set more options
+like the <code>parser</code>. We use this second alternative whether there is a parser or
+not, after all, if <code> cd.parser</code> is <code> undefined</code> then the object will end up having no
+parser to speak of, which is fine.</p>
+
+<h3><a name="Property isPrimaryKey">Property <code>isPrimaryKey</code></a></h3>
+
+<p>In the code block above we check for a property called <code>isPrimaryKey</code>, which was already
+introduced in a <a href="http://yuiblog.com/blog/2007/09/26/satyam-datatable-2/">previous
+article</a>. This property is not used by the DataTable itself but by a
+little utility function which I presented as a standalone function called <code>
+myBuildSql</code> for the purpose of that article but which is actually part of the
+modified DataTable:</p>
+
+<pre>SATYAM.DataTable.prototype.buildUrl = function(record) { 
+    var url = 'AjaxObj=' + escape(this.name), name;
+    for (var i = 0; i &lt; this.keyFields.length; i++) {
+        name = this.keyFields[i];
+        url += '&amp;' + name + '=';
+        if (this.sendFormatters[name]) {
+            url += escape(this.sendFormatters[name](this.currentRecord.getData(name)));
+        } else {
+            url += escape(this.currentRecord.getData(name));
+        }
+    }
+    return url; 
+};</pre>
+
+<p>Most of the transactions with the database server will require us to identify
+the record we want to work on. This function
+concatenates in URL-format the field names and the values of those fields marked
+with <code>isPrimaryKey</code> from the <code> record</code> it receives as an argument. To do
+that it relies on the <code>keyFields</code> array which is populated with the column
+keys of all columns with <code>isPrimaryKey</code> set. Also, since any of those
+fields might need to be formatted before sending them to the server, it checks
+for a <code>sendFormatter</code> function in the <code>sendFormatters</code> array
+under the column key name and uses it if
+present. The URL will also contain a field called <code>AjaxObj</code> which is
+my way of identifying the DataTable that is requesting the data. This
+field takes its value from the first argument of my DataTable constructor.
+That is just one convention of mine. The URL segment returned starts with
+a '&amp;' sign since it will probably be appended to other arguments such as
+what action you want performed on that record.</p>
+
+<h3><a name="Property visible">Property <code>visible</code></a></h3>
+
+<p>Finally we check the property <code>visible</code>. This property means that
+the column data will be read by the DataSource but won't be shown. To
+prevent the column from showing, we cannot let its definition to reach the
+DataTable. At this
+point we have already pushed its <code>key</code> and <code>parser</code> values to the <code>dataFields</code>
+array, which the DataSource will eventually receive. We also saved the <code>sendFormatter</code>
+attribute in the <code>sendFormatters</code> array just for this situation. So, with
+all that could be used of a non-visible column preserver elsewhere we can get
+rid of the definition for this column. If <code>visible</code> is exactly equal to <code>false</code> we use the
+native JavaScript <code>Array.splice()</code> method to delete that column from the
+column definition array and we then decrease the column index <code>i</code>
+since now the column that used to be next to this one is current. Two
+important things, when I started this paragraph with the word 'finally', I really meant finally,
+because since we change the index numbers of the columns with <code>splice</code>, we better leave this at
+the end of the loop. Second, the check for <code>visible === false</code> has to
+be with a triple equal sign since the default for <code>visible</code> is <code>true</code>,
+a missing <code>visible</code> property means it should be displayed. This is a
+case where <code>undefined</code> does not mean <code>false</code> but means <code>true</code>.</p>
+
+<h3><a name="Method render">Method <code>render</code></a></h3>
+
+<p>Finally, we get to actually render the table</p>
+
+<pre>var ds = new YAHOO.util.DataSource(this.serverURL);
+ds.responseType = YAHOO.util.DataSource.TYPE_JSON;
+ds.connMethodPost = true;
+ds.responseSchema = {
+    resultsList: 'data',
+    fields: dataFields
+};
+
+SATYAM.DataTable.superclass.constructor.call(
+    this, 
+    this.dataTableDiv,
+    cds,
+    ds,
+    {
+        initialRequest: this.initialRequest,
+        caption: this.caption,
+        sortedBy: this.sortedBy
+    }
+);
+this.subscribe('cellClickEvent',this.onEventEditCell);</pre>
+
+<p>We prepare the DataSource using the default <code> serverURL</code> property, which is set
+in the constructor but could have been changed if so desired. We set the
+reply data format as JSON with the results stored under the property <code>data</code>. The
+request will go as a <code>POST</code>. We set the <code> fields</code> of the DataSource to
+those we assembled in <code> dataFields</code>.</p>
+
+<p>Finally, we call the constructor of the actual YUI DataTable, which is the <code>
+superclass</code> of our new DataTable. We use the <code> call</code> method so we can scope
+the constructor to <code> this</code> DataTable and we give it the reference to the HTML
+element container where it is to be built, the column definitions, as modified
+in the previous code, the DataSource we just built and, as configuration
+options, the <code>initialRequest,</code> <code> caption </code>and the <code> sortedBy</code> we
+indicated. These last three were
+just promoted from being somewhat hidden one level
+too deep to first rate objects. Your choice of 'promoted' properties might
+be different.</p>
+
+<p>Since we plan to use inline cell editing, we subscribe to the <code>cellClickEvent</code>
+and pass it on to <code>onEventEditCell</code> to enable cell editing.</p>
+
+<h3><a name="Action buttons">Action buttons</a></h3>
+<p>Some developers prefer clean DataTables and to use a right click to pop up a
+ContextMenu for additional actions. I prefer to offer a column of small
+icons on each row. So, I added another extra property to the column
+definitions, which could be used like this, as in the example in the code box
+way on top:</p>
+<pre>{key:'idPayment',isPrimaryKey:true,actions:[
+    {
+        src:'images/delete.png',
+        title:'delete',
+        onClick: myDataTable.deleteRecord,
+        ask:'Are you sure you want to delete this payment?'
+    }
+]},</pre>
+<p>This definition can replace the first two column definitions in the previous example. This is not to be skimpy on column definitions but
+since the actions are usually performed on records identified with the primary
+key, putting all of it, the primary key that identifies the record and the
+actions to be performed on it, in just one column makes sense. The <code>idPayment</code> 
+field value won't be shown but the action icons will, while the value of the <code>idPayment</code> 
+field will still be in the underlying RecordSet.</p>
+
+<p>Notice that the new <code>actions</code> property (plural) takes an array, that
+means that you can specify more than one action button in the same column.
+Basically you give it the source of the image, the text to show as a tooltip and
+the function that is to be called when the icon is clicked.</p>
+
+<p>This requires some more code to process it. Remember the main loop
+where we processed each of the properties of the column definitions? We
+have to add this right before handling the <code>visible</code> property which had to
+be the last one on that loop:</p>
+
+<pre>if (cd.actions) {
+    if (!cd.formatter) {
+        cd.formatter = this.formatActions;
+    }
+}</pre>
+
+<p>Then we have to declare that function <code>formatActions</code>:</p>
+
+<pre>SATYAM.DataTable.prototype.formatActions = function(elCell, oRecord, oColumn, oData) {
+    var img = '', a;
+    for (var i = 0; i &lt; oColumn.actions.length; i++) {
+        a = oColumn.actions[i];
+        img += ' &lt;a href=&quot;#' + i + '&quot;&gt;&lt;img class=&quot;satyam-dt-action-button&quot; src=&quot;' + a.src + '&quot;';
+        if (a.title) img += ' title=&quot;' + a.title + '&quot;';
+        img += ' /&gt;&lt;/a&gt;';
+    }
+    elCell.innerHTML = img;
+};</pre>
+
+<p>This <code> formatter</code> builds a string with the HTML code to put a series of images
+(icons) surrounded in HTML anchor elements pointing to fake page markers made of the
+<code> #</code>
+sign and the index of the action in the <code>actions</code> array.</p>
+
+<p>And then the code to handle those clicks:</p>
+
+<pre>this.subscribe('linkClickEvent', function(ev) {
+    var target = YAHOO.util.Event.getTarget(ev);
+    var column = this.getColumn(target);
+    if (column.actions) {
+        YAHOO.util.Event.stopEvent(ev.event);
+        var action = column.actions[parseInt(target.hash.substr(1), 10)];
+        action.onClick.call(
+            this, 
+            YAHOO.util.Dom.getAncestorByTagName(target,'td'),
+            this.getRecord(target),
+            column,
+            action
+        );
+        return false;
+    }
+});</pre>
+
+<p>On the <code> linkClickEvent</code> we get the <code>target</code> of the click and from
+it we get the <code>Column</code> object for that column. If the column has an <code>actions</code>
+property, then it is one of our action buttons. If so, we stop the
+propagation of the event, since we are already dealing with it. The <code>actions</code>
+property holds an array of action buttons so we have to identify which action
+was the one clicked on. The <code>target</code> is a DOM <code>anchor</code> element
+and in the <code>hash</code> property it has the page marker we set, including the <code>#</code>
+sign so we parse the integer that starts in the second position (right after the
+#) which gives us the array index for the action. Then, we simply call the
+<code>onClick</code> function setting its scope to that of the DataTable, and passing
+it the cell clicked, the <code>Record</code> for that row, the <code>Column</code> and
+the actions instance. </p>
+
+<p>Have you noticed the actions property set up in the example above has an <code>ask</code>
+property which we haven't used? That is one of the nice things about
+object literals, you can pack lots of information in them beyond what the
+designer already put in it. For the <code>deleteRecord</code> action, we have
+the <code>ask</code> property, which we use like this: </p>
+
+<pre>SATYAM.DataTable.prototype.deleteRecord = function (cell, record, column, action) {
+    if (action.ask) {
+        if (!confirm(action.ask)) return;
+    } else {
+        if (!confirm('Are you sure you want to delete this record?')) return;
+    }
+    this.deleteRow(cell);
+};</pre>
+
+<p>Here, if there is an <code>ask</code> property then we use its contents as the text
+of the confirmation question, otherwise we use a generic question. This
+method is not communicating that deletion to the server, we covered that in a <a href="http://yuiblog.com/blog/2007/09/26/satyam-datatable-2">previous
+article</a> so I didn't want to clutter this example with that.
+Nevertheless, let me point out how handy the <code>buildUrl</code> method would be at
+this point to assemble the URL to identify the record to be deleted by the
+server.</p>
+
+<h3><a name="Missing pieces">Missing pieces</a></h3>
+
+<p>We have seen how to encapsulate a lot of application design decisions
+into our DataTable. We have defined our own data types, promoted some
+configuration properties and established our communication standards, which were
+some of our objectives. Adding missing pieces is another one. We
+have done that with the dropdown, by extending the <code> dropdownOptions</code> configuration
+property to also accept an URL to fetch the values from
+elsewhere. We can add further functionality:</p>
+
+<pre>SATYAM.DataTable.prototype.requery = function(newRequest) {
+    this.getDataSource().sendRequest(
+        (newRequest === undefined ? this.get('initialRequest') : newRequest), 
+        this.onDataReturnInitializeTable, 
+        this
+    );
+};</pre>
+
+<p>Here we are adding a <code>requery</code> method which goes back to the server to
+get the refreshed data straight from the database (or wherever it takes it
+from). If the argument <code>newRequest</code> is missing, it will use the same
+arguments it used the first time around, taken from <code>initialRequest</code>.</p>
+
+<p>These missing pieces might eventually make it into the standard DataTable so
+you might want to add some safety check.</p>
+
+<pre>if (YAHOO.lang.isUndefined(SATYAM.DataTable.prototype.refreshRow) 
+    &amp;&amp; YAHOO.lang.isUndefined(SATYAM.DataTable.refreshRow)
+) {
+    SATYAM.DataTable.prototype.refreshRow = function (row) {
+        var $D = YAHOO.util.Dom;
+        $D.batch($D.getChildren(this.getTrEl(row)),this.formatCell,this,true);
+    };
+} else {
+    alert('refreshRow exists!!!');
+}</pre>
+
+<p>Method <code>refreshRow</code> does what <code>refreshView</code>, but for only a single row. In
+this one I added a safety check, I first check if there is anything defined with
+that same name (method or property,
+static of instance it doesn't matter) and if so I issue an alert.  The
+alert is just for your own internal use, the end-user would never reach it but,
+when a new version comes and you want to try it out in your development system, these alerts
+will pop up as soon as the libraries are loaded, no chance to miss them.</p>
+
+<p>Temporary patches and fixes can be applied in a similar way. Instead of
+modifying the original YUI source for DataTable, modify your own
+DataTable. As a safety measure, when applying those patches, it is wise to
+check that you are patching the right version, for example:</p>
+
+<pre>if (YAHOO.env.modules.datatable.version == '2.3.1') // apply patch, else issue warning!!!!</pre>
+
+<h3>Conclusion</h3>
+<p>Articles have to have conclusions, mine is in the <a href="#Usage">code sample</a> at the
+begining. The definition of the table couldn't be easier, nuff said. </p>
+</div>
+</div>
+</body>
+
+</html>

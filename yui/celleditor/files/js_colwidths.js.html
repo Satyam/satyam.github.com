@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>js&#x2F;colwidths.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Base.html">DataTable.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.html">DataTable.BaseCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellEditor.KeyFiltering.html">DataTable.BaseCellEditor.KeyFiltering</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellInlineEditor.html">DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BaseCellPopupEditor.html">DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.html">DataTable.BodyView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.Formatters.html">DataTable.BodyView.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.BodyView.InputFormatters.html">DataTable.BodyView.InputFormatters</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.ColumnWidths.html">DataTable.ColumnWidths</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Core.html">DataTable.Core</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editable.html">DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Editors.html">DataTable.Editors</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.HeaderView.html">DataTable.HeaderView</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Message.html">DataTable.Message</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Mutable.html">DataTable.Mutable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Scrollable.html">DataTable.Scrollable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.Sortable.html">DataTable.Sortable</a></li>
+            
+                <li><a href="..&#x2F;classes/DataTable.TableView.html">DataTable.TableView</a></li>
+            
+                <li><a href="..&#x2F;classes/Plugin.DataTableDataSource.html">Plugin.DataTableDataSource</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-base.html">datatable-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-body.html">datatable-body</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-base.html">datatable-celleditor-base</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-inline.html">datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-keyfiltering.html">datatable-celleditor-keyfiltering</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-celleditor-popup.html">datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-column-widths.html">datatable-column-widths</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-core.html">datatable-core</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-datasource.html">datatable-datasource</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-editable.html">datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-formatters.html">datatable-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-head.html">datatable-head</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-input-formatters.html">datatable-input-formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-message.html">datatable-message</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-mutable.html">datatable-mutable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-scroll.html">datatable-scroll</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-sort.html">datatable-sort</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable-table.html">datatable-table</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js&#x2F;colwidths.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+Adds basic, programmatic column width support to DataTable via column
+configuration property &#x60;width&#x60; and method &#x60;table.setColumnWidth(id, width);&#x60;.
+
+@module datatable
+@submodule datatable-column-widths
+@since 3.5.0
+**&#x2F;
+var isNumber = Y.Lang.isNumber,
+    arrayIndex = Y.Array.indexOf;
+
+Y.Features.add(&#x27;table&#x27;, &#x27;badColWidth&#x27;, {
+    test: function () {
+        var body = Y.one(&#x27;body&#x27;),
+            node, broken;
+
+        if (body) {
+            &#x2F;&#x2F; In modern browsers, &lt;col style=&quot;width:X&quot;&gt; will make columns,
+            &#x2F;&#x2F; *including padding and borders* X wide. The cell content width
+            &#x2F;&#x2F; is reduced.  In old browsers and all Opera versions to date, the
+            &#x2F;&#x2F; col&#x27;s width style is passed to the cells, which causes cell
+            &#x2F;&#x2F; padding&#x2F;border to bloat the rendered width.
+            node = body.insertBefore(
+                &#x27;&lt;table style=&quot;position:absolute;visibility:hidden;border:0 none&quot;&gt;&#x27; +
+                    &#x27;&lt;colgroup&gt;&lt;col style=&quot;width:9px&quot;&gt;&lt;&#x2F;colgroup&gt;&#x27; +
+                    &#x27;&lt;tbody&gt;&lt;tr&gt;&#x27; +
+                        &#x27;&lt;td style=&quot;&#x27; +
+                            &#x27;padding:0 4px;&#x27; +
+                            &#x27;font:normal 2px&#x2F;2px arial;&#x27; +
+                            &#x27;border:0 none&quot;&gt;&#x27; +
+                        &#x27;.&#x27; + &#x2F;&#x2F; Just something to give the cell dimension
+                    &#x27;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&#x27; +
+                &#x27;&lt;&#x2F;table&gt;&#x27;,
+                body.get(&#x27;firstChild&#x27;));
+
+            broken = node.one(&#x27;td&#x27;).getComputedStyle(&#x27;width&#x27;) !== &#x27;1px&#x27;;
+
+            node.remove(true);
+        }
+
+        return broken;
+    }
+});
+
+&#x2F;**
+_API docs for this extension are included in the DataTable class._
+
+Adds basic, programmatic column width support to DataTable. Note, this does not
+add support for truncated columns.  Due to the way HTML tables render, column
+width is more like a &quot;recommended width&quot;.  Column content wider than the
+assigned width will cause the column to expand, despite the configured width.
+Similarly if the table is too narrow to fit the column with the configured
+column width, the column width will be reduced.
+
+To set a column width, either add a &#x60;width&#x60; value to the column configuration
+or call the &#x60;setColumnWidth(id, width)&#x60; method.
+
+Note, assigning column widths is possible without this module, as each cell is
+decorated with a class appropriate for that column which you can statically
+target in your site&#x27;s CSS.
+
+To achieve absolute column widths, with content truncation, you can either:
+
+1. Use this module, configure *all* columns to have &#x60;width&#x60;s, then add
+   &#x60;table-layout: fixed;&#x60; to your CSS for the appropriate &#x60;&lt;table&gt;&#x60;, or
+2. Wrap the contents of all cells in the column with a &#x60;&lt;div&gt;&#x60; (using a
+   &#x60;cellTemplate&#x60; or &#x60;formatter&#x60;), assign the div&#x27;s style &#x60;width&#x60;, then assign
+   the column &#x60;width&#x60; or add a CSS &#x60;width&#x60; to the column class created by
+   DataTable.
+
+&lt;pre&gt;&lt;code&gt;.yui3-datatable .yui3-datatable-col-foo {
+    padding: 0;
+    width: 125px;
+}
+.yui3-datatable .yui3-datatable-col-foo .yui3-datatable-liner {
+    overflow: hidden;
+    padding: 4px 10px;
+    width: 125px;
+}
+&lt;&#x2F;pre&gt;&lt;&#x2F;code&gt;
+
+&lt;pre&gt;&lt;code&gt;var table = new Y.DataTable({
+    columns: [
+        {
+            key: &#x27;foo&#x27;,
+            cellTemplate:
+                &#x27;&amp;lt;td class=&quot;{className}&quot;&gt;&#x27; +
+                    &#x27;&amp;lt;div class=&quot;yui3-datatable-liner&quot;&gt;{content}&amp;lt;&#x2F;div&gt;&#x27; +
+                &#x27;&amp;lt;&#x2F;td&gt;&#x27;
+        },
+        ...
+    ],
+    ...
+});
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+To add a liner to all columns, either provide a custom &#x60;bodyView&#x60; to the
+DataTable constructor or update the default &#x60;bodyView&#x60;&#x27;s &#x60;CELL_TEMPLATE&#x60; like
+so:
+
+&lt;pre&gt;&lt;code&gt;table.on(&#x27;renderBody&#x27;, function (e) {
+    e.view.CELL_TEMPLATE = e.view.CELL_TEMPLATE.replace(&#x2F;\{content\}&#x2F;,
+            &#x27;&amp;lt;div class=&quot;yui3-datatable-liner&quot;&gt;{content}&amp;lt;&#x2F;div&gt;&#x27;);
+});
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+Keep in mind that DataTable skins apply cell &#x60;padding&#x60;, so assign your CSS
+&#x60;width&#x60;s accordingly or override the &#x60;padding&#x60; style for that column&#x27;s &#x60;&lt;td&gt;&#x60;s
+to 0, and add &#x60;padding&#x60; to the liner &#x60;&lt;div&gt;&#x60;&#x27;s styles as shown above.
+
+@class DataTable.ColumnWidths
+@for DataTable
+@since 3.5.0
+**&#x2F;
+function ColumnWidths() {}
+
+Y.mix(ColumnWidths.prototype, {
+    &#x2F;**
+    The HTML template used to create the table&#x27;s &#x60;&lt;col&gt;&#x60;s.
+
+    @property COL_TEMPLATE
+    @type {HTML}
+    @default &#x27;&lt;col&#x2F;&gt;&#x27;
+    @since 3.5.0
+    **&#x2F;
+    COL_TEMPLATE: &#x27;&lt;col&#x2F;&gt;&#x27;,
+
+    &#x2F;**
+    The HTML template used to create the table&#x27;s &#x60;&lt;colgroup&gt;&#x60;.
+
+    @property COLGROUP_TEMPLATE
+    @type {HTML}
+    @default &#x27;&lt;colgroup&#x2F;&gt;&#x27;
+    @since 3.5.0
+    **&#x2F;
+    COLGROUP_TEMPLATE: &#x27;&lt;colgroup&#x2F;&gt;&#x27;,
+
+    &#x2F;**
+    Assigns the style width of the &#x60;&lt;col&gt;&#x60; representing the column identifed by
+    &#x60;id&#x60; and updates the column configuration.
+
+    Pass the empty string for &#x60;width&#x60; to return a column to auto sizing.
+
+    This does not trigger a &#x60;columnsChange&#x60; event today, but I can be convinced
+    that it should.
+
+    @method setColumnWidth
+    @param {Number|String|Object} id The column config object or key, name, or
+            index of a column in the host&#x27;s &#x60;_displayColumns&#x60; array.
+    @param {Number|String} width CSS width value. Numbers are treated as pixels
+    @return {DataTable}
+    @chainable
+    @since 3.5.0
+    **&#x2F;
+    setColumnWidth: function (id, width) {
+        var col = this.getColumn(id),
+            index = col &amp;&amp; arrayIndex(this._displayColumns, col);
+
+        if (index &gt; -1) {
+            if (isNumber(width)) {
+                width += &#x27;px&#x27;;
+            }
+
+            col.width = width;
+
+            this._setColumnWidth(index, width);
+        }
+
+        return this;
+    },
+
+    &#x2F;&#x2F;--------------------------------------------------------------------------
+    &#x2F;&#x2F; Protected properties and methods
+    &#x2F;&#x2F;--------------------------------------------------------------------------
+    &#x2F;**
+    Renders the table&#x27;s &#x60;&lt;colgroup&gt;&#x60; and populates the &#x60;_colgroupNode&#x60; property.
+
+    @method _createColumnGroup
+    @protected
+    @since 3.5.0
+    **&#x2F;
+    _createColumnGroup: function () {
+        return Y.Node.create(this.COLGROUP_TEMPLATE);
+    },
+
+    &#x2F;**
+    Hooks up to the rendering lifecycle to also render the &#x60;&lt;colgroup&gt;&#x60; and
+    subscribe to &#x60;columnChange&#x60; events.
+
+    @method initializer
+    @protected
+    @since 3.5.0
+    **&#x2F;
+    initializer: function () {
+        this.after([&#x27;renderView&#x27;, &#x27;columnsChange&#x27;], this._uiSetColumnWidths);
+    },
+
+    &#x2F;**
+    Sets a columns&#x27;s &#x60;&lt;col&gt;&#x60; element width style. This is needed to get around
+    browser rendering differences.
+
+    The colIndex corresponds to the item index of the &#x60;&lt;col&gt;&#x60; in the table&#x27;s
+    &#x60;&lt;colgroup&gt;&#x60;.
+
+    To unset the width, pass a falsy value for the &#x60;width&#x60;.
+
+    @method _setColumnWidth
+    @param {Number} colIndex The display column index
+    @param {Number|String} width The desired width
+    @protected
+    @since 3.5.0
+    **&#x2F;
+    &#x2F;&#x2F; TODO: move this to a conditional module
+    _setColumnWidth: function (colIndex, width) {
+        &#x2F;&#x2F; Opera (including Opera Next circa 1&#x2F;13&#x2F;2012) and IE7- pass on the
+        &#x2F;&#x2F; width style to the cells directly, allowing padding and borders to
+        &#x2F;&#x2F; expand the rendered width.  Chrome 16, Safari 5.1.1, and FF 3.6+ all
+        &#x2F;&#x2F; make the rendered width equal the col&#x27;s style width, reducing the
+        &#x2F;&#x2F; cells&#x27; calculated width.
+        var colgroup  = this._colgroupNode,
+            col       = colgroup &amp;&amp; colgroup.all(&#x27;col&#x27;).item(colIndex),
+            cell, getCStyle;
+
+        if (col) {
+            if (width &amp;&amp; isNumber(width)) {
+                width += &#x27;px&#x27;;
+            }
+
+            col.setStyle(&#x27;width&#x27;, width);
+
+            &#x2F;&#x2F; Adjust the width for browsers that make
+            &#x2F;&#x2F; td.style.width === col.style.width
+            if  (width &amp;&amp; Y.Features.test(&#x27;table&#x27;, &#x27;badColWidth&#x27;)) {
+                cell = this.getCell([0, colIndex]);
+
+                if (cell) {
+                    getCStyle = function (prop) {
+                        return parseInt(cell.getComputedStyle(prop), 10)||0;
+                    };
+
+                    col.setStyle(&#x27;width&#x27;,
+                        &#x2F;&#x2F; I hate this
+                        parseInt(width, 10) -
+                        getCStyle(&#x27;paddingLeft&#x27;) -
+                        getCStyle(&#x27;paddingRight&#x27;) -
+                        getCStyle(&#x27;borderLeftWidth&#x27;) -
+                        getCStyle(&#x27;borderRightWidth&#x27;) + &#x27;px&#x27;);
+
+                }
+            }
+        }
+    },
+
+    &#x2F;**
+    Populates the table&#x27;s &#x60;&lt;colgroup&gt;&#x60; with a &#x60;&lt;col&gt;&#x60; per item in the &#x60;columns&#x60;
+    attribute without children.  It is assumed that these are the columns that
+    have data cells renderered for them.
+
+    @method _uiSetColumnWidths
+    @protected
+    @since 3.5.0
+    **&#x2F;
+    _uiSetColumnWidths: function () {
+        if (!this.view) {
+            return;
+        }
+
+        var template = this.COL_TEMPLATE,
+            colgroup = this._colgroupNode,
+            columns  = this._displayColumns,
+            i, len;
+
+        if (!colgroup) {
+            colgroup = this._colgroupNode = this._createColumnGroup();
+
+            this._tableNode.insertBefore(
+                colgroup,
+                this._tableNode.one(&#x27;&gt; thead, &gt; tfoot, &gt; tbody&#x27;));
+        } else {
+            colgroup.empty();
+        }
+
+        for (i = 0, len = columns.length; i &lt; len; ++i) {
+
+            colgroup.append(template);
+
+            this._setColumnWidth(i, columns[i].width);
+        }
+    }
+}, true);
+
+Y.DataTable.ColumnWidths = ColumnWidths;
+
+Y.Base.mix(Y.DataTable, [ColumnWidths]);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

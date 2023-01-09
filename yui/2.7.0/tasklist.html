@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Highlighting tree nodes</title> 
+<!-- Individual YUI CSS files -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/skins/sam/logger.css">
+<link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">
+<style type="text/css"> /* to compensate for base.css which puts borders around TDs */
+.dp-highlighter th, .dp-highlighter td {
+	border:0;
+	padding:0;
+}
+.dp-highlighter .line1, .dp-highlighter  .line2 {
+	padding-left:10px;
+	white-space:nowrap;
+}
+.ft {
+	margin-top:2em;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="treeview/treeview.css">
+<!-- Individual YUI JS files -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="treeview/treeview.js"></script>
+
+
+
+
+		
+	</head>
+  <body class="yui-skin-sam">
+    <div id="doc">
+			<p align="right"><a href="../index.html">Back to the index of articles and examples</a></p>
+
+		<div class="hd">
+			<h1 class="first">Highlighting tree nodes</h1>
+		</div>
+		<div class="bd">
+			<h3>Tree with highlight propagation and 'checkbox' skin</h3>
+			<div id="treeDiv1"  class="whitebg ygtv-checkbox"></div>
+			<button id="logHilit">Log selected</button>
+			<hr/>
+			<h3>Tree with single node highlighting and simple skin</h3>
+			<div id="treeDiv2" class="whitebg ygtv-highlight"></div>
+		</div>
+		<div class="ft">
+		
+
+<p>Nodes of the <a href="http://developer.yahoo.com/yui/treeview/">TreeView Control</a> 
+can be highlighted in response to a user action or via code.  
+That highlighting can affect a single node at a time or multiple nodes and it can propagate up or down the tree.
+In this example we show two trees built at random with different node highlighting settings.</p>
+<p>We begin by defining the containers that will hold the trees.  
+The built-in stylesheet allows for two styles of highlighting, 
+the first one, selected via the className <code>ygtv-checkbox</code>, will add a tri-state checkbox
+in between the toggle icon and the label, the second, selected via the className <code>ygtv-highlight</code>, 
+will change the background of highlighted nodes. 
+If neither of those classes are selected, the highlighting will still work, 
+but the user won't notice since there will be no visual clues. 
+We also add a button to show how highlighted (selected) nodes can be found.</p>
+
+<textarea name="code" class="HTML" cols="60" rows="1"><h3>Tree with highlight propagation and 'checkbox' skin</h3>
+<div id="treeDiv1" class="ygtv-checkbox"></div>
+<button id="logHilit">Log selected</button>
+<hr/>
+<h3>Tree with single node highlighting and simple skin</h3>
+<div id="treeDiv2" class="ygtv-highlight"></div></textarea>
+
+<p>We create the first TreeView and render it.  
+Function <code>makeBranch</code> recursively builds a random branch of TextNodes.
+Highlighting is enabled by default, nodes can be highlighted via code, 
+but to respond to user events we need to attach the supplied listener <code>onEventToggleHighlight</code> 
+to the event we want to respond to.  
+We also want the highlighting to propagate both up and down.</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">tree1 = new YAHOO.widget.TreeView("treeDiv1");
+makeBranch(tree1.getRoot());
+tree1.subscribe('clickEvent',tree1.onEventToggleHighlight);		
+tree1.setNodesProperty('propagateHighlightUp',true);
+tree1.setNodesProperty('propagateHighlightDown',true);
+tree1.render();
+</textarea>
+
+<p>The checkbox is tri-state because when the highlighting propagates up, 
+the parent node into which it propagates might not have all its child nodes highlighted,
+so the checkbox has a partially checked state.</p>
+
+<p>We can easily find out which nodes have been highlighted by searching the tree by property 
+<code>highlighState</code> which will be 0 for not-highlighted, 1 for highlighted 
+and 2 for a node that has some children highlighted.</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">YAHOO.util.Event.on('logHilit','click',function() {
+	var hiLit = tree1.getNodesByProperty('highlightState',1);
+	if (YAHOO.lang.isNull(hiLit)) { 
+		YAHOO.log("None selected");
+	} else {
+		var labels = [];
+		for (var i = 0; i < hiLit.length; i++) {
+			labels.push(hiLit[i].label);
+		}
+		YAHOO.log("Highlighted nodes:\n" + labels.join("\n"), "info", "example");
+	}
+});</textarea>
+<p>For <code>tree2</code> we have set property <code>singleNodeHighlight</code> to true 
+so that by selecting one node, the currently highlighted node, if any, will be un-highlighted.
+The change in appearance is due to the highlighting 'skin' selected.</p>
+
+
+<textarea name="code" class="JScript" cols="60" rows="1">tree2 = new YAHOO.widget.TreeView("treeDiv2");
+makeBranch(tree2.getRoot());
+tree2.singleNodeHighlight = true;
+tree2.subscribe('clickEvent',tree2.onEventToggleHighlight);		
+tree2.render();</textarea>
+</div>
+<script type="text/javascript">
+
+//global variable to allow console inspection of tree:
+var tree1, tree2;
+
+//anonymous function wraps the remainder of the logic:
+(function() {
+
+	var myLogReader = new YAHOO.widget.LogReader(); 
+	var makeBranch = function (parent,label) {
+		label = label || '';
+		var n = Math.random() * (6 - (label.length || 0));
+		for (var i = 0;i < n;i++) {
+			var tmpNode = new YAHOO.widget.TextNode('label' + label + '-' + i, parent, Math.random() > .5);
+			makeBranch(tmpNode,label + '-' + i);
+		}
+	}
+
+
+	var treeInit = function() {
+		tree1 = new YAHOO.widget.TreeView("treeDiv1");
+		makeBranch(tree1.getRoot());
+		tree1.setNodesProperty('propagateHighlightUp',true);
+		tree1.setNodesProperty('propagateHighlightDown',true);
+		tree1.subscribe('clickEvent',tree1.onEventToggleHighlight);		
+		tree1.render();
+
+		YAHOO.util.Event.on('logHilit','click',function() {
+			var hiLit = tree1.getNodesByProperty('highlightState',1);
+			if (YAHOO.lang.isNull(hiLit)) { 
+				YAHOO.log("None selected");
+			} else {
+				var labels = [];
+				for (var i = 0; i < hiLit.length; i++) {
+					labels.push(hiLit[i].label);
+				}
+				YAHOO.log("Highlighted nodes:\n" + labels.join("\n"), "info", "example");
+			}
+		});
+
+
+		tree2 = new YAHOO.widget.TreeView("treeDiv2");
+		makeBranch(tree2.getRoot());
+		tree2.singleNodeHighlight = true;
+		tree2.subscribe('clickEvent',tree2.onEventToggleHighlight);		
+		tree2.render();
+		
+		
+	};
+
+	//Add an onDOMReady handler to build the tree when the document is ready
+    YAHOO.util.Event.onDOMReady(treeInit);
+
+})();
+
+</script>
+<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+
+
+	</body>
+</html>
