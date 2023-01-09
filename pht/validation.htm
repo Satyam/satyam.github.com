@@ -1,0 +1,117 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Validation</title>
+</head>
+
+<body>
+
+<h2>Validation</h2>
+<p>I also wanted some more formal check on the XML produced.  How could I
+integrate the definition of an XML file into this?  An XML Schema file
+describes what an XML file can and cannot have.  So, I added (not really in this
+release) one more
+declarative instruction, <code>XMLSchema</code>:</p>
+<pre  class="codeblock"><u>XMLSchema</u> [&lt;<i>path to .xsd file</i>&gt;] [<u>path</u> &lt;<i>simple</i> xPath<i> expression</i>&gt; (<u>,</u> ....)*] [<u>ignore case</u>]</pre>
+<p>The <code> XMLSchema</code> declaration tells the pre-compiler the schema file to check
+against.  Thus, as the tags and attributes are being parsed, the
+pre-compiler can check that they follow the schema. At some point I will have to add
+a DTD instruction to point to DTDs or rely on a DTD to XSD translator, of which
+there are many.</p>
+<p>The <code> XMLSchema</code> declaration can be either a separate statement, usually
+included at the beginning of the file or, at least, before the first tag is
+output or as a modifier after a function declaration.  Functions within a
+program usually generate just segments of XML, not full documents, for example a table row,
+thus you wouldn't expect a function to start by the root element but
+would, instead, want to declare that it generates a <code> &lt;tr&gt;</code> tag.  
+You indicate that by using the <code>path</code> clause. This declaration serves two purposes, to check that the tags generated within
+the function are of the right types and that the function is used within the
+enclosing source where a <code> &lt;tr&gt;</code> is expected.  Several <i> <code> xPaths</code></i> can be
+declared since a single function can generate, for example, either a <code> &lt;td&gt;</code>
+or a <code> &lt;th&gt;</code> tag, and they would both be acceptable. The <i><code>xPath</code></i>
+expression will often be partial, for example, <code>&quot;td&quot;, &quot;th&quot;</code>,
+not a full path from the document root, since a tag might be embedded an arbitrary number of levels within optional
+tags.</p>
+<p>The <code> &lt;path to .xsd file&gt;</code> may be omitted if the <code>path</code> is given, meaning
+that the global schema is used, which is usually the case for functions.  A
+source file may look like this:</p>
+<pre  class="codeblock">&lt;?php
+
+XMLSchema &quot;my/own/html.xsd&quot; ignore case;
+
+function tableRow($record) XMLSchema path 'tr' {
+    &lt;tr {
+        &lt;td ? $record['fieldn'];
+        // other columns
+    }
+}
+
+&lt;html {
+    &lt;body {
+        &amp;onLoad = 'setTimeout(&quot;updateClock()&quot;,1000)';
+        // ... etc 
+
+        // query the database
+            &lt;table {
+            while ($record = mysql_fetch_assoc($recordSet)) {
+                tableRow($record);
+            }
+        }
+    }
+}
+?&gt;</pre>
+<p>In this example, the whole PHP page is expected to follow an imaginary
+schema for HTML. The function <code>tableRow</code> is just expected to produce a single
+row out of the same schema ignoring upper or lower case, just as in the global
+declaration.  That function is used further down, and it has to be used
+within a <code> &lt;table&gt;</code> tag or the pre-compiler will complain.</p>
+<p align="left">So far, the examples given deal mostly with a sequential flow through the
+program.  Things start getting interesting with include files, conditionals
+and loops. What is sequential in the source file might not be so at execution time,
+for example, though the <code>else</code> part of an <code>if()</code> statement is
+sequentially after the <code>then</code>  part source wise, they are at the same
+level at
+execution time.  The number of occurrences is also important,  a tag within an
+<code>if()</code> block must be declared with a <code> minOccurs=0</code>
+attribute in the schema, while a tag within a <code>while()</code> loop must also have a
+<code>
+maxOccurs=unbounded</code> while a missing or <code> minOccurs=1</code> is fine for a
+<code>do --- while()</code>
+loop.</p>
+<p> I doubt it will make sense to produce more than
+warning messages since the final outcome of a piece of code cannot be guessed
+from the source.  It wouldn't make sense to abort the pre-compiler because
+a tag produced within a <code>while()</code> loop was not declared with a <code> minOccurs=0</code> since
+you might already know that the loop will always execute at least once.</p>
+<p>Of course, none of this checking is possible if the tag or attribute name is
+given as an expression, since its value can seldom be predicted by analyzing the
+source code, one more reason to discourage
+generic expressions on tag names.</p>
+<p>It is often the practice to have a couple of functions or small include files
+to generate the header and trailer of a document.  If it is HTML, a <code>header()</code>
+function or include file would provide the beginning of the document up to the <code>&lt;body&gt;</code>
+tag, while a <code>footer()</code> function would take from the <code>&lt;/body&gt;</code>
+to the end of the document.  These two functions would violate the block
+structure.   Nevertheless, solving this problem is not hard, either
+you call a function which provides the enclosing sections, passing a function
+providing the body contents as a callback function or, if programming OO-style,
+you would inherit from a <code>Document</code> class extending the<code>
+bodyContents()</code> method.  In either case, the block structure is
+preserved.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="development.htm">&lt;
+      Previous: Development</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="conclusion.htm">Next: Conclusion &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso8859-1" />
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>PHT: Development</title>
+  </head>
+
+  <body>
+    <h2>Development</h2>
+    <p>
+      Since I am not about to add another language to the rather abundant number
+      of scripting languages on offer, nor am I capable of doing such a
+      development, I decided I could do a pre-compiler or, in this case a
+      pre-interpreter, a program that would read and parse the source with the
+      extended instructions and turn them into the plain base language. After
+      some trials I settled (for the time being) on PHT, which is a merge of
+      <u>PH</u>P and <u>HT</u>ML though, of course, it generates XML, not just
+      HTML.&nbsp;
+    </p>
+    <p>
+      When I was satisfied with the syntax I tried to build the pre-compiler
+      using YACC and Lex (actually, Bison and Flex) the same tools the PHP
+      interpreter uses. It proved too much for me since I never had any formal
+      training in computer science. Someone suggested I tried JavaCC, which I
+      did, and in a couple of weeks I had a working parser, modified from a C
+      parser which did nothing but go through the PHP source files parsing them.
+      Two more weeks went by running the pre-compiler through the PHP 5.0 test
+      suite fixing errors in the parser until I got to an acceptably short to-do
+      list, and then added a single action to the whole parser, just a
+      pass-through action for most of the code.
+    </p>
+    <p>
+      I modified the parser to add the <code> &lt;</code>,
+      <code> &amp;</code> and <code> ?</code> instructions and the corresponding
+      actions, which was unexpectedly easy, so in one more week I got to the
+      point when I could actually write any of the previous examples into a .PHT
+      file (then called .PhpSt) and pre-compile it to a .PHP file and it worked.
+      So I started un-pre-compiling (going from regular PHP to PHT) some
+      programs I had and running them through the pre-compiler and they worked!
+      So far, I had my two blocks structures working nicely with each other, my
+      editor a little confused but accepting it tolerably well and my
+      pre-compiler running Ok. Even the PHP documenter ignored my added
+      instructions and produced documentation without a problem.
+    </p>
+    <p>
+      But I realized I would never be able to grow this into what I wanted.
+      Besides, the base I used for the pre-compiler was a C parser which might
+      eventually prove not to work exactly as the PHP parser does and I was
+      actually starting to find some cracks in it with some singular PHP
+      constructs. Anyway, I learned a lot with it, which was good.
+    </p>
+    <p>
+      Fortunately, I saw an announcement for an open source PHP compiler, which
+      seems to be defunct, not the equally open-source PHP interpreter, but a
+      compiler which suited me far better. It provided me with a full parser for
+      PHP version 5, which produced a very clear and sound tree representation
+      of the program, and several unparsers, one of them back to cleaner PHP
+      code and another two, a graphical representation and an XML
+      representation, both of which give a clear view of how the tree is
+      structured.
+    </p>
+    <p>
+      Most important of all, it has a very good programming interface to
+      traverse and transform the tree. A few releases afterwards, the authors
+      came with a plug-in interface, which made the whole project even easier,
+      and that's what I used for the current release.
+    </p>
+    <p>
+      The original site for the PHP Compiler seems to be gone, as well as my
+      link to the authors whom I meant to give credit for their work. Thus I
+      dropped those links as well as my modified version of their compiler,
+      which is now obsolete.
+    </p>
+    <p>
+      For details about the current release, you may follow the index below. To
+      keep going with the overview, you may press
+      <a href="validation.htm"> Next &gt;</a> at the bottom.
+    </p>
+    <ul>
+      <li><a href="parsing.htm">Parsing</a></li>
+      <li><a href="building_the_tree.htm">Building the tree</a></li>
+      <li><a href="modifying_the_tree.htm">Modifying the tree</a></li>
+      <li><a href="escaped_echo.htm">Escaped echo</a></li>
+      <li><a href="compacting_echos.htm">Compacting echos</a></li>
+    </ul>
+    <table border="0" width="100%">
+      <tr>
+        <td width="33%">
+          <a href="formal_definition.htm">&lt; Previous: Formal Definition</a>
+        </td>
+        <td width="33%">
+          <p align="center"><a href="index.html">Up</a></p>
+        </td>
+
+        <td width="34%">
+          <p align="right">
+            <a href="validation.htm">Next: Validation &gt;</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

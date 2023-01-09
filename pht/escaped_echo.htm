@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+
+
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Escaped echo</title>
+</head>
+
+<body>
+
+<h2>Escaped echo</h2>
+<p>The <code>?</code> instruction not only replaces <code>echo</code>, but also
+provides escaping of reserved symbols.  All the XML elements and attributes with
+its angled brackets and other symbols are output by specific instructions.  The <code> ?</code> instruction takes the arguments to be echoed and either
+escapes them at pre-compile time if they are literals or calls the PHP <code>
+htmlentities()</code> function if they are expressions.&nbsp; The same function
+is used for the values of attributes, which should be equally escaped. </p>
+
+<p>Thus, this: </p>
+
+<pre class="codeblock">? 'This is a literal with some troublesome characters: &amp;, &lt;, &gt;';
+? $something;
+&lt;StartTag {
+	&amp;att1 'more reserved symbols: &quot;&lt;&gt;&amp;';
+	&amp;att2 $somethingelse;
+}</pre>
+
+<p>will be converted into this: </p>
+
+<pre class="codeblock">echo 'This is a literal with some troublesome characters: &amp;amp;, &amp;lt;, &amp;gt;';
+echo htmlentities($something);
+echo '&lt;StartTag att1=&quot;more reserved symbols: &amp;quot;&amp;lt;&amp;gt;&amp;amp;&quot; att2=&quot;' , htmlentities($somethingelse), '&quot;/&gt;&quot;;</pre>
+
+<p>So, if the argument can be escaped at compile time, it will be, otherwise it
+will be escaped at execution time.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="modifying_the_tree.htm">&lt;
+      Previous: Modifying the tree</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="compacting_echos.htm">Next: Compatcing echos &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

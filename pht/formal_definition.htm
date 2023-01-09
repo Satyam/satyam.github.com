@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Formal definition</title>
+</head>
+
+<body>
+
+<h2>Formal definition</h2>
+<p>Formally, the extra instructions can be described as:</p>
+<h3>Tag:</h3>
+<pre  class="codeblock"><u>&lt;</u> [<u>?</u>] ( &lt;<i>tag-name</i>&gt; | &lt;<i>variable</i>&gt; ) &lt;<i>statement</i>&gt;</pre>
+<h3>Attribute:</h3>
+<pre class="codeblock"><u>&amp;</u> ( &lt;<i>attribute-name</i>&gt; | &lt;<i>variable</i>&gt; ) [<u>=</u>] &lt;<i>expression</i>&gt; <u>;</u></pre>
+<h3>Escaped print:</h3>
+<pre class="codeblock"><u>?</u> <i>&lt;expression&gt;</i>  (<u>,</u><i> &lt;expression&gt;</i>)* <u>;</u></pre>
+<p>(the underlined characters have to be typed as shown, sections
+enclosed in square brackets are optional. Elements separated by a vertical bar
+within parenthesis are exclusive options, elements surrounded by angle brackets
+are to be replaced by something corresponding to the concept.  An asterisk
+represents a 0 or more repetition.)</p>
+<p>Notice that the first two  instructions do not take a quoted string
+literal as the first argument but an unquoted one. 
+As I said, I am a lazy typist (and I'm sure I am not the only one) so I spared
+myself those quotes. Both element&nbsp; and attribute names can have hyphens and
+dots, which are invalid as PHP identifiers, more over, any PHP reserved word
+(such as if, while, function, etc.) can be used as an element or attribute
+name.&nbsp; PHT also supports XML namespaces, which is described <a href="#Namespaces">below</a>.</p>
+<p>  Variables can
+also be used and since in PHP they start with a $ sign, it is easy to tell when
+it's a literal or a variable.  This precludes the use of complex expressions including
+functions that return a string value.  I don't feel that the need to
+assemble tags on the fly is so significant and that allowing for variables would
+suffice for the odd case. See also <a href="validation.htm">validation</a>
+for another reason.</p>
+<p>The optional <code>?</code> sign in the <code>&lt;</code> statement allows for processing instructions. 
+Notice that a PHP page does start with a processing instruction: <code>&lt;?php</code>. 
+Another <code>&lt;?</code> within a processing instruction does not confuse the
+parser, the trouble could
+be with a closing one: <code>?&gt;</code>, but there is none in the Pht source since the
+pre-compiler generates the closing tag when reaching the end of
+<code>&lt;<i>statement</i>&gt;</code>.</p>
+<p>While rewriting some of my own programs to test the pre-compiler I inadvertently put an equal sign in
+an attribute instruction.  I figured this might be a common mistake and
+decided to allow for it. </p>
+
+<h2><a name="Namespaces">Namespaces</a></h2>
+<p>In order to support XML namespaces, both the element and attribute names can
+be given as two parts separated by a colon: </p>
+
+
+<h3>Element or attribute name: </h3>
+
+
+<pre class="codeblock">[ (<i>&lt;namespace&gt;</i> | <i>&lt;variable&gt;</i> ) <u>:</u> ] (<i>&lt;name&gt;</i> | <i>&lt;variable&gt;</i> ) </pre>
+
+
+<p>This colon is a separate operator so it can be surrounded by whitespace, PHT
+will take care that there will be no spaces around it in the XML output.&nbsp; </p>
+
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="sample.htm">&lt;
+      Previous: Sample</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="development.htm">Next: Development</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

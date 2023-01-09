@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Building the tree</title>
+</head>
+
+<body>
+
+<h2>Building the tree</h2>
+<p>The PHC package contains a program (maketea) to automatically create the Abstract
+Syntax Tree (AST) out of a definition given in a <a href="phc.tea"> phc.tea</a> file.</p>
+<p>To the definition of a statement, I added the line in red, to have the AST
+nodes for the new statements:</p>
+<pre class="codeblock">statement ::=
+     if | while | do | for | foreach 
+   | switch | break | continue | return
+   | static_declaration
+   | unset | declare | try | throw | eval_expr 
+   <font color="#FF0000">| xml_element | xml_element_attribute | escaped_print | xml_processing_instruction</font>
+   ;</pre>
+
+<p>Notice that these definitions only state what data has to be stored in the
+tree, it indicates node dependencies and repetitions, not the actual syntax of
+the statements, which is given in the parser. Thus, in the following:</p>
+<pre class="codeblock">xml_element ::= xml_element_name statement*;
+xml_element_attribute ::= xml_element_name  expr;
+escaped_print ::= expr*;
+xml_processing_instruction ::= xml_element_name statement*;
+xml_element_name ::=   ns_is_var:&quot;$&quot;? xml_namespace:TAG_NAME?  is_var:&quot;$&quot;? TAG_NAME;</pre>
+
+<p>an <code>xml_element</code> is composed of an <code>xml_element_name</code>
+and a list (possibly empty) of <code>statement</code>s.  This shows what
+nodes or lists of nodes have to be available and how they relate to each other.</p>
+<p>Most nodes require an <code>xml_element_name</code> which is composed of two
+parts, an optional namespace and the actual name.&nbsp; Either can be a variable
+or a literal thus, for each one there is a flag (<code>ns_is_var</code> and <code>is_var</code>)
+that indicates the presence of a &quot;$&quot; sign, which
+is the PHP prefix for variables.&nbsp; Both names are of type <code>TAG_NAME</code>,
+the second takes that as a name, the first is of the same type but will be
+called <code>xml_namespace</code>.&nbsp; The later can be optional&nbsp; (<code>?</code>
+ symbol which indicates it can take a <code>NULL</code> value) while the second
+cannot.&nbsp; The maketea
+utility assumes that uppercase identifiers are tokens, so a node of type <code>TAG_NAME</code>
+will be created.</p>
+<p>In order to operate on these nodes in a more generic way, they can be added
+to the lists of generic node types.  Those that are full statements and can
+have full comments in separate lines are added to  <code>commented_node</code>,
+those that are only a part of full statements are simply <code>node</code>s and
+a <code>TAG_NAME</code> is, of course, an <code>identifier</code>.  This is
+done in the following section with my additions in red.</p>
+<pre class="codeblock">node ::= 
+	  php_script | class_mod | signature 
+	| method_mod | formal_parameter | type | attr_mod 
+	| directive | list_element | variable_name | target
+	| array_elem | method_name | actual_parameter | class_name 
+	| commented_node | expr | identifier 
+	| formal_parameter* | directive* | array_elem* | actual_parameter* 
+	| INTERFACE_NAME* | list_element* | expr*
+	<font color="#FF0000">| xml_element_name</font>
+	;
+
+commented_node ::= 
+	  member | statement | interface_def | class_def | switch_case | catch 
+	| interface_def* | class_def* | member* | statement* | switch_case* | catch*   
+<font color="#FF0000">	| xml_element | xml_element_attribute | escaped_print | xml_processing_instruction
+</font>	;
+
+identifier ::=
+	  INTERFACE_NAME | CLASS_NAME | METHOD_NAME | VARIABLE_NAME 
+	| DIRECTIVE_NAME | CAST | OP | CONSTANT_NAME
+	<font color="#FF0000">| TAG_NAME</font>
+	;  
+</pre>
+
+<p>To process the phc.tea file, Haskell, a functional programming language, is
+required.  This is not in popular Linux distributions, though it is
+available as an extra, and the build process might give you an error if it
+doesn't find it, after all, the public interface to PHC is via
+the plug-ins which are meant to process standard PHP, not to add extended
+instructions to it.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="parsing.htm">&lt;
+      Previous: Parsing</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="modifying_the_tree.htm">Next: Modifying the tree
+      &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

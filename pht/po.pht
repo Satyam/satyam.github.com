@@ -1,0 +1,56 @@
+<?php
+//xmlSchema "po.xsd";
+
+
+function Address($type,$name,$street,$city,$state,$zip)
+	//xmlSchema "po.xsd" path "/purchaseOrder/shipTo","/purchaseOrder/billTo" 
+	{
+	< $type {
+	    &country = "US";
+	    <name ? $name;
+	    <street ? $street;
+	    <city ? $city;
+	    <state ? $state;
+	    <zip ? $zip;
+ 	}
+ }
+
+function Item($partNum,$productName,$quantity,$USPrice,$shipDate = null,$comment= null)
+ //	xmlSchema path "purchaseOrder/items/item" 
+ 	{
+
+ 	<item {
+ 	    &partNum  $partNum;
+ 	    <productName ? $productName;
+ 	    <quantity ? $quantity;
+ 	    <USPrice ? $USPrice;
+ 	    if (!is_null($shipDate)) <shipDate ? $shipDate;
+ 	    if (!is_null($comment)) <comment ? $comment;
+  	}
+}
+
+function xmlFormatDate($Fecha, $NotNull = false){
+	if (is_null($Fecha) or $Fecha == 0) return ($NotNull?"'1930-01-01'":'null');
+	return date("Y-m-d", $Fecha);
+}
+<?xml {
+	&version '1.0';
+	&encoding = 'iso-8859-15';
+}
+
+<purchaseOrder {
+    &orderDate = xmlFormatDate(time());
+    Address("shipTo","Alice Smith","123 Maple Street","Mill Valley","CA","90952");
+    Address("billTo","Robert Smith","8 Oak Avenue","Old Town","PA","95819");
+   <comment {
+   		if (true) &esto = 'aquello'; else &otro = 'esto otro';
+   		? "Hurry, my lawn is going wild";
+		<hr &size 2;
+		? ' & I\'m <a little bit> desperate ';
+   	}
+   <items {
+        Item("872-AA","Lawnmower",1,148.95,null,"Confirm this is electric");
+	Item("926-AA","Baby Monitor",1,39.98,"1999-05-21");
+   }
+}
+?>

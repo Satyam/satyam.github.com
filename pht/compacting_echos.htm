@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+
+
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>Compacting echos</title>
+</head>
+
+<body>
+
+<h2>Compacting echos</h2>
+<p>All of the extra instructions are converted to echos of different types.&nbsp; As a
+result, we end up with many consecutive echos, many of them with string
+literals. If left alone, it would be a complete drag in the performance of the
+resulting code.&nbsp;&nbsp; The compact_echo plugin handles that.&nbsp; The
+source files <a href="compact_echo.h">compact_echo.h</a> and <a href="compact_echo.cpp">compact_echo.cpp</a>
+are a separate plugin, usefull on its own, besides the pre-compiler. </p>
+<p>&nbsp;Compact_echo will convert this:</p>
+<pre class="codeblock">&lt;?php
+	echo &quot;1&quot; . (1 . $a ), 'ab';
+	echo 'c' ,2;
+	if ($a) {
+		echo 2;
+		//$a=1;
+		echo $a;
+	}
+?&gt;</pre>
+<p>Into this:</p>
+<pre class="codeblock">
+&lt;?php
+	echo &quot;1&quot;, 1, $a, &quot;abc&quot;, 2;
+	if($a)
+	{
+		echo 2, $a;
+	}
+?&gt;</pre>
+
+<p>Notice it compacts into a single echo the echos found in multiple lines,
+ignoring intermediate comments and it replaces the string concatenation operator
+(<code>.</code>) by simply echoing each operand as a separate argument, which is
+faster.&nbsp; On the other hand, if there are two consecutive string literals,
+it concatenates them into a single one at pre-compile time, which saves time at
+execution time.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="escaped_echo.htm">&lt;
+      Previous: Escaped echo</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="validation.htm">Next: Validation &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

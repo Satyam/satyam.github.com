@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso8859-1" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <title>PHT: PHp with embedded HTml</title>
+  </head>
+
+  <body>
+    <h1>PHT</h1>
+
+    <p align="center">
+      <b>(<u>PH</u>p with embedded <u>HT</u>ml)</b>
+    </p>
+
+    <ul>
+      <li><a href="#Introduction">Introduction</a></li>
+      <li><a href="sample.htm">Sample</a></li>
+      <li><a href="formal_definition.htm">Formal definition</a></li>
+      <li>
+        <a href="development.htm">Development</a>
+        <ul>
+          <li><a href="parsing.htm">Parsing</a></li>
+          <li><a href="building_the_tree.htm">Building the tree</a></li>
+          <li><a href="modifying_the_tree.htm">Modifying the tree</a></li>
+          <li><a href="escaped_echo.htm">Escaped echo</a></li>
+          <li><a href="compacting_echos.htm">Compacting echos</a></li>
+        </ul>
+      </li>
+      <li><a href="validation.htm">Validation</a></li>
+      <li><a href="conclusion.htm">Conclusion</a></li>
+      <li><a href="development.htm#Download">Download</a></li>
+    </ul>
+
+    <h2><a name="Introduction">Introduction</a></h2>
+
+    <p>
+      As a programmer, I find myself doing more and more programs that generate
+      output in HTML or XML (in the following, I'll use XML as a generic term
+      for any flavor of HTML and XML itself). None of the languages I use (or
+      know of) are quite adapted to producing this kind of output. For most
+      programming languages, XML is just a stream of arbitrary characters going
+      to the standard output. This made it possible to adopt XML quite fast
+      since all that was required from our programs was to output plain
+      characters, but in doing so we miss a lot. For all a program cares, the
+      XML output is just an arbitrary string, its structure is completely
+      ignored. It shouldn't be so.
+    </p>
+
+    <p>
+      XML is a structured language. So are our programs. Both have strict syntax
+      rules. Program translators (compilers or interpreters) take care of
+      checking the syntax of programming languages, but it is up to us to check
+      the syntax of the XML they produce, a most error prone and tiring task.
+      Fortunately, most of us don't even output any XML at all, we either
+      configure ready-made packages, tie together modules and components, use
+      template engines or occasionally use the DOM to manipulate the tree.
+      Nevertheless, at one point or another some part of this whole package does
+      have to produce some sort of XML. Most open source packages such as CMSs,
+      picture galleries, wikis do not rely on any runtime support, neither
+      runtime libraries nor template engines since such dependencies would
+      reduce their portability; they produce XML directly. Yes, lots of XML is
+      still produced directly and there has to be a way to do it better.
+    </p>
+
+    <p>
+      So, we have two well structured languages, one is procedural (any flavor
+      of C, JavaScript, PHP, Perl, etc.), the other descriptive. Their blocks
+      are quite compatible: to start with, they nest nicely within each other.
+      If an XML block is contained within an <code> if()</code> block, it has to
+      be completely within it, the boundaries of their blocks should not
+      overlap.
+    </p>
+
+    <p>
+      Code is usually embedded into XML via processing instructions like in PHP
+      <code> &lt;?php ....?&gt;</code> or other markings, such as
+      <code> &lt;% ... %&gt;</code> in ASP or as plain text within an element,
+      such as <code> &lt;script&gt;</code>. Nevertheless since most languages
+      have <code>print</code> or <code>echo</code> instructions to output
+      arbitrary strings to the XML stream, no structure can be forced into such
+      a program and, to my knowledge, no code beautifier or highlighter can
+      manage to make sense of this, they can either pretty print the code or the
+      XML but not both.
+    </p>
+    <p>
+      Alternatively, other environments such as XML Stylesheets have processing
+      instructions embedded as XML elements, but it is quite cumbersome, just
+      the namespace prefix xsl: or whatever you choose in front of every
+      instruction adds too much typing and the necessary use of attributes to
+      hold instruction arguments, explicitly naming each option, as if you
+      didn't know that the natural argument to a while instruction is a
+      conditional, makes COBOL's verbosity look not so bad.
+    </p>
+    <p>
+      So, I looked at the problem the other way around, I added XML-specific
+      instructions into an existing language. I called those instructions
+      <code>TAG</code> and <code> ATTRIBUTE</code> and, since I find no pleasure
+      in hitting more keys than absolutely required, I decided to shorten them
+      to a couple of symbols: <code> &lt;</code> for <code> TAG</code> and
+      <code> @</code> for <code><b>AT</b>TRIBUTE</code>. I was working with PHP
+      at the time and the <code> @</code> sign was already in use in a manner
+      which prevented my particular use, thus I switched to the
+      <code> &amp;</code> sign. Both <code> &lt;</code> and
+      <code> &amp;</code> are used in PHP, but they are used in ways that a
+      parser can tell when it is the native usage and when my extended use. And
+      since I was daydreaming, I opted to use the <code> ?</code> sign as a
+      synonym for <code>print</code> or <code>echo</code> but with a twist:
+      since XML tags are already output via the <code>TAG</code> statement, the
+      output of <code>?</code> will be escaped.
+    </p>
+    <p align="right"><a href="sample.htm">Next: Sample &gt;</a></p>
+  </body>
+</html>

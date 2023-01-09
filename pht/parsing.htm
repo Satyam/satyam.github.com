@@ -1,0 +1,225 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Parsing</title>
+</head>
+
+<body>
+
+<h2>Parsing</h2>
+<p>Most of the changes have been to the parser, located at: <kbd>/phc-0.1.7rc2/generated_src/<a href="php_parser.ypp">php_parser.ypp</a></kbd>.
+There was very little to add to the lexer, just a couple of lines shown <a href="#XML_NAME">below</a>.&nbsp;
+The modified lexer is located at: <kbd>/phc-0.1.7rc2/generated_src/<a href="php_scanner.lex">php_scanner.lex</a>.</kbd></p>
+<p>The following definitions were added to the definition of a <code>statement</code>:  </p>
+<pre class="codeblock">	| '&lt;' {$1 = NEW(AST_xml_element,());} xml_element_name statement
+		{
+			CAST_AST(new_element,$1,AST_xml_element);
+			CAST_AST(xml_element_name, $3, AST_xml_element_name);
+			CAST_STATEMENT_VECTOR(tag_stat, $4);
+			
+			new_element-&gt;xml_element_name = xml_element_name;
+			new_element-&gt;statements = tag_stat;
+			
+			$$ = new_element;
+		}
+	| '&lt;' '?'  {$2 = NEW(AST_xml_processing_instruction,());} xml_element_name statement
+		{
+			CAST_AST(new_element,$2,AST_xml_processing_instruction);
+			CAST_AST(xml_element_name, $4, AST_xml_element_name);
+			CAST_STATEMENT_VECTOR(tag_stat, $5);
+			
+			new_element-&gt;xml_element_name = xml_element_name;
+			new_element-&gt;statements = tag_stat;
+			
+			$$ = new_element;
+		}
+	| '&amp;' {$1 = NEW(AST_xml_element_attribute,());} xml_element_name atribute_assignment expr ';'
+		{
+			CAST_AST(new_att,$1,AST_xml_element_attribute);
+			CAST_AST(xml_element_name, $3, AST_xml_element_name);
+			CAST_AST(expr, $5, AST_expr);
+			
+			new_att-&gt;xml_element_name = xml_element_name;
+			new_att-&gt;expr = expr;
+			
+			$$ = new_att;
+		}
+	| '?' escaped_echo_expr_list ';'
+		{ $$ = $2; }
+
+</pre>
+
+<p>Since the added instructions use existing symbols, there was no need to
+modify the lexer definitions for these.  The statements added where <code>&lt;</code>
+for tags, <code>&lt;?</code> for XML processing instructions, <code>&amp;</code>
+for XML element attributes and <code>?</code> for escaped print (or
+echo).  </p>
+<p>The <code>CAST_AST</code> macro declares an object named as the first
+argument, with the data of the second argument (usually, a parsed element) of
+the class indicated in the third argument.</p>
+<p>A <code>&lt;</code> is expected to be followed by an <code>xml_element_name</code>
+(defined below) and a <code>statement</code>, which is already defined.</p>
+<p>A <code>&lt;?</code> also requires an <code>xml_element_name</code> and can
+have statements.  The definition is pretty much like the previous, except
+that a different kind of node is created, an <code>AST_xml_processing_instruction</code>
+instead of a <code>AST_xml_element</code>.   </p>
+<p>A <code>&amp;</code> statement requires an attribute name, which is also an <code>xml_element_name</code> 
+an expression and an ending <code>;</code> .  This last is now required
+since in the previous two, statement already assumes an ending <code>;</code> . 
+There is also a <code>atribute_assignment</code> which might be either an equal
+sign or empty, as shown below.  This is just to allow for an optional equal
+sign in between the attribute name and its value which is otherwise ignored:</p>
+<pre class="codeblock">atribute_assignment:
+    /* empty */
+    | '='
+    ;</pre>
+<p>Finally, the <code>?</code> instruction is followed by an <code>escaped_echo_expr_list</code>
+, a definition I just barely modified from the <code>echo_expr_list</code> which
+was already part of the original parser.</p>
+<p>An <code>xml_element_name</code>  is defined as one or two <code>xml_element_name_fragment</code>s separated by a colon:</p>
+<pre class="codeblock">xml_element_name:
+	  xml_element_name_fragment
+	| xml_element_name_fragment ':' xml_element_name_fragment</pre>
+<p>Before analyzing the actions associated with each, let us see what an
+xml_element_name_fragment is</p>
+<pre class="codeblock">xml_element_name_fragment:
+	 VARIABLE
+	 	{
+			CAST_STR(name,$1,Token_tag_name);
+			$$ = NEW(AST_xml_element_name, (false,NULL,true,name));
+		}
+	| IDENT 	{ MAKE_ELEMENT_NAME($$,$1) }
+	| XML_IDENT 	{ MAKE_ELEMENT_NAME($$,$1) }
+	| K_AND		{ MAKE_ELEMENT_NAME($$,$1) }
+	| K_OR		{ MAKE_ELEMENT_NAME($$,$1) }
+	| K_XOR		{ MAKE_ELEMENT_NAME($$,$1) }
+	| K___FILE__	{ MAKE_ELEMENT_NAME($$,$1) }
+	| K___LINE__	{ MAKE_ELEMENT_NAME($$,$1) }
+	........
+	
+	;</pre>
+<p>A tag name can be either a variable or a identifier, both already
+defined elsewhere.  Both create a tree node <code>AST_xml_element_name</code>,
+the first with the <code>is_var</code>  (the third argument to the constructor) argument set to true. 
+The variable name or identifier is stored in the node as a <code>Token_tag_name</code>
+ object, the fourth argument.&nbsp;</p>
+
+<p>The first two arguments of the constructor are for the namespace, the first a
+flag indicating whether it is a variable or an identifier, the second, the name
+of the variable or the identifier itself.&nbsp; For individual fragments, we
+make the namespace value <code>NULL</code>, indicating there is no
+namespace.&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p>Notice that there are many alternatives for an name fragment.&nbsp; The first
+is for a variable, the rest are alternatives for literals.&nbsp;&nbsp; XML
+admits many more names than PHP does.&nbsp; First of all, it accepts more valid
+characters, specially the hyphen and dot. Besides, XML does not care for PHP
+reserved words, thus, we have to accept PHP keywords such as <code>AND</code>, <code>OR</code>,
+<code> while</code> or
+any such.&nbsp;&nbsp; So, we accept a plain PHP <code> IDENT</code> but we also accept an
+<code>XML_IDENT</code>, which is basically the same as a <code> IDENT</code> but contains dots or hyphens
+and we also accept PHP keywords.&nbsp;&nbsp; I have not listed all PHP keywords,
+the list is over 50 tokens.</p>
+
+<p>I would have liked to be able to change the state of the lexer right after
+detecting any of the symbols preceding an xml element name so that I could
+change the behaviour of the lexical analyzer and make it recognize a <code> VARIABLE</code> or
+an <code>XML_IDENT</code>, unfortunately the lexer is already one step ahead of the parser so
+by the time the parser recognizes a '&lt;' or a '&amp;', the lexer has already
+read the next token which I have no alternative but to accept.&nbsp; Thus, the
+only change to the lexer are these two additions:</p>
+
+<pre class="codeblock"><a name="XML_NAME">XML_NAME</a>	 	[a-zA-Z_\x7F-\xFF][a-zA-Z0-9_\x7F-\xFF\.\-]*
+.....
+%%
+....
+&lt;PHP&gt;{XML_NAME}		{ semantic_value = new String(yytext);	RETURN(XML_IDENT);}</pre>
+
+<p>The first , in the definitions section, declares the pattern for an <code>XML_NAME</code>
+which is the same as for an <code>IDENT</code> with the dot and hyphen added
+(each escaped with a '\').&nbsp; The second goes in the rules section after the
+rule for an <code>IDENT</code>.&nbsp; It is important that it should go after
+that one otherwise it would rob it of all the identifiers and keywords.</p>
+
+<p>Notice that an <code>IDENT</code> is used, not a string literal or a
+generic expression, only variables and plain unquoted valid identifiers.&nbsp;</p>
+
+<p>So, now that we know the actions for an <code>xml_element_name_fragment</code>,
+we can see the actions associated with it:</p>
+
+<pre class="codeblock">xml_element_name:
+	  xml_element_name_fragment
+	  	{
+			$$ = $1;
+		}
+	| xml_element_name_fragment ':' xml_element_name_fragment
+		{
+			CAST_AST(xml_namespace, $1, AST_xml_element_name);
+			CAST_AST(xml_name, $3, AST_xml_element_name);
+
+			$$ =  NEW(AST_xml_element_name , (
+				  xml_namespace-&gt;is_var
+				, xml_namespace-&gt;tag_name
+				, xml_name-&gt;is_var
+				, xml_name-&gt;tag_name
+				)
+			);
+		}
+	;</pre>
+
+<p>An <code>xml_element_name</code> may be a single <code>xml_element_name_fragment</code>.
+If so, the fragment is the whole name.&nbsp; It can also be a couple of
+fragments separated by a colon.&nbsp; In that case I create a new&nbsp; <code>AST_xml_element_name</code>
+object and use the values of each fragment, the first as the namespace, the
+second as the element name.</p>
+
+<hr>
+
+<p>Finally, an <code> escaped_echo_expr_list</code></p>
+
+<pre class="codeblock">escaped_echo_expr_list:
+	  echo_expr_list ',' expr
+		{
+			CAST_AST(echo_list, $1, AST_statement_list);
+			CAST_AST(param, $3, AST_expr);
+			
+			AST_method_invocation* fn = NEW(AST_method_invocation, (&quot;?&quot;, param));
+			echo_list-&gt;push_back(NEW(AST_eval_expr, (fn)));
+			
+			$$ = echo_list;
+		}
+	| expr
+		{
+			CAST_AST(param, $1, AST_expr);
+			AST_statement_list* echo_list = new AST_statement_list;
+			
+			AST_method_invocation* fn = NEW(AST_method_invocation, (&quot;?&quot;, param));
+			echo_list-&gt;push_back(NEW(AST_eval_expr, (fn)));
+			
+			$$ = echo_list;
+		}
+	;</pre>
+
+<p>As with the original <code>echo_expr_list</code> it converts an <code> echo</code> (which
+is a statement in PHP and thus allows <code>echo 'hello', 'world!';</code> without
+parenthesis around the arguments) into
+a series of plain function calls <code>echo ('hello');echo('world!');</code>.
+In this case it converts them to calls to a non-existing <code>?</code>
+function, which I can process later on.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="development.htm">&lt;
+      Previous: Development</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="building_the_tree.htm">Next: Building the tree &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

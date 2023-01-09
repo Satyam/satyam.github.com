@@ -1,0 +1,213 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+<title>PHT: Modifying the tree</title>
+</head>
+
+<body>
+
+<h2>Modifying the tree</h2>
+<p>So, finally, we reach the part that processes the extended instructions into
+standard PHP. The source is located in files <a href="pht.h">pht.h </a>and <a href="pht.cpp">pht.cpp</a>.&nbsp;</p>
+<p>I won't comment on all the code, which it already has comments within the
+source files, just on a
+couple of methods which give a good taste of how it is done.</p>
+<p><code>Tree_visitor</code> and <code> Tree_transform</code> classes are
+provided by PHC.  The first one
+allows the full tree to be visited in an ordered way.   Each has
+methods from which to inherit, corresponding to each kind of node.  
+While <code> Tree_visitor</code> allows to visit each node and modify its contents,
+<code>
+Tree_transform</code> allows you to further change the tree itself, not just the
+contents of each node.   I use both since in a first pass I gather
+some information about each PHP function defined in the file to pre-compile
+while in the second I have to restructure the tree.</p>
+<p>The <code>Convert_xml_elements</code> class is the main conversion class and
+it inherits from <code>Tree_transform</code>.  A section of the
+declarations of the class is shown here:</p>
+<pre class="codeblock">class Convert_xml_elements : public Tree_transform {
+private:
+	enum State {
+		ANY_TAG,
+		START_TAG_OPEN,
+		START_TAG_CLOSED,
+		TAG_CLOSED,   // never used, when the tag is closed, the stack is popped so it is never stored
+		PI_OPEN,  // processing instruction
+		PI_CLOSED  // never used, when the tag is closed, the stack is popped so it is never stored
+	};
+	stack&lt;State&gt; s;
+.....
+
+public:
+	void pre_xml_element(AST_xml_element* in, AST_statement_list* out);
+	void post_xml_element(AST_xml_element* in, AST_statement_list* out);
+.....
+};
+</pre>
+<p>I'll just show the methods that process an <code>xml_element</code>, that is
+a <code>&lt;</code> <span style="font-variant: small-caps">tag</span>
+instruction.  <code>Tree_transform</code> provides hooks to visit the node
+before visiting the nodes further down the tree and after visiting them. 
+In both cases, a reference to the node representing the given node is the first
+argument.  The second argument is not a node of the same kind but an <code>AST_statement_list</code>. 
+This provides amazing flexibility because if nothing is copied from <code>in</code>
+to <code>out</code>, the node is deleted, if you just copy (actually, push into
+the list) the  <code>in</code>
+ node to the <code>out</code>  list, nothing changes but you can also add any other
+valid statements to the <code>out</code> list, either before, after or instead of the <code>in</code>
+node.</p>
+<p>Notice the <code>stack&lt;State&gt; s;</code> which keeps track of the state
+of the XML part.  The AST tree fully represents the PHP code, but the
+structure of the XML part is not fully reflected on the tree and, what is there
+is lost while doing the transformation so this stack indicates the state of the
+underlying XML, in particular which kind of tag is it and whether we are within
+the start tag, fully within the element or out of it.  Actually, when we
+are out of an element, we don't get to record that since once closed, we pop the stack
+and return to the previous state, so those two 'closed' states are formally
+there, but never used.  PI stands for 'Processing Instruction'.</p>
+
+<pre class="codeblock">void Convert_xml_elements::pre_xml_element(AST_xml_element* in, AST_statement_list* out) {
+	
+	// close any previous open start tag
+	if (s.top() == START_TAG_OPEN) close_start_tag(out);
+	// push the new state of the tags
+	s.push(START_TAG_OPEN);
+	
+	// The start tag is left open since attributes might follow.
+	out-&gt;push_back(echo(&quot;&lt;&quot;));
+	print_element_name(in-&gt;xml_element_name,out);
+
+	out-&gt;push_back(in);
+}</pre>
+
+<p>So, in this method we are pre-processing the node corresponding to an XML
+element.   First we check the top of the stack and if we see the
+previous tag is still open (supposedly waiting for further attributes) we close
+it.  The <code>close_start_tag</code> private method inserts into the <code>out</code>
+statement list an <code>echo &quot;&gt;&quot;;</code> and updates the state at the top of
+the stack.  Then we push the new state that we are about to enter and add a
+statement to echo a &quot;&lt;&quot;.&nbsp; The function print_element_name
+deals with the instructions to output the element name.</p>
+<p>Once that is finished, the <code>in</code> node is pushed into the <code>out</code>
+statement list.   This leaves the tree a little redundant.  It
+contains both the original <code>in</code> node as well as the instructions that should
+have replaced it.  That will be taken care in the 'post'  call, but
+the 'post' will only be called if the node still remains there, so we just leave
+it as a placeholder to ensure the post method will be called and then we take it
+out.</p>
+<p>Here is the post method.</p>
+<pre class="codeblock">void Convert_xml_elements::post_xml_element(AST_xml_element* in, AST_statement_list* out) {
+	
+	// if the statement list was empty, it is an empty element, such as &lt;br /&gt; or &lt;hr /&gt;
+	// notice that if the statement_list originally contained xml attributes, these have been output as echoes
+	// and taken out of the statement list.
+	if (in-&gt;statements-&gt;size() == 0) {
+		// if it is still open, close it
+		if (s.top() == START_TAG_OPEN) {
+			out-&gt;push_back(echo(&quot;/&gt;&quot;));
+			s.pop();
+			// no need to do anything else
+			return;
+		}
+	// if the statement list is not empty, then append the statements to the initial echo of the start tag.
+	} else {
+		out-&gt;push_back_all(in-&gt;statements);
+	}
+	
+	// just to be sure, there shouldn't be any start tag open this far, meaning something like &lt;html  
+	if (s.top() == START_TAG_OPEN) close_start_tag(out);
+	// likewise, there should be a full tag to close, like &lt;html&gt;
+	switch(s.top()) {
+		case START_TAG_CLOSED:
+			break;  // This is fine, nothing to do
+		case ANY_TAG:
+			printf(&quot;\n&lt;!-- %s[%d]:  ***** Warning: there might not be a  tag to close --&gt;\n&quot;, in-&gt;get_filename()-&gt;c_str(),in-&gt;get_line_number());
+			break;
+		default:
+			printf(&quot;\n&lt;!-- %s[%d]:  ***** Error: no  tag to close --&gt;\n&quot;, in-&gt;get_filename()-&gt;c_str(),in-&gt;get_line_number());
+	}
+	// So, just close the tag and pop whatever flags were there
+	// TODO warning, if the tag name is given as a variable, the value might have changed in the statements in between
+	// and the closing tag would not match the initial one
+	out-&gt;push_back(echo(&quot;&lt;/&quot;));
+	print_element_name(in-&gt;xml_element_name,out);
+	out-&gt;push_back(echo(&quot;&gt;&quot;));
+	s.pop();
+}
+</pre>
+
+<p>Remember that the <code>&lt;</code> instruction is followed by a tag name and
+then a statement.  The statement can be an empty statement (a single
+semicolon), a simple statement or a compound statement enclosed by curly
+braces.  They are all represented within the AST tree as a <code>AST_statement_list</code>
+which might be empty (<code>size == 0</code>) contain a single element or more
+than one.  So, the first thing is to check if it was an empty
+statement.  If it was and the start tag is still open, we close it with a <code>&quot;/&gt;&quot;</code>. 
+That would be the case for a <code>&lt;br /&gt;</code>.   Remember
+that in the 'pre' method we left the <code>in</code> node in the tree, now since
+we learned it contains no further statements we need nothing else from it so we return after popping out from the stack the state of the element
+we just closed.</p>
+<p>If the size of the statement list is not zero, we push the statements right
+behind the echos that we made in the 'pre' method. Those statements are in <code>in-&gt;statements</code>,
+a member of the <code>AST_xml_element</code> object created automatically from
+the phc.tea source. By now, these statements, if they have any extended
+instructions,&nbsp; have already been
+converted.   </p>
+<p>If the start tag is still open, it needs to be closed, before the end tag. (for reasons a little long to write here, it never happens).  On
+the other hand, if there is no start tag in the stack, it's an error.  
+The stack can also indicate a state called <code>ANY_TAG</code>.  This is
+because a PHP function might have to close a tag opened elsewhere before it was
+called.  Every time the
+pre-compiler finds a function definition, it sets the stack to <code>ANY_TAG</code>,
+because we can't know what the stack might contain when that method is called
+and whatever it contains when it is defined it does not matter at all. The
+pre-compiler issues a warning which, at this moment, has simply a different
+text.</p>
+<p>Finally, since we are done with this tag, we close the element by calling <code>
+print_element_name</code> surrounded by statements to echo <code>&quot;&lt;/&quot;</code>,&nbsp;<code>
+&quot;&gt;&quot;</code> and then we pop the state from the stack.   </p>
+<p>Notice that we have pushed several echos and the statements under the tag
+statement but not the node representing the tag statement itself, which had been
+left behind in the 'pre' method so it got effectively deleted
+from the tree.</p>
+<p>The private method <code> print_element_name</code> is used by both the element and
+attribute methods since they have the same naming conventions.&nbsp; If the
+element <code>xml_namespace</code> contains <code>NULL</code>, it means there
+isn't any.&nbsp; If there is it will check the flag <code>ns_is_var</code>, if
+true, it will assemble the tree nodes to echo a variable with the name given, if
+it is not it will simply echo the text of the name and finally a colon. For the
+tag name, it does basically the same.</p>
+<pre class="codeblock">void Convert_xml_elements::print_element_name(AST_xml_element_name* name,AST_statement_list* out) {
+	if (name-&gt;xml_namespace) {
+		if (name-&gt;ns_is_var) {
+			out-&gt;push_back(echo(new AST_variable(new Token_variable_name(name-&gt;xml_namespace-&gt;value))));
+		} else {
+			out-&gt;push_back(echo(name-&gt;xml_namespace-&gt;value));
+		}
+		out-&gt;push_back(echo(&quot;:&quot;));
+	}
+	if (name-&gt;is_var) {
+		out-&gt;push_back(echo(new AST_variable(new Token_variable_name(name-&gt;tag_name-&gt;value))));
+	} else {
+		out-&gt;push_back(echo(name-&gt;tag_name-&gt;value));
+	}
+}</pre>
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="building_the_tree.htm">&lt;
+      Previous: Building the tree</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="escaped_echo.htm">Next: Escaped echo &gt;</a></td>
+  </tr>
+</table>
+
+<p> </p>
+
+</body>
+
+</html>

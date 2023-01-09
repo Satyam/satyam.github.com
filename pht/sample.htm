@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<LINK REL=stylesheet type="text/css" HREF="style.css">
+
+<title>PHT: Sample</title>
+</head>
+
+<body>
+
+<h2>Sample</h2>
+<p>Thus, if I were to write a centered paragraph of HTML text, I could either
+do:</p>
+<pre class="codeblock">echo &quot;&lt;p align=\&quot;center\&quot;&gt;Hello World!&lt;/p&gt;&quot;;</pre>
+<p>or:</p>
+<pre class="codeblock">&lt;p {
+    &amp; align &quot;center&quot;;
+    ? &quot;Hello World!&quot;;
+}</pre>
+<p> I am giving examples in HTML so that I don't need
+to explain the meaning or usage of the tags. When I wrote this into my editor, the highlighting didn't come
+out right on some
+parts of it and the 'code insight' feature (the one that suggests what's next)
+was somewhat confused, but the code beautifier indented everything nicely and the
+brace matching worked perfectly as well.  </p>
+<p> More complex examples worked just
+as well:</p>
+<pre class="codeblock">&lt;table for ( $i=1; $i &lt; 10; $i++) {
+    &lt;div {
+        &amp;style = ($i &amp; 1?&quot;odd&quot;:&quot;even&quot;);
+        &lt;tr {
+            &lt;td ?  'data for column one, row: ' , $i;
+            &lt;td {               
+                 &amp;align 'right';
+                 ?  &quot;data for column two, row: &quot; , $i;
+            }
+        }
+    }
+}</pre>
+<p>Notice that in this example I am using both the <code>&lt;</code>, <code> &amp;</code> and
+<code> ?</code> symbols in their two
+meanings, as their regular PHP use of 'less than', 'bitwise and' and
+'conditional operator' and as their extended meanings. I am also mixing XML
+blocks with control flow blocks and I am enclosing some blocks with braces,
+others not.  PHP also accepts single and double quotes to enclose strings,
+and I used both, the pre-compiler will always use double quotes for attribute
+values and even escape un-escaped quotes within them. </p>
+
+<p>Since a statement can be empty, a line break (<code>&lt;br /&gt;</code>)
+could be simply be written as:</p>
+
+<pre class="codeblock">&lt; br;</pre>
+
+<p>or an extra wide horizontal line as:</p>
+
+<pre class="codeblock">&lt;hr &amp;size = 10;</pre>
+
+<p>There can be spaces in between the <code> &lt;</code> and <code> &amp;</code> symbols and the names and
+the <code>=</code> sign for the attribute argument is optional.</p>
+
+<p>A most simple heading could be:</p>
+
+<pre class="codeblock">&lt;h1 ? 'AT &amp; T';</pre>
+
+<p>in which the <code> ?</code> instruction will escape the <code> &amp;</code> sign and output
+<code> 'AT
+&amp;amp; T'</code>.</p>
+
+<p>On the other hand, the following is invalid</p>
+
+<pre class="codeblock">&lt;p {
+    ? &quot;Hello World!&quot;;
+    <font color="#FF0000">&amp; align &quot;center&quot;; // error</font>
+}</pre>
+
+<p>The <code>?</code> instruction would force the <code>&lt;p&gt;</code> tag to
+be closed so the attribute will produce an error.  The precompiler tries to
+leave start tags open (ie. <code>&lt;p</code> ) as long as possible but any
+output instruction makes it assume there are no further attributes within the
+opening tag.</p>
+
+<p>A further working sample can be found at <a href="po.pht">po.pht</a>, a
+sample program to build a purchase order.   The pre-compiled result
+can be seen in  <a href="po.txt">po.php</a>, and a sample run of it at <a href="po.xml">po.xml</a>. 
+The purchase order was modeled from the XML schema <a href="po.xsd">po.xsd</a>
+though it had some additions to test some features of the pre-compiler.</p>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="33%"><a href="index.html#Introduction">&lt;
+      Previous: Introduction</a></td>
+    <td width="33%">
+      <p align="center"><a href="index.html">Up</a></td>
+    <td width="34%">
+      <p align="right"><a href="formal_definition.htm">Next: Formal Definition &gt;</a></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

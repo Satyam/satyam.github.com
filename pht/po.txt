@@ -1,0 +1,47 @@
+<?php
+	//xmlSchema "po.xsd";
+	function Address($type, $name, $street, $city, $state, $zip)
+	{
+		echo "<", $type, " country=\"US\"><name>", htmlentities($name), "</name><street>", htmlentities($street), "</street><city>", htmlentities($city), "</city><state>", htmlentities($state), "</state><zip>", htmlentities($zip), "</zip></", $type, ">";
+	}
+
+	function Item($partNum, $productName, $quantity, $USPrice, $shipDate = null, $comment = null)
+	{
+		echo "<item partNum=\"", $partNum, "\"><productName>", htmlentities($productName), "</productName><quantity>", htmlentities($quantity), "</quantity><USPrice>", htmlentities($USPrice), "</USPrice>";
+		if(!is_null($shipDate))
+		{
+			echo "<shipDate>", htmlentities($shipDate), "</shipDate>";
+		}
+		if(!is_null($comment))
+		{
+			echo "<comment>", htmlentities($comment), "</comment>";
+		}
+		echo "</item>";
+	}
+
+	function xmlFormatDate($Fecha, $NotNull = false)
+	{
+		if(is_null($Fecha) or $Fecha == 0)
+		{
+			return ($NotNull ? "'1930-01-01'" : "null");
+		}
+		return date("Y-m-d", $Fecha);
+	}
+
+	echo "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?><purchaseOrder orderDate=\"", xmlFormatDate(time()), "\">";
+	Address("shipTo", "Alice Smith", "123 Maple Street", "Mill Valley", "CA", "90952");
+	Address("billTo", "Robert Smith", "8 Oak Avenue", "Old Town", "PA", "95819");
+	echo "<comment";
+	if(true)
+	{
+		echo " esto=\"aquello\"";
+	}
+	else
+	{
+		echo " otro=\"esto otro\"";
+	}
+	echo ">Hurry, my lawn is going wild<hr size=\"", 2, "\"></hr> &amp; I'm &lt;a little bit&gt; desperate </comment><items>";
+	Item("872-AA", "Lawnmower", 1, 148.95, null, "Confirm this is electric");
+	Item("926-AA", "Baby Monitor", 1, 39.98, "1999-05-21");
+	echo "</items></purchaseOrder>";
+?>
