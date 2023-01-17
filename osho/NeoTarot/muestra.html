@@ -1,0 +1,184 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
+    <meta name="Description" content="Neo Tarot de Osho" />
+    <meta name="KeyWords" content="Osho, Meditación, Meditation, Meditacion" />
+    <title>Neo Tarot de Osho</title>
+    <style>
+      BODY {
+        background-color: maroon;
+        padding: auto;
+      }
+      main {
+        max-width: 800px;
+        margin: auto;
+        background-color: teal;
+      }
+      header {
+        color: white;
+        text-align: center;
+        padding: 1em;
+      }
+      main::after {
+        content: '';
+        clear: both;
+        display: block;
+      }
+      figure {
+        text-align: center;
+      }
+      figure.osho {
+        background-color: white;
+        padding: 0.5em 1em;
+        border-radius: 1em;
+        font-size: larger;
+        margin: auto;
+        width: 220px;
+      }
+      figure.chica {
+        margin-left: 0;
+        width: 100px;
+        font-size: smaller;
+      }
+      figure.chica img {
+        background-color: white;
+        padding: 0.25em;
+        border-radius: 0.5em;
+      }
+      #thumbnails {
+        display: grid;
+        justify-items: center;
+      }
+      /* Extra small devices (phones, 600px and down) */
+      @media only screen and (max-width: 600px) {
+        #thumbnails {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      /* Small devices (portrait tablets and large phones, 600px and up) */
+      @media only screen and (min-width: 600px) {
+        #thumbnails {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      /* Medium devices (landscape tablets, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        #thumbnails {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        main {
+          padding: 1em;
+        }
+      }
+      /* Large devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        #thumbnails {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        main {
+          padding: 1em;
+        }
+      }
+      /* Extra large devices (large laptops and desktops, 1200px and up) */
+      @media only screen and (min-width: 1200px) {
+        #thumbnails {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Neo-Tarot de Osho</h1>
+      <h2>Baraja Completa</h2>
+    </header>
+    <main>
+      <figure class="osho">
+        <img src="0.jpg" />
+        <figcaption>Osho</figcaption>
+      </figure>
+      <div id="thumbnails"></div>
+    </main>
+    <script>
+      window.onload = () => {
+        const cartas = [
+          { carta: 1, titulo: 'Osho' },
+          { carta: 2, titulo: 'La Comuna' },
+          { carta: 3, titulo: 'La Iluminación' },
+          { carta: 4, titulo: 'La Entrega' },
+          { carta: 5, titulo: 'El Accidente Supremo' },
+          { carta: 6, titulo: 'La Codicia' },
+          { carta: 7, titulo: 'Más Allá de la Codicia' },
+          { carta: 8, titulo: 'El Aprendizaje' },
+          { carta: 9, titulo: 'El Mayor de los Milagros' },
+          { carta: 10, titulo: 'El Valor' },
+          { carta: 11, titulo: 'Ser Común' },
+          { carta: 12, titulo: 'La Receptividad' },
+          { carta: 13, titulo: 'Abandono del Conocimiento' },
+          { carta: 14, titulo: 'La Confianza' },
+          { carta: 15, titulo: 'La Vulnerabilidad' },
+          { carta: 16, titulo: 'La Imitación' },
+          { carta: 17, titulo: 'Darse Cuenta' },
+          { carta: 18, titulo: 'La Meditación' },
+          { carta: 19, titulo: 'Concentrándose' },
+          { carta: 20, titulo: 'La Comprensión' },
+          { carta: 21, titulo: 'Dar' },
+          { carta: 22, titulo: 'La Inocencia' },
+          { carta: 23, titulo: 'La Oración' },
+          { carta: 24, titulo: 'Mal Uso del Poder' },
+          { carta: 25, titulo: 'Lo Práctico' },
+          { carta: 26, titulo: 'La Comparación' },
+          { carta: 27, titulo: 'El Juicio' },
+          { carta: 28, titulo: 'La Autoaceptación' },
+          { carta: 29, titulo: 'El Agradecimiento' },
+          { carta: 30, titulo: 'La Muerte \/ Lo que Nunca Muere' },
+          { carta: 31, titulo: 'La Aceptación' },
+          { carta: 32, titulo: 'Más Allá de la Pequeña Familia' },
+          { carta: 33, titulo: 'El Renacimiento \/ Momento a Momento' },
+          { carta: 34, titulo: 'La Furia' },
+          { carta: 35, titulo: 'El Dominio de los Estados de Animo' },
+          { carta: 36, titulo: 'Las Puertas del Infierno' },
+          { carta: 37, titulo: 'Las Puertas del Cielo' },
+          { carta: 38, titulo: 'La Transformación' },
+          { carta: 39, titulo: 'La Creatividad' },
+          { carta: 40, titulo: 'La Totalidad' },
+          { carta: 41, titulo: 'El Fracaso' },
+          { carta: 42, titulo: 'La Preocupación \/ La Ansiedad' },
+          { carta: 43, titulo: 'La Mente' },
+          { carta: 44, titulo: 'El Deseo' },
+          { carta: 45, titulo: 'La Postergación' },
+          { carta: 46, titulo: 'Indagar \/ Explorar \/ Buscar' },
+          { carta: 47, titulo: 'La Esperanza' },
+          { carta: 48, titulo: 'El Desafío' },
+          { carta: 49, titulo: 'El Amor' },
+          { carta: 50, titulo: 'La Compasión' },
+          { carta: 51, titulo: 'El Coraje' },
+          { carta: 52, titulo: 'El Arrepentimiento' },
+          { carta: 53, titulo: 'El Juego' },
+          { carta: 54, titulo: 'El Objetivo Unico' },
+          { carta: 55, titulo: 'El Sexo' },
+          { carta: 56, titulo: 'La Devoción' },
+          { carta: 57, titulo: 'La Inteligencia' },
+          { carta: 58, titulo: 'El Trabajo' },
+          { carta: 59, titulo: 'Ven, Ven y aún Sigue Viniendo' },
+          { carta: 60, titulo: 'La Risa' },
+        ];
+
+        const $main = document.getElementById('thumbnails');
+        $main.innerHTML = cartas
+          .map(
+            ({ carta, titulo }) =>
+              `<a href="index.html#${carta}">
+              <figure class="chica">
+                <img src="chicas/${carta}.jpg" />
+                <figcaption>${carta}<br/>
+                  ${titulo}</figcaption>
+              </figure>
+            </a>`
+          )
+          .join('\n');
+      };
+    </script>
+  </body>
+</html>
