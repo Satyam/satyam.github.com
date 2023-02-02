@@ -109,16 +109,13 @@ ${lastTd}
     console.log(filename);
     const root = parse(await fs.readFile(name, 'utf8'));
     const $$content = root.querySelectorAll('.post-content');
-    if ($$content.length !== 1)
+    if ($$content.length !== 1) {
       console.error('not just one content', $$content.length, name);
-    else {
+      console.log(root.outerHTML);
+    } else {
       const $content = $$content[0];
       $content.querySelector('div.post-info').remove();
       $content.querySelector('div.post-footer').remove();
-
-      //TODO falta convertir enlaces entre articulos a nuevo formato
-
-      // TODO mover las imagenes
 
       for (const $img of $content.querySelectorAll(
         'img[src^="/blog/wp-content/"]'
@@ -164,6 +161,30 @@ ${lastTd}
           <figcaption>${caption}</figcaption>
         </figure>`);
       }
+      //TODO falta convertir enlaces entre articulos a nuevo formato
+      for (const $intralink of $content.querySelectorAll('a[href^="/blog"]')) {
+        // console.log('Internal reference', $intralink.outerHTML);
+        $intralink.setAttribute(
+          'href',
+          $intralink.getAttribute('href').replace(/\/$/, '.html')
+        );
+      }
+      for (const $empty of $content.querySelectorAll('p:empty')) {
+        $empty.remove();
+      }
+      for (const $more of $content.querySelectorAll('span[id^="more"]')) {
+        $more.replaceWith('<span class="more"></span>');
+      }
+      if ($content.querySelectorAll('span.more') == 0) {
+        console.log('first', $content.outerHTML.substring(0, 80));
+        $content.childNodes.find(($n) => {
+          if ($n.tagName) {
+            $n.insertAdjacentHTML('afterend', '<span class="more"></span>');
+            return true;
+          }
+        });
+      }
+
       const content = entityDecoder($content.innerHTML);
       const $$postInfo = root.querySelectorAll('.post-info');
       $$postInfo.forEach(async ($postInfo) => {
