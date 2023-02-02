@@ -118,7 +118,7 @@
                       <a
                         href="/blog/2007/01/27/xml-ahora-json-por-que-no-lisp/#comments"
                         >[3] Comments</a
-                      > 
+                      >
                     </div>
                   </td>
                   <td></td>
@@ -322,30 +322,32 @@
               <p>En JSON:</p>
               <pre>
 {"menu": {
-    "id": "file",
-    "value": "File",
-    "popup": {
-        "menuitem": [
-            {"value": "New", "onclick": "CreateNewDoc()"},
-            {"value": "Open", "onclick": "OpenDoc()"},
-            {"value": "Close", "onclick": "CloseDoc()"}
-        ]
-    } }}</pre
-              >
+    "id": "file",
+    "value": "File",
+    "popup": {
+        "menuitem": [
+            {"value": "New", "onclick": "CreateNewDoc()"},
+            {"value": "Open", "onclick": "OpenDoc()"},
+            {"value": "Close", "onclick": "CloseDoc()"}
+        ]
+    }
+  }
+}
+              </pre>
               <p>y en LISP</p>
               <pre>
 (menu
-    (id file)
-    (value File)
-    (popup
-        (menuitem
-            ((value New) (onclick (CreateNewDoc)))
-            ((value Open)(onclick (OpenDoc)))
-            ((value Close)(onclick (CloseDoc)))
-        )
-    )
-)</pre
-              >
+    (id file)
+    (value File)
+    (popup
+        (menuitem
+            ((value New) (onclick (CreateNewDoc)))
+            ((value Open)(onclick (OpenDoc)))
+            ((value Close)(onclick (CloseDoc)))
+        )
+    )
+)
+              </pre>
               <p>
                 La ventaja de JSON sobre XML es que la sintaxis de JSON es la
                 que se utiliza en JavaScript para definir un array asociativo,
@@ -365,13 +367,8 @@
                 vuelta a lo que ya se hizo hace medio siglo en algo olvidado por
                 ahí que se llama LISP.
               </p>
-              <p><!--71ed182c6075b6e6fd4cc777ca0c87f4--></p>
-              <p><!--f5b6271bb18a911a197146de43996a65--></p>
-              <p><!--cd7f274ace36187fb870967898e04930--></p>
-              <p><!--c84c32483d7eee47e108431155bdb1c0--></p>
-              <p><!--7dd55ae777f34f3b12922a64ca87c06a--></p>
               <div class="post-info"></div>
-              <div class="post-footer"> </div>
+              <div class="post-footer"></div>
             </div>
             <!-- You can start editing here. -->
 
@@ -458,7 +455,6 @@
               </li>
             </ol>
           </div>
-          <p align="center"></p>
         </div>
         <div id="sidebar">
           <h2>Archived Entry</h2>
