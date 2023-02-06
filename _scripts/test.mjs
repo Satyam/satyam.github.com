@@ -178,9 +178,9 @@ ${lastTd}
       // with a figure tag
       ($caption ?? $anchor).replaceWith(`
         <figure>
-          <img 
-            src="${destHref}" 
-            alt="${caption}" 
+          <img
+            src="${destHref}"
+            alt="${caption}"
             ${title ? `title="${title}"` : ''}
           />
           <figcaption>${caption}</figcaption>
@@ -258,4 +258,87 @@ ${content}
       );
     }
   }
+}
+
+// Deal with nested categories
+{
+  const catsSite = path.join(destSite, 'categories');
+  fs.ensureDir(catsSite);
+  fs.emptyDir(catsSite);
+  const $home = parse(
+    entityDecoder(
+      await fs.readFile(path.join(srcSite, 'blog/index.html'), 'utf8')
+    )
+  );
+
+  const getCat = ($li) => {
+    const $a = $li.querySelector('a');
+    return [$a.textContent, $a.getAttribute('href')];
+  };
+
+  const catFlat = {};
+  for (const $item of $home
+    .getElementById('sidebar')
+    .querySelectorAll('li.cat-item')) {
+    const [name, url] = getCat($item);
+    if (!url.startsWith('/blog/category/')) {
+      console.error('strange url', name, url);
+      continue;
+    }
+    const parts = url.split('/');
+    const l = parts.length;
+    if (l < 5 || l > 6) {
+      console.error('url inesperado', l, parts);
+      continue;
+    }
+    const p3 = parts[3];
+    if (!catFlat[p3]) {
+      catFlat[p3] = {
+        id: p3,
+        name,
+        url,
+      };
+    }
+    if (l === 6) {
+      const p4 = parts[4];
+      const id = [p3, p4].join('/');
+      if (!catFlat[id]) catFlat[id] = { id, name, url, parent: p3 };
+    }
+  }
+  for (const cat of Object.values(catFlat)) {
+    console.log(cat.id, cat.name);
+    const posts = [];
+    const parentPosts = catFlat[cat.parent]?.posts;
+    const pages = await glob([
+      path.join(srcSite, cat.url, 'index.html'),
+      path.join(srcSite, cat.url, 'page/*/index.html'),
+    ]);
+    for (const page of pages) {
+      console.log(page);
+      const root = parse(entityDecoder(await fs.readFile(page, 'utf8')));
+      const $$h3 = root.querySelectorAll('h3');
+      if ($$h3.length !== 1) console.error('more than one h3', $$h3.length);
+      for (const $post of root.querySelectorAll('div.post')) {
+        const $$title = $post.querySelectorAll('.post-title a');
+        if ($$title.length !== 1)
+          console.error('not just one title', $$title.length);
+        const $anchor = $$title[0];
+        const url = $anchor.getAttribute('href');
+        const $$date = $post.querySelectorAll('.post-date');
+        if ($$date.length !== 1)
+          console.error('not just one date', $$date.length);
+        posts.push({
+          date: $$date[0].textContent.trim(),
+          title: $anchor.textContent.trim(),
+          url,
+        });
+        if (parentPosts) {
+          const i = parentPosts.findIndex((pp) => pp.url === url);
+          if (i !== -1) parentPosts.splice(i, 1);
+        }
+      }
+    }
+    cat.posts = posts;
+  }
+  console.log('=================', JSON.stringify(catFlat, null, 2));
 }
