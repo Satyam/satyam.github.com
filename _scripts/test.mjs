@@ -262,7 +262,7 @@ ${content}
 
 // Deal with nested categories
 {
-  const catsSite = path.join(destSite, 'categories');
+  const catsSite = path.join(destSite, '_categorias');
   fs.ensureDir(catsSite);
   fs.emptyDir(catsSite);
   const $home = parse(
@@ -339,6 +339,17 @@ ${content}
       }
     }
     cat.posts = posts;
+    const filename = path.join(catsSite, `${cat.id}.html`);
+    await fs.ensureFile(filename);
+    await fs.writeFile(
+      filename,
+      `---
+layout: category
+cat: "${cat.name}"
+title:  "${cat.name}"
+---
+`
+    );
   }
   console.log('=================', JSON.stringify(catFlat, null, 2));
 }
