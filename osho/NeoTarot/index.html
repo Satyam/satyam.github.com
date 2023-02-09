@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; CHARSET=UTF-8" />
@@ -47,19 +48,45 @@
         text-align: center;
         font-size: larger;
       }
+      .show {
+        display: block;
+      }
+      table {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+        cursor: pointer;
+      }
+      td {
+        text-decoration: underline;
+      }
+      a:hover,
+      td:hover {
+        color: yellow;
+      }
+      a,
+      a:visited {
+        color: white;
+      }
     </style>
   </head>
 
   <body>
     <header>
       <h1>Neo-Tarot de Osho</h1>
-      <h2>xxx</h2>
+      <h2 id="subheader">xxx</h2>
+      <table>
+        <tr>
+          <td id="nueva">Nueva Carta</td>
+          <td><a href="muestra.html">Toda la baraja</a></td>
+        </tr>
+      </table>
     </header>
     <main>
       <figure>
-        <div class="number">1</div>
-        <img src="1.jpg" />
-        <figcaption>-caption-</figcaption>
+        <div id="number" class="number">1</div>
+        <img id="image" src="1.jpg" />
+        <figcaption id="caption">-caption-</figcaption>
       </figure>
       <section id="c1">
         <h3>Osho</h3>
@@ -4063,24 +4090,35 @@
     </main>
     <script>
       window.onload = () => {
-        const $img = document.getElementsByTagName('img')[0];
-        const $caption = document.getElementsByTagName('figcaption')[0];
-        const $subheader = document.getElementsByTagName('h2')[0];
-        const $number = document.getElementsByClassName('number')[0];
+        const renderCarta = (carta) => {
+          document
+            .querySelectorAll('.show')
+            .forEach(($el) => $el.classList.remove('show'));
+          const $section = document.getElementById(`c${carta}`);
+          $section.classList.add('show');
+          $number.innerHTML = carta;
+          $img.src = `${carta}.jpg`;
+          // location.hash = `#${carta}`;
+          const cardName = $section.getElementsByTagName('h3')[0].innerHTML;
+          document.title = `${carta} - ${cardName} - Neo Tarot de Osho`;
+          $subheader.innerHTML = `${carta} - ${cardName}`;
+          $caption.innerHTML = cardName.replace('/', '<br/>');
+          window.location.hash = `#${carta}`;
+        };
+
+        document.getElementById('nueva').addEventListener('click', () => {
+          renderCarta(Math.floor(Math.random() * 60) + 1);
+        });
+        const $img = document.getElementById('image');
+        const $caption = document.getElementById('caption');
+        const $subheader = document.getElementById('subheader');
+        const $number = document.getElementById('number');
 
         const hash = location.hash.replace(/^#/, '');
         const carta = hash
           ? parseInt(hash, 10)
           : Math.floor(Math.random() * 60) + 1;
-        const $section = document.getElementById(`c${carta}`);
-        $section.style.display = 'block';
-        $number.innerHTML = carta;
-        $img.src = `${carta}.jpg`;
-        // location.hash = `#${carta}`;
-        const cardName = $section.getElementsByTagName('h3')[0].innerHTML;
-        document.title = `${carta} - ${cardName} - Neo Tarot de Osho`;
-        $subheader.innerHTML = `${carta} - ${cardName}`;
-        $caption.innerHTML = cardName.replace('/', '<br/>');
+        renderCarta(carta);
       };
     </script>
   </body>

@@ -49,6 +49,24 @@
         display: grid;
         justify-items: center;
       }
+      table {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+        cursor: pointer;
+      }
+      td {
+        text-align: center;
+        text-decoration: underline;
+      }
+      a:hover,
+      td:hover {
+        color: yellow;
+      }
+      a,
+      a:visited {
+        color: white;
+      }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: 600px) {
         #thumbnails {
@@ -92,6 +110,14 @@
     <header>
       <h1>Neo-Tarot de Osho</h1>
       <h2>Baraja Completa</h2>
+      <table>
+        <tr>
+          <td><a href="index.html">Nueva Carta</a></td>
+          <td>
+            <a style="color: silver" href="muestra.html">Toda la baraja</a>
+          </td>
+        </tr>
+      </table>
     </header>
     <main>
       <figure class="osho">
