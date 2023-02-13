@@ -27,6 +27,14 @@ const entityDecoder = (src) =>
   });
 const spacesRex = /\s+/g;
 const trimSpaces = (s) => s.trim().replaceAll(spacesRex, ' ');
+
+const fixSingleQuotes = (s) =>
+  s
+    .replaceAll('\u2019', '´')
+    .replaceAll('\u2018', '`')
+    .replaceAll('\u00A0', ' ');
+
+const fixTextContent = (s) => fixSingleQuotes(trimSpaces(s ?? ''));
 /*
 // Mitos:
 {
@@ -150,11 +158,12 @@ const processImages = ($content) => {
     }
 
     // Pick the caption from either of the two alternatives
-    const caption =
+    const caption = fixTextContent(
       $caption?.querySelector('p.wp-caption-text')?.textContent ??
-      $img.getAttribute('alt');
+        $img.getAttribute('alt')
+    );
 
-    const title = $img.getAttribute('title');
+    const title = fixTextContent($img.getAttribute('title'));
 
     // Take the reference to the full image, no thumbnail
     // These days there is enough bandwidth anyway
@@ -252,7 +261,7 @@ const postFilenames = {};
 
     // Now that we cleaned it all, get the remaining content
     // and decode the entities that are not needed with utf-8 encoding.
-    const content = entityDecoder($$content[0].innerHTML);
+    const content = fixSingleQuotes(entityDecoder($$content[0].innerHTML));
 
     // Get the basic page info from the post info section
     const $$postInfo = root.querySelectorAll('.post-info');
@@ -263,8 +272,8 @@ const postFilenames = {};
     const $postInfo = $$postInfo[0];
     const $postTitle = $postInfo.querySelector('.post-title');
     if ($postTitle) {
-      const title = trimSpaces(entityDecoder($postTitle.textContent));
-      const category = trimSpaces(
+      const title = fixTextContent(entityDecoder($postTitle.textContent));
+      const category = fixTextContent(
         entityDecoder($postInfo.querySelector('a[rel~="category"]').textContent)
       );
       // console.log(title, category, slug);
@@ -301,14 +310,16 @@ ${content}
   );
 
   const catHash = {};
+  const postHash = {};
 
   // read all the links in the categories, read the description and the url
+
   for (const $a of $home
     .getElementById('sidebar')
     .querySelectorAll('li.cat-item a')) {
-    // const $a = $item.querySelector('a');
-    const name = $a.textContent;
+    const name = fixTextContent($a.textContent);
     const url = $a.getAttribute('href');
+
     if (!url.startsWith('/blog/category/')) {
       console.error('strange url', name, url);
       continue;
@@ -353,16 +364,23 @@ ${content}
       const root = parse(entityDecoder(await fs.readFile(page, 'utf8')));
       const $$h3 = root.querySelectorAll('h3');
       if ($$h3.length !== 1) console.error('more than one h3', $$h3.length);
+      if (fixTextContent($$h3[0].textContent) !== cat.name) {
+        console.error(
+          "Name of category doesn't match",
+          fixTextContent($$h3[0].textContent),
+          cat.name
+        );
+      }
       for (const $post of root.querySelectorAll('div.post')) {
         const $$title = $post.querySelectorAll('.post-title a');
         if ($$title.length !== 1)
           console.error('not just one title', $$title.length);
         const $anchor = $$title[0];
         const url = $anchor.getAttribute('href');
+        const title = fixTextContent($anchor.textContent);
 
         // Get the date and slug from the url
         const m = blogInfoRex.exec(url);
-        // if (m) console.log(m.groups);
         if (!m) {
           console.error('no match', url);
           continue;
@@ -371,7 +389,7 @@ ${content}
 
         posts.push({
           date: [year, month, day].join('-'),
-          title: trimSpaces($anchor.textContent),
+          title,
           url,
           year,
           month,
