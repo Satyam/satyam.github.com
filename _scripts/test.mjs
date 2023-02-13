@@ -89,6 +89,129 @@ ${lastTd}
 }
 */
 
+const removePointlessDivs = ($content) => {
+  $content.querySelector('div.post-info').remove();
+  $content.querySelector('div.post-footer').remove();
+  // Remove spurious empty paragraphs (usually at the end)
+  for (const $empty of $content.querySelectorAll('p:empty')) {
+    $empty.remove();
+  }
+};
+
+const imgFiles = [];
+
+const copyImage = (srcHref) => {
+  const destHref = path.join('/assets/img', path.basename(srcHref));
+
+  // Since I'm going to copy them all to the same folder
+  // I want to be sure not to have duplicate names.
+  const imgFile = path.basename(srcHref).toLowerCase();
+  if (imgFiles.includes(imgFile)) {
+    console.error('nombre duplicado', srcHref);
+    // didn't find duplicates so I didn't bother to add code to
+    // change the name to something unique
+  } else {
+    imgFiles.push(imgFile);
+  }
+
+  // now do copy the image
+  fs.copySync(path.join(srcSite, srcHref), path.join(destSite, destHref));
+
+  return destHref;
+};
+
+const processImages = ($content) => {
+  // Images are inserted as thumbnails surrounded by an anchor pointed to the full image.
+  // Sometimes they have a div with the caption, sometimes it is within the image.
+  // All images point to the same folder.
+  for (const $img of $content.querySelectorAll(
+    'img[src^="/blog/wp-content/"]'
+  )) {
+    // Anchor pointing to the full-size image.
+    const $anchor = $img.closest('a[href^="/blog/wp-content/"]');
+    const $caption = $img.closest('div.wp-caption');
+    // This was to check the various formats images could have.
+    // There was no case of "only image"
+    // console.log('------------------');
+    // if ($caption) {
+    //   console.log('has caption', $anchor ? 'has anchor' : 'no anchor');
+    //   console.log($caption.outerHTML);
+    // } else if ($anchor) {
+    //   console.log('has anchor');
+    //   console.log($anchor.outerHTML);
+    // } else {
+    //   console.log('only image');
+    //   console.log($img.outerHTML);
+    // }
+    if (!$anchor) {
+      console.error('no anchor', $img.outerHTML);
+      continue;
+      // actually, didn't find any img without anchor
+    }
+
+    // Pick the caption from either of the two alternatives
+    const caption =
+      $caption?.querySelector('p.wp-caption-text')?.textContent ??
+      $img.getAttribute('alt');
+
+    const title = $img.getAttribute('title');
+
+    // Take the reference to the full image, no thumbnail
+    // These days there is enough bandwidth anyway
+    const destHref = copyImage($anchor.getAttribute('href'));
+    // Now replace the div enclosing the image and the caption
+    // or the image (both enclosed in an anchor)
+    // with a figure tag
+    ($caption ?? $anchor).replaceWith(`
+        <figure>
+          <img
+            src="${destHref}"
+            alt="${caption}"
+            ${title ? `title="${title}"` : ''}
+          />
+          <figcaption>${caption}</figcaption>
+        </figure>`);
+  }
+};
+
+const fixIntraLinks = ($content) => {
+  // Posts were stored as an index.html file in a folder named for the post
+  // Need to change that to an html file named for the post.
+  for (const $intralink of $content.querySelectorAll('a[href^="/blog"]')) {
+    // console.log('Internal reference', $intralink.outerHTML);
+    $intralink.setAttribute(
+      'href',
+      $intralink.getAttribute('href').replace(/\/$/, '.html')
+    );
+  }
+};
+
+const fixExcerptSeparator = ($content) => {
+  const excerptSeparator = '<span class="more"></span>';
+  // change the tag signalling the end of the excerpt for the new one.
+  for (const $more of $content.querySelectorAll('span[id^="more"]')) {
+    $more.replaceWith(excerptSeparator);
+  }
+
+  // Check if the article does indeed have an exceprt separator
+  // and if not insert one after the first element, usually a paragraph
+  if ($content.querySelectorAll('span.more') == 0) {
+    $content.childNodes.find(($n) => {
+      if ($n.tagName) {
+        $n.insertAdjacentHTML('afterend', excerptSeparator);
+        return true;
+      }
+    });
+  }
+};
+
+const processContent = ($content) => {
+  removePointlessDivs($content);
+  processImages($content);
+  fixIntraLinks($content);
+  fixExcerptSeparator($content);
+};
+
 const blogInfoRex =
   /blog\/(?<year>\d+)\/(?<month>\d+)\/(?<day>\d+)\/(?<slug>[^\/]+)/;
 
@@ -96,7 +219,6 @@ const postFilenames = {};
 // posts
 {
   console.log('========== posts 96 =========');
-  const imgFiles = [];
   const postsSite = path.join(destSite, '_posts');
   fs.ensureDir(postsSite);
   fs.emptyDir(postsSite);
@@ -122,116 +244,15 @@ const postFilenames = {};
       continue;
     }
     // $content is the actual post content, one and only one per post.
-    const $content = $$content[0];
 
-    // remove pointless sections
-    $content.querySelector('div.post-info').remove();
-    $content.querySelector('div.post-footer').remove();
-
-    // Images are inserted as thumbnails surrounded by an anchor pointed to the full image.
-    // Sometimes they have a div with the caption, sometimes it is within the image.
-    // All images point to the same folder.
-    for (const $img of $content.querySelectorAll(
-      'img[src^="/blog/wp-content/"]'
-    )) {
-      // Anchor pointing to the full-size image.
-      const $anchor = $img.closest('a[href^="/blog/wp-content/"]');
-      const $caption = $img.closest('div.wp-caption');
-      // console.log('------------------');
-      // if ($caption) {
-      //   console.log('has caption', $anchor ? 'has anchor' : 'no anchor');
-      //   console.log($caption.outerHTML);
-      // } else if ($anchor) {
-      //   console.log('has anchor');
-      //   console.log($anchor.outerHTML);
-      // } else {
-      //   console.log('only image');
-      //   console.log($img.outerHTML);
-      // }
-      if (!$anchor) {
-        console.error('no anchor', $img.outerHTML);
-        continue;
-        // actually, didn't find any img without anchor
-      }
-
-      // Pick the caption from either of the two alternatives
-      const caption =
-        $caption?.querySelector('p.wp-caption-text')?.textContent ??
-        $img.getAttribute('alt');
-
-      const title = $img.getAttribute('title');
-
-      // Take the reference to the full image, no thumbnail
-      // These days there is enough bandwidth anyway
-      const srcHref = $anchor.getAttribute('href');
-      const destHref = path.join('/assets/img', path.basename(srcHref));
-
-      // Since I'm going to copy them all to the same folder
-      // I want to be sure not to have duplicate names.
-      const imgFile = path.basename(srcHref).toLowerCase();
-      if (imgFiles.includes(imgFile)) {
-        console.error('nombre duplicado', srcHref);
-        // didn't find duplicates so I didn't bother to add code to
-        // change the name to something unique
-      } else {
-        imgFiles.push(imgFile);
-      }
-
-      // now do copy the image
-      fs.copySync(path.join(srcSite, srcHref), path.join(destSite, destHref));
-
-      // Now replace the div enclosing the image and the caption
-      // or the image (both enclosed in an anchor)
-      // with a figure tag
-      ($caption ?? $anchor).replaceWith(`
-        <figure>
-          <img
-            src="${destHref}"
-            alt="${caption}"
-            ${title ? `title="${title}"` : ''}
-          />
-          <figcaption>${caption}</figcaption>
-        </figure>`);
-    }
-
-    // Posts were stored as an index.html file in a folder named for the post
-    // Need to change that to an html file named for the post.
-    for (const $intralink of $content.querySelectorAll('a[href^="/blog"]')) {
-      // console.log('Internal reference', $intralink.outerHTML);
-      $intralink.setAttribute(
-        'href',
-        $intralink.getAttribute('href').replace(/\/$/, '.html')
-      );
-    }
-
-    // Remove spurious empty paragraphs (usually at the end)
-    for (const $empty of $content.querySelectorAll('p:empty')) {
-      $empty.remove();
-    }
-
-    const excerptSeparator = '<span class="more"></span>';
-    // change the tag signalling the end of the excerpt for the new one.
-    for (const $more of $content.querySelectorAll('span[id^="more"]')) {
-      $more.replaceWith(excerptSeparator);
-    }
-
-    // Check if the article does indeed have an exceprt separator
-    // and if not insert one after the first element, usually a paragraph
-    if ($content.querySelectorAll('span.more') == 0) {
-      $content.childNodes.find(($n) => {
-        if ($n.tagName) {
-          $n.insertAdjacentHTML('afterend', excerptSeparator);
-          return true;
-        }
-      });
-    }
+    processContent($$content[0]);
 
     // Now we are puting together the strings we need to
     // make the actual new blog post.
 
     // Now that we cleaned it all, get the remaining content
     // and decode the entities that are not needed with utf-8 encoding.
-    const content = entityDecoder($content.innerHTML);
+    const content = entityDecoder($$content[0].innerHTML);
 
     // Get the basic page info from the post info section
     const $$postInfo = root.querySelectorAll('.post-info');
