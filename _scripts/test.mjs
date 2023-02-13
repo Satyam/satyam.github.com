@@ -386,16 +386,21 @@ ${content}
           continue;
         }
         const { year, month, day, slug } = m.groups;
+        const postId = [year, month, day, slug].join('/');
 
-        posts.push({
-          date: [year, month, day].join('-'),
-          title,
-          url,
-          year,
-          month,
-          day,
-          slug,
-        });
+        posts.push(postId);
+        if (postHash[postId]) {
+          postHash[postId].cats.push(cat.id);
+        } else {
+          postHash[postId] = {
+            title,
+            year,
+            month,
+            day,
+            slug,
+            cats: [cat.id],
+          };
+        }
 
         // If this post is listed under the parent category, remove it from the parent
         // Since parent folders come listed before children, the parent will already be
@@ -429,40 +434,62 @@ title:  "${cat.name}"
   // listed in `postFilenames` which has been populated
   // from the posts folders.
 
-  Object.values(catHash).forEach((cat) => {
-    cat.posts.forEach((post) => {
-      const parts = post.url.split('/');
-      const [, , y, m, d, s] = parts;
-      const fn = `${y}-${m}-${d}-${s}.html`;
-      if (Array.isArray(postFilenames[fn])) postFilenames[fn].push(cat.id);
-      else console.error('no está en postfilenames', fn);
-    });
-  });
-  console.log('===== posts in categories =========');
-  const postsInGeneral = catHash.general.posts;
-  for (const post in postFilenames) {
-    const l = postFilenames[post].length;
-    if (l !== 1) {
-      console.log(post, l, postFilenames[post]);
-    }
+  // Object.values(catHash).forEach((cat) => {
+  //   cat.posts.forEach((post) => {
+  //     const parts = post.url.split('/');
+  //     const [, , y, m, d, s] = parts;
+  //     const fn = `${y}-${m}-${d}-${s}.html`;
+  //     if (Array.isArray(postFilenames[fn])) postFilenames[fn].push(cat.id);
+  //     else console.error('no está en postfilenames', fn);
+  //   });
+  // });
+  // console.log('===== posts in categories =========');
+  // const postsInGeneral = catHash.general.posts;
+  // for (const post in postFilenames) {
+  //   const l = postFilenames[post].length;
+  //   if (l !== 1) {
+  //     console.log(post, l, postFilenames[post]);
+  //   }
 
-    // If a post was listed in a specific category but also in 'general'
-    // remove it from the ''general' (unclassified) category.
-    if (l > 1 && postFilenames[post].includes('general')) {
-      const date = post.substring(0, 10);
-      const slug = post.substring(11).replace('.html', '');
-      console.log(date, slug);
-      postsInGeneral.some((p, i) => {
-        if (p.date === date && p.slug === slug) {
-          console.log('remove entry', p, ' at  ', i);
-          postsInGeneral.splice(i, 1);
-          return true;
+  //   // If a post was listed in a specific category but also in 'general'
+  //   // remove it from the ''general' (unclassified) category.
+  //   if (l > 1 && postFilenames[post].includes('general')) {
+  //     const date = post.substring(0, 10);
+  //     const slug = post.substring(11).replace('.html', '');
+  //     console.log(date, slug);
+  //     postsInGeneral.some((p, i) => {
+  //       if (p.date === date && p.slug === slug) {
+  //         console.log('remove entry', p, ' at  ', i);
+  //         postsInGeneral.splice(i, 1);
+  //         return true;
+  //       }
+  //     });
+  //   }
+  // }
+
+  {
+    const genPosts = catHash.general.posts;
+    for (const slug in postHash) {
+      const cats = postHash[slug].cats;
+      if (cats.length > 1) {
+        if (cats.includes('general')) {
+          cats.splice(
+            cats.findIndex((c) => c === 'general'),
+            1
+          );
+          genPosts.splice(
+            genPosts.findIndex((item) => slug === item),
+            1
+          );
         }
-      });
+      }
+      cats.foreach((c) => {});
     }
   }
+
   console.log(
     '=======catHash 400 ==========',
     JSON.stringify(catHash, null, 2)
   );
+  console.log('============== postHash', JSON.stringify(postHash, null, 2));
 }
