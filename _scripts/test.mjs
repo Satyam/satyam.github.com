@@ -224,7 +224,6 @@ const processContent = ($content) => {
 const blogInfoRex =
   /blog\/(?<year>\d+)\/(?<month>\d+)\/(?<day>\d+)\/(?<slug>[^\/]+)/;
 
-const postFilenames = {};
 // posts
 {
   console.log('========== posts 96 =========');
@@ -276,9 +275,7 @@ const postFilenames = {};
       const category = fixTextContent(
         entityDecoder($postInfo.querySelector('a[rel~="category"]').textContent)
       );
-      // console.log(title, category, slug);
 
-      postFilenames[filename] = [];
       // Finally, write it!
       await fs.writeFile(
         path.join(postsSite, filename),
@@ -336,13 +333,12 @@ ${content}
       catHash[p3] = {
         id: p3,
         name,
-        url,
       };
     }
     if (l === 6) {
       const p4 = parts[4];
       const id = [p3, p4].join('/');
-      if (!catHash[id]) catHash[id] = { id, name, url, parent: p3 };
+      if (!catHash[id]) catHash[id] = { id, name, parent: p3 };
     }
   }
   // Read each of the categories pages and pick info about the posts
@@ -354,8 +350,8 @@ ${content}
     const parentPosts = catHash[cat.parent]?.posts;
     // Big categories take several pages of indexes:
     const pages = await glob([
-      path.join(srcSite, cat.url, 'index.html'),
-      path.join(srcSite, cat.url, 'page/*/index.html'),
+      path.join(srcSite, 'blog/category', cat.id, 'index.html'),
+      path.join(srcSite, 'blog/category', cat.id, 'page/*/index.html'),
     ]);
     // For each category index page, read the posts it contains
     // and get the title and url of each post.
@@ -429,45 +425,8 @@ title:  "${cat.name}"
     );
   }
 
-  // just a check to make sure that all posts are included.
-  // Check those colected from the categories against those
-  // listed in `postFilenames` which has been populated
-  // from the posts folders.
-
-  // Object.values(catHash).forEach((cat) => {
-  //   cat.posts.forEach((post) => {
-  //     const parts = post.url.split('/');
-  //     const [, , y, m, d, s] = parts;
-  //     const fn = `${y}-${m}-${d}-${s}.html`;
-  //     if (Array.isArray(postFilenames[fn])) postFilenames[fn].push(cat.id);
-  //     else console.error('no está en postfilenames', fn);
-  //   });
-  // });
-  // console.log('===== posts in categories =========');
-  // const postsInGeneral = catHash.general.posts;
-  // for (const post in postFilenames) {
-  //   const l = postFilenames[post].length;
-  //   if (l !== 1) {
-  //     console.log(post, l, postFilenames[post]);
-  //   }
-
-  //   // If a post was listed in a specific category but also in 'general'
-  //   // remove it from the ''general' (unclassified) category.
-  //   if (l > 1 && postFilenames[post].includes('general')) {
-  //     const date = post.substring(0, 10);
-  //     const slug = post.substring(11).replace('.html', '');
-  //     console.log(date, slug);
-  //     postsInGeneral.some((p, i) => {
-  //       if (p.date === date && p.slug === slug) {
-  //         console.log('remove entry', p, ' at  ', i);
-  //         postsInGeneral.splice(i, 1);
-  //         return true;
-  //       }
-  //     });
-  //   }
-  // }
-
   {
+    // drop posts from 'general' if they have another categoty
     const genPosts = catHash.general.posts;
     for (const slug in postHash) {
       const cats = postHash[slug].cats;
@@ -483,7 +442,21 @@ title:  "${cat.name}"
           );
         }
       }
-      cats.foreach((c) => {});
+      // drop posts from parent category if listed under child
+      cats.some((c1, i1) => {
+        cats.some((c2, i2) => {
+          if (i1 !== i2 && c1.startsWith(c2)) {
+            cats.splice(i2, 1);
+            const posts = catHash[c2].posts;
+
+            posts.splice(
+              posts.findIndex((p) => p === slug),
+              1
+            );
+            return true;
+          }
+        });
+      });
     }
   }
 
