@@ -35,14 +35,13 @@ const fixSingleQuotes = (s) =>
     .replaceAll('\u00A0', ' ');
 
 const fixTextContent = (s) => fixSingleQuotes(trimSpaces(s ?? ''));
-/*
-// Mitos:
-{
+
+const processMitos = async () => {
+  console.log('======= processMitos =========');
   const pages = await glob(path.join(srcSite, 'mitos', '*.htm*'));
   const mitosSite = path.join(destSite, '_mitos');
   fs.ensureDir(mitosSite);
   fs.emptyDir(mitosSite);
-  console.log('======= mitos 35 =========')
   for (const page of pages) {
     const root = parse(entityDecoder(await fs.readFile(page, 'utf8')));
     const title =
@@ -63,15 +62,15 @@ ${body}
 `
     );
   }
-}
-// Milagros:
-{
+};
+
+const processMilagros = async () => {
+  console.log('========= processMilagros =========');
   const pages = await glob(path.join(srcSite, 'milagros', '*.htm*'));
   const milagrosSite = path.join(destSite, '_milagros');
   fs.ensureDir(milagrosSite);
   fs.emptyDir(milagrosSite);
 
-  console.log('========= milagros 64 =========')
   for (const page of pages) {
     const root = parse(entityDecoder(await fs.readFile(page, 'utf8')));
     const title =
@@ -94,8 +93,7 @@ ${lastTd}
 `
     );
   }
-}
-*/
+};
 
 const removePointlessDivs = ($content) => {
   $content.querySelector('div.post-info').remove();
@@ -224,9 +222,8 @@ const processContent = ($content) => {
 const blogInfoRex =
   /blog\/(?<year>\d+)\/(?<month>\d+)\/(?<day>\d+)\/(?<slug>[^\/]+)/;
 
-// posts
-{
-  console.log('========== posts 96 =========');
+const processPosts = async () => {
+  console.log('========== processPosts =========');
   const postsSite = path.join(destSite, '_posts');
   fs.ensureDir(postsSite);
   fs.emptyDir(postsSite);
@@ -289,14 +286,13 @@ ${content}
       );
     }
   }
-}
+};
 
-// Deal with nested categories
-{
-  console.log('==== nested categories 271 ==========');
-  const catsSite = path.join(destSite, '_categorias');
-  fs.ensureDir(catsSite);
-  fs.emptyDir(catsSite);
+const catHash = {};
+const postHash = {};
+
+const analyzeCategories = async () => {
+  console.log('==== analyzeCategories ==========');
 
   // all pages contain the sidebar with the categories so
   // I might as well read it from the home page.
@@ -305,9 +301,6 @@ ${content}
       await fs.readFile(path.join(srcSite, 'blog/index.html'), 'utf8')
     )
   );
-
-  const catHash = {};
-  const postHash = {};
 
   // read all the links in the categories, read the description and the url
 
@@ -347,7 +340,7 @@ ${content}
   for (const cat of Object.values(catHash)) {
     console.log(cat.id, cat.name);
     const posts = [];
-    const parentPosts = catHash[cat.parent]?.posts;
+
     // Big categories take several pages of indexes:
     const pages = await glob([
       path.join(srcSite, 'blog/category', cat.id, 'index.html'),
@@ -397,21 +390,53 @@ ${content}
             cats: [cat.id],
           };
         }
-
-        // If this post is listed under the parent category, remove it from the parent
-        // Since parent folders come listed before children, the parent will already be
-        // populated.
-        if (parentPosts) {
-          const i = parentPosts.findIndex((pp) => pp.url === url);
-          if (i !== -1) parentPosts.splice(i, 1);
-        }
       }
     }
 
     // save those posts in the category entry
     cat.posts = posts;
+  }
+};
+const cleanDuplicatePosts = () => {
+  // drop posts from 'general' if they have another categoty
+  const genPosts = catHash.general.posts;
+  for (const slug in postHash) {
+    const cats = postHash[slug].cats;
+    if (cats.length > 1) {
+      if (cats.includes('general')) {
+        cats.splice(
+          cats.findIndex((c) => c === 'general'),
+          1
+        );
+        genPosts.splice(
+          genPosts.findIndex((item) => slug === item),
+          1
+        );
+      }
+    }
+    // drop posts from parent category if listed under child
+    cats.some((c1, i1) => {
+      cats.some((c2, i2) => {
+        if (i1 !== i2 && c1.startsWith(c2)) {
+          cats.splice(i2, 1);
+          const posts = catHash[c2].posts;
 
-    // write the new category entry (only the front matter is needed)
+          posts.splice(
+            posts.findIndex((p) => p === slug),
+            1
+          );
+          return true;
+        }
+      });
+    });
+  }
+};
+
+const generateCatFiles = async () => {
+  const catsSite = path.join(destSite, '_categorias');
+  fs.ensureDir(catsSite);
+  fs.emptyDir(catsSite);
+  for (const cat of Object.values(catHash)) {
     const filename = path.join(catsSite, `${cat.id}.html`);
     await fs.ensureFile(filename);
     await fs.writeFile(
@@ -424,45 +449,14 @@ title:  "${cat.name}"
 `
     );
   }
+};
+// await processMitos();
+// await processMilagros();
+await processPosts();
+await analyzeCategories();
+cleanDuplicatePosts();
 
-  {
-    // drop posts from 'general' if they have another categoty
-    const genPosts = catHash.general.posts;
-    for (const slug in postHash) {
-      const cats = postHash[slug].cats;
-      if (cats.length > 1) {
-        if (cats.includes('general')) {
-          cats.splice(
-            cats.findIndex((c) => c === 'general'),
-            1
-          );
-          genPosts.splice(
-            genPosts.findIndex((item) => slug === item),
-            1
-          );
-        }
-      }
-      // drop posts from parent category if listed under child
-      cats.some((c1, i1) => {
-        cats.some((c2, i2) => {
-          if (i1 !== i2 && c1.startsWith(c2)) {
-            cats.splice(i2, 1);
-            const posts = catHash[c2].posts;
+console.log('=======catHash 400 ==========', JSON.stringify(catHash, null, 2));
+console.log('============== postHash', JSON.stringify(postHash, null, 2));
 
-            posts.splice(
-              posts.findIndex((p) => p === slug),
-              1
-            );
-            return true;
-          }
-        });
-      });
-    }
-  }
-
-  console.log(
-    '=======catHash 400 ==========',
-    JSON.stringify(catHash, null, 2)
-  );
-  console.log('============== postHash', JSON.stringify(postHash, null, 2));
-}
+// await generateCatFiles();
