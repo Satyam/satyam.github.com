@@ -443,20 +443,61 @@ const generateCatFiles = async () => {
       filename,
       `---
 layout: category
-cat: "${cat.name}"
+cat: "${cat.id}"
 title:  "${cat.name}"
 ---
 `
     );
   }
 };
+
+const generatePostFiles = async () => {
+  console.log('========== generatePostFiles =========');
+  const postsSite = path.join(destSite, '_posts');
+  fs.ensureDir(postsSite);
+  fs.emptyDir(postsSite);
+
+  for (const post of Object.values(postHash)) {
+    const { year, month, day, slug, cats, title } = post;
+    const srcFile = path.join(
+      srcSite,
+      'blog',
+      year,
+      month,
+      day,
+      slug,
+      'index.html'
+    );
+    const root = parse(await fs.readFile(srcFile, 'utf8'));
+    const $$content = root.querySelectorAll('.post-content');
+    if ($$content.length !== 1) {
+      console.error('not just one content', $$content.length, srcFile);
+      console.log(root.outerHTML);
+      continue;
+    }
+
+    processContent($$content[0]);
+    const content = fixSingleQuotes(entityDecoder($$content[0].innerHTML));
+    await fs.writeFile(
+      path.join(postsSite, `${year}-${month}-${day}-${slug}.html`),
+      `---
+title:  "${title}"
+date:   ${year}-${month}-${day}
+categories: ["${cats.join('","')}"]
+---
+${content}
+  `
+    );
+  }
+};
 // await processMitos();
 // await processMilagros();
-await processPosts();
+// await processPosts();
 await analyzeCategories();
 cleanDuplicatePosts();
 
 console.log('=======catHash 400 ==========', JSON.stringify(catHash, null, 2));
 console.log('============== postHash', JSON.stringify(postHash, null, 2));
 
-// await generateCatFiles();
+await generateCatFiles();
+await generatePostFiles();
