@@ -80,20 +80,32 @@ class PostData {
   }
 }
 
+const catsHash = {};
 const postsSite = path.join(destSite, 'site1', 'blog');
 await fs.ensureDir(postsSite);
 await fs.emptyDir(postsSite);
+const postTpl = await fs.readFile(path.join(tplDir, 'post.tpl.html'), 'utf8');
 const jekyllPosts = path.join(destSite, '_posts');
 const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort()) {
   const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
-  const tplFile = await open(path.join(tplDir, 'post.tpl.html'), 'r');
+  // console.log(post.relURL, post.categories);
+  post.categories.forEach((cat) => {
+    const [c0, c1] = cat.split('/');
+    if (!(c0 in catsHash)) catsHash[c0] = { _: [] };
+    if (c1) {
+      if (!(c1 in catsHash[c0])) catsHash[c0][c1] = [];
+      catsHash[c0][c1].push(post.relURL);
+    } else {
+      catsHash[c0]['_'].push(post.relURL);
+    }
+  });
   const outDir = path.join(postsSite, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
-  const outFile = await open(path.join(outDir, `${post.slug}.html`), 'w');
-  for await (const line of tplFile.readLines({ encoding: 'utf8' })) {
-    const replacement = line.replaceAll(placeholder, (_, obj, prop) => {
+  await fs.writeFile(
+    path.join(outDir, `${post.slug}.html`),
+    postTpl.replaceAll(placeholder, (_, obj, prop) => {
       switch (obj) {
         case 'site':
           return site[prop];
@@ -103,9 +115,7 @@ for (const postName of postNames.sort()) {
           console.error('???', _, obj, prop);
           return _;
       }
-    });
-    await outFile.write(replacement);
-  }
-  tplFile.close();
-  outFile.close();
+    })
+  );
 }
+// console.log(JSON.stringify(catsHash, null, 2));
