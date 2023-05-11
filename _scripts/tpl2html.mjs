@@ -17,6 +17,21 @@ const catTpl = await fs.readFile(
   'utf8'
 );
 
+const meses = [
+  '??',
+  'ene',
+  'feb',
+  'mar',
+  'abr',
+  'may',
+  'jun',
+  'jul',
+  'ago',
+  'sep',
+  'oct',
+  'nov',
+  'dic',
+];
 class PostData {
   constructor(postFileName, postContent) {
     const m = blogInfoRex.exec(path.basename(postFileName));
@@ -33,7 +48,6 @@ class PostData {
         excerpt_separator: '<span class="more"></span>',
       })
     );
-    this._date = new Date(this.year, this.month - 1, this.day, 2);
     this.excerpt = htmlParse(this.excerpt).removeWhitespace().innerText;
   }
   get locale() {
@@ -43,7 +57,9 @@ class PostData {
     return `${this.year}-${this.month}-${this.day}T00:00:00+01:00`;
   }
   get localizedDate() {
-    return this._date.toLocaleDateString('es-ES', { dateStyle: 'medium' });
+    return `${parseInt(this.day, 10)} / ${meses[parseInt(this.month, 10)]} / ${
+      this.year
+    }`;
   }
   get fullURL() {
     return `${site.url}/blog/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
@@ -72,8 +88,6 @@ const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort()) {
   const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
-  // const site = await fs.readJSON(path.join(tplDir, 'site.json'));
-  // const post = await fs.readJSON(path.join(tplDir, 'bilbobus.json'));
   const tplFile = await open(path.join(tplDir, 'post.tpl.html'), 'r');
   const outDir = path.join(postsSite, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
@@ -85,10 +99,6 @@ for (const postName of postNames.sort()) {
           return site[prop];
         case 'post':
           return post[prop];
-        // case 'categories':
-        //   return post.categories
-        //     .map((cat) => catTpl.replaceAll('{{cat}}', cat))
-        //     .join('');
         default:
           console.error('???', _, obj, prop);
           return _;
