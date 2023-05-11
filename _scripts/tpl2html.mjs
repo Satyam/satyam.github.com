@@ -75,7 +75,7 @@ class PostData {
   }
   get catLinks() {
     return this.data.categories
-      .map((cat) => catTpl.replaceAll('{{cat}}', cat))
+      .map((cat) => catTpl.replaceAll('{{cat}}', cat.replace('/', '_')))
       .join('');
   }
 }
@@ -118,4 +118,51 @@ for (const postName of postNames.sort()) {
     })
   );
 }
-// console.log(JSON.stringify(catsHash, null, 2));
+
+const catsTpl = await fs.readFile(
+  path.join(tplDir, 'categories.tpl.html'),
+  'utf8'
+);
+const catsVars = {
+  fullURL: `${site.url}/blog/categories.html`,
+  relURL: 'categories.html',
+  ISODate: new Date().toISOString(),
+  localizedDate: new Date().toLocaleDateString('es-ES', {
+    dateStyle: 'medium',
+  }),
+  title: 'Categories',
+  excerpt: "Categories for posts on Satyam's blog",
+  // content: `<pre>${JSON.stringify(catsHash, null, 2)}</pre>`,
+  content: Object.keys(catsHash)
+    .sort()
+    .map((mainCat) =>
+      Object.keys(catsHash[mainCat])
+        .sort()
+        .map(
+          (subCat) => `
+          <h3 id="${mainCat}_${subCat}">${mainCat} / ${subCat}</h3>
+          <ul>
+            ${catsHash[mainCat][subCat]
+              .map((p) => `<li>${p}</li>\n`)
+              .join('\n')}
+          </ul>
+          `
+        )
+        .join('\n')
+    )
+    .join('\n'),
+};
+await fs.writeFile(
+  path.join(postsSite, 'categories.html'),
+  catsTpl.replaceAll(placeholder, (_, obj, prop) => {
+    switch (obj) {
+      case 'site':
+        return site[prop];
+      case 'post':
+        return catsVars[prop];
+      default:
+        console.error('???', _, obj, prop);
+        return _;
+    }
+  })
+);
