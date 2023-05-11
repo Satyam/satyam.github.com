@@ -1,20 +1,21 @@
 #!/usr/bin/env zx
 import { open } from 'node:fs/promises';
 import matter from 'gray-matter';
-import { parse } from 'node-html-parser';
+import { parse as htmlParse } from 'node-html-parser';
 
 const tplDir = path.join(__dirname, 'templates');
+const destSite = '../../satyam.com';
+
 const placeholder = /{{\s*(\w+)\.(\w+)\s*}}/g;
 
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 
-const site = {
-  name: 'Comentarios',
-  descr: 'Comentarios, viajes, ideas e historias',
-  authorEmail: 'satyam@satyam.com.ar',
-  url: 'www.satyam.com.ar',
-  root: '/',
-};
+const site = require(path.join(tplDir, 'site.json'));
+
+const catTpl = await fs.readFile(
+  path.join(tplDir, 'catentry.tpl.html'),
+  'utf8'
+);
 
 class PostData {
   constructor(postFileName, postContent) {
@@ -33,22 +34,22 @@ class PostData {
       })
     );
     this._date = new Date(this.year, this.month - 1, this.day, 2);
-    this.excerpt = parse(this.excerpt).innerText.replaceAll(/\s+/g, ' ').trim();
+    this.excerpt = htmlParse(this.excerpt).removeWhitespace().innerText;
   }
   get locale() {
     return 'es-ES';
   }
   get ISODate() {
-    return this._date.toISOString();
+    return `${this.year}-${this.month}-${this.day}T00:00:00+01:00`;
   }
   get localizedDate() {
     return this._date.toLocaleDateString('es-ES', { dateStyle: 'medium' });
   }
-  get url() {
+  get fullURL() {
     return `${site.url}/blog/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
   }
-  get uurl() {
-    return `/blog/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
+  get relURL() {
+    return `${this.year}/${this.month}/${this.day}/${this.slug}.html`;
   }
   get title() {
     return this.data.title;
@@ -56,37 +57,45 @@ class PostData {
   get categories() {
     return this.data.categories;
   }
+  get catLinks() {
+    return this.data.categories
+      .map((cat) => catTpl.replaceAll('{{cat}}', cat))
+      .join('');
+  }
 }
 
-const jekyllPosts = '../../satyam.com/_posts';
-const posts = await glob(path.join(jekyllPosts, '*.htm*'));
-const post = new PostData(posts[0], await fs.readFile(posts[0], 'utf8'));
+const postsSite = path.join(destSite, 'site1', 'blog');
+await fs.ensureDir(postsSite);
+await fs.emptyDir(postsSite);
+const jekyllPosts = path.join(destSite, '_posts');
+const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
+for (const postName of postNames.sort()) {
+  const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
-// const site = await fs.readJSON(path.join(tplDir, 'site.json'));
-// const post = await fs.readJSON(path.join(tplDir, 'bilbobus.json'));
-const tplFile = await open(path.join(tplDir, 'post.tpl.html'), 'r');
-const catTpl = await fs.readFile(
-  path.join(tplDir, 'catentry.tpl.html'),
-  'utf8'
-);
-const outFile = await open(path.join(tplDir, 'bilbobus.html'), 'w');
-for await (const line of tplFile.readLines({ encoding: 'utf8' })) {
-  const replacement = line.replaceAll(placeholder, (_, obj, prop) => {
-    switch (obj) {
-      case 'site':
-        return site[prop];
-      case 'post':
-        return post[prop];
-      case 'categories':
-        return post.categories
-          .map((cat) => catTpl.replaceAll('{{cat}}', cat))
-          .join('');
-      default:
-        console.error('???', _, obj, prop);
-        return _;
-    }
-  });
-  await outFile.write(replacement);
+  // const site = await fs.readJSON(path.join(tplDir, 'site.json'));
+  // const post = await fs.readJSON(path.join(tplDir, 'bilbobus.json'));
+  const tplFile = await open(path.join(tplDir, 'post.tpl.html'), 'r');
+  const outDir = path.join(postsSite, post.year, post.month, post.day);
+  await fs.ensureDir(outDir);
+  const outFile = await open(path.join(outDir, `${post.slug}.html`), 'w');
+  for await (const line of tplFile.readLines({ encoding: 'utf8' })) {
+    const replacement = line.replaceAll(placeholder, (_, obj, prop) => {
+      switch (obj) {
+        case 'site':
+          return site[prop];
+        case 'post':
+          return post[prop];
+        // case 'categories':
+        //   return post.categories
+        //     .map((cat) => catTpl.replaceAll('{{cat}}', cat))
+        //     .join('');
+        default:
+          console.error('???', _, obj, prop);
+          return _;
+      }
+    });
+    await outFile.write(replacement);
+  }
+  tplFile.close();
+  outFile.close();
 }
-tplFile.close();
-outFile.close();
