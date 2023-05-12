@@ -12,10 +12,13 @@ const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 
 const site = require(path.join(tplDir, 'site.json'));
 
-const catTpl = await fs.readFile(
-  path.join(tplDir, 'catentry.tpl.html'),
-  'utf8'
-);
+const siteRex = /{{\s*site\.(\w+)\s*}}/g;
+
+const resolveSiteVars = (template) =>
+  template.replaceAll(siteRex, (_, prop) => {
+    if (prop in site) return site[prop];
+    console.error('??? resolving site var:', prop, _);
+  });
 
 const meses = [
   '??',
@@ -32,6 +35,13 @@ const meses = [
   'nov',
   'dic',
 ];
+
+const catTpl = await fs.readFile(
+  path.join(tplDir, 'catentry.tpl.html'),
+  'utf8'
+);
+const postRex = /{{\s*post\.(\w+)\s*}}/g;
+
 class PostData {
   constructor(postFileName, postContent) {
     const m = blogInfoRex.exec(path.basename(postFileName));
@@ -78,13 +88,21 @@ class PostData {
       .map((cat) => catTpl.replaceAll('{{cat}}', cat.replace('/', '_')))
       .join('');
   }
+  resolveVars(template) {
+    return template.replaceAll(postRex, (_, prop) => {
+      if (prop in this) return this[prop];
+      console.error('??? resolving post var:', prop, _);
+    });
+  }
 }
 
 const catsHash = {};
 const postsSite = path.join(destSite, 'site1', 'blog');
 await fs.ensureDir(postsSite);
 await fs.emptyDir(postsSite);
-const postTpl = await fs.readFile(path.join(tplDir, 'post.tpl.html'), 'utf8');
+const postTpl = resolveSiteVars(
+  await fs.readFile(path.join(tplDir, 'post.tpl.html'), 'utf8')
+);
 const jekyllPosts = path.join(destSite, '_posts');
 const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort()) {
@@ -105,24 +123,10 @@ for (const postName of postNames.sort()) {
   await fs.ensureDir(outDir);
   await fs.writeFile(
     path.join(outDir, `${post.slug}.html`),
-    postTpl.replaceAll(placeholder, (_, obj, prop) => {
-      switch (obj) {
-        case 'site':
-          return site[prop];
-        case 'post':
-          return post[prop];
-        default:
-          console.error('???', _, obj, prop);
-          return _;
-      }
-    })
+    post.resolveVars(postTpl)
   );
 }
 
-const catsTpl = await fs.readFile(
-  path.join(tplDir, 'categories.tpl.html'),
-  'utf8'
-);
 const catsVars = {
   fullURL: `${site.url}/blog/categories.html`,
   relURL: 'categories.html',
@@ -131,6 +135,7 @@ const catsVars = {
     dateStyle: 'medium',
   }),
   title: 'Categories',
+  locale: 'es-ES',
   excerpt: "Categories for posts on Satyam's blog",
   // content: `<pre>${JSON.stringify(catsHash, null, 2)}</pre>`,
   content: Object.keys(catsHash)
@@ -152,17 +157,14 @@ const catsVars = {
     )
     .join('\n'),
 };
+const catsTpl = resolveSiteVars(
+  await fs.readFile(path.join(tplDir, 'categories.tpl.html'), 'utf8')
+);
+
 await fs.writeFile(
   path.join(postsSite, 'categories.html'),
-  catsTpl.replaceAll(placeholder, (_, obj, prop) => {
-    switch (obj) {
-      case 'site':
-        return site[prop];
-      case 'post':
-        return catsVars[prop];
-      default:
-        console.error('???', _, obj, prop);
-        return _;
-    }
+  catsTpl.replaceAll(postRex, (_, prop) => {
+    if (prop in catsVars) return catsVars[prop];
+    console.error('??? resolving categories var:', prop, _);
   })
 );
