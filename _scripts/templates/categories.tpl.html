@@ -117,5 +117,21 @@
         </div>
       </div>
     </footer>
+    <script>
+      document
+        .querySelector('.post-content')
+        .addEventListener('click', (ev) => {
+          if (ev.target.tagName === 'H3') {
+            const h3 = ev.target;
+            const ul = h3.nextElementSibling;
+            ul.hidden = !ul.hidden;
+          }
+        });
+      if (location.hash.length) {
+        const id = location.hash.substring(1);
+        document.getElementById(id).nextElementSibling.hidden = false;
+      }
+      console.log(location.hash);
+    </script>
   </body>
 </html>

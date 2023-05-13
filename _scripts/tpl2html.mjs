@@ -149,7 +149,7 @@ const catsVars = {
         .map(
           (subCat) => `
           <h3 id="${mainCat}_${subCat}">${mainCat} / ${subCat}</h3>
-          <ul>
+          <ul hidden>
             ${catsHash[mainCat][subCat]
               .map((p) => `<li>${p}</li>\n`)
               .join('\n')}
