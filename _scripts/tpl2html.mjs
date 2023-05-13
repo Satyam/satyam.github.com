@@ -10,15 +10,17 @@ const placeholder = /{{\s*(\w+)\.(\w+)\s*}}/g;
 
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 
+const resolve = (template, prefix, values) => {
+  const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
+  return template.replaceAll(rex, (_, prop) => {
+    if (prop in values) return values[prop];
+    console.error('??? resolving', prefix, 'var', prop);
+  });
+};
+
 const site = require(path.join(tplDir, 'site.json'));
 
-const siteRex = /{{\s*site\.(\w+)\s*}}/g;
-
-const resolveSiteVars = (template) =>
-  template.replaceAll(siteRex, (_, prop) => {
-    if (prop in site) return site[prop];
-    console.error('??? resolving site var:', prop, _);
-  });
+const resolveSiteVars = (template) => resolve(template, 'site', site);
 
 const meses = [
   '??',
@@ -89,10 +91,7 @@ class PostData {
       .join('');
   }
   resolveVars(template) {
-    return template.replaceAll(postRex, (_, prop) => {
-      if (prop in this) return this[prop];
-      console.error('??? resolving post var:', prop, _);
-    });
+    return resolve(template, 'post', this);
   }
 }
 
@@ -163,8 +162,5 @@ const catsTpl = resolveSiteVars(
 
 await fs.writeFile(
   path.join(postsSite, 'categories.html'),
-  catsTpl.replaceAll(postRex, (_, prop) => {
-    if (prop in catsVars) return catsVars[prop];
-    console.error('??? resolving categories var:', prop, _);
-  })
+  resolve(catsTpl, 'post', catsVars)
 );
