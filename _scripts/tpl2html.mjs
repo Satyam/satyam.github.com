@@ -6,21 +6,19 @@ import { parse as htmlParse } from 'node-html-parser';
 const tplDir = path.join(__dirname, 'templates');
 const destSite = '../../satyam.com';
 
-const placeholder = /{{\s*(\w+)\.(\w+)\s*}}/g;
-
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 
-const resolve = (template, prefix, values) => {
+const resolveVars = (template, prefix, values) => {
   const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
   return template.replaceAll(rex, (_, prop) => {
-    if (prop in values) return values[prop];
+    if (prop in values) return values[prop] ?? '';
     console.error('??? resolving', prefix, 'var', prop);
   });
 };
 
 const site = require(path.join(tplDir, 'site.json'));
 
-const resolveSiteVars = (template) => resolve(template, 'site', site);
+const resolveSiteVars = (template) => resolveVars(template, 'site', site);
 
 const meses = [
   '??',
@@ -42,8 +40,8 @@ const catTpl = await fs.readFile(
   path.join(tplDir, 'catentry.tpl.html'),
   'utf8'
 );
-const postRex = /{{\s*post\.(\w+)\s*}}/g;
 
+const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 class PostData {
   constructor(postFileName, postContent) {
     const m = blogInfoRex.exec(path.basename(postFileName));
@@ -83,18 +81,24 @@ class PostData {
     return this.data.title;
   }
   get categories() {
-    return this.data.categories;
+    return this.data.categories.map((cat) => {
+      const m = catRex.exec(cat);
+      if (!m) {
+        console.error('cat no match', cat, this._fileName);
+        process.exit(1);
+      }
+      return m.groups;
+    });
   }
   get catLinks() {
-    return this.data.categories
-      .map((cat) => catTpl.replaceAll('{{cat}}', cat.replace('/', '_')))
-      .join('');
+    return this.categories
+      .map((cat) => resolveVars(catTpl, 'cat', cat))
+      .join('\n');
   }
   resolveVars(template) {
-    return resolve(template, 'post', this);
+    return resolveVars(template, 'post', this);
   }
 }
-
 const catsHash = {};
 const postsSite = path.join(destSite, 'site1', 'blog');
 await fs.ensureDir(postsSite);
@@ -107,15 +111,15 @@ const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort()) {
   const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
-  // console.log(post.relURL, post.categories);
   post.categories.forEach((cat) => {
-    const [c0, c1] = cat.split('/');
-    if (!(c0 in catsHash)) catsHash[c0] = { _: [] };
-    if (c1) {
-      if (!(c1 in catsHash[c0])) catsHash[c0][c1] = [];
-      catsHash[c0][c1].push(post.relURL);
+    const { main, sub } = cat;
+    if (!(main in catsHash)) catsHash[main] = { '': [] };
+    const cMain = catsHash[main];
+    if (sub) {
+      if (!(sub in cMain)) cMain[sub] = [];
+      cMain[sub].push(post.relURL);
     } else {
-      catsHash[c0]['_'].push(post.relURL);
+      cMain[''].push(post.relURL);
     }
   });
   const outDir = path.join(postsSite, post.year, post.month, post.day);
@@ -162,5 +166,5 @@ const catsTpl = resolveSiteVars(
 
 await fs.writeFile(
   path.join(postsSite, 'categories.html'),
-  resolve(catsTpl, 'post', catsVars)
+  resolveVars(catsTpl, 'post', catsVars)
 );
