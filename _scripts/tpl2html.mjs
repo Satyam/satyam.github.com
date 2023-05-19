@@ -117,9 +117,9 @@ for (const postName of postNames.sort()) {
     const cMain = catsHash[main];
     if (sub) {
       if (!(sub in cMain)) cMain[sub] = [];
-      cMain[sub].push(post.relURL);
+      cMain[sub].push({ title: post.title, url: post.relURL });
     } else {
-      cMain[''].push(post.relURL);
+      cMain[''].push({ title: post.title, url: post.relURL });
     }
   });
   const outDir = path.join(postsSite, post.year, post.month, post.day);
@@ -130,6 +130,7 @@ for (const postName of postNames.sort()) {
   );
 }
 
+let lastMainCat = '';
 const catsVars = {
   fullURL: `${site.url}/blog/categories.html`,
   relURL: 'categories.html',
@@ -143,21 +144,30 @@ const catsVars = {
   // content: `<pre>${JSON.stringify(catsHash, null, 2)}</pre>`,
   content: Object.keys(catsHash)
     .sort()
-    .map((mainCat) =>
-      Object.keys(catsHash[mainCat])
+    .map((mainCat) => {
+      let out = '';
+      if (mainCat !== lastMainCat) {
+        out += `<h3 id="${mainCat}_">${mainCat}</h3><ul hidden>`;
+      }
+      out += Object.keys(catsHash[mainCat])
         .sort()
         .map(
           (subCat) => `
-          <h3 id="${mainCat}_${subCat}">${mainCat} / ${subCat}</h3>
-          <ul hidden>
-            ${catsHash[mainCat][subCat]
-              .map((p) => `<li>${p}</li>\n`)
-              .join('\n')}
-          </ul>
-          `
+        ${subCat ? `<h4 id="${mainCat}_${subCat}">${subCat}</h4>` : ''}
+        <ul hidden>
+          ${catsHash[mainCat][subCat]
+            .map((p) => `<li><a href="${p.url}">${p.title}</a></li>\n`)
+            .join('\n')}
+        </ul>
+        `
         )
-        .join('\n')
-    )
+        .join('\n');
+      if (mainCat !== lastMainCat) {
+        lastMainCat = mainCat;
+        out += '</ul>';
+      }
+      return out;
+    })
     .join('\n'),
 };
 const catsTpl = resolveSiteVars(

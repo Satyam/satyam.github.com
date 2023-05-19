@@ -121,10 +121,15 @@
       document
         .querySelector('.post-content')
         .addEventListener('click', (ev) => {
-          if (ev.target.tagName === 'H3') {
-            const h3 = ev.target;
-            const ul = h3.nextElementSibling;
+          const target = ev.target;
+          const tag = target.tagName;
+          if (tag === 'H3' || tag === 'H4') {
+            const ul = target.nextElementSibling;
             ul.hidden = !ul.hidden;
+            if (tag === 'H3') {
+              const nested = ul.firstElementChild;
+              nested.hidden = !nested.hidden;
+            }
           }
         });
       if (location.hash.length) {
