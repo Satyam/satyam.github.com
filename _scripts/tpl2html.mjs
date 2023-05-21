@@ -56,10 +56,6 @@ const catTitles = {
   'mega-ingenieria': 'Mega-Ingeniería',
   programacion: 'Programación',
 };
-const catTpl = await fs.readFile(
-  path.join(tplDir, 'catentry.tpl.html'),
-  'utf8'
-);
 
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 class PostData {
@@ -107,16 +103,16 @@ class PostData {
         console.error('cat no match', cat, this._fileName);
         process.exit(1);
       }
-      return {
-        ...m.groups,
-        mainTitle: catTitles[m.groups.main],
-        subTitle: catTitles[m.groups.sub],
-      };
+      return m.groups;
     });
   }
   get catLinks() {
     return this.categories
-      .map((cat) => resolveVars(catTpl, 'cat', cat))
+      .map(
+        (cat) => `<a href="/blog/categories/#${cat.main}_${cat.sub}"
+      >${catTitles[cat.main]}${cat.sub ? ` / ${catTitles[cat.sub]}` : ''}
+      </a>`
+      )
       .join('\n');
   }
   resolveVars(template) {
@@ -187,7 +183,7 @@ const catsVars = {
         }
         <ul hidden>
           ${catsHash[mainCat][subCat]
-            .map((p) => `<li><a href="${p.url}">${p.title}</a></li>\n`)
+            .map((p) => `<li><a href="../${p.url}">${p.title}</a></li>\n`)
             .join('\n')}
         </ul>
         `
