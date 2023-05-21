@@ -36,6 +36,26 @@ const meses = [
   'dic',
 ];
 
+const catTitles = {
+  viajes: 'Viajes',
+  tecnologia: 'Tecnología',
+  general: 'General',
+  urbanismo: 'Urbanismo',
+  historia: 'Historia',
+  mitos: 'Mitos',
+  papel: 'Papel',
+  futuro: 'Futuro',
+  'the-gods-that-werent': "The Gods that Weren't",
+  egipto: 'Egipto',
+  francia: 'Francia',
+  grecia: 'Grecia',
+  italia: 'Italia',
+  sitges: 'Sitges',
+  'tres-cantos': 'Tres Cantos',
+  turquia: 'Turquía',
+  'mega-ingenieria': 'Mega-Ingeniería',
+  programacion: 'Programación',
+};
 const catTpl = await fs.readFile(
   path.join(tplDir, 'catentry.tpl.html'),
   'utf8'
@@ -87,7 +107,11 @@ class PostData {
         console.error('cat no match', cat, this._fileName);
         process.exit(1);
       }
-      return m.groups;
+      return {
+        ...m.groups,
+        mainTitle: catTitles[m.groups.main],
+        subTitle: catTitles[m.groups.sub],
+      };
     });
   }
   get catLinks() {
@@ -129,7 +153,6 @@ for (const postName of postNames.sort()) {
     post.resolveVars(postTpl)
   );
 }
-
 let lastMainCat = '';
 const catsVars = {
   fullURL: `${site.url}/blog/categories.html`,
@@ -147,13 +170,21 @@ const catsVars = {
     .map((mainCat) => {
       let out = '';
       if (mainCat !== lastMainCat) {
-        out += `<h3 id="${mainCat}_">${mainCat}</h3><ul hidden>`;
+        out += `<h3 id="${mainCat}_">${
+          catTitles[mainCat] ?? `?? ${mainCat}`
+        }</h3><ul hidden>`;
       }
       out += Object.keys(catsHash[mainCat])
         .sort()
         .map(
           (subCat) => `
-        ${subCat ? `<h4 id="${mainCat}_${subCat}">${subCat}</h4>` : ''}
+        ${
+          subCat
+            ? `<h4 id="${mainCat}_${subCat}">${
+                catTitles[subCat] ?? `?? ${subCat}`
+              }</h4>`
+            : ''
+        }
         <ul hidden>
           ${catsHash[mainCat][subCat]
             .map((p) => `<li><a href="${p.url}">${p.title}</a></li>\n`)
