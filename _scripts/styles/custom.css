@@ -1,0 +1,13 @@
+/* custom */
+figure {
+  width: inherit;
+}
+
+figcaption {
+  text-align: center;
+}
+
+figure img {
+  margin-left: auto;
+  margin-right: auto;
+}

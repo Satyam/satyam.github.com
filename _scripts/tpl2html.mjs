@@ -3,8 +3,18 @@ import { open } from 'node:fs/promises';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 
-const tplDir = path.join(__dirname, 'templates');
 const destSite = '../../satyam.com';
+
+const SRC_DIRS = {
+  templates: path.join(__dirname, 'templates'),
+  styles: path.join(__dirname, 'styles'),
+  jekyllPosts: path.join(destSite, '_posts'),
+};
+
+const DEST_DIRS = {
+  styles: path.join(destSite, 'site1', 'assets', 'css'),
+  posts: path.join(destSite, 'site1', 'blog'),
+};
 
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 
@@ -16,7 +26,7 @@ const resolveVars = (template, prefix, values) => {
   });
 };
 
-const site = require(path.join(tplDir, 'site.json'));
+const site = require(path.join(SRC_DIRS.templates, 'site.json'));
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
 
@@ -57,6 +67,18 @@ const catTitles = {
   programacion: 'Programación',
 };
 
+// Copy and merge styles
+await fs.ensureDir(DEST_DIRS.styles);
+const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
+await outStyle.writeFile(
+  await fs.readFile(path.join(SRC_DIRS.styles, 'minima.css'), 'utf8')
+);
+await outStyle.writeFile(
+  await fs.readFile(path.join(SRC_DIRS.styles, 'custom.css'), 'utf8')
+);
+await outStyle.close();
+
+//---
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 class PostData {
   constructor(postFileName, postContent) {
@@ -120,14 +142,12 @@ class PostData {
   }
 }
 const catsHash = {};
-const postsSite = path.join(destSite, 'site1', 'blog');
-await fs.ensureDir(postsSite);
-await fs.emptyDir(postsSite);
+await fs.ensureDir(DEST_DIRS.posts);
+await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
-  await fs.readFile(path.join(tplDir, 'post.tpl.html'), 'utf8')
+  await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
 );
-const jekyllPosts = path.join(destSite, '_posts');
-const postNames = await glob(path.join(jekyllPosts, '*.htm*'));
+const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort()) {
   const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
@@ -142,7 +162,7 @@ for (const postName of postNames.sort()) {
       cMain[''].push({ title: post.title, url: post.relURL });
     }
   });
-  const outDir = path.join(postsSite, post.year, post.month, post.day);
+  const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
   await fs.writeFile(
     path.join(outDir, `${post.slug}.html`),
@@ -198,10 +218,13 @@ const catsVars = {
     .join('\n'),
 };
 const catsTpl = resolveSiteVars(
-  await fs.readFile(path.join(tplDir, 'categories.tpl.html'), 'utf8')
+  await fs.readFile(
+    path.join(SRC_DIRS.templates, 'categories.tpl.html'),
+    'utf8'
+  )
 );
 
 await fs.writeFile(
-  path.join(postsSite, 'categories.html'),
+  path.join(DEST_DIRS.posts, 'categories.html'),
   resolveVars(catsTpl, 'post', catsVars)
 );
