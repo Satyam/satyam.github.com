@@ -31,11 +31,11 @@
         "url": "{{post.fullURL}}"
       }
     </script>
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="{{site.root}}/assets/css/style.css" />
     <link
       type="application/atom+xml"
       rel="alternate"
-      href="/feed.xml"
+      href="{{site.root}}/feed.xml"
       title="{{site.name}}"
     />
   </head>
@@ -82,9 +82,8 @@
             </p>
           </header>
 
-          <div class="post-content e-content" itemprop="articleBody">
-            {{post.content}}
-          </div>
+          <div class="post-content e-content categories">{{post.content}}</div>
+
           <a class="u-url" href="{{site.root}}{{post.relURL}}" hidden></a>
         </article>
       </div>
