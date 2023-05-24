@@ -134,11 +134,12 @@ for (const postName of postNames.sort()) {
     const { main, sub } = cat;
     if (!(main in catsHash)) catsHash[main] = { '': [] };
     const cMain = catsHash[main];
+    const { title, relURL, localizedDate, excerpt } = post;
     if (sub) {
       if (!(sub in cMain)) cMain[sub] = [];
-      cMain[sub].push({ title: post.title, url: post.relURL });
+      cMain[sub].push({ title, relURL, localizedDate, excerpt });
     } else {
-      cMain[''].push({ title: post.title, url: post.relURL });
+      cMain[''].push({ title, relURL, localizedDate, excerpt });
     }
   });
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
@@ -184,7 +185,12 @@ const catsVars = {
         }
         <ul hidden>
           ${catsHash[mainCat][subCat]
-            .map((p) => `<li><a href="../${p.url}">${p.title}</a></li>\n`)
+            .map(
+              (
+                p
+              ) => `<li><a href="../${p.url}">${p.title}</a> ${p.localizedDate}
+            <blockquote>${p.excerpt}</blockquote></li>\n`
+            )
             .join('\n')}
         </ul>
         `
