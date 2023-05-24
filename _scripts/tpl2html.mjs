@@ -2,18 +2,21 @@
 import { open } from 'node:fs/promises';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
-
-const destSite = '../../satyam.com';
+import slugify from 'slugify';
 
 const SRC_DIRS = {
   templates: path.join(__dirname, 'templates'),
   styles: path.join(__dirname, 'styles'),
-  jekyllPosts: path.join(destSite, '_posts'),
+  jekyllPosts: path.join(__dirname, 'posts'),
+  images: path.join(__dirname, 'imgs'),
 };
 
+const SITE = path.join(__dirname, 'blog');
+const ASSETS = path.join(SITE, 'assets');
 const DEST_DIRS = {
-  styles: path.join(destSite, 'site1', 'assets', 'css'),
-  posts: path.join(destSite, 'site1', 'blog'),
+  posts: SITE,
+  styles: path.join(ASSETS, 'css'),
+  images: path.join(ASSETS, 'img'),
 };
 
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
@@ -46,40 +49,8 @@ const meses = [
   'dic',
 ];
 
-const catTitles = {
-  viajes: 'Viajes',
-  tecnologia: 'Tecnología',
-  general: 'General',
-  urbanismo: 'Urbanismo',
-  historia: 'Historia',
-  mitos: 'Mitos',
-  papel: 'Papel',
-  futuro: 'Futuro',
-  'the-gods-that-werent': "The Gods that Weren't",
-  egipto: 'Egipto',
-  francia: 'Francia',
-  grecia: 'Grecia',
-  italia: 'Italia',
-  sitges: 'Sitges',
-  'tres-cantos': 'Tres Cantos',
-  turquia: 'Turquía',
-  'mega-ingenieria': 'Mega-Ingeniería',
-  programacion: 'Programación',
-};
-
-// Copy and merge styles
-await fs.ensureDir(DEST_DIRS.styles);
-const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
-await outStyle.writeFile(
-  await fs.readFile(path.join(SRC_DIRS.styles, 'minima.css'), 'utf8')
-);
-await outStyle.writeFile(
-  await fs.readFile(path.join(SRC_DIRS.styles, 'custom.css'), 'utf8')
-);
-await outStyle.close();
-
-//---
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
+
 class PostData {
   constructor(postFileName, postContent) {
     const m = blogInfoRex.exec(path.basename(postFileName));
@@ -130,10 +101,18 @@ class PostData {
   }
   get catLinks() {
     return this.categories
-      .map(
-        (cat) => `<a href="/blog/categories/#${cat.main}_${cat.sub}"
-      >${catTitles[cat.main]}${cat.sub ? ` / ${catTitles[cat.sub]}` : ''}
-      </a>`
+      .map((cat) =>
+        cat.sub
+          ? `
+          <a href="/blog/categories/#${slugify(cat.main)}_${slugify(
+              cat.sub
+            )}" rel="category tag">
+            ${cat.main}
+          </a>`
+          : `
+          <a href="/blog/categories/#${slugify(cat.main)}" rel="category tag">
+            ${cat.main}
+          </a>`
       )
       .join('\n');
   }
@@ -143,7 +122,7 @@ class PostData {
 }
 const catsHash = {};
 await fs.ensureDir(DEST_DIRS.posts);
-await fs.emptyDir(DEST_DIRS.posts);
+// await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
   await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
 );
@@ -181,14 +160,16 @@ const catsVars = {
   locale: 'es-ES',
   excerpt: "Categories for posts on Satyam's blog",
   // content: `<pre>${JSON.stringify(catsHash, null, 2)}</pre>`,
+
+  // TODO cambiar estructura a https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#try_it
   content: Object.keys(catsHash)
     .sort()
     .map((mainCat) => {
       let out = '';
       if (mainCat !== lastMainCat) {
-        out += `<h3 id="${mainCat}_">${
-          catTitles[mainCat] ?? `?? ${mainCat}`
-        }</h3><ul hidden>`;
+        out += `<h3 id="${slugify(
+          mainCat
+        )}" class="main-category">${mainCat}</h3><ul hidden>`;
       }
       out += Object.keys(catsHash[mainCat])
         .sort()
@@ -196,9 +177,9 @@ const catsVars = {
           (subCat) => `
         ${
           subCat
-            ? `<h4 id="${mainCat}_${subCat}">${
-                catTitles[subCat] ?? `?? ${subCat}`
-              }</h4>`
+            ? `<h4 id="${slugify(mainCat)}_${slugify(
+                subCat
+              )}" class="sub-category">${subCat}</h4>`
             : ''
         }
         <ul hidden>
@@ -228,3 +209,21 @@ await fs.writeFile(
   path.join(DEST_DIRS.posts, 'categories.html'),
   resolveVars(catsTpl, 'post', catsVars)
 );
+
+// Copy and merge styles
+await fs.ensureDir(DEST_DIRS.styles);
+const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
+await outStyle.writeFile(
+  await fs.readFile(path.join(SRC_DIRS.styles, 'minima.css'), 'utf8')
+);
+await outStyle.writeFile(
+  await fs.readFile(path.join(SRC_DIRS.styles, 'custom.css'), 'utf8')
+);
+await outStyle.close();
+
+//---
+
+if (!(await fs.pathExists(DEST_DIRS.images))) {
+  await fs.ensureDir(DEST_DIRS.images);
+  await fs.copy(SRC_DIRS.images, DEST_DIRS.images);
+}
