@@ -47,18 +47,18 @@ await fs.ensureDir(DEST_DIRS.POSTS);
 const postNames = await glob(path.join(SRC_DIRS.POSTS, '*.htm*'));
 for (const postName of postNames) {
   const baseName = path.basename(postName);
-  const post = matter.read(postName);
+  const { data, content } = matter.read(postName);
 
   // Expand categories to full names using `catTables`
-  const cats = post.data.categories.map((cat) => {
+  const cats = data.categories.map((cat) => {
     const [main, sub] = cat.split('/');
     return catTitles[main] + (sub ? '/' + catTitles[sub] : '');
   });
 
   // Check for English or Spanish
 
-  const esMatch = post.content.match(esRx)?.length ?? 0;
-  const enMatch = post.content.match(enRx)?.length ?? 0;
+  const esMatch = content.match(esRx)?.length ?? 0;
+  const enMatch = content.match(enRx)?.length ?? 0;
   const lang = esMatch > enMatch ? 'es-ES' : 'en-US';
 
   const ymd = baseName.split('-').slice(0, 3);
@@ -66,12 +66,12 @@ for (const postName of postNames) {
   await fs.writeFile(
     path.join(DEST_DIRS.POSTS, baseName),
     `---
-title: "${post.data.title}"
+title: "${data.title}"
 date: "${ymd.join('-')}"
 categories: ${JSON.stringify(cats)}
 language: "${lang}"
 ---
-${post.content}
+${content}
 `
   );
 }
