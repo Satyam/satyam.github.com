@@ -70,7 +70,7 @@ class PostData {
     this.excerpt = htmlParse(this.excerpt).removeWhitespace().innerText;
   }
   get locale() {
-    return 'es-ES';
+    return this.data.language;
   }
   get ISODate() {
     return `${this.year}-${this.month}-${this.day}T00:00:00+01:00`;
@@ -107,7 +107,7 @@ class PostData {
           <a href="/blog/categories/#${slugify(cat.main)}_${slugify(
               cat.sub
             )}" rel="category tag">
-            ${cat.main}
+            ${cat.main} / ${cat.sub}
           </a>`
           : `
           <a href="/blog/categories/#${slugify(cat.main)}" rel="category tag">
@@ -224,6 +224,7 @@ await outStyle.close();
 //---
 
 if (!(await fs.pathExists(DEST_DIRS.images))) {
+  console.log('copying images');
   await fs.ensureDir(DEST_DIRS.images);
   await fs.copy(SRC_DIRS.images, DEST_DIRS.images);
 }
