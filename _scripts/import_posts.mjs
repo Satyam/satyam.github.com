@@ -39,7 +39,9 @@ const catTitles = {
   programacion: 'Programación',
 };
 
-const theRx = /\bthe\b/gi;
+// From: https://github.com/wooorm/franc/blob/main/packages/franc-min/data.js
+const esRx = /\sde|de\s|os\s|\sla|\sa\s|la\s|\sy\s/gi;
+const enRx = /the|\sth|\san|he\s|nd\s/gi;
 
 await fs.ensureDir(DEST_DIRS.POSTS);
 const postNames = await glob(path.join(SRC_DIRS.POSTS, '*.htm*'));
@@ -53,10 +55,14 @@ for (const postName of postNames) {
     return catTitles[main] + (sub ? '/' + catTitles[sub] : '');
   });
 
-  // Check for English
+  // Check for English or Spanish
 
-  const lang = theRx.test(post.content) ? 'en-US' : 'es-ES';
+  const esMatch = post.content.match(esRx)?.length ?? 0;
+  const enMatch = post.content.match(enRx)?.length ?? 0;
+  const lang = esMatch > enMatch ? 'es-ES' : 'en-US';
+
   const ymd = baseName.split('-').slice(0, 3);
+
   await fs.writeFile(
     path.join(DEST_DIRS.POSTS, baseName),
     `---
