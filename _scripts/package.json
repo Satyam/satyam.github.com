@@ -1,8 +1,13 @@
 {
   "dependencies": {
-    "node-html-parser": "^6.1.4"
+    "node-html-parser": "^6.1.4",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "gray-matter": "^4.0.3"
+  },
+  "scripts": {
+    "test": "serve .",
+    "build": "./tpl2html.mjs"
   }
 }
