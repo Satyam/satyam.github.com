@@ -7,7 +7,7 @@
     "gray-matter": "^4.0.3"
   },
   "scripts": {
-    "test": "serve .",
+    "start": "serve .",
     "build": "./tpl2html.mjs"
   }
 }
