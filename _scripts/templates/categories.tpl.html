@@ -125,17 +125,19 @@
           if (tag === 'H3' || tag === 'H4') {
             const ul = target.nextElementSibling;
             ul.hidden = !ul.hidden;
-            if (tag === 'H3') {
-              const nested = ul.firstElementChild;
-              nested.hidden = !nested.hidden;
-            }
           }
         });
       if (location.hash.length) {
         const id = location.hash.substring(1);
-        document.getElementById(id).nextElementSibling.hidden = false;
+        const hEl = document.getElementById(id);
+        if (hEl) {
+          hEl.nextElementSibling.hidden = false;
+          if (hEl.tagName === 'H4') {
+            hEl.closest('UL').hidden = false;
+          }
+          hEl.focus();
+        }
       }
-      console.log(location.hash);
     </script>
   </body>
 </html>

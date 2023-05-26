@@ -182,13 +182,13 @@ const processPostArray = (a) => a.map(processPostItem).join('');
 // linkArray =  [
 //       { "title": "Andorra la Vella"  }
 //     ],
-const processSubItem = (postArray, subCat) =>
+const processSubItem = (postArray, mainCat, subCat) =>
   subCat === '|'
     ? processPostArray(postArray)
     : `
     <li>
-      <h4>${subCat}</h4>
-      <ul>${processPostArray(postArray)}</ul>
+      <h4  id="${slugify(mainCat)}_${slugify(subCat)}">${subCat}</h4>
+      <ul hidden>${processPostArray(postArray)}</ul>
     </li>`;
 
 //  mainCat = "Viajes"
@@ -205,8 +205,10 @@ const processSubItem = (postArray, subCat) =>
 //   }
 const processMainHash = (subHash, mainCat) => `
     <li>
-      <h3>${mainCat}</h3>
-      <ul>${objectMap(subHash, processSubItem).join('')}</ul>
+      <h3 id="${slugify(mainCat)}">${mainCat}</h3>
+      <ul hidden>${objectMap(subHash, (postArray, subCat) =>
+        processSubItem(postArray, mainCat, subCat)
+      ).join('')}</ul>
     </li>`;
 
 // hash = {
