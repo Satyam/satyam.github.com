@@ -29,6 +29,11 @@ const resolveVars = (template, prefix, values) => {
   });
 };
 
+const objectMap = (obj, fn, sortFn) =>
+  Object.keys(obj)
+    .sort(sortFn)
+    .map((key, index) => fn(obj[key], key, index));
+
 const site = require(path.join(SRC_DIRS.templates, 'site.json'));
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
@@ -127,19 +132,24 @@ const postTpl = resolveSiteVars(
   await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
 );
 const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
-for (const postName of postNames.sort()) {
+for (const postName of postNames.sort((a, b) => {
+  if (a < b) return 1;
+  if (a > b) return -1;
+  return 0;
+})) {
   const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
 
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
-    if (!(main in catsHash)) catsHash[main] = { '': [] };
+    // Important: the reason for the | key is because it gets sorted after all alpha characters
+    if (!(main in catsHash)) catsHash[main] = { '|': [] };
     const cMain = catsHash[main];
     const { title, relURL, localizedDate, excerpt } = post;
     if (sub) {
       if (!(sub in cMain)) cMain[sub] = [];
       cMain[sub].push({ title, relURL, localizedDate, excerpt });
     } else {
-      cMain[''].push({ title, relURL, localizedDate, excerpt });
+      cMain['|'].push({ title, relURL, localizedDate, excerpt });
     }
   });
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
@@ -149,7 +159,80 @@ for (const postName of postNames.sort()) {
     post.resolveVars(postTpl)
   );
 }
-let lastMainCat = '';
+
+// p = { "title": "El entierro de la sardina" }
+const processPostItem = (p) => `
+  <li>
+    <a href="../${p.relURL}">${p.title}</a> ${p.localizedDate}
+    <blockquote>${p.excerpt}</blockquote>
+  </li>`;
+
+// a =  [
+//       { "title": "El entierro de la sardina" }
+//     ],
+// It is assumed that posts will be sorted descending by date
+const processPostArray = (a) => a.map(processPostItem).join('');
+
+// subCat = "Tres Cantos"
+// postArray =  [
+//       { "title": "El entierro de la sardina" }
+//     ],
+// or:
+// subCat = "|"
+// linkArray =  [
+//       { "title": "Andorra la Vella"  }
+//     ],
+const processSubItem = (postArray, subCat) =>
+  subCat === '|'
+    ? processPostArray(postArray)
+    : `
+    <li>
+      <h4>${subCat}</h4>
+      <ul>${processPostArray(postArray)}</ul>
+    </li>`;
+
+//  mainCat = "Viajes"
+//  subHash = {
+//     "|": [
+//       { "title": "Andorra la Vella"  }
+//     ],
+//     "Tres Cantos": [
+//       { "title": "El entierro de la sardina" }
+//     ],
+//     "Italia": [
+//       { "title": "Capri y Sorrento" }
+//     ],
+//   }
+const processMainHash = (subHash, mainCat) => `
+    <li>
+      <h3>${mainCat}</h3>
+      <ul>${objectMap(subHash, processSubItem).join('')}</ul>
+    </li>`;
+
+// hash = {
+//   "Viajes": {
+//     "|": [
+//       { "title": "Andorra la Vella"  }
+//     ],
+//     "Tres Cantos": [
+//       { "title": "El entierro de la sardina" }
+//     ],
+//     "Italia": [
+//       { "title": "Capri y Sorrento" }
+//     ],
+//   },
+//   "Tecnología": {
+//     "|": [
+//       { "title": "Tecnología" }
+//     ],
+//     "Mega-Ingeniería": [
+//       { "title": "Barcos generadores de hidrógeno" }
+//     ],
+//   }
+// }
+const processCatsHash = (hash) =>
+  `<ul>${objectMap(hash, processMainHash).join('')}</ul>`;
+
 const catsVars = {
   fullURL: `${site.url}/blog/categories.html`,
   relURL: 'categories.html',
@@ -160,49 +243,18 @@ const catsVars = {
   title: 'Categories',
   locale: 'es-ES',
   excerpt: "Categories for posts on Satyam's blog",
-  // content: `<pre>${JSON.stringify(catsHash, null, 2)}</pre>`,
+  // content: `<pre>${JSON.stringify(
+  //   catsHash,
+  //   (key, value) =>
+  //     ['excerpt', 'relURL', 'localizedDate'].includes(key)
+  //       ? undefined
+  //       : Array.isArray(value)
+  //       ? value.slice(0, 1)
+  //       : value,
+  //   2
+  // )}</pre>`,
 
-  // TODO cambiar estructura a https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#try_it
-  content: Object.keys(catsHash)
-    .sort()
-    .map((mainCat) => {
-      let out = '';
-      if (mainCat !== lastMainCat) {
-        out += `<h3 id="${slugify(
-          mainCat
-        )}" class="main-category">${mainCat}</h3><ul hidden>`;
-      }
-      out += Object.keys(catsHash[mainCat])
-        .sort()
-        .map(
-          (subCat) => `
-        ${
-          subCat
-            ? `<h4 id="${slugify(mainCat)}_${slugify(
-                subCat
-              )}" class="sub-category">${subCat}</h4>`
-            : ''
-        }
-        <ul hidden>
-          ${catsHash[mainCat][subCat]
-            .map(
-              (
-                p
-              ) => `<li><a href="../${p.url}">${p.title}</a> ${p.localizedDate}
-            <blockquote>${p.excerpt}</blockquote></li>\n`
-            )
-            .join('\n')}
-        </ul>
-        `
-        )
-        .join('\n');
-      if (mainCat !== lastMainCat) {
-        lastMainCat = mainCat;
-        out += '</ul>';
-      }
-      return out;
-    })
-    .join('\n'),
+  content: processCatsHash(catsHash),
 };
 const catsTpl = resolveSiteVars(
   await fs.readFile(
