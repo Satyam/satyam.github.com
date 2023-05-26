@@ -72,7 +72,10 @@ class PostData {
         excerpt_separator: '<span class="more"></span>',
       })
     );
-    this.excerpt = htmlParse(this.excerpt).removeWhitespace().innerText;
+
+    this.excerpt = htmlParse(this.excerpt).innerText.replaceAll(/[ ]+/g, ' ');
+    if (this.excerpt.length > 800)
+      console.error('excerpt too long', postFileName, this.excerpt.length);
   }
   get locale() {
     return this.data.language;
