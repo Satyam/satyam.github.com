@@ -56,6 +56,11 @@ const meses = [
 
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
+const cleanExcerpt = (e) => {
+  const eEl = htmlParse(e);
+  eEl.querySelectorAll('figure').forEach((fig) => fig.remove());
+  return eEl.innerText.replaceAll(/[ ]+/g, ' ');
+};
 class PostData {
   constructor(postFileName, postContent) {
     const m = blogInfoRex.exec(path.basename(postFileName));
@@ -73,7 +78,7 @@ class PostData {
       })
     );
 
-    this.excerpt = htmlParse(this.excerpt).innerText.replaceAll(/[ ]+/g, ' ');
+    this.excerpt = cleanExcerpt(this.excerpt);
     if (this.excerpt.length > 800)
       console.error('excerpt too long', postFileName, this.excerpt.length);
   }
@@ -89,7 +94,7 @@ class PostData {
     }`;
   }
   get fullURL() {
-    return `${site.url}/blog/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
+    return `${site.url}${site.root}/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
   }
   get relURL() {
     return `${this.year}/${this.month}/${this.day}/${this.slug}.html`;
@@ -112,13 +117,13 @@ class PostData {
       .map((cat) =>
         cat.sub
           ? `
-          <a href="/blog/categories/#${slugify(cat.main)}_${slugify(
+          <a href="categories/#${slugify(cat.main)}_${slugify(
               cat.sub
             )}" rel="category tag">
             ${cat.main} / ${cat.sub}
           </a>`
           : `
-          <a href="/blog/categories/#${slugify(cat.main)}" rel="category tag">
+          <a href="categories/#${slugify(cat.main)}" rel="category tag">
             ${cat.main}
           </a>`
       )
@@ -166,7 +171,8 @@ for (const postName of postNames.sort((a, b) => {
 // p = { "title": "El entierro de la sardina" }
 const processPostItem = (p) => `
   <li>
-    <a href="../${p.relURL}">${p.title}</a> ${p.localizedDate}
+    <a class="cat-post-link" href="${p.relURL}">${p.title}</a>
+    <span class="cat-post-date">${p.localizedDate}</span>
     <blockquote>${p.excerpt}</blockquote>
   </li>`;
 
@@ -239,7 +245,7 @@ const processCatsHash = (hash) =>
   `<ul>${objectMap(hash, processMainHash).join('')}</ul>`;
 
 const catsVars = {
-  fullURL: `${site.url}/blog/categories.html`,
+  fullURL: `${site.url}${site.root}/categories.html`,
   relURL: 'categories.html',
   ISODate: new Date().toISOString(),
   localizedDate: new Date().toLocaleDateString('es-ES', {
