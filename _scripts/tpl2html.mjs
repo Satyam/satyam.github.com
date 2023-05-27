@@ -19,8 +19,6 @@ const DEST_DIRS = {
   images: path.join(ASSETS, 'img'),
 };
 
-const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
-
 const resolveVars = (template, prefix, values) => {
   const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
   return template.replaceAll(rex, (_, prop) => {
@@ -54,6 +52,7 @@ const meses = [
   'dic',
 ];
 
+const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
 const cleanExcerpt = (e) => {
@@ -61,78 +60,62 @@ const cleanExcerpt = (e) => {
   eEl.querySelectorAll('figure').forEach((fig) => fig.remove());
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
-class PostData {
-  constructor(postFileName, postContent) {
-    const m = blogInfoRex.exec(path.basename(postFileName));
-    if (!m) {
-      console.error('no match', postFileName);
-      process.exit(1);
-    }
-    Object.assign(
-      this,
-      { _fileName: postFileName },
-      m.groups,
-      matter(postContent, {
-        excerpt: true,
-        excerpt_separator: '<span class="more"></span>',
-      })
-    );
 
-    this.excerpt = cleanExcerpt(this.excerpt);
-    if (this.excerpt.length > 800)
-      console.error('excerpt too long', postFileName, this.excerpt.length);
+const parsePostData = (postFileName, postContent) => {
+  const m = blogInfoRex.exec(path.basename(postFileName));
+  if (!m) {
+    console.error('no match', postFileName);
+    process.exit(1);
   }
-  get locale() {
-    return this.data.language;
-  }
-  get ISODate() {
-    return `${this.year}-${this.month}-${this.day}T00:00:00+01:00`;
-  }
-  get localizedDate() {
-    return `${parseInt(this.day, 10)} / ${meses[parseInt(this.month, 10)]} / ${
-      this.year
-    }`;
-  }
-  get fullURL() {
-    return `${site.url}${site.root}/${this.year}/${this.month}/${this.day}/${this.slug}.html`;
-  }
-  get relURL() {
-    return `${this.year}/${this.month}/${this.day}/${this.slug}.html`;
-  }
-  get title() {
-    return this.data.title;
-  }
-  get categories() {
-    return this.data.categories.map((cat) => {
+  const { year, month, day, slug } = m.groups;
+  const fMat = matter(postContent, {
+    excerpt: true,
+    excerpt_separator: '<span class="more"></span>',
+  });
+  const result = {
+    year,
+    month,
+    day,
+    slug,
+    excerpt: cleanExcerpt(fMat.excerpt),
+    content: fMat.content,
+    locale: fMat.data.language,
+    ISODate: `${year}-${month}-${day}T00:00:00+01:00`,
+    localizedDate: `${parseInt(day, 10)} / ${
+      meses[parseInt(month, 10)]
+    } / ${year}`,
+    fullURL: `${site.url}${site.root}/${year}/${month}/${day}/${slug}.html`,
+    relURL: `${year}/${month}/${day}/${slug}.html`,
+    title: fMat.data.title,
+    categories: fMat.data.categories.map((cat) => {
       const m = catRex.exec(cat);
       if (!m) {
-        console.error('cat no match', cat, this._fileName);
+        console.error('cat no match', cat, postFileName);
         process.exit(1);
       }
       return m.groups;
-    });
-  }
-  get catLinks() {
-    return this.categories
-      .map((cat) =>
-        cat.sub
-          ? `
+    }),
+  };
+  result.catLinks = result.categories
+    .map((cat) =>
+      cat.sub
+        ? `
           <a href="categories/#${slugify(cat.main)}_${slugify(
-              cat.sub
-            )}" rel="category tag">
+            cat.sub
+          )}" rel="category tag">
             ${cat.main} / ${cat.sub}
           </a>`
-          : `
+        : `
           <a href="categories/#${slugify(cat.main)}" rel="category tag">
             ${cat.main}
           </a>`
-      )
-      .join('\n');
-  }
-  resolveVars(template) {
-    return resolveVars(template, 'post', this);
-  }
-}
+    )
+    .join('\n');
+  if (result.excerpt.length > 800)
+    console.error('excerpt too long', postFileName, result.excerpt.length);
+  return result;
+};
+
 const catsHash = {};
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
@@ -145,7 +128,7 @@ for (const postName of postNames.sort((a, b) => {
   if (a > b) return -1;
   return 0;
 })) {
-  const post = new PostData(postName, await fs.readFile(postName, 'utf8'));
+  const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
 
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
@@ -164,7 +147,7 @@ for (const postName of postNames.sort((a, b) => {
   await fs.ensureDir(outDir);
   await fs.writeFile(
     path.join(outDir, `${post.slug}.html`),
-    post.resolveVars(postTpl)
+    resolveVars(postTpl, 'post', post)
   );
 }
 
