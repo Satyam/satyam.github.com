@@ -61,6 +61,19 @@ const cleanExcerpt = (e) => {
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
 
+const createExcerptEntry = (post) => `
+<div class="excerpt-title p-name" itemprop="name headline">
+  <a class="home-post-link" href="${post.relURL}">${post.title}</a>
+</div>
+<div class="excerpt-extra">
+  <time class="excerpt-date" datetime="${
+    post.ISODate
+  }" itemprop="datePublished">${post.localizedDate}</time>
+  <span class="excerpt-cats">${post.catLinks ?? ''}</span>
+</div>
+<blockquote class="excerpt">${post.excerpt}</blockquote>
+`;
+
 const parsePostData = (postFileName, postContent) => {
   const m = blogInfoRex.exec(path.basename(postFileName));
   if (!m) {
@@ -122,6 +135,11 @@ await fs.ensureDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
   await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
 );
+
+const homePage = await open(path.join(DEST_DIRS.posts, 'index.html'), 'w');
+homePage.writeFile(`<html><head><base href="/blog/">
+<link rel="stylesheet" href="assets/css/style.css"></head><body>`);
+let lastYear = '0';
 const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort((a, b) => {
   if (a < b) return 1;
@@ -135,12 +153,12 @@ for (const postName of postNames.sort((a, b) => {
     // Important: the reason for the | key is because it gets sorted after all alpha characters
     if (!(main in catsHash)) catsHash[main] = { '|': [] };
     const cMain = catsHash[main];
-    const { title, relURL, localizedDate, excerpt } = post;
+    const { title, relURL, localizedDate, excerpt, ISODate } = post;
     if (sub) {
       if (!(sub in cMain)) cMain[sub] = [];
-      cMain[sub].push({ title, relURL, localizedDate, excerpt });
+      cMain[sub].push({ title, relURL, localizedDate, excerpt, ISODate });
     } else {
-      cMain['|'].push({ title, relURL, localizedDate, excerpt });
+      cMain['|'].push({ title, relURL, localizedDate, excerpt, ISODate });
     }
   });
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
@@ -149,15 +167,21 @@ for (const postName of postNames.sort((a, b) => {
     path.join(outDir, `${post.slug}.html`),
     resolveVars(postTpl, 'post', post)
   );
+  if (post.year !== lastYear) {
+    lastYear = post.year;
+    await homePage.writeFile(`
+        ${lastYear ? '</details>' : ''}
+        <details><summary>${post.year}</summary>
+      `);
+  }
+  await homePage.writeFile(createExcerptEntry(post));
 }
+await homePage.writeFile('</details>');
+await homePage.close();
 
-// p = { "title": "El entierro de la sardina" }
-const processPostItem = (p) => `
-  <li>
-    <a class="cat-post-link" href="${p.relURL}">${p.title}</a>
-    <span class="cat-post-date">${p.localizedDate}</span>
-    <blockquote>${p.excerpt}</blockquote>
-  </li>`;
+// post = { "title": "El entierro de la sardina" }
+const processPostItem = (post) =>
+  `<li class="excerpt-li">${createExcerptEntry(post)}</li>`;
 
 // a =  [
 //       { "title": "El entierro de la sardina" }

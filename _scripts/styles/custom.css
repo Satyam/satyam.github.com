@@ -22,17 +22,47 @@ figure img {
   margin-bottom: 3px;
   font-size: 16px;
 }
-.categories .cat-post-link {
-  float: left;
+
+.excerpt-li {
+  list-style-type: none;
 }
-.categories .cat-post-date {
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
+}
+
+.excerpt-title {
+  font-size: large;
+  text-align: center;
+}
+.excerpt-cats {
   float: right;
-  font-size: smaller;
-  background-color: lightgray;
-  border-radius: 8px;
-  padding: 1px 5px;
 }
-.categories blockquote {
+.excerpt-date {
+  float: left;
+  background-color: #e8e8e8;
+  padding: 2px 5px;
+  border-radius: 10px;
+}
+
+.excerpt {
   clear: both;
-  margin-top: 5px;
+  margin-top: 10px;
 }
