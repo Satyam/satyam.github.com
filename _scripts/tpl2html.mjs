@@ -52,6 +52,11 @@ const meses = [
   'dic',
 ];
 
+const sortDescending = (a, b) => {
+  if (a < b) return 1;
+  if (a > b) return -1;
+  return 0;
+};
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
@@ -130,54 +135,48 @@ const parsePostData = (postFileName, postContent) => {
 };
 
 const catsHash = {};
+const postsByYear = {};
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
   await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
 );
 
-const homePage = await open(path.join(DEST_DIRS.posts, 'index.html'), 'w');
-homePage.writeFile(`<html><head><base href="/blog/">
-<link rel="stylesheet" href="assets/css/style.css"></head><body>`);
-let lastYear = '0';
 const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
-for (const postName of postNames.sort((a, b) => {
-  if (a < b) return 1;
-  if (a > b) return -1;
-  return 0;
-})) {
+for (const postName of postNames.sort(sortDescending)) {
   const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
-
-  post.categories.forEach((cat) => {
-    const { main, sub } = cat;
-    // Important: the reason for the | key is because it gets sorted after all alpha characters
-    if (!(main in catsHash)) catsHash[main] = { '|': [] };
-    const cMain = catsHash[main];
-    const { title, relURL, localizedDate, excerpt, ISODate } = post;
-    if (sub) {
-      if (!(sub in cMain)) cMain[sub] = [];
-      cMain[sub].push({ title, relURL, localizedDate, excerpt, ISODate });
-    } else {
-      cMain['|'].push({ title, relURL, localizedDate, excerpt, ISODate });
-    }
-  });
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
   await fs.writeFile(
     path.join(outDir, `${post.slug}.html`),
     resolveVars(postTpl, 'post', post)
   );
-  if (post.year !== lastYear) {
-    lastYear = post.year;
-    await homePage.writeFile(`
-        ${lastYear ? '</details>' : ''}
-        <details><summary>${post.year}</summary>
-      `);
-  }
-  await homePage.writeFile(createExcerptEntry(post));
+  delete post.content;
+
+  if (!(post.year in postsByYear)) postsByYear[post.year] = [];
+  postsByYear[post.year].push(post);
+  post.categories.forEach((cat) => {
+    const { main, sub } = cat;
+    // Important: the reason for the | key is because it gets sorted after all alpha characters
+    if (!(main in catsHash)) catsHash[main] = { '|': [] };
+    const cMain = catsHash[main];
+    if (sub && !cMain[sub]) cMain[sub] = [];
+    cMain[sub ?? '|'].push(post);
+  });
 }
-await homePage.writeFile('</details>');
-await homePage.close();
+await fs.writeFile(
+  path.join(DEST_DIRS.posts, 'posts.html'),
+  `<html><head><base href="/blog/">
+<link rel="stylesheet" href="assets/css/style.css"></head><body>
+${objectMap(
+  postsByYear,
+  (posts, year) => `
+  <details><summary>${year}</summary>
+  ${posts.map(createExcerptEntry).join('')}</details>`,
+  sortDescending
+).join('')}
+</body></html>`
+);
 
 // post = { "title": "El entierro de la sardina" }
 const processPostItem = (post) =>
