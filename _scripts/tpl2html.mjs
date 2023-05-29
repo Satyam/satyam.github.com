@@ -19,6 +19,9 @@ const DEST_DIRS = {
   images: path.join(ASSETS, 'img'),
 };
 
+// Important: the reason for the | key is because it gets sorted after all alpha characters
+const NO_SUBCAT_KEY = '|';
+
 const resolveVars = (template, prefix, values) => {
   const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
   return template.replaceAll(rex, (_, prop) => {
@@ -157,25 +160,38 @@ for (const postName of postNames.sort(sortDescending)) {
   postsByYear[post.year].push(post);
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
-    // Important: the reason for the | key is because it gets sorted after all alpha characters
-    if (!(main in catsHash)) catsHash[main] = { '|': [] };
+    if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
     const cMain = catsHash[main];
     if (sub && !cMain[sub]) cMain[sub] = [];
-    cMain[sub ?? '|'].push(post);
+    cMain[sub ?? NO_SUBCAT_KEY].push(post);
   });
 }
+
+const postsVars = {
+  fullURL: `${site.url}${site.root}/posts.html`,
+  relURL: 'posts.html',
+  ISODate: new Date().toISOString(),
+  localizedDate: new Date().toLocaleDateString('es-ES', {
+    dateStyle: 'medium',
+  }),
+  title: 'Posts by Year',
+  locale: 'es-ES',
+  excerpt: "Index of posts by year of publishing for on Satyam's blog",
+
+  content: objectMap(
+    postsByYear,
+    (posts, year) => `
+    <details id="year${year}"><summary>${year}</summary>
+    ${posts.map(createExcerptEntry).join('')}</details>`,
+    sortDescending
+  ).join(''),
+};
+const postsTpl = resolveSiteVars(
+  await fs.readFile(path.join(SRC_DIRS.templates, 'posts.tpl.html'), 'utf8')
+);
 await fs.writeFile(
   path.join(DEST_DIRS.posts, 'posts.html'),
-  `<html><head><base href="/blog/">
-<link rel="stylesheet" href="assets/css/style.css"></head><body>
-${objectMap(
-  postsByYear,
-  (posts, year) => `
-  <details><summary>${year}</summary>
-  ${posts.map(createExcerptEntry).join('')}</details>`,
-  sortDescending
-).join('')}
-</body></html>`
+  resolveVars(postsTpl, 'post', postsVars)
 );
 
 // post = { "title": "El entierro de la sardina" }
@@ -198,7 +214,7 @@ const processPostArray = (a) => a.map(processPostItem).join('');
 //       { "title": "Andorra la Vella"  }
 //     ],
 const processSubItem = (postArray, mainCat, subCat) =>
-  subCat === '|'
+  subCat === NO_SUBCAT_KEY
     ? processPostArray(postArray)
     : `
     <li>
