@@ -194,15 +194,11 @@ await fs.writeFile(
   resolveVars(postsTpl, 'post', postsVars)
 );
 
-// post = { "title": "El entierro de la sardina" }
-const processPostItem = (post) =>
-  `<li class="excerpt-li">${createExcerptEntry(post)}</li>`;
-
 // a =  [
 //       { "title": "El entierro de la sardina" }
 //     ],
 // It is assumed that posts will be sorted descending by date
-const processPostArray = (a) => a.map(processPostItem).join('');
+const processPostArray = (a) => a.map(createExcerptEntry).join('');
 
 // subCat = "Tres Cantos"
 // postArray =  [
@@ -217,10 +213,10 @@ const processSubItem = (postArray, mainCat, subCat) =>
   subCat === NO_SUBCAT_KEY
     ? processPostArray(postArray)
     : `
-    <li>
-      <h4  id="${slugify(mainCat)}_${slugify(subCat)}">${subCat}</h4>
-      <ul hidden>${processPostArray(postArray)}</ul>
-    </li>`;
+    <details  id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
+      <summary>${subCat}</summary>
+      ${processPostArray(postArray)}
+    </details>`;
 
 //  mainCat = "Viajes"
 //  subHash = {
@@ -235,12 +231,12 @@ const processSubItem = (postArray, mainCat, subCat) =>
 //     ],
 //   }
 const processMainHash = (subHash, mainCat) => `
-    <li>
-      <h3 id="${slugify(mainCat)}">${mainCat}</h3>
-      <ul hidden>${objectMap(subHash, (postArray, subCat) =>
+    <details id="${slugify(mainCat)}"class="mainItem">
+      <summary>${mainCat}</summary>
+      ${objectMap(subHash, (postArray, subCat) =>
         processSubItem(postArray, mainCat, subCat)
-      ).join('')}</ul>
-    </li>`;
+      ).join('')}
+    </details>`;
 
 // hash = {
 //   "Viajes": {
@@ -263,8 +259,7 @@ const processMainHash = (subHash, mainCat) => `
 //     ],
 //   }
 // }
-const processCatsHash = (hash) =>
-  `<ul>${objectMap(hash, processMainHash).join('')}</ul>`;
+const processHash = (hash) => `${objectMap(hash, processMainHash).join('')}`;
 
 const catsVars = {
   fullURL: `${site.url}${site.root}/categories.html`,
@@ -287,7 +282,7 @@ const catsVars = {
   //   2
   // )}</pre>`,
 
-  content: processCatsHash(catsHash),
+  content: processHash(catsHash),
 };
 const catsTpl = resolveSiteVars(
   await fs.readFile(
