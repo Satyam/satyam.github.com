@@ -9,6 +9,7 @@ const SRC_DIRS = {
   styles: path.join(__dirname, 'styles'),
   jekyllPosts: path.join(__dirname, 'posts'),
   images: path.join(__dirname, 'imgs'),
+  js: path.join(__dirname, 'js'),
 };
 
 const SITE = path.join(__dirname, 'blog');
@@ -17,6 +18,7 @@ const DEST_DIRS = {
   posts: SITE,
   styles: path.join(ASSETS, 'css'),
   images: path.join(ASSETS, 'img'),
+  js: path.join(ASSETS, 'js'),
 };
 
 // Important: the reason for the | key is because it gets sorted after all alpha characters
@@ -308,6 +310,9 @@ await outStyle.writeFile(
 await outStyle.close();
 
 //---
+// copy js
+await fs.ensureDir(DEST_DIRS.js);
+await fs.copy(SRC_DIRS.js, DEST_DIRS.js);
 
 if (!(await fs.pathExists(DEST_DIRS.images))) {
   console.log('copying images');
