@@ -125,7 +125,7 @@
       let currentSubId;
       // To tell the toggle event listener that the toggle has been requested via code, not the user
       // and that the history should not be changed.
-      let dontPush = true;
+      let dontPush = false;
       document.querySelectorAll('.post-content details').forEach((el) => {
         el.addEventListener('toggle', (ev) => {
           if (working) return;
@@ -142,10 +142,6 @@
               document.getElementById(currentSubId).open = false;
             }
             currentSubId = subId ? id : undefined;
-            detailsEl.scrollIntoView();
-            setTimeout(() => {
-              working = false;
-            }, 0);
             if (dontPush) {
               dontPush = false;
             } else {
@@ -155,20 +151,31 @@
             currentSubId = undefined;
             if (!subId) currentMainId = undefined;
           }
-          console.log(currentMainId, currentSubId);
+          detailsEl.scrollIntoView();
+          setTimeout(() => {
+            working = false;
+          }, 0);
         });
       });
       if (location.hash.length) {
         const id = location.hash.substring(1);
         const detailsEl = document.getElementById(id);
-        dontPush = true;
-        if (detailsEl.matches('details')) detailsEl.open = true;
+        if (detailsEl.matches('details')) {
+          dontPush = true;
+          detailsEl.open = true;
+          history.replaceState({ id }, '');
+        }
       }
       window.addEventListener('popstate', (ev) => {
-        const id = ev.state.id;
-        const detailsEl = document.getElementById(id);
-        dontPush = true;
-        if (detailsEl.matches('details')) detailsEl.open = true;
+        const id = ev.state?.id;
+        if (id) {
+          const detailsEl = document.getElementById(id);
+
+          if (detailsEl.matches('details')) {
+            dontPush = true;
+            detailsEl.open = true;
+          }
+        }
       });
     </script>
   </body>
