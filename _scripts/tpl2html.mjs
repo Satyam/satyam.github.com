@@ -4,21 +4,22 @@ import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
 
+const ASSETS = 'assets';
 const SRC_DIRS = {
   templates: path.join(__dirname, 'templates'),
-  styles: path.join(__dirname, 'styles'),
   jekyllPosts: path.join(__dirname, 'posts'),
-  images: path.join(__dirname, 'imgs'),
-  js: path.join(__dirname, 'js'),
+  styles: path.join(__dirname, ASSETS, 'styles'),
+  images: path.join(__dirname, ASSETS, 'imgs'),
+  js: path.join(__dirname, ASSETS, 'js'),
 };
 
-const SITE = path.join(__dirname, 'blog');
-const ASSETS = path.join(SITE, 'assets');
+const SITE_DIR = path.join(__dirname, 'blog');
+const ASSETS_DIR = path.join(SITE_DIR, ASSETS);
 const DEST_DIRS = {
-  posts: SITE,
-  styles: path.join(ASSETS, 'css'),
-  images: path.join(ASSETS, 'img'),
-  js: path.join(ASSETS, 'js'),
+  posts: SITE_DIR,
+  styles: path.join(ASSETS_DIR, 'css'),
+  images: path.join(ASSETS_DIR, 'img'),
+  js: path.join(ASSETS_DIR, 'js'),
 };
 
 // Important: the reason for the | key is because it gets sorted after all alpha characters
