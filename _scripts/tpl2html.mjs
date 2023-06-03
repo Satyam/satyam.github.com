@@ -161,9 +161,10 @@ for (const postName of postNames.sort(sortDescending)) {
   delete post.content;
 
   if (!(post.year in postsHash)) postsHash[post.year] = [];
-  if (!(post.month in postsHash[post.year]))
-    postsHash[post.year][post.month] = [];
-  postsHash[post.year][post.month].push(post);
+  const monthText = `${post.month} - ${meses[parseInt(post.month, 10)]}`;
+  if (!(monthText in postsHash[post.year]))
+    postsHash[post.year][monthText] = [];
+  postsHash[post.year][monthText].push(post);
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
     if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
