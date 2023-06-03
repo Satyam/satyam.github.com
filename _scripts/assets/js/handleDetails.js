@@ -25,7 +25,9 @@ document.querySelectorAll('.post-content details').forEach((el) => {
       if (dontPush) {
         dontPush = false;
       } else {
-        history.pushState({ id }, '', `categories#${id}`);
+        const newURL = new URL(location.href);
+        newURL.hash = `#${id}`;
+        history.pushState({ id }, '', newURL);
       }
     } else {
       currentSubId = undefined;
