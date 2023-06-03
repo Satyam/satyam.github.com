@@ -141,7 +141,7 @@ const parsePostData = (postFileName, postContent) => {
 };
 
 const catsHash = {};
-const postsByYear = {};
+const postsHash = {};
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
@@ -160,8 +160,10 @@ for (const postName of postNames.sort(sortDescending)) {
   );
   delete post.content;
 
-  if (!(post.year in postsByYear)) postsByYear[post.year] = [];
-  postsByYear[post.year].push(post);
+  if (!(post.year in postsHash)) postsHash[post.year] = [];
+  if (!(post.month in postsHash[post.year]))
+    postsHash[post.year][post.month] = [];
+  postsHash[post.year][post.month].push(post);
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
     if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
@@ -170,33 +172,6 @@ for (const postName of postNames.sort(sortDescending)) {
     cMain[sub ?? NO_SUBCAT_KEY].push(post);
   });
 }
-
-const postsVars = {
-  fullURL: `${site.url}${site.root}/posts.html`,
-  relURL: 'posts.html',
-  ISODate: new Date().toISOString(),
-  localizedDate: new Date().toLocaleDateString('es-ES', {
-    dateStyle: 'medium',
-  }),
-  title: 'Posts by Year',
-  locale: 'es-ES',
-  excerpt: "Index of posts by year of publishing for on Satyam's blog",
-
-  content: objectMap(
-    postsByYear,
-    (posts, year) => `
-    <details id="year${year}"><summary>${year}</summary>
-    ${posts.map(createExcerptEntry).join('')}</details>`,
-    sortDescending
-  ).join(''),
-};
-const postsTpl = resolveSiteVars(
-  await fs.readFile(path.join(SRC_DIRS.templates, 'posts.tpl.html'), 'utf8')
-);
-await fs.writeFile(
-  path.join(DEST_DIRS.posts, 'posts.html'),
-  resolveVars(postsTpl, 'post', postsVars)
-);
 
 // a =  [
 //       { "title": "El entierro de la sardina" }
@@ -275,16 +250,6 @@ const catsVars = {
   title: 'Categories',
   locale: 'es-ES',
   excerpt: "Categories for posts on Satyam's blog",
-  // content: `<pre>${JSON.stringify(
-  //   catsHash,
-  //   (key, value) =>
-  //     ['excerpt', 'relURL', 'localizedDate'].includes(key)
-  //       ? undefined
-  //       : Array.isArray(value)
-  //       ? value.slice(0, 1)
-  //       : value,
-  //   2
-  // )}</pre>`,
 
   content: processHash(catsHash),
 };
@@ -298,6 +263,27 @@ const catsTpl = resolveSiteVars(
 await fs.writeFile(
   path.join(DEST_DIRS.posts, 'categories.html'),
   resolveVars(catsTpl, 'post', catsVars)
+);
+
+const postsVars = {
+  fullURL: `${site.url}${site.root}/posts.html`,
+  relURL: 'posts.html',
+  ISODate: new Date().toISOString(),
+  localizedDate: new Date().toLocaleDateString('es-ES', {
+    dateStyle: 'medium',
+  }),
+  title: 'Posts by Year',
+  locale: 'es-ES',
+  excerpt: "Index of posts by year of publishing for on Satyam's blog",
+
+  content: processHash(postsHash),
+};
+const postsTpl = resolveSiteVars(
+  await fs.readFile(path.join(SRC_DIRS.templates, 'posts.tpl.html'), 'utf8')
+);
+await fs.writeFile(
+  path.join(DEST_DIRS.posts, 'posts.html'),
+  resolveVars(postsTpl, 'post', postsVars)
 );
 
 // Copy and merge styles
