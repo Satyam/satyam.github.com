@@ -151,6 +151,7 @@ const postTpl = resolveSiteVars(
 const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort(sortDescending)) {
   const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
+  if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
   await fs.writeFile(
