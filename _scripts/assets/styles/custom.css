@@ -66,3 +66,7 @@ details[open] > summary {
   clear: both;
   margin-top: 10px;
 }
+
+time {
+  word-spacing: -0.1em;
+}
