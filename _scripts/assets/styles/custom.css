@@ -12,25 +12,22 @@ figure img {
   margin-right: auto;
 }
 
-.categories h3 {
+.mainItem > summary {
   cursor: pointer;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   font-size: 20px;
 }
-.categories h4 {
+.subItem > summary {
   cursor: pointer;
-  margin-bottom: 3px;
+  /* margin-bottom: 3px; */
   font-size: 16px;
-}
-
-.excerpt-li {
-  list-style-type: none;
 }
 
 details {
   border: 1px solid #aaa;
   border-radius: 4px;
   padding: 0.5em 0.5em 0;
+  margin-bottom: 0.3em;
 }
 
 summary {
@@ -39,11 +36,14 @@ summary {
   padding: 0.5em;
 }
 
+summary:hover {
+  opacity: 70%;
+}
 details[open] {
   padding: 0.5em;
 }
 
-details[open] summary {
+details[open] > summary {
   border-bottom: 1px solid #aaa;
   margin-bottom: 0.5em;
 }
