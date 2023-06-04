@@ -56,7 +56,8 @@ const openDetails = (id) => {
 };
 
 if (location.hash.length) {
-  if (openDetails(location.hash.substring(1))) history.replaceState({ id }, '');
+  const id = location.hash.substring(1);
+  if (openDetails(id)) history.replaceState({ id }, '');
 }
 window.addEventListener('popstate', (ev) => {
   openDetails(ev.state?.id);
