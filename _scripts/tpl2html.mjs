@@ -73,16 +73,18 @@ const cleanExcerpt = (e) => {
 };
 
 const createExcerptEntry = (post) => `
-<div class="excerpt-title p-name" itemprop="name headline">
-  <a class="home-post-link" href="${post.relURL}">${post.title}</a>
+<div class="excerpt">
+  <div class="excerpt-title p-name" itemprop="name headline">
+    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
+  </div>
+  <div class="excerpt-extra">
+    <time class="excerpt-date" datetime="${
+      post.ISODate
+    }" itemprop="datePublished">${post.localizedDate}</time>
+    <span class="excerpt-cats">${post.catLinks ?? ''}</span>
+  </div>
+  <blockquote>${post.excerpt}</blockquote>
 </div>
-<div class="excerpt-extra">
-  <time class="excerpt-date" datetime="${
-    post.ISODate
-  }" itemprop="datePublished">${post.localizedDate}</time>
-  <span class="excerpt-cats">${post.catLinks ?? ''}</span>
-</div>
-<blockquote class="excerpt">${post.excerpt}</blockquote>
 `;
 
 const parsePostData = (postFileName, postContent) => {
@@ -178,7 +180,7 @@ for (const postName of postNames.sort(sortDescending)) {
 //       { "title": "El entierro de la sardina" }
 //     ],
 // It is assumed that posts will be sorted descending by date
-const processPostArray = (a) => a.map(createExcerptEntry).join('');
+const processPostArray = (a) => a.map(createExcerptEntry).join('<hr />');
 
 // subCat = "Tres Cantos"
 // postArray =  [

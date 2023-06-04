@@ -62,11 +62,15 @@ details[open] > summary {
   border-radius: 10px;
 }
 
-.excerpt {
+.excerpt blockquote {
   clear: both;
   margin-top: 10px;
 }
 
 time {
   word-spacing: -0.1em;
+}
+details hr {
+  margin-left: -8px;
+  margin-right: -8px;
 }
