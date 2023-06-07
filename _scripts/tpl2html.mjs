@@ -144,6 +144,50 @@ const parsePostData = (postFileName, postContent) => {
 
 const catsHash = {};
 const postsHash = {};
+
+// const postsArray = [];
+// const mainEntries = [];
+// const mainSubs = [];
+// const subEntries = [];
+// let lastMainTitle, lastSubTitle;
+
+// const appendToArray = (
+//   arr,
+//   mainTitle = Number.NEGATIVE_INFINITY,
+//   subTitle = Number.NEGATIVE_INFINITY,
+//   post = {}
+// ) => {
+//   if (mainTitle === lastMainTitle) {
+//     if (subTitle === lastSubTitle) {
+//       // do nothing.
+//     } else {
+//       mainSubs.push(Array.from(subEntries));
+//       subEntries.length = 0;
+//     }
+//   } else {
+//     if (subEntries.length) {
+//       mainSubs.push(Array.from(subEntries));
+//       subEntries.length = 0;
+//     }
+//     if (mainEntries.length || mainSubs.length) {
+//       arr.push({
+//         title: lastMainTitle,
+//         entries: mainEntries.length ? Array.from(mainEntries) : undefined,
+//         subs: mainSubs.length ? Array.from(mainSubs) : undefined,
+//       });
+//       mainEntries.length = 0;
+//       mainSubs.length = 0;
+//     }
+//   }
+//   if (subTitle) {
+//     subEntries.push(post);
+//   } else {
+//     mainEntries.push(post);
+//   }
+//   lastSubTitle = subTitle;
+//   lastMainTitle = mainTitle;
+// };
+
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = resolveSiteVars(
@@ -174,8 +218,12 @@ for (const postName of postNames.sort(sortDescending)) {
     if (sub && !cMain[sub]) cMain[sub] = [];
     cMain[sub ?? NO_SUBCAT_KEY].push(post);
   });
+
+  // appendToArray(postsArray, post.year, post.month, post);
 }
 
+// appendToArray(postsArray);
+console.log(JSON.stringify(postsArray, null, 2));
 // a =  [
 //       { "title": "El entierro de la sardina" }
 //     ],
@@ -219,6 +267,69 @@ const processMainHash = (subHash, mainCat) => `
         processSubItem(postArray, mainCat, subCat)
       ).join('')}
     </details>`;
+// TODO Better to switch to this structure because arrays preserve the sort order
+//     const arr = [
+//       {
+//         title: 'Viajes',
+//         // mainEntries
+//         entries: [{ title: 'Andorra la Vella' }],
+//         // mainSubs
+//         subs: [
+//           {
+//             title: 'Tres Cantos',
+//             // subEntries
+//             entries: [{ title: 'El entierro de la sardina' }],
+//           },
+//           {
+//             title: 'Italia',
+//             entries: [{ title: 'Capri y Sorrento' }],
+//           },
+//         ],
+//       },
+//       {
+//         title: 'Tecnología',
+//         entries: [{ title: 'Tecnología' }],
+//         subs: [
+//           {
+//             title: 'Mega-Ingeniería',
+//             entries: [{ title: 'Barcos generadores de hidrógeno' }],
+//           },
+//         ],
+//       },
+//     ];
+// const excerptCatsListTpl = `{{#arr}}
+//   <details id="{{#slugify}}{{title)}}{{/slugify}}" class="mainItem">
+//     <summary>{{title}}</summary>
+//     {{#subs}}
+//       <details
+//         id="{{#slugify}}{{../title)}}{{/slugify}}_{{#slugify}}{{title)}}{{/slugify}}"
+//         class="subItem"
+//       >
+//         <summary>{{../title}}</summary>
+//         <!-- falta procesar -->
+//       </details>
+//     {{/subs}}
+//     {{#entries}}
+//       <div class="excerpt">
+//         <div class="excerpt-title p-name" itemprop="name headline">
+//           <a class="home-post-link" href="{{relURL}}">{{title}}</a>
+//         </div>
+//         <div class="excerpt-extra">
+//           <time
+//             class="excerpt-date"
+//             datetime="{{ISODate}}"
+//             itemprop="datePublished">{{localizedDate}}</time>
+//           <span class="excerpt-cats">{{catLinks}}</span>
+//         </div>
+//         <blockquote>{{excerpt}}</blockquote>
+//       </div>
+//     {{/entries}}
+//   </details>
+// {{/arr}}
+// `;
+
+// // const template = Handlebars.compile(excerptListTpl);
+// // console.log(template(c));
 
 // hash = {
 //   "Viajes": {
