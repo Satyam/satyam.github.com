@@ -63,6 +63,25 @@ const sortDescending = (a, b) => {
   if (a > b) return -1;
   return 0;
 };
+
+const baseTemplate = await fs.readFile(
+  path.join(SRC_DIRS.templates, 'base.tpl.html'),
+  'utf8'
+);
+
+const prepareTemplate = async (tpl) => {
+  const template = await fs.readFile(
+    path.join(SRC_DIRS.templates, `${tpl}.tpl.html`),
+    'utf8'
+  );
+  const tplDoc = htmlParse(template);
+  const rex = new RegExp(`{{\\s*template\\.(\\w+)\\s*}}`, 'g');
+  return resolveSiteVars(
+    baseTemplate.replaceAll(rex, (_, prop) => {
+      return tplDoc.getElementById(prop)?.innerHTML ?? '';
+    })
+  );
+};
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
@@ -147,9 +166,7 @@ const postsHash = {};
 
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
-const postTpl = resolveSiteVars(
-  await fs.readFile(path.join(SRC_DIRS.templates, 'post.tpl.html'), 'utf8')
-);
+const postTpl = await prepareTemplate('post');
 
 const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
 for (const postName of postNames.sort(sortDescending)) {
@@ -260,12 +277,7 @@ const catsVars = {
 
   content: processHash(catsHash),
 };
-const catsTpl = resolveSiteVars(
-  await fs.readFile(
-    path.join(SRC_DIRS.templates, 'categories.tpl.html'),
-    'utf8'
-  )
-);
+const catsTpl = await prepareTemplate('categories');
 
 await fs.writeFile(
   path.join(DEST_DIRS.posts, 'categories.html'),
@@ -285,9 +297,8 @@ const postsVars = {
 
   content: processHash(postsHash, sortDescending),
 };
-const postsTpl = resolveSiteVars(
-  await fs.readFile(path.join(SRC_DIRS.templates, 'posts.tpl.html'), 'utf8')
-);
+const postsTpl = await prepareTemplate('posts');
+
 await fs.writeFile(
   path.join(DEST_DIRS.posts, 'posts.html'),
   resolveVars(postsTpl, 'post', postsVars)
