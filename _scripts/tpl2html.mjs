@@ -64,16 +64,13 @@ const sortDescending = (a, b) => {
   return 0;
 };
 
-const baseTemplate = await fs.readFile(
-  path.join(SRC_DIRS.templates, 'base.tpl.html'),
-  'utf8'
-);
+const readSrcFile = async (folder, file) =>
+  await fs.readFile(path.join(SRC_DIRS[folder], file), 'utf8');
+
+const baseTemplate = await readSrcFile('templates', 'base.tpl.html');
 
 const prepareTemplate = async (tpl) => {
-  const template = await fs.readFile(
-    path.join(SRC_DIRS.templates, `${tpl}.tpl.html`),
-    'utf8'
-  );
+  const template = await readSrcFile('templates', `${tpl}.tpl.html`);
   const tplDoc = htmlParse(template);
   const rex = new RegExp(`{{\\s*template\\.(\\w+)\\s*}}`, 'g');
   return resolveSiteVars(
@@ -307,12 +304,8 @@ await fs.writeFile(
 // Copy and merge styles
 await fs.ensureDir(DEST_DIRS.styles);
 const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
-await outStyle.writeFile(
-  await fs.readFile(path.join(SRC_DIRS.styles, 'minima.css'), 'utf8')
-);
-await outStyle.writeFile(
-  await fs.readFile(path.join(SRC_DIRS.styles, 'custom.css'), 'utf8')
-);
+await outStyle.writeFile(await readSrcFile('styles', 'minima.css'));
+await outStyle.writeFile(await readSrcFile('styles', 'custom.css'));
 await outStyle.close();
 
 //---
