@@ -36,7 +36,7 @@ const resolveVars = (template, prefix, values) => {
 const objectMap = (obj, fn, sortFn) =>
   Object.keys(obj)
     .sort(sortFn)
-    .map((key, index) => fn(obj[key], key, index));
+    .map((key, index) => fn(obj[key], key, sortFn));
 
 const site = require(path.join(SRC_DIRS.templates, 'site.json'));
 
@@ -213,11 +213,13 @@ const processSubItem = (postArray, mainCat, subCat) =>
 //       { "title": "Capri y Sorrento" }
 //     ],
 //   }
-const processMainHash = (subHash, mainCat) => `
+const processMainHash = (subHash, mainCat, sortOrder) => `
     <details id="${slugify(mainCat)}"class="mainItem">
       <summary>${mainCat}</summary>
-      ${objectMap(subHash, (postArray, subCat) =>
-        processSubItem(postArray, mainCat, subCat)
+      ${objectMap(
+        subHash,
+        (postArray, subCat) => processSubItem(postArray, mainCat, subCat),
+        sortOrder
       ).join('')}
     </details>`;
 
@@ -242,7 +244,8 @@ const processMainHash = (subHash, mainCat) => `
 //     ],
 //   }
 // }
-const processHash = (hash) => `${objectMap(hash, processMainHash).join('')}`;
+const processHash = (hash, sortOrder) =>
+  `${objectMap(hash, processMainHash, sortOrder).join('')}`;
 
 const catsVars = {
   fullURL: `${site.url}${site.root}/categories.html`,
@@ -280,7 +283,7 @@ const postsVars = {
   locale: 'es-ES',
   excerpt: "Index of posts by year of publishing for on Satyam's blog",
 
-  content: processHash(postsHash),
+  content: processHash(postsHash, sortDescending),
 };
 const postsTpl = resolveSiteVars(
   await fs.readFile(path.join(SRC_DIRS.templates, 'posts.tpl.html'), 'utf8')
