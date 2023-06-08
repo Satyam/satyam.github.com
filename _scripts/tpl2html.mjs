@@ -88,21 +88,6 @@ const cleanExcerpt = (e) => {
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
 
-const createExcerptEntry = (post) => `
-<div class="excerpt">
-  <div class="excerpt-title p-name" itemprop="name headline">
-    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
-  </div>
-  <div class="excerpt-extra">
-    <time class="excerpt-date" datetime="${
-      post.ISODate
-    }" itemprop="datePublished">${post.localizedDate}</time>
-    <span class="excerpt-cats">${post.catLinks ?? ''}</span>
-  </div>
-  <blockquote>${post.excerpt}</blockquote>
-</div>
-`;
-
 const parsePostData = (postFileName, postContent) => {
   const m = blogInfoRex.exec(path.basename(postFileName));
   if (!m) {
@@ -153,35 +138,21 @@ const parsePostData = (postFileName, postContent) => {
           </a>`
     )
     .join('\n');
-  if (result.excerpt.length > 800)
-    console.error('excerpt too long', postFileName, result.excerpt.length);
+
   return result;
 };
 
-const catsHash = {};
 const postsHash = {};
-
-await fs.ensureDir(DEST_DIRS.posts);
-// await fs.emptyDir(DEST_DIRS.posts);
-const postTpl = await prepareTemplate('post');
-
-const postNames = await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'));
-for (const postName of postNames.sort(sortDescending)) {
-  const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
-  if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
-  const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
-  await fs.ensureDir(outDir);
-  await fs.writeFile(
-    path.join(outDir, `${post.slug}.html`),
-    resolveVars(postTpl, 'post', post)
-  );
-  delete post.content;
-
+const addToPostsHash = (post) => {
   if (!(post.year in postsHash)) postsHash[post.year] = [];
   const monthText = `${post.month} - ${meses[parseInt(post.month, 10)]}`;
   if (!(monthText in postsHash[post.year]))
     postsHash[post.year][monthText] = [];
   postsHash[post.year][monthText].push(post);
+};
+const catsHash = {};
+
+const addToCatsHash = (post) => {
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
     if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
@@ -189,45 +160,86 @@ for (const postName of postNames.sort(sortDescending)) {
     if (sub && !cMain[sub]) cMain[sub] = [];
     cMain[sub ?? NO_SUBCAT_KEY].push(post);
   });
+};
+await fs.ensureDir(DEST_DIRS.posts);
+// await fs.emptyDir(DEST_DIRS.posts);
+const postTpl = await prepareTemplate('post');
+const postNames = (await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'))).sort(
+  sortDescending
+);
+
+for (const postName of postNames) {
+  const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
+
+  if (!post.excerpt) console.error('missing excerpt in ', postName);
+  if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
+  if (post.excerpt?.length > 800)
+    console.error('excerpt too long', postName, post.excerpt.length);
+
+  const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
+  await fs.ensureDir(outDir);
+  await fs.writeFile(
+    path.join(outDir, `${post.slug}.html`),
+    resolveVars(postTpl, 'post', post)
+  );
+
+  delete post.content;
+
+  addToPostsHash(post);
+  addToCatsHash(post);
 }
+const processHash = (hash, sortOrder) => {
+  const createExcerptEntry = (post) => `
+<div class="excerpt">
+  <div class="excerpt-title p-name" itemprop="name headline">
+    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
+  </div>
+  <div class="excerpt-extra">
+    <time class="excerpt-date" datetime="${
+      post.ISODate
+    }" itemprop="datePublished">${post.localizedDate}</time>
+    <span class="excerpt-cats">${post.catLinks ?? ''}</span>
+  </div>
+  <blockquote>${post.excerpt}</blockquote>
+</div>
+`;
+  // a =  [
+  //       { "title": "El entierro de la sardina" }
+  //     ],
+  // It is assumed that posts will be sorted descending by date
+  const processPostArray = (a) => a.map(createExcerptEntry).join('');
 
-// a =  [
-//       { "title": "El entierro de la sardina" }
-//     ],
-// It is assumed that posts will be sorted descending by date
-const processPostArray = (a) => a.map(createExcerptEntry).join('<hr />');
-
-// subCat = "Tres Cantos"
-// postArray =  [
-//       { "title": "El entierro de la sardina" }
-//     ],
-// or:
-// subCat = "|"
-// linkArray =  [
-//       { "title": "Andorra la Vella"  }
-//     ],
-const processSubItem = (postArray, mainCat, subCat) =>
-  subCat === NO_SUBCAT_KEY
-    ? processPostArray(postArray)
-    : `
+  // subCat = "Tres Cantos"
+  // postArray =  [
+  //       { "title": "El entierro de la sardina" }
+  //     ],
+  // or:
+  // subCat = "|"
+  // linkArray =  [
+  //       { "title": "Andorra la Vella"  }
+  //     ],
+  const processSubItem = (postArray, mainCat, subCat) =>
+    subCat === NO_SUBCAT_KEY
+      ? processPostArray(postArray)
+      : `
     <details  id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
       <summary>${subCat}</summary>
       ${processPostArray(postArray)}
     </details>`;
 
-//  mainCat = "Viajes"
-//  subHash = {
-//     "|": [
-//       { "title": "Andorra la Vella"  }
-//     ],
-//     "Tres Cantos": [
-//       { "title": "El entierro de la sardina" }
-//     ],
-//     "Italia": [
-//       { "title": "Capri y Sorrento" }
-//     ],
-//   }
-const processMainHash = (subHash, mainCat, sortOrder) => `
+  //  mainCat = "Viajes"
+  //  subHash = {
+  //     "|": [
+  //       { "title": "Andorra la Vella"  }
+  //     ],
+  //     "Tres Cantos": [
+  //       { "title": "El entierro de la sardina" }
+  //     ],
+  //     "Italia": [
+  //       { "title": "Capri y Sorrento" }
+  //     ],
+  //   }
+  const processMainHash = (subHash, mainCat, sortOrder) => `
     <details id="${slugify(mainCat)}"class="mainItem">
       <summary>${mainCat}</summary>
       ${objectMap(
@@ -237,30 +249,29 @@ const processMainHash = (subHash, mainCat, sortOrder) => `
       ).join('')}
     </details>`;
 
-// hash = {
-//   "Viajes": {
-//     "|": [
-//       { "title": "Andorra la Vella"  }
-//     ],
-//     "Tres Cantos": [
-//       { "title": "El entierro de la sardina" }
-//     ],
-//     "Italia": [
-//       { "title": "Capri y Sorrento" }
-//     ],
-//   },
-//   "Tecnología": {
-//     "|": [
-//       { "title": "Tecnología" }
-//     ],
-//     "Mega-Ingeniería": [
-//       { "title": "Barcos generadores de hidrógeno" }
-//     ],
-//   }
-// }
-const processHash = (hash, sortOrder) =>
-  `${objectMap(hash, processMainHash, sortOrder).join('')}`;
-
+  // hash = {
+  //   "Viajes": {
+  //     "|": [
+  //       { "title": "Andorra la Vella"  }
+  //     ],
+  //     "Tres Cantos": [
+  //       { "title": "El entierro de la sardina" }
+  //     ],
+  //     "Italia": [
+  //       { "title": "Capri y Sorrento" }
+  //     ],
+  //   },
+  //   "Tecnología": {
+  //     "|": [
+  //       { "title": "Tecnología" }
+  //     ],
+  //     "Mega-Ingeniería": [
+  //       { "title": "Barcos generadores de hidrógeno" }
+  //     ],
+  //   }
+  // }
+  return `${objectMap(hash, processMainHash, sortOrder).join('')}`;
+};
 const catsVars = {
   fullURL: `${site.url}${site.root}/categories.html`,
   relURL: 'categories.html',
@@ -294,6 +305,7 @@ const postsVars = {
 
   content: processHash(postsHash, sortDescending),
 };
+
 const postsTpl = await prepareTemplate('posts');
 
 await fs.writeFile(

@@ -44,13 +44,21 @@ details[open] {
 }
 
 details[open] > summary {
-  border-bottom: 1px solid #aaa;
+  /* border-bottom: 1px solid #aaa; */
   margin-bottom: 0.5em;
 }
 
+.excerpt {
+  margin-left: -8px;
+  margin-right: -8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-top: 1px solid #aaa;
+}
 .excerpt-title {
-  font-size: large;
+  font-size: 22px;
   text-align: center;
+  font-weight: bold;
 }
 .excerpt-cats {
   float: right;
@@ -70,7 +78,7 @@ details[open] > summary {
 time {
   word-spacing: -0.1em;
 }
-details hr {
+/* details hr {
   margin-left: -8px;
   margin-right: -8px;
-}
+} */
