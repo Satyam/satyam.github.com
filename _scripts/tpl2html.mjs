@@ -152,6 +152,7 @@ const parsePostData = (postFileName, postContent) => {
     }),
   };
   result.metaBlock = metaBlock(result);
+  result.metaBlock = metaBlock(result);
   const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
   result.siblings = `
@@ -235,6 +236,7 @@ const processHash = (hash, sortOrder) => {
   <div class="excerpt-title p-name" itemprop="name headline">
     <a class="home-post-link" href="${post.relURL}">${post.title}</a>
   </div>
+  ${metaBlock(post)}
   ${metaBlock(post)}
   <blockquote>${post.excerpt}</blockquote>
 </div>
