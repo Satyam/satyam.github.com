@@ -138,7 +138,7 @@ const parsePostData = (postFileName, postContent) => {
             ${cat.main}
           </a>`
     )
-    .join('\n');
+    .join(',\n');
   const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
   result.siblings = `
