@@ -79,6 +79,33 @@ const prepareTemplate = async (tpl) => {
     })
   );
 };
+
+const metaBlock = (post) => `
+<div class="post-meta">
+  <div class="date-published">
+    Publicado el: 
+    <time  datetime="${post.ISODate}" itemprop="datePublished">
+    ${post.localizedDate}</time>
+  </div>
+  ${
+    post.categories?.length
+      ? `<div class="post-cats">Archivado bajo: ${post.categories
+          .map((cat) =>
+            cat.sub
+              ? `<a
+            href="categories/#${slugify(cat.main)}_${slugify(cat.sub)}"
+            rel="category tag"
+            >${cat.main} / ${cat.sub}
+            </a>`
+              : `
+          <a href="categories/#${slugify(cat.main)}" rel="category tag">
+            ${cat.main}
+          </a>`
+          )
+          .join(',\n')}</div>`
+      : ''
+  }</div>`;
+
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
@@ -124,21 +151,7 @@ const parsePostData = (postFileName, postContent) => {
       return m.groups;
     }),
   };
-  result.catLinks = result.categories
-    .map((cat) =>
-      cat.sub
-        ? `
-          <a href="categories/#${slugify(cat.main)}_${slugify(
-            cat.sub
-          )}" rel="category tag">
-            ${cat.main} / ${cat.sub}
-          </a>`
-        : `
-          <a href="categories/#${slugify(cat.main)}" rel="category tag">
-            ${cat.main}
-          </a>`
-    )
-    .join(',\n');
+  result.metaBlock = metaBlock(result);
   const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
   result.siblings = `
@@ -222,12 +235,7 @@ const processHash = (hash, sortOrder) => {
   <div class="excerpt-title p-name" itemprop="name headline">
     <a class="home-post-link" href="${post.relURL}">${post.title}</a>
   </div>
-  <div class="excerpt-extra">
-    <time class="excerpt-date" datetime="${
-      post.ISODate
-    }" itemprop="datePublished">${post.localizedDate}</time>
-    <span class="excerpt-cats">${post.catLinks ?? ''}</span>
-  </div>
+  ${metaBlock(post)}
   <blockquote>${post.excerpt}</blockquote>
 </div>
 `;
@@ -313,6 +321,8 @@ const catsVars = {
 
   content: processHash(catsHash),
 };
+catsVars.metaBlock = metaBlock(catsVars);
+
 const catsTpl = await prepareTemplate('categories');
 
 await fs.writeFile(
@@ -333,6 +343,7 @@ const postsVars = {
 
   content: processHash(postsHash, sortDescending),
 };
+postsVars.metaBlock = metaBlock(postsVars);
 
 const postsTpl = await prepareTemplate('posts');
 
