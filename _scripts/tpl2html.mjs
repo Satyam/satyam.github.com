@@ -87,6 +87,7 @@ const cleanExcerpt = (e) => {
   eEl.querySelectorAll('figure').forEach((fig) => fig.remove());
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
+let postsURLIndex;
 
 const parsePostData = (postFileName, postContent) => {
   const m = blogInfoRex.exec(path.basename(postFileName));
@@ -138,7 +139,24 @@ const parsePostData = (postFileName, postContent) => {
           </a>`
     )
     .join('\n');
+  const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
+  result.siblings = `
+  ${
+    postIndex > 0
+      ? `<a href="${
+          postsURLIndex[postIndex - 1]
+        }"><div class="triangle-left"></div> Anterior</a>`
+      : ''
+  }
+  ${postIndex > 0 && postIndex < postsURLIndex.length - 1 ? ' - ' : ''}
+  ${
+    postIndex < postsURLIndex.length - 1
+      ? `<a href="${
+          postsURLIndex[postIndex + 1]
+        }">Siguiente <div class="triangle-right"></div></a>`
+      : ''
+  }`;
   return result;
 };
 
@@ -167,6 +185,16 @@ const postTpl = await prepareTemplate('post');
 const postNames = (await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'))).sort(
   sortDescending
 );
+
+postsURLIndex = postNames.map((postFileName) => {
+  const m = blogInfoRex.exec(path.basename(postFileName));
+  if (!m) {
+    console.error('no match', postFileName);
+    process.exit(1);
+  }
+  const { year, month, day, slug } = m.groups;
+  return `${year}/${month}/${day}/${slug}.html`;
+});
 
 for (const postName of postNames) {
   const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
