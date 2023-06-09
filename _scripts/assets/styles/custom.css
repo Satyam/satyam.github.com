@@ -57,6 +57,7 @@ details[open] > summary {
   text-align: center;
   font-weight: bold;
 }
+
 .excerpt-cats {
   float: right;
 }
@@ -76,8 +77,11 @@ time {
   word-spacing: -0.1em;
 }
 
-.post-footer {
-  text-align: center;
+.excerpt-title a,
+.excerpt-cats a,
+.post-footer a,
+.post-categories a {
+  color: #111;
 }
 
 .triangle-left {
