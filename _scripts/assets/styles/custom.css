@@ -58,15 +58,15 @@ details[open] > summary {
   font-weight: bold;
 }
 
-.excerpt-cats {
-  float: right;
+.excerpt-extra {
+  margin-top: 5px;
+  font-size: 14px;
 }
-.excerpt-date {
-  float: left;
+/* .excerpt-date {
   background-color: #e8e8e8;
   padding: 2px 5px;
   border-radius: 10px;
-}
+} */
 
 .excerpt blockquote {
   clear: both;
