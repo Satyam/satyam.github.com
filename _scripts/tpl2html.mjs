@@ -42,22 +42,6 @@ const site = require(path.join(SRC_DIRS.templates, 'site.json'));
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
 
-const meses = [
-  '??',
-  'ene',
-  'feb',
-  'mar',
-  'abr',
-  'may',
-  'jun',
-  'jul',
-  'ago',
-  'sep',
-  'oct',
-  'nov',
-  'dic',
-];
-
 const sortDescending = (a, b) => {
   if (a < b) return 1;
   if (a > b) return -1;
@@ -78,6 +62,34 @@ const prepareTemplate = async (tpl) => {
       return tplDoc.getElementById(prop)?.innerHTML ?? '';
     })
   );
+};
+
+const meses = [
+  '??',
+  'ene',
+  'feb',
+  'mar',
+  'abr',
+  'may',
+  'jun',
+  'jul',
+  'ago',
+  'sep',
+  'oct',
+  'nov',
+  'dic',
+];
+
+const formatDMY = (day, month, year) =>
+  `${parseInt(day, 10)} / ${meses[parseInt(month, 10)]} / ${year}`;
+
+const nowVars = () => {
+  const now = new Date();
+  const [year, month, day] = now.toISOString().split('T')[0].split('-');
+  return {
+    ISODate: now.toISOString(),
+    localizedDate: formatDMY(day, month, year),
+  };
 };
 
 const metaBlock = (post) => `
@@ -136,9 +148,7 @@ const parsePostData = (postFileName, postContent) => {
     content: fMat.content,
     locale: fMat.data.language,
     ISODate: `${year}-${month}-${day}T00:00:00+01:00`,
-    localizedDate: `${parseInt(day, 10)} / ${
-      meses[parseInt(month, 10)]
-    } / ${year}`,
+    localizedDate: formatDMY(day, month, year),
     fullURL: `${site.url}${site.root}/${year}/${month}/${day}/${slug}.html`,
     relURL: `${year}/${month}/${day}/${slug}.html`,
     title: fMat.data.title,
@@ -152,25 +162,25 @@ const parsePostData = (postFileName, postContent) => {
     }),
   };
   result.metaBlock = metaBlock(result);
-  result.metaBlock = metaBlock(result);
   const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
   result.siblings = `
-  ${
-    postIndex > 0
-      ? `<a href="${
-          postsURLIndex[postIndex - 1]
-        }"><div class="triangle-left"></div> Anterior</a>`
-      : ''
-  }
-  ${postIndex > 0 && postIndex < postsURLIndex.length - 1 ? ' - ' : ''}
-  ${
-    postIndex < postsURLIndex.length - 1
-      ? `<a href="${
-          postsURLIndex[postIndex + 1]
-        }">Siguiente <div class="triangle-right"></div></a>`
-      : ''
-  }`;
+  <div class="next-prev-links">
+    ${
+      postIndex > 0
+        ? `<a  class="prev-link" href="${
+            postsURLIndex[postIndex - 1]
+          }"><div class="triangle-left"></div> Anterior</a>`
+        : ''
+    }
+    ${
+      postIndex < postsURLIndex.length - 1
+        ? `<a  class="next-link" href="${
+            postsURLIndex[postIndex + 1]
+          }">Siguiente <div class="triangle-right"></div></a>`
+        : ''
+    }
+  </div>`;
   return result;
 };
 
@@ -236,7 +246,6 @@ const processHash = (hash, sortOrder) => {
   <div class="excerpt-title p-name" itemprop="name headline">
     <a class="home-post-link" href="${post.relURL}">${post.title}</a>
   </div>
-  ${metaBlock(post)}
   ${metaBlock(post)}
   <blockquote>${post.excerpt}</blockquote>
 </div>
@@ -311,12 +320,9 @@ const processHash = (hash, sortOrder) => {
   return `${objectMap(hash, processMainHash, sortOrder).join('')}`;
 };
 const catsVars = {
+  ...nowVars(),
   fullURL: `${site.url}${site.root}/categories.html`,
   relURL: 'categories.html',
-  ISODate: new Date().toISOString(),
-  localizedDate: new Date().toLocaleDateString('es-ES', {
-    dateStyle: 'medium',
-  }),
   title: 'Categories',
   locale: 'es-ES',
   excerpt: "Categories for posts on Satyam's blog",
@@ -333,12 +339,9 @@ await fs.writeFile(
 );
 
 const postsVars = {
+  ...nowVars(),
   fullURL: `${site.url}${site.root}/posts.html`,
   relURL: 'posts.html',
-  ISODate: new Date().toISOString(),
-  localizedDate: new Date().toLocaleDateString('es-ES', {
-    dateStyle: 'medium',
-  }),
   title: 'Posts by Year',
   locale: 'es-ES',
   excerpt: "Index of posts by year of publishing for on Satyam's blog",

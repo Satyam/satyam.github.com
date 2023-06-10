@@ -58,16 +58,6 @@ details[open] > summary {
   font-weight: bold;
 }
 
-.excerpt-extra {
-  margin-top: 5px;
-  font-size: 14px;
-}
-/* .excerpt-date {
-  background-color: #e8e8e8;
-  padding: 2px 5px;
-  border-radius: 10px;
-} */
-
 .excerpt blockquote {
   clear: both;
   margin-top: 10px;
@@ -77,16 +67,18 @@ time {
   word-spacing: -0.1em;
 }
 
-.post-footer {
-  text-align: center;
-}
 .excerpt-title a,
-.excerpt-cats a,
-.post-footer a,
-.post-categories a {
+.next-prev-links a,
+.post-cats a {
   color: #111;
 }
 
+.prev-link {
+  float: left;
+}
+.next-link {
+  float: right;
+}
 .triangle-left {
   width: 0;
   height: 0;
