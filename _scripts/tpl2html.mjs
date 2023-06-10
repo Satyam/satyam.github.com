@@ -324,9 +324,9 @@ const catsVars = {
   ...nowVars(),
   fullURL: `${site.url}${site.root}/categories.html`,
   relURL: 'categories.html',
-  title: 'Categories',
+  title: 'Etiquetas',
   locale: 'es-ES',
-  excerpt: "Categories for posts on Satyam's blog",
+  excerpt: 'Artículos archivados por etiqueta',
 
   content: processHash(catsHash),
 };
@@ -343,9 +343,9 @@ const postsVars = {
   ...nowVars(),
   fullURL: `${site.url}${site.root}/posts.html`,
   relURL: 'posts.html',
-  title: 'Posts by Year',
+  title: 'Artículos por fecha',
   locale: 'es-ES',
-  excerpt: "Index of posts by year of publishing for on Satyam's blog",
+  excerpt: 'Artículos por fecha de publicación',
 
   content: processHash(postsHash, sortDescending),
 };
