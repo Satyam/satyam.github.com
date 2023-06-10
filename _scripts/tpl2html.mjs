@@ -149,7 +149,6 @@ const parsePostData = (postFileName, postContent) => {
     locale: fMat.data.language,
     ISODate: `${year}-${month}-${day}T00:00:00+01:00`,
     localizedDate: formatDMY(day, month, year),
-    fullURL: `${site.url}${site.root}/${year}/${month}/${day}/${slug}.html`,
     relURL: `${year}/${month}/${day}/${slug}.html`,
     title: fMat.data.title,
     categories: fMat.data.categories.map((cat) => {
@@ -162,6 +161,8 @@ const parsePostData = (postFileName, postContent) => {
     }),
   };
   result.metaBlock = metaBlock(result);
+  result.fullURL = `${site.url}${site.root}/${result.relURL}`;
+
   const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
 
   result.siblings = `
