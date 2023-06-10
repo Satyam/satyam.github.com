@@ -118,6 +118,16 @@ const metaBlock = (post) => `
       : ''
   }</div>`;
 
+const createExcerptEntry = (post) => `
+<div class="excerpt">
+  <div class="excerpt-title p-name" itemprop="name headline">
+    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
+  </div>
+  ${metaBlock(post)}
+  <blockquote>${post.excerpt}</blockquote>
+</div>
+`;
+
 const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
@@ -185,6 +195,9 @@ const parsePostData = (postFileName, postContent) => {
   return result;
 };
 
+const latestPostsArray = [];
+let latestPostsCount = 10;
+
 const postsHash = {};
 const addToPostsHash = (post) => {
   if (!(post.year in postsHash)) postsHash[post.year] = [];
@@ -240,17 +253,12 @@ for (const postName of postNames) {
 
   addToPostsHash(post);
   addToCatsHash(post);
+  if (latestPostsCount) {
+    latestPostsCount--;
+    latestPostsArray.push(post);
+  }
 }
 const processHash = (hash, sortOrder) => {
-  const createExcerptEntry = (post) => `
-<div class="excerpt">
-  <div class="excerpt-title p-name" itemprop="name headline">
-    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
-  </div>
-  ${metaBlock(post)}
-  <blockquote>${post.excerpt}</blockquote>
-</div>
-`;
   // a =  [
   //       { "title": "El entierro de la sardina" }
   //     ],
@@ -320,6 +328,27 @@ const processHash = (hash, sortOrder) => {
   // }
   return `${objectMap(hash, processMainHash, sortOrder).join('')}`;
 };
+
+const homeVars = {
+  ...nowVars(),
+  fullURL: `${site.url}${site.root}/index.html`,
+  relURL: 'index.html',
+  title: 'Bienvenido',
+  locale: 'es-ES',
+  excerpt: 'Artículos más recientes',
+
+  content: `<div class="home-summary">Artículos más recientes</div>
+    ${latestPostsArray.map(createExcerptEntry).join('')}`,
+};
+homeVars.metaBlock = metaBlock(homeVars);
+
+const homeTpl = await prepareTemplate('home');
+
+await fs.writeFile(
+  path.join(DEST_DIRS.posts, 'index.html'),
+  resolveVars(homeTpl, 'post', homeVars)
+);
+
 const catsVars = {
   ...nowVars(),
   fullURL: `${site.url}${site.root}/categories.html`,

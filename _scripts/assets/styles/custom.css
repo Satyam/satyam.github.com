@@ -95,3 +95,24 @@ time {
   border-left: 0.8rem solid #555;
   border-bottom: 0.4rem solid transparent;
 }
+
+.home {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+  margin-bottom: 0.3em;
+}
+
+.home-summary {
+  font-size: 24px;
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.more-posts,
+.more-posts:visited {
+  float: right;
+  color: #111;
+}
