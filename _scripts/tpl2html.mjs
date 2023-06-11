@@ -39,6 +39,7 @@ const objectMap = (obj, fn, sortFn) =>
     .map((key, index) => fn(obj[key], key, sortFn));
 
 const site = require(path.join(SRC_DIRS.templates, 'site.json'));
+site.updated = new Date().toISOString();
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
 
@@ -161,6 +162,7 @@ const parsePostData = (postFileName, postContent) => {
     localizedDate: formatDMY(day, month, year),
     relURL: `${year}/${month}/${day}/${slug}.html`,
     title: fMat.data.title,
+    rawCats: fMat.data.categories,
     categories: fMat.data.categories.map((cat) => {
       const m = catRex.exec(cat);
       if (!m) {
@@ -385,6 +387,27 @@ const postsTpl = await prepareTemplate('posts');
 await fs.writeFile(
   path.join(DEST_DIRS.posts, 'posts.html'),
   resolveVars(postsTpl, 'post', postsVars)
+);
+
+const feedTemplate = resolveSiteVars(
+  await readSrcFile('templates', 'feed.tpl.html')
+);
+const entryTemplate = resolveSiteVars(
+  await readSrcFile('templates', 'feedEntry.tpl.html')
+);
+
+const entries = latestPostsArray
+  .map((post) => {
+    post.catTerms = post.rawCats
+      .map((cat) => `<category term="${cat}" />`)
+      .join('\n');
+    return resolveVars(entryTemplate, 'post', post);
+  })
+  .join('\n');
+
+await fs.writeFile(
+  path.join(DEST_DIRS.posts, 'feed.xml'),
+  resolveVars(feedTemplate, 'feed', { content: entries })
 );
 
 // Copy and merge styles

@@ -1,0 +1,17 @@
+<entry>
+  <title type="html">{{post.title}}</title>
+  <link
+    href="{{post.fullURL}}"
+    rel="alternate"
+    type="text/html"
+    title="{{post.title}}"
+  />
+  <published>{{post.ISODate}}</published>
+  <updated>{{post.ISODate}}</updated>
+  <id>{{post.fullURL}}</id>
+  <author>
+    <name>{{site.author}}</name>
+  </author>
+  {{post.catTerms}}
+  <summary type="html">{{post.excerpt}}</summary>
+</entry>
