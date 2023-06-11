@@ -56,7 +56,19 @@
             </span>
           </label>
 
-          <div class="trigger">{{template.menu}}</div>
+          <div class="trigger">
+            {{template.menu}}
+            <form
+              id="searchform"
+              method="get"
+              action="https://www.google.com/search"
+              target="_blank"
+            >
+              <input type="text" name="q" id="s" size="15" />
+              <input type="submit" name="submit" value="🔍" />
+              <input type="hidden" name="as_sitesearch" value="satyam.com.ar" />
+            </form>
+          </div>
         </nav>
       </div>
     </header>

@@ -116,3 +116,7 @@ time {
   float: right;
   color: #111;
 }
+
+#searchform {
+  display: inline-block;
+}
