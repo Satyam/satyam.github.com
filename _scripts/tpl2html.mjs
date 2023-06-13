@@ -140,16 +140,12 @@ const cleanExcerpt = (e) => {
 let postsURLIndex;
 
 const parsePostData = (postFileName, postContent) => {
-  const m = blogInfoRex.exec(path.basename(postFileName));
-  if (!m) {
-    console.error('no match', postFileName);
-    process.exit(1);
-  }
-  const { year, month, day, slug } = m.groups;
   const fMat = matter(postContent, {
     excerpt: true,
     excerpt_separator: '<span class="more"></span>',
   });
+  const [year, month, day] = fMat.data.date.split('-');
+  const slug = slugify(fMat.data.title, { lower: true, strict: true });
   const result = {
     year,
     month,
@@ -243,6 +239,7 @@ for (const postName of postNames) {
   if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
   if (post.excerpt?.length > 800)
     console.error('excerpt too long', postName, post.excerpt.length);
+  if (post.content?.length < 20) console.error('short content', postName);
 
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
