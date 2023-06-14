@@ -1,8 +1,33 @@
 #!/usr/bin/env zx
-import { open } from 'node:fs/promises';
+import { open, readFile } from 'node:fs/promises';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
+
+const md_anchor = require('markdown-it-anchor');
+const md_sub = require('markdown-it-sub');
+const md_sup = require('markdown-it-sup');
+const md_emoji = require('markdown-it-emoji');
+const hljs = require('highlight.js');
+
+const md = require('markdown-it')({
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${
+          hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+        }
+          </code></pre>`;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
+  },
+});
+
+md.use(md_anchor).use(md_sub).use(md_sup).use(md_emoji);
 
 const ASSETS = 'assets';
 const SRC_DIRS = {
@@ -129,7 +154,6 @@ const createExcerptEntry = (post) => `
 </div>
 `;
 
-const blogInfoRex = /(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-(?<slug>.+)\.html/;
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
 const cleanExcerpt = (e) => {
@@ -140,19 +164,21 @@ const cleanExcerpt = (e) => {
 let postsURLIndex;
 
 const parsePostData = (postFileName, postContent) => {
+  const isMd = path.extname(postFileName) === '.md';
   const fMat = matter(postContent, {
     excerpt: true,
-    excerpt_separator: '<span class="more"></span>',
+    excerpt_separator: isMd ? '---' : '<span class="more"></span>',
   });
   const [year, month, day] = fMat.data.date.split('-');
   const slug = slugify(fMat.data.title, { lower: true, strict: true });
+  const content = isMd ? md.render(fMat.content) : fMat.content;
   const result = {
     year,
     month,
     day,
     slug,
-    excerpt: cleanExcerpt(fMat.excerpt),
-    content: fMat.content,
+    excerpt: cleanExcerpt(isMd ? md.render(fMat.excerpt) : fMat.excerpt),
+    content,
     locale: fMat.data.language,
     ISODate: `${year}-${month}-${day}T00:00:00+01:00`,
     localizedDate: formatDMY(day, month, year),
@@ -218,22 +244,25 @@ const addToCatsHash = (post) => {
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
-const postNames = (await glob(path.join(SRC_DIRS.jekyllPosts, '*.htm*'))).sort(
-  sortDescending
-);
+
+const postNames = (
+  await glob(['*.htm*', '*.md'], {
+    cwd: SRC_DIRS.jekyllPosts,
+  })
+).sort(sortDescending);
 
 postsURLIndex = postNames.map((postFileName) => {
-  const m = blogInfoRex.exec(path.basename(postFileName));
-  if (!m) {
-    console.error('no match', postFileName);
-    process.exit(1);
-  }
-  const { year, month, day, slug } = m.groups;
+  const fMat = matter.read(path.join(SRC_DIRS.jekyllPosts, postFileName));
+  const [year, month, day] = fMat.data.date.split('-');
+  const slug = slugify(fMat.data.title, { lower: true, strict: true });
   return `${year}/${month}/${day}/${slug}.html`;
 });
 
 for (const postName of postNames) {
-  const post = parsePostData(postName, await fs.readFile(postName, 'utf8'));
+  const post = parsePostData(
+    postName,
+    await fs.readFile(path.join(SRC_DIRS.jekyllPosts, postName), 'utf8')
+  );
 
   if (!post.excerpt) console.error('missing excerpt in ', postName);
   if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
@@ -411,6 +440,12 @@ await fs.writeFile(
 await fs.ensureDir(DEST_DIRS.styles);
 const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
 await outStyle.writeFile(await readSrcFile('styles', 'minima.css'));
+await outStyle.writeFile(
+  await readFile(
+    path.join(__dirname, 'node_modules/highlight.js/styles/github.css'),
+    'utf8'
+  )
+);
 await outStyle.writeFile(await readSrcFile('styles', 'custom.css'));
 await outStyle.close();
 
