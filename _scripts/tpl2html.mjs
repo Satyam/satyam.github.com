@@ -177,6 +177,7 @@ const parsePostData = (srcFileName, postContent) => {
   const slug = slugify(fMat.data.title, { lower: true, strict: true });
   const content = isMd ? md.render(fMat.content) : fMat.content;
   const result = {
+    srcFileName,
     year,
     month,
     day,
@@ -370,6 +371,7 @@ const processHash = (hash, sortOrder) => {
 
 const homeVars = {
   ...nowVars(),
+  srcFileName: '--generated--',
   fullURL: `${site.url}${site.root}/index.html`,
   relURL: 'index.html',
   title: 'Bienvenido',
@@ -390,6 +392,7 @@ await fs.writeFile(
 
 const catsVars = {
   ...nowVars(),
+  srcFileName: '--generated--',
   fullURL: `${site.url}${site.root}/categories.html`,
   relURL: 'categories.html',
   title: 'Etiquetas',
@@ -409,6 +412,7 @@ await fs.writeFile(
 
 const postsVars = {
   ...nowVars(),
+  srcFileName: '--generated--',
   fullURL: `${site.url}${site.root}/posts.html`,
   relURL: 'posts.html',
   title: 'Artículos por fecha',
