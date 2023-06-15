@@ -161,10 +161,14 @@ const cleanExcerpt = (e) => {
   eEl.querySelectorAll('figure').forEach((fig) => fig.remove());
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
-let postsURLIndex;
 
-const parsePostData = (postFileName, postContent) => {
-  const isMd = path.extname(postFileName) === '.md';
+// `postsArray` is an ordered array of arrays, each containing
+// [srcFileName, relUrl]
+// It will be filled later on, but `parsePostData` needs to have access to it
+let postsArray;
+
+const parsePostData = (srcFileName, postContent) => {
+  const isMd = path.extname(srcFileName) === '.md';
   const fMat = matter(postContent, {
     excerpt: true,
     excerpt_separator: isMd ? '---' : '<span class="more"></span>',
@@ -188,7 +192,7 @@ const parsePostData = (postFileName, postContent) => {
     categories: fMat.data.categories.map((cat) => {
       const m = catRex.exec(cat);
       if (!m) {
-        console.error('cat no match', cat, postFileName);
+        console.error('cat no match', cat, srcFileName);
         process.exit(1);
       }
       return m.groups;
@@ -197,21 +201,21 @@ const parsePostData = (postFileName, postContent) => {
   result.metaBlock = metaBlock(result);
   result.fullURL = `${site.url}${site.root}/${result.relURL}`;
 
-  const postIndex = postsURLIndex.findIndex((item) => result.relURL === item);
+  const postIndex = postsArray.findIndex((item) => result.relURL === item[1]);
 
   result.siblings = `
   <div class="next-prev-links">
     ${
       postIndex > 0
         ? `<a  class="prev-link" href="${
-            postsURLIndex[postIndex - 1]
+            postsArray[postIndex - 1][1]
           }"><div class="triangle-left"></div> Anterior</a>`
         : ''
     }
     ${
-      postIndex < postsURLIndex.length - 1
+      postIndex < postsArray.length - 1
         ? `<a  class="next-link" href="${
-            postsURLIndex[postIndex + 1]
+            postsArray[postIndex + 1][1]
           }">Siguiente <div class="triangle-right"></div></a>`
         : ''
     }
@@ -245,30 +249,37 @@ await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
 
-const postNames = (
-  await glob(['*.htm*', '*.md'], {
-    cwd: SRC_DIRS.jekyllPosts,
-  })
-).sort(sortDescending);
-
-postsURLIndex = postNames.map((postFileName) => {
-  const fMat = matter.read(path.join(SRC_DIRS.jekyllPosts, postFileName));
-  const [year, month, day] = fMat.data.date.split('-');
-  const slug = slugify(fMat.data.title, { lower: true, strict: true });
-  return `${year}/${month}/${day}/${slug}.html`;
+const srcPostNames = await glob(['**.htm*', '**.md'], {
+  cwd: SRC_DIRS.jekyllPosts,
+  deep: 5,
 });
 
-for (const postName of postNames) {
+// This is declared up above so it is available to `parsePostData`
+postsArray = srcPostNames
+  .map((srcFileName) => {
+    const fMat = matter.read(path.join(SRC_DIRS.jekyllPosts, srcFileName));
+    const [year, month, day] = fMat.data.date.split('-');
+    const slug = slugify(fMat.data.title, { lower: true, strict: true });
+    return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
+  })
+  .sort((a, b) => {
+    if (a[1] < b[1]) return 1;
+    if (a[1] > b[1]) return -1;
+    return 0;
+  });
+
+for (const [srcFileName] of postsArray) {
   const post = parsePostData(
-    postName,
-    await fs.readFile(path.join(SRC_DIRS.jekyllPosts, postName), 'utf8')
+    srcFileName,
+    await fs.readFile(path.join(SRC_DIRS.jekyllPosts, srcFileName), 'utf8')
   );
 
-  if (!post.excerpt) console.error('missing excerpt in ', postName);
-  if (post.excerpt?.length === 0) console.error('empty excerpt in ', postName);
+  if (!post.excerpt) console.error('missing excerpt in ', srcFileName);
+  if (post.excerpt?.length === 0)
+    console.error('empty excerpt in ', srcFileName);
   if (post.excerpt?.length > 800)
-    console.error('excerpt too long', postName, post.excerpt.length);
-  if (post.content?.length < 20) console.error('short content', postName);
+    console.error('excerpt too long', srcFileName, post.excerpt.length);
+  if (post.content?.length < 20) console.error('short content', srcFileName);
 
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
   await fs.ensureDir(outDir);
