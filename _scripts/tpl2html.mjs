@@ -165,10 +165,49 @@ const cleanExcerpt = (e) => {
   return eEl.innerText.replaceAll(/[ ]+/g, ' ');
 };
 
-// `postsArray` is an ordered array of arrays, each containing
-// [srcFileName, relURL]
-// It will be filled later on, but `parsePostData` needs to have access to it
-let postsArray;
+const latestPostsArray = [];
+let latestPostsCount = 10;
+
+const postsHash = {};
+const addToPostsHash = (post) => {
+  if (!(post.year in postsHash)) postsHash[post.year] = [];
+  const monthText = `${post.month} - ${meses[parseInt(post.month, 10)]}`;
+  if (!(monthText in postsHash[post.year]))
+    postsHash[post.year][monthText] = [];
+  postsHash[post.year][monthText].push(post);
+};
+const catsHash = {};
+
+const addToCatsHash = (post) => {
+  post.categories.forEach((cat) => {
+    const { main, sub } = cat;
+    if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
+    const cMain = catsHash[main];
+    if (sub && !cMain[sub]) cMain[sub] = [];
+    cMain[sub ?? NO_SUBCAT_KEY].push(post);
+  });
+};
+await fs.ensureDir(DEST_DIRS.posts);
+// await fs.emptyDir(DEST_DIRS.posts);
+const postTpl = await prepareTemplate('post');
+
+const srcPostNames = await glob(['**.htm*', '**.md'], {
+  cwd: SRC_DIRS.jekyllPosts,
+  deep: 5,
+});
+
+const postsArray = srcPostNames
+  .map((srcFileName) => {
+    const fMat = parsePost(srcFileName);
+    const [year, month, day] = fMat.data.date.split('-');
+    const slug = slugify(fMat.data.title, { lower: true, strict: true });
+    return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
+  })
+  .sort((a, b) => {
+    if (a[1] < b[1]) return 1;
+    if (a[1] > b[1]) return -1;
+    return 0;
+  });
 
 const parsePostData = (srcFileName, relURL) => {
   const isMd = path.extname(srcFileName) === '.md';
@@ -208,69 +247,24 @@ const parsePostData = (srcFileName, relURL) => {
   const postIndex = postsArray.findIndex((item) => relURL === item[1]);
 
   result.siblings = `
-  <div class="next-prev-links">
-    ${
-      postIndex > 0
-        ? `<a  class="prev-link" href="${
-            postsArray[postIndex - 1][1]
-          }"><div class="triangle-left"></div> Anterior</a>`
-        : ''
-    }
-    ${
-      postIndex < postsArray.length - 1
-        ? `<a  class="next-link" href="${
-            postsArray[postIndex + 1][1]
-          }">Siguiente <div class="triangle-right"></div></a>`
-        : ''
-    }
-  </div>`;
+    <div class="next-prev-links">
+      ${
+        postIndex > 0
+          ? `<a  class="prev-link" href="${
+              postsArray[postIndex - 1][1]
+            }"><div class="triangle-left"></div> Anterior</a>`
+          : ''
+      }
+      ${
+        postIndex < postsArray.length - 1
+          ? `<a  class="next-link" href="${
+              postsArray[postIndex + 1][1]
+            }">Siguiente <div class="triangle-right"></div></a>`
+          : ''
+      }
+    </div>`;
   return result;
 };
-
-const latestPostsArray = [];
-let latestPostsCount = 10;
-
-const postsHash = {};
-const addToPostsHash = (post) => {
-  if (!(post.year in postsHash)) postsHash[post.year] = [];
-  const monthText = `${post.month} - ${meses[parseInt(post.month, 10)]}`;
-  if (!(monthText in postsHash[post.year]))
-    postsHash[post.year][monthText] = [];
-  postsHash[post.year][monthText].push(post);
-};
-const catsHash = {};
-
-const addToCatsHash = (post) => {
-  post.categories.forEach((cat) => {
-    const { main, sub } = cat;
-    if (!(main in catsHash)) catsHash[main] = { [NO_SUBCAT_KEY]: [] };
-    const cMain = catsHash[main];
-    if (sub && !cMain[sub]) cMain[sub] = [];
-    cMain[sub ?? NO_SUBCAT_KEY].push(post);
-  });
-};
-await fs.ensureDir(DEST_DIRS.posts);
-// await fs.emptyDir(DEST_DIRS.posts);
-const postTpl = await prepareTemplate('post');
-
-const srcPostNames = await glob(['**.htm*', '**.md'], {
-  cwd: SRC_DIRS.jekyllPosts,
-  deep: 5,
-});
-
-// This is declared up above so it is available to `parsePostData`
-postsArray = srcPostNames
-  .map((srcFileName) => {
-    const fMat = parsePost(srcFileName);
-    const [year, month, day] = fMat.data.date.split('-');
-    const slug = slugify(fMat.data.title, { lower: true, strict: true });
-    return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
-  })
-  .sort((a, b) => {
-    if (a[1] < b[1]) return 1;
-    if (a[1] > b[1]) return -1;
-    return 0;
-  });
 
 for (const [srcFileName, relURL] of postsArray) {
   const post = parsePostData(srcFileName, relURL);
