@@ -163,11 +163,11 @@ const cleanExcerpt = (e) => {
 };
 
 // `postsArray` is an ordered array of arrays, each containing
-// [srcFileName, relUrl]
+// [srcFileName, relURL]
 // It will be filled later on, but `parsePostData` needs to have access to it
 let postsArray;
 
-const parsePostData = (srcFileName, postContent) => {
+const parsePostData = (srcFileName, relURL, postContent) => {
   const isMd = path.extname(srcFileName) === '.md';
   const fMat = matter(postContent, {
     excerpt: true,
@@ -187,7 +187,8 @@ const parsePostData = (srcFileName, postContent) => {
     locale: fMat.data.language,
     ISODate: `${year}-${month}-${day}T00:00:00+01:00`,
     localizedDate: formatDMY(day, month, year),
-    relURL: `${year}/${month}/${day}/${slug}.html`,
+    relURL,
+    fullURL: `${site.url}${site.root}/${relURL}`,
     title: fMat.data.title,
     rawCats: fMat.data.categories,
     categories: fMat.data.categories.map((cat) => {
@@ -200,9 +201,8 @@ const parsePostData = (srcFileName, postContent) => {
     }),
   };
   result.metaBlock = metaBlock(result);
-  result.fullURL = `${site.url}${site.root}/${result.relURL}`;
 
-  const postIndex = postsArray.findIndex((item) => result.relURL === item[1]);
+  const postIndex = postsArray.findIndex((item) => relURL === item[1]);
 
   result.siblings = `
   <div class="next-prev-links">
@@ -269,9 +269,10 @@ postsArray = srcPostNames
     return 0;
   });
 
-for (const [srcFileName] of postsArray) {
+for (const [srcFileName, relURL] of postsArray) {
   const post = parsePostData(
     srcFileName,
+    relURL,
     await fs.readFile(path.join(SRC_DIRS.jekyllPosts, srcFileName), 'utf8')
   );
 
