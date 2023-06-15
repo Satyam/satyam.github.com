@@ -77,6 +77,9 @@ const sortDescending = (a, b) => {
 const readSrcFile = async (folder, file) =>
   await fs.readFile(path.join(SRC_DIRS[folder], file), 'utf8');
 
+const parsePost = (srcFileName, options) =>
+  matter.read(path.join(SRC_DIRS.jekyllPosts, srcFileName), options);
+
 const baseTemplate = await readSrcFile('templates', 'base.tpl.html');
 
 const prepareTemplate = async (tpl) => {
@@ -167,9 +170,9 @@ const cleanExcerpt = (e) => {
 // It will be filled later on, but `parsePostData` needs to have access to it
 let postsArray;
 
-const parsePostData = (srcFileName, relURL, postContent) => {
+const parsePostData = (srcFileName, relURL) => {
   const isMd = path.extname(srcFileName) === '.md';
-  const fMat = matter(postContent, {
+  const fMat = parsePost(srcFileName, {
     excerpt: true,
     excerpt_separator: isMd ? '---' : '<span class="more"></span>',
   });
@@ -258,7 +261,7 @@ const srcPostNames = await glob(['**.htm*', '**.md'], {
 // This is declared up above so it is available to `parsePostData`
 postsArray = srcPostNames
   .map((srcFileName) => {
-    const fMat = matter.read(path.join(SRC_DIRS.jekyllPosts, srcFileName));
+    const fMat = parsePost(srcFileName);
     const [year, month, day] = fMat.data.date.split('-');
     const slug = slugify(fMat.data.title, { lower: true, strict: true });
     return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
@@ -270,11 +273,7 @@ postsArray = srcPostNames
   });
 
 for (const [srcFileName, relURL] of postsArray) {
-  const post = parsePostData(
-    srcFileName,
-    relURL,
-    await fs.readFile(path.join(SRC_DIRS.jekyllPosts, srcFileName), 'utf8')
-  );
+  const post = parsePostData(srcFileName, relURL);
 
   if (!post.excerpt) console.error('missing excerpt in ', srcFileName);
   if (post.excerpt?.length === 0)
