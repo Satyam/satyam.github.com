@@ -95,18 +95,18 @@ const prepareTemplate = async (tpl) => {
 
 const meses = [
   '??',
-  'ene',
-  'feb',
-  'mar',
-  'abr',
-  'may',
-  'jun',
-  'jul',
-  'ago',
-  'sep',
-  'oct',
-  'nov',
-  'dic',
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Setiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
 ];
 
 const formatDMY = (day, month, year) =>
@@ -171,7 +171,7 @@ let latestPostsCount = 10;
 const postsHash = {};
 const addToPostsHash = (post) => {
   if (!(post.year in postsHash)) postsHash[post.year] = [];
-  const monthText = `${post.month} - ${meses[parseInt(post.month, 10)]}`;
+  const monthText = meses[parseInt(post.month, 10)];
   if (!(monthText in postsHash[post.year]))
     postsHash[post.year][monthText] = [];
   postsHash[post.year][monthText].push(post);
