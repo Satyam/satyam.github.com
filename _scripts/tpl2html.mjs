@@ -4,36 +4,39 @@ import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
 
-const md_anchor = require('markdown-it-anchor');
-const md_sub = require('markdown-it-sub');
-const md_sup = require('markdown-it-sup');
-const md_emoji = require('markdown-it-emoji');
-const hljs = require('highlight.js');
+const md = (() => {
+  const md_anchor = require('markdown-it-anchor');
+  const md_sub = require('markdown-it-sub');
+  const md_sup = require('markdown-it-sup');
+  const md_emoji = require('markdown-it-emoji');
+  const hljs = require('highlight.js');
 
-const md = require('markdown-it')({
-  highlight: (str, lang) => {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return `<pre class="hljs"><code>${
-          hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+  const md = require('markdown-it')({
+    highlight: (str, lang) => {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return `<pre class="hljs"><code>${
+            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+          }</code></pre>`;
+        } catch (err) {
+          console.error(err);
         }
-          </code></pre>`;
-      } catch (err) {
-        console.error(err);
       }
-    }
-
-    return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
-  },
-});
-
-md.use(md_anchor).use(md_sub).use(md_sup).use(md_emoji);
+      return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
+    },
+  });
+  md.use(md_anchor).use(md_sub).use(md_sup).use(md_emoji);
+  return md;
+})();
 
 const ASSETS = 'assets';
+const TEMPLATES = 'templates';
+const STYLES = 'styles';
+
 const SRC_DIRS = {
-  templates: path.join(__dirname, 'templates'),
+  templates: path.join(__dirname, TEMPLATES),
   jekyllPosts: path.join(__dirname, 'posts'),
-  styles: path.join(__dirname, ASSETS, 'styles'),
+  styles: path.join(__dirname, ASSETS, STYLES),
   images: path.join(__dirname, ASSETS, 'imgs'),
   js: path.join(__dirname, ASSETS, 'js'),
 };
@@ -67,15 +70,15 @@ const resolveVars = (template, prefix, values) => {
   });
 };
 
-const site = JSON.parse(await readSrcFile('templates', 'site.json'));
+const site = JSON.parse(await readSrcFile(TEMPLATES, 'site.json'));
 site.updated = new Date().toISOString();
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
 
-const baseTemplate = await readSrcFile('templates', 'base.tpl.html');
+const baseTemplate = await readSrcFile(TEMPLATES, 'base.tpl.html');
 
 const prepareTemplate = async (tpl) => {
-  const template = await readSrcFile('templates', `${tpl}.tpl.html`);
+  const template = await readSrcFile(TEMPLATES, `${tpl}.tpl.html`);
   const values = {};
   htmlParse(template)
     .querySelectorAll('template')
@@ -89,8 +92,21 @@ const sortDescending = (a, b) => {
   return 0;
 };
 
-const parsePost = (srcFileName, options) =>
-  matter.read(path.join(SRC_DIRS.jekyllPosts, srcFileName), options);
+const parsePostFrontMatter = (srcFileName, options) => {
+  const fMat = matter.read(
+    path.join(SRC_DIRS.jekyllPosts, srcFileName),
+    options
+  );
+  const [year, month, day] = fMat.data.date.split('-');
+  const slug = slugify(fMat.data.title, { lower: true, strict: true });
+  return {
+    ...fMat,
+    year,
+    month,
+    day,
+    slug,
+  };
+};
 
 const meses = [
   '??',
@@ -187,6 +203,9 @@ const addToCatsHash = (post) => {
   });
 };
 
+//-------------------------
+// Here is where it does start to do something
+//-------------------------
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
@@ -206,9 +225,7 @@ The ordering is important to get the *previous/next* links right.
 */
 const postsArray = srcPostNames
   .map((srcFileName) => {
-    const fMat = parsePost(srcFileName);
-    const [year, month, day] = fMat.data.date.split('-');
-    const slug = slugify(fMat.data.title, { lower: true, strict: true });
+    const { year, month, day, slug } = parsePostFrontMatter(srcFileName);
     return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
   })
   .sort((a, b) => {
@@ -219,12 +236,11 @@ const postsArray = srcPostNames
 
 const parsePostData = (srcFileName, relURL) => {
   const isMd = path.extname(srcFileName) === '.md';
-  const fMat = parsePost(srcFileName, {
+  const fMat = parsePostFrontMatter(srcFileName, {
     excerpt: true,
     excerpt_separator: isMd ? '---' : '<span class="more"></span>',
   });
-  const [year, month, day] = fMat.data.date.split('-');
-  const slug = slugify(fMat.data.title, { lower: true, strict: true });
+  const { year, month, day, slug } = fMat;
   const content = isMd ? md.render(fMat.content) : fMat.content;
   const result = {
     srcFileName,
@@ -274,6 +290,8 @@ const parsePostData = (srcFileName, relURL) => {
   return result;
 };
 
+// Notice that this loop goes over the posts source
+// now ordered descending by date, not just as `glob` finds them
 for (const [srcFileName, relURL] of postsArray) {
   const post = parsePostData(srcFileName, relURL);
 
@@ -291,6 +309,9 @@ for (const [srcFileName, relURL] of postsArray) {
     resolveVars(postTpl, 'post', post)
   );
 
+  // Start collecting info for the various index pages.
+
+  // No need to preserve the post content which can be large
   delete post.content;
 
   addToPostsHash(post);
@@ -371,6 +392,7 @@ const processHash = (hash, sortOrder) => {
   return `${objectMap(hash, processMainHash, sortOrder).join('')}`;
 };
 
+// Create home page
 const homeVars = {
   ...nowVars(),
   srcFileName: '--generated--',
@@ -392,6 +414,7 @@ await fs.writeFile(
   resolveVars(homeTpl, 'post', homeVars)
 );
 
+// create Etiquetas page
 const catsVars = {
   ...nowVars(),
   srcFileName: '--generated--',
@@ -412,6 +435,7 @@ await fs.writeFile(
   resolveVars(catsTpl, 'post', catsVars)
 );
 
+// Create Arhivo page
 const postsVars = {
   ...nowVars(),
   srcFileName: '--generated--',
@@ -432,11 +456,12 @@ await fs.writeFile(
   resolveVars(postsTpl, 'post', postsVars)
 );
 
+// Create feed.xml
 const feedTemplate = resolveSiteVars(
-  await readSrcFile('templates', 'feed.tpl.html')
+  await readSrcFile(TEMPLATES, 'feed.tpl.html')
 );
 const entryTemplate = resolveSiteVars(
-  await readSrcFile('templates', 'feedEntry.tpl.html')
+  await readSrcFile(TEMPLATES, 'feedEntry.tpl.html')
 );
 
 const entries = latestPostsArray
@@ -456,14 +481,14 @@ await fs.writeFile(
 // Copy and merge styles
 await fs.ensureDir(DEST_DIRS.styles);
 const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
-await outStyle.writeFile(await readSrcFile('styles', 'minima.css'));
+await outStyle.writeFile(await readSrcFile(STYLES, 'minima.css'));
 await outStyle.writeFile(
   await readFile(
     path.join(__dirname, 'node_modules/highlight.js/styles/github.css'),
     'utf8'
   )
 );
-await outStyle.writeFile(await readSrcFile('styles', 'custom.css'));
+await outStyle.writeFile(await readSrcFile(STYLES, 'custom.css'));
 await outStyle.close();
 
 //---
