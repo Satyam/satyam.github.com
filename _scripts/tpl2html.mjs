@@ -47,26 +47,41 @@ const DEST_DIRS = {
   js: path.join(ASSETS_DIR, 'js'),
 };
 
+const readSrcFile = async (folder, file) =>
+  await fs.readFile(path.join(SRC_DIRS[folder], file), 'utf8');
+
 // Important: the reason for the | key is because it gets sorted after all alpha characters
 const NO_SUBCAT_KEY = '|';
-
-const resolveVars = (template, prefix, values) => {
-  const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
-  return template.replaceAll(rex, (_, prop) => {
-    if (prop in values) return values[prop] ?? '';
-    console.error('??? resolving', prefix, 'var', prop);
-  });
-};
 
 const objectMap = (obj, fn, sortFn) =>
   Object.keys(obj)
     .sort(sortFn)
     .map((key, index) => fn(obj[key], key, sortFn));
 
-const site = require(path.join(SRC_DIRS.templates, 'site.json'));
+const resolveVars = (template, prefix, values) => {
+  const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
+  return template.replaceAll(rex, (_, prop) => {
+    if (prop in values) return values[prop] ?? '';
+    // console.error('??? resolving', prefix, 'var', prop);
+    return '';
+  });
+};
+
+const site = JSON.parse(await readSrcFile('templates', 'site.json'));
 site.updated = new Date().toISOString();
 
 const resolveSiteVars = (template) => resolveVars(template, 'site', site);
+
+const baseTemplate = await readSrcFile('templates', 'base.tpl.html');
+
+const prepareTemplate = async (tpl) => {
+  const template = await readSrcFile('templates', `${tpl}.tpl.html`);
+  const values = {};
+  htmlParse(template)
+    .querySelectorAll('template')
+    .forEach((t) => (values[t.id] = t.innerHTML));
+  return resolveSiteVars(resolveVars(baseTemplate, 'template', values));
+};
 
 const sortDescending = (a, b) => {
   if (a < b) return 1;
@@ -74,24 +89,8 @@ const sortDescending = (a, b) => {
   return 0;
 };
 
-const readSrcFile = async (folder, file) =>
-  await fs.readFile(path.join(SRC_DIRS[folder], file), 'utf8');
-
 const parsePost = (srcFileName, options) =>
   matter.read(path.join(SRC_DIRS.jekyllPosts, srcFileName), options);
-
-const baseTemplate = await readSrcFile('templates', 'base.tpl.html');
-
-const prepareTemplate = async (tpl) => {
-  const template = await readSrcFile('templates', `${tpl}.tpl.html`);
-  const tplDoc = htmlParse(template);
-  const rex = new RegExp(`{{\\s*template\\.(\\w+)\\s*}}`, 'g');
-  return resolveSiteVars(
-    baseTemplate.replaceAll(rex, (_, prop) => {
-      return tplDoc.getElementById(prop)?.innerHTML ?? '';
-    })
-  );
-};
 
 const meses = [
   '??',
@@ -176,8 +175,8 @@ const addToPostsHash = (post) => {
     postsHash[post.year][monthText] = [];
   postsHash[post.year][monthText].push(post);
 };
-const catsHash = {};
 
+const catsHash = {};
 const addToCatsHash = (post) => {
   post.categories.forEach((cat) => {
     const { main, sub } = cat;
@@ -187,6 +186,7 @@ const addToCatsHash = (post) => {
     cMain[sub ?? NO_SUBCAT_KEY].push(post);
   });
 };
+
 await fs.ensureDir(DEST_DIRS.posts);
 // await fs.emptyDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
@@ -196,6 +196,14 @@ const srcPostNames = await glob(['**.htm*', '**.md'], {
   deep: 5,
 });
 
+/*
+`postsArray` is an ordered array of arrays (duples) 
+made of `[srcFileName, relUrl]`
+where `relURL` is build out of the date and the slugified title
+taken from the frontmatter. 
+It is ordered by date, newer on top after the date in the frontmatter.
+The ordering is important to get the *previous/next* links right.
+*/
 const postsArray = srcPostNames
   .map((srcFileName) => {
     const fMat = parsePost(srcFileName);
