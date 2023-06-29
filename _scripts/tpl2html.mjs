@@ -42,7 +42,7 @@ const SRC_DIRS = {
   js: path.join(__dirname, ASSETS, 'js'),
 };
 
-const SITE_DIR = path.join(__dirname, 'blog');
+const SITE_DIR = path.join(__dirname, '../docs/blog');
 const ASSETS_DIR = path.join(SITE_DIR, ASSETS);
 const DEST_DIRS = {
   posts: SITE_DIR,

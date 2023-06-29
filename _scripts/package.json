@@ -13,7 +13,7 @@
     "gray-matter": "^4.0.3"
   },
   "scripts": {
-    "start": "serve .",
+    "start": "serve ../docs",
     "build": "./tpl2html.mjs"
   }
 }
