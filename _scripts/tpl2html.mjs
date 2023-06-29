@@ -34,12 +34,14 @@ const ASSETS = 'assets';
 const TEMPLATES = 'templates';
 const STYLES = 'styles';
 
+const ROOT = path.join(__dirname, '..');
+const SCRIPT = __dirname;
 const SRC_DIRS = {
-  templates: path.join(__dirname, TEMPLATES),
-  jekyllPosts: path.join(__dirname, 'posts'),
-  styles: path.join(__dirname, ASSETS, STYLES),
-  images: path.join(__dirname, ASSETS, 'imgs'),
-  js: path.join(__dirname, ASSETS, 'js'),
+  templates: path.join(SCRIPT, TEMPLATES),
+  jekyllPosts: path.join(ROOT, 'blogsrc'),
+  styles: path.join(SCRIPT, ASSETS, STYLES),
+  images: path.join(ROOT, ASSETS, 'img'),
+  js: path.join(SCRIPT, ASSETS, 'js'),
 };
 
 const SITE_DIR = path.join(__dirname, '../docs/blog');
