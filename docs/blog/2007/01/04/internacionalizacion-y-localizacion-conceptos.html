@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--Source file: 2007-01-04-internacionalizacion-y-localizacion-conceptos.html-->
+    <meta charset="utf-8" />
+    <base href="/blog/" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Internacionalización y localización: conceptos | Comentarios</title>
+    <meta property="og:title" content="Internacionalización y localización: conceptos" />
+    <meta property="og:locale" content="es-ES" />
+    <meta name="description" content="
+
+ Un problema que se ve con más frecuencia en las aplicaciones de web es la
+ necesidad de internacionalización y localización. Dado que son palabras muy
+ largas, es habitual que sean abreviadas como i18n y l10n refiriéndose, como si
+ se tratara de un crucigrama, a las respectivas iniciales, la cantidad de
+ letras intermedias y la letra final. Estas dos palabras no son sinónimos, la
+ primera se refiere a la capacidad de una aplicación para que pueda ser
+ traducida, la segunda a la traducción en si, que muchas veces implica algo más
+ que simplemente traducirla, cosas como, por ejemplo, las representaciones y
+ conversiones necesarias para las fechas o la moneda. Si una aplicación no está
+ internacionalizada, es muy difícil localizarla." />
+    <meta property="og:description" content="
+
+ Un problema que se ve con más frecuencia en las aplicaciones de web es la
+ necesidad de internacionalización y localización. Dado que son palabras muy
+ largas, es habitual que sean abreviadas como i18n y l10n refiriéndose, como si
+ se tratara de un crucigrama, a las respectivas iniciales, la cantidad de
+ letras intermedias y la letra final. Estas dos palabras no son sinónimos, la
+ primera se refiere a la capacidad de una aplicación para que pueda ser
+ traducida, la segunda a la traducción en si, que muchas veces implica algo más
+ que simplemente traducirla, cosas como, por ejemplo, las representaciones y
+ conversiones necesarias para las fechas o la moneda. Si una aplicación no está
+ internacionalizada, es muy difícil localizarla." />
+    <link rel="canonical" href="http://www.satyam.com.ar/blog/2007/01/04/internacionalizacion-y-localizacion-conceptos.html" />
+    <meta property="og:url" content="http://www.satyam.com.ar/blog/2007/01/04/internacionalizacion-y-localizacion-conceptos.html" />
+    <meta property="og:site_name" content="Comentarios" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2007-01-04T00:00:00+01:00" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Internacionalización y localización: conceptos" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "dateModified": "2007-01-04T00:00:00+01:00",
+        "datePublished": "2007-01-04T00:00:00+01:00",
+        "description": "
+
+ Un problema que se ve con más frecuencia en las aplicaciones de web es la
+ necesidad de internacionalización y localización. Dado que son palabras muy
+ largas, es habitual que sean abreviadas como i18n y l10n refiriéndose, como si
+ se tratara de un crucigrama, a las respectivas iniciales, la cantidad de
+ letras intermedias y la letra final. Estas dos palabras no son sinónimos, la
+ primera se refiere a la capacidad de una aplicación para que pueda ser
+ traducida, la segunda a la traducción en si, que muchas veces implica algo más
+ que simplemente traducirla, cosas como, por ejemplo, las representaciones y
+ conversiones necesarias para las fechas o la moneda. Si una aplicación no está
+ internacionalizada, es muy difícil localizarla.",
+        "headline": "Internacionalización y localización: conceptos",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "http://www.satyam.com.ar/blog/2007/01/04/internacionalizacion-y-localizacion-conceptos.html"
+        },
+        "url": "http://www.satyam.com.ar/blog/2007/01/04/internacionalizacion-y-localizacion-conceptos.html"
+      }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      type="application/atom+xml"
+      rel="alternate"
+      href="feed.xml"
+      title="Comentarios"
+    />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        <a class="site-title" rel="author" href="index.html">Comentarios</a>
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path
+                  d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"
+                />
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            
+  <a class="page-link" href="" title="Home page">Home</a>
+  <a class="page-link" href="posts.html" title="Artículos por fecha">Archivo</a>
+  <a class="page-link" href="categories.html" title="Artículos por etiqueta">
+    Etiquetas
+  </a>
+
+            <form
+              id="searchform"
+              method="get"
+              action="https://www.google.com/search"
+              target="_blank"
+            >
+              <input type="text" name="q" id="s" size="15" />
+              <input type="submit" name="submit" value="🔍" />
+              <input type="hidden" name="as_sitesearch" value="satyam.com.ar" />
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="page-content" aria-label="Content" lang="es-ES">
+      <div class="wrapper">
+        <article
+          class="post h-entry"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <header class="post-header">
+            <h1 class="post-title p-name" itemprop="name headline">
+              Internacionalización y localización: conceptos
+            </h1>
+            
+<div class="post-meta">
+  <div class="date-published">
+    Publicado el: 
+    <time  datetime="2007-01-04T00:00:00+01:00" itemprop="datePublished">
+    4 / Enero / 2007</time>
+  </div>
+  <div class="post-cats">Archivado bajo: <a
+            href="categories/#Tecnologia_Programacion"
+            rel="category tag"
+            >Tecnología / Programación
+            </a></div></div>
+          </header>
+
+          <div
+            class="post-content e-content "
+            itemprop="articleBody"
+          >
+            
+<p>
+  Un problema que se ve con más frecuencia en las aplicaciones de web es la
+  necesidad de internacionalización y localización. Dado que son palabras muy
+  largas, es habitual que sean abreviadas como i18n y l10n refiriéndose, como si
+  se tratara de un crucigrama, a las respectivas iniciales, la cantidad de
+  letras intermedias y la letra final. Estas dos palabras no son sinónimos, la
+  primera se refiere a la capacidad de una aplicación para que pueda ser
+  traducida, la segunda a la traducción en si, que muchas veces implica algo más
+  que simplemente traducirla, cosas como, por ejemplo, las representaciones y
+  conversiones necesarias para las fechas o la moneda. Si una aplicación no está
+  internacionalizada, es muy difícil localizarla.<span class="more"></span>
+</p>
+<p>
+  Para que una aplicación esté internacionalizada, un primer requerimiento es
+  que sus textos estén separados del cuerpo de la aplicación. Lo más práctico es
+  que estos textos residan en archivos separados de la aplicación y se carguen
+  según sea necesario. Habitualmente, toda la colección de traducciones reside
+  en varios archivos en un mismo directorio y cada uno lleva el código del
+  idioma a que corresponde.
+</p>
+<p>
+  Para representar el idioma, lo mejor es utilizar algún código estándar, como
+  el ISO639 que ofrece códigos de 2 y 3 caracteres para indicar los lenguajes
+  reconocidos. La mayoría de las lenguas en uso disponen de códigos de 2 letras,
+  todos los idiomas, incluso lenguas muertas de interés sólo para eruditos,
+  disponen de códigos de tres letras. Así pues tenemos ES para castellano, CA
+  para catalán/valenciano, GL para gallego, EU para vasco y también códigos de
+  tres letras para los mismos idiomas, respectivamente SPA, CAT, GLG o EUS. La
+  norma aclara que los códigos pueden ser indistintamente en mayúsculas o
+  minúsculas, yo opté por las mayúsculas simplemente para distinguirlos del
+  resto del texto. He elegido estos ejemplos en lugar de otros más obvios tales
+  como EN para inglés, FR para francés o DE para alemán para resaltar que el
+  idioma no está necesariamente asociado a un país.
+</p>
+<p>
+  Es frecuente, aunque incorrecto, usar los códigos de país dados por la
+  ISO3166, que son los mismos usados en las terminaciones de los dominios de
+  Internet. Por ejemplo, no tiene sentido tener tablas para UY (Uruguay) y AR
+  (Argentina) siendo que en ambos países se habla el mismo dialecto de
+  castellano. Sin embargo, esto no es así en cuanto a la moneda. Por otro lado,
+  en buena parte de la Unión Europea, aún con la variedad de idiomas que tiene
+  (que incluso usan distintos alfabetos, a saber, el latino, el griego y a
+  partir del 2007 el cirílico por Bulgaria), se usa la misma moneda, el Euro. A
+  su vez, el formato de las fechas varía en los distintos países, siendo los
+  casos notables Japón, que utiliza el orden aaaa/mm/dd, Estados Unidos que usa
+  mm/dd/aaaa y el resto del mundo, incluso otros países angloparlantes, que usan
+  dd/mm/aaaa.
+</p>
+<p>
+  A tal efecto, la RFC3066 (que reemplaza a la RFC1766) especifica que los
+  códigos para las localizaciones (implicando en ello tanto la traducción de los
+  textos como la representación de fechas e importe monetarios) debe hacerse a
+  través de un código compuesto de una primera parte obligatoria que será el
+  código de idioma de la ISO639-1 (o sea, los códigos de sólo dos letras) o de
+  tres, si no hubiere código de dos letras, seguidos opcionalmente de un guión y
+  un código de país según la ISO3166. La norma preve otras posibilidades que
+  escapan a este artículo. Menciona también la costumbre de poner las letras del
+  idioma en minúsculas y las del país en mayúsculas, aunque dice que el software
+  lo debe reconocer indistintamente. Por ejemplo, tenemos: es, es-AR, es-UY,
+  es-ES, ca-ES o ca-FR.
+</p>
+<p>
+  Estos mismos códigos son los que se utilizan en la función de PHP
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.setlocale.php"
+      target="phpmanual"
+      >setlocale()</a
+    ></code
+  >, que nos provee facilidades para el formateo de fechas, moneda, ordenamiento
+  alfabético, conversión de mayúsculas a minúsculas y otras facilidades. Nótese
+  que esta función y las asociadas a ella dependen de que el sistema operativo
+  subyacente tenga cargadas la información respecto de los idiomas solicitados.
+  Esta función devuelve verdadero o falso según el idioma solicitado esté
+  disponible o no. Además, también permite indicar una serie de códigos para
+  tentar suerte y ver si alguno sale, por ejemplo, “ca-ES, es-ES, es, en-EN, en”
+  indicando la preferencia por catalán de España, castellano de España,
+  cualquier castellano, inglés de Inglaterra o cualquier inglés, en ese orden.
+</p>
+<p>
+  Es incómodo para el usuario que le anden preguntando su preferencia en cuanto
+  a idioma. Es posible automatizarlo de varias formas.
+</p>
+<p>
+  Una buena aproximación es consultar la variable
+  <a
+    title="Manual de PHP: $_SERVER"
+    href="http://es2.php.net/manual/es/reserved.variables.php"
+    target="phpmanual"
+    ><code>$_SERVER['HTTP_ACCEPT_LANGUAGE']</code></a
+  >. Esta nos devuelve la información del <em>header</em>
+  <code>Accept-Language</code> que es uno de los <em>header</em> estándar de
+  cualquier navegador. Esta información suele ser bastante confiable.
+  Habitualmente es una cadena con varios códigos separados por comas. Dado que
+  la función
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.setlocale.php"
+      target="phpmanual"
+      >setlocale()</a
+    ></code
+  >
+  acepta los múltiples códigos como un array, lo mejor es hacer un
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.explode.php"
+      target="phpmanual"
+      >explode()</a
+    ></code
+  >
+  de la cadena de idiomas que devuelve
+  <code
+    ><a
+      title="Manual de PHP: $_SERVER"
+      href="http://es2.php.net/manual/es/reserved.variables.php"
+      target="phpmanual"
+      >$_SERVER['HTTP_ACCEPT_LANGUAGE']</a
+    ></code
+  >. Esta información de idiomas está disponible en casi todos los navegadores.
+  Estos la obtienen ya sea del sistema operativo en que está instalado o del
+  propio idioma del navegador. Así pues, es de suponer que si un usuario tiene
+  el navegador instalado en castellano es que preferirá este idioma para todas
+  sus operaciones. Esto, sin embargo, puede no ser así. El usuario puede ser un
+  turista visitando un cibercafé en un país cuyo idioma desconoce. Puede ser un
+  hispano-parlante que habla inglés y lo prefiere para consultar cosas como
+  Wikipedia, que tiene muchos más artículos disponibles que la versión
+  castellana o el manual de PHP cuya traducción al castellano es algo
+  deficiente. Por ello, es importante ofrecer la posibilidad de cambiar de
+  idioma.
+</p>
+<p>
+  Otra posibilidad, que se usa habitualmente para los banners de publicidad pero
+  puede servir para proponer el idioma de la interfaz, es usar alguna base de
+  direcciones de IP por países. Hay varias alternativas, gratis o pagas,
+  cualquier buscador encontrará varias si se busca por <em>geoip</em>.
+</p>
+<p>
+  Si bien cualquiera de los métodos anteriores puede servir para establecer un
+  primer idioma de contacto con el usuario, se debe ofrecer la alternativa de
+  cambiar de idioma y se debe almacenar esta selección. No es admisible que al
+  pasar el usuario de una página a otra el idioma se revierta al inicial.
+  Internamente, se debe guardar el idioma seleccionado en una variable de sesión
+  o en un <em>cookie</em>. El <em>cookie</em> tiene la ventaja de que el usuario
+  encontrará siempre el sitio en el idioma que hubiera seleccionado
+  inicialmente, el problema es que un usuario en un cibercafé puede llegar a
+  encontrarse una aplicación en el idioma del último turista que hubiera usado
+  ese sistema. En todo caso, la posibilidad de cambiar el idioma de la interfaz
+  debe estar siempre disponible y, de ser posible, en forma gráfica, a través de
+  iconos con las banderas de países representativos de cada idioma.
+</p>
+<p>
+  Continuación:
+  <a
+    title="Segunda parte"
+    href="2007/01/04/internacionalizacion-y-localizacion-recomendaciones.html"
+    >Internacionalizacion y localizacion: recomendaciones</a
+  >.
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>
+
+          </div>
+          <footer class="post-footer">
+    <div class="next-prev-links">
+      <a  class="prev-link" href="2007/01/04/internacionalizacion-y-localizacion-recomendaciones.html"><div class="triangle-left"></div> Anterior</a>
+      <a  class="next-link" href="2007/01/03/disminuir-el-desempleo.html">Siguiente <div class="triangle-right"></div></a>
+    </div> </footer>
+          <a class="u-url" href="/blog2007/01/04/internacionalizacion-y-localizacion-conceptos.html" hidden></a>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer h-card">
+      <data class="u-url" href="/blog"></data>
+
+      <div class="wrapper">
+        <h2 class="footer-heading">Comentarios</h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li class="p-name">Comentarios</li>
+              <li>
+                <a class="u-email" href="mailto:satyam@satyam.com.ar"
+                  >satyam@satyam.com.ar</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list"></ul>
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p>Comentarios, viajes, ideas e historias</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+</html>

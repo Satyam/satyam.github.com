@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--Source file: tecnologia/procesador-1-bit.md-->
+    <meta charset="utf-8" />
+    <base href="/blog/" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Procesador de 1 bit de ancho de palabra | Comentarios</title>
+    <meta property="og:title" content="Procesador de 1 bit de ancho de palabra" />
+    <meta property="og:locale" content="es-ES" />
+    <meta name="description" content="¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (bitwise) y ‘lógicas’ (logical), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (XOR) si ignoramos el resto y multiplicar es lo mismo que hacer un AND, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, LOAD, SAVE, AND, OR, NOT, XOR y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o stack para llamar subrutinas y volver.
+" />
+    <meta property="og:description" content="¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (bitwise) y ‘lógicas’ (logical), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (XOR) si ignoramos el resto y multiplicar es lo mismo que hacer un AND, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, LOAD, SAVE, AND, OR, NOT, XOR y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o stack para llamar subrutinas y volver.
+" />
+    <link rel="canonical" href="http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html" />
+    <meta property="og:url" content="http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html" />
+    <meta property="og:site_name" content="Comentarios" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2022-06-02T00:00:00+01:00" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Procesador de 1 bit de ancho de palabra" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "dateModified": "2022-06-02T00:00:00+01:00",
+        "datePublished": "2022-06-02T00:00:00+01:00",
+        "description": "¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (bitwise) y ‘lógicas’ (logical), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (XOR) si ignoramos el resto y multiplicar es lo mismo que hacer un AND, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, LOAD, SAVE, AND, OR, NOT, XOR y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o stack para llamar subrutinas y volver.
+",
+        "headline": "Procesador de 1 bit de ancho de palabra",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html"
+        },
+        "url": "http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html"
+      }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      type="application/atom+xml"
+      rel="alternate"
+      href="feed.xml"
+      title="Comentarios"
+    />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        <a class="site-title" rel="author" href="index.html">Comentarios</a>
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path
+                  d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"
+                />
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            
+  <a class="page-link" href="" title="Home page">Home</a>
+  <a class="page-link" href="posts.html" title="Artículos por fecha">Archivo</a>
+  <a class="page-link" href="categories.html" title="Artículos por etiqueta">
+    Etiquetas
+  </a>
+
+            <form
+              id="searchform"
+              method="get"
+              action="https://www.google.com/search"
+              target="_blank"
+            >
+              <input type="text" name="q" id="s" size="15" />
+              <input type="submit" name="submit" value="🔍" />
+              <input type="hidden" name="as_sitesearch" value="satyam.com.ar" />
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="page-content" aria-label="Content" lang="es-ES">
+      <div class="wrapper">
+        <article
+          class="post h-entry"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <header class="post-header">
+            <h1 class="post-title p-name" itemprop="name headline">
+              Procesador de 1 bit de ancho de palabra
+            </h1>
+            
+<div class="post-meta">
+  <div class="date-published">
+    Publicado el: 
+    <time  datetime="2022-06-02T00:00:00+01:00" itemprop="datePublished">
+    2 / Junio / 2022</time>
+  </div>
+  <div class="post-cats">Archivado bajo: 
+          <a href="categories/#Tecnologia" rel="category tag">
+            Tecnología
+          </a></div></div>
+          </header>
+
+          <div
+            class="post-content e-content "
+            itemprop="articleBody"
+          >
+            <p>¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (<em>bitwise</em>) y ‘lógicas’ (<em>logical</em>), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (<code>XOR</code>) si ignoramos el resto y multiplicar es lo mismo que hacer un <code>AND</code>, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, <code>LOAD</code>, <code>SAVE</code>, <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>XOR</code> y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o <em>stack</em> para llamar subrutinas y volver.</p>
+<hr>
+<p>Si nos ponemos en teóricos, la máquina de Turing era de un bit de ancho de palabra y su importancia estriba en que con ella Alan Turing demuestra que toda máquina de Turing puede emular a otra máquina de Turing, con más o menos esfuerzo. Por lo tanto un chip de un bit de ancho de palabra no es tan extraño a fines teóricos/didácticos. La máquina de Turing tenía una cinta (su memoria) infinita y un procesador de un bit también requeriría muchísimos bits de memoria para resolver cualquier operación de una de mayor ancho de palabra, pero la teoría dice que es posible.</p>
+<p>Por ejemplo, sumar dos posiciones de memoria de 8 bits puede hacerse en un solo ciclo en un procesador de 8 bits o en 8 ciclos en uno de un bit, de a un bit a la vez. En realidad se necesitan 16 ciclos para llevar el resto y muchos más si se va a controlar si el resultado es cero, o si una resta es negativa o si ha habido overflow, cosa que cualquier procesador de 8 bits hace en paralelo con la suma en sí. De todas maneras estas comprobaciones que se hacen automáticamente en un chip multi-bit no se usan siempre, la mayor parte de las veces se ignoran. Habitualmente se usan junto con instrucciones de salto condicional: <code>JZ</code> (<em>Jump if Zero</em>), <code>JC</code> (<em>Jump if Carry</em>), <code>JN</code> (<em>Jump if Negative</em>), <code>JV</code> (<em>Jump if oVerflow</em>) y sus opuestas: <code>JNZ</code> (<em>Jump of Not Zero</em>) y demás negaciones de las primeras. En el caso de un procesador de 1 bit emulando uno de mayor ancho de palabra, valdría la pena postergar el cálculo de los bits de estado hasta que la presencia de la instrucción de salto condicional lo requiriera. En otras palabras, que los procesadores multi-bit calculen estos bits automáticamente es una optimización que pueden hacer a costo nulo, pero si ello demandara ciclos de ejecución, bien puede omitirse y hacerlas bajo demanda.</p>
+<p>Fuera de la teoría, tiempo ha existía un micro-controlador de un bit de ancho de palabra, un simple chip de 20 o 22 patitas. Si ese chip existía y se comercializaba, será porque servía para algo. A fin de cuentas controlar un ascensor no necesita más, de hecho, en aquella época se hacía con simples relés electromecánicos, que son de un sólo bit con lógica cableada (<em>hard-wired</em>).</p>
+<h2 id="alu" tabindex="-1">ALU</h2>
+<p>El caso es que la ALU (por las siglas en inglés de Unidad Aritmética y Lógica) o, en este caso, LU dado que no haría aritmética, se podría componer simplemente de 4 compuertas, <code>AND</code>, <code>OR</code>, <code>XOR</code> y <code>NOT</code>. Todas ellas procesarían en paralelo el mismo par de valores (excepto la <code>NOT</code> que procesa un sólo valor) y se generarían los 4 posibles resultados. Una compuerta a la salida de cada una de ellas se activaría para dejar pasar el resultado que se busca. Esto, básicamente, formaría la (A)LU que, normalmente, se representa como una Y griega con dos entradas y una única salida,como un embudo, con una flecha lateral que indica las líneas de control que seleccionan la operación. Las cuatro salidas se alimentan a un multiplexor que es un circuito que selecciona uno de 4 valores de entrada en función de dos líneas de control, por ejemplo, el <a href="https://www.ti.com/lit/ds/symlink/sn74ls153.pdf">74x153</a>.</p>
+<figure>
+<img src="assets/img/alu.webp" title="ALU" />
+<figcaption>
+Los bits A y B se combinan en la primera fila de compuertas obteniendo `A AND B`, `A OR B`, `A XOR B` y `NOT B`. Luego, según que línea S esté activa, el resultado de una de estas operaciones llega a R
+</figcaption>
+</figure>
+<p>Los bits A y B se combinan en la primera fila de compuertas obteniendo <code>A AND B</code>, <code>A OR B</code>, <code>A XOR B</code> y <code>NOT B</code>. Luego, según cuál línea S esté activa, el resultado de una de estas operaciones llega a R. Las dos filas inferiores pueden reemplazarse por un chip como el <a href="https://www.ti.com/lit/ds/symlink/sn74ls153.pdf">74x153</a></p>
+<p>Según la arquitectura del chip hay dos opciones extremas para las dos entradas de la Y y la salida. La más flexible es leer los dos valores a procesar de sendas posiciones de memoria y volcar el resultado en otra posición de memoria. Eso implica poner multiplexores/demultiplexores en cada uno de los brazos de la Y para seleccionar independientemente las entradas y la salida. Si se tienen 256 posiciones de memoria, se necesitan 8 bits para seleccionar cada posición y en este esquema, con selección independiente de 3 posiciones de memoria, implicaría usar 24 pines nada más que para seleccionar el origen de los operandos y el destino del resultado. Acabaríamos con más pines que silicio.</p>
+<p>Lo más práctico suele ser predeterminar parte de estas direcciones. De allí surge lo que se conoce como el ‘acumulador’, que es una celda de memoria interna dentro de la CPU que es el origen predeterminado de uno de los dos operandos y es el destino predeterminado del resultado. Este es el otro extremo del espectro.</p>
+<figure>
+<img src="assets/img/acumulador.webp" title="Acumulador" />
+<figcaption>
+A la izquierda una ALU que recibe datos de cualquier posible posición de memoria A y B y envía al resultado R a cualquier posible posición de memoria. A la derecha, una ALU con un acumulador ACC que es siempre el destino del resultado y el origen de uno de sus operandos mientras el otro puede venir de cualquier posición de memoria M. La primera requiere muchas más líneas de datos conectando la ALU con memoria que la segunda.
+</figcaption>
+</figure>
+<p>¿Dónde está la ventaja de usar un acumulador si nos obliga, primero, a que cargar uno de los operandos en el acumulador, hacer la operación con el segundo operando y, si el resultado ha de ir a memoria, guardar el resultado en el destino final? El caso es que lo más frecuente es que se encadenen varias operaciones sobre los mismos valores por lo que, en realidad, las más de las veces se sigue operando con el acumulador. Dada la poca variedad de operaciones que se pueden hacer con un bit, esto no es tan probable, pero habiendo más operaciones disponibles, las probabilidades de reutilizar el acumulador en una misma secuencia aumentan.</p>
+<h2 id="set-de-instrucciones" tabindex="-1">Set de instrucciones</h2>
+<p>Entonces, tenemos 8 operaciones posibles, que se pueden codificar muy sencillamente en 3 bits que llamaremos por sus abreviaturas habituales en algunos lenguajes ensambladores (<em>assembler</em>): <code>AND</code>, <code>OR</code>, <code>XOR</code>, <code>NOT</code>, <code>LOAD</code>, <code>SAVE</code>, <code>JMP</code> (<em>JuMP</em>, incondicional), <code>JT</code> (<em>Jump if True</em>).</p>
+<p>Cada una de estas instrucciones va seguida de una dirección de memoria, ya sea para el operando que no es el acumulador, que está implícito, ya sea para indicar donde se encuentra el valor a cargar o donde guardar el resultado, o para indicar la dirección a donde se ha de saltar (excepto el <code>NOT</code> que no tiene segundo operando).</p>
+<p>Las posiciones de memoria, en nuestro procesador de un bit, pueden no estar realmente en un chip de memoria sino ser dispositivos binarios a manipular tales como pulsadores de llamada de un ascensor, sensores de ubicación de la cabina en cada piso, control del motor y el freno y accionamiento de puertas y sí, también algo de memoria para memorizar las llamadas de los varios pisos y también para recordar en qué dirección estaba yendo.</p>
+<h2 id="registros-internos" tabindex="-1">Registros internos</h2>
+<p>Aquí podemos seguir un paso más en el diseño de nuestra CPU y optar por disponer de registros internos, esto es, posiciones de trabajo internas dentro del mismo chip del procesador. Ya hemos hablado del acumulador como una posición de memoria dentro del procesador. Podemos tener más de estas posiciones de trabajo. ¿Cuál es la ventaja? Por un lado, estando dentro del chip son más rápidas de acceder. Toda vez que una señal sale del chip hay un retardo. La velocidad de la luz es de unos 30cm por nanosegundo y, a la velocidad del procesador, cualquier cosa que esté fuera del chip está lejos (hay razones eléctricas también, pero no vienen al caso).</p>
+<p>En segundo lugar, los registros también nos ofrecen más casillas de trabajo en que guardar resultados intermedios y encadenar secuencias de operaciones. Además, al haber menos registros que memoria, se puede referir a cualquier registro con muchos menos bits que una posición de memoria. Por ejemplo, podemos tener 16 registros de trabajo y usar 4 bits de dirección de registro. Habiendo registros, podemos establecer que todas las operaciones se hacen entre un registro y el acumulador con el resultado en otro registro, siendo el acumulador el registro 0.</p>
+<p>Nuestro set de instrucciones puede convertirse en algo como se muestra en la siguiente tabla donde cada número en las primeras tres columnas indican un bit seguido de 8 bits (representados por letras) para el/los operandos, seguidos de su mnemónico y la explicación:</p>
+<figure>
+<img src="assets/img/setInstrucciones.webp" title="Set de Instrucciones" />
+<figcaption>
+Las primeras columnas, bajo el encabezado de Código binario representan bits individuales. Los fondos de colores sirven para destacar la regularidad en la interpretación de los bits de cada grupo.
+</figcaption>
+</figure>
+<p>Como se puede ver, todas las instrucciones son de una única ‘palabra’ de 11 bits de ancho (ya sé que es un ancho de palabra extraño, pero también lo es un procesador de un bit 😉 ). Es muy homogéneo pues ya los primeros 3 bits, en amarillo, indican qué hacer.</p>
+<p>Tenemos una primera subdivisión, si el primer bit está en cero, como en las 4 primeras filas, es una operación que implica el acceso a memoria externa y los últimos 8 bits (<code>mmmmmmmm</code>) indican la dirección. Si el primer bit es 1, es una operación entre registros siendo <code>ssss</code> y <code>dddd</code> los registros de origen y destino de la operación.</p>
+<p>Una segunda subdivisión nos da cuatro grupos de 2 instrucciones cada uno, a saber:</p>
+<ul>
+<li><code>LOAD</code> y <code>SAVE</code> nos permite acceder a datos a memoria, con el tercer bit indicando la dirección (carga o graba).</li>
+<li><code>JMP</code> y <code>JT</code> son saltos en la ejecución del programa, con el tercer bit indicando si es condicional al estado del acumulador o no.</li>
+<li><code>AND</code> y <code>OR</code> son las operaciones lógicas básicas entre un registro y el acumulador con el resultado en otro (o el mismo) registro.</li>
+<li><code>MOVE</code> y <code>NOT</code>, copian un registro en otro donde el tercer bit nos dice si ha de invertirse en el proceso.</li>
+</ul>
+<p>La regularidad en la interpretación de cada bit dentro del código de la instrucción es importante porque facilita su decodificación y la activación de los varios circuitos dentro de la CPU. Por ejemplo, ya comentamos que todas las operaciones fuera del chip necesitan más tiempo en ejecutarse, por lo que ya el primer bit del código de la instrucción nos dice si estirar el ciclo de ejecución (usualmente el procesador deja pasar el siguiente tic del reloj) para darle tiempo al dato externo a llegar o ejecutarse de inmediato al ser una operación interna, y también permite saber cómo interpretar los últimos 8 bits, si como una dirección de memoria absoluta de 8 bits o dos referencias a registros internos de trabajo de 4 bits cada una.</p>
+<p>Es un set de instrucciones muy RISC (<em>Reduced Instruction Set Computer</em>). Instrucciones simples, todas de una sola palabra, codificando toda la información relevante de la forma más regular posible. Esto es a diferencia de una CPU CISC (<em>Complex Instruction Set Computer</em>) donde se disponen de muchas más instrucciones, algunas de ellas requiriendo múltiples palabras para completar toda la información que se necesita, obligando a un proceso de decodificación mucho más complejo. Por ejemplo los chips tipo ARM o RISC-V son RISC, la familia ix86 es CISC donde una instrucción puede llegar a 15 bytes de largo.</p>
+<p>Aparentemente, en este set de instrucciones faltan cosas, por ejemplo no hay <code>JF</code> (<em>Jump if False</em>) pero este se puede codificar con la secuencia de un <code>NOT</code> seguido de un <code>JT</code>.</p>
+<p>Hemos perdido la operación <code>XOR</code> que aparecía en el diagrama lógico de la ALU de más arriba. Ocurre que al disponer de registros, estamos obligados a proveer la capacidad de mover los datos de un registro a otro y al tener que agregar la instrucción <code>MOVE</code>, nos hemos visto obligados a hacer un hueco en las 8 posibles combinaciones de 3 bits de que disponemos, y por eso hemos dejado caer el <code>XOR</code> que, de todas formas, al igual que el JF, se puede reemplazar por una secuencia de operaciones lógicas.</p>
+<p>Nos falta algún mecanismo para poner un registro en cero o en uno. Para ello, no es inusual destinar un registro fantasma que siempre esté en 0 (y potencialmente otro para que siempre esté en uno). Digamos que el registro 15 (<code>1111</code>) está siempre en 0 y el 14 (1110) en 1. Poner en cero el registro <code>xxxx</code> se hace con <code>MOVE 15, xxxx</code>. Siempre se trata de mantener cierta regularidad en la circuitería, por ejemplo, los dos registros falsos comienzan con <code>111</code>.</p>
+<p>Y, como en toda decisión de ingeniería, hay que buscar un compromiso. ¿Qué opción podrá dar mejor provecho? ¿Vale más, destinar dos registros fantasmas a guardar 0 y 1 o tener un solo registro falso con 0 y obtener el 1 negando un 0 en la instrucción siguiente? Lo segundo es mejor pues, disponer del cero es indispensable, mientras que el 1 se puede generar, cuando se quiera.</p>
+<p>Un procesador CISC dispondría de las operaciones <code>JF</code> y <code>XOR</code>, un RISC deja a cargo del compilador o ensamblador reemplazarlo con su equivalente si fuera necesario.</p>
+<h2 id="macro-ensamblador" tabindex="-1">Macro-ensamblador</h2>
+<p>Hasta ahora, apenas nos hemos referido a la representación de las operaciones de la CPU usando sus valores binarios, bit a bit, en el cuadro más arriba. Es raro programar usando binario. Aún al nivel más básico, se utiliza un ensamblador (<em>assembler</em>) que traduce mnemónicos como <code>ADD</code> o <code>MOVE</code> y que también nos permite usar números decimales (o cualquier otra base) en lugar de binarios o hacer referencia a posiciones del código con nombres para usar en <code>JMP</code> o <code>JT</code>.</p>
+<p>El macro-ensamblador (<em>macro-assembler</em>) agrega la facilidad de crear aliases ya sea para los operandos o los mnemónicos o incluso a secuencias de ellos. Por ejemplo, en un macro-assembler se puede tener pre-definido <code>ACC = 0</code> para referirse al acumulador (que es nuestro registro 0) o <code>ZERO = 15</code> para el registro fantasma que contiene un cero. También podríamos definir nuevos mnemónicos, algunos que ya hemos visto, otros nuevos (en assembler, se usa el carácter <code>;</code> para indicar un comentario)</p>
+<pre class="hljs"><code>    DEF ACC 0     ; definimos la constante ACC igual a 0
+
+    DEF ZERO 15 
+
+    MACRO JF dest ; macro-instrucción JF con un único argumento
+    NOT ACC       ; Negar el acumulador usando la macro previa
+    JT dest
+    ENDMACRO
+
+    MACRO RESET r  
+    MOVE ZERO, r
+    ENDMACRO
+
+    MACRO SET r
+    RESET r
+    NOT r, r
+    ENDMACRO
+</code></pre>
+<p>Las pseudo-instrucciones <code>DEF</code>, <code>MACRO</code> y <code>ENDMACRO</code> no se traducen directamente en códigos de operación para la CPU sino que son declaraciones para el macro-assembler para ya sea <em>DEF</em>inir constantes o <em>MACRO</em>-instrucciones formadas por múltiples instrucciones y posiblemente operandos.</p>
+<h2 id="otros-componentes" tabindex="-1">Otros componentes</h2>
+<p>Además de la A(LU), y los 16 registros internos, entre ellos el acumulador y otro fantasma conteniendo un 0, la CPU ha de tener,</p>
+<ol>
+<li>un registro de instrucción, en este caso, de 11 bits, que guarde la instrucción en curso mientras se está procesando.</li>
+<li>un registro de paso de programa, en nuestro caso de 8 bits, donde se indica la posición de memoria de la próxima instrucción a ser ejecutada y que se incrementa automáticamente tras cargar cada instrucción en el registro de instrucción. Este habitualmente se abrevia como <code>PC</code> por <em>Program Counter</em>.</li>
+</ol>
+<p>Por ejemplo, si los 3 primeros bits del registro de instrucción son son <code>010</code> (<code>JMP</code>) quiere decir que los últimos 8 bits del registro de instrucción se deben copiar en el <code>PC</code>, para que la ejecución del programa continúe en dicha dirección. Si la instrucción comienza con <code>011</code> (<code>JT</code>), la copia se hace condicional a que el acumulador esté en 1.</p>
+<p>Si los dos primeros bits del registro de instrucción son <code>00</code> (<code>LOAD</code> y <code>SAVE</code>), entonces los últimos 8 bits se deben exponer en el bus de direcciones para seleccionar la posición de memoria y el tercer bit dice si esa posición se ha de leer o grabar.</p>
+<h2 id="eficiencia." tabindex="-1">Eficiencia.</h2>
+<p>Cada circuito que se agrega implica una demora. Ya en la primera página del demultiplexor <a href="https://www.ti.com/lit/ds/symlink/sn74ls153.pdf">74153</a> que señalé más arriba se ofrece el dato de “typical average propagation delay times” lo que resalta su importancia. El problema con sumar mucha circuitería es que estas demoras de propagación se van sumando y hacen al procesador más lento. Una solución es describir el circuito como ecuaciones Booleanas y simplificarlas como cualquier operación algebraica.</p>
+<p>Sabemos que, en aritmética normal la ecuación <code>(a + -b * c) * d</code> podemos simplificarla como <code>a * -b * d + a * c * d</code>. La ventaja de esta última representación es que podemos procesar los dos términos <code>(a * -b * d)</code> y <code>(a * c * d)</code> en paralelo y luego sumarlos entre si mientras que en la primera ecuación, tenemos que esperar el resultado de <code>(-b * c)</code> para recién sumarlo a la <code>a</code> para finalmente multiplicarlo por <code>d</code>, agregando un paso a la otra alternativa. En circuitos digitales eso de ‘esperar’ no es bueno. Entonces en lugar de encadenar ‘bloques funcionales’ que en la práctica son compuertas de diversos tipos compuestas a su vez de varias cadenas de otros circuitos conectados en serie unos detrás de otros, podemos simplificar la ecuación lógica de buena parte del circuito para hacer más cosas en paralelo y reducir la demora a no más de dos o tres “propagation delay times”.</p>
+<p>Viendo el diagrama lógico interno del demultiplexor <a href="https://www.ti.com/lit/ds/symlink/sn74ls153.pdf">74x153</a>, al pie de la segunda página observamos el efecto de esta simplificación de las ecuaciones lógicas, algo que se puede aplicar a muchos circuitos lógicos. Todos se pueden reducir a tres pasos:</p>
+<ol>
+<li>Negar todas las entradas.
+Con esto se ofrece en las barras verticales, todas las señales de entrada y sus opuestos.</li>
+<li>El <code>AND</code> de las señales que se quieran de estas barras verticales
+(todos estos resultados se podrían también conectar a una segunda serie de barras verticales)</li>
+<li>El <code>OR</code> de las salidas de los <code>AND</code> para obtener el resultado</li>
+</ol>
+<p>Entre las etapas 2. y 3. podría haberse dispuesto otro grupo de barras verticales con todos los <code>AND</code>, pero reagrupando apropiadamente las compuertas, el delineante lo ha evitado. Tampoco es necesario más compuertas inversoras intermedias dado que <code>NOT (a AND b)</code> es igual a <code>(NOT a OR NOT b)</code>, o sea que haciendo todas las negaciones al inicio, se cubren todas las posibilidades. (Nota: el circuito muestra algunas compuertas inversoras extra al inicio, pero estas están allí por consideraciones eléctricas, no de la lógica del circuito).</p>
+<h2 id="clock" tabindex="-1">Clock</h2>
+<p>La diferencia en los tiempos de propagación de las señales es la razón para el clock que usan las CPUs y por qué este afecta la eficiencia del procesador. El caso es que dados estos varios tiempos de propagación de los varios circuitos internos, hay momentos de inestabilidad mientras las señales de unos circuitos llegan a los que le siguen en la cadena mientras los de otros todavía están al llegar. Esto quiere decir que hay momentos en que los datos no son confiables.</p>
+<p>De hecho, hay operaciones que nunca podrían ser estables, tal como un <code>NOT</code> de un registro sobre si mismo. Si originalmente fuera 0, el <code>NOT</code> produciría un 1, pero como ahora ese registro contiene un 1, su <code>NOT</code> es 0, cuyo <code>NOT</code> es 1 y así siguiendo tan rápido como la demora en la propagación del resultado lo permitiera.</p>
+<p>Uno de los primeros ordenadores de uso académico en la Universidad de Buenos Aires se llamaba <a href="https://es.wikipedia.org/wiki/Clementina_(computadora)">Clementina</a>. El panel de control del operador tenía un altavoz y el fabricante había provisto, como muestra, un programa que hacía sonar en este altavoz la canción <em>Oh my darling, Clementine</em>. De allí surgió el nombre. La función real de este altavoz era detectar si un programa había entrado en bucle. Si una operación tardaba demasiado (y dada la velocidad de procesamiento de aquella época, todos los programas tardaban bastante) el operador podía subir el volumen de ese altavoz y, si sonaba un tono uniforme, había entrado en bucle. Habitualmente emitía ruido blanco.</p>
+<p>Por ello, debemos interrumpir esta realimentación para estabilizar el resultado una vez hecho el primer ciclo.</p>
+<p>Es necesario disponer de ‘latches’ (que se traduce como pestillo, aunque quizás sería mejor llamarlo ‘barrera’ o algo así) como el <a href="https://pdf1.alldatasheet.es/datasheet-pdf/view/107803/TI/SN74100.html">74100</a> que mantienen estable el valor de la operación anterior y sólo dejan pasar el valor de una nueva operación cuando ha transcurrido la demora del camino de propagación más lento del circuito y por ello el nuevo dato está estable y es confiable, evitando así las inestabilidades en los momentos de transición.</p>
+<p>Y para accionar estos latches se necesita el clock que vaya marcando los tiempos de espera para estas demoras. Suele haber dos etapas bien marcadas en la operación de una CPU que son ‘búsqueda’ y ‘ejecución’ (<em>fetch</em> y <em>execute</em>). En la búsqueda se lee el código de la operación a ejecutar y se retiene en el registro de instrucción para que pueda ir siendo decodificado y se accionen las compuertas que habilitarán las varias partes del circuito. En el segundo se ejecuta esta instrucción y para ello se habilita el paso de los datos a ser procesados y, finalmente, se retiene el resultado final, cuando está estable, para que pueda disponerse de él.</p>
+<p>En principio, el clock nos ofrece dos estados (0 y 1) por ciclo. En ocasiones, es necesario hilar más fino y en lugar de operar en dos fases por ciclo, es necesario dar distintos tiempos a distintas operaciones. Para ello, el clock puede operar al doble de la velocidad y, tras dividirlo en dos, ofrecer 4 fases, (0, 1, 2 y 3) con cada latch y demás componentes activándose en una o más fases de esta secuencia. Lo que en música diríamos pasar del simple <em>um-pa</em> de la polca a la métrica más compleja del tango, <em>um-pa-pa-pa</em>.</p>
+<h2 id="micro-c%C3%B3digo" tabindex="-1">Micro-código</h2>
+<p>La CPU que hemos venido describiendo es extremadamente simple, pero no demasiado útil. Si quisiéramos agregarle más habilidades, nos podríamos encontrar con operaciones que no se pueden resolver en un solo ciclo. De hecho, sabemos que todas las operaciones que implican acceso a memoria externa requieren un par de ciclos, aunque en este caso, en el segundo ciclo no se hace nada, simplemente se espera. También hemos creado macro-instrucciones como <code>JF</code> o <code>SET</code> y otras más que ya veremos, que requieren más de una instrucción, o sea que realmente no pueden resolverse en un solo ciclo.</p>
+<p>Acabamos de ver que muchos circuitos se pueden reducir a una sucesión de 3 tipos de compuertas con barras de señales distribuyendo por todo el circuito los resultados de una etapa a las compuertas de la etapa siguiente. Alguien se podrá preguntar si no podría hacerse un circuito que tuviera estas tres etapas de compuertas y sus barras de distribución ya grabadas en el silicio del chip y se pudieran programar las conexiones. Eso, obviamente, ya existe y se llama PLA (<em>Programmable Logic Array</em>) y, como se puede ver en el diagrama en <a href="https://commons.wikimedia.org/wiki/File:Programmable_logic_array_(schematic_drawing_example).svg">Wikipedia</a>, su estructura interna se corresponde a lo ya descrito donde los círculos huecos en los cruces representan las conexiones que pueden programarse.</p>
+<p>Eso se puede ver en circuitos reales como <a href="https://en.wikipedia.org/wiki/MOS_Technology_6502#/media/File:BreakNES_MOS_6502.jpg">esta imagen</a> de una CPU de 8 bits, el MOS 6502 que es el chip que usaron varios de los primeros ordenadores hogareños como la Apple ][, Commodore 64 o tantos otros de aquella época. Haciendo zoom en la parte superior, se llegan a ver los puntos de conexión que conectan juegos de barras. La técnica no es nueva, en <a href="https://www.computerhistory.org/revolution/mainframe-computers/7/164/582">esta imagen</a> podemos ver una tarjeta de micro-código de una IBM 360 que es un ordenador que antecede a los circuitos integrados y donde el micro-código es una serie de tarjetas Hollerith en plástico (aislante) con trazas de aluminio donde las intersecciones que no se quieren se perforan con una <a href="https://es.wikipedia.org/wiki/Perforadora_de_tarjetas#/media/Archivo:IBM_card_punch_029.JPG">perforadora de tarjetas</a> que, en aquella época, cualquier centro de cómputos tenía.</p>
+<p>Otro tipo de chip que se presta a esto es una memoria de lectura-solamente o ROM (<em>Read-Only Memory</em>) en cualquiera de sus variantes (PROM, EPROM, EEROM, etc). Si pensamos en sus líneas de dirección como entradas y las de dato como salidas, una ROM nos puede ofrecer en sus salidas cualquier posible combinación lógica de sus entradas. No parece obvio y no es el uso habitual, pero si vemos el caso de la vieja tarjeta de micro-código de la IBM-360, acaso no es una tarjeta de datos Hollerith tradicional, pero en lugar de ser de papel y leerse por transparencia, se lee eléctricamente. Una ROM es lo mismo que una colección de estas tarjetas, como lo era el micro-código de la IBM-360, que era un bastidor conteniendo docenas de estas tarjetas (una para cada código de instrucción).</p>
+<p>A diferencia del uso habitual de una memoria ROM que tiene muchos pines de entrada (16 para una memoria de 64k de profundidad) y pocos de salida (8 para una memoria de 8 bits de ancho de palabra) las memorias de micro-código son más anchas que profundas con menos pines de entrada que de salida. En el caso de nuestro set de instrucciones, tendría solamente 3 bits de entrada pero bastantes más de salida, para accionar las varias partes del circuito.</p>
+<p>¿Qué pasa si le ponemos más micro-código y hacemos un chip CISC con instrucciones más complejas? Eso nos permitiría, por ejemplo, condensar en un sólo código de operación algunas de las macros que mencionamos arriba. Obviamente, en el set de instrucciones en la tabla de más arriba, no hay huecos donde meter más instrucciones, todas las posibles combinaciones de bits están tomadas, pero ya estaríamos hablando de otra CPU con otro set de instrucciones, que por el momento no analizaremos.</p>
+<p>Utilizaremos una ROM donde cada dirección de memoria corresponderá con un paso de la micro-instrucción. La dirección de cada micro-instrucción la compondremos con la parte del código que representa la operación a ejecutar, no sus argumentos, que en el caso de nuestro viejo set de instrucciones serían 3 bits pero que, como debemos ampliar, dado que no tenemos huecos libres, le asignaremos 4 bits.</p>
+<p>Para identificar el paso concreto dentro de la secuencia de micro-instrucciones, agregamos internamente un micro-contador de micro-instrucción. Para ello tenemos que ver cuántos pasos requiere la secuencia más larga de micro-instrucciones. Digamos que la secuencia de micro-instrucciones más larga es de 5, que tenemos que redondear a la potencia de 2 siguiente, esto es 8, que implica 3 bits que debemos sumar a los 4 bits anteriores.</p>
+<p>Finalmente, debemos prever nuestro clock. ¿Será del tipo polca (<em>um-pa</em>) o tango (<em>um-pa-pa-pa</em>)? Si fuera este último, debemos agregar dos bits más.</p>
+<p>Entonces, nuestra ROM deberá tener 9 bits de profundidad que representa 512 palabras de memoria.</p>
+<p>Eso nos permite que el micro-código ejecute para cada código de (macro-)operación, (en nuestro ejemplo previo de macro-instrucciones, digamos <code>JF</code>) una secuencia de micro-instrucciones (<code>NOT</code> y <code>JT</code>) en las fases del clock que correspondan.</p>
+<p>Esto nos dice la profundidad de la ROM, no nos dice el ancho de palabra. Habitualmente, siendo que las ROM las usamos para datos, solemos tener 8, 16 o hasta 32 bits de ancho de palabra. Acá no estamos pensando en datos sino en controlar compuertas dentro de nuestra CPU, entonces, la cantidad de bits de salida dependerá de cuántas señales necesitemos para controlar cada una de esas compuertas. En nuestro ejemplo original, nada más que en la ALU necesitábamos 4 bits para activar una de cuatro posibles salidas. Luego tenemos que agregar los latches que retienen los datos, los selectores de registros o de memoria y una larga lista de etcéteras que, sin un diseño concreto, no podemos precisar.</p>
+<p>A esto le tenemos que sumar un bit extra para señalar el fin de una micro-secuencia. Como las micro-secuencias tienen distinta cantidad de pasos, debemos saber cuándo una secuencia está completa para pasar así a la siguiente macro-instrucción. Cuando el bit de fin de micro-secuencia está activo, el contador de paso de la micro-secuencia vuelve a cero y se lee la siguiente macro-instrucción.</p>
+<h2 id="subrutinas" tabindex="-1">Subrutinas</h2>
+<p>Una subrutina es un segmento de código que ejecuta una funcionalidad genérica. ¿Qué se necesita para llamar una subrutina y volver de ella? Básicamente, guardar el contador de paso de programa, el <code>PC</code>, en una pila o <em>stack</em> y recuperarlo al volver.</p>
+<p>A nuestro set de instrucciones (que como lo dejamos la última vez no tiene huecos libres pero, siendo un ejercicio, podemos inventar otro set) tenemos que agregar dos instrucciones más:</p>
+<ul>
+<li><code>CALL mmmmmmmm</code> para llamar una subrutina que comienza en la instrucción de memoria que se indica</li>
+<li><code>RET</code> para retornar de ella.</li>
+</ul>
+<p>Ya tenemos una instrucción <code>JMP mmmmmmmm</code> que pasa a ejecutar la instrucción en la dirección que se indica, esto es, carga <code>mmmmmmmm</code> en el contador de paso de programa <code>PC</code>. La diferencia con hacer un <code>CALL</code> es que primero tenemos que guardar el <code>PC</code> actual en un stack antes de cargar la nueva dirección. Para ello necesitamos el micro-código, dado que estamos hablando de dos operaciones internas separadas.</p>
+<p>En una CPU normal de múltiples bits de ancho de palabra, con memoria RAM suficiente, la pila o <em>stack</em> suele ser un bloque de memoria asignado por el sistema operativo en la misma memoria principal donde se guarda tanto el programa como los datos. La CPU simplemente necesita incorporar lo que se llama un puntero al tope de la pila habitualmente abreviado como <code>SP</code> (por <em>stack pointer</em>).</p>
+<p>En una CPU como la nuestra, que tiene un solo bit de ancho de palabra, para hacer un stack necesitamos algún tipo de memoria RAM, en este caso de 8 bits de ancho de palabra, y un contador como el <a href="https://www.ti.com/lit/ds/symlink/cy74fct191t.pdf">74x191</a> que tiene 4 bits y se puede encadenar con otros (el pin marcado RC para llevar el ‘resto’ <em>carry</em>) para dar 8, 12, 16 o más bits de conteo.</p>
+<p>De hecho, el contador de paso de programa <code>PC</code> en nuestra CPU podría hacerse con dos de estos chips <a href="https://www.ti.com/lit/ds/symlink/cy74fct191t.pdf">74x191</a> encadenados para poder contar con 8 bits, que es nuestro ancho de palabra de direcciones de programa. Se puede apreciar que el chip tiene tanto pines de entrada como de salida. Son estos pines de entrada los que, en el caso de un <code>JMP</code> o un <code>CALL</code>, cargan el <code>PC</code> con el nuevo valor mientras el pin marcado <code>CP</code> recibe el clock para ir avanzando la cuenta.</p>
+<p>Lo importante para el <code>CALL</code> y <code>RET</code> es el <code>up/down</code>. El chip tiene un pin marcado <code>U/D</code> (por <em>Up/Down</em>) que le permite contar para arriba o para abajo. Entonces, cuando se hace un <code>CALL</code>, se incrementa el puntero al tope de la pila <code>SP</code> para que apunte a la siguiente posición disponible y se guarda el <code>PC</code> actual en esa casilla. Cuando se hace un <code>RET</code>, se carga el <code>PC</code> con el valor al tope de la pila y se decrementa el <code>SP</code> para que apunte al valor al tope del resto de la pila. Es importante que la secuencia entre acceder (en lectura y escritura) y el incremento/decremento del <code>SP</code> sea a la inversa en el <code>CALL</code> y el <code>RET</code> pues una operación revierte la otra y deben ejecutarse en la secuencia inversa la una de la otra. Es indistinto si la pila crece hacia valores más altos o si crece hacia abajo, basta ser consistente.</p>
+<p>¿Cómo se pasan parámetros en las subrutinas? Usualmente, en sistemas chicos, como es el descrito, se designan registros internos para pasar los valores sobre los que la subrutina ha de operar. En sistemas más complejos, los parámetros se pasan en memoria, frecuentemente en la misma pila en que se guarda el stack de ejecución. Para ello existen instrucciones, habitualmente denominadas <code>PUSH</code> y <code>POP</code>, que implícitamente usan el puntero al tope de la pila, <code>SP</code> para acceder a la memoria.</p>
+<ul>
+<li><code>PUSH rrrr</code> Se incrementa el <code>SP</code> para que apunte a la próxima posición disponible en la pila y se guarda el valor del registro <code>rrrr</code> en ella.</li>
+<li><code>POP rrrr</code> Se lee el valor al tope de la pila para llevarlo llevarlo al registro <code>rrrr</code> y se decrementa el <code>SP</code>.</li>
+</ul>
+<p>Suele ser responsabilidad del programador o del compilador retirar de la pila (<code>POP</code>) tantos datos como se hubieran guardado (<code>PUSH</code>) para que el <code>RET</code> encuentre el valor del <code>PC</code> guardado y no confunda un dato con código.</p>
+<p>Existen procesadores donde el <code>PC</code> y el <code>SP</code> son parte de los registros internos tal como lo son el <code>ACC</code> (registro 0) o el <code>ZERO</code> (registro 15). En ellos, puede no existir <code>CALL</code> y <code>RET</code> dado que se pueden reemplazar por macros:</p>
+<pre class="hljs"><code>    DEF PC 14  ; supongamos que el PC es el registro 14
+    
+    MACRO CALL m  ; defino la macro CALL con un argumento m
+    PUSH PC  ; guardo el contador de paso de programa en la pila
+    JMP m    ; voy a ejecutar el código en la dirección m
+    ENDMACRO
+
+    MACRO RET  ; defino la macro RET que no lleva argumentos
+    POP PC
+    ENDMACRO
+</code></pre>
+<p>Esto, en definitiva, es lo que termina haciendo el micro-código si <code>CALL</code> y <code>RET</code> formaran parte del set de instrucciones.</p>
+<h2 id="huecos-en-el-set-de-instrucciones" tabindex="-1">Huecos en el set de instrucciones</h2>
+<p>Ya hemos visto que nuestro primer set de instrucciones está completo, para agregar cualquier otra capacidad interna al chip, o sea, que no sea a través de macros en el ensamblador, tenemos que ampliar el set de instrucciones. En lugar de los 3 bits originales (más operandos) tendríamos que pasar a 4, 5 o más.</p>
+<p>Dado que sólo podemos hacerlo en potencias de 2, cada nueva ampliación nos ofrece todo un abanico de posibles códigos de instrucción. ¿Podremos usarlas todas como hemos hecho con nuestro primer set de instrucciones? Y si no podemos usar todas las posibles combinaciones de bits de nuestro set ampliado, ¿qué pasa con los huecos?</p>
+<p>Hay varias posibilidades. La más simple es no hacer nada. Si alguien incluyera en su programa el patrón de bits de estos huecos, el resultado podría ser indeterminado e imprevisible.</p>
+<p>La segunda opción es que todo hueco sea un <code>NOOP</code>, una abreviatura corriente para una instrucción que no hace nada (del inglés <em>NO-OPeration</em>). Dado que ningún ensamblador o compilador podría producir uno de estos códigos, si el programa, en ejecución, se encuentra una de estas instrucciones, lo más probable es que el código esté corrupto, que el programa haya encontrado con una posición de datos en lugar de código, que casualmente contenga uno de estos códigos. Por ejemplo, si al llamar una subrutina los PUSHs y POPs para los argumentos no estén apareados como corresponde. En este caso, el programa está perdido de todas formas, su <code>PC</code> está apuntando a memoria de datos en lugar de código y, por lo tanto, aunque esta instrucción NOOP no haga nada, el resto de lo que el chip ahora cree que es el programa tampoco tendrá sentido.</p>
+<p>La mejor opción es tratar el código en esos huecos como una llamada a una subrutina, un <code>CALL</code>, a una posición pre-determinada. La ventaja de esto es que podemos escribir código que responda a esta instrucción y decidir qué hacer, por ejemplo, reiniciar el chip desde cero. Otra posibilidad es aprovechar esa subrutina para ampliar, experimentalmente, el set de instrucciones del procesador. Esto es más habitual de lo que podría suponerse. Hay familias de chips que tienen todos el mismo set de instrucciones base, pero algunos miembros de esa familia tienen extensiones al set de instrucciones básico, por ejemplo, para hacer aritmética de punto flotante, y otros chips no. Es lo que ocurre con el <a href="https://es.wikipedia.org/wiki/RISC-V#ISA_Base_y_extensiones">set de instrucciones del RISC-V</a> que tiene su base y varias posibles extensiones ya establecidas.</p>
+<p>¿Qué pasa si usamos una instrucción del set de aritmética de punto flotante en un chip que no tiene esa extensión? Se puede cargar un emulador en software de estas operaciones de punto flotante y ejecutar el mismo programa que usa esas operaciones sin que el programa se entere que, en realidad, están siendo simuladas. Se ejecutarán más lento, pero el programa funcionará.</p>
+<p>Y como el chip, al encontrar la instrucción inexistente, ha hecho un <code>CALL</code> esta subrutina puede retomar la ejecución del programa inicial con un simple <code>RET</code>, como cualquier otra subrutina.</p>
+<h2 id="turing-y-von-neuman" tabindex="-1">Turing y Von Neuman</h2>
+<p>Si bien la descrita es una máquina de Turing (limitada, porque no tiene una cinta infinita, ni de lejos) no responde a una arquitectura de Von Neuman. ¿Por qué? El gran concepto de Von Neuman fue tratar los programas como datos y usar la misma memoria tanto para el programa como para la información a procesar. Esto permite hacer cosas como un compilador o un intérprete que trata un programa como datos y es fundamental para LISP y otros programas de inteligencia artificial de la misma familia que modifican su código mientras se ejecutan. En la práctica el uso más frecuente de esta capacidad está en poder cargar un programa desde un dispositivo de almacenamiento como si fuera datos y luego ejecutarlo en ese mismo espacio de memoria.</p>
+<p>La que hemos descrito hasta ahora claramente no es una máquina de Von Neuman. El ancho de palabra de los códigos de ejecución del set de instrucciones que vimos es de 11 bits mientas que los datos son de a 1 bit. Hemos designado 8 bits tanto para direcciones de memoria de programa como de memoria de datos pero esto ha sido, más que nada, para realzar la regularidad del set de instrucciones, no porque sea necesario. Podríamos hacer diferente la cantidad de bits de direcciones para <code>LOAD</code> y <code>SAVE</code> que para <code>JMP</code>, <code>JT</code> y <code>CALL</code>. Hasta donde hemos llegado, conceptualmente, son opciones válidas.</p>
+<p>No es inusual que los micro-controladores no sean máquinas de Von Neuman. Tiene sentido que no lo sean porque raramente van a ejecutar un programa distinto al que llevan grabado de fábrica, programa que se graba por un mecanismo distinto de aquel en que lo ejecutan. Incluso el tipo de memoria es distinta para una y otra, ROM o EPROM o FLASH para programa, RAM para datos. La compilación del programa de un micro-controlador habitualmente se hace en otra máquina, como en el caso del Arduino, donde el código fuente en C se compila en la PC donde se carga el soft de desarrollo.</p>
+<p>En una máquina de arquitectura de Von Neuman en la que los códigos del programa y los datos residen en la misma memoria y se acceden por los mismos buses de datos y direcciones, debemos reservar momentos distintos del ciclo de ejecución para acceder unos y otros.</p>
+<p>En una máquina de Von Neuman, cuando nos encontramos con un <code>LOAD</code> o <code>SAVE</code> no podemos leer la siguiente instrucción inmediatamente pues debemos esperar que el dato que se carga o guarda se transita por el mismo bus de datos antes de ocuparlo leyendo la siguiente instrucción.</p>
+<p>Al no ser una máquina de Von Neuman, podemos leer los códigos de operación del programa de forma continuada pues estos transitan por sus buses independientes de los datos.</p>
+<h2 id="reset" tabindex="-1">Reset</h2>
+<p>Se debe prever circuitería para el reset de la CPU, concretamente, cargar el <code>PC</code> con 0 (o cualquier valor predeterminado) y limpiar los latches que fuera necesario. Algunos cargan el <code>SP</code> con algún valor fijo.</p>
+<p>Algunos procesadores de uso general (o sea, de Von Neuman) cargan el <code>PC</code> con el valor grabado en una cierta posición de memoria. Es costumbre utilizar las direcciones bajas de la memoria para RAM que, obviamente, contendrá basura al arrancar. La ROM (por ejemplo el BIOS) suele ponerse en direcciones altas, por ello, al resetear es normal ir a buscar la dirección de inicio en esas posiciones altas donde está la ROM. Esta dirección, a su vez, usualmente apuntará también al inicio del programa en esa misma ROM. En ordenadores más antiguos, las llaves y pulsadores que se veían en los paneles de control eran para indicar la dirección de inicio del código (entre otras cosas)</p>
+<p>Ningún procesador borra la memoria principal ni los registros, estos deben inicializarse expresamente.</p>
+<p>— — — — — —</p>
+<p>Conceptualmente creo que esto cubre todo lo fundamental en el diseño de una CPU. Faltarían:</p>
+<ul>
+<li>anchos de palabra mayores</li>
+<li>operaciones aritméticas</li>
+<li>interrupciones (<code>CALL</code>s disparados por señales de hardware, importante para responder rápidamente a sucesos externos)</li>
+<li>acceso a memoria indexado por registros internos por ejemplo, para acceder a sucesivos elementos de un array cuya base está guardada en un registro interno, o al segundo parámetro de una subrutina, que está guardada en el stack y por ello está indexado relativo al <code>SP</code>.</li>
+</ul>
+<p>Pero estos no hacen a lo fundamental de una CPU.</p>
+
+          </div>
+          <footer class="post-footer">
+    <div class="next-prev-links">
+      
+      <a  class="next-link" href="2016/02/15/einsteins-gravitational-waves.html">Siguiente <div class="triangle-right"></div></a>
+    </div> </footer>
+          <a class="u-url" href="/blog2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html" hidden></a>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer h-card">
+      <data class="u-url" href="/blog"></data>
+
+      <div class="wrapper">
+        <h2 class="footer-heading">Comentarios</h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li class="p-name">Comentarios</li>
+              <li>
+                <a class="u-email" href="mailto:satyam@satyam.com.ar"
+                  >satyam@satyam.com.ar</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list"></ul>
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p>Comentarios, viajes, ideas e historias</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+</html>

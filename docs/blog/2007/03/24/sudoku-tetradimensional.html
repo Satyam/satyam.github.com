@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--Source file: 2007-03-24-sudoku-tetradimensional.html-->
+    <meta charset="utf-8" />
+    <base href="/blog/" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sudoku tetradimensional | Comentarios</title>
+    <meta property="og:title" content="Sudoku tetradimensional" />
+    <meta property="og:locale" content="es-ES" />
+    <meta name="description" content="
+
+ El Sudoku se ha hecho tan popular que ha desplazado a las palabras cruzadas en
+ muchísimos periódicos y ha generado una industria de libros con problemas a
+ resolver. Las reglas piden que se complete la grilla, que ya viene cargada con
+ algunos valores, de tal manera que en ninguna fila, ninguna columna y en
+ ninguna de las 9 subgrillas haya se repitan los dígitos. El problema es una
+ extensión de la familia de problemas en que, dada una grilla de 9 casillas (3
+ x 3) colocar los dígitos del 1 al 9 en las casillas tal que la suma de las
+ filas, columnas y diagonales sumen lo mismo. En este caso, se agranda la
+ grilla y se cambian las restricciones.
+
+" />
+    <meta property="og:description" content="
+
+ El Sudoku se ha hecho tan popular que ha desplazado a las palabras cruzadas en
+ muchísimos periódicos y ha generado una industria de libros con problemas a
+ resolver. Las reglas piden que se complete la grilla, que ya viene cargada con
+ algunos valores, de tal manera que en ninguna fila, ninguna columna y en
+ ninguna de las 9 subgrillas haya se repitan los dígitos. El problema es una
+ extensión de la familia de problemas en que, dada una grilla de 9 casillas (3
+ x 3) colocar los dígitos del 1 al 9 en las casillas tal que la suma de las
+ filas, columnas y diagonales sumen lo mismo. En este caso, se agranda la
+ grilla y se cambian las restricciones.
+
+" />
+    <link rel="canonical" href="http://www.satyam.com.ar/blog/2007/03/24/sudoku-tetradimensional.html" />
+    <meta property="og:url" content="http://www.satyam.com.ar/blog/2007/03/24/sudoku-tetradimensional.html" />
+    <meta property="og:site_name" content="Comentarios" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2007-03-24T00:00:00+01:00" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Sudoku tetradimensional" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "dateModified": "2007-03-24T00:00:00+01:00",
+        "datePublished": "2007-03-24T00:00:00+01:00",
+        "description": "
+
+ El Sudoku se ha hecho tan popular que ha desplazado a las palabras cruzadas en
+ muchísimos periódicos y ha generado una industria de libros con problemas a
+ resolver. Las reglas piden que se complete la grilla, que ya viene cargada con
+ algunos valores, de tal manera que en ninguna fila, ninguna columna y en
+ ninguna de las 9 subgrillas haya se repitan los dígitos. El problema es una
+ extensión de la familia de problemas en que, dada una grilla de 9 casillas (3
+ x 3) colocar los dígitos del 1 al 9 en las casillas tal que la suma de las
+ filas, columnas y diagonales sumen lo mismo. En este caso, se agranda la
+ grilla y se cambian las restricciones.
+
+",
+        "headline": "Sudoku tetradimensional",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "http://www.satyam.com.ar/blog/2007/03/24/sudoku-tetradimensional.html"
+        },
+        "url": "http://www.satyam.com.ar/blog/2007/03/24/sudoku-tetradimensional.html"
+      }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      type="application/atom+xml"
+      rel="alternate"
+      href="feed.xml"
+      title="Comentarios"
+    />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        <a class="site-title" rel="author" href="index.html">Comentarios</a>
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path
+                  d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"
+                />
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            
+  <a class="page-link" href="" title="Home page">Home</a>
+  <a class="page-link" href="posts.html" title="Artículos por fecha">Archivo</a>
+  <a class="page-link" href="categories.html" title="Artículos por etiqueta">
+    Etiquetas
+  </a>
+
+            <form
+              id="searchform"
+              method="get"
+              action="https://www.google.com/search"
+              target="_blank"
+            >
+              <input type="text" name="q" id="s" size="15" />
+              <input type="submit" name="submit" value="🔍" />
+              <input type="hidden" name="as_sitesearch" value="satyam.com.ar" />
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="page-content" aria-label="Content" lang="es-ES">
+      <div class="wrapper">
+        <article
+          class="post h-entry"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <header class="post-header">
+            <h1 class="post-title p-name" itemprop="name headline">
+              Sudoku tetradimensional
+            </h1>
+            
+<div class="post-meta">
+  <div class="date-published">
+    Publicado el: 
+    <time  datetime="2007-03-24T00:00:00+01:00" itemprop="datePublished">
+    24 / Marzo / 2007</time>
+  </div>
+  <div class="post-cats">Archivado bajo: 
+          <a href="categories/#General" rel="category tag">
+            General
+          </a></div></div>
+          </header>
+
+          <div
+            class="post-content e-content "
+            itemprop="articleBody"
+          >
+            
+<p>
+  El Sudoku se ha hecho tan popular que ha desplazado a las palabras cruzadas en
+  muchísimos periódicos y ha generado una industria de libros con problemas a
+  resolver. Las reglas piden que se complete la grilla, que ya viene cargada con
+  algunos valores, de tal manera que en ninguna fila, ninguna columna y en
+  ninguna de las 9 subgrillas haya se repitan los dígitos. El problema es una
+  extensión de la familia de problemas en que, dada una grilla de 9 casillas (3
+  x 3) colocar los dígitos del 1 al 9 en las casillas tal que la suma de las
+  filas, columnas y diagonales sumen lo mismo. En este caso, se agranda la
+  grilla y se cambian las restricciones.
+</p>
+<span class="more"></span>
+<p>
+  Para no complicar las explicaciones, vamos a llamar grilla a todo el tablero y
+  cuadro a cada una de las 9 secciones de 3×3 que la componen.
+</p>
+<div>
+  <img
+    title="Grilla de Sudoku"
+    alt="Grilla de Sudoku"
+    src="/sudoku/tetra/SudokuBase.png"
+    align="left"
+  />
+  En la imagen, vemos una grilla de Sudoku con sus 9 cuadros separados. El
+  problema, entonces, es lograr ubicar los dígitos tal que dentro de cada fila,
+  columna y cuadro no haya repeticiones. La que se muestra en la figura no es
+  una solución válida, si bien los dígitos no se repiten en cada cuadro, si se
+  repiten en las filas y columnas, que se extienden a lo largo de los varios
+  cuadros.
+</div>
+<p>
+  <img
+    title="Grilla con una columna marcada"
+    alt="Grilla con una columna marcada"
+    src="/sudoku/tetra/columna.png"
+    align="left"
+  />En esta imagen he marcado una columna, la extrema izquierda.
+</p>
+
+<p>
+  <img
+    title="Columna convertida a plano en 3d"
+    alt="Columna convertida a plano en 3d"
+    src="/sudoku/tetra/columna3d.png"
+    align="left"
+  />Si ahora tomamos los cuadros y los apilamos como se muestra en la imagen, la
+  columna que había marcado antes con una línea, se convierte en un plano. Aquí
+  he marcado una sóla columna, pero las demás columnas son también sendos
+  planos, 9 en total, uno correspondiendo a cada columna.
+</p>
+
+<p>
+  De la misma manera que cada cuadro podría verse como un `plano´ que hay que
+  resolver, cada una de las columnas, después de hacer este apilado de las
+  filas, también implica resolver un plano.
+</p>
+<p>
+  <img
+    title="Sudoku apilado con columna volteada"
+    alt="Sudoku apilado con columna volteada"
+    src="/sudoku/tetra/columna3dvolteada.png"
+    align="left"
+  />
+</p>
+<p>
+  Aquí lo vemos gráficamente. En azul he resaltado uno de los cuadros que,
+  tomado independientemente, es el viejo problema de resolver una simple grilla
+  de 3×3.
+</p>
+<p>
+  De los tres cuadros de más a la izquierda, lo que hice fue tomar las casillas
+  marcadas por el plano en la figura anterior y las giré, volteándolas a la
+  izquierda. Noten la numeración de las celdas que siguen la secuencia de la
+  grilla plana y que quedan en el resto, las demás columnas de los cuadros.
+</p>
+<p>
+  Aquí se vé cómo, resolver una columna es lo mismo que resolver también un
+  cuadro sobre un plano perpendicular al otro, el plano del cuadro azul.
+</p>
+
+<p>
+  Lo mismo que en este caso hemos hecho sobre una columna, lo podemos repetir
+  sobre el resto, y también podemos apilar las bandas en la otra dirección de
+  tal manera que las filas se conviertan en planos.
+</p>
+<p>
+  En matemática se utiliza mucho este tipo de replanteo donde una reordenación o
+  redistribución de las partes dá un problema equivalente que se puede plantear
+  de una manera más genérica y facilita su solución. En este caso, el
+  reordenamiento implica apilar bandas de cuadros una sobre otra, de tal manera
+  que ya no tengo que hablar de filas, columnas y cuadros sino de planos
+  perpendiculares entre si.
+</p>
+<p>
+  Visto así, la cosa no parece muy práctica. Si tuvieramos un cubo, la cosa
+  sería más simple, pero acá tenemos que apilar las cosas en un sentido para
+  lograr generalizar las columnas, pero tenemos que apilarlas en otro sentido
+  para poder generalizar las filas. Claramente la generalización así no
+  funciona, a menos que pudiéramos apilar en ambos sentidos al mismo tiempo, lo
+  cual nos daría no un cubo sino un hiper-cubo, un cubo en 4 dimensiones que,
+  obviamente no podemos dibujar.
+</p>
+<p>
+  Reducir un cubo tridimensional a un dibujo plano, o sea, bi-dimensional
+  implica perder una de las dimensiones que nuestra imaginación puede intuir, o
+  sea, nos imaginamos el cuerpo tri-dimensional a partir de la vista
+  bi-dimensional. Si este dibujo bi-dimensional quisiera reducirlo más, esto es,
+  a un dibujo uni-dimensional, o sea, pintado a lo largo de una recta, no hay
+  forma que lo pudieramos interpretar, simplemente veríamos una línea que iría
+  cambiando de color, pero no podríamos imaginar qué representa. Reducir un
+  hiper-cubo presenta el mismo problema. Si le sacamos una dimensión,
+  obtendríamos un cuerpo tri-dimensional que, de alguna manera, podríamos
+  comprender y con un esfuerzo de la imaginación, dado que en realidad jamás
+  hemos visto un hipercubo, podríamos a partir de ese cuerpo entender el
+  hiper-cubo. Si ese cuerpo, que no es más que una proyección del hipercubo, lo
+  quisiera reducir a un dibujo plano, le estaría sacando una dimensión más y el
+  resultado no puede sino ser ininteligible.
+</p>
+<p>
+  Pero matemáticamente, un hipercubo es simple. Dentro de una recta, la
+  ubicación de cualquier punto lo podemos definir por un valor (x), la distancia
+  a otro punto que tomáramos como referencia o cero. En un plano, necesitamos
+  dos puntos (x,y) para definir cualquier ubicación dentro del plano. En un
+  cubo, necesitamos 3 (x,y,z). Por como viene la cosa, ya se deben imaginar lo
+  que sigue, para definir la ubicación de un punto en un hipercubo, necesitamos
+  4 valores (x,y,z,h).
+</p>
+<p>
+  <img
+    title="coordenadas tetradimensionales"
+    alt="coordenadas tetradimensionales"
+    src="/sudoku/tetra/coord4.png"
+    align="left"
+  />
+</p>
+
+<p>
+  En esta imagen podemos ver cómo podríamos numerar las celdas en este espacio
+  tetradimensional. Los números grandes representan las coordenadas de los
+  cuadros, del (1,1) arriba a la izquierda hasta el (3,3) abajo a la derecha. De
+  la misma manera que la grilla completa esta dividida en 3 x 3 cuadros, cada
+  cuadro está dividido en 3 x 3 celdas. Si bien en la imagen llevan los dígitos
+  del 1 al 9 como en un tablero de Sudoku, las coordenadas de ellos se
+  representan también con dos dígitos. Así, la celda que lleva el 1 es la (1,1),
+  la que lleva el 6 es la (2,3), la del 8 la (3,2). Como se vé, así en lo grande
+  como en lo chico. En nuestro sistema genérico, una celda cualquiera se puede
+  representar entonces con 4 dígitos, los dos primeros correspondientes a cada
+  cuadro, los dos siguientes a cada celda dentro de ese cuadro.
+</p>
+<p>
+  La celda superior izquierda sería la celda (1,1,1,1), mientras la inferior
+  derecha sería la (3,3,3,3). La celda que contiene el dígito 4 en el cuadro
+  central sería la (2,2,2,1), mientras que el 7 en el cuadro a su derecha sería
+  el (2,3,3,1).
+</p>
+<p>
+  Un plano en este hipercubo son todas las celdas que tienen dos de sus
+  coordenadas fijas y dos variables. Así, por ejemplo, el cuadro de arriba a la
+  izquierda sería el que corresponde a las celdas (1,1,x,y), mientras que la
+  columna de que habláramos al principio sería aquella que corresponde a las
+  celdas (1,x,1,y).
+</p>
+<p>
+  ¿Cuántos conjuntos de planos existen en el hipercubo? Tantos como
+  combinaciones de coordenadas fijas y variables. Marquemos con F las fijas y
+  con V las variables, eso nos da:
+</p>
+<p>
+  (F,F,V,V)<br />
+  (F,V,F,V)<br />
+  (F,V,V,F)<br />
+  (V,F,F,V)<br />
+  (V,F,V,F)<br />
+  (V,V,F,F)
+</p>
+<p>
+  En total, seis posibles conjuntos de planos, cada conjunto formado por 9
+  planos paralelos entre si. Esto último es obvio, el sudoku tiene 9 columnas, 9
+  filas y 9 cuadros, lo que no resulta obvio es que estos son solamente 3 de los
+  6 conjuntos de planos posibles.
+</p>
+<p>
+  Dentro del tablero tradicional del sudoku, ¿cómo se ven esos 3 planos extras?
+  ¿Cuáles serían las restricciones que impondrían?
+</p>
+<p>
+  Una de ellas sería que todas las casillas en la misma posición relativa de
+  cada cuadro contuviera números distintos, o sea que, digamos, la celda de
+  arriba a la izquierda de cada uno de los 9 cuadros tuviera un dígito distinto
+  y lo mismo con las casillas del medio arriba, la del centro de cada cuadro, la
+  de abajo a la derecha y así siguiendo con las 9 posibles.
+</p>
+<p>
+  Otro de los conjuntos de planos estaría formado por las filas superiores de
+  los 3 cuadros en una misma columna, en el gráfico esto serían las casillas que
+  contienen los dígitos 1, 2 y 3 en la columna de la izquierda, luego las
+  casillas que contienen los dígitos 4, 5 y 6, luego las de 7, 8 y 9 y luego las
+  mismas filas en la columna central de cuadros y finalmente las de la columna
+  derecha.
+</p>
+<p>
+  Otro tanto se puede hacer con las columnas de cada fila de cuadros, la que
+  contiene 1, 4 y 7 de la fila superior de cuadros y así siguiendo hasta los 9
+  planos paralelos en esta dimensión del hipercubo.
+</p>
+<p>
+  El sudoku sólo impone restricciones en 3 de los 6 posibles conjuntos de
+  planos. ¿Se puede solucionar un sudoku en todos los posibles planos del
+  hipercubo? La forma habitual de ir resolviendo el sudoku es que cada vez que
+  se pone un dígito en una posición, se marcan todas las casillas en que NO se
+  puede poner ese mismo dígito. Así, por ejemplo, si yo pongo un 1 en la casilla
+  de arriba a la izquierda, no puedo poner otro 1 en ningún lugar de la misma
+  fila, de la misma columna o del mismo cuadro.
+</p>
+<p>
+  <img
+    title="Sudoku normal con un 1 insertado y exclusiones marcadas"
+    alt="Sudoku normal con un 1 insertado y exclusiones marcadas"
+    src="/sudoku/tetra/sudoku1.GIF"
+    align="left"
+  />Aquí vemos un sudoku normal con un 1 insertado y en rojo marcadas todas las
+  casillas donde NO se pueden poner ningún 1, por las reglas de exclusión. No
+  puede haber ningún 1 en la misma fila, columna o cuadro.
+</p>
+
+<p>
+  <img
+    title="Soduku tetradimensional con un 1 insertado"
+    alt="Soduku tetradimensional con un 1 insertado"
+    src="/sudoku/tetra/sudoku1-h.GIF"
+    align="left"
+  />Ahora, si imponemos las 6 exclusiones posibles del mismo 1 en todos los 6
+  posibles planos, vemos que ya nos quedan muchos menos lugares donde poner otro
+  1.
+</p>
+
+<p>
+  <img
+    title="Sudoku tetradimensional con un segundo 1"
+    alt="Sudoku tetradimensional con un segundo 1"
+    src="/sudoku/tetra/sudoku1-h2.GIF"
+    align="left"
+  />Pongamos entonces un segundo 1 en alguna de las pocas casillas donde
+  podemos. Esto nos agrega a las exclusiones ya marcadas en rojo, aquellas que
+  ahora marcamos en azul.
+</p>
+
+<p>
+  <img
+    title="Sudoku tetradimensional con tercer 1 insertado"
+    alt="Sudoku tetradimensional con tercer 1 insertado"
+    src="/sudoku/tetra/sudoku1-h3.GIF"
+    align="left"
+  />Como era ya de esperarse, la inserción de un tercer 1 en una de las pocas
+  casillas disponibles agrega las exclusiones que ahora marcamos en verde. Como
+  se puede apreciar, ya no quedan lugares donde poner más unos. En los 6 cuadros
+  de abajo no hay ningún lugar donde poner un 1. El problema, por lo tanto, es
+  insoluble.
+</p>
+
+<p>
+  Si levantamos una de las restricciones y dejamos sólo 5 de las 6 posibles en
+  el hipercubo, el problema sigue sin poder resolverse. Recién con 4 existe una
+  única solución posible, aunque pudieran parecer más. En realidad, todas son el
+  resultado de las distintas permitaciones de los 9 dígitos en las mismas
+  posiciones, más todas las simetrías posibles.
+</p>
+<p>
+  Digamos que una vez que resolvieramos un problema, reemplazamos todos los 1
+  por la letra A, los 2 por la B y así siguiendo. Luego volvemos a reemplazar
+  todas las A por el dígito 2, las B por el dígito 3 y así siguiendo. En ese
+  caso, aunque la solución aparenta ser distinta, en realidad es una permutación
+  de la primera. Otro tanto ocurre si espejamos una solución por cualquiera de
+  las diagonales (y en un hipercubo hay 6!).
+</p>
+<p>
+  También es normal que dos problemas lleven a la misma solución. La elección de
+  cuales son los valores iniciales es arbitraria. Si vemos todas las posibles
+  soluciones, podemos tomar cualquier conjunto de casillas para hacer el planteo
+  del problema. Sabemos que cualquier conjunto de casillas llevará
+  necesariamente a una solución, pues estamos partiendo de una solución. Si
+  tomamos pocas casillas, es posible que se llegue a más de una solución, a
+  aquella de la cual partimos o a alguna otra. Si tomamos muchas, dejamos
+  demasiado poco para que el jugador resuelva.
+</p>
+<p>
+  En el caso del sudoku tetradimensional de 4 planos, aunque podemos plantear
+  muchos problemas, todos ellos llevan a la misma solución o cualquiera de sus
+  permutaciones o simetrías. Eso haría que el juego fuera demasiado fácil de
+  resolver y perdiera atractivo.
+</p>
+<p>
+  En definitiva, el sudoku tal cual es, ofrece muchísimas soluciones, y eso es
+  lo que lo hace un desafío.
+</p>
+
+          </div>
+          <footer class="post-footer">
+    <div class="next-prev-links">
+      <a  class="prev-link" href="2007/05/14/la-mayoria-de-los-espanoles-espera-ser-funcionario.html"><div class="triangle-left"></div> Anterior</a>
+      <a  class="next-link" href="2007/03/08/modelo-de-pagina-activa-de-ingreso-de-datos.html">Siguiente <div class="triangle-right"></div></a>
+    </div> </footer>
+          <a class="u-url" href="/blog2007/03/24/sudoku-tetradimensional.html" hidden></a>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer h-card">
+      <data class="u-url" href="/blog"></data>
+
+      <div class="wrapper">
+        <h2 class="footer-heading">Comentarios</h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li class="p-name">Comentarios</li>
+              <li>
+                <a class="u-email" href="mailto:satyam@satyam.com.ar"
+                  >satyam@satyam.com.ar</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list"></ul>
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p>Comentarios, viajes, ideas e historias</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+</html>
