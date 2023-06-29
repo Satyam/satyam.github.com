@@ -1,0 +1,223 @@
+---
+title: 'XML, ahora JSON, ¿por qué no LISP?'
+date: '2007-01-27'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Ya nos han vendido tanto las virtudes de XML que sale sobrando que yo diga
+  algo aquí. Ahora, con AJAX, todo el mundo tendrá bien en cuenta que la X del
+  final es por XML, aunque sean más las razones para evitar XML que usarlo pues
+  cuando la estructura de la información a enviar lo requiere, muchos preferirán
+  usar JSON. Pocos serán los memoriosos que recordarán LISP, la mayoría no lo
+  recordará porque jamás lo habrá usado, sin embargo, ¡cómo lo extraño!
+</p>
+<span class="more"></span>
+<p>En realidad no lo extraño tanto, era para llamar la atención.</p>
+<p>
+  LISP, junto con COBOL y FORTRAN fueron de los primeros lenguajes de
+  programación de alto nivel que se desarrollaron hace cerca de medio siglo, a
+  finales de la década de 1950. Todavía hay una enorme base de programas hechos
+  en COBOL, practicamente todas las aplicaciones bancarias se hacían en COBOL o,
+  posiblemente, RPG. Cuando fue el descalabro por el supuesto colapso del año
+  2000, era tal la cantidad de programas en COBOL a verificar que no alcanzaban
+  los programadores. FORTRAN se ha usado siempre mucho en ingeniería, la mayoría
+  de las estructuras como edificios, puentes y otras obras, han sido calculadas
+  con aplicaciones en FORTRAN y sigue siendo muy usado también en el ámbito
+  científico.
+</p>
+<p>
+  En comparación con todo esto, LISP ha casi desaparecido, sin embargo, quizás
+  haya sido un lenguaje adelantado a su tiempo, como muchas de sus
+  características demuestran.
+</p>
+<p>
+  LISP quiere decir LISt Processor, procesador de listas y su estructura,
+  básicamente, es una serie de listas. Una lista es cualquier cosa encerrada
+  entre paréntesis, que pueden ser símbolos u otras listas, por ejemplo:
+</p>
+<p>
+  <code>(elemento-1 (sub-elemento-2-1 sub-elemento-2-1) elemento-3)</code>
+</p>
+<p>
+  En esta lista, el segundo elemento es una lista compuesta de dos elementos. No
+  hay límite teórico a la cantidad de elementos en una lista ni al número de
+  listas anidadas una dentro de la otra. Si un programa conoce cómo está
+  estructurada una lista, no hay problema en armarla como se quiera. Si la lista
+  puede tener una estructura variable, es necesaria marcarla de alguna manera
+  para poder reconocer sus elementos. Usualmente, el primer elemento de una
+  lista es el identificador del contenido de esa lista.
+</p>
+<p>
+  Voy a abreviar los ejemplos abstractos e ir simplemente al grano. Una lista
+  puede ser algo como esto:
+</p>
+<p>
+  <code
+    >(html (head (title '(Ejemplo de htmLISP)))(body (h1 '(Ejemplo de htmLISP))
+    (p '(Este es un ejemplo))))</code
+  >
+</p>
+<p>
+  He usado una suerte de HTML escrito en notación de LISP para mostrar,
+  justamente, la flexibilidad que tiene el LISP para representar estructuras de
+  datos complejas, tal como la tiene XML, del cual HTML es una suerte de
+  variedad que, por ser familiar a todo el mundo, me ahorra tener que explicar
+  el significado de las etiquetas. En LISP, las cadenas literales se encierran
+  (como todo lo demás) entre paréntesis y se las precede de una comilla simple.
+</p>
+<p>
+  A diferencia del XML, un elemento de LISP acaba donde termina el paréntesis
+  correspondiente, no es necesario repetir el nombre de la etiqueta al final.
+  Pasado el primer elemento, el resto puede ser lo que se quiera salvo,
+  obviamente, paréntesis, espacios en blanco o una breve lista de caracteres
+  reservados. Los espacios en blanco separan los elementos de la lista, por eso,
+  si se quiere que un texto sea un único elemento, se lo debe preceder con una
+  comilla, pero nada impide que cada palabra fuera un elemento, si así se
+  definiera que debe ser el contenido de una lista. Por ejemplo, sería válido,
+  si así se definiera, escribir:
+</p>
+<p><code>(p Este es un ejemplo)</code></p>
+<p>
+  que es una lista de 5 elementos (la etiqueta también cuenta) a diferencia de
+  una de dos, como la del ejemplo previo. Esto es también algo interesante de
+  LISP, cualquier símbolo se puede redefinir y, a falta de una redefinición, un
+  elemento es igual a si mismo. Podría redefinir el símbolo
+  <code>ejemplo</code> para que sea igual a
+  <code>'ejemplo ejemplar'</code> pero, a falta de tal redefinición,
+  <code>ejemplo</code> quiere decir, simplemente, <code>ejemplo</code>. Las
+  comillas también sirven para indicar que el contenido se debe interpretar
+  literalmente.
+</p>
+<p>
+  Alguien dirá que LISP carece de atributos como XML. En su forma nativa eso es
+  cierto, pero nada impide convenir en algo como lo siguiente:
+</p>
+<p>
+  <code>(p (attributes (align center)) Este es un ejemplo)</code>
+</p>
+<p>
+  O sea, un elemento de tipo <code>attributes</code> que contenga pares de
+  elementos, equivalentes a los atributos de XML. Estos atributos pueden ser
+  símbolos simples o cosas más complejas, como por ejemplo:
+</p>
+<p>
+  <code
+    >(p (attributes (style (text-align center) (font italic normal bolder 12pt
+    Arial))) Este es un ejemplo)</code
+  >
+</p>
+<p>
+  Lo cual nos lleva a ver que una notación al estilo LISP puede usarse tanto
+  para XML como para CSS, pues el contenido del atributo <code>style</code> es
+  una serie de atributos de estilo y, de hecho, una hoja de estilo completa no
+  es sino una serie de datos con una estructura especial y nada impide
+  representarla en LISP (como que tampoco hay algo que impida representarla en
+  XML).
+</p>
+<p>
+  En realidad, LISP en su simplicidad, es extremadamente flexible. Mi primer
+  contacto con LISP fue con el dialecto AutoLISP, que viene integrado en el
+  programa de diseño AutoCAD. Hasta entonces, siempre había asociado al LISP al
+  ámbito académico, particularmente en inteligencia artificial y manejo de
+  textos; su uso en un programa de ingeniería me parecía extraño, sin embargo,
+  cuando comenzó el AutoCAD, en 1982, no existía otro lenguaje de programación
+  interpretado que permitiera expresar las complejas estructuras de datos que
+  debía manejar el AutoCAD. Alguien dirá que el C existía ya desde hace tiempo,
+  pero el C es compilado y las pocas versiones interpretadas que existían eran
+  incapaces de manejar algo por encima de los tipos de datos más simples, nada
+  de estructuras de datos o referencias. El AutoLISP permitía y, de hecho,
+  todavía permite, en la misma línea de comando del AutoCAD definir alguna
+  función que operara sobre el objeto siendo dibujado.
+</p>
+<p>
+  Quizás con toda esta descripción de listas de LISP como alternativa al XML,
+  HTML y CSS nos estamos olvidando que LISP es un lenguaje de programación. O
+  sea, en lugar de usar JavaScript, podríamos usar LISPScript, lo cual en
+  realidad es una redundancia, LISP nunca fue compilado, como lo es Java, por lo
+  que al hacer una versión interpretada, debieron agregarle la terminación
+  <em>Script</em>. LISP siempre fue interpretado, por ejemplo, podríamos hacer:
+</p>
+<p>
+  <code
+    >(input (attributes (type button)(value '(haga click aquí))(onClick (alert
+    '(gracias por hacer click)))))</code
+  >
+</p>
+<p>que sería equivalente al siguiente código:</p>
+<p>
+  <code
+    >&lt;input onclick="alert('gracias por hacer click');" type="button"
+    value="haga click aquí" /></code
+  >
+</p>
+<p>
+  O sea, además de expresar XML o HTML y CSS, también podríamos programar en
+  LISP. En realidad, a los efectos de un supuesto interprete LISP embutido en el
+  navegador, las etiquetas de HTML o CSS no son más que funciones que producen
+  determinado comportamiento, mostrar tal o cual elemento en una determinada
+  forma.
+</p>
+<p>
+  Actualmente, la X de AJAX está desapareciendo más y más y va siendo
+  reemplazada por JSON. Por ejemplo, este ejemplo, tomado del sitio de
+  <a href="http://www.json.org/">http://www.json.org/</a>, nos muestra los
+  mismos datos en XML y JSON:
+</p>
+<pre>
+&lt;menu id="file" value="File">
+&lt;popup>
+&lt;menuitem value="New" onclick="CreateNewDoc()" />
+&lt;menuitem value="Open" onclick="OpenDoc()" />
+&lt;menuitem value="Close" onclick="CloseDoc()" />
+&lt;/popup>
+&lt;/menu></pre
+>
+<p>En JSON:</p>
+<pre>
+{"menu": {
+    "id": "file",
+    "value": "File",
+    "popup": {
+        "menuitem": [
+            {"value": "New", "onclick": "CreateNewDoc()"},
+            {"value": "Open", "onclick": "OpenDoc()"},
+            {"value": "Close", "onclick": "CloseDoc()"}
+        ]
+    }
+  }
+}
+              </pre
+>
+<p>y en LISP</p>
+<pre>
+(menu
+    (id file)
+    (value File)
+    (popup
+        (menuitem
+            ((value New) (onclick (CreateNewDoc)))
+            ((value Open)(onclick (OpenDoc)))
+            ((value Close)(onclick (CloseDoc)))
+        )
+    )
+)
+              </pre
+>
+<p>
+  La ventaja de JSON sobre XML es que la sintaxis de JSON es la que se utiliza
+  en JavaScript para definir un array asociativo, donde la parte que va antes
+  del dos-puntos es la clave y la que le sigue es el valor, que puede ser
+  también un array. Esto hace que los datos trasmitidos en formato JSON puedan
+  ser leídos e interpretados como si fueran código propio (con la función
+  <code>eval()</code> de JavaScript) y trasladado a un array asociativo, una
+  estructura nativa de JavaScript, de tal manera que no requiere funciones u
+  objetos externos para interpretar y manipular datos en formato XML. En LISP,
+  sin embargo, esto es lo natural, a nadie se le habría ocurrido usar otro
+  formato para los datos que el nativo!
+</p>
+<p>
+  En definitiva, vemos que JSON es un alejamiento de XML y una vuelta a lo que
+  ya se hizo hace medio siglo en algo olvidado por ahí que se llama LISP.
+</p>

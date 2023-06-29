@@ -1,0 +1,112 @@
+---
+title: 'Internacionalización y localización: usando arrays'
+date: '2007-01-16'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  <a
+    title="Usando arrays"
+    href="/int/array/index.php?language=es"
+    target="ejemplo"
+    >Usar arrays</a
+  >
+  es apenas un poco mejor que usar
+  <a
+    title="usando variables"
+    href="/int/variables/index.php?language=es"
+    target="ejemplo"
+    >variables</a
+  >. Al menos no se ocupa mucho de la tabla de símbolos del intérprete y
+  difícilmente se pueda crear un conflicto de nombres. Se puede incluir una
+  instrucción <code>global</code> con el nombre del único array de traducciones
+  en cada función que vaya a emitir una cadena localizada, en lugar de tener que
+  mencionar cada posible variable de traducción individualmente. Es más lento
+  que usar las variables directamente y su expansión dentro de cadenas
+  encerradas en comillas dobles o cadenas `heredoc´ va a requerir encerrar la
+  expresión entre llaves para evitar la ambig�edad de que el intérprete no pueda
+  determinar dónde termina la expresión:
+</p>
+<p>
+  <code
+    ><span style="color: #007700">echo </span
+    ><span style="color: #dd0000"
+      >"debe usarse así:
+      <span style="color: #0000bb">${textos['aceptar']}</span>, y no:
+      <span style="color: #0000bb">$textos['aceptar']</span>"</span
+    ><span style="color: #007700">;<br /> </span
+  ></code>
+</p>
+<span class="more"></span>
+<p>
+  Una ventaja que tiene el usar arrays es organizar los strings en distintos
+  niveles de anidamiento, como se puede ver en el ejemplo, donde se ha armado
+  una lista desplegable a partir de un array de traducciones que es a su vez un
+  único elemento dentro del array <code>$textos</code>. Es esta posibilidad de
+  organización lo que lo hace más atractivo. Nótese incluso el uso de la función
+  <a
+    title="Manual de PHP: función asort()"
+    href="http://es2.php.net/manual/es/function.asort.php"
+    target="_blank"
+    ><code>asort()</code></a
+  >
+  para asegurarse que la lista desplegable esté siempre ordenada
+  alfabéticamente, según el texto traducido y no según el orden original de la
+  lista. Esto es imprescindible en listas largas, pues es muy molesto, por
+  ejemplo, en una lista de paises, encontrar, por ejemplo: Somalía, Africa del
+  Sur, España, Sudán que se corresponde al orden alfabético en inglés: Somalia,
+  South Africa, Spain, Sudan, etc..
+</p>
+<p>
+  Un array, sin embargo, es la mejor manera de almacenar los textos y, como se
+  puede ver en los archivos de traducción, el formato es fácil de interpretar
+  por parte de un traductor, incluso los arrays anidados le proveen un poco de
+  contexto al traductor para saber que todos los textos en ese grupo están
+  relacionados.
+</p>
+<p>
+  Usar una función para acceder a las traducciones puede salvar dos de los
+  defectos de usar arrays. Una función tiene visibilidad global por lo que puede
+  llamarse desde cualquier lugar, dentro o fuera de una función, sin tener que
+  usar la instrucción <code>global</code>. Por otra parte, una función puede
+  salvar el problema de que no se muestre nada si falta una traducción.
+</p>
+<p>Un ejemplo de tal función se muestra a continuación:</p>
+<pre><span style="color: #007700">function </span><span style="color: #0000bb">traducir</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">) {
+         global </span><span style="color: #0000bb">$textos</span><span style="color: #007700">;
+
+         if (</span><span style="color: #0000bb">array_key_exists</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">,</span><span style="color: #0000bb">$textos</span><span style="color: #007700">)) return </span><span style="color: #0000bb">$textos</span><span style="color: #007700">[</span><span style="color: #0000bb">$texto</span><span style="color: #007700">];
+         else  return </span><span style="color: #0000bb">$texto</span><span style="color: #007700">;
+} </span></pre>
+<p>
+  Si el texto cuya clave se indica no existe, al menos se muestra la clave en
+  sí.
+</p>
+<p>
+  Viene de:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: variables"
+    href="2007/01/16/internacionalizacion-y-localizacion-variables.html"
+    rel="bookmark"
+    >Internacionalización y Localización: usando variables</a
+  >
+</p>
+<p>
+  Continúa en:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando gettext()"
+    href="2007/01/16/internacionalizacion-y-localizacion-usando-gettext.html"
+    rel="bookmark"
+    >Internacionalización y localización: usando gettext()</a
+  >
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

@@ -1,0 +1,177 @@
+---
+title: 'Internacionalización y localización: conceptos'
+date: '2007-01-04'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Un problema que se ve con más frecuencia en las aplicaciones de web es la
+  necesidad de internacionalización y localización. Dado que son palabras muy
+  largas, es habitual que sean abreviadas como i18n y l10n refiriéndose, como si
+  se tratara de un crucigrama, a las respectivas iniciales, la cantidad de
+  letras intermedias y la letra final. Estas dos palabras no son sinónimos, la
+  primera se refiere a la capacidad de una aplicación para que pueda ser
+  traducida, la segunda a la traducción en si, que muchas veces implica algo más
+  que simplemente traducirla, cosas como, por ejemplo, las representaciones y
+  conversiones necesarias para las fechas o la moneda. Si una aplicación no está
+  internacionalizada, es muy difícil localizarla.<span class="more"></span>
+</p>
+<p>
+  Para que una aplicación esté internacionalizada, un primer requerimiento es
+  que sus textos estén separados del cuerpo de la aplicación. Lo más práctico es
+  que estos textos residan en archivos separados de la aplicación y se carguen
+  según sea necesario. Habitualmente, toda la colección de traducciones reside
+  en varios archivos en un mismo directorio y cada uno lleva el código del
+  idioma a que corresponde.
+</p>
+<p>
+  Para representar el idioma, lo mejor es utilizar algún código estándar, como
+  el ISO639 que ofrece códigos de 2 y 3 caracteres para indicar los lenguajes
+  reconocidos. La mayoría de las lenguas en uso disponen de códigos de 2 letras,
+  todos los idiomas, incluso lenguas muertas de interés sólo para eruditos,
+  disponen de códigos de tres letras. Así pues tenemos ES para castellano, CA
+  para catalán/valenciano, GL para gallego, EU para vasco y también códigos de
+  tres letras para los mismos idiomas, respectivamente SPA, CAT, GLG o EUS. La
+  norma aclara que los códigos pueden ser indistintamente en mayúsculas o
+  minúsculas, yo opté por las mayúsculas simplemente para distinguirlos del
+  resto del texto. He elegido estos ejemplos en lugar de otros más obvios tales
+  como EN para inglés, FR para francés o DE para alemán para resaltar que el
+  idioma no está necesariamente asociado a un país.
+</p>
+<p>
+  Es frecuente, aunque incorrecto, usar los códigos de país dados por la
+  ISO3166, que son los mismos usados en las terminaciones de los dominios de
+  Internet. Por ejemplo, no tiene sentido tener tablas para UY (Uruguay) y AR
+  (Argentina) siendo que en ambos países se habla el mismo dialecto de
+  castellano. Sin embargo, esto no es así en cuanto a la moneda. Por otro lado,
+  en buena parte de la Unión Europea, aún con la variedad de idiomas que tiene
+  (que incluso usan distintos alfabetos, a saber, el latino, el griego y a
+  partir del 2007 el cirílico por Bulgaria), se usa la misma moneda, el Euro. A
+  su vez, el formato de las fechas varía en los distintos países, siendo los
+  casos notables Japón, que utiliza el orden aaaa/mm/dd, Estados Unidos que usa
+  mm/dd/aaaa y el resto del mundo, incluso otros países angloparlantes, que usan
+  dd/mm/aaaa.
+</p>
+<p>
+  A tal efecto, la RFC3066 (que reemplaza a la RFC1766) especifica que los
+  códigos para las localizaciones (implicando en ello tanto la traducción de los
+  textos como la representación de fechas e importe monetarios) debe hacerse a
+  través de un código compuesto de una primera parte obligatoria que será el
+  código de idioma de la ISO639-1 (o sea, los códigos de sólo dos letras) o de
+  tres, si no hubiere código de dos letras, seguidos opcionalmente de un guión y
+  un código de país según la ISO3166. La norma preve otras posibilidades que
+  escapan a este artículo. Menciona también la costumbre de poner las letras del
+  idioma en minúsculas y las del país en mayúsculas, aunque dice que el software
+  lo debe reconocer indistintamente. Por ejemplo, tenemos: es, es-AR, es-UY,
+  es-ES, ca-ES o ca-FR.
+</p>
+<p>
+  Estos mismos códigos son los que se utilizan en la función de PHP
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.setlocale.php"
+      target="phpmanual"
+      >setlocale()</a
+    ></code
+  >, que nos provee facilidades para el formateo de fechas, moneda, ordenamiento
+  alfabético, conversión de mayúsculas a minúsculas y otras facilidades. Nótese
+  que esta función y las asociadas a ella dependen de que el sistema operativo
+  subyacente tenga cargadas la información respecto de los idiomas solicitados.
+  Esta función devuelve verdadero o falso según el idioma solicitado esté
+  disponible o no. Además, también permite indicar una serie de códigos para
+  tentar suerte y ver si alguno sale, por ejemplo, “ca-ES, es-ES, es, en-EN, en”
+  indicando la preferencia por catalán de España, castellano de España,
+  cualquier castellano, inglés de Inglaterra o cualquier inglés, en ese orden.
+</p>
+<p>
+  Es incómodo para el usuario que le anden preguntando su preferencia en cuanto
+  a idioma. Es posible automatizarlo de varias formas.
+</p>
+<p>
+  Una buena aproximación es consultar la variable
+  <a
+    title="Manual de PHP: $_SERVER"
+    href="http://es2.php.net/manual/es/reserved.variables.php"
+    target="phpmanual"
+    ><code>$_SERVER['HTTP_ACCEPT_LANGUAGE']</code></a
+  >. Esta nos devuelve la información del <em>header</em>
+  <code>Accept-Language</code> que es uno de los <em>header</em> estándar de
+  cualquier navegador. Esta información suele ser bastante confiable.
+  Habitualmente es una cadena con varios códigos separados por comas. Dado que
+  la función
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.setlocale.php"
+      target="phpmanual"
+      >setlocale()</a
+    ></code
+  >
+  acepta los múltiples códigos como un array, lo mejor es hacer un
+  <code
+    ><a
+      title="Manual de PHP: setlocale"
+      href="http://es2.php.net/manual/es/function.explode.php"
+      target="phpmanual"
+      >explode()</a
+    ></code
+  >
+  de la cadena de idiomas que devuelve
+  <code
+    ><a
+      title="Manual de PHP: $_SERVER"
+      href="http://es2.php.net/manual/es/reserved.variables.php"
+      target="phpmanual"
+      >$_SERVER['HTTP_ACCEPT_LANGUAGE']</a
+    ></code
+  >. Esta información de idiomas está disponible en casi todos los navegadores.
+  Estos la obtienen ya sea del sistema operativo en que está instalado o del
+  propio idioma del navegador. Así pues, es de suponer que si un usuario tiene
+  el navegador instalado en castellano es que preferirá este idioma para todas
+  sus operaciones. Esto, sin embargo, puede no ser así. El usuario puede ser un
+  turista visitando un cibercafé en un país cuyo idioma desconoce. Puede ser un
+  hispano-parlante que habla inglés y lo prefiere para consultar cosas como
+  Wikipedia, que tiene muchos más artículos disponibles que la versión
+  castellana o el manual de PHP cuya traducción al castellano es algo
+  deficiente. Por ello, es importante ofrecer la posibilidad de cambiar de
+  idioma.
+</p>
+<p>
+  Otra posibilidad, que se usa habitualmente para los banners de publicidad pero
+  puede servir para proponer el idioma de la interfaz, es usar alguna base de
+  direcciones de IP por países. Hay varias alternativas, gratis o pagas,
+  cualquier buscador encontrará varias si se busca por <em>geoip</em>.
+</p>
+<p>
+  Si bien cualquiera de los métodos anteriores puede servir para establecer un
+  primer idioma de contacto con el usuario, se debe ofrecer la alternativa de
+  cambiar de idioma y se debe almacenar esta selección. No es admisible que al
+  pasar el usuario de una página a otra el idioma se revierta al inicial.
+  Internamente, se debe guardar el idioma seleccionado en una variable de sesión
+  o en un <em>cookie</em>. El <em>cookie</em> tiene la ventaja de que el usuario
+  encontrará siempre el sitio en el idioma que hubiera seleccionado
+  inicialmente, el problema es que un usuario en un cibercafé puede llegar a
+  encontrarse una aplicación en el idioma del último turista que hubiera usado
+  ese sistema. En todo caso, la posibilidad de cambiar el idioma de la interfaz
+  debe estar siempre disponible y, de ser posible, en forma gráfica, a través de
+  iconos con las banderas de países representativos de cada idioma.
+</p>
+<p>
+  Continuación:
+  <a
+    title="Segunda parte"
+    href="2007/01/04/internacionalizacion-y-localizacion-recomendaciones.html"
+    >Internacionalizacion y localizacion: recomendaciones</a
+  >.
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

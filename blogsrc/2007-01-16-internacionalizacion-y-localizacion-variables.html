@@ -1,0 +1,92 @@
+---
+title: 'Internacionalización y Localización: usando variables'
+date: '2007-01-16'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Usar variables en el archivo de traducciones es quizás la peor de las
+  opciones. Destinar un lugar dentro de la tabla de símbolos para cada posible
+  cadena es un abuso. El uso de un prefijo reservado para traducciones, como se
+  muestra en el
+  <a
+    title="ejemplo"
+    href="/int/variables/index.php?language=es"
+    target="ejemplo"
+    >ejemplo</a
+  >, al menos reduce la posibilidad de conflicto con otras variables que se usen
+  en la aplicación, sin embargo, no impide que inadvertidamente se reutilice el
+  mismo nombre para dos cadenas distintas y el intérprete PHP no dará aviso de
+  error, como lo haría en el caso de querer redefinir una constante, quedándose
+  con el último valor asignado.<span class="more"></span>
+</p>
+<p>
+  Otro problema es que las variables no son visibles dentro de las funciones,
+  por lo que se deben acceder a través del array
+  <code
+    ><a
+      title="Manual de PHP: $GLOBALS"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.globals"
+      target="phpmanual"
+      >$GLOBALS</a
+    ></code
+  >
+  o declarar cada variable individualmente con la instrucción
+  <a
+    title="Manual de PHP: global"
+    href="http://es2.php.net/global#language.variables.scope.global"
+    target="phpmanual"
+    ><code>global</code></a
+  >
+  en cada función donde se utilice, como se muestra en la función
+  <code>mostrar_archivos()</code>.
+</p>
+<p>
+  Sobre las constantes, tiene la ventaja de ser más rápidas de procesar y además
+  pueden expandirse dentro de una cadena con comillas dobles o un
+  <a
+    title="Manual de PHP: heredoc"
+    href="http://es2.php.net/manual/es/language.types.string.php#language.types.string.syntax.heredoc"
+    target="phpmanual"
+    ><code>heredoc</code></a
+  >.
+</p>
+<p>
+  Finalmente, otro problema es que, en caso de faltar una traducción, no se
+  muestra nada, como se puede ver en el
+  <a
+    title="Ejemplo"
+    href="/int/variables/index.php?language=es"
+    target="ejemplo"
+    >ejemplo</a
+  >
+  si se elije la última opción de idioma.
+</p>
+<p>
+  Viene de:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando constantes"
+    href="2007/01/12/internacionalizacion-y-localizacion-usando-constantes.html"
+    rel="bookmark"
+    >Internacionalización y localización: usando constantes</a
+  >
+</p>
+<p>
+  Continúa en:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando arrays"
+    href="2007/01/16/internacionalizacion-y-localizacion-usando-arrays.html"
+    rel="bookmark"
+    >Internacionalización y localización: usando arrays</a
+  >
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

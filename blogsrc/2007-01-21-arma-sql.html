@@ -1,0 +1,184 @@
+---
+title: 'Arma SQL'
+date: '2007-01-21'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Cansado de lidiar con el armado de instrucciones de SQL con argumentos
+  variables, se me ocurrió hacer una función para manejarlo. Originalmente se
+  llamaba <code>ArmaSql</code>, estaba en Visual Basic, lo que me tocaba en ese
+  momento y funcionaba sobre MS-SQL. La versión más reciente está en PHP y
+  funciona sobre MySql y como la puse en algún foro en inglés por ahí, se llama
+  <a
+    title="Código fuente de BuildSql"
+    href="/int/ShowSource.php?title=BuildSql&file=BuildSql.php"
+    ><code>BuildSql()</code></a
+  >. Con muy pocos cambios se puede adaptar a cualquier otra base de datos, pero
+  no me ha tocado hacerlo.
+</p>
+<span class="more"></span>
+<p>
+  Creo que lo más molesto es el manejo de las fechas y los cadenas nulos. Andar
+  dando vuelta a las fechas para que queden bien en el formato aceptado por la
+  base de datos y manejar la alternativa de que tanto una fecha o una cadena
+  pueda ser nulo siempre me dio dolor de cabeza, pues me ha ocurrido de insertar
+  inadvertidamente el texto <code>'null'</code> en lugar del valor
+  <code>null</code> (sin comillas).
+</p>
+<p>
+  Hice entonces esta función que es una suerte de
+  <code
+    ><a
+      title="Manual de PHP: función sprintf()"
+      href="http://es2.php.net/manual/es/function.sprintf.php"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >sprintf()</a
+    ></code
+  >
+  orientado a SQL. El problema que se me presentaba con
+  <a
+    title="Manual de PHP: función sprintf()"
+    href="http://es2.php.net/manual/es/function.sprintf.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>sprintf()</code></a
+  >
+  era el de los valores en <code>null</code>, especialmente cadenas de
+  caracteres y fechas, pues en el string de formato de
+  <a
+    title="Manual de PHP: función sprintf()"
+    href="http://es2.php.net/manual/es/function.sprintf.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>sprintf()</code></a
+  >
+  ya ponía las comillas y si la variable estaba en
+  <code>null</code>, terminaba escribiendo el texto <code>'null'</code> en la
+  base de datos.
+  <a
+    title="Manual de PHP: función sprintf()"
+    href="http://es2.php.net/manual/es/function.sprintf.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>sprintf()</code></a
+  >
+  no sabe que cuando el valor es <code>null</code> no debe incluir las comillas.
+  Yo uso mucho el valor <code>null</code> en la base de datos, significa `no sé´
+  o `no hay´, indica la falta de un dato. Otros prefieren usar un valor
+  convenido para indicar lo mismo, por ejemplo, cadenas vacías o importes en
+  cero o negativos o alguna otra convención arbitraria que, en mi opinión es
+  innecesaria pues SQL ya tiene previsto el valor <code>null</code> para eso. Es
+  por ello que el <code>null</code> me preocupa tanto.
+</p>
+<p>
+  Entonces, al igual que
+  <a
+    title="Manual de PHP: función sprintf()"
+    href="http://es2.php.net/manual/es/function.sprintf.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>sprintf()</code></a
+  >, la función
+  <a
+    title="Código fuente de BuildSql"
+    href="/int/ShowSource.php?title=BuildSql&file=BuildSql.php"
+    ><code>BuildSql()</code></a
+  >
+  acepta un primer argumento que es el modelo de la instrucción de SQL a armar y
+  luego una cantidad variable de argumentos cuyos valores serán insertados en la
+  primer cadena con el formato que le corresponda a cada uno. El lugar de
+  inserción de los valores va indicado por un signo de interrogación seguido de
+  varios modificadores, según se indica:
+</p>
+<p><code>?[nn][m]t</code></p>
+<p>Donde:</p>
+<p>
+  <code><em>nn</em></code
+  >: opcional, indica la posición del argumento dentro de la lista de
+  argumentos. El argumento 0 es el modelo de la instrucción misma y no tiene
+  sentido usarlo. Si no se indica los argumentos se irán insertando
+  secuencialmente según aparecen. Cuando se indica el número de argumento a
+  usar, el puntero secuencial de argumentos no se incrementa.
+</p>
+<p><code>m</code>: opcional, puede ser una de dos opciones:</p>
+<blockquote>
+  <p>
+    <code>m</code>: el argumento es obligatorio (en inglés:
+    <em><strong>m</strong>andatory</em>) el argumento no puede ser
+    <code>null</code>. Dará error si lo fuera.<br />
+    <code>n</code>: convertir a null si el argumento fuera 0 o una cadena vacía.
+  </p>
+</blockquote>
+<p>
+  <code>t</code>: este es el único modificador obligatorio e indica el tipo del
+  argumento, que puede ser cualquiera de los siguientes:
+</p>
+<blockquote>
+  <p>
+    <code>s</code>: <em><strong>s</strong>tring</em><br />
+    <code>i</code>: <em><strong>i</strong>nteger</em><br />
+    <code>f</code>: <em><strong>f</strong>loat</em><br />
+    <code>d</code>: <em><strong>d</strong>ate, datetime, timestamp</em><br />
+    <code>t</code>: <em><strong>t</strong>ime</em><br />
+    <code>b</code>: <em><strong>b</strong>oolean</em><br />
+    <code>p</code>: <em><strong>p</strong>refijo</em>
+  </p>
+</blockquote>
+<p>
+  Todos estos modificadores pueden darse tanto en mayúsculas como en minúsculas.
+  Lo mínimo requerido es el signo de interrogación seguido de una descripción
+  del tipo de datos. En el caso de que el tipo de dato requiriera encerrar el
+  valor entre comillas, la función las proveerá. No hay previsión para insertar
+  un signo de interrogación en la salida pues, como es un carácter inválido en
+  SQL, no tiene sentido, pero no hay problema en que cualquiera de los
+  argumentos lo contenga.
+</p>
+<p>
+  El tipo de datos `<code>p</code>` es especial en cuanto a que no representa un
+  argumento sino el contenido de la variable
+  <code>$table_prefix</code>. Dependiendo del servicio contratado con un
+  proveedor de internet, es posible disponer de ilimitadas bases de datos o un
+  número limitado, en ocasiones una sola. En ese caso, es necesario llamar a
+  cada tabla con un prefijo que indique a qué aplicación corresponde. El
+  modificador p permite agregar automáticamente ese prefijo, tomándola de la
+  variable global <code>$table_prefix</code> (un nombre arbitrario que puede
+  cambiarse a gusto) supuestamente leído de la configuración de la aplicación.
+</p>
+<p>
+  La función está comentada en el
+  <a
+    title="función BuildSql"
+    href="/int/ShowSource.php?title=BuildSql&file=BuildSql.php"
+    >fuente</a
+  >
+  e incluye un ejemplo.
+</p>
+<p>
+  Esta función se complementa con <code>ReadSqlDate()</code>, más abajo en el
+  mismo
+  <a
+    title="función BuildSql"
+    href="/int/ShowSource.php?title=BuildSql&file=BuildSql.php"
+    >fuente</a
+  >
+  que permite convertir una fecha, fecha-hora o
+  <em>timestamp</em> al formato interno de PHP. Yo nunca he usado el tipo de
+  dato time de SQL, por lo que no he previsto una función equivalente para ese
+  tipo de dato. Vale la pena que advierta a quien quiera hacerlo que la función
+  <a
+    title="Manual de PHP: función mktime()"
+    href="http://es2.php.net/manual/es/function.mktime.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mktime()</code></a
+  >, cuando no se le dan los argumentos mes, día y año, no los supone cero sino
+  que toma los valores actuales, por lo que al convertirlo, se deberá usar:
+</p>
+<p>
+  <code>mktime($hora,$minuto,$segundos) - $mktime(0,0,0)</code>
+</p>
+<p>y no simplemente:</p>
+<p>mktime<code>($hora,$minuto,$segundos)</code></p>

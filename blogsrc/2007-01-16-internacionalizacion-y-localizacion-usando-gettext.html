@@ -1,0 +1,273 @@
+---
+title: 'Internacionalización y localización: usando gettext()'
+date: '2007-01-16'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  La función
+  <code
+    ><a
+      title="Manual de PHP: biblioteca gettext"
+      href="http://www.php.net/manual/es/ref.gettext.php"
+      target="phpmanual"
+      >gettext()</a
+    ></code
+  >
+  es la forma semi-oficial de manejar una localización y está muy bien integrado
+  en los entornos del tipo Unix, lo cual es bueno y malo. Un grave problema es
+  que depende del soporte de idioma que esté instalado en el servidor, lo cual
+  puede hacer que una aplicación que funciona perfectamente en un servidor, no
+  funcione en otro. Por otra parte, para su inicialización requiere una serie de
+  llamadas a funciones que parecen un tanto caprichosas y que están pensadas más
+  desde el punto de vista organizativo del servidor Unix que de la aplicación.
+  Otros entornos, como Windows, esto puede representar un problema, por ejemplo,
+  si se desarrolla en un ordenador Windows para usar en un servidor con Linux.
+</p>
+<p>
+  <span class="more"></span>El
+  <a
+    title="ejemplo"
+    href="/int/gettext/index.php?language=es_ES"
+    target="phpmanual"
+    >ejemplo</a
+  >
+  muestra cómo usar las funciones necesarias para
+  <code
+    ><a
+      title="Manual de PHP: biblioteca gettext"
+      href="http://www.php.net/manual/es/ref.gettext.php"
+      target="phpmanual"
+      >gettext()</a
+    ></code
+  >. El fuente de la página muestra llamadas a las funciones
+  <code
+    ><a
+      title="Manual de PHP: función setlocale()"
+      href="http://es2.php.net/manual/es/function.setlocale.php"
+      target="phpmanual"
+      >setlocale()</a
+    ></code
+  >,
+  <a
+    title="Manual de PHP: función bindtextdomain()"
+    href="http://www.php.net/manual/es/function.bindtextdomain.php"
+    target="phpmanual"
+    ><code>bindtextdomain()</code></a
+  >
+  y
+  <a
+    title="Manual de PHP: función textdomain()"
+    href="http://www.php.net/manual/es/function.textdomain.php"
+    target="phpmanual"
+    ><code>textdomain()</code></a
+  >
+  las cuales deben estar al inicio de cualquier script, antes de la primer
+  llamada a
+  <code
+    ><a
+      title="Manual de PHP: biblioteca gettext"
+      href="http://www.php.net/manual/es/ref.gettext.php"
+      target="phpmanual"
+      >gettext()</a
+    ></code
+  >
+  que, por otra parte, no verán en el fuente, dado que
+  <code
+    ><a
+      title="Manual de PHP: biblioteca gettext"
+      href="http://www.php.net/manual/es/ref.gettext.php"
+      target="phpmanual"
+      >gettext()</a
+    ></code
+  >
+  tiene predefinido como alias la función
+  <code
+    ><a
+      title="Manual de PHP: función _()"
+      href="http://www.php.net/manual/es/function.gettext.php"
+      target="phpmanual"
+      >_()</a
+    ></code
+  >, que siendo mucho más breve, es más cómoda.
+</p>
+<p>
+  La explicación del manual sobre el uso de estas funciones es insuficiente y
+  sin recorrer los comentarios de los usuarios, más abajo (que, además, no están
+  traducidos) no es posible poner la cosa a funcionar.
+</p>
+<p>
+  La función
+  <a
+    title="Manual de PHP: función setlocale()"
+    href="http://es2.php.net/manual/es/function.setlocale.php"
+    target="phpmanual"
+    ><code>setlocale()</code></a
+  >
+  es la que establece el idioma que se utilizará, aunque en realidad hace mucho
+  más que eso. Permite definir, por ejemplo, cómo se les dará formato a los
+  números (el uso de comas y puntos para miles y decimales), moneda (símbolo
+  monetario, cantidad de decimales, etc), fechas (orden de las partes) y varias
+  otras cosas que se detallan en su
+  <a
+    title="Manual de PHP: función setlocale()"
+    href="http://es2.php.net/manual/es/function.setlocale.php"
+    target="phpmanual"
+    >documentación</a
+  >.
+</p>
+<p>
+  En el
+  <a
+    title="ejemplo"
+    href="/int/gettext/index.php?language=es_ES"
+    target="phpmanual"
+    >ejemplo</a
+  >
+  usamos la constante <code>LC_ALL</code> para localizar todos los aspectos
+  posibles. Aquí es donde reside el primer problema, el éxito de la función
+  <a
+    title="Manual de PHP: función setlocale()"
+    href="http://es2.php.net/manual/es/function.setlocale.php"
+    target="phpmanual"
+    ><code>setlocale()</code></a
+  >
+  depende de que la localización pedida exista en el servidor. Por ejemplo, un
+  servidor puede tener instalado
+  <code>fr_FR</code> (francés de Francia) pero no <code>fr_BE</code> (francés de
+  Bélgica) o <code>fr_CG</code> (francés del Congo), puede tener
+  <code>ca_ES</code> (catalán de España) pero no <code>ca_FR</code> (catalán de
+  Francia). Uno podría querer obviar estos problemas simplemente indicando el
+  código de idioma y no el de país, por ejemplo <code>fr</code>,
+  <code>es</code> o <code>ca</code>, y dependiendo del servidor, estos pueden
+  estar disponibles o no.
+</p>
+<p>
+  Por otra parte, el sitio en cuestión puede ser un sitio para un grupo de
+  filólogos que estudian idiomas inusuales, tales como klingon, que tiene su
+  código ISO-639 (<code>tlh</code>) o esperanto (<code>epo</code>). En el
+  ejemplo se ha agregado una casilla donde ingresar un código de localización y
+  ver el resultado donde dice `locale actual´. Si se muestra un resultado, el
+  código indicado existe, sino, queda en blanco. La función
+  <a
+    title="Manual de PHP: función setlocale()"
+    href="http://es2.php.net/manual/es/function.setlocale.php"
+    target="phpmanual"
+    ><code>setlocale()</code></a
+  >
+  llama a la función equivalente del sistema operativo y retorna lo que esta le
+  indica. Esto es importante pues es posible que la función devuelva algo, pero
+  distinto de lo indicado. Por ejemplo, el sistema operativo es libre de indicar
+  que no tiene `en_UK´ pero que si tiene `en´. Eso hace que uno no tenga más
+  remedio que ponerse a explorar en el servidor para ver qué idiomas tiene y,
+  según eso, ver qué ofrecer y, por encima de todo, cómo estructurar la
+  aplicación, pues lo que todavía no hemos visto es dónde ubicar el archivo de
+  traducciones.
+</p>
+<p>
+  Los argumentos de este trío de funciones son los que determinan la ubicación
+  de los archivos de traducción, concretamente en el caso del
+  <a
+    title="ejemplo"
+    href="/int/gettext/index.php?language=es_ES"
+    target="phpmanual"
+    >ejemplo</a
+  >:
+</p>
+<p>
+  <span style="color: #0000bb">$locale </span
+  ><span style="color: #007700">= </span
+  ><span style="color: #0000bb">setlocale</span
+  ><span style="color: #007700">(</span
+  ><span style="color: #0000bb">LC_ALL</span
+  ><span style="color: #007700">, `en_US´</span
+  ><span style="color: #007700">);<br /> </span
+  ><span style="color: #0000bb">bindtextdomain</span
+  ><span style="color: #007700">(</span
+  ><span style="color: #dd0000">`ejemplo´</span
+  ><span style="color: #007700">, </span
+  ><span style="color: #dd0000">`./locale´</span
+  ><span style="color: #007700">);<br /> </span
+  ><span style="color: #0000bb">textdomain</span
+  ><span style="color: #007700">(</span
+  ><span style="color: #dd0000">`ejemplo´</span
+  ><span style="color: #007700">);</span>
+</p>
+<p>el archivo de traducciones se encontrará en:</p>
+<p><code>./locale/en_US/LC_MESSAGES/ejemplo.mo</code></p>
+<p>
+  Dejo como ejercicio para el lector dilucidar de dónde sale cada segmento,
+  aunque aclaro que <code>LC_MESSAGES</code> es fijo e inalterable como lo es la
+  extensión <code>.mo</code> para el archivo. Esto hace evidente un problema,
+  uno debe tener tantas carpetas con códigos de localización como vaya a
+  ofrecer, aunque el contenido de <code>es_AR</code> sea idéntico al de
+  <code>es_UY</code>, como en el caso del ejemplo donde usé
+  <code>en_US</code> arbitrariamente en lugar de, por ejemplo,
+  <code>en_</code>UK. La diferencia puede no ser importante en las traducciones,
+  pero si en otros aspectos de la localización como el signo monetario $ ó �, o
+  el orden de los elementos de la fecha.
+</p>
+<p>
+  Todo esto hace que esta solución no sea muy portable, y es de suponer que si
+  uno está internacionalizando una aplicación en muchos casos es porque pretende
+  hacerla portable. La dependencia de todo el paquete de gettext() de la
+  configuración del servidor en que reside, hace que pueda ser un problema para
+  quien debe instalar y mantener el paquete.
+</p>
+<p>
+  Finalmente, un `bug´ que seguramente se solucionará, eventualmente … La
+  mayoría de las aplicaciones `internacionales´ se escriben en inglés por lo que
+  los textos originales están en ese idioma. El
+  <a
+    title="ejemplo"
+    href="/int/gettext/index.php?language=es_ES"
+    target="phpmanual"
+    >ejemplo</a
+  >
+  que acompaña este artículo está en castellano. Noten que si seleccionan como
+  idioma el inglés, los textos donde el original contuviera acentos, eñe o
+  cualquier otra letra o símbolo que no sea ASCII nativo, gettext() no
+  encontrará la traducción, cosa que sí hará con cualquier texto donde el
+  original sea puro ASCII, aunque el texto traducido sí contenga caracteres
+  no-ASCII.
+</p>
+<p>
+  Por todo esto, en conclusión, no recomiendo usar las funciones de
+  <a
+    title="Manual de PHP: biblioteca gettext"
+    href="http://www.php.net/manual/es/ref.gettext.php"
+    target="phpmanual"
+    ><code>gettext()</code></a
+  >
+  de PHP aunque, como alternativa, existe un paquete de PHP escrito en PHP
+  mismo, que es mucho más simple de usar y más fácil de mantener. De hecho, es
+  el que usa la aplicación WordPress con que funciona este mismo blog y que
+  veremos en el siguiente artículo.
+</p>
+<p>
+  Viene de:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando arrays"
+    href="2007/01/16/internacionalizacion-y-localizacion-usando-arrays.html"
+    rel="bookmark"
+    >Internacionalización y localización: usando arrays</a
+  >
+</p>
+<p>
+  Continúa en:<a
+    title="Enlace permanente: Internacionalización y localización: usando PHP-gettext"
+    href="2007/01/16/internacionalizacion-y-localizacion-usando-php-gettext.html"
+    rel="bookmark"
+    >Internacionalización y localización: usando PHP-gettext</a
+  >
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

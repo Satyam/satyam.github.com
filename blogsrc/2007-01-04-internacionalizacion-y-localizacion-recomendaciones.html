@@ -1,0 +1,122 @@
+---
+title: 'Internacionalización y localización: recomendaciones'
+date: '2007-01-04'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Es difícil traducir un texto si no se entiende. Es difícil que se entienda si
+  no está completo o si es críptico. Los textos deben estar preparados para que
+  puedan ser traducidos.<span class="more"></span>En muchos casos, un traductor
+  no tendrá acceso al programa original. Los traductores han sido de los
+  primeros profesionales en el área de artes y humanidades en utilizar la
+  Internet. Muchos de ellos reciben los textos a traducir por correo electrónico
+  y los devuelven por el mismo medio. Esto quiere decir que habitualmente
+  recibirán un archivo de cadenas de texto y devolverán otro, ya traducido. Si
+  el archivo original no está claro o completo, la traducción será deficiente.
+  Por ello es importante atender a ciertas recomendaciones.
+</p>
+<p>
+  Los textos deben representar oraciones completas o incluso párrafos. Si bien
+  se puede reducir el uso de memoria usando y reusando fragmentos, el traductor,
+  al encontrar estos fragmentos aislados puede no saber cómo traducirlos. Esto
+  ocurre frecuentemente con las traducciones de inglés a castellano, dado que en
+  el inglés, muchas veces, no se diferencia género y número por lo cuál es
+  posible que el traductor, viendo dos fragmentos separados, uno lo traduzca en
+  masculino, el otro en femenino o uno en singular y el otro en plural.
+</p>
+<p>
+  Por ejemplo, por una cuestión de prolijidad a nivel de código fuente, un
+  programador puede armar un texto largo (un texto de ayuda o similar)
+  encadenando varios segmentos o haciendo múltiples <code>echo()</code>. En
+  ocasiones el texto se corta arbitrariamente de a renglón, según una medida
+  caprichosa. El traductor, enfrentado con los varios segmentos, no tiene forma
+  de hacer una traducción coherente. Por ejemplo:
+</p>
+<p>
+  <code
+    >echo 'este es un párrafo';<br />
+    echo 'tremendamente largo';</code
+  >
+</p>
+<p>Podría quedar traducido como:</p>
+<p>
+  <code
+    >echo 'this is a paragraph';<br />
+    echo 'extremely long';</code
+  >
+</p>
+<p>Cuando que si el original hubiera sido:</p>
+<p><code>echo 'este es un párrafo tremendamente largo';</code></p>
+<p>la traducción habría sido la correcta:</p>
+<p><code>echo 'this is an extremely long paragraph';</code></p>
+<p>
+  Nótese cómo ha cambiado el orden de las palabras (el sustantivo al final) y el
+  artículo indefinido `an´ en lugar de `a´.
+</p>
+<p>
+  Aunque en los ejemplos previos he usado código de PHP, habitualmente el
+  traductor recibirá un archivo conteniendo sólo los textos a traducir y no
+  sabrá si dos renglones consecutivos forman parte de la misma oración o no.
+</p>
+<p>
+  Igualmente, se debe tener en cuenta que el orden de las palabras puede ser
+  distinto en un idioma que en otro, por ejemplo, en inglés el adjetivo va
+  delante del sustantivo, al revés que en castellano. Si estuviéramos
+  componiendo la descripción de un artículo, por ejemplo, para un catálogo de
+  ropa, a partir de los códigos de pieza, talle, color, etc., el orden de estos
+  elementos será distinto en un idioma y otro.
+</p>
+<p>
+  Para ello son muy útiles las funciones
+  <a
+    title="Manual de PHP: printf()"
+    href="http://es2.php.net/manual/es/function.printf.php"
+    target="phpmanual"
+    ><code>printf()</code></a
+  >
+  o
+  <a
+    title="Manual de PHP: sprintf()"
+    href="http://es2.php.net/manual/es/function.sprintf.php"
+    target="phpmanual"
+    ><code>sprintf()</code></a
+  >. Estas permiten componer un string combinando las partes fijas con las
+  variables. Es importante notar la especificación posicional de formato, esto
+  es, la posibilidad de indicar en la cadena de formato el orden en que se deben
+  insertar las partes variables. Por ejemplo:
+</p>
+<p><code>echo $color, ' ' , $item;</code></p>
+<p>
+  Podrá producir `blue blouse´ en inglés pero resultaría en `azul blusa´ en
+  castellano. Por ello es mejor usar:
+</p>
+<p><code>printf('%1$s %2$s',$color, $item);</code></p>
+<p>
+  pues cambiando la cadena de formato a
+  <code>'%2$s %1$s'</code> obtendremos `blusa azul´ que es lo correcto en
+  castellano. Claro que todo esto falla si el color es rojo, pues entonces queda
+  `blusa rojo´ (usualmente esto se salva indicando rojo/a). Este ejemplo tampoco
+  sirve de mucho dado que un traductor enfrentado con una especificación de
+  formato tan críptica no podrá traducirla.
+</p>
+<p>
+  Este artículo es continuación de
+  <a
+    title="Primera parte"
+    href="2007/01/04/internacionalizacion-y-localizacion-conceptos.html"
+    >Internacionalización y localización: conceptos</a
+  >.
+</p>
+<p>
+  Continúa en:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando constantes"
+    href="2007/01/12/internacionalizacion-y-localizacion-usando-constantes.html"
+    rel="bookmark"
+    ><font color="#676e04"
+      >Internacionalización y localización: usando constantes</font
+    ></a
+  >
+</p>

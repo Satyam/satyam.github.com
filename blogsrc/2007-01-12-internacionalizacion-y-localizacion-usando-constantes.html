@@ -1,0 +1,113 @@
+---
+title: 'Internacionalización y localización: usando constantes'
+date: '2007-01-12'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Una forma simple de separar las traducciones del archivo ejecutable es definir
+  archivos de traducción que contengan constantes con los textos a traducir. El
+  <a title="Ejemplo" href="/int/define/index.php?language=es" target="ejemplo"
+    >ejemplo</a
+  >
+  muestra la página generada y los archivos fuente que la componen.
+</p>
+<span class="more"></span>
+<p>
+  En la parte superior se muestran algunos textos y se ofrecen tres botones con
+  tres opciones de idiomas, un botón para aceptar el cambio y luego una frase
+  arbitraria para mostrar una traducción compuesta.
+</p>
+<p>
+  Inmediatamente debajo, se puede ver el fuente que genera la página. El enlace
+  establece inicialmente el idioma en castellano. La última de las opciones
+  muestra qué ocurre cuando no hay traducción disponible. No es que el caso de
+  que no haya archivo para una de las traducciones que se ofrecen se vaya a
+  presentar con frecuencia, pero es posible que en un archivo de traducciones
+  falte un texto. Esto suele ocurrir cuando la aplicación se va modificando y se
+  agregan textos. El desarrollador difícilmente sepa todos los idiomas
+  ofrecidos. En ese caso, alguno de los archivos de traducciones quedará con
+  alguna traducción de menos hasta que se consiga completarla. Como se ve, el
+  PHP interpreta los nombres de las constantes como textos literales.
+</p>
+<p>
+  Como se ve en el fuente, en todos los casos en que se fuera a escribir un
+  texto, se ha usado una constante en su lugar. Todas las constantes están en
+  mayúsculas, como es habitual en las constantes y por influencias de la función
+  <code
+    ><a
+      title="Manual de PHP: función gettext"
+      href="http://es2.php.net/manual/en/function.gettext.php"
+      target="phpmanual"
+      >gettext()</a
+    ></code
+  >
+  cuyo alias es
+  <code
+    ><a
+      title="Manual de PHP: función gettext"
+      href="http://es2.php.net/manual/en/function.gettext.php"
+      target="phpmanual"
+      >_()</a
+    ></code
+  >, he usado un guión como carácter inicial, lo cual es totalmente arbitrario.
+</p>
+<p>
+  En las primeras líneas, verifico si el URL ha contenido el argumento
+  <code>'language'</code> en cuyo caso lo leo y lo almaceno en una variable de
+  sesión para continuar usándolo en el resto del sitio. Si el archivo cuyo
+  nombre contendría el código de idioma existe, lo cargo, con lo que se
+  definirán todas las constantes.
+</p>
+<p>
+  Más abajo aparece el archivo con las traducciones. Su estructura es
+  extremadamente simple y cualquier traductor lo podrá traducir sin mayores
+  problemas indicándole claramente qué debe tocar y qué no, cuidando simplemente
+  de salvar las comillas simples que pudiera tener que incluir en el texto.
+</p>
+<p>
+  Si se hubieran usado cadenas de formato para la función
+  <code
+    ><a
+      title="Manual de PHP: función printf()"
+      href="http://es2.php.net/manual/en/function.printf.php"
+      target="phpmanual"
+      >printf()</a
+    ></code
+  >, tal como se sugiere en un
+  <a
+    title="Internacionalización y localización: recomendaciones "
+    href="2007/01/04/internacionalizacion-y-localizacion-recomendaciones.html"
+    >anterior artículo</a
+  >, estas aparecerían como <code>%1$s</code> (en el caso más habitual) debe
+  poder reconocerlos como comodines y saber que puede ubicarlos en cualquier
+  orden dentro de la traducción.
+</p>
+<p>
+  Este artículo es continuación de
+  <a
+    title="Enlace permanente: Internacionalización y localización: recomendaciones"
+    href="2007/01/04/internacionalizacion-y-localizacion-recomendaciones.html"
+    rel="bookmark"
+    >Internacionalización y localización: recomendaciones</a
+  >
+</p>
+<p>
+  Continúa en:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: variables"
+    href="2007/01/16/internacionalizacion-y-localizacion-variables.html"
+    rel="bookmark"
+    >Internacionalización y Localización: variables</a
+  >
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    rel="bookmark"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

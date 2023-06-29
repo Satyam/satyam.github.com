@@ -1,0 +1,67 @@
+---
+title: 'DIN A4'
+date: '2007-01-25'
+categories: ['Papel']
+language: 'es-ES'
+---
+
+<p>
+  Las normas DIN (Deutsche Industrie Norm: norma de la industria alemana) dicen
+  un poco del carácter alemán: lo abarcan todo.
+</p>
+<p>
+  La norma conque estamos probablemente más familiarizados sea la que estipula
+  el tamaño de los papeles, en particular el DIN A4. Las medidas de una hoja A4
+  parecen un poco tomadas de los pelos: 297 * 210 milímetros. Podrían haber
+  establecido algo más simple, no?
+</p>
+<span class="more"></span>
+<p>
+  El caso es que aunque los valores concretos resultan un poco caprichosos, la
+  definición y razón de ser de los tamaños de toda la serie de papeles DIN A es
+  simple. Cualquier hoja de la serie, si se corta a la mitad, nos da un par de
+  hojas del tamaño siguiente. Así, si cortamos una A3 al medio, tenemos dos A4,
+  si cortamos una A4, tendremos dos A5 y, lo más importante, todas ellas tienen
+  la misma proporción de alto a ancho.
+</p>
+<p>
+  La serie comienza con la A0 que se define como una hoja que además de cumplir
+  con la condición anterior, tenga una superficie de 1 metro cuadrado. Un
+  cuadrado de un metro de lado tiene una superficie de 1 metro cuadrado, pero si
+  lo plegamos al medio, tendremos una hoja de 1 metro de alto por medio de
+  ancho, que de ninguna manera son las proporciones de la hoja original. Si la
+  plegamos una vez más, tendríamos una hoja cuadrada de medio metro de lado,
+  pero estaríamos siempre alternando entre hojas cuadradas y rectangulares.
+</p>
+<p>
+  Expresado algebraicamente, si llamamos <code>L</code> al largo y
+  <code>A</code> al ancho de la hoja, lo que pedimos es que:
+</p>
+<p><code>L / A = A / (L/2)</code></p>
+<p>
+  o sea, que la proporción entre el largo y el ancho sea igual a la proporción
+  entre el ancho y la mitad del largo, que es lo que queda una vez plegada la
+  hoja. Esto se cumple para un largo igual al ancho multiplicado por la raíz de
+  dos. Como la raíz de dos es un número irracional, o sea, que tiene infinitos
+  decimales, no hay forma de buscar `números redondos´ para el tamaño de la
+  hoja. Aún si hubiéramos querido hacer la A4 de, digamos, 20cm de ancho, el
+  largo habría resultado de 28,2843….. e incontables decimales más. O sea, la
+  cosa no tenía remedio por más que le buscáramos la vuelta por un lado, se nos
+  arruina por el otro.
+</p>
+<p>El largo de cualquier hoja, en metros, se obtiene de la fórmula:</p>
+<p><code>L(n) = sqrt(sqrt(1 / (2 ^ (2*n-1))))</code></p>
+<p>
+  <code>L(n)</code> representa el Largo de la hoja de tamaño An. El símbolo
+  <code>^</code> representa exponenciación y <code>sqrt()</code> la función raíz
+  cuadrada. Dos veces la raíz cuadrada es lo mismo que la raíz cuarta, pero la
+  mayoría de las calculadoras tiene raíz cuadrada pero no raíces de otros
+  valores. Muchos lenguajes de programación tomarán esta expresión tal cual. El
+  ancho es:
+</p>
+<p><code>A(n) = L(n) / sqrt(2)</code></p>
+<p>
+  Para una hoja A4, o sea, <code>n = 4</code>, <code>L(4)</code> vale 0,2973016m
+  y <code>A(4)</code> vale 0,2102239m los cuales, redondeando a milímetros, nos
+  dan los bastante poco memorables 297mm * 210mm de la hoja A4 normal.
+</p>

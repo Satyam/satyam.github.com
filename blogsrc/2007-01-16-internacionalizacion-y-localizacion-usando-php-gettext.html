@@ -1,0 +1,277 @@
+---
+title: 'Internacionalización y localización: usando PHP-gettext'
+date: '2007-01-16'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Dados los problemas de uso de la biblioteca de funciones
+  <a
+    title="Manual de PHP: funciones de gettext"
+    target="phpmanual"
+    href="http://es2.php.net/manual/es/ref.gettext.php"
+    ><code>gettext()</code></a
+  >
+  incorporadas dentro mismo de PHP mencionadas en el artículo anterior, mi
+  sugerencia es usar
+  <a
+    title="PHP-gettext"
+    target="_blank"
+    href="http://savannah.nongnu.org/projects/php-gettext/"
+    >PHP-gettext</a
+  >, un paquete que usan muchas aplicaciones, incluso WordPress, en que corre
+  este blog. No sólo su uso es más simple sino que tiene un
+  <code>README</code> donde explica rápidamente su uso, dispone de ejemplos e
+  incluye un archivo para hacer una emulación completa de la funcionalidad de la
+  biblioteca <code>gettext()</code>, aunque vistos los problemas comentados, lo
+  que menos puedo recomendar es usar una emulación que los reproduce hasta el
+  último dolor de cabeza.<span class="more"></span>
+</p>
+<p>
+  Usar este paquete requiere, básicamente, incluir un par de archivos que se
+  proveen, como se ve en el ejemplo:
+</p>
+<p>
+  <code
+    ><span style="color: #007700">include </span
+    ><span style="color: #dd0000">'php-gettext-1.0.7/streams.php'</span></code
+  ><code
+    ><span style="color: #007700"
+      >;<br />
+      include </span
+    ><span style="color: #dd0000">'php-gettext-1.0.7/gettext.php'</span
+    ><span style="color: #007700">;</span></code
+  >
+</p>
+<p>
+  La razón de dividir el paquete en dos archivos es que el segundo es el que
+  provee la funcionalidad de
+  <code>gettext</code> mientras que el primero es el que lee el archivo de
+  traducciones y puede ser reemplazado por otro que acceda a este archivo por
+  otro mecanismo.
+</p>
+<p>
+  La carga del archivo de traducciones en sí se hace mediante el siguiente
+  código:
+</p>
+<p>
+  <code
+    ><font color="#007700">if (</font
+    ><span style="color: #0000bb">file_exists</span
+    ><span style="color: #007700">(</span
+    ><span style="color: #0000bb">$_SESSION</span
+    ><span style="color: #007700">[</span
+    ><span style="color: #dd0000">'language'</span
+    ><span style="color: #007700">] . </span
+    ><span style="color: #dd0000">'.mo'</span></code
+  ><code
+    ><span style="color: #007700">)) {<br /> </span
+    ><span style="color: #0000bb"> $gettext_tables </span
+    ><span style="color: #007700">= new </span
+    ><span style="color: #0000bb">gettext_reader</span
+    ><span style="color: #007700"
+      >(<br />
+      new </span
+    ><span style="color: #0000bb">CachedFileReader</span
+    ><span style="color: #007700">(</span
+    ><span style="color: #0000bb">$_SESSION</span
+    ><span style="color: #007700">[</span
+    ><span style="color: #dd0000">'language'</span
+    ><span style="color: #007700">] . </span
+    ><span style="color: #dd0000">'.mo'</span></code
+  ><code
+    ><span style="color: #007700"
+      >)<br />
+      );<br /> </span
+    ><span style="color: #0000bb"> $gettext_tables</span
+    ><span style="color: #007700">-></span
+    ><span style="color: #0000bb">load_tables</span></code
+  ><span style="color: #007700"
+    ><code
+      >();<br />
+      }</code
+    ></span
+  >
+</p>
+<p>
+  Como se puede ver, el archivo de traducciones se puede ubicar donde uno
+  prefiera, el control es total. En este caso, primero verifico que exista y
+  luego genero una instancia del
+  <code>CachedFileReader</code> indicándole la ubicación del archivo. A su vez,
+  este objeto se usa en el constructor de <code>gettext_reader</code>, que es el
+  objeto que proveerá toda la funcionalidad de <code>gettext</code>. Finalmente,
+  se invoca el método que carga las tablas. El paquete permite tanto cachear las
+  tablas en memoria (predeterminado) o accederlas directamente a disco, en cuyo
+  caso el <code>FileReader</code> almacena los punteros a las traducciones
+  accediéndolas directamente del archivo. Esto se determina mediante un
+  argumento opcional en el lector o instanciando distintos lectores.
+</p>
+<p>
+  La idea de usar el nombre <code>_()</code> para la función de traducción es
+  muy bueno, pero como ya está tomado y no es posible redefinirlo, usamos
+  <code>__()</code>, que es igualmente breve y legible, donde la legibilidad
+  está en la facilidad de leer los textos a traducir, pues a la parte ejecutable
+  no le afecta.
+</p>
+<pre><span style="color: #007700">function </span><span style="color: #0000bb">__</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">) {
+global </span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">;</span><span style="color: #007700">
+
+if (</span><span style="color: #0000bb">is_null</span><span style="color: #007700">(</span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">)) return </span><span style="color: #0000bb">$texto</span><span style="color: #007700">;
+else return </span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">-></span><span style="color: #0000bb">translate</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">);
+}</span></pre>
+<p>
+  Esta función verifica que el objeto haya sido instanciado con éxito y si es
+  así, llama al método . En cualquier caso, ya fuera que la traducción no
+  existiera, un texto individual o el archivo de traducciones completo, la
+  función devuelve el texto original con lo que, al menos, el usuario no se
+  queda mirando una pantalla en blanco.A partir de allí, el resto del programa
+  es simple, cada vez que se quiere usar una cadena localizable, se la encierra
+  en una llamada a la función y listo.Probablemente ya hayan notado que no es
+  necesario inventar identificadores para las cadenas a traducir, el texto en el
+  idioma original es la clave de búsqueda por lo que en el caso de no haber una
+  traducción, siempre se dispone de algún texto, aunque fuera en un idioma que
+  no corresponde al pedido por el usuario.
+</p>
+<p>
+  A todo esto, no hemos aclarado cómo se genera un archivo
+  <code>.mo</code>, ni hemos explicado la estructura del archivo de
+  traducciones.
+</p>
+<p>
+  La clave del uso del paquete <code>gettext</code> es una serie de programas
+  que se encargan de rastrear los fuentes buscando cadenas a traducir y
+  actualizarlas cuando cambian. Existen programas con interfaces gráficas para
+  facilitar esta tarea, tal como
+  <a title="poEdit" target="_blank" href="http://www.poedit.net/">poEdit</a>,
+  que está disponible para Linux, Macintosh y Windows y, obviamente,
+  internacionalizado, aunque también están los comandos de línea que existen en
+  todas las plataformas Linux (aunque pueden no estar instalados por defecto) y
+  también hay versiones para Windows (<a
+    title="gnuwin32 en SourceForge"
+    target="_blank"
+    href="http://gnuwin32.sourceforge.net/packages/gettext.htm"
+    >gnuwin32</a
+  >).
+</p>
+<p>El proceso, resumido, es el siguiente:</p>
+<p>
+  1) se extraen las cadenas a traducir con el programa
+  <code>xgettext</code>:
+</p>
+<p>
+  <code
+    >xgettext *.php --output=index.pot --keyword=__ --from-code=ISO-8859-1</code
+  >
+</p>
+<p>
+  En todos los casos he usado las versiones largas de las opciones para que sean
+  más claras. A <code>xgettext</code> se le indica el o los fuentes de los que
+  extraer las cadenas. Se le debe indicar el archivo de salida o redireccionar
+  de la salida estándar, el set de caracteres de los fuentes y, en nuestro caso,
+  dado que hemos usado el nombre de función <code>__()</code> en lugar de
+  <code>_()</code> se le debe indicar expresamente que busque este nombre de
+  función. El programa reconoce el lenguaje de los fuentes por su extensión e
+  interpreta la sintáxis según se trate, pero si se hubiera usado alguna
+  extensión que no reconociera, se le puede indicar expresamente.
+</p>
+<p>
+  En este caso la salida ha sido un archivo <code>.pot</code>, extensión que
+  corresponde a un <em>`template´</em> o `modelo´ de la traducción. Es habitual
+  entregar este archivo de modelo como parte de una aplicación para que el
+  traductor disponga de un original limpio a partir del cual comenzar su
+  trabajo.
+</p>
+<p>2) Se genera un archivo de traducción a partir del modelo:</p>
+<p>
+  <code>msginit --input=index.pot --output=en.po --locale=en</code>
+</p>
+<p>
+  Este programa simplemente toma el archivo <code>.pot</code> que se le indica y
+  genera un archivo <code>.po</code> para la localización que se indica.
+  Completa varios de los campos con datos que obtiene del sistema, por ejemplo,
+  el nombre de usuario, la fecha de la traducción y pone como traducción el
+  mismo texto que el original. El traductor puede tanto comenzar a partir del
+  archivo <code>.pot</code> o del <code>.po</code> según prefiera.
+</p>
+<p>
+  3) Traducción. Esta se puede hacer con cualquier editor de texto simple.
+  Existen macros para EMACS y hay IDEs que tienen modos de edición específicos
+  para este tipo de archivo. Aplicaciones como
+  <a title="poEdit" target="_blank" href="http://www.poedit.net/">poEdit</a>
+  disponen de su propio editor. Este programa en particular permite guardar una
+  base de datos de traducciones de tal manera que en sucesivas traducciones
+  puede intentar por sí solo traducir parte de los textos.
+</p>
+<p>
+  De todas formas, el proceso es simple, el texto tras la palabra clave msgid es
+  el original, el que sigue a msgstr es la traducción. Para facilitar la tarea,
+  los comentarios que preceden a cada cadena muestran el fuente y número de
+  línea en que ha encontrado esta cadena. El programa
+  <code>xgettext</code> se encarga de identificar cadenas duplicadas por sí
+  mismo.
+</p>
+<p>4) Compilación:</p>
+<p><code>msgfmt en.po --output-file=en.mo</code></p>
+<p>
+  Esta es la parte más simple del proceso, compilarlo implica llamar a
+  <code>msgfmt</code>, indicarle el nombre del archivo de entrada y el de
+  salida.
+</p>
+<p>
+  Esta última etapa puede automatizarse fácilmente dentro de un archivo
+  <code>makefile</code>, no así las primeras. En particular, llamar a
+  <code>msginit</code> una segunda vez destruiría el archivo de traducciones ya
+  hecho. El paquete dispone de un mecanismo de actualización a través del
+  programa <code>msgmerge</code>. El proceso de actualización es similar al ya
+  descripto, comenzando por el punto 1 hasta el 4, excepto que en lugar del paso
+  2 anterior se utiliza el comando siguiente:
+</p>
+<p><code>msgmerge --update en.po index.pot</code></p>
+<p>
+  El comando <code>msgmerge</code> lee tanto el <code>.pot</code> como el
+  <code>.po</code> y actualiza este último sin dañar las traducciones ya
+  presentes.
+</p>
+<p>
+  Adviértase que solo es necesario un único archivo de traducciones para toda
+  una aplicación, no es necesaria un archivo asociado a cada fuente, de allí que
+  para el modelo usé el nombre <code>index.pot</code>, adoptando index como
+  predeterminado, aunque no esto no es necesario.
+</p>
+<p>
+  Gettext tiene varias otras facilidades que no he mencionado, como ser el
+  manejo de traducciones ambiguas (<em>fuzzy</em>), plurales (permite ofrecer
+  distintas traducciones según el número de ítems que se le indiquen) y
+  múltiples dominios, lo cual es indispensable cuando se utilizan paquetes de
+  diferentes orígenes o <em>`plugins´</em>, cada uno con sus conjunto de
+  traducciones independientes. Para esto se recomienda ver la documentación
+  original.
+</p>
+<p>
+  Viene de:
+  <a
+    title="Enlace permanente: Internacionalización y localización: usando gettext()"
+    rel="bookmark"
+    href="2007/01/16/internacionalizacion-y-localizacion-usando-gettext.html"
+    >Internacionalización y localización: usando gettext()</a
+  >
+</p>
+<p>
+  Continúa en:
+  <a
+    title="Enlace permanente: Internacionalización y localización: bases de datos"
+    rel="bookmark"
+    href="2007/01/17/internacionalizacion-y-localizacion-bases-de-datos.html"
+    >Internacionalización y localización: bases de datos</a
+  >
+</p>
+<p>
+  Indice:
+  <a
+    title="Enlace permanente: Internacionalización y Localización: índice"
+    rel="bookmark"
+    href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
+    >Internacionalización y Localización: índice</a
+  >
+</p>

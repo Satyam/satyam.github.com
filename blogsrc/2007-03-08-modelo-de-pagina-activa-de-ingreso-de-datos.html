@@ -1,0 +1,834 @@
+---
+title: 'Modelo de página activa de ingreso de datos'
+date: '2007-03-08'
+categories: ['Tecnología/Programación']
+language: 'es-ES'
+---
+
+<p>
+  Para aplicaciones de cierta envergadura, el uso de `<em>frameworks</em>` de
+  desarrollo o motores de `<em>templates</em>` es altamente recomendado, pero
+  para muchas aplicaciones pequeñas o para las páginas de mantenimiento de
+  tablas, que pueden no ser particularmente importantes, un modelo más simple es
+  más que suficiente. Comentaré un modelo simple, cuyo código se puede ver en
+  <a
+    title="Modelo de página activa"
+    href="http://satyam.com.ar/int/ShowSource.php?title=Modelo+de+pagina+activa&file=modelo.php"
+    target="_blank"
+    rel="noopener noreferrer"
+    >esta página</a
+  >. y el resultado en
+  <a
+    title="ejemplo"
+    href="/int/modelo.php"
+    target="_blank"
+    rel="noopener noreferrer"
+    >esta otra</a
+  >. El ejemplo no funciona del todo pues para ello requeriría una base de datos
+  real y no la tiene. Para seguir este comentario haré referencia a los números
+  de línea en la página referida (indicando el número de línea entre corchetes)
+  por ello es conveniente tener ambas ventanas abiertas una al lado de la otra.
+</p>
+<span class="more"></span>
+<p>
+  Mucho del código que muestro es de uso general y por lo tanto apropiado para
+  ubicar en uno o más archivos que se incluirán en la página mediante la
+  instrucción
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >. No lo estoy haciendo en este ejemplo para que el lector pueda ver todo en
+  un solo vistazo sin andar saltando de un archivo al otro. De hecho el único
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >
+  que muestro [2] es a
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql.php</code></a
+  >
+  cuya funcionalidad comento en otro
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html">artículo</a>.
+</p>
+<p>
+  Por ejemplo, la página hace uso de una conexión a una base de datos que se ha
+  abierto en algún lugar que no se muestra. También es frecuente que la parte
+  variable de la aplicación esté rodeada de un marco con información general del
+  sitio, logotipo de la empresa, el menú de navegación y otras cosas que son
+  comunes a todas las páginas del sitio. Todo esto convendrá que esté en
+  archivos de
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >.
+</p>
+<p>
+  Las funciones de validación de datos también son excelentes candidatas a
+  residir en archivos de
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >. En el ejemplo, he incorporado su código directamente a la página para
+  mostrar cómo pueden hacerse. Lo mejor es tener una biblioteca de funciones de
+  validación en un
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >
+  externo, esta página sólo cumple un fin didáctico.
+</p>
+<p>
+  La página permite editar una simple tabla compuesta de 4 campos,
+  <code>IdDatos</code>, un entero que es la clave principal de la tabla,
+  <code>Nombre</code>, un <em>varchar</em>, <code>FechaNacimiento</code>, una
+  fecha y <code>NumDependientes</code>, un entero.
+</p>
+<p>
+  A esta página se puede llegar de dos formas. Si en el URL se incluye un
+  argumento <code>id_datos</code>, es que se desea ver y/o editar el registro
+  cuya clave se indica. Si no se incluye un <code>id_datos</code> o este es
+  cero, es que se desea agregar un nuevo registro.
+</p>
+<p>
+  En primer lugar, [6-15] se lee y valida este argumento. Esta técnica se
+  utiliza con variaciones con el resto de los datos. Salvo que los espacios en
+  blanco en los extremos fueran importantes, lo primero [6] será eliminarlos con
+  <a
+    title="Manual de PHP: función trim()"
+    href="http://www.php.net/manual/es/function.trim.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>trim()</code></a
+  >. Luego [7], se verifica la longitud de lo que queda con
+  <a
+    title="Manual de PHP: función strlen()"
+    href="http://www.php.net/manual/es/function.strlen.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>strlen()</code></a
+  >, lo cual permite controlar datos que sean obligatorios y mostrar un mensaje,
+  si correspondiere. En este caso, si no hubiera un argumento
+  <code>id_datos</code>, simplemente se lo supone cero [14]. Dado que el campo
+  <code>IdDatos</code> es un autonumérico y que estos comienzan en 1, 0 es una
+  obvia indicación de que no nos referimos a un registro existente sino uno
+  nuevo que todavía no tiene <code>IdDatos</code>.
+</p>
+<p>
+  Usamos expresiones regulares para validar los datos. Funciones como
+  <a
+    title="Manual de PHP: función intval()"
+    href="http://www.php.net/manual/es/function.intval.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>intval()</code></a
+  >
+  o
+  <a
+    title="Manual de PHP: función floatval()"
+    href="http://www.php.net/manual/es/function.floatval.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>floatval()</code></a
+  >
+  interpretan todo lo que encuentran como numérico hasta el primer carácter que
+  no lo sea. Por ello, no son suficientes para detectar que ´12 de octubre´ es
+  un texto, no un número, pues cualquiera de ellas lee y convierte el 12 e
+  ignora el resto. Otro peligro de
+  <a
+    title="Manual de PHP: función intval()"
+    href="http://www.php.net/manual/es/function.intval.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>intval()</code></a
+  >
+  es que si la cadena a evaluar comienza en 0, la interpretará como octal, dando
+  resultados inesperados. Es importante [9] agregar el segundo parámetro que es
+  la base de conversión para salvar este peligro.
+</p>
+<p>
+  En caso de éxito, este segmento devuelve en
+  <code>$id_datos</code> el valor convertido a entero [9], un 0 si no estuviera
+  presente [14] o sale por error [11] si fuera inválido. A diferencia de los
+  otros datos en que se muestra un mensaje de error al usuario, este dato sólo
+  puede venir a través de enlaces desde otras páginas por lo tanto no es un
+  error que el usuario pudiera salvar. El error del que hablamos no es
+  simplemente un número de registro que pudiera haber sido borrado (que es
+  salvable) sino un argumento <code>id_datos</code> que contenga caracteres
+  no-numéricos, lo que señala un posible intento de jugar con el URL para romper
+  la aplicación, lo cual no es aceptable y conviene impedir que el operador
+  pueda continuar más allá.
+</p>
+<p>
+  En [18] preguntamos si hay un argumento
+  <code>'submit'</code> con valor <code>'Aceptar'</code>. Esto es indicio que a
+  esta página se llegó al pulsar el botón <code>Aceptar</code> al pie del
+  formulario. En este caso, leemos también el resto de las variables, comenzando
+  por <code>Nombre</code>.
+</p>
+<p>
+  La opción
+  <code
+    ><a
+      title="Manual de PHP: opción magic_quotes_gpc"
+      href="http://www.php.net/manual/es/security.magicquotes.php"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >magic_quotes_gpc</a
+    ></code
+  >
+  del php.ini, que está en <code>on</code> por defecto, agrega la barra
+  invertida por delante de cualquier apóstrofe o comilla, por lo que lo primero
+  [20] es eliminar los blancos en los extremos y sacar estas barras con la
+  función
+  <a
+    title="Manual de PHP: función stripslashes()"
+    href="http://www.php.net/manual/es/function.stripslashes.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>stripslashes()</code></a
+  >. La razón por la que PHP agrega estas barras es salvar a programadores
+  inexpertos de pasar datos sin validar a la base de datos y quedar expuestos a
+  lo que se denomina `SQL injection´ o dejar comillas desapareadas en las
+  instrucciones SQL. Aquí no sólo estamos validando los datos, como corresponde,
+  sino que también la función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql()</code></a
+  >
+  comentada anteriormente salva las comillas y apóstrofes antes de grabar.
+</p>
+<p>
+  En [21] controlamos que no esté vacía y en [22] controlamos que contenga sólo
+  caracteres aceptables, incluidos letras acentuadas, apóstrofes (D´Elía,
+  O´Higgins) o guiones. Esta lista se podrá ampliar o limitar a voluntad. Dado
+  que el valor es de por si una cadena de caracteres, si valida, no hay nada más
+  que hacer. Si no valida, entonces en [25] preparamos el mensaje de error. Otro
+  tanto ocurre en [28] en el caso de que el campo hubiera estado en blanco.
+</p>
+<p>
+  Los errores no los mostraremos en el momento por dos razones. Todavía no hemos
+  enviado el encabezamiento de la página al navegador, por lo que los mensajes
+  quedarían fuera de contexto y no enviaremos estos encabezados hasta más
+  adelante [71] por razones que ya comentaremos. Por otro lado, este esquema nos
+  permitirá mostrar los errores junto al campo en error, lo cual será más útil
+  al usuario.
+</p>
+<p>
+  Para los errores, tenemos reservada una variable
+  <code>$errores</code>, que inicializamos en [4] con un <em>array</em> en
+  blanco. Los errores de cada campo los agregaremos a este <em>array</em> usando
+  el nombre del campo como clave, según se ve en [25] y [28]. Adicionalmente,
+  previendo la posibilidad de que hubiera más de un error para un mismo campo,
+  agregamos el par de corchetes vacíos para que el mensaje se agregue sobre una
+  posible lista de errores para ese mismo campo. Aunque en este ejemplo no se
+  usa, reservamos el elemento <code>$errores[null]</code> para mensajes de error
+  genéricos que no estén asociados a ningún campo.
+</p>
+<p>
+  En el caso de la fecha [31-40], usamos la misma función
+  <a
+    title="Manual de PHP: función preg_match()"
+    href="http://www.php.net/manual/es/function.preg-match.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>preg_match()</code></a
+  >
+  no sólo para validar sino también para separar las partes (día/mes/año)
+  permitiendo usar indistintamente barras o guiones para separar las partes.
+  Como ya se comentara, en un caso real, todas estas funciones de validación y
+  conversión deberían estar en un
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >
+  y esta en particular, como también las funciones de validación y conversión de
+  importes monetarios deberán adecuarse al
+  <em>`locale´</em>, según comentara en un
+  <a
+    title="setlocale() y otras funciones"
+    href="2007/01/17/internacionalizacion-y-localizacion-setlocale-y-otras-funciones.html"
+    >artículo previo</a
+  >. En el caso de las fechas, la función
+  <a
+    title="Manual de PHP: función nl_langinfo()"
+    href="http://www.php.net/manual/es/function.nl-langinfo.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>nl_langinfo(D_T_FMT)</code></a
+  >
+  nos dará una cadena de la que podemos deducir el orden de las partes
+  (dd/mm/aaaa, mm/dd/aaaa o aaaa/mm/dd) y en el caso de importes monetarios, la
+  función
+  <code
+    ><a
+      title="Manual de PHP: función localeconv()"
+      href="http://www.php.net/manual/es/function.localeconv.php"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >localeconv()</a
+    ></code
+  >
+  nos permitirá también armar la expresión regular correcta.
+</p>
+<p>
+  Salvo <code>$id_datos</code>, el resto de los datos los hemos puesto como
+  obligatorios y mostramos mensajes de error al efecto. En caso de no serlo,
+  basta cambiar la generación del mensaje de error por una asignación a la
+  variable interna el valor predeterminado para el campo o asegurarse de dejarla
+  en blanco, cero o <code>null</code>, según se quiera grabar en la base de
+  datos. Yo soy partidario del uso de <code>null</code> en la base de datos para
+  indicar la ausencia de información, pero como al mostrar una variable que
+  contiene <code>null</code> ocasionalmente se puede ver el texto
+  <code>'null'</code>, la función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql()</code></a
+  >
+  provee el modificador <code>n</code> (por ejemplo <code>?ns</code> en lugar de
+  simplemente <code>?s</code>) para grabar los ceros o cadenas vacías como
+  <code>null</code> en la base de datos.
+</p>
+<p>
+  Es un buen momento para resaltar algo importante. Mi criterio es que todos los
+  datos, además de validarse, deben convertirse al formato nativo apenas se
+  reciben y sólo deben formatearse a la salida. La fecha es el caso en que con
+  más frecuencia veo tropezarse a los novatos. Muchas veces, reciben la fecha
+  del campo del formulario y así como está, la graban en la base de datos en un
+  campo de texto. Al poco tiempo llegan a la lista de correos de PHP preguntando
+  cómo pueden hacer para ordenar los registros por fechas o seleccionar los
+  registros del último mes. Para ese entonces es tarde. SQL dispone de una
+  enorme variedad de funciones para operar y seleccionar registros sobre fechas
+  y aunque PHP es un poco mezquino, hay muchas bibliotecas de funciones para
+  salvar esta carencia de funciones para manipular fechas. Ninguna de estas
+  funciones puede operar sobre una fecha expresada como una cadena de
+  caracteres, con variedad de separadores, con ceros para completar los días y
+  meses a dos dígitos o no, con los años en 2 ó 4 dígitos. En resumen, el dato
+  carece de valor semántico que permita operar sobre él. Es la misma razón por
+  la que a las cadenas de caracteres les aplico
+  <a
+    title="Manual de PHP: función stripslashes()"
+    href="http://www.php.net/manual/es/function.stripslashes.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>stripslashes()</code></a
+  >
+  y a los importes los convierto a <code>float</code>.
+</p>
+<p>
+  Reitero: Los datos siempre se deben validar y convertir al formato nativo
+  apenas se reciben y se deben formatear recién al enviarlos fuera, ya sea al
+  navegador o a la base de datos. En el caso de la base de datos, la función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql()</code></a
+  >
+  se encarga de esto.
+</p>
+<p>
+  Volviendo al modelo, en la línea [53] controlamos que aún no haya errores y si
+  efectivamente no los hay, procedemos a grabar la información. En primer lugar
+  vemos si
+  <code>$id_datos</code> está o no en cero. Si <code>$id_datos</code> es cero es
+  un alta de registro, si es distinto de cero, es una actualización. MySql
+  dispone de la instrucción <code>REPLACE</code> que hace irrelevante la
+  diferencia, pero esa instrucción no es estándar de SQL por lo cual mejor
+  evitarla.
+</p>
+<p>
+  En [55] utilizo la función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql()</code></a
+  >
+  para armar la instrucción en <code>$sql</code>, luego procedo a ejecutarla
+  sobre la base de datos [57]. En producción, acostumbro a eliminar el paso
+  intermedio de la variable <code>$sql</code>, simplemente hago
+  <code>$mysql_query(BuildSql( ....))</code>, pero en las primeras etapas
+  conviene disponer el texto de la instrucción en <code>$sql</code> pues si
+  hubiera error, es más fácil para ver qué ocurrió.
+</p>
+<p>
+  Es <strong>IMPRESCINDIBLE</strong> controlar el resultado de
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  tras su ejecución. Un buen número de mensajes en la lista de PHP se ahorrarían
+  si los programadores inexpertos o descuidados adoptaran esta norma. Hasta
+  escribí un
+  <a
+    title="Programación Balística"
+    href="2006/06/29/programacion-balistica.html"
+    >artículo</a
+  >
+  al respecto, lo llamo Programación Balística, escribes el programa y lo
+  disparas, esperando que acierte en el blanco pero, al igual que un proyectil
+  balístico, una vez que abandona el cañón, ya no tienes ningún control sobre el
+  mismo. Luego de días de arrancarte los pelos, consultas a la lista de PHP para
+  que te solucionen el problema que tu podrías haber detectado desde el inicio.
+</p>
+<p>
+  El uso del operador <code>or</code> en este caso es bastante singular. Es un
+  viejo truco pero, atención, no funciona en todos los lenguajes, en Visual
+  Basic no funciona y en algunas versiones de Pascal tampoco. El caso es que el
+  operador <code>or</code> devuelve <code>verdadero</code> si cualquiera de sus
+  operandos es <code>verdadero</code>, por lo tanto, si el primer operando, en
+  este caso, la función
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  devuelve un valor no-<code>falso</code>, el intérprete no se molesta siquiera
+  en evaluar el segundo operando, en este caso la función
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >, pero, si el primer operando da <code>falso</code>, que en el caso de
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  indica un error, entonces el operador <code>or</code> se ve forzado a evaluar
+  el segundo operando, en este caso la función
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >. Esta función, en realidad, no devuelve ningún valor, de hecho, no retorna
+  pues termina la ejecución del <em>script</em>, por lo tanto el operador
+  <code>or</code> no podrá devolver nada, pero para ese entonces no importa. El
+  operador <code>or</code> está, en este caso, actuando más como una estructura
+  de control que como un operador, pues lo que importa es cómo afecta la
+  secuencia de ejecución de las instrucciones, en este caso, si el
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >
+  se ejecuta o no. Lo mismo se podría hacer con un
+  <code>if</code>. La ventaja que le veo a esta sintaxis es que el
+  <code>or die()</code> queda como un condimento al final del
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  que es lo fundamental. Si encierro el
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  dentro del <code>if</code>, el <code>if</code> parece tomar más importancia
+  que el
+  <a
+    title="Manual de PHP: función mysql_query()"
+    href="http://www.php.net/manual/es/function.mysql-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_query()</code></a
+  >
+  y me distrae de la secuencia normal de ejecución del programa para llamarme la
+  atención sobre la recuperación de un eventual error.
+</p>
+<p>
+  Es en esta llamada a la función
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >
+  donde la variable <code>$sql</code> es de gran utilidad pues la función
+  <a
+    title="Manual de PHP: función mysql_error()"
+    href="http://www.php.net/manual/es/function.mysql-error.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>mysql_error()</code></a
+  >
+  nos indica el tipo de error, pero no nos muestra la instrucción que ha
+  generado el error: para eso mostramos <code>$sql</code>. Nuevamente, en este
+  caso usamos la función
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >
+  en lugar de mostrar un error al usuario pues estos errores sólo ocurren en dos
+  circunstancias. La primera es cuando se está en desarrollo y se ha cometido un
+  error de sintaxis en la instrucción SQL. Lo mejor es corregir el error antes
+  de seguir adelante con las pruebas. La función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql()</code></a
+  >
+  salva la mayoría de los errores que potencialmente se podrían producir por
+  datos inválidos, que son sobre los cuales el usuario podría tener influencia
+  llegada a la etapa de producción. Por esto es también que llegado a la etapa
+  de producción, el paso intermedio de guardar la instrucción en
+  <code>$sql</code> se puede eliminar. La segunda circunstancia, ya en
+  producción, es cuando se cae la base de datos, en cuyo caso de poco sirve
+  querer continuar.
+</p>
+<p>
+  En [58] uso la función
+  <a
+    title="Manual de PHP: función header()"
+    href="http://www.php.net/manual/es/function.header.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>header()</code></a
+  >
+  para hacer que el intérprete envíe al navegador un encabezado de tipo
+  <code>Location</code>, lo cual produce una redirección. Este es el truco para
+  evitar insertar múltiples registros cuando el operador pulsa
+  <code>F5</code> repetidas veces o hace clic sobre el botón de refrescar. Esta
+  técnica la he comentado en otro
+  <a
+    title="Evitar múltiples inserciones con F5"
+    href="2007/01/18/como-evitar-duplicar-registros-al-hacer-refrescar-f5-en-el-navegador.html"
+    >artículo</a
+  >, así que no la desarrollaré aquí. Dado que no se pueden enviar
+  <em>headers</em> al navegador una vez que se ha comenzado a enviar texto,
+  hasta ahora nos hemos abstenido de hacerlo. Esta es una de las razones para no
+  haber mostrado los mensajes de error que hubieramos encontrado.
+</p>
+<p>
+  Baste decir que en este caso agrego al <code>URL</code> de esta misma página
+  (que genero dinámicamente para hacerla portable) dos argumentos,
+  <code>confirma</code> recibe un entero distinto de cero que simplemente indica
+  el texto del mensaje de error a mostrar. El segundo argumento,
+  <code>$id_datos</code>, es la referencia al registro actualizado, para poder
+  seguir operando sobre él. El número y tipo de estos argumentos es arbitrario,
+  pero es necesario que haya al menos un argumento (en este caso
+  <code>confirma</code>) que permita diferenciar un <code>URL</code> de
+  confirmación de uno de consulta o de modificación (argumento
+  <code>submit</code>). Convendrá agregar los suficientes argumentos para
+  proveer al usuario de un mensaje significativo o, alternativamente, si ya se
+  estuvieran usando sesiones, se puede guardar la información en variables de
+  sesión en <code>$_SESSION</code>.
+</p>
+<p>
+  En el caso de ser una inserción de nuevo registro, hacemos lo mismo [60-64]
+  salvo que en [63] leemos el valor de la clave autonumérica generada, para usar
+  en el mensaje de confirmación. En ambos casos, en [66] salimos del
+  <em>script</em>. Las funciones
+  <a
+    title="Manual de PHP: función exit()"
+    href="http://www.php.net/manual/es/function.exit.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>exit()</code></a
+  >
+  y
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >
+  son sinónimos, pero yo prefiero usar
+  <a
+    title="Manual de PHP: función die()"
+    href="http://www.php.net/manual/es/function.die.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>die()</code></a
+  >
+  para las salidas catastróficas y
+  <a
+    title="Manual de PHP: función exit()"
+    href="http://www.php.net/manual/es/function.exit.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>exit()</code></a
+  >
+  para las intencionales.
+</p>
+<p>
+  En [71], finalmente, comenzamos con el contenido de la página. La declaración
+  de tipo de documento es conveniente pues permite validar el documento con
+  <a
+    title="HTML Tidy en SourceForge"
+    href="http://tidy.sourceforge.net/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >HTML Tidy</a
+  >
+  y asegura un comprotamiento más predecible en el navegador. Para ser concreto,
+  el Internet Explorer 7 tiene dos modos de funcionamiento, uno en que reproduce
+  algunas incompatibilidades de versiones pasadas (IE6 y previas) y otro en que
+  se ajusta más a la norma, y esto lo decide en función del
+  <code>DOCTYPE</code>.
+</p>
+<p>
+  La declaración en [74] también es importante para permitir el uso de letras
+  con acentos o eñie sin tener que recurrir a cosas como á o ñ, lo que hace que
+  la parte estática del texto sea más fácil de leer y, por ende, menos pasible
+  de contener errores.
+</p>
+<p>
+  Si bien en las líneas [77-95] he incluído la declaración de estilos que uso en
+  la página, lo recomendable es guardar estos estilos en una página de estilos y
+  referenciarla con un
+  <em>link</em> como el que se muestra (&lt;!–comentado–>) en [76]. De entre
+  todos los estilos, el que quiero resaltar es el uso del atributo
+  <code>float:left</code> para la etiqueta <code>label</code>. Esto permite
+  armar el formulario con los rótulos junto a los campos, sin necesidad de usar
+  tablas, que era la técnica habitual para alinear los campos con sus leyendas.
+</p>
+<p>
+  En [101-108] controlo el argumento <code>confirma</code> y si está presente,
+  muestro el mensaje de confirmación correspondiente. En este caso, la única
+  acción es mostrar uno u otro mensaje pero en un caso real podría, por ejemplo,
+  volver a cargar las variables con sus valores predeterminados pues, en este
+  caso, cuando se da de alta un registro, se vuelve a mostrar el registro con
+  los valores recién ingresados cuando que lo más práctico podría ser volver a
+  ofrecer el formulario en blanco para ingresar nuevos datos.
+</p>
+<p>
+  En [110-115] controlo si hay errores globales, o sea, si hay mensajes cargados
+  bajo la clave <code>null</code> en <code>$errores</code>. Si los hay, los
+  muestro individualmente. Una vez terminado, los borro del <em>array</em>. Esto
+  es para el beneficio de la instrucción siguiente en [116] pues si luego de
+  borrados los errores generales aún quedaran errores, es que son errores de los
+  campos. En ese caso, muestro una ayuda indicando cómo reconocer los errores.
+  De hecho, esta parte sí funciona en el
+  <a
+    title="ejemplo"
+    href="/int/modelo.php"
+    target="_blank"
+    rel="noopener noreferrer"
+    >ejemplo</a
+  >
+  sin base de datos, pues como si hay errores no intenta grabar nada, la
+  ausencia de la base de datos no molesta. Con sólo hacer clic sobre
+  <code>Aceptar</code> se verá cómo muestra los errores indicando que los campos
+  son obligatorios.
+</p>
+<p>
+  En [124-134] en el caso de que el registro existiera (<code>$id_datos</code>
+  distinto de cero) y que no hubiera errores, leo el registro de la base de
+  datos y cargo las variables con sus valores. En el caso de la fecha, uso la
+  función
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>ReadSqlDate()</code></a
+  >
+  que se encuentra en
+  <a title="BuildSql.php" href="2007/01/21/arma-sql.html"
+    ><code>BuildSql.php</code></a
+  >.
+</p>
+<p>
+  En [132] muestro un mensaje de error indicando que el registro pedido no
+  existe. Este caso es distinto del caso en [11] pues este sí es un error en que
+  el usuario puede hacer algo al respecto. El primero lo más probable es que
+  fuera un intento de intrusión, este, en cambio, es posible que sea a
+  consecuencia de pedir un registro que fue borrado. Quizás el usuario lo tenía
+  guardado en su lista de favoritos, quizás había pedido un listado y lo tuvo en
+  su pantalla un tiempo hasta que se decidió a hacer clic en alguno de sus
+  enlaces y mientras tanto otro usuario le borró el registro. En cualquier caso
+  el usuario puede hacer algo con la información.
+</p>
+<p>
+  En [136-159] muestro el formulario de ingreso de datos. Noten el uso de las
+  etiquetas
+  <code>&lt;fieldset>, &lt;legend></code> y <code>&lt;label></code> que son
+  relativamente nuevas, aunque hace ya un tiempo que son soportadas por los
+  navegadores. Si se es conservador, se puede preferir usar la técnica de usar
+  una tabla para alinear los campos con sus leyendas.
+</p>
+<p>
+  Para el formulario en [138] uso el método <code>get</code>. En la práctica lo
+  más conveniente y seguro es usar <code>post</code>. El <code>get</code> es
+  bueno en desarrollo pues me permite ver en la barra de direcciones del
+  navegador qué datos se han transmitido y hasta me permite jugar con ellos
+  directamente en la barra de direcciones para ver cómo responde la aplicación.
+  Sin embargo, el <code>get</code> expone información innecesariamente, lo cual
+  puede hacer que un usuario pícaro pueda querer jugar con esos datos. Al decir
+  un usuario pícaro tampoco me refiero a un hacker, pues este, con ver el fuente
+  también podría intentar algo, simplemente me refiero a un usuario que quiera
+  ver qué pasa si hace esto o aquello sin realmente saber. El
+  <code>get</code> también tiene limitación en el largo de los datos a
+  transmitir, largo que es desconocido, pues cada navegador se comporta
+  distinto, incluso entre versiones de la misma marca, y si se excede este largo
+  no da error, simplemente se trunca la información. El <code>post</code>, por
+  el contrario, no tiene límite de longitud.
+</p>
+<p>
+  Por esta misma razón he usado
+  <code
+    ><a
+      title="Manual de PHP: variable $_REQUEST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.request"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_REQUEST</a
+    ></code
+  >
+  en lugar de
+  <code
+    ><a
+      title="Manual de PHP: variable $_GET "
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.get"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_GET</a
+    ></code
+  >
+  o
+  <code
+    ><a
+      title="Manual de PHP: variable $_POST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.post"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_POST</a
+    ></code
+  >. Al usar
+  <code
+    ><a
+      title="Manual de PHP: variable $_REQUEST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.request"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_REQUEST</a
+    ></code
+  >, si cambio el método de <code>get</code> a <code>post</code>, la aplicación
+  sigue funcionando. Una vez hecha la transición de <code>get</code> a
+  <code>post</code> cuando la aplicación pase de desarrollo a producción,
+  convendrá cambiar los
+  <code
+    ><a
+      title="Manual de PHP: variable $_REQUEST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.request"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_REQUEST</a
+    ></code
+  >
+  por
+  <code
+    ><a
+      title="Manual de PHP: variable $_POST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.post"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_POST</a
+    ></code
+  >. Nótese, sin embargo, que en el caso de <code>$id_datos</code>, es necesario
+  usar
+  <code
+    ><a
+      title="Manual de PHP: variable $_REQUEST"
+      href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.request"
+      target="phpmanual"
+      rel="noopener noreferrer"
+      >$_REQUEST</a
+    ></code
+  >
+  dado que el argumento puede ser parte de un <code>URL</code> en un enlace que
+  viene de una página de listado o puede venir del <em>submit</em> del
+  formulario, así que debe ser posible leerlo en ambos casos.
+</p>
+<p>
+  En [139] incluyo un campo de tipo <em>hidden</em> para guardar el valor de la
+  clave del registro, ya fuera cero, para indicar que se va a hacer un alta o el
+  valor concreto de la clave primaria del registro que se va a modificar.
+</p>
+<p>
+  En todos los campos, cargo el atributo <code>value</code> con el valor de la
+  variable que corresponde. En [142] al valor de <code>$nombre</code> le aplico
+  la función
+  <a
+    title="Manual de PHP: función htmlentities()"
+    href="http://www.php.net/manual/es/function.htmlentities.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>htmlentities()</code></a
+  >
+  para asegurarme que cualquier caracter especial que pudiera contener este
+  campo no generará HTML inválido. En este caso no sería necesario pues por la
+  validación que hiciera en [22] y la declaración del <em>charset</em> a usar en
+  [74], no deberían presentarse caracteres especiales.
+</p>
+<p>
+  Tras cada campo <code>&lt;input></code> llamo a la función
+  <code>mostrar_error()</code>, que se muestra en [164-173]. Lo que hace es
+  verificar si el array <code>$errores</code> contiene valores bajo la clave que
+  se le indica y que usualmente corresponde al nombre del campo, y si los
+  hubiera, muestra un icono de alerta y carga el mensaje como tooltip para que
+  el usuario lo pueda ver con sólo dejar el cursor un momento sobre el símbolo.
+  Esto permite mostrar la ubicación de los errores y dar un mensaje de error
+  significativo sin estropear el diseño de la página.
+</p>
+<p>
+  Aunque así como aparece el ejemplo parece muy largo, para una aplicación
+  simple, hay que notar que buena parte está ocupada por la validación de datos
+  que, en la práctica, se haría con simples llamadas a funciones en algún
+  archivo
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include</code></a
+  >. El estilo debería darse en una hoja de estilo, no dentro de la misma
+  página, estilo que sería compartido por todas las páginas del sitio,
+  asegurándose aspecto consistente. La función
+  <code>mostrar_error()</code> obviamente debería ser parte de las funciones
+  comunes al sitio. Nótese también la regularidad en el armado de los campos del
+  formulario. Todos los campos se podrían generar con una llamada por cada campo
+  a una función a la que se le indicara el nombre del campo, el valor y el tipo
+  de dato.
+</p>
+<p>
+  Toda la validación hecha en la primera parte debería ser, en realidad, la
+  segunda validación. La primera validación debería hacerse mediante JavaScript
+  en el mismo navegador. Ambas son importantes y necesarias. La primera, en
+  JavaScript en el cliente, le provee al usuario un <em>feedback</em> inmediato,
+  sin tener que esperar la respuesta desde el servidor y sin ocupar recursos de
+  este. La segunda, en el servidor, es necesaria pues algunos usuarios
+  inhabilitan el JavaScript en sus navegadores por lo que no puede suponerse que
+  los datos que llegan estén validados. La validación en el cliente es por una
+  cuestión de fluidez de la aplicación, la segunda es imprescindible por
+  seguridad.
+</p>
