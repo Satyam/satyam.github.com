@@ -1,13 +1,14 @@
-#!/usr/bin/env zx
-import { open, readFile, stat } from 'node:fs/promises';
+import { open, readFile, writeFile, stat } from 'node:fs/promises';
+import { join, dirname, extname } from 'node:path';
+import { ensureDir, pathExists, copy } from 'fs-extra/esm';
+import { globby } from 'globby';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
+import md from './mdParser.mjs';
 
-// import { fileURLToPath } from 'url';
-// const $filename = fileURLToPath(import.meta.url);
-// const $dirname = path.dirname($filename);
-// console.log($dirname, __dirname);
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const lastMod = async (file) => {
   try {
@@ -19,57 +20,31 @@ const lastMod = async (file) => {
   }
 };
 
-const md = (() => {
-  const md_anchor = require('markdown-it-anchor');
-  const md_sub = require('markdown-it-sub');
-  const md_sup = require('markdown-it-sup');
-  const md_emoji = require('markdown-it-emoji');
-  const hljs = require('highlight.js');
-
-  const md = require('markdown-it')({
-    html: true,
-    highlight: (str, lang) => {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return `<pre class="hljs"><code>${
-            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
-          }</code></pre>`;
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
-    },
-  });
-  md.use(md_anchor).use(md_sub).use(md_sup).use(md_emoji);
-  return md;
-})();
-
 const ASSETS = 'assets';
 const TEMPLATES = 'templates';
 const STYLES = 'styles';
 
-const ROOT = path.join(__dirname, '..');
+const ROOT = join(__dirname, '..');
 const SCRIPT = __dirname;
 const SRC_DIRS = {
-  templates: path.join(SCRIPT, TEMPLATES),
-  srcPosts: path.join(ROOT, 'blogsrc'),
-  styles: path.join(SCRIPT, ASSETS, STYLES),
-  images: path.join(ROOT, ASSETS, 'img'),
-  js: path.join(SCRIPT, ASSETS, 'js'),
+  templates: join(SCRIPT, TEMPLATES),
+  srcPosts: join(ROOT, 'blogsrc'),
+  styles: join(SCRIPT, ASSETS, STYLES),
+  images: join(ROOT, ASSETS, 'img'),
+  js: join(SCRIPT, ASSETS, 'js'),
 };
 
-const SITE_DIR = path.join(__dirname, '../docs/blog');
-const ASSETS_DIR = path.join(SITE_DIR, ASSETS);
+const SITE_DIR = join(__dirname, '../docs/blog');
+const ASSETS_DIR = join(SITE_DIR, ASSETS);
 const DEST_DIRS = {
   posts: SITE_DIR,
-  styles: path.join(ASSETS_DIR, 'css'),
-  images: path.join(ASSETS_DIR, 'img'),
-  js: path.join(ASSETS_DIR, 'js'),
+  styles: join(ASSETS_DIR, 'css'),
+  images: join(ASSETS_DIR, 'img'),
+  js: join(ASSETS_DIR, 'js'),
 };
 
 const readSrcFile = async (folder, file) =>
-  await fs.readFile(path.join(SRC_DIRS[folder], file), 'utf8');
+  await readFile(join(SRC_DIRS[folder], file), 'utf8');
 
 // Important: the reason for the | key is because it gets sorted after all alpha characters
 const NO_SUBCAT_KEY = '|';
@@ -111,7 +86,7 @@ const sortDescending = (a, b) => {
 };
 
 const parsePostFrontMatter = (srcFileName, options) => {
-  const fMat = matter.read(path.join(SRC_DIRS.srcPosts, srcFileName), options);
+  const fMat = matter.read(join(SRC_DIRS.srcPosts, srcFileName), options);
   const [year, month, day] = fMat.data.date.split('-');
   const slug = slugify(fMat.data.title, { lower: true, strict: true });
   return {
@@ -221,11 +196,10 @@ const addToCatsHash = (post) => {
 //-------------------------
 // Here is where it does start to do something
 //-------------------------
-await fs.ensureDir(DEST_DIRS.posts);
-// await fs.emptyDir(DEST_DIRS.posts);
+await ensureDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
 
-const srcPostNames = await glob(['**.htm*', '**.md'], {
+const srcPostNames = await globby(['**.htm*', '**.md'], {
   cwd: SRC_DIRS.srcPosts,
   deep: 5,
 });
@@ -250,7 +224,7 @@ const postsArray = srcPostNames
   });
 
 const parsePostData = (srcFileName, relURL) => {
-  const isMd = path.extname(srcFileName) === '.md';
+  const isMd = extname(srcFileName) === '.md';
   const fMat = parsePostFrontMatter(srcFileName, {
     excerpt: true,
     excerpt_separator: isMd ? '---' : '<span class="more"></span>',
@@ -306,7 +280,7 @@ const parsePostData = (srcFileName, relURL) => {
 };
 
 // Notice that this loop goes over the posts source
-// now ordered descending by date, not just as `glob` finds them
+// now ordered descending by date, not just as `globby` finds them
 for (const [srcFileName, relURL] of postsArray) {
   const post = parsePostData(srcFileName, relURL);
 
@@ -317,13 +291,13 @@ for (const [srcFileName, relURL] of postsArray) {
     console.error('excerpt too long', srcFileName, post.excerpt.length);
   if (post.content?.length < 20) console.error('short content', srcFileName);
 
-  const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
-  const srcMod = await lastMod(path.join(SRC_DIRS.srcPosts, srcFileName));
-  const outMode = await lastMod(path.join(outDir, `${post.slug}.html`));
+  const outDir = join(DEST_DIRS.posts, post.year, post.month, post.day);
+  const srcMod = await lastMod(join(SRC_DIRS.srcPosts, srcFileName));
+  const outMode = await lastMod(join(outDir, `${post.slug}.html`));
   console.log(relURL, outMode - srcMod);
-  await fs.ensureDir(outDir);
-  await fs.writeFile(
-    path.join(outDir, `${post.slug}.html`),
+  await ensureDir(outDir);
+  await writeFile(
+    join(outDir, `${post.slug}.html`),
     resolveVars(postTpl, 'post', post)
   );
 
@@ -427,8 +401,8 @@ homeVars.metaBlock = metaBlock(homeVars);
 
 const homeTpl = await prepareTemplate('home');
 
-await fs.writeFile(
-  path.join(DEST_DIRS.posts, 'index.html'),
+await writeFile(
+  join(DEST_DIRS.posts, 'index.html'),
   resolveVars(homeTpl, 'post', homeVars)
 );
 
@@ -448,8 +422,8 @@ catsVars.metaBlock = metaBlock(catsVars);
 
 const catsTpl = await prepareTemplate('categories');
 
-await fs.writeFile(
-  path.join(DEST_DIRS.posts, 'categories.html'),
+await writeFile(
+  join(DEST_DIRS.posts, 'categories.html'),
   resolveVars(catsTpl, 'post', catsVars)
 );
 
@@ -469,8 +443,8 @@ postsVars.metaBlock = metaBlock(postsVars);
 
 const postsTpl = await prepareTemplate('posts');
 
-await fs.writeFile(
-  path.join(DEST_DIRS.posts, 'posts.html'),
+await writeFile(
+  join(DEST_DIRS.posts, 'posts.html'),
   resolveVars(postsTpl, 'post', postsVars)
 );
 
@@ -491,18 +465,18 @@ const entries = latestPostsArray
   })
   .join('\n');
 
-await fs.writeFile(
-  path.join(DEST_DIRS.posts, 'feed.xml'),
+await writeFile(
+  join(DEST_DIRS.posts, 'feed.xml'),
   resolveVars(feedTemplate, 'feed', { content: entries })
 );
 
 // Copy and merge styles
-await fs.ensureDir(DEST_DIRS.styles);
-const outStyle = await open(path.join(DEST_DIRS.styles, 'style.css'), 'w');
+await ensureDir(DEST_DIRS.styles);
+const outStyle = await open(join(DEST_DIRS.styles, 'style.css'), 'w');
 await outStyle.writeFile(await readSrcFile(STYLES, 'minima.css'));
 await outStyle.writeFile(
   await readFile(
-    path.join(__dirname, 'node_modules/highlight.js/styles/github.css'),
+    join(__dirname, 'node_modules/highlight.js/styles/github.css'),
     'utf8'
   )
 );
@@ -511,11 +485,11 @@ await outStyle.close();
 
 //---
 // copy js
-await fs.ensureDir(DEST_DIRS.js);
-await fs.copy(SRC_DIRS.js, DEST_DIRS.js);
+await ensureDir(DEST_DIRS.js);
+await copy(SRC_DIRS.js, DEST_DIRS.js);
 
-if (!(await fs.pathExists(DEST_DIRS.images))) {
+if (!(await pathExists(DEST_DIRS.images))) {
   console.log('copying images');
-  await fs.ensureDir(DEST_DIRS.images);
-  await fs.copy(SRC_DIRS.images, DEST_DIRS.images);
+  await ensureDir(DEST_DIRS.images);
+  await copy(SRC_DIRS.images, DEST_DIRS.images);
 }

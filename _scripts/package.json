@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "fs-extra": "^11.1.1",
+    "globby": "^13.2.0",
     "highlight.js": "^11.8.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.7",
@@ -14,6 +16,6 @@
   },
   "scripts": {
     "start": "serve ../docs",
-    "build": "./tpl2html.mjs"
+    "build": "node ./tpl2html.mjs"
   }
 }
