@@ -1,8 +1,23 @@
 #!/usr/bin/env zx
-import { open, readFile } from 'node:fs/promises';
+import { open, readFile, stat } from 'node:fs/promises';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
+
+// import { fileURLToPath } from 'url';
+// const $filename = fileURLToPath(import.meta.url);
+// const $dirname = path.dirname($filename);
+// console.log($dirname, __dirname);
+
+const lastMod = async (file) => {
+  try {
+    const fstat = await stat(file);
+    return Math.floor(fstat.mtimeMs / 1000);
+  } catch (err) {
+    console.error(err);
+    return 0;
+  }
+};
 
 const md = (() => {
   const md_anchor = require('markdown-it-anchor');
@@ -38,7 +53,7 @@ const ROOT = path.join(__dirname, '..');
 const SCRIPT = __dirname;
 const SRC_DIRS = {
   templates: path.join(SCRIPT, TEMPLATES),
-  jekyllPosts: path.join(ROOT, 'blogsrc'),
+  srcPosts: path.join(ROOT, 'blogsrc'),
   styles: path.join(SCRIPT, ASSETS, STYLES),
   images: path.join(ROOT, ASSETS, 'img'),
   js: path.join(SCRIPT, ASSETS, 'js'),
@@ -96,10 +111,7 @@ const sortDescending = (a, b) => {
 };
 
 const parsePostFrontMatter = (srcFileName, options) => {
-  const fMat = matter.read(
-    path.join(SRC_DIRS.jekyllPosts, srcFileName),
-    options
-  );
+  const fMat = matter.read(path.join(SRC_DIRS.srcPosts, srcFileName), options);
   const [year, month, day] = fMat.data.date.split('-');
   const slug = slugify(fMat.data.title, { lower: true, strict: true });
   return {
@@ -214,7 +226,7 @@ await fs.ensureDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post');
 
 const srcPostNames = await glob(['**.htm*', '**.md'], {
-  cwd: SRC_DIRS.jekyllPosts,
+  cwd: SRC_DIRS.srcPosts,
   deep: 5,
 });
 
@@ -306,6 +318,9 @@ for (const [srcFileName, relURL] of postsArray) {
   if (post.content?.length < 20) console.error('short content', srcFileName);
 
   const outDir = path.join(DEST_DIRS.posts, post.year, post.month, post.day);
+  const srcMod = await lastMod(path.join(SRC_DIRS.srcPosts, srcFileName));
+  const outMode = await lastMod(path.join(outDir, `${post.slug}.html`));
+  console.log(relURL, outMode - srcMod);
   await fs.ensureDir(outDir);
   await fs.writeFile(
     path.join(outDir, `${post.slug}.html`),
