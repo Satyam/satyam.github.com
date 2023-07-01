@@ -1,10 +1,7 @@
-import { open, readFile, writeFile, stat } from 'node:fs/promises';
+import { open, readFile, writeFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 import { ensureDir, pathExists, copy } from 'fs-extra/esm';
 import { globby } from 'globby';
-import matter from 'gray-matter';
-import { parse as htmlParse } from 'node-html-parser';
-import slugify from 'slugify';
 
 import {
   NO_SUBCAT_KEY,
@@ -18,63 +15,16 @@ import {
 import md from './mdParser.mjs';
 import processHash from './processHash.mjs';
 import { metaBlock, createExcerptEntry } from './fnTemplates.mjs';
-
-const lastMod = async (file) => {
-  try {
-    const fstat = await stat(file);
-    return Math.floor(fstat.mtimeMs / 1000);
-  } catch (err) {
-    console.error(err);
-    return 0;
-  }
-};
-
-const readSrcFile = async (folder, file) =>
-  await readFile(join(SRC_DIRS[folder], file), 'utf8');
-
-const resolveVars = (template, prefix, values) => {
-  const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
-  return template.replaceAll(rex, (_, prop) => {
-    if (prop in values) return values[prop] ?? '';
-    // console.error('??? resolving', prefix, 'var', prop);
-    return '';
-  });
-};
-
-const site = JSON.parse(await readSrcFile(TEMPLATES, 'site.json'));
-site.updated = new Date().toISOString();
-
-const resolveSiteVars = (template) => resolveVars(template, 'site', site);
-
-const baseTemplate = await readSrcFile(TEMPLATES, 'base.tpl.html');
-
-const prepareTemplate = async (tpl) => {
-  const template = await readSrcFile(TEMPLATES, `${tpl}.tpl.html`);
-  const values = {};
-  htmlParse(template)
-    .querySelectorAll('template')
-    .forEach((t) => (values[t.id] = t.innerHTML));
-  return resolveSiteVars(resolveVars(baseTemplate, 'template', values));
-};
-
-const sortDescending = (a, b) => {
-  if (a < b) return 1;
-  if (a > b) return -1;
-  return 0;
-};
-
-const parsePostFrontMatter = (srcFileName, options) => {
-  const fMat = matter.read(join(SRC_DIRS.srcPosts, srcFileName), options);
-  const [year, month, day] = fMat.data.date.split('-');
-  const slug = slugify(fMat.data.title, { lower: true, strict: true });
-  return {
-    ...fMat,
-    year,
-    month,
-    day,
-    slug,
-  };
-};
+import {
+  resolveVars,
+  readSrcFile,
+  site,
+  resolveSiteVars,
+  sortDescending,
+  prepareTemplate,
+  cleanExcerpt,
+  parsePostFrontMatter,
+} from './utils.mjs';
 
 const meses = [
   '??',
@@ -105,12 +55,6 @@ const nowVars = () => {
 };
 
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
-
-const cleanExcerpt = (e) => {
-  const eEl = htmlParse(e);
-  eEl.querySelectorAll('figure').forEach((fig) => fig.remove());
-  return eEl.innerText.replaceAll(/[ ]+/g, ' ');
-};
 
 const latestPostsArray = [];
 let latestPostsCount = 10;
