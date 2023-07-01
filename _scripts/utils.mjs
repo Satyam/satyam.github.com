@@ -11,7 +11,6 @@ export const lastMod = async (file) => {
     const fstat = await stat(file);
     return Math.floor(fstat.mtimeMs / 1000);
   } catch (err) {
-    console.error(err);
     return 0;
   }
 };

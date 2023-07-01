@@ -24,6 +24,7 @@ import {
   prepareTemplate,
   cleanExcerpt,
   parsePostFrontMatter,
+  shouldUpdate,
 } from './utils.mjs';
 
 const meses = [
@@ -178,14 +179,11 @@ for (const [srcFileName, relURL] of postsArray) {
   if (post.content?.length < 20) console.error('short content', srcFileName);
 
   const outDir = join(DEST_DIRS.posts, post.year, post.month, post.day);
-  // const srcMod = await lastMod(join(SRC_DIRS.srcPosts, srcFileName));
-  // const outMode = await lastMod(join(outDir, `${post.slug}.html`));
-  // console.log(relURL, outMode - srcMod);
   await ensureDir(outDir);
-  await writeFile(
-    join(outDir, `${post.slug}.html`),
-    resolveVars(postTpl, 'post', post)
-  );
+  const outFile = join(outDir, `${post.slug}.html`);
+  if (await shouldUpdate(outFile, join(SRC_DIRS.srcPosts, srcFileName))) {
+    await writeFile(outFile, resolveVars(postTpl, 'post', post));
+  }
 
   // Start collecting info for the various index pages.
 
@@ -288,24 +286,40 @@ await writeFile(
 
 // Copy and merge styles
 await ensureDir(DEST_DIRS.styles);
-const outStyle = await open(join(DEST_DIRS.styles, 'style.css'), 'w');
-await outStyle.writeFile(await readSrcFile(STYLES, 'minima.css'));
-await outStyle.writeFile(
-  await readFile(
-    join(__dirname, 'node_modules/highlight.js/styles/github.css'),
-    'utf8'
-  )
-);
-await outStyle.writeFile(await readSrcFile(STYLES, 'custom.css'));
-await outStyle.close();
+
+const destCSS = join(DEST_DIRS.styles, 'style.css');
+const srcCSS = [
+  join(SRC_DIRS.styles, 'minima.css'),
+  join(__dirname, 'node_modules/highlight.js/styles/github.css'),
+  join(SRC_DIRS.styles, 'custom.css'),
+];
+
+if (await shouldUpdate(destCSS, ...srcCSS)) {
+  console.log('updating styles');
+  const outStyle = await open(join(DEST_DIRS.styles, 'style.css'), 'w');
+  for (const src of srcCSS) {
+    await outStyle.writeFile(await readFile(src));
+  }
+  await outStyle.close();
+}
 
 //---
 // copy js
 await ensureDir(DEST_DIRS.js);
 await copy(SRC_DIRS.js, DEST_DIRS.js);
 
-if (!(await pathExists(DEST_DIRS.images))) {
-  console.log('copying images');
-  await ensureDir(DEST_DIRS.images);
-  await copy(SRC_DIRS.images, DEST_DIRS.images);
+await ensureDir(DEST_DIRS.images);
+
+const imgNames = await globby(`**/*.*`, {
+  cwd: SRC_DIRS.images,
+  deep: 5,
+});
+
+for (const img of imgNames) {
+  const src = join(SRC_DIRS.images, img);
+  const dest = join(DEST_DIRS.images, img);
+  if (await shouldUpdate(dest, src)) {
+    console.log('updating image', img);
+    await copy(src, dest, { preserveTimestamps: true });
+  }
 }
