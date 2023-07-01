@@ -1,14 +1,23 @@
 import { open, readFile, writeFile, stat } from 'node:fs/promises';
-import { join, dirname, extname } from 'node:path';
+import { join, extname } from 'node:path';
 import { ensureDir, pathExists, copy } from 'fs-extra/esm';
 import { globby } from 'globby';
 import matter from 'gray-matter';
 import { parse as htmlParse } from 'node-html-parser';
 import slugify from 'slugify';
-import md from './mdParser.mjs';
 
-import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import {
+  NO_SUBCAT_KEY,
+  SRC_DIRS,
+  DEST_DIRS,
+  __dirname,
+  TEMPLATES,
+  STYLES,
+} from './constants.mjs';
+
+import md from './mdParser.mjs';
+import processHash from './processHash.mjs';
+import { metaBlock, createExcerptEntry } from './fnTemplates.mjs';
 
 const lastMod = async (file) => {
   try {
@@ -20,39 +29,8 @@ const lastMod = async (file) => {
   }
 };
 
-const ASSETS = 'assets';
-const TEMPLATES = 'templates';
-const STYLES = 'styles';
-
-const ROOT = join(__dirname, '..');
-const SCRIPT = __dirname;
-const SRC_DIRS = {
-  templates: join(SCRIPT, TEMPLATES),
-  srcPosts: join(ROOT, 'blogsrc'),
-  styles: join(SCRIPT, ASSETS, STYLES),
-  images: join(ROOT, ASSETS, 'img'),
-  js: join(SCRIPT, ASSETS, 'js'),
-};
-
-const SITE_DIR = join(__dirname, '../docs/blog');
-const ASSETS_DIR = join(SITE_DIR, ASSETS);
-const DEST_DIRS = {
-  posts: SITE_DIR,
-  styles: join(ASSETS_DIR, 'css'),
-  images: join(ASSETS_DIR, 'img'),
-  js: join(ASSETS_DIR, 'js'),
-};
-
 const readSrcFile = async (folder, file) =>
   await readFile(join(SRC_DIRS[folder], file), 'utf8');
-
-// Important: the reason for the | key is because it gets sorted after all alpha characters
-const NO_SUBCAT_KEY = '|';
-
-const objectMap = (obj, fn, sortFn) =>
-  Object.keys(obj)
-    .sort(sortFn)
-    .map((key, index) => fn(obj[key], key, sortFn));
 
 const resolveVars = (template, prefix, values) => {
   const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
@@ -125,42 +103,6 @@ const nowVars = () => {
     localizedDate: formatDMY(day, month, year),
   };
 };
-
-const metaBlock = (post) => `
-<div class="post-meta">
-  <div class="date-published">
-    Publicado el: 
-    <time  datetime="${post.ISODate}" itemprop="datePublished">
-    ${post.localizedDate}</time>
-  </div>
-  ${
-    post.categories?.length
-      ? `<div class="post-cats">Archivado bajo: ${post.categories
-          .map((cat) =>
-            cat.sub
-              ? `<a
-            href="categories/#${slugify(cat.main)}_${slugify(cat.sub)}"
-            rel="category tag"
-            >${cat.main} / ${cat.sub}
-            </a>`
-              : `
-          <a href="categories/#${slugify(cat.main)}" rel="category tag">
-            ${cat.main}
-          </a>`
-          )
-          .join(',\n')}</div>`
-      : ''
-  }</div>`;
-
-const createExcerptEntry = (post) => `
-<div class="excerpt">
-  <div class="excerpt-title p-name" itemprop="name headline">
-    <a class="home-post-link" href="${post.relURL}">${post.title}</a>
-  </div>
-  ${metaBlock(post)}
-  <blockquote>${post.excerpt}</blockquote>
-</div>
-`;
 
 const catRex = /\s*(?<main>[^\/]+)\s*(\/\s*(?<sub>[^\/]+)\s*)?/;
 
@@ -292,9 +234,9 @@ for (const [srcFileName, relURL] of postsArray) {
   if (post.content?.length < 20) console.error('short content', srcFileName);
 
   const outDir = join(DEST_DIRS.posts, post.year, post.month, post.day);
-  const srcMod = await lastMod(join(SRC_DIRS.srcPosts, srcFileName));
-  const outMode = await lastMod(join(outDir, `${post.slug}.html`));
-  console.log(relURL, outMode - srcMod);
+  // const srcMod = await lastMod(join(SRC_DIRS.srcPosts, srcFileName));
+  // const outMode = await lastMod(join(outDir, `${post.slug}.html`));
+  // console.log(relURL, outMode - srcMod);
   await ensureDir(outDir);
   await writeFile(
     join(outDir, `${post.slug}.html`),
@@ -313,76 +255,6 @@ for (const [srcFileName, relURL] of postsArray) {
     latestPostsArray.push(post);
   }
 }
-const processHash = (hash, sortOrder) => {
-  // a =  [
-  //       { "title": "El entierro de la sardina" }
-  //     ],
-  // It is assumed that posts will be sorted descending by date
-  const processPostArray = (a) => a.map(createExcerptEntry).join('');
-
-  // subCat = "Tres Cantos"
-  // postArray =  [
-  //       { "title": "El entierro de la sardina" }
-  //     ],
-  // or:
-  // subCat = "|"
-  // linkArray =  [
-  //       { "title": "Andorra la Vella"  }
-  //     ],
-  const processSubItem = (postArray, mainCat, subCat) =>
-    subCat === NO_SUBCAT_KEY
-      ? processPostArray(postArray)
-      : `
-    <details  id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
-      <summary>${subCat}</summary>
-      ${processPostArray(postArray)}
-    </details>`;
-
-  //  mainCat = "Viajes"
-  //  subHash = {
-  //     "|": [
-  //       { "title": "Andorra la Vella"  }
-  //     ],
-  //     "Tres Cantos": [
-  //       { "title": "El entierro de la sardina" }
-  //     ],
-  //     "Italia": [
-  //       { "title": "Capri y Sorrento" }
-  //     ],
-  //   }
-  const processMainHash = (subHash, mainCat, sortOrder) => `
-    <details id="${slugify(mainCat)}"class="mainItem">
-      <summary>${mainCat}</summary>
-      ${objectMap(
-        subHash,
-        (postArray, subCat) => processSubItem(postArray, mainCat, subCat),
-        sortOrder
-      ).join('')}
-    </details>`;
-
-  // hash = {
-  //   "Viajes": {
-  //     "|": [
-  //       { "title": "Andorra la Vella"  }
-  //     ],
-  //     "Tres Cantos": [
-  //       { "title": "El entierro de la sardina" }
-  //     ],
-  //     "Italia": [
-  //       { "title": "Capri y Sorrento" }
-  //     ],
-  //   },
-  //   "Tecnología": {
-  //     "|": [
-  //       { "title": "Tecnología" }
-  //     ],
-  //     "Mega-Ingeniería": [
-  //       { "title": "Barcos generadores de hidrógeno" }
-  //     ],
-  //   }
-  // }
-  return `${objectMap(hash, processMainHash, sortOrder).join('')}`;
-};
 
 // Create home page
 const homeVars = {
