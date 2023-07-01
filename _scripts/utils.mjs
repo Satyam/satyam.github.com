@@ -16,6 +16,16 @@ export const lastMod = async (file) => {
   }
 };
 
+export const shouldUpdate = async (dest, ...srcs) => {
+  const destMod = await lastMod(dest);
+  if (destMod === 0) return true;
+  for (const src of srcs) {
+    if (destMod < (await lastMod(src))) return true;
+  }
+
+  return false;
+};
+
 export const resolveVars = (template, prefix, values) => {
   const rex = new RegExp(`{{\\s*${prefix}\\.(\\w+)\\s*}}`, 'g');
   return template.replaceAll(rex, (_, prop) => {
