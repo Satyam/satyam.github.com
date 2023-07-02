@@ -110,6 +110,7 @@ const postsArray = srcPostNames
     return 0;
   });
 
+const dropExcertpSeparatorRx = /^\s*-{3,}\s*$/m;
 const parsePostData = (srcFileName, relURL) => {
   const isMd = extname(srcFileName) === '.md';
   const fMat = parsePostFrontMatter(srcFileName, {
@@ -117,7 +118,9 @@ const parsePostData = (srcFileName, relURL) => {
     excerpt_separator: isMd ? '---' : '<span class="more"></span>',
   });
   const { year, month, day, slug } = fMat;
-  const content = isMd ? md.render(fMat.content) : fMat.content;
+  const content = isMd
+    ? md.render(fMat.content.replace(dropExcertpSeparatorRx, ''))
+    : fMat.content;
   const result = {
     srcFileName,
     year,
