@@ -28,7 +28,7 @@ const processSubItem = (postArray, mainCat, subCat) =>
     ? processPostArray(postArray)
     : `
     <details  id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
-      <summary>${subCat}</summary>
+      <summary>${subCat} (${Object.keys(postArray).length})</summary>
       ${processPostArray(postArray)}
     </details>`;
 
@@ -45,8 +45,8 @@ const processSubItem = (postArray, mainCat, subCat) =>
 //     ],
 //   }
 const processMainHash = (subHash, mainCat, sortOrder) => `
-    <details id="${slugify(mainCat)}"class="mainItem">
-      <summary>${mainCat}</summary>
+    <details id="${slugify(mainCat)}" class="mainItem">
+      <summary>${mainCat} (${Object.values(subHash).flat().length})</summary>
       ${objectMap(
         subHash,
         (postArray, subCat) => processSubItem(postArray, mainCat, subCat),
