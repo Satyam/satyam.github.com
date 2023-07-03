@@ -62,8 +62,12 @@ let latestPostsCount = 10;
 
 const postsHash = {};
 const addToPostsHash = (post) => {
-  if (!(post.year in postsHash)) postsHash[post.year] = [];
-  const monthText = meses[parseInt(post.month, 10)];
+  if (!(post.year in postsHash)) postsHash[post.year] = {};
+
+  // It is important that `monthText` serves to sort it by date, descending.
+  const monthText = `${post.month} / ${post.year} - ${
+    meses[parseInt(post.month, 10)]
+  }`;
   if (!(monthText in postsHash[post.year]))
     postsHash[post.year][monthText] = [];
   postsHash[post.year][monthText].push(post);
