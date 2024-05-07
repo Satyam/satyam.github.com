@@ -6,7 +6,7 @@ export const __dirname = dirname(fileURLToPath(import.meta.url));
 // Important: the reason for the | key is because it gets sorted after all alpha characters
 export const NO_SUBCAT_KEY = '|';
 
-const ROOT = join(__dirname, '..');
+export const ROOT = join(__dirname, '..');
 
 const ASSETS = 'assets';
 export const TEMPLATES = 'templates';
