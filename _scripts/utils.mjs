@@ -1,11 +1,12 @@
-import { readFile, stat } from 'node:fs/promises';
+import { open, readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { parse as htmlParse } from 'node-html-parser';
 import matter from 'gray-matter';
 import slugify from 'slugify';
-
+import { ensureDir, copy } from 'fs-extra/esm';
 import { TEMPLATES, SRC_DIRS } from './constants.mjs';
 
+import { __dirname } from './constants.mjs';
 export const lastMod = async (file) => {
   try {
     const fstat = await stat(file);
@@ -40,18 +41,21 @@ export const readSrcFile = async (folder, file) =>
 export const site = JSON.parse(await readSrcFile(TEMPLATES, 'site.json'));
 site.updated = new Date().toISOString();
 
-export const resolveSiteVars = (template) =>
-  resolveVars(template, 'site', site);
+export const resolveSiteVars = (template, siteVars) =>
+  resolveVars(template, 'site', siteVars);
 
 const baseTemplate = await readSrcFile(TEMPLATES, 'base.tpl.html');
 
-export const prepareTemplate = async (tpl) => {
+export const prepareTemplate = async (tpl, siteVars) => {
   const template = await readSrcFile(TEMPLATES, `${tpl}.tpl.html`);
   const values = {};
   htmlParse(template)
     .querySelectorAll('template')
     .forEach((t) => (values[t.id] = t.innerHTML));
-  return resolveSiteVars(resolveVars(baseTemplate, 'template', values));
+  return resolveSiteVars(
+    resolveVars(baseTemplate, 'template', values),
+    siteVars
+  );
 };
 
 export const sortDescending = (a, b) => {
@@ -77,4 +81,32 @@ export const parsePostFrontMatter = (srcFileName, options) => {
     day,
     slug,
   };
+};
+
+// Copy and merge styles
+export const copyStyles = async (destination) => {
+  await ensureDir(destination);
+
+  const destCSS = join(destination, 'style.css');
+  const srcCSS = [
+    join(SRC_DIRS.styles, 'minima.css'),
+    join(__dirname, 'node_modules/highlight.js/styles/github.css'),
+    join(SRC_DIRS.styles, 'custom.css'),
+  ];
+
+  if (await shouldUpdate(destCSS, ...srcCSS)) {
+    console.log('updating styles');
+
+    const outStyle = await open(destCSS, 'w');
+    for (const src of srcCSS) {
+      await outStyle.writeFile(await readFile(src));
+    }
+    return await outStyle.close();
+  }
+};
+//---
+export const copyJs = async (destination) => {
+  // copy js
+  await ensureDir(destination);
+  return await copy(SRC_DIRS.js, destination);
 };

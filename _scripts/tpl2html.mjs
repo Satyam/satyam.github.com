@@ -25,6 +25,8 @@ import {
   cleanExcerpt,
   parsePostFrontMatter,
   shouldUpdate,
+  copyStyles,
+  copyJs,
 } from './utils.mjs';
 
 const meses = [
@@ -88,7 +90,7 @@ const addToCatsHash = (post) => {
 // Here is where it does start to do something
 //-------------------------
 await ensureDir(DEST_DIRS.posts);
-const postTpl = await prepareTemplate('post');
+const postTpl = await prepareTemplate('post', site);
 
 const srcPostNames = await globby(['**.htm*', '**.md'], {
   cwd: SRC_DIRS.srcPosts,
@@ -220,7 +222,7 @@ const homeVars = {
 };
 homeVars.metaBlock = metaBlock(homeVars);
 
-const homeTpl = await prepareTemplate('home');
+const homeTpl = await prepareTemplate('home', site);
 
 await writeFile(
   join(DEST_DIRS.posts, 'index.html'),
@@ -241,7 +243,7 @@ const catsVars = {
 };
 catsVars.metaBlock = metaBlock(catsVars);
 
-const catsTpl = await prepareTemplate('categories');
+const catsTpl = await prepareTemplate('categories', site);
 
 await writeFile(
   join(DEST_DIRS.posts, 'categories.html'),
@@ -262,7 +264,7 @@ const postsVars = {
 };
 postsVars.metaBlock = metaBlock(postsVars);
 
-const postsTpl = await prepareTemplate('posts');
+const postsTpl = await prepareTemplate('posts', site);
 
 await writeFile(
   join(DEST_DIRS.posts, 'posts.html'),
@@ -271,10 +273,12 @@ await writeFile(
 
 // Create feed.xml
 const feedTemplate = resolveSiteVars(
-  await readSrcFile(TEMPLATES, 'feed.tpl.html')
+  await readSrcFile(TEMPLATES, 'feed.tpl.html'),
+  site
 );
 const entryTemplate = resolveSiteVars(
-  await readSrcFile(TEMPLATES, 'feedEntry.tpl.html')
+  await readSrcFile(TEMPLATES, 'feedEntry.tpl.html'),
+  site
 );
 
 const entries = latestPostsArray
@@ -291,29 +295,8 @@ await writeFile(
   resolveVars(feedTemplate, 'feed', { content: entries })
 );
 
-// Copy and merge styles
-await ensureDir(DEST_DIRS.styles);
-
-const destCSS = join(DEST_DIRS.styles, 'style.css');
-const srcCSS = [
-  join(SRC_DIRS.styles, 'minima.css'),
-  join(__dirname, 'node_modules/highlight.js/styles/github.css'),
-  join(SRC_DIRS.styles, 'custom.css'),
-];
-
-if (await shouldUpdate(destCSS, ...srcCSS)) {
-  console.log('updating styles');
-  const outStyle = await open(join(DEST_DIRS.styles, 'style.css'), 'w');
-  for (const src of srcCSS) {
-    await outStyle.writeFile(await readFile(src));
-  }
-  await outStyle.close();
-}
-
-//---
-// copy js
-await ensureDir(DEST_DIRS.js);
-await copy(SRC_DIRS.js, DEST_DIRS.js);
+await copyStyles(DEST_DIRS.styles);
+await copyJs(DEST_DIRS.js);
 
 await ensureDir(DEST_DIRS.images);
 

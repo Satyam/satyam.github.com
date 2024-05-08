@@ -8,7 +8,7 @@ export const NO_SUBCAT_KEY = '|';
 
 export const ROOT = join(__dirname, '..');
 
-const ASSETS = 'assets';
+export const ASSETS = 'assets';
 export const TEMPLATES = 'templates';
 export const STYLES = 'styles';
 

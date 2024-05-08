@@ -7,8 +7,14 @@ import slugify from 'slugify';
 
 import { metaBlock, createExcerptEntry } from './fnTemplates.mjs';
 
-import { ROOT } from './constants.mjs';
-import { site, prepareTemplate, resolveVars } from './utils.mjs';
+import { ROOT, ASSETS } from './constants.mjs';
+import {
+  site,
+  prepareTemplate,
+  resolveVars,
+  copyStyles,
+  copyJs,
+} from './utils.mjs';
 
 const meses = [
   '??',
@@ -25,8 +31,10 @@ const meses = [
   'Noviembre',
   'Diciembre',
 ];
-
-const postTpl = await prepareTemplate('post');
+const postTpl = await prepareTemplate('post', {
+  ...site,
+  root: '/_mitos',
+});
 
 const formatDMY = (day, month, year) =>
   `${parseInt(day, 10)} / ${meses[parseInt(month, 10)]} / ${year}`;
@@ -84,6 +92,7 @@ const mimi = async (name) => {
     const out = resolveVars(postTpl, 'post', result);
     await writeFile(join(outFolder, `${slug}.html`), out);
   }
+  // await copyStyles(join(outFolder, ASSETS, 'css'));
 };
 
 await mimi('_milagros');
