@@ -38,8 +38,11 @@ export const resolveVars = (template, prefix, values) => {
 export const readSrcFile = async (folder, file) =>
   await readFile(join(SRC_DIRS[folder], file), 'utf8');
 
-export const site = JSON.parse(await readSrcFile(TEMPLATES, 'site.json'));
-site.updated = new Date().toISOString();
+export const readJsonConfig = async (name) => {
+  const values = JSON.parse(await readSrcFile(TEMPLATES, `${name}.json`));
+  values.updated = new Date().toISOString();
+  return values;
+};
 
 export const resolveSiteVars = (template, siteVars) =>
   resolveVars(template, 'site', siteVars);
@@ -110,3 +113,21 @@ export const copyJs = async (destination) => {
   await ensureDir(destination);
   return await copy(SRC_DIRS.js, destination);
 };
+
+export const meses = [
+  '??',
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Setiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
+];
+export const formatDMY = (day, month, year) =>
+  `${parseInt(day, 10)} / ${meses[parseInt(month, 10)]} / ${year}`;
