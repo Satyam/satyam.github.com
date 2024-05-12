@@ -18,7 +18,7 @@ import { metaBlock, createExcerptEntry } from './fnTemplates.mjs';
 import {
   resolveVars,
   readSrcFile,
-  site,
+  readJsonConfig,
   resolveSiteVars,
   sortDescending,
   prepareTemplate,
@@ -27,26 +27,11 @@ import {
   shouldUpdate,
   copyStyles,
   copyJs,
+  formatDMY,
+  meses,
 } from './utils.mjs';
 
-const meses = [
-  '??',
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Julio',
-  'Agosto',
-  'Setiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre',
-];
-
-const formatDMY = (day, month, year) =>
-  `${parseInt(day, 10)} / ${meses[parseInt(month, 10)]} / ${year}`;
+const site = readJsonConfig('blog');
 
 const nowVars = () => {
   const now = new Date();
