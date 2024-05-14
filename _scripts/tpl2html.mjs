@@ -31,7 +31,7 @@ import {
   meses,
 } from './utils.mjs';
 
-const site = readJsonConfig('blog');
+const site = await readJsonConfig('blog');
 
 const nowVars = () => {
   const now = new Date();
