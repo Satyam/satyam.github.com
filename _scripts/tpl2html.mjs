@@ -179,6 +179,13 @@ for (const [srcFileName, relURL] of postsArray) {
     await writeFile(outFile, resolveVars(postTpl, 'post', post));
   }
 
+  const classes = [...post.content.matchAll(/\sclass="([^"]*)"/gi)]
+    .map((m) => m[1])
+    .filter((m) => m !== 'more');
+  if (classes.length) {
+    console.log(srcFileName, classes);
+  }
+
   // Start collecting info for the various index pages.
 
   // No need to preserve the post content which can be large
