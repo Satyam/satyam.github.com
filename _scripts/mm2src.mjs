@@ -31,15 +31,18 @@ const convert = async (name, category) => {
     const content = htmlParse(fMat.content);
     const anchors = content.querySelectorAll('a');
     if (anchors.length) {
-      console.log(name, srcFile);
+      console.log('a', name, srcFile);
       console.log(anchors.map((a) => a.getAttribute('href')));
     }
+    const breaks = content.querySelectorAll('br');
+    if (breaks.length) {
+      console.log('br', name, srcFile, breaks.length);
+    }
+    const emptyPs = content.querySelectorAll('p:empty');
+    for (const p of emptyPs) {
+      p.remove();
+    }
 
-    // const firstP = content.childNodes.find(
-    //   (n) =>
-    //     (n.nodeType === 3 && n.textContent.trim().length) || n.nodeType === 1
-    // );
-    // console.log(srcFile, slug, firstP?.nodeType, firstP?.textContent);
     await writeFile(
       `${join(outDir, slug)}.html`,
       d`
