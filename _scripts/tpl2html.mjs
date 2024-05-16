@@ -77,9 +77,8 @@ const addToCatsHash = (post) => {
 await ensureDir(DEST_DIRS.posts);
 const postTpl = await prepareTemplate('post', site);
 
-const srcPostNames = await globby(['**.htm*', '**.md'], {
+const srcPostNames = await globby(['**/*.htm*', '**/*.md'], {
   cwd: SRC_DIRS.srcPosts,
-  deep: 5,
 });
 
 /*
