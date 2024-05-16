@@ -92,12 +92,20 @@ The ordering is important to get the *previous/next* links right.
 */
 const postsArray = srcPostNames
   .map((srcFileName) => {
-    const { year, month, day, slug } = parsePostFrontMatter(srcFileName);
-    return [srcFileName, `${year}/${month}/${day}/${slug}.html`];
+    const { year, month, day, slug, data } = parsePostFrontMatter(srcFileName);
+    return {
+      srcFileName,
+      relURL: `${year}/${month}/${day}/${slug}.html`,
+      title: data.title,
+    };
   })
   .sort((a, b) => {
-    if (a[1] < b[1]) return 1;
-    if (a[1] > b[1]) return -1;
+    // descending by date (most recent first)
+    if (a.relURL < b.relURL) return 1;
+    if (a.relURL > b.relURL) return -1;
+    // ascending by title
+    if (a.title < b.title) return -1;
+    if (a.title > b.title) return 1;
     return 0;
   });
 
@@ -138,25 +146,30 @@ const parsePostData = (srcFileName, relURL) => {
   };
   result.metaBlock = metaBlock(result);
 
-  const postIndex = postsArray.findIndex((item) => relURL === item[1]);
+  const postIndex = postsArray.findIndex((item) => relURL === item.relURL);
 
   result.siblings = d`
     <div class="next-prev-links">
       ${
         postIndex > 0
           ? d`
-            <a  class="prev-link" href="${
-              postsArray[postIndex - 1][1]
-            }"><div class="triangle-left"></div> Anterior</a>
+            <a  class="prev-link" title="Anterior"
+              href="${postsArray[postIndex - 1].relURL}"
+            >
+              <div class="triangle-left"></div>
+              ${postsArray[postIndex - 1].title}
+            </a>
           `
           : ''
       }
       ${
         postIndex < postsArray.length - 1
           ? d`
-            <a  class="next-link" href="${
-              postsArray[postIndex + 1][1]
-            }">Siguiente <div class="triangle-right"></div></a>
+            <a class="next-link" title="Siguiente"
+              href="${postsArray[postIndex + 1].relURL}"
+            >${postsArray[postIndex + 1].title} 
+            <div class="triangle-right"></div>
+            </a>
           `
           : ''
       }
@@ -166,7 +179,7 @@ const parsePostData = (srcFileName, relURL) => {
 
 // Notice that this loop goes over the posts source
 // now ordered descending by date, not just as `globby` finds them
-for (const [srcFileName, relURL] of postsArray) {
+for (const { srcFileName, relURL } of postsArray) {
   const post = parsePostData(srcFileName, relURL);
 
   if (!post.excerpt) console.error('missing excerpt in ', srcFileName);
