@@ -1,4 +1,5 @@
 import slugify from 'slugify';
+import d from './dedent.mjs';
 
 import { NO_SUBCAT_KEY } from './constants.mjs';
 import { createExcerptEntry } from './fnTemplates.mjs';
@@ -26,11 +27,11 @@ const processPostArray = (a) => a.map(createExcerptEntry).join('');
 const processSubItem = (postArray, mainCat, subCat) =>
   subCat === NO_SUBCAT_KEY
     ? processPostArray(postArray)
-    : `
-    <details  id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
-      <summary>${subCat} (${Object.keys(postArray).length})</summary>
-      ${processPostArray(postArray)}
-    </details>`;
+    : d`
+      <details id="${slugify(mainCat)}_${slugify(subCat)}" class="subItem">
+        <summary>${subCat} (${Object.keys(postArray).length})</summary>
+        ${processPostArray(postArray)}
+      </details>`;
 
 //  mainCat = "Viajes"
 //  subHash = {
@@ -44,15 +45,16 @@ const processSubItem = (postArray, mainCat, subCat) =>
 //       { "title": "Capri y Sorrento" }
 //     ],
 //   }
-const processMainHash = (subHash, mainCat, sortOrder) => `
-    <details id="${slugify(mainCat)}" class="mainItem">
-      <summary>${mainCat} (${Object.values(subHash).flat().length})</summary>
-      ${objectMap(
-        subHash,
-        (postArray, subCat) => processSubItem(postArray, mainCat, subCat),
-        sortOrder
-      ).join('')}
-    </details>`;
+const processMainHash = (subHash, mainCat, sortOrder) => d`
+  <details id="${slugify(mainCat)}" class="mainItem">
+    <summary>${mainCat} (${Object.values(subHash).flat().length})</summary>
+    ${objectMap(
+      subHash,
+      (postArray, subCat) => processSubItem(postArray, mainCat, subCat),
+      sortOrder
+    ).join('')}
+  </details>
+`;
 
 // hash = {
 //   "Viajes": {
@@ -76,6 +78,6 @@ const processMainHash = (subHash, mainCat, sortOrder) => `
 //   }
 // }
 const processHash = (hash, sortOrder) =>
-  `${objectMap(hash, processMainHash, sortOrder).join('')}`;
+  objectMap(hash, processMainHash, sortOrder).join('');
 
 export default processHash;

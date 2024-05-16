@@ -1,6 +1,6 @@
-import { open, readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
-import { ensureDir, pathExists, copy } from 'fs-extra/esm';
+import { ensureDir, copy } from 'fs-extra/esm';
 import { globby } from 'globby';
 
 import {
@@ -9,11 +9,12 @@ import {
   DEST_DIRS,
   __dirname,
   TEMPLATES,
-  STYLES,
 } from './constants.mjs';
 
 import md from './mdParser.mjs';
 import processHash from './processHash.mjs';
+import d from './dedent.mjs';
+
 import { metaBlock, createExcerptEntry } from './fnTemplates.mjs';
 import {
   resolveVars,
@@ -139,20 +140,24 @@ const parsePostData = (srcFileName, relURL) => {
 
   const postIndex = postsArray.findIndex((item) => relURL === item[1]);
 
-  result.siblings = `
+  result.siblings = d`
     <div class="next-prev-links">
       ${
         postIndex > 0
-          ? `<a  class="prev-link" href="${
+          ? d`
+            <a  class="prev-link" href="${
               postsArray[postIndex - 1][1]
-            }"><div class="triangle-left"></div> Anterior</a>`
+            }"><div class="triangle-left"></div> Anterior</a>
+          `
           : ''
       }
       ${
         postIndex < postsArray.length - 1
-          ? `<a  class="next-link" href="${
+          ? d`
+            <a  class="next-link" href="${
               postsArray[postIndex + 1][1]
-            }">Siguiente <div class="triangle-right"></div></a>`
+            }">Siguiente <div class="triangle-right"></div></a>
+          `
           : ''
       }
     </div>`;
@@ -208,8 +213,10 @@ const homeVars = {
   locale: 'es-ES',
   excerpt: 'Artículos más recientes',
 
-  content: `<div class="home-summary">Artículos más recientes</div>
-    ${latestPostsArray.map(createExcerptEntry).join('')}`,
+  content: d`
+    <div class="home-summary">Artículos más recientes</div>
+    ${latestPostsArray.map(createExcerptEntry).join('')}
+  `,
 };
 homeVars.metaBlock = metaBlock(homeVars);
 
