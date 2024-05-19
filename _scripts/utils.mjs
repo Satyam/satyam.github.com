@@ -93,7 +93,7 @@ export const copyStyles = async (destination) => {
   const destCSS = join(destination, 'style.css');
   const srcCSS = [
     join(SRC_DIRS.styles, 'minima.css'),
-    join(__dirname, 'node_modules/highlight.js/styles/github.css'),
+    join(SRC_DIRS.styles, 'github.min.css'),
     join(SRC_DIRS.styles, 'custom.css'),
   ];
 
