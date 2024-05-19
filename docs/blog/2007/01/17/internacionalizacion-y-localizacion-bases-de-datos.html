@@ -260,19 +260,19 @@ Tecnología / Programación
   tal manera de que nada deje de funcionar, aunque lo hará un poco más lento
   mientras se reescriben los programas.
 </p>
-<p>
-  <code
-    >CREATE VIEW articulos AS<br />
-    SELECT<br />
-    articulos_neutra.id_art AS id_art,<br />
-    descr AS Descr,<br />
-    Precio,<br />
-    Cantidad<br />
-    FROM articulos_neutra JOIN articulos_textos<br />
-    ON articulos_neutra.id_art = articulos_textos.id_art<br />
-    WHERE articulos_textos.idioma = 'es'</code
-  >
-</p>
+<pre>
+  <code  class="language.sql">
+CREATE VIEW articulos AS
+  SELECT
+    articulos_neutra.id_art AS id_art,
+    descr AS Descr,
+    Precio,
+    Cantidad
+  FROM articulos_neutra JOIN articulos_textos
+  ON articulos_neutra.id_art = articulos_textos.id_art
+  WHERE articulos_textos.idioma = 'es'
+  </code>
+</pre>
 <p>
   Una vez borrada la tabla original, esta vista la puede reemplazar. Adviértase
   que el código de idioma en esta vista está fijo en el código que corresponde a
@@ -349,5 +349,10 @@ href="2007/01/16/internacionalizacion-y-localizacion-usando-variables.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>

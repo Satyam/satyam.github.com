@@ -34,23 +34,23 @@ language: 'es-ES'
   caprichosa. El traductor, enfrentado con los varios segmentos, no tiene forma
   de hacer una traducción coherente. Por ejemplo:
 </p>
-<p>
-  <code
-    >echo 'este es un párrafo';<br />
-    echo 'tremendamente largo';</code
-  >
-</p>
+<pre>
+  <code class="language.php">
+echo 'este es un párrafo';
+echo 'tremendamente largo';
+  </code>
+</pre>
 <p>Podría quedar traducido como:</p>
-<p>
-  <code
-    >echo 'this is a paragraph';<br />
-    echo 'extremely long';</code
-  >
-</p>
+<pre>
+  <code class="language.php">
+echo 'this is a paragraph';
+echo 'extremely long';
+  </code >
+</pre>
 <p>Cuando que si el original hubiera sido:</p>
-<p><code>echo 'este es un párrafo tremendamente largo';</code></p>
+<pre><code class="language.php">echo 'este es un párrafo tremendamente largo';</code></pre>
 <p>la traducción habría sido la correcta:</p>
-<p><code>echo 'this is an extremely long paragraph';</code></p>
+<pre><code  class="language.php">echo 'this is an extremely long paragraph';</code></pre>
 <p>
   Nótese cómo ha cambiado el orden de las palabras (el sustantivo al final) y el
   artículo indefinido `an´ en lugar de `a´.
@@ -72,14 +72,14 @@ language: 'es-ES'
   Para ello son muy útiles las funciones
   <a
     title="Manual de PHP: printf()"
-    href="http://es2.php.net/manual/es/function.printf.php"
+    href="http://www.php.net/manual/es/function.printf.php"
     target="phpmanual"
     ><code>printf()</code></a
   >
   o
   <a
     title="Manual de PHP: sprintf()"
-    href="http://es2.php.net/manual/es/function.sprintf.php"
+    href="http://www.php.net/manual/es/function.sprintf.php"
     target="phpmanual"
     ><code>sprintf()</code></a
   >. Estas permiten componer un string combinando las partes fijas con las
@@ -87,12 +87,12 @@ language: 'es-ES'
   es, la posibilidad de indicar en la cadena de formato el orden en que se deben
   insertar las partes variables. Por ejemplo:
 </p>
-<p><code>echo $color, ' ' , $item;</code></p>
+<pre><code class="language.php">echo $color, ' ' , $item;</code></pre>
 <p>
   Podrá producir `blue blouse´ en inglés pero resultaría en `azul blusa´ en
   castellano. Por ello es mejor usar:
 </p>
-<p><code>printf('%1$s %2$s',$color, $item);</code></p>
+<pre><code class="language.php">printf('%1$s %2$s',$color, $item);</code></pre>
 <p>
   pues cambiando la cadena de formato a
   <code>'%2$s %1$s'</code> obtendremos `blusa azul´ que es lo correcto en
@@ -115,8 +115,6 @@ language: 'es-ES'
     title="Enlace permanente: Internacionalización y localización: usando constantes"
     href="2007/01/12/internacionalizacion-y-localizacion-usando-constantes.html"
     rel="bookmark"
-    ><font color="#676e04"
-      >Internacionalización y localización: usando constantes</font
-    ></a
-  >
+    >Internacionalización y localización: usando constantes
+  </a>
 </p>

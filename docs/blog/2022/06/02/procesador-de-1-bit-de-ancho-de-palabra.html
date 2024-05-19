@@ -167,7 +167,8 @@ Las primeras columnas, bajo el encabezado de Código binario representan bits in
 <h2 id="macro-ensamblador" tabindex="-1">Macro-ensamblador</h2>
 <p>Hasta ahora, apenas nos hemos referido a la representación de las operaciones de la CPU usando sus valores binarios, bit a bit, en el cuadro más arriba. Es raro programar usando binario. Aún al nivel más básico, se utiliza un ensamblador (<em>assembler</em>) que traduce mnemónicos como <code>ADD</code> o <code>MOVE</code> y que también nos permite usar números decimales (o cualquier otra base) en lugar de binarios o hacer referencia a posiciones del código con nombres para usar en <code>JMP</code> o <code>JT</code>.</p>
 <p>El macro-ensamblador (<em>macro-assembler</em>) agrega la facilidad de crear aliases ya sea para los operandos o los mnemónicos o incluso a secuencias de ellos. Por ejemplo, en un macro-assembler se puede tener pre-definido <code>ACC = 0</code> para referirse al acumulador (que es nuestro registro 0) o <code>ZERO = 15</code> para el registro fantasma que contiene un cero. También podríamos definir nuevos mnemónicos, algunos que ya hemos visto, otros nuevos (en assembler, se usa el carácter <code>;</code> para indicar un comentario)</p>
-<pre class="hljs"><code>    DEF ACC 0     ; definimos la constante ACC igual a 0
+<pre><code class="language.asm">
+    DEF ACC 0     ; definimos la constante ACC igual a 0
 
     DEF ZERO 15 
 
@@ -331,5 +332,10 @@ href="2016/02/15/einsteins-gravitational-waves.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>

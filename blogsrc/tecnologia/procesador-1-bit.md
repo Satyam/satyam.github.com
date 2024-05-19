@@ -94,7 +94,7 @@ Hasta ahora, apenas nos hemos referido a la representación de las operaciones d
 
 El macro-ensamblador (*macro-assembler*) agrega la facilidad de crear aliases ya sea para los operandos o los mnemónicos o incluso a secuencias de ellos. Por ejemplo, en un macro-assembler se puede tener pre-definido `ACC = 0` para referirse al acumulador (que es nuestro registro 0) o `ZERO = 15` para el registro fantasma que contiene un cero. También podríamos definir nuevos mnemónicos, algunos que ya hemos visto, otros nuevos (en assembler, se usa el carácter `;` para indicar un comentario)
 
-```asm
+<pre><code class="language.asm">
     DEF ACC 0     ; definimos la constante ACC igual a 0
 
     DEF ZERO 15 
@@ -112,7 +112,7 @@ El macro-ensamblador (*macro-assembler*) agrega la facilidad de crear aliases ya
     RESET r
     NOT r, r
     ENDMACRO
-```
+</code></pre>
 Las pseudo-instrucciones `DEF`, `MACRO` y `ENDMACRO` no se traducen directamente en códigos de operación para la CPU sino que son declaraciones para el macro-assembler para ya sea *DEF*inir constantes o *MACRO*-instrucciones formadas por múltiples instrucciones y posiblemente operandos.
 
 ## Otros componentes

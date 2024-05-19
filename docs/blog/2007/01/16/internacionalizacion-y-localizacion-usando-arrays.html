@@ -24,9 +24,9 @@
  determinar dónde termina la expresión:
 
 
- echo "debe usarse así:
- ${textos['aceptar']}, y no:
- $textos['aceptar']"; 
+ <code class="language.php">
+echo "debe usarse así: ${textos['aceptar']}, y no: $textos['aceptar']";
+ </code>
 
 " />
     <meta property="og:description" content="
@@ -44,9 +44,9 @@
  determinar dónde termina la expresión:
 
 
- echo "debe usarse así:
- ${textos['aceptar']}, y no:
- $textos['aceptar']"; 
+ <code class="language.php">
+echo "debe usarse así: ${textos['aceptar']}, y no: $textos['aceptar']";
+ </code>
 
 " />
     <link rel="canonical" href="http://www.satyam.com.ar/blog/2007/01/16/internacionalizacion-y-localizacion-usando-arrays.html" />
@@ -77,9 +77,9 @@
  determinar dónde termina la expresión:
 
 
- echo "debe usarse así:
- ${textos['aceptar']}, y no:
- $textos['aceptar']"; 
+ <code class="language.php">
+echo "debe usarse así: ${textos['aceptar']}, y no: $textos['aceptar']";
+ </code>
 
 ",
         "headline": "Internacionalización y localización: usando arrays",
@@ -193,16 +193,11 @@ Tecnología / Programación
   expresión entre llaves para evitar la ambig�edad de que el intérprete no pueda
   determinar dónde termina la expresión:
 </p>
-<p>
-  <code
-    ><span style="color: #007700">echo </span
-    ><span style="color: #dd0000"
-      >"debe usarse así:
-      <span style="color: #0000bb">${textos['aceptar']}</span>, y no:
-      <span style="color: #0000bb">$textos['aceptar']</span>"</span
-    ><span style="color: #007700">;<br /> </span
-  ></code>
-</p>
+<pre>
+  <code class="language.php">
+echo "debe usarse así: ${textos['aceptar']}, y no: $textos['aceptar']";
+  </code>
+</pre>
 <span class="more"></span>
 <p>
   Una ventaja que tiene el usar arrays es organizar los strings en distintos
@@ -212,7 +207,7 @@ Tecnología / Programación
   organización lo que lo hace más atractivo. Nótese incluso el uso de la función
   <a
     title="Manual de PHP: función asort()"
-    href="http://es2.php.net/manual/es/function.asort.php"
+    href="http://www.php.net/manual/es/function.asort.php"
     target="_blank"
     ><code>asort()</code></a
   >
@@ -238,12 +233,14 @@ Tecnología / Programación
   salvar el problema de que no se muestre nada si falta una traducción.
 </p>
 <p>Un ejemplo de tal función se muestra a continuación:</p>
-<pre><span style="color: #007700">function </span><span style="color: #0000bb">traducir</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">) {
-         global </span><span style="color: #0000bb">$textos</span><span style="color: #007700">;
+<pre><code  class="language.php">
+function traducir($texto) {
+  global $textos;
 
-         if (</span><span style="color: #0000bb">array_key_exists</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">,</span><span style="color: #0000bb">$textos</span><span style="color: #007700">)) return </span><span style="color: #0000bb">$textos</span><span style="color: #007700">[</span><span style="color: #0000bb">$texto</span><span style="color: #007700">];
-         else  return </span><span style="color: #0000bb">$texto</span><span style="color: #007700">;
-} </span></pre>
+  if (array_key_exists($texto,$textos)) return $textos[$texto];
+  else  return $texto;
+}
+</code></pre>
 <p>
   Si el texto cuya clave se indica no existe, al menos se muestra la clave en
   sí.
@@ -325,5 +322,10 @@ href="2007/01/12/lecciones-del-transporte-publico-de-madrid.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>

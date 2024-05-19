@@ -154,7 +154,7 @@ Tecnología / Programación
   <a
     title="Manual de PHP: funciones de gettext"
     target="phpmanual"
-    href="http://es2.php.net/manual/es/ref.gettext.php"
+    href="http://www.php.net/manual/es/ref.gettext.php"
     ><code>gettext()</code></a
   >
   incorporadas dentro mismo de PHP mencionadas en el artículo anterior, mi
@@ -177,16 +177,10 @@ Tecnología / Programación
   proveen, como se ve en el ejemplo:
 </p>
 <p>
-  <code
-    ><span style="color: #007700">include </span
-    ><span style="color: #dd0000">'php-gettext-1.0.7/streams.php'</span></code
-  ><code
-    ><span style="color: #007700"
-      >;<br />
-      include </span
-    ><span style="color: #dd0000">'php-gettext-1.0.7/gettext.php'</span
-    ><span style="color: #007700">;</span></code
-  >
+  <code class="language.php">
+    include 'php-gettext-1.0.7/streams.php'; include
+    'php-gettext-1.0.7/gettext.php';
+  </code>
 </p>
 <p>
   La razón de dividir el paquete en dos archivos es que el segundo es el que
@@ -199,45 +193,16 @@ Tecnología / Programación
   La carga del archivo de traducciones en sí se hace mediante el siguiente
   código:
 </p>
-<p>
-  <code
-    ><font color="#007700">if (</font
-    ><span style="color: #0000bb">file_exists</span
-    ><span style="color: #007700">(</span
-    ><span style="color: #0000bb">$_SESSION</span
-    ><span style="color: #007700">[</span
-    ><span style="color: #dd0000">'language'</span
-    ><span style="color: #007700">] . </span
-    ><span style="color: #dd0000">'.mo'</span></code
-  ><code
-    ><span style="color: #007700">)) {<br /> </span
-    ><span style="color: #0000bb"> $gettext_tables </span
-    ><span style="color: #007700">= new </span
-    ><span style="color: #0000bb">gettext_reader</span
-    ><span style="color: #007700"
-      >(<br />
-      new </span
-    ><span style="color: #0000bb">CachedFileReader</span
-    ><span style="color: #007700">(</span
-    ><span style="color: #0000bb">$_SESSION</span
-    ><span style="color: #007700">[</span
-    ><span style="color: #dd0000">'language'</span
-    ><span style="color: #007700">] . </span
-    ><span style="color: #dd0000">'.mo'</span></code
-  ><code
-    ><span style="color: #007700"
-      >)<br />
-      );<br /> </span
-    ><span style="color: #0000bb"> $gettext_tables</span
-    ><span style="color: #007700">-></span
-    ><span style="color: #0000bb">load_tables</span></code
-  ><span style="color: #007700"
-    ><code
-      >();<br />
-      }</code
-    ></span
-  >
-</p>
+<pre>
+  <code class="language.php">
+    if (file_exists($_SESSION['language'] . '.mo')) {
+      $gettext_tables = new gettext_reader(
+        new CachedFileReader($_SESSION['language'] . '.mo')
+      );
+      $gettext_tables->load_tables();
+    }
+  </code>
+</pre>
 <p>
   Como se puede ver, el archivo de traducciones se puede ubicar donde uno
   prefiera, el control es total. En este caso, primero verifico que exista y
@@ -258,12 +223,13 @@ Tecnología / Programación
   está en la facilidad de leer los textos a traducir, pues a la parte ejecutable
   no le afecta.
 </p>
-<pre><span style="color: #007700">function </span><span style="color: #0000bb">__</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">) {
-global </span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">;</span><span style="color: #007700">
+<pre><code  class="language.php">
+  function __($texto) {
+    global $gettext_tables;
 
-if (</span><span style="color: #0000bb">is_null</span><span style="color: #007700">(</span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">)) return </span><span style="color: #0000bb">$texto</span><span style="color: #007700">;
-else return </span><span style="color: #0000bb">$gettext_tables</span><span style="color: #007700">-></span><span style="color: #0000bb">translate</span><span style="color: #007700">(</span><span style="color: #0000bb">$texto</span><span style="color: #007700">);
-}</span></pre>
+    if (is_null($gettext_tables)) return $texto;
+    else return $gettext_tables->translate($texto);
+}</code></pre>
 <p>
   Esta función verifica que el objeto haya sido instanciado con éxito y si es
   así, llama al método . En cualquier caso, ya fuera que la traducción no
@@ -303,11 +269,11 @@ else return </span><span style="color: #0000bb">$gettext_tables</span><span styl
   1) se extraen las cadenas a traducir con el programa
   <code>xgettext</code>:
 </p>
-<p>
-  <code
-    >xgettext *.php --output=index.pot --keyword=__ --from-code=ISO-8859-1</code
-  >
-</p>
+<pre>
+  <code class="language.bash">
+    xgettext *.php --output=index.pot --keyword=__ --from-code=ISO-8859-1
+  </code>
+</pre>
 <p>
   En todos los casos he usado las versiones largas de las opciones para que sean
   más claras. A <code>xgettext</code> se le indica el o los fuentes de los que
@@ -327,9 +293,9 @@ else return </span><span style="color: #0000bb">$gettext_tables</span><span styl
   trabajo.
 </p>
 <p>2) Se genera un archivo de traducción a partir del modelo:</p>
-<p>
-  <code>msginit --input=index.pot --output=en.po --locale=en</code>
-</p>
+<pre>
+  <code  class="language.bash">msginit --input=index.pot --output=en.po --locale=en</code>
+</pre>
 <p>
   Este programa simplemente toma el archivo <code>.pot</code> que se le indica y
   genera un archivo <code>.po</code> para la localización que se indica.
@@ -356,7 +322,7 @@ else return </span><span style="color: #0000bb">$gettext_tables</span><span styl
   mismo.
 </p>
 <p>4) Compilación:</p>
-<p><code>msgfmt en.po --output-file=en.mo</code></p>
+<pre><code  class="language.bash">msgfmt en.po --output-file=en.mo</code></pre>
 <p>
   Esta es la parte más simple del proceso, compilarlo implica llamar a
   <code>msgfmt</code>, indicarle el nombre del archivo de entrada y el de
@@ -371,7 +337,7 @@ else return </span><span style="color: #0000bb">$gettext_tables</span><span styl
   descripto, comenzando por el punto 1 hasta el 4, excepto que en lugar del paso
   2 anterior se utiliza el comando siguiente:
 </p>
-<p><code>msgmerge --update en.po index.pot</code></p>
+<pre><code class="language.bash">msgmerge --update en.po index.pot</code></pre>
 <p>
   El comando <code>msgmerge</code> lee tanto el <code>.pot</code> como el
   <code>.po</code> y actualiza este último sin dañar las traducciones ya
@@ -469,5 +435,10 @@ href="2007/01/16/internacionalizacion-y-localizacion-usando-gettext.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>

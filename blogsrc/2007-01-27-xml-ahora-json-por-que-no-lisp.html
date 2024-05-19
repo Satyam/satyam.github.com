@@ -37,9 +37,9 @@ language: 'es-ES'
   básicamente, es una serie de listas. Una lista es cualquier cosa encerrada
   entre paréntesis, que pueden ser símbolos u otras listas, por ejemplo:
 </p>
-<p>
-  <code>(elemento-1 (sub-elemento-2-1 sub-elemento-2-1) elemento-3)</code>
-</p>
+<pre>
+  <code class="language.lisp">(elemento-1 (sub-elemento-2-1 sub-elemento-2-1) elemento-3)</code>
+</pre>
 <p>
   En esta lista, el segundo elemento es una lista compuesta de dos elementos. No
   hay límite teórico a la cantidad de elementos en una lista ni al número de
@@ -53,12 +53,19 @@ language: 'es-ES'
   Voy a abreviar los ejemplos abstractos e ir simplemente al grano. Una lista
   puede ser algo como esto:
 </p>
-<p>
-  <code
-    >(html (head (title '(Ejemplo de htmLISP)))(body (h1 '(Ejemplo de htmLISP))
-    (p '(Este es un ejemplo))))</code
-  >
-</p>
+<pre>
+  <code class="language.lisp">
+(html 
+  (head 
+    (title '(Ejemplo de htmLISP))
+  )
+  (body 
+    (h1 '(Ejemplo de htmLISP))
+    (p '(Este es un ejemplo))
+  )
+)
+  </code>
+</pre>
 <p>
   He usado una suerte de HTML escrito en notación de LISP para mostrar,
   justamente, la flexibilidad que tiene el LISP para representar estructuras de
@@ -78,7 +85,7 @@ language: 'es-ES'
   definiera que debe ser el contenido de una lista. Por ejemplo, sería válido,
   si así se definiera, escribir:
 </p>
-<p><code>(p Este es un ejemplo)</code></p>
+<pre><code class="language.lisp">(p Este es un ejemplo)</code></pre>
 <p>
   que es una lista de 5 elementos (la etiqueta también cuenta) a diferencia de
   una de dos, como la del ejemplo previo. Esto es también algo interesante de
@@ -94,20 +101,34 @@ language: 'es-ES'
   Alguien dirá que LISP carece de atributos como XML. En su forma nativa eso es
   cierto, pero nada impide convenir en algo como lo siguiente:
 </p>
-<p>
-  <code>(p (attributes (align center)) Este es un ejemplo)</code>
-</p>
+<pre>
+  <code class="language.lisp">
+(p 
+  (attributes 
+    (align center)
+  ) 
+  Este es un ejemplo
+)
+  </code>
+</pre>
 <p>
   O sea, un elemento de tipo <code>attributes</code> que contenga pares de
   elementos, equivalentes a los atributos de XML. Estos atributos pueden ser
   símbolos simples o cosas más complejas, como por ejemplo:
 </p>
-<p>
-  <code
-    >(p (attributes (style (text-align center) (font italic normal bolder 12pt
-    Arial))) Este es un ejemplo)</code
-  >
-</p>
+<pre>
+  <code  class="language.lisp">
+(p 
+  (attributes 
+    (style 
+      (text-align center) 
+      (font italic normal bolder 12pt Arial)
+    )
+  ) 
+  Este es un ejemplo
+)
+  </code>
+</pre>
 <p>
   Lo cual nos lleva a ver que una notación al estilo LISP puede usarse tanto
   para XML como para CSS, pues el contenido del atributo <code>style</code> es
@@ -139,19 +160,29 @@ language: 'es-ES'
   que al hacer una versión interpretada, debieron agregarle la terminación
   <em>Script</em>. LISP siempre fue interpretado, por ejemplo, podríamos hacer:
 </p>
-<p>
-  <code
-    >(input (attributes (type button)(value '(haga click aquí))(onClick (alert
-    '(gracias por hacer click)))))</code
-  >
-</p>
+<pre>
+  <code class="language.lisp">
+(input 
+  (attributes 
+    (type button)
+    (value '(haga click aquí))
+    (onClick 
+      (alert '(gracias por hacer click))
+    )
+  )
+)
+  </code>
+</pre>
 <p>que sería equivalente al siguiente código:</p>
-<p>
-  <code
-    >&lt;input onclick="alert('gracias por hacer click');" type="button"
-    value="haga click aquí" /></code
-  >
-</p>
+<pre>
+  <code  class="language.html">
+&lt;input 
+  onclick="alert('gracias por hacer click');" 
+  type="button"
+  value="haga click aquí" 
+/>
+  </code>
+</pre>
 <p>
   O sea, además de expresar XML o HTML y CSS, también podríamos programar en
   LISP. En realidad, a los efectos de un supuesto interprete LISP embutido en el
@@ -165,17 +196,17 @@ language: 'es-ES'
   <a href="http://www.json.org/">http://www.json.org/</a>, nos muestra los
   mismos datos en XML y JSON:
 </p>
-<pre>
+<pre><code  class="language.html">
 &lt;menu id="file" value="File">
-&lt;popup>
-&lt;menuitem value="New" onclick="CreateNewDoc()" />
-&lt;menuitem value="Open" onclick="OpenDoc()" />
-&lt;menuitem value="Close" onclick="CloseDoc()" />
-&lt;/popup>
-&lt;/menu></pre
->
+  &lt;popup>
+    &lt;menuitem value="New" onclick="CreateNewDoc()" />
+    &lt;menuitem value="Open" onclick="OpenDoc()" />
+    &lt;menuitem value="Close" onclick="CloseDoc()" />
+  &lt;/popup>
+&lt;/menu>
+</code></pre>
 <p>En JSON:</p>
-<pre>
+<pre><code  class="language.json">
 {"menu": {
     "id": "file",
     "value": "File",
@@ -188,10 +219,9 @@ language: 'es-ES'
     }
   }
 }
-              </pre
->
+</code></pre>
 <p>y en LISP</p>
-<pre>
+<pre><code  class="language.lisp">
 (menu
     (id file)
     (value File)
@@ -203,8 +233,7 @@ language: 'es-ES'
         )
     )
 )
-              </pre
->
+</code></pre>
 <p>
   La ventaja de JSON sobre XML es que la sintaxis de JSON es la que se utiliza
   en JavaScript para definir un array asociativo, donde la parte que va antes

@@ -198,7 +198,7 @@ Tecnología / Programación
   <code
     ><a
       title="Manual de PHP: función setlocale()"
-      href="http://es2.php.net/manual/es/function.setlocale.php"
+      href="http://www.php.net/manual/es/function.setlocale.php"
       target="phpmanual"
       >setlocale()</a
     ></code
@@ -254,7 +254,7 @@ Tecnología / Programación
   La función
   <a
     title="Manual de PHP: función setlocale()"
-    href="http://es2.php.net/manual/es/function.setlocale.php"
+    href="http://www.php.net/manual/es/function.setlocale.php"
     target="phpmanual"
     ><code>setlocale()</code></a
   >
@@ -265,7 +265,7 @@ Tecnología / Programación
   otras cosas que se detallan en su
   <a
     title="Manual de PHP: función setlocale()"
-    href="http://es2.php.net/manual/es/function.setlocale.php"
+    href="http://www.php.net/manual/es/function.setlocale.php"
     target="phpmanual"
     >documentación</a
   >.
@@ -282,7 +282,7 @@ Tecnología / Programación
   posibles. Aquí es donde reside el primer problema, el éxito de la función
   <a
     title="Manual de PHP: función setlocale()"
-    href="http://es2.php.net/manual/es/function.setlocale.php"
+    href="http://www.php.net/manual/es/function.setlocale.php"
     target="phpmanual"
     ><code>setlocale()</code></a
   >
@@ -305,7 +305,7 @@ Tecnología / Programación
   código indicado existe, sino, queda en blanco. La función
   <a
     title="Manual de PHP: función setlocale()"
-    href="http://es2.php.net/manual/es/function.setlocale.php"
+    href="http://www.php.net/manual/es/function.setlocale.php"
     target="phpmanual"
     ><code>setlocale()</code></a
   >
@@ -328,25 +328,11 @@ Tecnología / Programación
     >ejemplo</a
   >:
 </p>
-<p>
-  <span style="color: #0000bb">$locale </span
-  ><span style="color: #007700">= </span
-  ><span style="color: #0000bb">setlocale</span
-  ><span style="color: #007700">(</span
-  ><span style="color: #0000bb">LC_ALL</span
-  ><span style="color: #007700">, `en_US´</span
-  ><span style="color: #007700">);<br /> </span
-  ><span style="color: #0000bb">bindtextdomain</span
-  ><span style="color: #007700">(</span
-  ><span style="color: #dd0000">`ejemplo´</span
-  ><span style="color: #007700">, </span
-  ><span style="color: #dd0000">`./locale´</span
-  ><span style="color: #007700">);<br /> </span
-  ><span style="color: #0000bb">textdomain</span
-  ><span style="color: #007700">(</span
-  ><span style="color: #dd0000">`ejemplo´</span
-  ><span style="color: #007700">);</span>
-</p>
+<pre><code  class="language.php">
+$locale = setlocale(LC_ALL, `en_US´);
+bindtextdomain(`ejemplo´, `./locale´);
+textdomain(`ejemplo´);
+</code ></pre>
 <p>el archivo de traducciones se encontrará en:</p>
 <p><code>./locale/en_US/LC_MESSAGES/ejemplo.mo</code></p>
 <p>
@@ -474,5 +460,10 @@ href="2007/01/16/internacionalizacion-y-localizacion-usando-arrays.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>

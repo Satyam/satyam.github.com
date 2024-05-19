@@ -10,21 +10,19 @@
     <meta property="og:title" content="Cómo evitar duplicar registros al hacer Refrescar (F5) en el navegador" />
     <meta property="og:locale" content="es-ES" />
     <meta name="description" content="
- 
- Una pregunta frecuente es cómo evitar que cuando un usuario a
- hecho una operación que modifica la base de datos, se pueda
- evitar que esta operación se repita si el usuario, inseguro de
- su resultado, pide un refresco de la página o, después de haber
- navegado a otros lugares, pase accidentalmente por esta página
- al retroceder." />
+
+ Una pregunta frecuente es cómo evitar que cuando un usuario a hecho una
+ operación que modifica la base de datos, se pueda evitar que esta operación se
+ repita si el usuario, inseguro de su resultado, pide un refresco de la página
+ o, después de haber navegado a otros lugares, pase accidentalmente por esta
+ página al retroceder." />
     <meta property="og:description" content="
- 
- Una pregunta frecuente es cómo evitar que cuando un usuario a
- hecho una operación que modifica la base de datos, se pueda
- evitar que esta operación se repita si el usuario, inseguro de
- su resultado, pide un refresco de la página o, después de haber
- navegado a otros lugares, pase accidentalmente por esta página
- al retroceder." />
+
+ Una pregunta frecuente es cómo evitar que cuando un usuario a hecho una
+ operación que modifica la base de datos, se pueda evitar que esta operación se
+ repita si el usuario, inseguro de su resultado, pide un refresco de la página
+ o, después de haber navegado a otros lugares, pase accidentalmente por esta
+ página al retroceder." />
     <link rel="canonical" href="http://www.satyam.com.ar/blog/2007/01/18/como-evitar-duplicar-registros-al-hacer-refrescar-f5-en-el-navegador.html" />
     <meta property="og:url" content="http://www.satyam.com.ar/blog/2007/01/18/como-evitar-duplicar-registros-al-hacer-refrescar-f5-en-el-navegador.html" />
     <meta property="og:site_name" content="Comentarios" />
@@ -39,13 +37,12 @@
         "dateModified": "2007-01-18T00:00:00+01:00",
         "datePublished": "2007-01-18T00:00:00+01:00",
         "description": "
- 
- Una pregunta frecuente es cómo evitar que cuando un usuario a
- hecho una operación que modifica la base de datos, se pueda
- evitar que esta operación se repita si el usuario, inseguro de
- su resultado, pide un refresco de la página o, después de haber
- navegado a otros lugares, pase accidentalmente por esta página
- al retroceder.",
+
+ Una pregunta frecuente es cómo evitar que cuando un usuario a hecho una
+ operación que modifica la base de datos, se pueda evitar que esta operación se
+ repita si el usuario, inseguro de su resultado, pide un refresco de la página
+ o, después de haber navegado a otros lugares, pase accidentalmente por esta
+ página al retroceder.",
         "headline": "Cómo evitar duplicar registros al hacer Refrescar (F5) en el navegador",
         "mainEntityOfPage": {
           "@type": "WebPage",
@@ -134,177 +131,179 @@ Tecnología / Programación
             itemprop="articleBody"
           >
             
-              <p>
-                Una pregunta frecuente es cómo evitar que cuando un usuario a
-                hecho una operación que modifica la base de datos, se pueda
-                evitar que esta operación se repita si el usuario, inseguro de
-                su resultado, pide un refresco de la página o, después de haber
-                navegado a otros lugares, pase accidentalmente por esta página
-                al retroceder.<span class="more"></span>
-              </p>
-              <p>
-                Debemos primero comprender dónde está el problema. El navegador
-                mantiene una lista de los lugares visitados en su historial.
-                Cuando se pide un refresco, el navegador va a la dirección más
-                reciente de esta lista, cuando se vuelve atrás, se va
-                retrocediendo en las direcciones de esta lista. El valor
-                almacenado no sólo es la dirección de la página sino también
-                todos los datos que se hubieran enviado, ya fuera por
-                <code>GET</code> o <code>POST</code>, por lo tanto, cuando la
-                operación se repite, se repite en su totalidad, con todos sus
-                datos y todas sus consecuencias.
-              </p>
-              <p>
-                Desde PHP no se puede hacer mucho por controlar esta lista una
-                vez que una dirección ingresó en ella, pero sí podemos engañar
-                al navegador para que no ingrese esa dirección, y sus datos,
-                sino otra que nosotros le indiquemos. Esto lo hacemos mediante
-                la función
-                <a                   title="Manual de PHP: función header()"
-                  href="http://es2.php.net/manual/es/function.header.php"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>header()</code></a>, específicamente enviándole el <em>header</em> `<code                   >Location: </code>`. Este <em>header</em> le indica al navegador que la página
-                solicitada ya no existe y que está en una nueva ubicación, la
-                que se le indica con ese encabezado. El navegador, a fin de
-                acelerar futuros accesos a la página pedida, en lugar de guardar
-                la dirección original, que supone obsoleta, guarda en el
-                historial la nueva, que supone es la correcta de allí en más.
-              </p>
-              <p>
-                El
-                <a                   title="ejemplo"
-                  href="/int/NoDuplicados.php"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >ejemplo</a>
-                muestra cómo funciona este mecanismo. Para evitar usar tablas en
-                base de datos, lo que hemos hecho es usar una variable de sesión
-                (array
-                <a                   title="Manual de PHP: variable predefinida $_SESSION"
-                  href="http://es2.php.net/manual/es/reserved.variables.php#reserved.variables.session"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>$_SESSION</code></a>) que vamos incrementando. Para simular que esta operación
-                funcione o falle, como podría ocurrir con una operación de SQL,
-                le damos la opción al usuario para generar un éxito o un fracaso
-                a través de sendos botones.
-              </p>
-              <p>
-                Si el usuario pulsa el botón
-                <code><strong>Funciona</strong></code>, el contador en <code>$_SESSION['contador']</code> se
-                incrementará en uno y se mostrará un mensaje confirmando el
-                éxito de la operación. Si el usuario pulsa el botón
-                <strong><code>No funciona</code></strong>, el programa hará como si hubiera habido un fallo.
-              </p>
-              <p>
-                Debajo de los botones se muestra el valor del contador, que
-                inicialmente estará en blanco. Al pulsar el botón
-                <code><strong>Funciona</strong></code>, se incrementará en uno. Al pulsar el botón
-                <code><strong>No Funciona</strong></code>, no se incrementará pues, supuestamente, habría habido un
-                error. Lo importante es que en el caso de pedir un refresco de
-                la página tanto luego de que funcione como de que no, el
-                contador no cambiará.
-              </p>
-              <p>
-                Al principio del script, tras iniciar la sesión (función
-                <a                   title="Manual de PHP: función session_start()"
-                  href="http://es2.php.net/manual/es/function.session-start.php"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>session_start()</code></a>, sino el array <code>$_SESSION</code> no mantiene los valores
-                entre accesos) defino un par de funciones
-                <code>redireccion_relativa()</code> y
-                <code>redireccion_aqui().</code> Estas funciones arman un header
-                del tipo <code>'Location:</code> ` para forzar una redirección.
-                La primera de las funciones hace una redirección relativa a la
-                página actual, la segunda hace una redirección a sí misma. Ambas
-                admiten un par de argumentos que permiten armar un URL con
-                argumentos, usando la función
-                <a                   title="Manual de PHP: función http_build_query()"
-                  href="http://es2.php.net/manual/es/function.http-build-query.php"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>http_build_query()</code></a>. La primera de estas funciones no se usa en el ejemplo, la
-                incluí como <em>`tip´</em>. Para completar las posibilidades,
-                faltan las funciones <code>redireccion_absoluta()</code> y
-                <code>redireccion_raiz()</code>, la primera es trivial, va donde
-                le digas. La segunda sirve para ir a una página relativa a la
-                raíz de la aplicación. Esta función depende de una variable
-                externa a esta página que indique la dirección raíz de la
-                aplicación. Esta variable usualmente estará guardada en un
-                archivo de configuración de la aplicación o en un registro de la
-                base de datos. Por depender de variables externas al ejemplo, no
-                la incluí, pero es fácil hacerla a partir de las dadas.
-              </p>
-              <p>
-                Tras estas funciones comienza el proceso en sí. Noten que hasta
-                este punto no se ha enviado al navegador ni un solo carácter.
-                Esto es importante, el <em>header</em> `<code>Location: </code>`
-                no funciona si ya se ha enviado algo y da error, así que es
-                importante que no haya ni siquiera un carácter en blanco. Vale
-                la pena mencionar aquí algo que hace que este error salga sin
-                que uno lo quiera. Aunque uno haya buscado hasta el aburrimiento
-                que no hubiera caracteres extra (por ejemplo, no debe haber nada
-                antes del primer <code>&lt;?php</code>) el error aparece. Esto suele ocurrir cuando la
-                página incluye otros scripts a través de la instrucción
-                <a                   title="Manual de PHP: función include()"
-                  href="http://es2.php.net/manual/es/function.include.php"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>include()</code></a>. Si alguno cualquiera de estos archivos incluidos tienen
-                aunque más no fuera una interlínea después del último
-                <code>?></code> de cierre, ese carácter se enviará al navegador
-                y generará error. En ocasiones, el editor de texto que usamos
-                agrega automáticamente una interlínea al final del archivo sin
-                preguntar. La forma de evitar este error es simplemente dejar el
-                archivo incluído sin el <code>?></code> final. Esto no genera
-                error y, de hecho, es la sugerencia de
-                <a                   title="Wikipedia: Rasmus Lerdorf"
-                  href="http://es.wikipedia.org/wiki/Rasmus_Lerdorf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Rasmus Lerdorf</a>, quien ha de saber lo que hace.Volviendo al programa, en caso
-                de recibir un argumento de nombre <code>'submit'</code> verifico
-                que el valor sea <code>'Funciona'</code>, en ese caso,
-                incremento el contador y hago una redirección a esta misma
-                página pero cambiando los argumentos. No quiero que haya un
-                argumento de nombre <code>'submit'</code> con valor
-                <code>'Funciona'</code> pues esto haría que el contador se
-                volviera a incrementar. Invento otro argumento, de nombre
-                <code>'confirma'</code> y valor <code>'ok'</code>. Es este el
-                valor que el navegador recibirá como nueva ubicación de esta
-                página y la que guardará en su historial. De hecho, si se mira
-                en la casilla de dirección del navegador, se verá que el URL que
-                muestra es el de la página de confirmación, no el del
-                formulario.
-              </p>
-              <p>
-                En el caso de error, no hago ninguna redirección, lo habitual es
-                que el form se vuelva a mostrar con los valores que el usuario
-                hubiera ingresado, que se obtendrán de las variables
-                <a                   title="Manual de PHP: variable predefinida $_GET"
-                  href="http://es2.php.net/manual/es/reserved.variables.php#reserved.variables.get"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>$_GET</code></a>
-                o
-                <a                   title="Manual de PHP: variable predefinida $_POST"
-                  href="http://es2.php.net/manual/es/reserved.variables.php#reserved.variables.post"
-                  target="phpmanual"
-                  rel="noopener noreferrer"
-                  ><code>$_POST</code></a>
-                según se hubiera indicado en el formulario.
-              </p>
-              <p>
-                El resto del programa no requiere mayor explicación que la que
-                dan los comentarios que contiene.
-              </p>
-              
-              
-              
-            
-  
+<p>
+  Una pregunta frecuente es cómo evitar que cuando un usuario a hecho una
+  operación que modifica la base de datos, se pueda evitar que esta operación se
+  repita si el usuario, inseguro de su resultado, pide un refresco de la página
+  o, después de haber navegado a otros lugares, pase accidentalmente por esta
+  página al retroceder.<span class="more"></span>
+</p>
+<p>
+  Debemos primero comprender dónde está el problema. El navegador mantiene una
+  lista de los lugares visitados en su historial. Cuando se pide un refresco, el
+  navegador va a la dirección más reciente de esta lista, cuando se vuelve
+  atrás, se va retrocediendo en las direcciones de esta lista. El valor
+  almacenado no sólo es la dirección de la página sino también todos los datos
+  que se hubieran enviado, ya fuera por
+  <code>GET</code> o <code>POST</code>, por lo tanto, cuando la operación se
+  repite, se repite en su totalidad, con todos sus datos y todas sus
+  consecuencias.
+</p>
+<p>
+  Desde PHP no se puede hacer mucho por controlar esta lista una vez que una
+  dirección ingresó en ella, pero sí podemos engañar al navegador para que no
+  ingrese esa dirección, y sus datos, sino otra que nosotros le indiquemos. Esto
+  lo hacemos mediante la función
+  <a
+    title="Manual de PHP: función header()"
+    href="http://www.php.net/manual/es/function.header.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>header()</code></a
+  >, específicamente enviándole el <em>header</em> `<code>Location: </code>`.
+  Este <em>header</em> le indica al navegador que la página solicitada ya no
+  existe y que está en una nueva ubicación, la que se le indica con ese
+  encabezado. El navegador, a fin de acelerar futuros accesos a la página
+  pedida, en lugar de guardar la dirección original, que supone obsoleta, guarda
+  en el historial la nueva, que supone es la correcta de allí en más.
+</p>
+<p>
+  El
+  <a
+    title="ejemplo"
+    href="/int/NoDuplicados.php"
+    target="_blank"
+    rel="noopener noreferrer"
+    >ejemplo</a
+  >
+  muestra cómo funciona este mecanismo. Para evitar usar tablas en base de
+  datos, lo que hemos hecho es usar una variable de sesión (array
+  <a
+    title="Manual de PHP: variable predefinida $_SESSION"
+    href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.session"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>$_SESSION</code></a
+  >) que vamos incrementando. Para simular que esta operación funcione o falle,
+  como podría ocurrir con una operación de SQL, le damos la opción al usuario
+  para generar un éxito o un fracaso a través de sendos botones.
+</p>
+<p>
+  Si el usuario pulsa el botón
+  <code><strong>Funciona</strong></code
+  >, el contador en <code>$_SESSION['contador']</code> se incrementará en uno y
+  se mostrará un mensaje confirmando el éxito de la operación. Si el usuario
+  pulsa el botón <strong><code>No funciona</code></strong
+  >, el programa hará como si hubiera habido un fallo.
+</p>
+<p>
+  Debajo de los botones se muestra el valor del contador, que inicialmente
+  estará en blanco. Al pulsar el botón
+  <code><strong>Funciona</strong></code
+  >, se incrementará en uno. Al pulsar el botón
+  <code><strong>No Funciona</strong></code
+  >, no se incrementará pues, supuestamente, habría habido un error. Lo
+  importante es que en el caso de pedir un refresco de la página tanto luego de
+  que funcione como de que no, el contador no cambiará.
+</p>
+<p>
+  Al principio del script, tras iniciar la sesión (función
+  <a
+    title="Manual de PHP: función session_start()"
+    href="http://www.php.net/manual/es/function.session-start.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>session_start()</code></a
+  >, sino el array <code>$_SESSION</code> no mantiene los valores entre accesos)
+  defino un par de funciones <code>redireccion_relativa()</code> y
+  <code>redireccion_aqui().</code> Estas funciones arman un header del tipo
+  <code>'Location:</code> ` para forzar una redirección. La primera de las
+  funciones hace una redirección relativa a la página actual, la segunda hace
+  una redirección a sí misma. Ambas admiten un par de argumentos que permiten
+  armar un URL con argumentos, usando la función
+  <a
+    title="Manual de PHP: función http_build_query()"
+    href="http://www.php.net/manual/es/function.http-build-query.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>http_build_query()</code></a
+  >. La primera de estas funciones no se usa en el ejemplo, la incluí como
+  <em>`tip´</em>. Para completar las posibilidades, faltan las funciones
+  <code>redireccion_absoluta()</code> y <code>redireccion_raiz()</code>, la
+  primera es trivial, va donde le digas. La segunda sirve para ir a una página
+  relativa a la raíz de la aplicación. Esta función depende de una variable
+  externa a esta página que indique la dirección raíz de la aplicación. Esta
+  variable usualmente estará guardada en un archivo de configuración de la
+  aplicación o en un registro de la base de datos. Por depender de variables
+  externas al ejemplo, no la incluí, pero es fácil hacerla a partir de las
+  dadas.
+</p>
+<p>
+  Tras estas funciones comienza el proceso en sí. Noten que hasta este punto no
+  se ha enviado al navegador ni un solo carácter. Esto es importante, el
+  <em>header</em> `<code>Location: </code>` no funciona si ya se ha enviado algo
+  y da error, así que es importante que no haya ni siquiera un carácter en
+  blanco. Vale la pena mencionar aquí algo que hace que este error salga sin que
+  uno lo quiera. Aunque uno haya buscado hasta el aburrimiento que no hubiera
+  caracteres extra (por ejemplo, no debe haber nada antes del primer
+  <code>&lt;?php</code>) el error aparece. Esto suele ocurrir cuando la página
+  incluye otros scripts a través de la instrucción
+  <a
+    title="Manual de PHP: función include()"
+    href="http://www.php.net/manual/es/function.include.php"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>include()</code></a
+  >. Si alguno cualquiera de estos archivos incluidos tienen aunque más no fuera
+  una interlínea después del último <code>?></code> de cierre, ese carácter se
+  enviará al navegador y generará error. En ocasiones, el editor de texto que
+  usamos agrega automáticamente una interlínea al final del archivo sin
+  preguntar. La forma de evitar este error es simplemente dejar el archivo
+  incluído sin el <code>?></code> final. Esto no genera error y, de hecho, es la
+  sugerencia de
+  <a
+    title="Wikipedia: Rasmus Lerdorf"
+    href="http://es.wikipedia.org/wiki/Rasmus_Lerdorf"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Rasmus Lerdorf</a
+  >, quien ha de saber lo que hace.Volviendo al programa, en caso de recibir un
+  argumento de nombre <code>'submit'</code> verifico que el valor sea
+  <code>'Funciona'</code>, en ese caso, incremento el contador y hago una
+  redirección a esta misma página pero cambiando los argumentos. No quiero que
+  haya un argumento de nombre <code>'submit'</code> con valor
+  <code>'Funciona'</code> pues esto haría que el contador se volviera a
+  incrementar. Invento otro argumento, de nombre <code>'confirma'</code> y valor
+  <code>'ok'</code>. Es este el valor que el navegador recibirá como nueva
+  ubicación de esta página y la que guardará en su historial. De hecho, si se
+  mira en la casilla de dirección del navegador, se verá que el URL que muestra
+  es el de la página de confirmación, no el del formulario.
+</p>
+<p>
+  En el caso de error, no hago ninguna redirección, lo habitual es que el form
+  se vuelva a mostrar con los valores que el usuario hubiera ingresado, que se
+  obtendrán de las variables
+  <a
+    title="Manual de PHP: variable predefinida $_GET"
+    href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.get"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>$_GET</code></a
+  >
+  o
+  <a
+    title="Manual de PHP: variable predefinida $_POST"
+    href="http://www.php.net/manual/es/reserved.variables.php#reserved.variables.post"
+    target="phpmanual"
+    rel="noopener noreferrer"
+    ><code>$_POST</code></a
+  >
+  según se hubiera indicado en el formulario.
+</p>
+<p>
+  El resto del programa no requiere mayor explicación que la que dan los
+  comentarios que contiene.
+</p>
 
           </div>
           <footer class="post-footer"><div class="next-prev-links">
@@ -355,5 +354,10 @@ href="2007/01/17/internacionalizacion-y-localizacion-indice.html"
       </div>
     </footer>
     
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
   </body>
 </html>
