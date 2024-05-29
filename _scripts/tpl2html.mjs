@@ -91,14 +91,15 @@ It is ordered by date, newer on top after the date in the frontmatter.
 The ordering is important to get the *previous/next* links right.
 */
 const postsArray = srcPostNames
-  .map((srcFileName) => {
+  .reduce((result, srcFileName) => {
     const { year, month, day, slug, data } = parsePostFrontMatter(srcFileName);
-    return {
+    if (data.draft) return result;
+    return result.concat({
       srcFileName,
       relURL: `${year}/${month}/${day}/${slug}.html`,
       title: data.title,
-    };
-  })
+    });
+  }, [])
   .sort((a, b) => {
     // descending by date (most recent first)
     if (a.relURL < b.relURL) return 1;
