@@ -4,7 +4,7 @@ date: "2024-10-19"
 categories: ["Tecnología/Fracasos","Historia/Informática"]
 language: "es-ES"
 ---
-Cómo Novell cedió el mercado de los servidores de redes locales a Microsoft
+Cómo Novell cedió el mercado de los servidores de redes locales a Microsoft.
 
 ---
 
