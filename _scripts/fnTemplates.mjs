@@ -17,14 +17,18 @@ export const metaBlock = (post) => d`
               cat.sub
                 ? d`
                   <a
-                    href="categories/#${slugify(cat.main)}_${slugify(cat.sub)}"
+                    href="categories.html#${slugify(cat.main)}_${slugify(
+                    cat.sub
+                  )}"
                     rel="category tag"
                   >
                     ${cat.main} / ${cat.sub}
                   </a>
                 `
                 : d`
-                  <a href="categories/#${slugify(cat.main)}" rel="category tag">
+                  <a href="categories.html#${slugify(
+                    cat.main
+                  )}" rel="category tag">
                     ${cat.main}
                   </a>
                 `
