@@ -6,11 +6,51 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2024-05-30T16:39:21.128Z</updated>
+  <updated>2024-10-27T16:46:25.798Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Novell NetWare vs. Windows NT</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2024/10/19/novell-netware-vs-windows-nt.html"
+    rel="alternate"
+    type="text/html"
+    title="Novell NetWare vs. Windows NT"
+  />
+  <published>2024-10-19T00:00:00+01:00</published>
+  <updated>2024-10-19T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2024/10/19/novell-netware-vs-windows-nt.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Tecnología/Fracasos" />
+<category term="Historia/Informática" />
+  <summary type="html">Cómo Novell cedió el mercado de los servidores de redes locales a Microsoft.
+</summary>
+</entry>
+
+<entry>
+  <title type="html">La IBM PC y la PS/2 en la Argentina</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2024/10/16/la-ibm-pc-y-la-ps2-en-la-argentina.html"
+    rel="alternate"
+    type="text/html"
+    title="La IBM PC y la PS/2 en la Argentina"
+  />
+  <published>2024-10-16T00:00:00+01:00</published>
+  <updated>2024-10-16T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2024/10/16/la-ibm-pc-y-la-ps2-en-la-argentina.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Tecnología/Fracasos" />
+<category term="Historia/Informática" />
+  <summary type="html">Cómo IBM perdió el mercado de las computadoras personales o PCs después de haberla inventado.
+</summary>
+</entry>
+
+<entry>
   <title type="html">Fancy old French waterworks</title>
   <link
     href="http://www.satyam.com.ar/blog/2022/09/01/fancy-old-french-waterworks.html"
@@ -176,73 +216,6 @@
  los taxistas.
 
 </summary>
-</entry>
-
-<entry>
-  <title type="html">Un coche triangular</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2015/05/06/un-coche-triangular.html"
-    rel="alternate"
-    type="text/html"
-    title="Un coche triangular"
-  />
-  <published>2015-05-06T00:00:00+01:00</published>
-  <updated>2015-05-06T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2015/05/06/un-coche-triangular.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Futuro" />
-<category term="Tecnología" />
-<category term="Urbanismo" />
-  <summary type="html">
-
- En un anterior artículo,
- Reinvindicando el Isetta, comentaba las ventajas que veía en el diseño del viejo Isetta, ese vehículo
- extraño cuya única puerta se abría hacia adelante. Debiera haber acompañado
- ese artículo de algunas imágenes para clarificar las ventajas del vehículo de
- base triangular.
-
-</summary>
-</entry>
-
-<entry>
-  <title type="html">Cultivando bajo tierra</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2015/05/04/cultivando-bajo-tierra.html"
-    rel="alternate"
-    type="text/html"
-    title="Cultivando bajo tierra"
-  />
-  <published>2015-05-04T00:00:00+01:00</published>
-  <updated>2015-05-04T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2015/05/04/cultivando-bajo-tierra.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Futuro" />
-<category term="Tecnología" />
-<category term="Urbanismo" />
-  <summary type="html">
- 
- El eventual cambio de nuestros automóviles actuales a vehículos
- autónomos de alquiler traerá grandes cambios a toda la economía.
- No sólo la industria automotriz, sus proveedores y cadenas de
- distribución y venta se verán afectados, también las
- aseguradoras, las petroleras, empresas de construcción y
- mantenimiento de infraestructuras viales, las empresas de
- publicidad y un increíblemente largo etcétera. Las ciudades
- ganarán miles de hectáreas de espacio público, las aceras se
- ensancharán abarcando los carriles de parking, el número de
- carriles de circulación se reducirá pues el tráfico de vehículos
- autónomos, al ser más ordenado, reducirá la necesidad de
- disponer de un colchón de espacio para acomodar los diversos
- estilos de conducción de innumerables motoristas. Al mismo
- tiempo, perderán los ingresos por matriculación de vehículos
- que, seguramente, no compensarán con el alquiler de los
- vehículos autónomos cuyas tarifas mantendrán bajas para ganar
- votos.
- </summary>
 </entry>
 
 </feed>
