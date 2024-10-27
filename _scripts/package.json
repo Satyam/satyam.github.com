@@ -17,6 +17,7 @@
   "scripts": {
     "start": "serve ../docs",
     "build": "node ./tpl2html.mjs",
+    "buildAll": "node ./tpl2html.mjs all",
     "mm": "node ./mm.mjs",
     "checks": "node ./checks.mjs"
   }

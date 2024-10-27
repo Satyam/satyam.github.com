@@ -180,6 +180,8 @@ const parsePostData = (srcFileName, relURL) => {
 
 // Notice that this loop goes over the posts source
 // now ordered descending by date, not just as `globby` finds them
+
+const updateAll = process.argv[2]?.toLowerCase() === 'all';
 for (const { srcFileName, relURL } of postsArray) {
   const post = parsePostData(srcFileName, relURL);
 
@@ -193,7 +195,11 @@ for (const { srcFileName, relURL } of postsArray) {
   const outDir = join(DEST_DIRS.posts, post.year, post.month, post.day);
   await ensureDir(outDir);
   const outFile = join(outDir, `${post.slug}.html`);
-  if (await shouldUpdate(outFile, join(SRC_DIRS.srcPosts, srcFileName))) {
+  if (
+    updateAll ||
+    (await shouldUpdate(outFile, join(SRC_DIRS.srcPosts, srcFileName)))
+  ) {
+    console.log('.');
     await writeFile(outFile, resolveVars(postTpl, 'post', post));
   }
 
