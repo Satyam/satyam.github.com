@@ -1,10 +1,12 @@
 /* custom */
 figure {
+  text-align: center;
   width: inherit;
 }
 
 figcaption {
   text-align: center;
+  font-size: smaller;
 }
 
 figure img {
