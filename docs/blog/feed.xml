@@ -6,11 +6,31 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2024-10-27T16:46:25.798Z</updated>
+  <updated>2024-11-04T09:44:48.261Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Lotus vs. Excel</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2024/10/26/lotus-vs-excel.html"
+    rel="alternate"
+    type="text/html"
+    title="Lotus vs. Excel"
+  />
+  <published>2024-10-26T00:00:00+01:00</published>
+  <updated>2024-10-26T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2024/10/26/lotus-vs-excel.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Tecnología/Fracasos" />
+<category term="Historia/Informática" />
+  <summary type="html">Cómo Lotus perdió la carrera de las hojas de cálculo.
+</summary>
+</entry>
+
+<entry>
   <title type="html">Novell NetWare vs. Windows NT</title>
   <link
     href="http://www.satyam.com.ar/blog/2024/10/19/novell-netware-vs-windows-nt.html"
@@ -189,33 +209,6 @@
  stars coming towards us from different directions, we might
  figure out where are we going and how fast and, most
  intriguingly, where did we come from.</summary>
-</entry>
-
-<entry>
-  <title type="html">En favor de Uber</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2015/10/23/en-favor-de-uber.html"
-    rel="alternate"
-    type="text/html"
-    title="En favor de Uber"
-  />
-  <published>2015-10-23T00:00:00+01:00</published>
-  <updated>2015-10-23T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2015/10/23/en-favor-de-uber.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Urbanismo" />
-  <summary type="html">
-
- Uber es una `app´ que permite conectar gente que dispone de un auto y está
- dispuesta a llevar pasajeros con sus posibles clientes. O sea, algo así como
- pedir un taxi (pero que no es taxi) por Internet, acordando e incluso
- efectuando el pago a través de la app. El sistema es muy popular en
- algunos lugares pero ha llegado a ser ilegalizado en otros por la presión de
- los taxistas.
-
-</summary>
 </entry>
 
 </feed>
