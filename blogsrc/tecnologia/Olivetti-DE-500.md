@@ -62,6 +62,35 @@ Cada operadora (pues usualmente eran mujeres) recibía un fajo de estos talones,
 
 Cada lote de talones se grababa (o perforaba) primero y luego se verificaba.  Para verificarlo una segunda operadora volvía a ingresar los mismos datos y la máquina, en modo de verificación, lo comparaba con lo grabado.  Aunque pareciera que es más trabajo, la velocidad conque podían teclear era tal que esto era más eficiente que si lo leyeran y compararan visualmente.  Si la comparación fallaba se borraba el registro (o se tiraba la tarjeta) y el talón original, que había sido mal grabado, se ponía en otra pila para volver a procesar.
 
-Este mismo proceso de perforar y verificar tarjetas, o hacerlo con casetes era el primer paso de prácticamente todo sistema informático de aquel entonces.  Ya fueran las planillas de los cajeros de las sucursales bancarias, las listas de entrada y salida de personal, la recepción de mercadería o el despacho de pedidos, todos los datos llegaban al centro de cómputos a través de los ágiles dedos de toda esta gente.
+Este mismo proceso de perforar y verificar tarjetas, o hacerlo con casetes, era el primer paso de prácticamente todo sistema informático de aquel entonces.  Ya fueran las planillas de los cajeros de las sucursales bancarias, las listas de entrada y salida de personal, la recepción de mercadería o el despacho de pedidos, todos los datos llegaban al centro de cómputos a través de los ágiles dedos de estas damas. El procesamiento **digital** comenzaba aquí.
 
-Mientras las perforadoras de tarjetas eran escritorios completos con la máquina parte integral de los mismos, la DE-500 era del tamaño de las viejas PCs y se podía poner en cualquier lado.
+Mientras que las perforadoras de tarjetas eran tan grandes que venían integradas dentro de su propio escritorio la DE-500 era del tamaño de las viejas PCs y se podía poner en cualquier lado.
+
+La DE-500 no estaba limitada al ingreso de datos.  Era una máquina totalmente programable y, dentro de sus limitaciones en memoria y almacenamiento, podría afrontar cualquier tarea.  Era, en definitiva, una versión de mesa de las primeras computadoras comerciales de los 50 que costaban fortunas y ocupaban salas enteras.
+
+Para usar en ingreso de datos, se configuraba con un mínimo de memoria y una sola casetera, pero con el máximo de memoria y doble casetera podía hacer trabajos contables al viejo estilo, por ejemplo, con un casete conteniendo una copia del inventario más reciente (que se conserva como resguardo) en una casetera, el *maestro* y en la otra los entradas y salidas de mercaderías, los *movimientos*, ambas ordenadas por el código del artículo.  Se lee un artículo del maestro, y se leen los movimientos que hubiera habido de ese artículo y, si los hubiera habido, se regraba el maestro con la nueva cantidad (por eso se trabaja sobre una copia, por si algo fallara).
+
+Esto requiere que ambos casetes estuvieran ordenados por código de artículo, lo que en la jerga se llama *sort*.  Este era un paso previo que se hacía con un programa estándar del sistema. Tardaba bastante, dependiendo de cuánta memoria interna tuviera la máquina, pero era algo habitual en cualquier sistema informático de la época.
+
+Mejor aún que andar haciendo malabares con sólo dos casetes, que son medios de almacenamiento secuencial, es ofrecer un medio de almacenamiento de acceso directo, como son los *floppies*,  *diskettes* (o "disquetes", como recomienda la Real Academia).  Ya para esa época, IBM mismo había pasado del uso de tarjetas perforadas usando los *diskettes* de 8 pulgadas.
+
+En lugar de las ruidosas perforadoras de tarjetas la IBM 3741 grababa directamente en *diskettes* de 8 pulgadas junto con los periféricos correspondientes en sus sistemas mayores, que podían cargar con docenas de *diskettes* insertándolos individualmente en el lector.
+
+<figure>
+  <a 
+    title="Museo de Informática, CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&gt;, via Wikimedia Commons" 
+    href="https://commons.wikimedia.org/wiki/File:IBM_3741_Data_Station_(1).jpg"
+  >
+    <img alt="IBM 3741 Data Station" src="assets/img/IBM_3741_Data_Station.jpg">
+  </a>
+  <figcaption>Grabadora / verificadora de datos IBM 3741</figcaption>
+</figure>
+
+Este formato se hizo muy popular aunque, en principio, tenía menos capacidad de almacenamiento en cada *floppy* que en un casete, pero era mucho más flexible y rápidos.  Con el tiempo, además, los *diskettes* fueron aumentando de capacidad, igualándose con los casetes, y reduciéndose en tamaño: 5 ¼ pulgadas y, finalmente, 3 ½ pulgadas.
+
+Aquí cabe revelar un secreto, Olivetti no había diseñado la DE-500, la vendía y creo que la fabricaba bajo licencia de Sycor, una empresa de Ann Harbor, MI, en los EEUU.   Para Sycor, era la DE-340.  Ante el auge del *diskette*, diseñaron la DE-350 que en lugar de casetes disponía de una unidad doble de *diskettes* de 8 pulgadas.  Era, básicamente, la misma máquina, con un nuevo diseño, con algo más de memoria interna.
+
+<figure>
+  <img src="assets/img/sycor_de_3xx.png" title="Sycor 340/350" />
+  <figcaption>Composición fotográfica de los modelos 350 (arriba) y 340 (abajo) de un folleto de Sycor</figcaption>
+</figure>
