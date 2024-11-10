@@ -6,11 +6,31 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2024-11-04T09:44:48.261Z</updated>
+  <updated>2024-11-10T16:40:59.334Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Olivetti DE-5xx / Sycor DE-3xx</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2024/11/07/olivetti-de-5xx-sycor-de-3xx.html"
+    rel="alternate"
+    type="text/html"
+    title="Olivetti DE-5xx / Sycor DE-3xx"
+  />
+  <published>2024-11-07T00:00:00+01:00</published>
+  <updated>2024-11-07T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2024/11/07/olivetti-de-5xx-sycor-de-3xx.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Tecnología/Fracasos" />
+<category term="Historia/Informática" />
+  <summary type="html">Cómo Olivetti vendió promesas y perdió un mercado.
+</summary>
+</entry>
+
+<entry>
   <title type="html">Lotus vs. Excel</title>
   <link
     href="http://www.satyam.com.ar/blog/2024/10/26/lotus-vs-excel.html"
@@ -182,33 +202,6 @@
   <category term="Tecnología" />
   <summary type="html">My first paid job was an internship at an electronics repair shop at Olivetti Argentina while I was still at university studying Electrical Engineering. We repaired digital calculators like that on the image above, which were quickly replacing the mechanical ones. Yes, it was the early days, now a calculator is just an app in your smartphone then, the mechanical ones were being replaced by electronic ones using medium-scale integrated circuits (ICs). They didn't run on batteries. The digits of the display took some power, but it was the paper strip printer that required so much power that it had to be plugged. People liked the printed copy of their calculations as the mechanical ones provided. As a matter of fact it was standard practice to have the printed strip with the calculation stapled on whatever forms the clerks were producing or checking.
 </summary>
-</entry>
-
-<entry>
-  <title type="html">Einstein´s Gravitational Waves</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2016/02/15/einsteins-gravitational-waves.html"
-    rel="alternate"
-    type="text/html"
-    title="Einstein´s Gravitational Waves"
-  />
-  <published>2016-02-15T00:00:00+01:00</published>
-  <updated>2016-02-15T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2016/02/15/einsteins-gravitational-waves.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="General" />
-  <summary type="html">
- 
- As we can feel the wind in a moving sailboat and figure out
- which way and how fast we are moving, someone thought that, as
- we are traveling through space in our own planet Earth, we
- should be able to somehow feel the wind. If we can
- perceive the slight differences in the speed of the light of the
- stars coming towards us from different directions, we might
- figure out where are we going and how fast and, most
- intriguingly, where did we come from.</summary>
 </entry>
 
 </feed>
