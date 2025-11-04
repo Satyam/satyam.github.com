@@ -6,11 +6,30 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2024-11-10T16:40:59.334Z</updated>
+  <updated>2025-11-04T17:42:07.584Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Panel de llaves</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2025/11/03/panel-de-llaves.html"
+    rel="alternate"
+    type="text/html"
+    title="Panel de llaves"
+  />
+  <published>2025-11-03T00:00:00+01:00</published>
+  <updated>2025-11-03T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2025/11/03/panel-de-llaves.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Historia/Informática" />
+  <summary type="html">Cómo se arrancaban esos grandes computadores de antaño
+</summary>
+</entry>
+
+<entry>
   <title type="html">Olivetti DE-5xx / Sycor DE-3xx</title>
   <link
     href="http://www.satyam.com.ar/blog/2024/11/07/olivetti-de-5xx-sycor-de-3xx.html"
@@ -182,25 +201,6 @@
   </author>
   <category term="Tecnología" />
   <summary type="html">Most Windows users would know that the processor on which it runs is some sort of Intel x86 processor or a compatible one, which comes down from a lineage started with the i8086, the first of Intel's 16 bit microprocessors. It was succeeded by the i80186, i80286 and so on. That is what that 'x' in 'x86' stands for, the ever increasing middle digit in the series, which they dropped once they decided they could no longer carry on with that numbering system and started giving them names, something that started with the Intel Pentium which would have otherwise been an i80586.
-</summary>
-</entry>
-
-<entry>
-  <title type="html">My first and proudest day on the job</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2021/10/07/my-first-and-proudest-day-on-the-job.html"
-    rel="alternate"
-    type="text/html"
-    title="My first and proudest day on the job"
-  />
-  <published>2021-10-07T00:00:00+01:00</published>
-  <updated>2021-10-07T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2021/10/07/my-first-and-proudest-day-on-the-job.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Tecnología" />
-  <summary type="html">My first paid job was an internship at an electronics repair shop at Olivetti Argentina while I was still at university studying Electrical Engineering. We repaired digital calculators like that on the image above, which were quickly replacing the mechanical ones. Yes, it was the early days, now a calculator is just an app in your smartphone then, the mechanical ones were being replaced by electronic ones using medium-scale integrated circuits (ICs). They didn't run on batteries. The digits of the display took some power, but it was the paper strip printer that required so much power that it had to be plugged. People liked the printed copy of their calculations as the mechanical ones provided. As a matter of fact it was standard practice to have the printed strip with the calculation stapled on whatever forms the clerks were producing or checking.
 </summary>
 </entry>
 
