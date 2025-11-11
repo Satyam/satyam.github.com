@@ -3,6 +3,7 @@ title: "Programación a la antigua"
 date: "2025-09-26"
 categories: ["Historia/Informática"]
 language: "es-ES"
+draft: true
 ---
 Programación a la antigua
 

@@ -6,11 +6,30 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2025-11-04T17:42:07.584Z</updated>
+  <updated>2025-11-11T17:31:30.590Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Poniendo orden en los datos</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2025/11/06/poniendo-orden-en-los-datos.html"
+    rel="alternate"
+    type="text/html"
+    title="Poniendo orden en los datos"
+  />
+  <published>2025-11-06T00:00:00+01:00</published>
+  <updated>2025-11-06T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2025/11/06/poniendo-orden-en-los-datos.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Historia/Informática" />
+  <summary type="html">Una de las operaciones más habituales en el procesamiento de datos es el ordenamiento de listas de datos.
+</summary>
+</entry>
+
+<entry>
   <title type="html">Panel de llaves</title>
   <link
     href="http://www.satyam.com.ar/blog/2025/11/03/panel-de-llaves.html"
@@ -182,25 +201,6 @@
   </author>
   <category term="Tecnología" />
   <summary type="html">¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (bitwise) y ‘lógicas’ (logical), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (XOR) si ignoramos el resto y multiplicar es lo mismo que hacer un AND, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, LOAD, SAVE, AND, OR, NOT, XOR y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o stack para llamar subrutinas y volver.
-</summary>
-</entry>
-
-<entry>
-  <title type="html">Eight Users working from a single i8080 processor</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2021/11/06/eight-users-working-from-a-single-i8080-processor.html"
-    rel="alternate"
-    type="text/html"
-    title="Eight Users working from a single i8080 processor"
-  />
-  <published>2021-11-06T00:00:00+01:00</published>
-  <updated>2021-11-06T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2021/11/06/eight-users-working-from-a-single-i8080-processor.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Tecnología" />
-  <summary type="html">Most Windows users would know that the processor on which it runs is some sort of Intel x86 processor or a compatible one, which comes down from a lineage started with the i8086, the first of Intel's 16 bit microprocessors. It was succeeded by the i80186, i80286 and so on. That is what that 'x' in 'x86' stands for, the ever increasing middle digit in the series, which they dropped once they decided they could no longer carry on with that numbering system and started giving them names, something that started with the Intel Pentium which would have otherwise been an i80586.
 </summary>
 </entry>
 
