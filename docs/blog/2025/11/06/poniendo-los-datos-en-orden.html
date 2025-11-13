@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--Source file: tecnologia/sort.md-->
+    <meta charset="utf-8" />
+    <base href="/blog/" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Poniendo los datos en orden | Comentarios</title>
+    <meta property="og:title" content="Poniendo los datos en orden" />
+    <meta property="og:locale" content="es-ES" />
+    <meta name="description" content="Una de las operaciones más habituales en el procesamiento de datos es el ordenamiento de listas de datos.
+" />
+    <meta property="og:description" content="Una de las operaciones más habituales en el procesamiento de datos es el ordenamiento de listas de datos.
+" />
+    <link rel="canonical" href="http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html" />
+    <meta property="og:url" content="http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html" />
+    <meta property="og:site_name" content="Comentarios" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2025-11-06T00:00:00+01:00" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Poniendo los datos en orden" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "dateModified": "2025-11-06T00:00:00+01:00",
+        "datePublished": "2025-11-06T00:00:00+01:00",
+        "description": "Una de las operaciones más habituales en el procesamiento de datos es el ordenamiento de listas de datos.
+",
+        "headline": "Poniendo los datos en orden",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html"
+        },
+        "url": "http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html"
+      }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      type="application/atom+xml"
+      rel="alternate"
+      href="feed.xml"
+      title="Comentarios"
+    />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        <a class="site-title" rel="author" href="index.html">Comentarios</a>
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path
+                  d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"
+                />
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            
+  <a class="page-link" href="../" title="Home page">Home</a>
+  <a class="page-link" href="posts.html" title="Artículos por fecha">Archivo</a>
+  <a class="page-link" href="categories.html" title="Artículos por etiqueta">
+    Etiquetas
+  </a>
+
+            <form
+              id="searchform"
+              method="get"
+              action="https://www.google.com/search"
+              target="_blank"
+            >
+              <input type="text" name="q" id="s" size="15" />
+              <input type="submit" name="submit" value="🔍" />
+              <input type="hidden" name="as_sitesearch" value="satyam.com.ar" />
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="page-content" aria-label="Content" lang="es-ES">
+      <div class="wrapper">
+        <article
+          class="post h-entry"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <header class="post-header">
+            <h1 class="post-title p-name" itemprop="name headline">
+              Poniendo los datos en orden
+            </h1>
+            <div class="post-meta">
+  <div class="date-published">
+    Publicado el: 
+    <time  datetime="2025-11-06T00:00:00+01:00" itemprop="datePublished">
+      6 / Noviembre / 2025
+    </time>
+  </div>
+  <div class="post-cats">Archivado bajo: <a
+href="categories.html#Historia_Informatica"
+rel="category tag"
+>
+Historia / Informática
+</a>
+</div>
+</div>
+
+          </header>
+
+          <div
+            class="post-content e-content "
+            itemprop="articleBody"
+          >
+            <p>Una de las operaciones más habituales en el procesamiento de datos es el ordenamiento de listas de datos.</p>
+<p>Puede que no pensemos mucho en ello pero, por ejemplo, cuando llenamos un formulario de registro en que ingresamos nuestros datos, o una dirección de envío, alguno de los elementos de la pantalla nos ofrecerá una lista de países o provincias que seguramente estará ordenada alfabéticamente ... aunque a veces no sale bien.  Es habitual encontrar sitios donde España no está en la E sino entre Sudán del Sur y Sri Lanka porque el programador ha ordenado primero la lista de países en inglés: South Sudan, Spain, Sri Lanka, y luego los ha traducido en lugar de ordenar la versión traducida.</p>
+<p>Justamente es en España donde al computador se le dice <a href="https://es.wikipedia.org/wiki/Computadora#Ordenador"><em>ordenador</em></a> del francés <em>ordinateur</em> vocablo que los comerciales de IBM en Francia inventaron para resaltar que la nueva máquina no se limitaba a cálculos numéricos sino que <em>ponía orden</em> en los datos de un comercio o industria.</p>
+<p>En la jerga informática se le dice también <em>sort</em> pues es el nombre de la función de ordenamiento en la mayoría de las bibliotecas de funciones de cualquier lenguaje de programación. Por ser breve y singular, usaré este término, y hasta lo usaré como verbo: <em>sortear</em>.</p>
+<figure>
+ <a title="waelder, CC BY-SA 3.0 &lt;http://creativecommons.org/licenses/by-sa/3.0/&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Punch_card_sorter.JPG">
+    <img alt="Una clásica clasificadora electromecánica" src="assets/img/1024px-Punch_card_sorter.jpeg">
+  </a>
+  <figcaption>Clásica clasificadora electromecánica de tarjetas perforadas usada para *sortear* las tarjetas.</figcaption>
+</figure>
+<p>Sortear es tan importante que ya en la época de las tarjetas perforadas había máquinas cuyo principal uso era <em>sortear</em> tarjetas, como la clasificadora en la imagen superior.  Como su nombre lo indica, esta máquina permite clasificar tarjetas, que se ubican en la bandeja de entrada al lado derecho en esta imagen y, según la columna seleccionada, clasificaría las tarjetas en las 13 casillas de salida.</p>
+<figure>
+  <a title="ArnoldReinhold, CC0, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:IBM_026_card_code.png">
+    <img alt="Tarjeta Hollerith" src="assets/img/IBM_026_card_code.png">
+  </a>
+  <figcaption>Tarjeta perforada Hollerith</figcaption>
+</figure>
+<p>Las tarjetas de IBM tenían hasta 80 columnas y 12 filas. No eran las únicas en el mercado, varios fabricantes tenían sus modelos pero, históricamente, esta tarjeta dio origen a la empresa misma cuando Herman Hollerith presentó la abuelita de todas las tarjetas en una licitación para hacer el censo de los EE.UU. y de allí surgió la Herman Hollerith Tabulating Machines, que luego se transformó en IBM.  Aunque el formato cambio desde aquellas originales, la tarjeta se la conoce también como tarjeta Hollerith.</p>
+<p>Como se puede ver en la imagen de arriba, 10 de esas filas estaban destinadas a números.  Las dos filas superiores cambiaban la interpretación de las 10 filas inferiores, como si fueran una suerte de tecla mayúscula o <code>Alt</code> que le cambia el significado a las otras teclas. A estas dos filas se las llamaba '12' y '11' contando de arriba. Las escribo entre comillas porque, en realidad, podrían haberlas llamado cualquier cosa, 'A' y 'B' o 'Ctrl' y 'Alt' o Pepe y Juan.  Para representar los números no se usaba ninguna perforación en esas dos filas. Si la tarjeta tenía una perforación en la fila '12' las mismas perforaciones que representan del 0 al 9 se interpretaba como las letras A a I y si la perforación estaba en la fila '11' representaban las letras J a R.  Por una cuestión de eficacia, dada la frecuencia con que se usaban, los números se representan con 1 sola perforación por columna, las letras con 2 y los símbolos ortográficos con 3 perforaciones en la misma columna.  Por esa razón, usar solo dos perforaciones, las letras de la S a la Z usan el 0 como <em>mayúscula</em>.</p>
+<p>En el borde superior de la tarjeta el perforador imprime el texto de la tarjeta, tal como se ve en la imagen.  Cuando las tarjetas se guardan en las largas cajas de archivo, esa línea impresa es fácil de leer cuando se busca una tarjeta determinada.  La esquina superior izquierda tiene un corte en ángulo que permite asegurarse que la tarjeta está orientada correctamente, simplísimo pero efectivo.</p>
+<p>En realidad las perforaciones en una tarjeta Hollerith se podían usar para representar cualquier cosa.  Al ser una cartulina normal, se le podría estampar un formulario con casillas que tildar o, en este caso, perforar manualmente.  En un censo, un par de casillas podían usarse para sexo y marcarlas M y F y usar el resto de la columna para otros datos. Sin embargo, mezclar diversos tipos de información en una misma columna no era práctico para su procesamiento automatizado, aunque sí se usó para el censo en que surgió todo pues el procesamiento era puramente manual. En Argentina, los memoriosos reconocerán la tarjeta que entonces llamábamos la &quot;Tarjeta del PRODE&quot; (Pronósticos Deportivos) por una suerte de lotería deportiva donde se podía marcar L, E o V por Local, Empate o Visitante en varios partidos de fútbol del fin de semana.  El cliente se quedaba con la copia en papel de su apuesta y la tarjeta, perforada por el vendedor, se enviaba para procesar.</p>
+<p>Ya vemos por qué la clasificadora disponía de 13 casillas de salida.  La primera, contigua a la bandeja de entrada, era para las que no tenían ninguna perforación en la columna en cuestión y luego, una casilla para cada una de las filas en el orden en que aparecen en la tarjeta, primero la '12', luego la '11' seguidas de las del 0 al 9.</p>
+<p>La mayoría de las tarjetas, sin embargo, no se perforaban manualmente sino en máquinas como esta:</p>
+<figure>
+  <a title="waelder, CC BY-SA 3.0 &lt;http://creativecommons.org/licenses/by-sa/3.0/&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:IBM_card_punch_029.JPG">
+    <img alt="Perforadora de tarjetas IBM 029" src="assets/img/800px-IBM_card_punch_029.jpeg">
+  </a>
+  <figcaption>Perforadora de tarjetas</figcaption>
+</figure>
+<p>Docenas de operadores ingresaban en máquinas como esta la copia que los comerciantes enviaban a los bancos por las compras hechas con tarjeta de crédito, cuando todo se hacía en papel.  O los horarios de entrada y salida de los empleados cuando estas se marcaban insertando la tarjeta en los relojes de control horario en los accesos a las fábricas u oficinas.  Posteriormente esta información era grabada, según el fabricante, en diskettes de 8&quot;, en cassettes como los de audio, pero con una cinta magnética especial para datos (<a href="2024/11/07/olivetti-de-5xx-sycor-de-3xx.html">ver Olivetti DE-500</a>) u otro tipo de cartucho de cinta magnética.  A diferencia de las tarjetas, que eran de un solo uso, los distintos formatos de cinta magnética permitían la reutilización.</p>
+<p>Yo mismo usé una máquina similar a la de la imagen para perforar las tarjetas de mis primeros programas en Fortran IV allá por 1975 cuando estudiaba ingeniería.  Mi universidad no podía, en aquel entonces, afrontar el costo de una computadora, pero sí el de una perforadora donde perforar nuestros programas.  Las tarjetas con nuestros &quot;trabajos prácticos&quot; se enviaban a un centro de cómputo donde se alquilaba tiempo de máquina para procesar, y nos devolvían los impresos con los resultados del programa o el listado de errores detectados por el compilador.</p>
+<p>Hay un vínculo curioso entre el Fortran IV y las tarjetas perforadas.  La norma de esa versión del lenguaje establecía el uso de ciertas columnas para ciertas funciones. Establecía que las instrucciones debían ocupar desde la columna 7 a la 72.   Si una instrucción ocupaba más que los 66 caracteres previstos se podía continuar en la tarjeta siguiente, con alguna perforación en la columna 6 y luego la instrucción, a partir de la 7, como era normal.  Las primeras 5 columnas se reservaban para los números que servirían como destino de los saltos dentro del programa, los <em>rótulos</em> o <em>labels</em>. Así, al igual que en el BASIC de las primeras PC hogareñas, el Fortran disponía de la instrucción <code>GO TO</code>(en BASIC era <code>GOTO</code> todo junto) que debía ser seguida del número de línea en que debía continuar la ejecución.  A diferencia del BASIC, estos números de líneas no eran obligatorios si la línea en cuestión no era el destino de un salto.  Tampoco tenían por qué estar en orden, dado que eran simples rótulos y no indicaban el orden de ejecución.</p>
+<p>Cabe preguntar, ¿para qué se usaban las columnas de la 73 a la 80?  Para numerar las tarjetas, por si estas se caían y se desordenaban.  Si al manipular las pilas de tarjetas había algún accidente y se desordenaban, se pasaban por la clasificadora y se volvían a poner en orden. Como ayuda visual también era habitual trazar una línea en diagonal sobre el canto de la pila de tarjetas pues, si la línea estaba quebrada es que las tarjetas estaban desordenadas. Por eso la especificación del lenguaje decía que esas casillas eran ignoradas, para dar pie al programador de numerarlas a su antojo, o no hacerlo.  Lo habitual era numerarlas de a 10 en 10, como en el BASIC nativo de las primeras PC, para poder intercalar instrucciones si era necesario.</p>
+<p>Como se puede apreciar, la definición del formato de una línea de instrucción especificaba las columnas en que debían escribirse.  El lenguaje estaba definido por el medio físico en que se registraba, la tarjeta de 80 columnas.  Esas mismas 80 columnas que eran el ancho estándar de una terminal de computadora y era también el ancho normal para las primeras impresoras hogareñas, como la clásica Epson FX-80.</p>
+<p>Pero, vamos a lo del título.  ¿Cómo se <em>sorteaban</em> estas tarjetas?</p>
+<p>Imaginemos que queremos ordenar las tarjetas por los números en un campo de dos posiciones en las columnas 20 y 21. La clasificadora sólo es capaz de seleccionar una columna por vez. Preparamos la clasificadora para seleccionar por la columna 21, o sea, el dígito de las unidades.  Ponemos las tarjetas en la casilla de entrada y la arrancamos.  En esa primera pasada quedará así:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">9</th>
+<th style="text-align:right">8</th>
+<th style="text-align:right">7</th>
+<th style="text-align:right">6</th>
+<th style="text-align:right">5</th>
+<th style="text-align:right">4</th>
+<th style="text-align:right">3</th>
+<th style="text-align:right">2</th>
+<th style="text-align:right">1</th>
+<th style="text-align:right">0</th>
+<th style="text-align:right">11</th>
+<th style="text-align:right">12</th>
+<th style="text-align:right">-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">04</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">10</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">49</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">57</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">54</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">51</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">19</td>
+<td style="text-align:right">38</td>
+<td style="text-align:right">37</td>
+<td style="text-align:right">76</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">44</td>
+<td style="text-align:right">33</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">61</td>
+<td style="text-align:right">30</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">99</td>
+<td style="text-align:right">88</td>
+<td style="text-align:right">57</td>
+<td style="text-align:right">86</td>
+<td style="text-align:right">25</td>
+<td style="text-align:right">24</td>
+<td style="text-align:right">63</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">31</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">49</td>
+<td style="text-align:right">18</td>
+<td style="text-align:right">37</td>
+<td style="text-align:right">36</td>
+<td style="text-align:right">95</td>
+<td style="text-align:right">74</td>
+<td style="text-align:right">83</td>
+<td style="text-align:right">02</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p>En cada casilla están las tarjetas con el número que termina en el de la casilla. No hay tarjetas en las casillas '11' y '12' porque al ser números solo usan una perforación y tampoco hay tarjetas en la casilla del descarte porque todas tienen perforaciones en esa columna.  Las decenas están en cualquier orden, pero eso lo arreglamos en una segunda pasada.  Primero movemos el selector de columna a la columna 20, la de las decenas.</p>
+<p>Las tarjetas se ponen cara para abajo en la casilla de entrada y quedan boca abajo en las casillas de salida.  Entonces recogemos las tarjetas de derecha a izquierda, primero las del 0, luego las del 1 y así siguiendo.  Eso quiere decir que al ponerlas nuevamente en la casilla de entrada, las terminadas en 0 estarán primero, luego las terminadas en 1 y así hasta el 9.  Se arranca de nuevo la clasificadora y queda así:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">9</th>
+<th style="text-align:right">8</th>
+<th style="text-align:right">7</th>
+<th style="text-align:right">6</th>
+<th style="text-align:right">5</th>
+<th style="text-align:right">4</th>
+<th style="text-align:right">3</th>
+<th style="text-align:right">2</th>
+<th style="text-align:right">1</th>
+<th style="text-align:right">0</th>
+<th style="text-align:right">11</th>
+<th style="text-align:right">12</th>
+<th style="text-align:right">-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">38</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">37</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">57</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">37</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">19</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">57</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">36</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">18</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right"></td>
+<td style="text-align:right">88</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">63</td>
+<td style="text-align:right">54</td>
+<td style="text-align:right">49</td>
+<td style="text-align:right">33</td>
+<td style="text-align:right">25</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">99</td>
+<td style="text-align:right">86</td>
+<td style="text-align:right">76</td>
+<td style="text-align:right">61</td>
+<td style="text-align:right">51</td>
+<td style="text-align:right">49</td>
+<td style="text-align:right">31</td>
+<td style="text-align:right">24</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">04</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">95</td>
+<td style="text-align:right">83</td>
+<td style="text-align:right">74</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">44</td>
+<td style="text-align:right">30</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">02</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p>Volviendo a recoger las tarjetas de derecha a izquierda vemos que quedan: 02, 04, 10, 11, 16, 18 ..  y así hasta la 99.  Hay duplicados, como las 37, 49 ó 57 pero eso si eso es válido o no, no nos concierne, las que son iguales están contiguas y en el orden correcto respecto del resto.</p>
+<p>¿Cómo se hace para ordenar alfabéticamente?  Al usar dos perforaciones eso requiere dos pasadas. La clasificadora ordena siempre por una única perforación en una única columna en cada pasada.  Si se necesita ordenar por más de una perforación dentro de la misma columna o más de una columna se necesitan más pasadas. Por defecto, la clasificadora decide en base a la primera perforación que encuentra.  Así pues, en principio, no discrimina entre un 3, una C, una L o una T pues todas ellas llevan una perforación en la fila 3.</p>
+<p>Además de seleccionar la columna, la clasificadora tiene la opción de saltear filas.  Las tarjetas las lee de abajo hacia arriba, desde la fila 9 hacia el 0, luego la '11' y la '12'.  Entonces, en una segunda pasada, se le pide saltearse las filas de la 9 a la 1, de tal manera que sólo le queden las filas 0, '11' y '12'.  Al final de la segunda pasada quedarán las tarjetas con 3 en la casilla de descarte, pues el 3 lo salteamos y la columna no tiene más perforaciones en esa columna, las C en la '12', las L en la '11' y las T en la 0.</p>
+<p>Si ahora recogemos las tarjetas de derecha a izquierda, como siempre debemos hacer cuando <em>sorteamos</em> en orden ascendente, las que contengan números serán las primeras, luego las de la A a la I, luego la J a la R y finalmente la S a la Z.</p>
+<hr>
+<p>Es admirable cómo, una máquina tan simple como la clasificadora, con un único sensor que sólo es capaz de leer una sola columna por vez y salta a la primera perforación que detecta, a menos que se le haga saltear alguna fila, puede usarse de manera tan ingeniosa.  También es de destacar la eficacia de la codificación usando, como se dijo ya tantas veces, una única perforación para los números, que es lo que más se usa ya sea para códigos de artículo, código de cliente, legajo del empleado, etc.; dos para letras, que es menos usado, y 3 para símbolos, que raramente se usan para ordenar o clasificar nada.</p>
+<p>También sorprende cómo la tradicional tarjeta de 80 columnas influyó en lenguajes como Fortran y también COBOL, y posteriores dispositivos como terminales e impresoras.</p>
+
+          </div>
+          <footer class="post-footer"><div class="next-prev-links">
+  
+  <a class="next-link" title="Siguiente"
+href="2025/11/03/panel-de-llaves.html"
+>Panel de llaves 
+<div class="triangle-right"></div>
+</a>
+
+</div> </footer>
+          <a class="u-url" href="/blog/2025/11/06/poniendo-los-datos-en-orden.html" hidden></a>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer h-card">
+      <data class="u-url" href="/blog"></data>
+
+      <div class="wrapper">
+        <h2 class="footer-heading">Comentarios</h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li class="p-name">Comentarios</li>
+              <li>
+                <a class="u-email" href="mailto:satyam@satyam.com.ar"
+                  >satyam@satyam.com.ar</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list"></ul>
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p>Comentarios, viajes, ideas e historias</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  <script src="assets/js/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
+  </body>
+</html>

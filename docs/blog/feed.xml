@@ -6,21 +6,21 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2025-11-11T17:31:30.590Z</updated>
+  <updated>2025-11-13T16:26:45.366Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
-  <title type="html">Poniendo orden en los datos</title>
+  <title type="html">Poniendo los datos en orden</title>
   <link
-    href="http://www.satyam.com.ar/blog/2025/11/06/poniendo-orden-en-los-datos.html"
+    href="http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html"
     rel="alternate"
     type="text/html"
-    title="Poniendo orden en los datos"
+    title="Poniendo los datos en orden"
   />
   <published>2025-11-06T00:00:00+01:00</published>
   <updated>2025-11-06T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2025/11/06/poniendo-orden-en-los-datos.html</id>
+  <id>http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html</id>
   <author>
     <name>Daniel Barreiro, Satyam</name>
   </author>
