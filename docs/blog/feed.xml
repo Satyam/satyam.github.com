@@ -6,11 +6,33 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2025-11-13T16:26:45.366Z</updated>
+  <updated>2025-11-16T15:38:26.744Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Cintas Magnéticas</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2025/11/14/cintas-magneticas.html"
+    rel="alternate"
+    type="text/html"
+    title="Cintas Magnéticas"
+  />
+  <published>2025-11-14T00:00:00+01:00</published>
+  <updated>2025-11-14T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2025/11/14/cintas-magneticas.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Historia/Informática" />
+  <summary type="html">
+Nunca subestimes el ancho de banda de una camioneta familiar cargada de cintas magnéticas que circula a toda velocidad por la autopista.
+Andrew S. Tanenbaum
+
+</summary>
+</entry>
+
+<entry>
   <title type="html">Poniendo los datos en orden</title>
   <link
     href="http://www.satyam.com.ar/blog/2025/11/06/poniendo-los-datos-en-orden.html"
@@ -182,25 +204,6 @@
   </author>
   <category term="General" />
   <summary type="html">Creo que todos, de niños, hemos jugado a ser un trencito aunque aún los más viejos entre nosotros probablemente nunca hubiéramos visto una locomotora de vapor en vivo. Movíamos los brazos, parcialmente plegados, hacia adelante y atrás como si fueran las bielas de la máquina de vapor, haciendo &quot;chuf, chuf&quot; al ritmo.
-</summary>
-</entry>
-
-<entry>
-  <title type="html">Procesador de 1 bit de ancho de palabra</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html"
-    rel="alternate"
-    type="text/html"
-    title="Procesador de 1 bit de ancho de palabra"
-  />
-  <published>2022-06-02T00:00:00+01:00</published>
-  <updated>2022-06-02T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Tecnología" />
-  <summary type="html">¿Por qué un bit de ancho? Pues los elementos constituyentes de un ordenador son los mismos cualquiera que sea el ancho de palabra. El conjunto o set de instrucciones es, obviamente, más breve dado que no se pueden hacer tantas operaciones: con un solo bit no hay diferencia entre operaciones ‘bit a bit’ (bitwise) y ‘lógicas’ (logical), como habitualmente se las conoce, y sumar es lo mismo que hacer un or exclusivo (XOR) si ignoramos el resto y multiplicar es lo mismo que hacer un AND, así que las instrucciones son menos, pero sigue habiendo, usando las abreviaturas habituales en la industria, LOAD, SAVE, AND, OR, NOT, XOR y saltos condicionales o no. También tiene un puntero al paso de programa y podría tener una pila o stack para llamar subrutinas y volver.
 </summary>
 </entry>
 
