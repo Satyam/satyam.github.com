@@ -6,11 +6,30 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2025-11-16T15:38:26.744Z</updated>
+  <updated>2026-01-17T16:16:09.806Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">La desaparición del papel</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2025/12/05/la-desaparicion-del-papel.html"
+    rel="alternate"
+    type="text/html"
+    title="La desaparición del papel"
+  />
+  <published>2025-12-05T00:00:00+01:00</published>
+  <updated>2025-12-05T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2025/12/05/la-desaparicion-del-papel.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Historia/Informática" />
+  <summary type="html">Aunque la informática prometía llevarnos a la 'Oficina sin papel', el papel sigue allí.
+</summary>
+</entry>
+
+<entry>
   <title type="html">Cintas Magnéticas</title>
   <link
     href="http://www.satyam.com.ar/blog/2025/11/14/cintas-magneticas.html"
@@ -185,25 +204,6 @@ Andrew S. Tanenbaum
   </author>
   <category term="Tecnología" />
   <summary type="html">I remember that as a child, I imagined the perfect car which had everything, and then, I kept adding to it. A bit like Homer Simpson's dream car. There are some inventions that are a bit like that, for example, cars with solar cells in the roof. Not that they are a particular bad offender in this arena, it is simply that I started talking about cars so I'll just keep going on that line. There are a couple of offerings that came out of a quick search, the Lightyear and the Sion.
-</summary>
-</entry>
-
-<entry>
-  <title type="html">Siempre jugué mal al trencito</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2022/07/13/siempre-jugue-mal-al-trencito.html"
-    rel="alternate"
-    type="text/html"
-    title="Siempre jugué mal al trencito"
-  />
-  <published>2022-07-13T00:00:00+01:00</published>
-  <updated>2022-07-13T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2022/07/13/siempre-jugue-mal-al-trencito.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="General" />
-  <summary type="html">Creo que todos, de niños, hemos jugado a ser un trencito aunque aún los más viejos entre nosotros probablemente nunca hubiéramos visto una locomotora de vapor en vivo. Movíamos los brazos, parcialmente plegados, hacia adelante y atrás como si fueran las bielas de la máquina de vapor, haciendo &quot;chuf, chuf&quot; al ritmo.
 </summary>
 </entry>
 
