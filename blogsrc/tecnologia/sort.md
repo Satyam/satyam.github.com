@@ -96,4 +96,6 @@ Si ahora recogemos las tarjetas de derecha a izquierda, como siempre debemos hac
 
 Es admirable cómo, una máquina tan simple como la clasificadora, con un único sensor que sólo es capaz de leer una sola columna por vez y salta a la primera perforación que detecta, a menos que se le haga saltear alguna fila, puede usarse de manera tan ingeniosa.  También es de destacar la eficacia de la codificación usando, como se dijo ya tantas veces, una única perforación para los números, que es lo que más se usa ya sea para códigos de artículo, código de cliente, legajo del empleado, etc.; dos para letras, que es menos usado, y 3 para símbolos, que raramente se usan para ordenar o clasificar nada.
 
-También sorprende cómo la tradicional tarjeta de 80 columnas influyó en lenguajes como Fortran y también COBOL, y posteriores dispositivos como terminales e impresoras.
+También sorprende cómo la tradicional tarjeta de 80 columnas influyó en lenguajes como Fortran y también COBOL, y posteriores dispositivos como terminales e impresoras, que mantienen ese ancho de línea.
+
+La tarjeta perforada era tan versátil que también se llegó a usar, en una versión de Mylar con trazas de aluminio como se ve en las imágenes en [esta página](https://www.computerhistory.org/revolution/mainframe-computers/7/164/582) para almacenar el [micro-código](2022/06/02/procesador-de-1-bit-de-ancho-de-palabra.html#micro-c%C3%B3digo) de uno de los modelos del IBM System/360.  
