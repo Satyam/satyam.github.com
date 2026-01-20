@@ -6,11 +6,31 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2026-01-17T16:16:09.806Z</updated>
+  <updated>2026-01-20T18:07:52.716Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
+  <title type="html">Ocho usuarios trabajando desde un único procesador i8080</title>
+  <link
+    href="http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-i8080.html"
+    rel="alternate"
+    type="text/html"
+    title="Ocho usuarios trabajando desde un único procesador i8080"
+  />
+  <published>2026-01-18T00:00:00+01:00</published>
+  <updated>2026-01-18T00:00:00+01:00</updated>
+  <id>http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-i8080.html</id>
+  <author>
+    <name>Daniel Barreiro, Satyam</name>
+  </author>
+  <category term="Historia/Informática" />
+<category term="Tecnología" />
+  <summary type="html">Un sorprendente minicomputador multi-usuario de oficina
+</summary>
+</entry>
+
+<entry>
   <title type="html">La desaparición del papel</title>
   <link
     href="http://www.satyam.com.ar/blog/2025/12/05/la-desaparicion-del-papel.html"
@@ -185,25 +205,6 @@ Andrew S. Tanenbaum
   </author>
   <category term="Tecnología/Mega-Ingeniería" />
   <summary type="html">Years ago while driving around the region around Beziers, France, we stayed in a room in a house in Montady, just north of this curious place , right by the edge of that wheel. We learned that the locals call it the 'camembert' since it looks like sliced wheel of that cheese.
-</summary>
-</entry>
-
-<entry>
-  <title type="html">Pointless Innovations</title>
-  <link
-    href="http://www.satyam.com.ar/blog/2022/07/30/pointless-innovations.html"
-    rel="alternate"
-    type="text/html"
-    title="Pointless Innovations"
-  />
-  <published>2022-07-30T00:00:00+01:00</published>
-  <updated>2022-07-30T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2022/07/30/pointless-innovations.html</id>
-  <author>
-    <name>Daniel Barreiro, Satyam</name>
-  </author>
-  <category term="Tecnología" />
-  <summary type="html">I remember that as a child, I imagined the perfect car which had everything, and then, I kept adding to it. A bit like Homer Simpson's dream car. There are some inventions that are a bit like that, for example, cars with solar cells in the roof. Not that they are a particular bad offender in this arena, it is simply that I started talking about cars so I'll just keep going on that line. There are a couple of offerings that came out of a quick search, the Lightyear and the Sion.
 </summary>
 </entry>
 
