@@ -6,21 +6,21 @@
     type="application/atom+xml"
   />
   <link href="http://www.satyam.com.ar/blog/" rel="alternate" type="text/html" />
-  <updated>2026-01-20T18:07:52.716Z</updated>
+  <updated>2026-01-22T10:36:24.217Z</updated>
   <id>http://www.satyam.com.ar/blog/feed.xml</id>
   <title type="html">Comentarios</title>
   <subtitle>Comentarios, viajes, ideas e historias</subtitle>
   <entry>
-  <title type="html">Ocho usuarios trabajando desde un único procesador i8080</title>
+  <title type="html">Ocho usuarios trabajando desde un único procesador Intel 8080</title>
   <link
-    href="http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-i8080.html"
+    href="http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-intel-8080.html"
     rel="alternate"
     type="text/html"
-    title="Ocho usuarios trabajando desde un único procesador i8080"
+    title="Ocho usuarios trabajando desde un único procesador Intel 8080"
   />
   <published>2026-01-18T00:00:00+01:00</published>
   <updated>2026-01-18T00:00:00+01:00</updated>
-  <id>http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-i8080.html</id>
+  <id>http://www.satyam.com.ar/blog/2026/01/18/ocho-usuarios-trabajando-desde-un-unico-procesador-intel-8080.html</id>
   <author>
     <name>Daniel Barreiro, Satyam</name>
   </author>
